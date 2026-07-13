@@ -18,7 +18,7 @@ The tools unlocked from the start. Start here once the foundations make sense.
 
 - **Docker** — [Docker quickstart trip-ups](docker/notes/2026-07-13-docker-quickstart-trip-ups.md) covers what to expect on first contact, [Minimal non-root Dockerfile](docker/dockerfiles/2026-07-13-minimal-nonroot-image.Dockerfile) shows a real multi-stage build, and [First port-mapped container](docker/scripts/2026-07-13-first-port-mapped-container.sh) runs and tears down a container.
 - **Bash** ⏳ — command-line scripting for day-to-day automation.
-- **Git** ⏳ — version control and collaboration workflow.
+- **Git** — [Git quickstart trip-ups](git/notes/2026-07-13-git-quickstart-trip-ups.md) covers first contact and where it tripped me up, and [Undo, stage, commit, push](git/notes/2026-07-13-undo-stage-commit-push.md) walks the stage → commit → push cycle and how to undo each step.
 - **Python** ⏳ — scripting and tooling for ops tasks.
 
 ## Stage 3: Building Skills
@@ -44,7 +44,7 @@ These depend on the foundations being in place.
 
 ## Progression Map
 
-Only Docker has content on disk today. The rest of the map shows what unlocks what once the notes land.
+Docker and Git have content on disk today. The rest of the map shows what unlocks what once the notes land.
 
 ```
 Foundations (Linux, Git, Containerization, IaC, Scripting)
