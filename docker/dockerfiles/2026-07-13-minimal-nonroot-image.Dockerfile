@@ -1,4 +1,4 @@
-# last_verified: 2026-07-13 · Docker n/a
+# last_verified: 2026-07-14 · Docker 29.2.0
 
 # Multi-stage build: build stage uses the full Go image, runtime stage
 # uses distroless so the final image is tiny and has no shell.

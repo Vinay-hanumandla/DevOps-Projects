@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-14
+
+- docker: Refresh docker-001/002/003 — bump last_verified and tool_version
+
 ## 2026-07-13
 
 - docker: Add quickstart trip-ups notes (docker-001)
