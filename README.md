@@ -31,7 +31,7 @@ A small, growing kit of hands-on DevOps artifacts. Each entry is a dated note, s
 
 | Tool | notes | dockerfiles | scripts | Last verified |
 |------|-------|-------------|---------|---------------|
-| Docker | 1 | 1 | 1 | 2026-07-13 |
+| Docker | 1 | 1 | 1 | 2026-07-14 |
 | Git | 2 | — | — | 2026-07-13 |
 
 ## Status
