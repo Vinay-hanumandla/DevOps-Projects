@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# last_verified: 2026-07-13 · Docker n/a
+# last_verified: 2026-07-14 · Docker 29.2.0
 #
 # Run my first container and map its port end to end.
 #

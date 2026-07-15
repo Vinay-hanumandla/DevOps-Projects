@@ -1,6 +1,6 @@
 ---
-last_verified: 2026-07-13
-tool_version: n/a
+last_verified: 2026-07-14
+tool_version: "29.2.0"
 sources: []
 ---
 
