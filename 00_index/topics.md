@@ -1,6 +1,6 @@
 # Topics
 
-> A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](learning-path.md).
+> A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](00_index/learning-path.md).
 
 ## Docker  ·  4 files
 
@@ -11,5 +11,5 @@
 
 ## Git  ·  2 files
 
-- **notes:** [Git quickstart trip-ups](git/notes/2026-07-13-git-quickstart-trip-ups.md) — what worked and where I got stuck on first contact
+- **primer:** [Git quickstart trip-ups](git/notes/2026-07-13-git-quickstart-trip-ups.md) — what worked and where I got stuck on first contact
 - **notes:** [Undo, stage, commit, push](git/notes/2026-07-13-undo-stage-commit-push.md) — the stage → commit → push cycle, plus how to undo each step
