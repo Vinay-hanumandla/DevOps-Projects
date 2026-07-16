@@ -2,7 +2,7 @@
 
 > A working DevOps engineer's reference for Docker and Git — first-contact notes, runnable snippets, and configs.
 
-> **New here?** Start at [the learning path](00_index/learning-path.md). It walks you from first contact to confidence in a sensible order, then sends you back to this table.
+> **New here?** Start at [the learning path](00_index/learning-path.md). It walks you from first-contact to confident in a sensible order — read that before this table.
 
 ## Who this is for
 
@@ -39,4 +39,4 @@ A small, growing kit of hands-on DevOps artifacts. Each entry is a dated note, s
 Working through first-contact material for Docker and Git — both have notes now, and more tools are on the way.
 
 ---
-_Last updated: 2026-07-14_
+_Last updated: 2026-07-15_
