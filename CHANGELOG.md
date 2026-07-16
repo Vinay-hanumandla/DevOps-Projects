@@ -1,10 +1,9 @@
 # Changelog
 
-## 2026-07-15
+## 2026-07-16
 
-- git: Refresh quickstart trip-ups notes (git-001)
-- git: Refresh undo-stage-commit-push notes (git-002)
-- docker: Refresh quickstart trip-ups notes (docker-001)
+- docker: Add Python-based tagged-build non-root Dockerfile and server (docker-002)
+- docker: Add port-mapped container run script (docker-003)
 
 ## 2026-07-14
 
