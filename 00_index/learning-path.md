@@ -17,7 +17,7 @@ The concepts every DevOps task leans on.
 The tools unlocked from the start. Start here once the foundations make sense.
 
 - **Git** — A handful of notes covering the basics: [quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md) and [undo/commit/push](../git/notes/2026-07-13-undo-stage-commit-push.md), each refreshed in Jul 15.
-- **Docker** — [Quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md), [minimal non-root Dockerfile](../docker/dockerfiles/2026-07-13-minimal-nonroot-image.Dockerfile), [tagged-build variant](../docker/dockerfiles/2026-07-16-minimal-image-tagged-nonroot.Dockerfile), and [container run scripts](../docker/scripts/2026-07-13-first-port-mapped-container.sh) give you hands-on with images, port mapping, and multi-stage builds.
+- **Docker** — [Quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md), [minimal non-root Dockerfile](../docker/dockerfiles/2026-07-13-minimal-nonroot-image.Dockerfile), [tagged-build variant](../docker/dockerfiles/2026-07-16-minimal-image-tagged-nonroot.Dockerfile), [container run scripts](../docker/scripts/2026-07-13-first-port-mapped-container.sh), and the [sample apps](../docker/src/main.go) they build give you hands-on with images, port mapping, and multi-stage builds.
 - **Bash** ⏳ — command-line scripting for day-to-day automation.
 - **Python** ⏳ — scripting and tooling for ops tasks.
 
