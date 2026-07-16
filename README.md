@@ -10,42 +10,33 @@ A working DevOps engineer's quick-reference: first-contact notes, runnable snipp
 
 ## What's in here
 
-A growing kit of hands-on DevOps artifacts. Each entry is a dated note, snippet, or config built while following a tool's quickstart and kept for later. Currently it holds Docker material — first-contact notes, a minimal non-root multi-stage Dockerfile, a tagged-build variant with a Python sample app, and container run scripts — plus Git material: first-contact notes and stage/commit/push/undo walkthroughs.
-
----
+A small, growing kit of hands-on DevOps artifacts. Each entry is a dated note, snippet, or config built while following a tool's quickstart and kept for later. Currently it holds Docker material — a quickstart trip-ups note, a minimal non-root multi-stage Dockerfile, the sample app it builds, and a port-mapped container script — plus Git material: a quickstart trip-ups note and a stage/commit/push/undo walkthrough.
 
 ## Quick links
 
-- [Tagged-build non-root Dockerfile](docker/dockerfiles/2026-07-16-minimal-image-tagged-nonroot.Dockerfile) — multi-stage Python build pinned to a specific tag
-- [Python HTTP server](docker/dockerfiles/2026-07-16-server.py) — the sample app served inside the tagged-build image
-- [Port-mapped container script](docker/scripts/2026-07-16-run-container-port-map.sh) — run a container, map a port, verify, and tear down
-- [Docker quickstart trip-ups (Jul 15)](docker/notes/2026-07-15-docker-quickstart-trip-ups.md) — a refreshed look at what trips up first-time Docker users
-- [Git quickstart trip-ups (Jul 15)](git/notes/2026-07-15-git-quickstart-trip-ups.md) — what worked and where I got stuck revisiting Git
-
----
+- [Git quickstart trip-ups](git/notes/2026-07-13-git-quickstart-trip-ups.md) — what worked and where I got stuck on first contact with Git
+- [Undo, stage, commit, push](git/notes/2026-07-13-undo-stage-commit-push.md) — the working-directory → staging → commit → push cycle, plus how to undo each step
+- [Docker quickstart trip-ups](docker/notes/2026-07-13-docker-quickstart-trip-ups.md) — what I hit following the official Docker quickstart
+- [Minimal non-root Dockerfile](docker/dockerfiles/2026-07-13-minimal-nonroot-image.Dockerfile) — multi-stage Go build to a distroless, non-root runtime
+- [First port-mapped container](docker/scripts/2026-07-13-first-port-mapped-container.sh) — run nginx, map a port, verify, tear down
 
 ## Layout
 
-- `docker/` — Docker material: notes, Dockerfiles, scripts, and sample apps.
+- `docker/` — Docker material: notes, Dockerfiles, source files, and runnable scripts.
 - `git/` — Git material: first-contact notes and workflow walkthroughs.
 - `00_index/` — the map: topics, quick links, glossary, and the learning path.
 - `CHANGELOG.md` — a dated log of what was added and when.
-
----
 
 ## Coverage
 
 | Tool | notes | dockerfiles | scripts | Last verified |
 |------|-------|-------------|---------|---------------|
-| Docker | 2 | 4 | 2 | 2026-07-16 |
-| Git | 4 | — | — | 2026-07-15 |
-
----
+| Docker | 2 | 2 | 2 | 2026-07-16 |
+| Git | 4 | — | — | 2026-07-16 |
 
 ## Status
 
-Working through first-contact material for Docker and Git — both have notes and runnable examples now. Docker gained a tagged-build multi-stage Dockerfile and a fresh port-mapped container script this cycle. More tools land as the foundation builds.
+Working through first-contact material for Docker and Git — both have notes now, and more tools are on the way.
 
 ---
-
 _Last updated: 2026-07-16_
