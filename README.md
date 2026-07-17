@@ -43,4 +43,4 @@ A small, growing collection of hands-on DevOps artifacts. Each entry is a dated 
 Working through first-contact material for Docker and Git — both have notes now, and more tools are on the way.
 
 ---
-_Last updated: 2026-07-16_
+_Last updated: 2026-07-18_
