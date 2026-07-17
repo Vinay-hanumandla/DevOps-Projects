@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-17
+
+- docker: Remove stale duplicate docker-001 notes (2026-07-13); 2026-07-15 version retained
+
 ## 2026-07-16
 
 - docker: Add Python-based tagged-build non-root Dockerfile and server (docker-002)
