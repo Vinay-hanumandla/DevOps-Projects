@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-07-16
+
+- docker: Add Python-based tagged-build non-root Dockerfile and server (docker-002)
+- docker: Add port-mapped container run script (docker-003)
+
 ## 2026-07-14
 
 - docker: Refresh docker-001/002/003 — bump last_verified and tool_version
