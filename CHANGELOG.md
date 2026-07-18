@@ -2,9 +2,7 @@
 
 ## 2026-07-18
 
-- bash: Add quick primer (bash-001)
-- bash: Add install and first script notes (bash-002)
-- bash: Add hello world script with variables and conditionals (bash-003)
+- docker: Replace stale port-mapped container script with fresh L2 version (docker-003 rework)
 
 ## 2026-07-17
 
