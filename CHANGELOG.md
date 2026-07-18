@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-07-18
+
+- bash: Add quick primer (bash-001)
+- bash: Add install and first script notes (bash-002)
+- bash: Add hello world script with variables and conditionals (bash-003)
+
 ## 2026-07-17
 
 - docker: Refresh minimal tagged-build non-root Dockerfile (docker-002 rework)

@@ -7,8 +7,7 @@
 - [Docker quickstart follow-up](../docker/notes/2026-07-15-docker-quickstart-trip-ups.md) — more gotchas after the initial run-through
 
 ### Build a container image
-- [Minimal non-root Dockerfile](../docker/dockerfiles/2026-07-13-minimal-nonroot-image.Dockerfile) — multi-stage Go build to a distroless, non-root runtime
-- [Tagged multi-stage Dockerfile](../docker/dockerfiles/2026-07-16-minimal-image-tagged-nonroot.Dockerfile) — Python build pinned to a specific tag, non-root runtime
+- [Minimal non-root Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile) — multi-stage build to a distroless, non-root runtime
 
 ### Run a container
 - [First port-mapped container](../docker/scripts/2026-07-13-first-port-mapped-container.sh) — run nginx, map a port, verify, and tear down
