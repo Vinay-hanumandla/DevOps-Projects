@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-17
+
+- docker: Refresh minimal tagged-build non-root Dockerfile (docker-002 rework)
+
 ## 2026-07-16
 
 - docker: Add Python-based tagged-build non-root Dockerfile and server (docker-002)
