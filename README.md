@@ -19,7 +19,7 @@ A small, growing collection of hands-on DevOps artifacts. Each entry is a dated 
 ## Quick links
 
 - [Docker quickstart follow-up](docker/notes/2026-07-15-docker-quickstart-trip-ups.md) — more first-contact gotchas after the initial run-through
-- [Tagged multi-stage Dockerfile](docker/dockerfiles/2026-07-16-minimal-image-tagged-nonroot.Dockerfile) — Python build pinned to a specific tag, non-root runtime
+- [Minimal non-root Dockerfile](docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile) — multi-stage Python build pinned to a specific tag, non-root runtime
 - [Run container with port map](docker/scripts/2026-07-16-run-container-port-map.sh) — run the tagged image, map a port, verify, and tear down
 - [Git quickstart trip-ups](git/notes/2026-07-13-git-quickstart-trip-ups.md) — what worked and where I got stuck on first contact with Git
 - [Undo, stage, commit, push](git/notes/2026-07-13-undo-stage-commit-push.md) — the working-directory → staging → commit → push cycle, plus how to undo each step
@@ -35,7 +35,7 @@ A small, growing collection of hands-on DevOps artifacts. Each entry is a dated 
 
 | Tool | notes | dockerfiles | scripts | src | Last verified |
 |------|-------|-------------|---------|-----|---------------|
-| Docker | 2 | 2 | 2 | 2 | 2026-07-16 |
+| Docker | 2 | 1 | 2 | 2 | 2026-07-17 |
 | Git | 4 | — | — | — | 2026-07-16 |
 
 ## Status
