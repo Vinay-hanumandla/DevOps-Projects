@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-18
+
+- docker: Replace stale port-mapped container script with fresh L2 version (docker-003 rework)
+
 ## 2026-07-17
 
 - docker: Refresh minimal tagged-build non-root Dockerfile (docker-002 rework)
