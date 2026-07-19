@@ -6,11 +6,11 @@
 
 The concepts every DevOps task leans on.
 
-- **Linux & CLI Fundamentals** ⏳ — the shell, processes, and filesystem basics underpinning every tool here.
+- **Linux & CLI Fundamentals** — the shell, processes, and filesystem basics underpinning every tool here.
 - **Version Control & Git Workflow** — [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md) covers first contact; [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md) walks the working cycle. Refreshed notes from Jul 15 add a second perspective on each.
 - **Containerization Concepts** — [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md) covers what an image and container are on first contact; the Jul 15 refresh adds more gotchas.
-- **Infrastructure as Code Principles** ⏳ — describing infrastructure in files rather than by hand.
-- **Scripting & Automation Philosophy** ⏳ — when to reach for a script instead of doing it manually.
+- **Infrastructure as Code Principles** — describing infrastructure in files rather than by hand.
+- **Scripting & Automation Philosophy** — when to reach for a script instead of doing it manually.
 
 ## Stage 2: Core Tools
 
@@ -25,8 +25,8 @@ The tools unlocked from the start. Start here once the foundations make sense.
 
 Intermediate concepts that unlock more advanced tools.
 
-- **CI/CD Pipeline Concepts** ⏳ — automating build, test, and deploy once the basics are solid.
-- **Networking Fundamentals** ⏳ — ports, bridges, and how containers talk to each other and the host.
+- **CI/CD Pipeline Concepts** — automating build, test, and deploy once the basics are solid.
+- **Networking Fundamentals** — ports, bridges, and how containers talk to each other and the host.
 
 ## Stage 4: Advanced Tools
 
@@ -39,7 +39,7 @@ These depend on the foundations being in place.
 
 ## Stage 5: Mastery
 
-- **Observability & Monitoring Concepts** ⏳ — knowing what your systems are doing in production.
+- **Observability & Monitoring Concepts** — knowing what your systems are doing in production.
 - **Prometheus** ⏳ / **Grafana** ⏳ — metrics collection and dashboards.
 - **Jenkins** ⏳ — self-hosted CI/CD pipelines.
 - **GitHub Actions** ⏳ — managed CI/CD wired into the repo.
