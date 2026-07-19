@@ -2,6 +2,7 @@
 
 ## 2026-07-19
 
+- concepts: Add L1 primers for CI/CD Pipeline Concepts, Containerization Concepts, Infrastructure as Code Principles (con-001, con-002, con-003)
 - concepts: Add Linux & CLI Fundamentals primer (con-004)
 - concepts: Add Networking Fundamentals primer (con-005)
 - concepts: Add Observability & Monitoring Concepts primer (con-006)
