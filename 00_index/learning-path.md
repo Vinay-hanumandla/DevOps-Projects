@@ -17,8 +17,8 @@ The concepts every DevOps task leans on.
 The tools unlocked from the start. Start here once the foundations make sense.
 
 - **Git** — A handful of notes covering the basics: [quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md) and [undo/commit/push](../git/notes/2026-07-13-undo-stage-commit-push.md), each refreshed in Jul 15.
-- **Docker** — [Quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md), [minimal non-root Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile), [container run scripts](../docker/scripts/2026-07-13-first-port-mapped-container.sh), and the [sample apps](../docker/src/main.go) they build give you hands-on with images, port mapping, and multi-stage builds.
-- **Bash** ⏳ — command-line scripting for day-to-day automation.
+- **Docker** — [Quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md), [minimal non-root Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile), [container run scripts](../docker/scripts/2026-07-18-first-port-mapped-container.sh), and the [sample apps](../docker/src/main.go) they build give you hands-on with images, port mapping, and multi-stage builds.
+- **Bash** — [primer](../bash/notes/0000-primer-bash.md), [install and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md), and a [hello-world script](../bash/scripts/2026-07-18-first-hello-world.sh) give you a first-day grounding.
 - **Python** ⏳ — scripting and tooling for ops tasks.
 
 ## Stage 3: Building Skills
@@ -46,13 +46,13 @@ These depend on the foundations being in place.
 
 ## Progression Map
 
-Docker and Git have content on disk today. The rest of the map shows what unlocks what once the notes land.
+Docker, Git, and Bash have content on disk today. The rest of the map shows what unlocks what once the notes land.
 
 ```
 Foundations (Linux, Git, Containerization, IaC, Scripting)
         |
         v
-  Core Tools: Docker, Git  <-- content exists here
+  Core Tools: Bash, Docker, Git  <-- content exists here
         |
         +---> Kubernetes, Helm, Terraform, Ansible (advanced)
         |

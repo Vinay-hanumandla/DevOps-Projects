@@ -12,6 +12,16 @@
 - **Non-root runtime** — configuring the container to run as an unprivileged UID instead of root, a basic security hardening step.
 - **Volume** — a persistent, host-managed storage mount that survives container restarts, used when data must outlive the container.
 
+## Bash
+
+- **Shell** — the program that reads typed commands and runs them; Bash is the most common Unix/Linux shell.
+- **Script** — a text file containing Bash commands, usually with a `.sh` extension, run with `bash script.sh` or `./script.sh` after making it executable.
+- **Variable** — a named value, set with `name="value"` and read with `$name`.
+- **Pipe (`|`)** — sends the output of one command as input to another (e.g. `ls | grep ".md"`).
+- **Exit code** — every command returns a number: 0 means success, non-zero means failure.
+- **`$PATH`** — a colon-separated list of directories where the shell looks for executables.
+- **Shebang** — the first line of a script (`#!/usr/bin/env bash`) that tells the system which interpreter to use.
+
 ## Git
 
 - **Staging area (index)** — the intermediate holding place between your working directory and a commit; `git add` moves changes here, `git commit` snapshots them.
