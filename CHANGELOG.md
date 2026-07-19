@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-19
+
+- concepts: Add L1 primers for CI/CD Pipeline Concepts, Containerization Concepts, Infrastructure as Code Principles (con-001, con-002, con-003)
+
 ## 2026-07-18
 
 - docker: Replace stale port-mapped container script with fresh L2 version (docker-003 rework)
