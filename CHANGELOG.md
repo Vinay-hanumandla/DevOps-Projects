@@ -2,6 +2,9 @@
 
 ## 2026-07-19
 
+- concepts: Add Scripting & Automation Philosophy primer (con-007)
+- concepts: Add Version Control & Git Workflow primer (con-008)
+- concepts: Add CI/CD pipeline stage simulation script — build/test/deploy with parallel jobs and fail-fast (con-009)
 - concepts: Add L1 primers for CI/CD Pipeline Concepts, Containerization Concepts, Infrastructure as Code Principles (con-001, con-002, con-003)
 - concepts: Add Linux & CLI Fundamentals primer (con-004)
 - concepts: Add Networking Fundamentals primer (con-005)
