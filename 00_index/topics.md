@@ -18,3 +18,16 @@
 ## Git  ·  4 files
 
 - **notes** (4): [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md), [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md), [Git follow-up trip-ups](../git/notes/2026-07-15-git-quickstart-trip-ups.md), [Undo follow-up](../git/notes/2026-07-15-undo-stage-commit-push.md)
+
+## Concepts (docs/concepts/)  ·  9 files
+
+Foundational primers on the ideas the tools build on — one primer per concept, plus a runnable companion for CI/CD.
+
+- **CI/CD Pipeline Concepts:** [primer](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) · script: [CI/CD stage simulation](../docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh)
+- **Containerization Concepts:** [primer](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md)
+- **Infrastructure as Code Principles:** [primer](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md)
+- **Linux & CLI Fundamentals:** [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md)
+- **Networking Fundamentals:** [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md)
+- **Observability & Monitoring Concepts:** [primer](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md)
+- **Scripting & Automation Philosophy:** [primer](../docs/concepts/scripting-automation-philosophy/0000-primer-scripting-automation-philosophy.md)
+- **Version Control & Git Workflow:** [primer](../docs/concepts/version-control-git-workflow/0000-primer-version-control-git-workflow.md)

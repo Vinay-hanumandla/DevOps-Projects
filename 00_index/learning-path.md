@@ -4,13 +4,13 @@
 
 ## Stage 1: Foundations
 
-The concepts every DevOps task leans on.
+The concepts every DevOps task leans on. Each now has a first-day primer.
 
-- **Linux & CLI Fundamentals** ⏳ — the shell, processes, and filesystem basics underpinning every tool here.
-- **Version Control & Git Workflow** — [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md) covers first contact; [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md) walks the working cycle. Refreshed notes from Jul 15 add a second perspective on each.
-- **Containerization Concepts** — [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md) covers what an image and container are on first contact; the Jul 15 refresh adds more gotchas.
-- **Infrastructure as Code Principles** ⏳ — describing infrastructure in files rather than by hand.
-- **Scripting & Automation Philosophy** ⏳ — when to reach for a script instead of doing it manually.
+- **Linux & CLI Fundamentals** — [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md): the shell, processes, and filesystem basics underpinning every tool here.
+- **Version Control & Git Workflow** — [primer](../docs/concepts/version-control-git-workflow/0000-primer-version-control-git-workflow.md) for the concepts; then [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md) and [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md) for first contact (both refreshed Jul 15).
+- **Containerization Concepts** — [primer](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md) for what an image and container are; then [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md) to see it in practice.
+- **Infrastructure as Code Principles** — [primer](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md): describing infrastructure in files rather than by hand.
+- **Scripting & Automation Philosophy** — [primer](../docs/concepts/scripting-automation-philosophy/0000-primer-scripting-automation-philosophy.md): when to reach for a script instead of doing it manually.
 
 ## Stage 2: Core Tools
 
@@ -25,8 +25,8 @@ The tools unlocked from the start. Start here once the foundations make sense.
 
 Intermediate concepts that unlock more advanced tools.
 
-- **CI/CD Pipeline Concepts** ⏳ — automating build, test, and deploy once the basics are solid.
-- **Networking Fundamentals** ⏳ — ports, bridges, and how containers talk to each other and the host.
+- **CI/CD Pipeline Concepts** — [primer](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) for the ideas; [CI/CD stage simulation](../docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh) is a pure-Bash pipeline to practice build→test→deploy gating.
+- **Networking Fundamentals** — [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md): ports, addresses, and how containers talk to each other and the host.
 
 ## Stage 4: Advanced Tools
 
@@ -39,24 +39,24 @@ These depend on the foundations being in place.
 
 ## Stage 5: Mastery
 
-- **Observability & Monitoring Concepts** ⏳ — knowing what your systems are doing in production.
+- **Observability & Monitoring Concepts** — [primer](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md): knowing what your systems are doing in production.
 - **Prometheus** ⏳ / **Grafana** ⏳ — metrics collection and dashboards.
 - **Jenkins** ⏳ — self-hosted CI/CD pipelines.
 - **GitHub Actions** ⏳ — managed CI/CD wired into the repo.
 
 ## Progression Map
 
-Docker, Git, and Bash have content on disk today. The rest of the map shows what unlocks what once the notes land.
+Bash, Docker, and Git have tool content on disk today, and all eight foundational concepts now have primers. The rest of the map shows what unlocks what once the tool notes land.
 
 ```
-Foundations (Linux, Git, Containerization, IaC, Scripting)
+Foundations (Linux, Git workflow, Containerization, IaC, Scripting)  <-- primers exist
         |
         v
   Core Tools: Bash, Docker, Git  <-- content exists here
         |
         +---> Kubernetes, Helm, Terraform, Ansible (advanced)
         |
-  CI/CD + Networking
+  CI/CD + Networking  <-- concept primers exist
         |
         v
   Prometheus, Grafana, Jenkins, GitHub Actions (mastery)

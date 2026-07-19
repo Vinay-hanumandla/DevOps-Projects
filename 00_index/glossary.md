@@ -35,3 +35,18 @@
 - **Reset** — `git reset` moves HEAD (and optionally the index/working tree); `--soft` keeps changes staged, `--hard` discards them, so use it with care.
 - **Amend** — `git commit --amend` rewrites the most recent commit (message or contents); fine locally, dangerous once pushed.
 - **Patch staging** — `git add -p` stages only selected hunks of a file so unrelated edits can land in separate commits.
+
+## Concepts
+
+- **CI/CD** — Continuous Integration (merging and testing code changes often) plus Continuous Delivery/Deployment (automatically getting those changes to production-ready or live states).
+- **Pipeline** — an ordered sequence of automated stages (typically build → test → deploy) where each stage must pass before the next runs.
+- **Fail-fast** — stopping a pipeline the moment a stage fails so broken changes don't waste time or reach later stages; usually gated on exit codes.
+- **Infrastructure as Code (IaC)** — managing servers, networks, and services through version-controlled definition files instead of manual clicks, so environments are reproducible.
+- **Idempotence** — applying the same configuration repeatedly yields the same end state; a core property that makes IaC and automation safe to re-run.
+- **Observability** — the ability to understand a system's internal state from its external outputs (metrics, logs, traces) without adding new instrumentation each time.
+- **Monitoring** — collecting and tracking metrics, logs, and alerts so you know when something breaks; the practical, threshold-driven side of observability.
+- **Metric** — a numeric measurement sampled over time (e.g. request latency, CPU usage) used to track system health and trigger alerts.
+- **Port** — a numbered endpoint on a host that identifies a specific service, letting one machine run many networked programs at once.
+- **Protocol** — an agreed set of rules for how machines exchange data (e.g. TCP, HTTP); both ends must speak the same one to communicate.
+- **CLI** — command-line interface: interacting with a system by typing text commands rather than clicking a graphical desktop.
+- **Kernel** — the core of an operating system that manages hardware, processes, and memory; the Linux kernel underpins most servers and containers.
