@@ -38,3 +38,9 @@
 - docker: Add port-mapped nginx container script (docker-003)
 - git: Add quickstart trip-ups notes (git-001)
 - git: Add undo-stage-commit-push notes (git-002)
+
+## 2026-07-20
+
+- git: Add Git primer (git-004)
+- git: Add first-time Git install notes (git-005)
+- git: Add first-repo lifecycle script (git-006)
