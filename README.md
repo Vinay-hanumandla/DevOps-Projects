@@ -26,11 +26,12 @@ A small, growing collection of hands-on DevOps artifacts. Each entry is a dated 
 
 ## Layout
 
-- `bash/` — Bash material: primer, notes, and scripts.
-- `docker/` — Docker material: notes, Dockerfiles, source files, and scripts.
-- `git/` — Git material: first-contact notes and workflow walkthroughs.
 - `00_index/` — the map: topics, quick links, glossary, and learning path.
+- `bash/` — Bash material: primer, notes, and scripts.
 - `CHANGELOG.md` — a dated log of what was added and when.
+- `docker/` — Docker material: notes, Dockerfiles, source files, and scripts.
+- `docs/` — Foundational concept primers covering CI/CD, containerization, IaC, Linux CLI, networking, observability, scripting, and version control.
+- `git/` — Git material: first-contact notes and workflow walkthroughs.
 
 ## Coverage
 
