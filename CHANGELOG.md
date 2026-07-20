@@ -2,6 +2,10 @@
 
 ## 2026-07-19
 
+- docker: Add Docker primer (docker-004)
+- docker: Add Docker install and daemon verify notes (docker-005)
+- docker: Add hello-world container script (docker-006)
+
 - concepts: Add Scripting & Automation Philosophy primer (con-007)
 - concepts: Add Version Control & Git Workflow primer (con-008)
 - concepts: Add CI/CD pipeline stage simulation script — build/test/deploy with parallel jobs and fail-fast (con-009)
@@ -34,3 +38,9 @@
 - docker: Add port-mapped nginx container script (docker-003)
 - git: Add quickstart trip-ups notes (git-001)
 - git: Add undo-stage-commit-push notes (git-002)
+
+## 2026-07-20
+
+- git: Add Git primer (git-004)
+- git: Add first-time Git install notes (git-005)
+- git: Add first-repo lifecycle script (git-006)
