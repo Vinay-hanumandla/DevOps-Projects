@@ -38,8 +38,8 @@ A small, growing collection of hands-on DevOps artifacts. Each entry is a dated 
 | Tool | notes | primer | scripts | dockerfiles | src | Last verified |
 |------|-------|--------|---------|-------------|-----|---------------|
 | Bash | 1 | 1 | 1 | — | — | 2026-07-18 |
-| Docker | 2 | — | 2 | 1 | 2 | 2026-07-15 |
-| Git | 4 | — | — | — | — | 2026-07-15 |
+| Docker | 2 | — | 3 | 1 | 2 | 2026-07-19 |
+| Git | 4 | — | 1 | — | — | 2026-07-20 |
 
 Foundational concept primers (one each) live under `docs/concepts/`: CI/CD, containerization, infrastructure-as-code, Linux & CLI, networking, observability & monitoring, scripting & automation, and version control — all last verified 2026-07-19.
 
