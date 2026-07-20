@@ -1,5 +1,5 @@
 # DevOps-Projects
-> A working DevOps engineer's reference — Bash, Docker, and Git notes, scripts, and source files.
+> A working DevOps engineer's reference — Bash, Docker, and Git notes and scripts, plus first-day primers on the core DevOps concepts.
 
 ![Last commit](https://img.shields.io/github/last-commit/Vinay-hanumandla/DevOps-Projects)
 ![Top language](https://img.shields.io/github/languages/top/Vinay-hanumandla/DevOps-Projects)
@@ -10,40 +10,42 @@
 
 ## Who this is for
 
-A working DevOps engineer's quick-reference: first-contact notes, runnable snippets, and configs for Bash, Docker, and Git. Use it as a shelf you grab from, not a tutorial site — each entry is something I actually built while working through a tool's quickstart, kept so I can revisit what tripped me up. It deliberately does not try to replace each tool's official docs. Right now it covers Bash, Docker, and Git; more tools land as I work through them.
+A working DevOps engineer's quick-reference: first-contact notes, runnable snippets, and the foundational concepts behind Bash, Docker, and Git. Use it as a shelf you grab from, not a tutorial site — each entry is something I actually built while working through a tool's quickstart, kept so I can revisit what tripped me up. It deliberately does not try to replace each tool's official docs. Right now it covers Bash, Docker, and Git, plus primers on the concepts they rest on; more tools land as I work through them.
 
 ## What's in here
 
-A small, growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, or config built while following a tool's quickstart and kept for later. Currently it holds Bash material (primer, install notes, hello-world script), Docker material (quickstart trip-ups notes, multi-stage Dockerfiles, sample apps, port-mapped container scripts), and Git material (quickstart trip-ups notes and undo/commit/push walkthroughs).
+A small, growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, or config built while following a tool's quickstart and kept for later. Currently it holds Bash material (primer, install notes, hello-world script), Docker material (quickstart trip-ups notes, a multi-stage Dockerfile, sample apps, and port-mapped container scripts), Git material (quickstart trip-ups notes and undo/commit/push walkthroughs), and a set of foundational concept primers under `docs/concepts/` covering the ideas the tools build on.
 
 ## Quick links
 
-- [Bash primer](bash/notes/0000-primer-bash.md) — what Bash is, key terminology, and a tiny example
-- [Install Bash and first script](bash/notes/2026-07-18-install-bash-and-first-script.md) — install check, first .sh file, and permission gotcha
-- [Docker quickstart follow-up](docker/notes/2026-07-15-docker-quickstart-trip-ups.md) — more first-contact gotchas after the initial run-through
-- [Minimal non-root Dockerfile](docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile) — multi-stage Python build pinned to a specific tag, non-root runtime
-- [Run container with port map](docker/scripts/2026-07-18-first-port-mapped-container.sh) — run nginx, map a port, verify, and tear down
+- [CI/CD stage simulation](docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh) — a pure-Bash build→test→deploy pipeline with fail-fast gating
+- [Scripting & Automation Philosophy primer](docs/concepts/scripting-automation-philosophy/0000-primer-scripting-automation-philosophy.md) — when to reach for a script instead of doing it by hand
+- [Version Control & Git Workflow primer](docs/concepts/version-control-git-workflow/0000-primer-version-control-git-workflow.md) — the ideas behind commits, branches, and remotes
+- [Linux & CLI Fundamentals primer](docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) — the shell, processes, and filesystem basics everything else leans on
+- [Networking Fundamentals primer](docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md) — ports, addresses, and how containers talk to the host
 
 ## Layout
 
-- `00_index/` — the map: topics, quick links, glossary, and learning path.
 - `bash/` — Bash material: primer, notes, and scripts.
-- `CHANGELOG.md` — a dated log of what was added and when.
 - `docker/` — Docker material: notes, Dockerfiles, source files, and scripts.
-- `docs/` — Foundational concept primers covering CI/CD, containerization, IaC, Linux CLI, networking, observability, scripting, and version control.
 - `git/` — Git material: first-contact notes and workflow walkthroughs.
+- `docs/concepts/` — foundational primers on the concepts the tools build on (Linux, networking, containerization, CI/CD, IaC, observability, and more).
+- `00_index/` — the map: topics, quick links, glossary, and learning path.
+- `CHANGELOG.md` — a dated log of what was added and when.
 
 ## Coverage
 
 | Tool | notes | primer | scripts | dockerfiles | src | Last verified |
 |------|-------|--------|---------|-------------|-----|---------------|
 | Bash | 1 | 1 | 1 | — | — | 2026-07-18 |
-| Docker | 2 | — | 2 | 1 | 2 | 2026-07-18 |
+| Docker | 2 | — | 2 | 1 | 2 | 2026-07-15 |
 | Git | 4 | — | — | — | — | 2026-07-15 |
+
+Foundational concept primers (one each) live under `docs/concepts/`: CI/CD, containerization, infrastructure-as-code, Linux & CLI, networking, observability & monitoring, scripting & automation, and version control — all last verified 2026-07-19.
 
 ## Status
 
-Working through first-contact material for Bash, Docker, and Git — Bash just landed its primer, first note, and first script; both Docker and Git have notes now, and more tools are on the way.
+Working through first-contact material for Bash, Docker, and Git, and laying down primers for the DevOps concepts underneath them — all eight foundational concept primers are now in place, and a CI/CD stage-simulation script gives the pipeline concepts a runnable companion. More tool-specific depth is on the way.
 
 ---
-_Last updated: 2026-07-19_
+_Last updated: 2026-07-20_
