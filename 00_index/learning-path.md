@@ -16,8 +16,8 @@ The concepts every DevOps task leans on. Each now has a first-day primer.
 
 The tools unlocked from the start. Start here once the foundations make sense.
 
-- **Git** — A handful of notes covering the basics: [quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md) and [undo/commit/push](../git/notes/2026-07-13-undo-stage-commit-push.md), each refreshed in Jul 15.
-- **Docker** — [Quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md), [minimal non-root Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile), [container run scripts](../docker/scripts/2026-07-18-first-port-mapped-container.sh), and the [sample apps](../docker/src/main.go) they build give you hands-on with images, port mapping, and multi-stage builds.
+- **Git** — [Git primer](../git/notes/0000-primer-git.md), [quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md), and [undo/commit/push](../git/notes/2026-07-13-undo-stage-commit-push.md) cover first contact. [Install Git and first repo](../git/notes/2026-07-20-install-git.md) and [first-repo lifecycle script](../git/scripts/2026-07-20-first-repo.sh) give you a runnable first day.
+- **Docker** — [Docker primer](../docker/notes/0000-primer-docker.md), [quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md), [minimal non-root Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile), [container run scripts](../docker/scripts/2026-07-18-first-port-mapped-container.sh), and the [sample apps](../docker/src/main.go) they build give you hands-on with images, port mapping, and multi-stage builds.
 - **Bash** — [primer](../bash/notes/0000-primer-bash.md), [install and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md), and a [hello-world script](../bash/scripts/2026-07-18-first-hello-world.sh) give you a first-day grounding.
 - **Python** ⏳ — scripting and tooling for ops tasks.
 

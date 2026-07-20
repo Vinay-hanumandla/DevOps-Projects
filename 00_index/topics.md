@@ -8,16 +8,19 @@
 - **notes** (1): [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
 - **scripts** (1): [Hello world with argument handling](../bash/scripts/2026-07-18-first-hello-world.sh)
 
-## Docker  ·  7 files
+## Docker  ·  10 files
 
-- **notes** (2): [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md), [Docker quickstart follow-up](../docker/notes/2026-07-15-docker-quickstart-trip-ups.md)
+- **primer:** [Docker — quick primer](../docker/notes/0000-primer-docker.md)
+- **notes** (3): [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md), [Docker quickstart follow-up](../docker/notes/2026-07-15-docker-quickstart-trip-ups.md), [Install Docker and verify daemon](../docker/notes/2026-07-19-install-docker.md)
 - **dockerfiles** (1): [Minimal non-root image](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile)
-- **scripts** (2): [Run container with port map](../docker/scripts/2026-07-16-run-container-port-map.sh), [Run nginx with port map](../docker/scripts/2026-07-18-first-port-mapped-container.sh)
+- **scripts** (3): [Run container with port map](../docker/scripts/2026-07-16-run-container-port-map.sh), [Run nginx with port map](../docker/scripts/2026-07-18-first-port-mapped-container.sh), [Hello-world container](../docker/scripts/2026-07-19-first-hello-world.sh)
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go) — the apps the Dockerfiles build
 
-## Git  ·  4 files
+## Git  ·  7 files
 
-- **notes** (4): [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md), [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md), [Git follow-up trip-ups](../git/notes/2026-07-15-git-quickstart-trip-ups.md), [Undo follow-up](../git/notes/2026-07-15-undo-stage-commit-push.md)
+- **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
+- **notes** (5): [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md), [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md), [Git follow-up trip-ups](../git/notes/2026-07-15-git-quickstart-trip-ups.md), [Undo follow-up](../git/notes/2026-07-15-undo-stage-commit-push.md), [Install Git and first repo](../git/notes/2026-07-20-install-git.md)
+- **scripts** (1): [First-repo lifecycle](../git/scripts/2026-07-20-first-repo.sh)
 
 ## Concepts (docs/concepts/)  ·  9 files
 
