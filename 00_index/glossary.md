@@ -15,6 +15,7 @@
 - **Daemon / Engine** — the background process (`dockerd`) that manages images, containers, networks, and volumes; the `docker` CLI talks to it via a socket.
 - **Registry** — a server that stores and distributes images; Docker Hub is the default public registry.
 - **Layer** — each instruction in a Dockerfile creates a layer; Docker caches layers so rebuilding is fast when only the last few instructions changed.
+- **Manifest** — the JSON document that describes an image's layers, config, and platform (Docker V2 or OCI format); `docker manifest inspect <image>` shows it.
 - **docker compose** — Docker's built-in multi-container orchestration tool (V2); define services in a `compose.yaml` and start everything with `docker compose up`.
 
 ## Bash
@@ -45,8 +46,10 @@
 
 ## Concepts
 
+- **Artifact** — a build output (binary, package, container image, or report) produced by one pipeline stage and consumed by the next; promoting an artifact means moving a specific version through dev → staging → prod.
 - **CI/CD** — Continuous Integration (merging and testing code changes often) plus Continuous Delivery/Deployment (automatically getting those changes to production-ready or live states).
 - **Pipeline** — an ordered sequence of automated stages (typically build → test → deploy) where each stage must pass before the next runs.
+- **Gate** — a checkpoint in a pipeline that must succeed before the next stage runs; examples are test pass/fail, security scan thresholds, and manual approval steps.
 - **Fail-fast** — stopping a pipeline the moment a stage fails so broken changes don't waste time or reach later stages; usually gated on exit codes.
 - **Infrastructure as Code (IaC)** — managing servers, networks, and services through version-controlled definition files instead of manual clicks, so environments are reproducible.
 - **Idempotence** — applying the same configuration repeatedly yields the same end state; a core property that makes IaC and automation safe to re-run.
