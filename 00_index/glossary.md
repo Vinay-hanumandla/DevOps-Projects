@@ -11,6 +11,11 @@
 - **Distroless image** — a minimal final image containing only the app and its runtime dependencies (no shell, package manager, or OS utilities), which shrinks attack surface.
 - **Non-root runtime** — configuring the container to run as an unprivileged UID instead of root, a basic security hardening step.
 - **Volume** — a persistent, host-managed storage mount that survives container restarts, used when data must outlive the container.
+- **Dockerfile** — a recipe for building an image; each instruction (`FROM`, `RUN`, `COPY`) creates a cached layer.
+- **Daemon / Engine** — the background process (`dockerd`) that manages images, containers, networks, and volumes; the `docker` CLI talks to it via a socket.
+- **Registry** — a server that stores and distributes images; Docker Hub is the default public registry.
+- **Layer** — each instruction in a Dockerfile creates a layer; Docker caches layers so rebuilding is fast when only the last few instructions changed.
+- **docker compose** — Docker's built-in multi-container orchestration tool (V2); define services in a `compose.yaml` and start everything with `docker compose up`.
 
 ## Bash
 
@@ -24,6 +29,8 @@
 
 ## Git
 
+- **Repository** — the folder Git is tracking, plus the hidden `.git` database that stores all history.
+- **Working tree** — the actual files on disk that you edit, as opposed to the committed snapshots stored in `.git`.
 - **Staging area (index)** — the intermediate holding place between your working directory and a commit; `git add` moves changes here, `git commit` snapshots them.
 - **Commit** — a snapshot of the staged changes with an author stamp and message; the unit of history in a repository.
 - **Branch** — a movable pointer to a commit; `git switch <name>` creates the context where new commits land without touching other lines of work.
