@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-07-21
+
+- concepts: Add containerization image manifest parser snippet (con-012)
+- concepts: Add IaC idempotency check script (con-013)
+- concepts: Add IaC declarative state diff snippet (con-014)
+
 ## 2026-07-19
 
 - docker: Add Docker primer (docker-004)
