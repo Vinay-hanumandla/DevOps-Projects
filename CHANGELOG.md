@@ -44,3 +44,6 @@
 - git: Add Git primer (git-004)
 - git: Add first-time Git install notes (git-005)
 - git: Add first-repo lifecycle script (git-006)
+- git: Add branch-merge-revert workflow script (git-003)
+- concepts: Add CI/CD artifact promotion snippet (con-010)
+- concepts: Add container lifecycle inspection script (con-011)
