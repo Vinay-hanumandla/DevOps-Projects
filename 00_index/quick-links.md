@@ -10,9 +10,9 @@
 - [Hello world with argument handling](../bash/scripts/2026-07-18-first-hello-world.sh) — a minimal script that checks for arguments
 
 ### Get started with Docker
-- [Docker primer](../docker/notes/0000-primer-docker.md) — what Docker is, key terminology, and a tiny example
 - [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md) — what to expect and where beginners get stuck
 - [Docker quickstart follow-up](../docker/notes/2026-07-15-docker-quickstart-trip-ups.md) — more gotchas after the initial run-through
+- [Hello-world container](../docker/scripts/2026-07-19-first-hello-world.sh) — pull and run the hello-world image to verify Docker works
 
 ### Build a container image
 - [Minimal non-root Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile) — multi-stage build to a distroless, non-root runtime
@@ -20,13 +20,11 @@
 ### Run a container
 - [Run container with port map](../docker/scripts/2026-07-16-run-container-port-map.sh) — run a tagged image, map a port, verify, and tear down
 - [Run nginx with port map](../docker/scripts/2026-07-18-first-port-mapped-container.sh) — run nginx, map a port, verify, and tear down
-- [Hello-world container](../docker/scripts/2026-07-19-first-hello-world.sh) — pull and run the hello-world image
 
 ### Get started with Git
-- [Git primer](../git/notes/0000-primer-git.md) — what Git is, key terminology, and a tiny example
 - [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md) — first contact with Git and where it tripped me up
 - [Git follow-up trip-ups](../git/notes/2026-07-15-git-quickstart-trip-ups.md) — more first-contact gotchas on the second pass
-- [Install Git and first repo](../git/notes/2026-07-20-install-git.md) — install check, first repo, and commit/push walkthrough
+- [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh) — init, add, commit, status in a minimal example
 
 ### Undo and fix a Git mistake
 - [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md) — unstage, discard, revert, and safely rewrite a local commit

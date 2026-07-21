@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-07-21
+
+- concepts: Add containerization image manifest parser snippet (con-012)
+- concepts: Add IaC idempotency check script (con-013)
+- concepts: Add IaC declarative state diff snippet (con-014)
+
 ## 2026-07-19
 
 - docker: Add Docker primer (docker-004)
@@ -44,3 +50,6 @@
 - git: Add Git primer (git-004)
 - git: Add first-time Git install notes (git-005)
 - git: Add first-repo lifecycle script (git-006)
+- git: Add branch-merge-revert workflow script (git-003)
+- concepts: Add CI/CD artifact promotion snippet (con-010)
+- concepts: Add container lifecycle inspection script (con-011)
