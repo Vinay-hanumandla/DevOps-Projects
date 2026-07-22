@@ -1,10 +1,10 @@
 # Changelog
 
-## 2026-07-21
+## 2026-07-22
 
-- concepts: Add containerization image manifest parser snippet (con-012)
-- concepts: Add IaC idempotency check script (con-013)
-- concepts: Add IaC declarative state diff snippet (con-014)
+- concepts: Refresh con-012/013/014 — rewrite stale containerization manifest parser, IaC idempotency check, and declarative state diff with today's date
+
+## 2026-07-21
 
 ## 2026-07-19
 
