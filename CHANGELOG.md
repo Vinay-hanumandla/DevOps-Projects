@@ -6,6 +6,9 @@
 - python: Add first Python script with variables and types snippet (python-002)
 - python: Add end-to-end venv setup and run script (python-003)
 - concepts: Refresh con-012/013/014 — rewrite stale containerization manifest parser, IaC idempotency check, and declarative state diff with today's date
+- concepts: Add Linux file permissions & process management practice script (con-015)
+- concepts: Add Linux CLI subprocess wrapper Python snippet (con-016)
+- concepts: Add network connectivity, DNS & port inspection practice script (con-017)
 
 ## 2026-07-21
 
