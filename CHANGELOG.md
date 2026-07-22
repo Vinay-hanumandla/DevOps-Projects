@@ -5,12 +5,9 @@
 - python: Add Python quick-start primer (python-001)
 - python: Add first Python script with variables and types snippet (python-002)
 - python: Add end-to-end venv setup and run script (python-003)
+- concepts: Refresh con-012/013/014 — rewrite stale containerization manifest parser, IaC idempotency check, and declarative state diff with today's date
 
 ## 2026-07-21
-
-- concepts: Add containerization image manifest parser snippet (con-012)
-- concepts: Add IaC idempotency check script (con-013)
-- concepts: Add IaC declarative state diff snippet (con-014)
 
 ## 2026-07-19
 
