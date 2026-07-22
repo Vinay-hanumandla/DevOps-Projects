@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-07-22
+
+- python: Add Python quick-start primer (python-001)
+- python: Add first Python script with variables and types snippet (python-002)
+- python: Add end-to-end venv setup and run script (python-003)
+
 ## 2026-07-21
 
 - concepts: Add containerization image manifest parser snippet (con-012)
