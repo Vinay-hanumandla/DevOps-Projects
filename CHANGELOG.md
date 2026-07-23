@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-23
+
+- bash: Rework bash-004/005/006 — fix sources/versions per research.md, add strict mode to script template
+
 ## 2026-07-22
 
 - python: Add Python quick-start primer (python-001)
