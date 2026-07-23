@@ -22,15 +22,21 @@
 - **notes** (5): [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md), [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md), [Git follow-up trip-ups](../git/notes/2026-07-15-git-quickstart-trip-ups.md), [Undo follow-up](../git/notes/2026-07-15-undo-stage-commit-push.md), [Install Git](../git/notes/2026-07-20-install-git.md)
 - **scripts** (2): [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh), [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh)
 
-## Concepts (docs/concepts/)  ·  14 files
+## Python  ·  3 files
 
-Foundational primers on the ideas the tools build on — one primer per concept, plus runnable scripts and snippets for CI/CD, containerization, and IaC.
+- **primer:** [Python — quick primer](../python/notes/0000-primer-python.md)
+- **scripts** (1): [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py)
+- **snippets** (1): [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
+
+## Concepts (docs/concepts/)  ·  17 files
+
+Foundational primers on the ideas the tools build on — one primer per concept, plus runnable scripts and snippets for CI/CD, containerization, IaC, Linux & CLI, and networking.
 
 - **CI/CD Pipeline Concepts** (3): [primer](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) · script: [CI/CD stage simulation](../docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh) · snippet: [Artifact promotion](../docs/concepts/ci-cd-pipeline-concepts/snippets/2026-07-20-artifact-promotion.py)
-- **Containerization Concepts** (3): [primer](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md) · script: [Container lifecycle inspection](../docs/concepts/containerization-concepts/scripts/2026-07-20-container-lifecycle-inspection.sh) · snippet: [Image manifest parser](../docs/concepts/containerization-concepts/snippets/2026-07-21-image-manifest-parser.py)
-- **Infrastructure as Code Principles** (3): [primer](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md) · script: [IaC idempotency check](../docs/concepts/infrastructure-as-code-principles/scripts/2026-07-21-iac-idempotency-check.sh) · snippet: [Declarative state diff](../docs/concepts/infrastructure-as-code-principles/snippets/2026-07-21-declarative-state-diff.py)
-- **Linux & CLI Fundamentals** (1): [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md)
-- **Networking Fundamentals** (1): [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md)
+- **Containerization Concepts** (3): [primer](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md) · script: [Container lifecycle inspection](../docs/concepts/containerization-concepts/scripts/2026-07-20-container-lifecycle-inspection.sh) · snippet: [Image manifest parser](../docs/concepts/containerization-concepts/snippets/2026-07-22-image-manifest-parser.py)
+- **Infrastructure as Code Principles** (3): [primer](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md) · script: [IaC idempotency check](../docs/concepts/infrastructure-as-code-principles/scripts/2026-07-22-iac-idempotency-check.sh) · snippet: [Declarative state diff](../docs/concepts/infrastructure-as-code-principles/snippets/2026-07-22-declarative-state-diff.py)
+- **Linux & CLI Fundamentals** (3): [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) · script: [File permissions and processes](../docs/concepts/linux-cli-fundamentals/scripts/2026-07-22-file-permissions-and-processes.sh) · snippet: [Subprocess wrapper](../docs/concepts/linux-cli-fundamentals/snippets/2026-07-22-subprocess-wrapper.py)
+- **Networking Fundamentals** (2): [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md) · script: [Network connectivity check](../docs/concepts/networking-fundamentals/scripts/2026-07-22-network-connectivity-check.sh)
 - **Observability & Monitoring Concepts** (1): [primer](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md)
 - **Scripting & Automation Philosophy** (1): [primer](../docs/concepts/scripting-automation-philosophy/0000-primer-scripting-automation-philosophy.md)
 - **Version Control & Git Workflow** (1): [primer](../docs/concepts/version-control-git-workflow/0000-primer-version-control-git-workflow.md)

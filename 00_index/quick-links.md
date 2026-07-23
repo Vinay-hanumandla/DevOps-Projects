@@ -37,6 +37,14 @@
 ### Branch, merge, and revert
 - [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh) — create branches, merge them, and undo a merge
 
+### Get started with Python
+- [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip
+- [Install and first script](../python/notes/0000-primer-python.md) — the same primer also walks you through setting up a venv and running your first `.py`
+
+### Write and run a Python script
+- [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py) — end-to-end virtual-environment setup and a runner inside it
+- [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py) — declare variables, inspect types, and print mixed-type lists
+
 ### Understand a DevOps concept before touching a tool
 - [Linux & CLI Fundamentals](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) — the shell, processes, and filesystem basics everything leans on
 - [Networking Fundamentals](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md) — ports, addresses, and how containers reach the host
@@ -50,7 +58,10 @@
 ### Practice a concept hands-on
 - [CI/CD stage simulation](../docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh) — a pure-Bash build→test→deploy pipeline with fail-fast gating
 - [Container lifecycle inspection](../docs/concepts/containerization-concepts/scripts/2026-07-20-container-lifecycle-inspection.sh) — inspect running and stopped containers using the Docker API
-- [IaC idempotency check](../docs/concepts/infrastructure-as-code-principles/scripts/2026-07-21-iac-idempotency-check.sh) — verify that a provisioning step produces the same result on repeat runs
+- [IaC idempotency check](../docs/concepts/infrastructure-as-code-principles/scripts/2026-07-22-iac-idempotency-check.sh) — verify that a provisioning step produces the same result on repeat runs
 - [Artifact promotion](../docs/concepts/ci-cd-pipeline-concepts/snippets/2026-07-20-artifact-promotion.py) — promote a build artifact across pipeline stages with an audit trail
-- [Image manifest parser](../docs/concepts/containerization-concepts/snippets/2026-07-21-image-manifest-parser.py) — parse container image manifests and extract layer metadata
-- [Declarative state diff](../docs/concepts/infrastructure-as-code-principles/snippets/2026-07-21-declarative-state-diff.py) — compute the diff between a declared config and live state
+- [Image manifest parser](../docs/concepts/containerization-concepts/snippets/2026-07-22-image-manifest-parser.py) — parse container image manifests and extract layer metadata
+- [File permissions and processes](../docs/concepts/linux-cli-fundamentals/scripts/2026-07-22-file-permissions-and-processes.sh) — inspect and modify Linux file permissions, then list and filter running processes
+- [Subprocess wrapper](../docs/concepts/linux-cli-fundamentals/snippets/2026-07-22-subprocess-wrapper.py) — run a command and capture stdout/stderr/return code from Python
+- [Network connectivity check](../docs/concepts/networking-fundamentals/scripts/2026-07-22-network-connectivity-check.sh) — test TCP connectivity to a host:port and diagnose why it's unreachable
+- [Declarative state diff](../docs/concepts/infrastructure-as-code-principles/snippets/2026-07-22-declarative-state-diff.py) — compute the diff between a declared config and live state
