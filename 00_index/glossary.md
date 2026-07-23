@@ -44,6 +44,14 @@
 - **Amend** — `git commit --amend` rewrites the most recent commit (message or contents); fine locally, dangerous once pushed.
 - **Patch staging** — `git add -p` stages only selected hunks of a file so unrelated edits can land in separate commits.
 
+## Python
+
+- **Type** — the category of a value (`int`, `float`, `str`, `bool`, `list`, `dict`); `type(value)` returns it, and knowing it prevents surprises like `5 / 2` giving `2.5` instead of `2`.
+- **Virtual environment (venv)** — an isolated directory containing its own Python interpreter and installed packages; created with `python -m venv .venv` so nothing leaks in or out between projects.
+- **pip** — Python's package installer; `pip install requests` fetches and installs a library, usually combined with a venv to keep dependencies reproducible.
+- **Module** — a `.py` file containing functions, classes, or constants; `import os` loads the built-in `os` module for filesystem and environment access.
+- **f-string** — a string with `f""` containing `{}` placeholders evaluated at runtime; faster and more readable than the older `.format()` style.
+
 ## Concepts
 
 - **Artifact** — a build output (binary, package, container image, or report) produced by one pipeline stage and consumed by the next; promoting an artifact means moving a specific version through dev → staging → prod.
