@@ -2,9 +2,7 @@
 
 ## 2026-07-23
 
-- bash: Add Bash guide trip-ups notes (bash-004)
-- bash: Add minimal safe Bash script template (bash-005)
-- bash: Add Bash robust scripts gotchas and patterns docs (bash-006)
+- bash: Rework bash-004/005/006 — fix sources/versions per research.md, add strict mode to script template
 
 ## 2026-07-22
 

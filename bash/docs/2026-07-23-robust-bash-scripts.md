@@ -1,10 +1,9 @@
 ---
 last_verified: 2026-07-23
-tool_version: 5.2.37
+tool_version: n/a
 sources:
-  - https://github.com/waleyinka/system_monitoring/
-  - https://estudy247.com/courses/bash/lessons/real-world-bash-projects/
-  - https://unixy.io/blog/shell-scripting-pitfalls/
+  - https://www.fosslinux.com/105140/10-must-know-bash-shell-scripting-tips-and-tricks-for-beginners.htm
+  - https://www.mechanicalrock.io/blog/modern-bash
 ---
 
 # What I learned about writing robust Bash scripts: gotchas and patterns

@@ -1,9 +1,9 @@
 ---
 last_verified: 2026-07-23
-tool_version: 5.2.37
+tool_version: n/a
 sources:
-  - https://linuxjunkies.org/guides/bash-scripting-for-beginners
-  - https://unixy.io/blog/shell-scripting-pitfalls/
+  - https://www.fosslinux.com/105140/10-must-know-bash-shell-scripting-tips-and-tricks-for-beginners.htm
+  - https://www.mechanicalrock.io/blog/modern-bash
 ---
 
 # Bash guide — what tripped me up
