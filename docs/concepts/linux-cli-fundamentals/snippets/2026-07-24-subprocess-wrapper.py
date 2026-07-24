@@ -1,4 +1,4 @@
-# last_verified: 2026-07-22 · Linux & CLI Fundamentals L2
+# last_verified: 2026-07-24 · Linux & CLI Fundamentals L2
 
 """
 Applying Linux & CLI fundamentals — subprocess wrapper
