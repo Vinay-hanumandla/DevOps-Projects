@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# last_verified: 2026-07-22 · Networking Fundamentals L2
+# last_verified: 2026-07-24 · Networking Fundamentals L2
 
 # Practice: Network connectivity, DNS, and port inspection
 # I built this to test basic networking from a fresh Linux box —

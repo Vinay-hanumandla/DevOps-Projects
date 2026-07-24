@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-24
+
+- concepts: Refresh con-015/016/017 — Linux file permissions/process script, subprocess wrapper snippet, and network connectivity script with today's date
+
 ## 2026-07-23
 
 - bash: Rework bash-004/005/006 — fix sources/versions per research.md, add strict mode to script template

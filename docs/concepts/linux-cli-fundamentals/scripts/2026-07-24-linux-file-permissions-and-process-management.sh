@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-# last_verified: 2026-07-22 · Linux & CLI Fundamentals L2
+# last_verified: 2026-07-24 · Linux & CLI Fundamentals L2
 
 # Practice: Linux file permissions and process management
-# I wrote this to get comfortable with chmod, chown, ps, kill, and umask.
+# I'm refreshing this lab to get comfortable with chmod, chown, ps,
+# kill, and umask after rereading the primer.
 
 set -u
 
