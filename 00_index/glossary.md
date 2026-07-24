@@ -27,6 +27,12 @@
 - **Exit code** — every command returns a number: 0 means success, non-zero means failure.
 - **`$PATH`** — a colon-separated list of directories where the shell looks for executables.
 - **Shebang** — the first line of a script (`#!/usr/bin/env bash`) that tells the system which interpreter to use.
+- **`$?`** — the exit code of the last foreground command; useful for inline error checks without an explicit `if`.
+- **Stderr** — the separate output stream (`>&2`) for error messages, distinct from normal output (stdout); redirecting it independently keeps diagnostics from polluting a command's real output.
+- **Positional parameters** — the arguments passed to a script or function, accessed as `$1`, `$2`, etc.; `$@` holds all of them as separate words, `$*` as a single string.
+- **Word splitting** — the shell's behaviour of splitting unquoted variable expansions on characters in `$IFS` (space, tab, newline by default), which causes bugs when a value contains spaces unless quoted.
+- **IFS** — the Internal Field Separator, used by the shell to split words after expansion; overriding it (e.g. `IFS=,`) changes how `read` and loops parse delimited input.
+- **`trap`** — a builtin that registers a command to run when the shell receives a signal or event (e.g. `EXIT`, `ERR`, `SIGINT`), used for cleanup and error handling.
 
 ## Git
 
