@@ -5,9 +5,14 @@
 ### Get started with Bash
 - [Bash primer](../bash/notes/0000-primer-bash.md) — what Bash is, key terminology, and a tiny example
 - [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md) — install check, first .sh file, and permission gotcha
+- [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md) — quoting, word splitting, exit codes, and trap
 
 ### Write and run a Bash script
 - [Hello world with argument handling](../bash/scripts/2026-07-18-first-hello-world.sh) — a minimal script that checks for arguments
+- [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh) — a reusable skeleton with `set -euo pipefail`
+
+### Write robust Bash
+- [Robust Bash scripting](../bash/docs/2026-07-23-robust-bash-scripts.md) — strict mode, error handling, and safe defaults
 
 ### Get started with Docker
 - [Docker primer](../docker/notes/0000-primer-docker.md) — what Docker is, images vs containers, and a minimal workflow
@@ -39,7 +44,6 @@
 
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip
-- [Install and first script](../python/notes/0000-primer-python.md) — the same primer also walks you through setting up a venv and running your first `.py`
 
 ### Write and run a Python script
 - [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py) — end-to-end virtual-environment setup and a runner inside it
@@ -61,7 +65,7 @@
 - [IaC idempotency check](../docs/concepts/infrastructure-as-code-principles/scripts/2026-07-22-iac-idempotency-check.sh) — verify that a provisioning step produces the same result on repeat runs
 - [Artifact promotion](../docs/concepts/ci-cd-pipeline-concepts/snippets/2026-07-20-artifact-promotion.py) — promote a build artifact across pipeline stages with an audit trail
 - [Image manifest parser](../docs/concepts/containerization-concepts/snippets/2026-07-22-image-manifest-parser.py) — parse container image manifests and extract layer metadata
-- [File permissions and processes](../docs/concepts/linux-cli-fundamentals/scripts/2026-07-22-file-permissions-and-processes.sh) — inspect and modify Linux file permissions, then list and filter running processes
-- [Subprocess wrapper](../docs/concepts/linux-cli-fundamentals/snippets/2026-07-22-subprocess-wrapper.py) — run a command and capture stdout/stderr/return code from Python
-- [Network connectivity check](../docs/concepts/networking-fundamentals/scripts/2026-07-22-network-connectivity-check.sh) — test TCP connectivity to a host:port and diagnose why it's unreachable
+- [File permissions and processes](../docs/concepts/linux-cli-fundamentals/scripts/2026-07-24-linux-file-permissions-and-process-management.sh) — inspect and modify Linux file permissions, then list and filter running processes
+- [Subprocess wrapper](../docs/concepts/linux-cli-fundamentals/snippets/2026-07-24-subprocess-wrapper.py) — run a command and capture stdout/stderr/return code from Python
+- [Network connectivity check](../docs/concepts/networking-fundamentals/scripts/2026-07-24-network-connectivity-dns-port-inspection.sh) — test TCP connectivity to a host:port and diagnose why it's unreachable
 - [Declarative state diff](../docs/concepts/infrastructure-as-code-principles/snippets/2026-07-22-declarative-state-diff.py) — compute the diff between a declared config and live state
