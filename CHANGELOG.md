@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-25
+
+- concepts: Update con-017 — rewrite network connectivity practice script with proper date and metadata
+
 ## 2026-07-24
 
 - concepts: Refresh con-015/016/017 — Linux file permissions/process script, subprocess wrapper snippet, and network connectivity script with today's date
