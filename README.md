@@ -14,19 +14,19 @@ A working DevOps engineer's quick-reference: first-contact notes, runnable snipp
 
 ## What's in here
 
-A small, growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, or config built while following a tool's quickstart and kept for later. It holds Bash material (primer, install notes, hello-world script), Docker material (primer, quickstart trip-ups notes, install note, multi-stage Dockerfile, sample apps, and container scripts), Git material (primer, quickstart trip-ups notes, undo/commit/push walkthroughs, install note, and branch-merge-revert script), Python material (primer, first script, snippets), and a set of foundational concept primers under `docs/concepts/` — each now joined by a runnable script or snippet that puts the ideas into practice.
+A small, growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, or config built while following a tool's quickstart and kept for later. It holds Bash material (primer, install notes, trip-ups guide, robust scripting patterns, hello-world and safe-template scripts), Docker material (primer, quickstart trip-ups, install note, multi-stage Dockerfile, sample apps, and container scripts), Git material (primer, quickstart trip-ups, undo/commit/push walkthroughs, install note, and branch-merge-revert script), Python material (primer, first script, snippets), and a set of foundational concept primers under `docs/concepts/` — each now joined by a runnable script or snippet that puts the ideas into practice.
 
 ## Quick links
 
-- [File permissions and processes](docs/concepts/linux-cli-fundamentals/scripts/2026-07-22-file-permissions-and-processes.sh) — inspect and modify Linux file permissions, then list and filter running processes
-- [Subprocess wrapper](docs/concepts/linux-cli-fundamentals/snippets/2026-07-22-subprocess-wrapper.py) — run a command and capture stdout/stderr/return code from Python
-- [Network connectivity check](docs/concepts/networking-fundamentals/scripts/2026-07-22-network-connectivity-check.sh) — test TCP connectivity to a host:port and diagnose why it's unreachable
+- [Robust Bash scripting](bash/docs/2026-07-23-robust-bash-scripts.md) — patterns for writing error-resistant Bash scripts with strict mode, error handling, and safe defaults
+- [Bash trip-ups](bash/notes/2026-07-23-bash-guide-trip-ups.md) — gotchas from working with Bash: quoting, word splitting, exit codes, and trap
+- [Safe Bash template](bash/scripts/2026-07-23-safe-bash-template.sh) — a reusable, defensive Bash script skeleton with `set -euo pipefail`
 - [Python primer](python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip
 - [Create venv and run](python/scripts/2026-07-22-create-venv-and-run.py) — end-to-end virtual-environment setup and a runner inside it
 
 ## Layout
 
-- `bash/` — Bash material: primer, notes, and scripts.
+- `bash/` — Bash material: primer, notes, docs, and scripts.
 - `docker/` — Docker material: notes, Dockerfiles, source files, and scripts.
 - `git/` — Git material: notes and workflow scripts.
 - `python/` — Python material: primer, scripts, and snippets.
@@ -36,18 +36,18 @@ A small, growing collection of hands-on DevOps artifacts. Each entry is a dated 
 
 ## Coverage
 
-| Tool | notes | scripts | dockerfiles | src | snippets | Last verified |
-|------|-------|---------|-------------|-----|----------|---------------|
-| Bash | 1 | 1 | — | — | — | 2026-07-18 |
-| Docker | 3 | 3 | 1 | 2 | — | 2026-07-19 |
-| Git | 5 | 2 | — | — | — | 2026-07-20 |
-| Python | 1 | 1 | — | — | 1 | 2026-07-22 |
+| Tool | notes | docs | scripts | dockerfiles | src | snippets | Last verified |
+|------|-------|------|---------|-------------|-----|----------|---------------|
+| Bash | 3 | 1 | 2 | — | — | — | 2026-07-23 |
+| Docker | 4 | — | 3 | 1 | 2 | — | 2026-07-19 |
+| Git | 6 | — | 2 | — | — | — | 2026-07-20 |
+| Python | 1 | — | 1 | — | — | 1 | 2026-07-22 |
 
-Foundational concept primers (one each) live under `docs/concepts/`: CI/CD, containerization, infrastructure-as-code, Linux & CLI, networking, observability & monitoring, scripting & automation, and version control — all last verified 2026-07-22. Five of the eight now have runnable scripts and four have code snippets.
+Foundational concept primers (one each) live under `docs/concepts/`: CI/CD, containerization, infrastructure-as-code, Linux & CLI, networking, observability & monitoring, scripting & automation, and version control — primers last verified 2026-07-19. Five of the eight now have runnable scripts and four have code snippets, some verified more recently.
 
 ## Status
 
 Working through first-contact material for Bash, Docker, Git, and Python, and laying down primers for the DevOps concepts underneath them. All eight foundational concept primers are in place; CI/CD, containerization, IaC, Linux & CLI, and networking have gained runnable scripts and snippets. More tool-specific depth is on the way.
 
 ---
-_Last updated: 2026-07-23_
+_Last updated: 2026-07-24_
