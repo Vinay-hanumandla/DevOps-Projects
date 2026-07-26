@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-07-26
+
+- terraform: Add install notes (tf-003) and first local_file resource config (tf-004)
+- concepts: Add Networking Fundamentals socket connection tester snippet (con-018)
+
 ## 2026-07-25
 
 - concepts: Update con-017 — rewrite network connectivity practice script with proper date and metadata
