@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-07-27
+
+- docs: Cross-link three concept primers (ci-cd-pipeline-concepts, containerization-concepts, infrastructure-as-code-principles) from index files (docs-001)
+- bash: Add companion hello.sh for Bash primer (bash-007)
+- bash: Add companion test.sh for Bash install notes (bash-008)
+
 ## 2026-07-26
 
 - terraform: Add install notes (tf-003) and first local_file resource config (tf-004)
