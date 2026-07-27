@@ -5,6 +5,9 @@
 - docs: Cross-link three concept primers (ci-cd-pipeline-concepts, containerization-concepts, infrastructure-as-code-principles) from index files (docs-001)
 - bash: Add companion hello.sh for Bash primer (bash-007)
 - bash: Add companion test.sh for Bash install notes (bash-008)
+- git: Add companion readme.txt for Git primer (git-007)
+- git: Add companion README.md for Git quickstart trip-ups notes (git-008)
+- git: Add companion file.txt for Git quickstart trip-ups notes (git-009)
 
 ## 2026-07-26
 
