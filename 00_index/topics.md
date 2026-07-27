@@ -7,7 +7,7 @@
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (2): [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md), [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md)
 - **docs** (1): [Robust Bash scripting](../bash/docs/2026-07-23-robust-bash-scripts.md) — patterns for error-resistant scripts
-- **scripts** (2): [Hello world with argument handling](../bash/scripts/2026-07-18-first-hello-world.sh), [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh)
+- **scripts** (2): [Hello world with argument handling](../bash/scripts/2026-07-18-first-hello-world.sh), [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh) · **concept:** [CI/CD Pipeline Concepts](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md)
 
 ## Docker  ·  10 files
 
@@ -15,13 +15,13 @@
 - **notes** (4): [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md), [Docker follow-up trip-ups](../docker/notes/2026-07-15-docker-quickstart-trip-ups.md), [Install Docker](../docker/notes/2026-07-19-install-docker.md)
 - **dockerfiles** (1): [Minimal non-root image](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile)
 - **scripts** (3): [Hello-world container](../docker/scripts/2026-07-19-first-hello-world.sh), [Run container with port map](../docker/scripts/2026-07-16-run-container-port-map.sh), [Run nginx with port map](../docker/scripts/2026-07-18-first-port-mapped-container.sh)
-- **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go) — the apps the Dockerfiles build
+- **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go) — the apps the Dockerfiles build · **concept:** [Containerization Concepts](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md)
 
 ## Git  ·  8 files
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
 - **notes** (6): [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md), [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md), [Git follow-up trip-ups](../git/notes/2026-07-15-git-quickstart-trip-ups.md), [Undo follow-up](../git/notes/2026-07-15-undo-stage-commit-push.md), [Install Git](../git/notes/2026-07-20-install-git.md)
-- **scripts** (2): [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh), [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh)
+- **scripts** (2): [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh), [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh) · **concept:** [Infrastructure as Code Principles](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md)
 
 ## Python  ·  3 files
 
