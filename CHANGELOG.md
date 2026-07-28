@@ -5,6 +5,9 @@
 - git: Add companion README.md for Git quickstart trip-ups notes (git-010)
 - git: Add companion forgotten.txt for Git undo notes (git-011)
 - git: Add companion forgotten.txt for Git undo notes (git-012)
+- concepts: Add companion errors-i-found.txt notes for Linux CLI primer (con-025)
+- concepts: Add companion README.md notes for Git Workflow primer (con-026)
+- concepts: Add companion requirements.txt notes for CI/CD primer (con-027)
 
 ## 2026-07-27
 
