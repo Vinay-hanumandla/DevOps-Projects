@@ -7,7 +7,7 @@
 The concepts every DevOps task leans on. Each now has a first-day primer, and several have runnable companions.
 
 - **Linux & CLI Fundamentals** — [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md): the shell, processes, and filesystem basics underpinning every tool here.
-- **Version Control & Git Workflow** — [primer](../docs/concepts/version-control-git-workflow/0000-primer-version-control-git-workflow.md) for the concepts; then [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md) and [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md) for first contact.
+- **Version Control & Git Workflow** — [primer](../docs/concepts/version-control-git-workflow/0000-primer-version-control-git-workflow.md) for the ideas; then [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md) and [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md) for first contact.
 - **Containerization Concepts** — [primer](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md) for what an image and container are; then [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md) to see it in practice. The [container lifecycle inspection](../docs/concepts/containerization-concepts/scripts/2026-07-20-container-lifecycle-inspection.sh) script and [image manifest parser](../docs/concepts/containerization-concepts/snippets/2026-07-22-image-manifest-parser.py) go deeper. Leads into [CI/CD Pipeline Concepts](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) and [Infrastructure as Code Principles](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md).
 - **Infrastructure as Code Principles** — [primer](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md): describing infrastructure in files rather than by hand. Follow up with the [IaC idempotency check](../docs/concepts/infrastructure-as-code-principles/scripts/2026-07-22-iac-idempotency-check.sh) script and [declarative state diff](../docs/concepts/infrastructure-as-code-principles/snippets/2026-07-22-declarative-state-diff.py) snippet. Connects to [Containerization Concepts](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md) and [CI/CD Pipeline Concepts](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md).
 - **Scripting & Automation Philosophy** — [primer](../docs/concepts/scripting-automation-philosophy/0000-primer-scripting-automation-philosophy.md): when to reach for a script instead of doing it manually.
@@ -18,24 +18,24 @@ The tools unlocked from the start. Start here once the foundations make sense.
 
 - **Git** — [Git primer](../git/notes/0000-primer-git.md), [quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md), and [undo/commit/push](../git/notes/2026-07-13-undo-stage-commit-push.md) cover first contact. [Install Git and first repo](../git/notes/2026-07-20-install-git.md) and [first-repo lifecycle script](../git/scripts/2026-07-20-first-repo.sh) give you a runnable first day. The [branch-merge-revert](../git/scripts/2026-07-20-branch-merge-revert.sh) script adds intermediate workflow practice.
 - **Docker** — [Docker primer](../docker/notes/0000-primer-docker.md), [quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md), [minimal non-root Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile), [container run scripts](../docker/scripts/2026-07-18-first-port-mapped-container.sh), and the [sample apps](../docker/src/main.go) they build give you hands-on with images, port mapping, and multi-stage builds.
-- **Bash** — [primer](../bash/notes/0000-primer-bash.md), [install and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md), and a [hello-world script](../bash/scripts/2026-07-18-first-hello-world.sh) give you a first-day grounding. Then level up with the [trip-ups guide](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [robust scripting patterns](../bash/docs/2026-07-23-robust-bash-scripts.md), and the [safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh).
-- **Python** — [primer](../python/notes/0000-primer-python.md), [create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py), and a [first script with variables and types](../python/snippets/2026-07-22-first-script-variables-types.py) give you a first-day grounding in scripting for ops tasks.
+- **Bash** — [primer](../bash/notes/0000-primer-bash.md), [install and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md), and a [hello-world script](../bash/scripts/2026-07-18-first-hello-world.sh) give you a first-day grounding. Then level up with the [trip-ups guide](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [robust scripting patterns](../bash/docs/2026-07-23-robust-bash-scripts.md), the [safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh), and the companion scripts and tests.
+- **Python** — [primer](../python/notes/0000-primer-python.md), [create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py), and [first script with variables and types](../python/snippets/2026-07-22-first-script-variables-types.py) give you a first-day grounding in scripting for ops tasks.
 
 ## Stage 3: Building Skills
 
 Intermediate concepts that unlock more advanced tools.
 
 - **CI/CD Pipeline Concepts** — [primer](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) for the ideas; [CI/CD stage simulation](../docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh) is a pure-Bash pipeline to practice build→test→deploy gating, and the [artifact promotion snippet](../docs/concepts/ci-cd-pipeline-concepts/snippets/2026-07-20-artifact-promotion.py) shows how outputs move between stages. Builds on [Containerization Concepts](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md) and [Infrastructure as Code Principles](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md).
-- **Networking Fundamentals** — [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md): ports, addresses, and how containers talk to each other and the host. The [network connectivity check](../docs/concepts/networking-fundamentals/scripts/2026-07-24-network-connectivity-dns-port-inspection.sh) lets you practice diagnosing reachability.
+- **Networking Fundamentals** — [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md): ports, addresses, and how containers talk to each other and the host. The [network connectivity check](../docs/concepts/networking-fundamentals/scripts/2026-07-25-practice-network-connectivity-dns-port-inspection.sh) lets you practice diagnosing reachability. The [socket connection tester](../docs/concepts/networking-fundamentals/snippets/2026-07-26-socket-connection-tester.py) gives a Python companion for the same task.
 - **Linux & CLI Fundamentals** — [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md): the shell, processes, and permissions. The [file permissions and processes](../docs/concepts/linux-cli-fundamentals/scripts/2026-07-24-linux-file-permissions-and-process-management.sh) script and [subprocess wrapper](../docs/concepts/linux-cli-fundamentals/snippets/2026-07-24-subprocess-wrapper.py) let you practice common sysadmin tasks.
 
 ## Stage 4: Advanced Tools
 
 These depend on the foundations being in place.
 
+- **Terraform** — declarative infrastructure provisioning (needs Linux + IaC). [Install note and first config](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md), then the [first Terraform config](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl) that creates a local file.
 - **Kubernetes** ⏳ — orchestrating containers at scale (needs Containerization + Linux + Networking).
 - **Helm** ⏳ — packaging Kubernetes workloads (needs Containerization + IaC).
-- **Terraform** ⏳ — declarative infrastructure provisioning (needs Linux + IaC).
 - **Ansible** ⏳ — configuration management and automation (needs Linux + IaC + scripting).
 
 ## Stage 5: Mastery
@@ -47,18 +47,18 @@ These depend on the foundations being in place.
 
 ## Progression Map
 
-Bash, Docker, Git, and Python have tool content on disk today, and all eight foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, and networking also have runnable scripts and snippets. The rest of the map shows what unlocks what once the tool notes land.
+Bash, Docker, Git, Python, and Terraform have tool content on disk today, and all eight foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, and networking also have runnable scripts and snippets. The rest of the map shows what unlocks what once the tool notes land.
 
 ```
 Foundations (Linux, Git workflow, Containerization, IaC, Scripting)  <-- primers + scripts exist
-        |
-        v
-  Core Tools: Bash, Docker, Git, Python  <-- content exists here
-        |
-        +---> Kubernetes, Helm, Terraform, Ansible (advanced)
-        |
-   CI/CD + Networking  <-- concept primers exist; both have hands-on scripts
-        |
-        v
-  Prometheus, Grafana, Jenkins, GitHub Actions (mastery)
+         |
+         v
+   Core Tools: Bash, Docker, Git, Python, Terraform  <-- content exists here
+         |
+         +---> Kubernetes, Helm, Ansible (advanced)
+         |
+    CI/CD + Networking  <-- concept primers exist; both have hands-on scripts
+         |
+         v
+   Prometheus, Grafana, Jenkins, GitHub Actions (mastery)
 ```
