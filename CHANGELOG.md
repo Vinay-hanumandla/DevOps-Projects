@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-07-28
+
+- git: Add companion README.md for Git quickstart trip-ups notes (git-010)
+- git: Add companion forgotten.txt for Git undo notes (git-011)
+- git: Add companion forgotten.txt for Git undo notes (git-012)
+
 ## 2026-07-27
 
 - docs: Cross-link three concept primers (ci-cd-pipeline-concepts, containerization-concepts, infrastructure-as-code-principles) from index files (docs-001)
