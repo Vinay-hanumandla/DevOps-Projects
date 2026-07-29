@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-29
+
+- git: Add comparison of interactive rebase vs merge commit (git-015)
+
 ## 2026-07-28
 
 - git: Add companion README.md for Git quickstart trip-ups notes (git-010)
