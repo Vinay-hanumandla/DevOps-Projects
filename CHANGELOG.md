@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-07-29
+
+- git: Add feature branch workflow with interactive rebase script (git-013)
+- git: Add docs on wiring Git hooks into local dev workflow (git-014)
+
 ## 2026-07-28
 
 - git: Add companion README.md for Git quickstart trip-ups notes (git-010)
