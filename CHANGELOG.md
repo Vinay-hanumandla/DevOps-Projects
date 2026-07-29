@@ -2,6 +2,7 @@
 
 ## 2026-07-29
 
+- git: Add comparison of interactive rebase vs merge commit (git-015)
 - git: Add feature branch workflow with interactive rebase script (git-013)
 - git: Add docs on wiring Git hooks into local dev workflow (git-014)
 
