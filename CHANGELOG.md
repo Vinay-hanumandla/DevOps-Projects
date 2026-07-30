@@ -9,8 +9,10 @@ Passed ([x]) git-014 — Git: docs — How I wired Git hooks into my local dev w
 - git: Add docs on wiring Git hooks into local dev workflow (git-014)
 - concepts: Add gate-before-merge with branch protection doc (con-028)
 - docs: Remove spurious .github/workflows/ci.yml reference from CI/CD primer (docs-002)
+ - git: Add docs on wiring Git hooks into local dev workflow (git-014)
++  - concepts: Add CI/CD + Observability notebook — pipeline metrics and health dashboards (con-029)
 
-## 2026-07-29
+ ## 2026-07-29
 
 - git: Add comparison of interactive rebase vs merge commit (git-015)
 - git: Add feature branch workflow with interactive rebase script (git-013)
