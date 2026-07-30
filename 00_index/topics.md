@@ -2,21 +2,21 @@
 
 > A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](learning-path.md).
 
-## Bash  ·  8 files
+## Bash  ·  10 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
-- **docs** (1): [Robust Bash scripting](../bash/docs/2026-07-23-robust-bash-scripts.md) — patterns for error-resistant scripts
-- **scripts** (4): [Companion hello script](../bash/scripts/2026-07-27-companion-hello.sh), [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh), [Hello world with argument handling](../bash/scripts/2026-07-18-first-hello-world.sh), [Companion test script](../bash/scripts/2026-07-27-companion-test.sh)
+- **docs** (2): most recent → [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md), [Robust Bash scripting](../bash/docs/2026-07-23-robust-bash-scripts.md)
+- **scripts** (5): most recent → [System report tool](../bash/scripts/system-report-tool.sh), [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh), [Hello world with argument handling](../bash/scripts/2026-07-18-first-hello-world.sh)
+- _…and 2 more under `bash/scripts/` — browse the folder._
 
 ## Docker  ·  10 files
 
 - **primer:** [Docker — quick primer](../docker/notes/0000-primer-docker.md)
-- **notes** (4): most recent → [Install Docker](../docker/notes/2026-07-19-install-docker.md), [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md), [Docker follow-up trip-ups](../docker/notes/2026-07-15-docker-quickstart-trip-ups.md)
+- **notes** (4): most recent → [Install Docker](../docker/notes/2026-07-19-install-docker.md), [Docker follow-up trip-ups](../docker/notes/2026-07-15-docker-quickstart-trip-ups.md), [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md)
 - **dockerfiles** (1): [Minimal non-root image](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile)
 - **scripts** (3): [Hello-world container](../docker/scripts/2026-07-19-first-hello-world.sh), [Run nginx with port map](../docker/scripts/2026-07-18-first-port-mapped-container.sh), [Run container with port map](../docker/scripts/2026-07-16-run-container-port-map.sh)
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
-- _…and more under `docker/` — browse the folder._
 
 ## Git  ·  18 files
 
@@ -38,11 +38,11 @@
 - **notes** (1): [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
 - **configs** (1): [First Terraform local file resource](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl)
 
-## Concepts (docs/concepts/)  ·  21 files
+## Concepts (docs/concepts/)  ·  23 files
 
 Foundational primers on the ideas the tools build on — one primer per concept, plus runnable scripts and snippets for most.
 
-- **CI/CD Pipeline Concepts** (4): [primer](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) · [companion requirements notes](../docs/concepts/ci-cd-pipeline-concepts/notes/2026-07-28-companion-requirements.md) · script: [CI/CD stage simulation](../docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh) · snippet: [Artifact promotion](../docs/concepts/ci-cd-pipeline-concepts/snippets/2026-07-20-artifact-promotion.py)
+- **CI/CD Pipeline Concepts** (6): [primer](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) · [gate-before-merge with branch protection](../docs/concepts/ci-cd-pipeline-concepts/gate-before-merge-branch-protection.md) · [companion requirements notes](../docs/concepts/ci-cd-pipeline-concepts/notes/2026-07-28-companion-requirements.md) · script: [CI/CD stage simulation](../docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh) · snippet: [Artifact promotion](../docs/concepts/ci-cd-pipeline-concepts/snippets/2026-07-20-artifact-promotion.py) · notebook: [Pipeline metrics and health dashboards](../docs/concepts/ci-cd-pipeline-concepts/notebooks/pipeline-metrics-and-health-dashboards.ipynb)
 - **Containerization Concepts** (3): [primer](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md) · script: [Container lifecycle inspection](../docs/concepts/containerization-concepts/scripts/2026-07-20-container-lifecycle-inspection.sh) · snippet: [Image manifest parser](../docs/concepts/containerization-concepts/snippets/2026-07-22-image-manifest-parser.py)
 - **Infrastructure as Code Principles** (3): [primer](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md) · script: [IaC idempotency check](../docs/concepts/infrastructure-as-code-principles/scripts/2026-07-22-iac-idempotency-check.sh) · snippet: [Declarative state diff](../docs/concepts/infrastructure-as-code-principles/snippets/2026-07-22-declarative-state-diff.py)
 - **Linux & CLI Fundamentals** (4): [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) · [errors I found](../docs/concepts/linux-cli-fundamentals/notes/2026-07-28-errors-i-found.md) · script: [File permissions and processes](../docs/concepts/linux-cli-fundamentals/scripts/2026-07-24-linux-file-permissions-and-process-management.sh) · snippet: [Subprocess wrapper](../docs/concepts/linux-cli-fundamentals/snippets/2026-07-24-subprocess-wrapper.py)
