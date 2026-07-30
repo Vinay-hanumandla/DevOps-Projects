@@ -18,11 +18,14 @@
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
 - _…and more under `docker/` — browse the folder._
 
-## Git  ·  8 files
+## Git  ·  18 files
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
-- **notes** (6): most recent → [Install Git](../git/notes/2026-07-20-install-git.md), [Undo follow-up](../git/notes/2026-07-15-undo-stage-commit-push.md), [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md), [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md), [Git follow-up trip-ups](../git/notes/2026-07-15-git-quickstart-trip-ups.md)
-- **scripts** (2): [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh), [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh)
+- **notes** (12): most recent → [Companion forgotten undo notes 15](../git/notes/2026-07-28-git-companion-forgotten-undo-notes-15.md), [Companion forgotten undo notes](../git/notes/2026-07-28-git-companion-forgotten-undo-notes.md), [Companion readme quickstart trip-ups](../git/notes/2026-07-28-git-companion-readme-quickstart-trip-ups.md), [Companion readme](../git/notes/2026-07-27-git-companion-readme.md), [Install Git](../git/notes/2026-07-20-install-git.md)
+- **docs** (2): [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md), [How I wired Git hooks into local dev](../git/docs/how-i-wired-git-hooks-into-my-local-dev-workflow.md)
+- **scripts** (3): [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh), [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh), [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh)
+- **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
+- _…and more under `git/` — browse the folder._
 
 ## Python  ·  3 files
 
@@ -35,15 +38,16 @@
 - **notes** (1): [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
 - **configs** (1): [First Terraform local file resource](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl)
 
-## Concepts (docs/concepts/)  ·  18 files
+## Concepts (docs/concepts/)  ·  21 files
 
 Foundational primers on the ideas the tools build on — one primer per concept, plus runnable scripts and snippets for most.
 
-- **CI/CD Pipeline Concepts** (3): [primer](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) · script: [CI/CD stage simulation](../docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh) · snippet: [Artifact promotion](../docs/concepts/ci-cd-pipeline-concepts/snippets/2026-07-20-artifact-promotion.py)
+- **CI/CD Pipeline Concepts** (4): [primer](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) · [companion requirements notes](../docs/concepts/ci-cd-pipeline-concepts/notes/2026-07-28-companion-requirements.md) · script: [CI/CD stage simulation](../docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh) · snippet: [Artifact promotion](../docs/concepts/ci-cd-pipeline-concepts/snippets/2026-07-20-artifact-promotion.py)
 - **Containerization Concepts** (3): [primer](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md) · script: [Container lifecycle inspection](../docs/concepts/containerization-concepts/scripts/2026-07-20-container-lifecycle-inspection.sh) · snippet: [Image manifest parser](../docs/concepts/containerization-concepts/snippets/2026-07-22-image-manifest-parser.py)
 - **Infrastructure as Code Principles** (3): [primer](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md) · script: [IaC idempotency check](../docs/concepts/infrastructure-as-code-principles/scripts/2026-07-22-iac-idempotency-check.sh) · snippet: [Declarative state diff](../docs/concepts/infrastructure-as-code-principles/snippets/2026-07-22-declarative-state-diff.py)
-- **Linux & CLI Fundamentals** (3): [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) · script: [File permissions and processes](../docs/concepts/linux-cli-fundamentals/scripts/2026-07-24-linux-file-permissions-and-process-management.sh) · snippet: [Subprocess wrapper](../docs/concepts/linux-cli-fundamentals/snippets/2026-07-24-subprocess-wrapper.py)
+- **Linux & CLI Fundamentals** (4): [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) · [errors I found](../docs/concepts/linux-cli-fundamentals/notes/2026-07-28-errors-i-found.md) · script: [File permissions and processes](../docs/concepts/linux-cli-fundamentals/scripts/2026-07-24-linux-file-permissions-and-process-management.sh) · snippet: [Subprocess wrapper](../docs/concepts/linux-cli-fundamentals/snippets/2026-07-24-subprocess-wrapper.py)
 - **Networking Fundamentals** (3): [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md) · script: [Network connectivity check](../docs/concepts/networking-fundamentals/scripts/2026-07-25-practice-network-connectivity-dns-port-inspection.sh) · snippet: [Socket connection tester](../docs/concepts/networking-fundamentals/snippets/2026-07-26-socket-connection-tester.py)
 - **Observability & Monitoring Concepts** (1): [primer](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md)
 - **Scripting & Automation Philosophy** (1): [primer](../docs/concepts/scripting-automation-philosophy/0000-primer-scripting-automation-philosophy.md)
-- **Version Control & Git Workflow** (1): [primer](../docs/concepts/version-control-git-workflow/0000-primer-version-control-git-workflow.md)
+- **Version Control & Git Workflow** (2): [primer](../docs/concepts/version-control-git-workflow/0000-primer-version-control-git-workflow.md) · [companion readme](../docs/concepts/version-control-git-workflow/notes/2026-07-28-companion-readme.md)
+- _…and more under `docs/concepts/` — browse the folder._

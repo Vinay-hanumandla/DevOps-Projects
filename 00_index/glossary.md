@@ -49,6 +49,9 @@
 - **Reset** — `git reset` moves HEAD (and optionally the index/working tree); `--soft` keeps changes staged, `--hard` discards them, so use it with care.
 - **Amend** — `git commit --amend` rewrites the most recent commit (message or contents); fine locally, dangerous once pushed.
 - **Patch staging** — `git add -p` stages only selected hunks of a file so unrelated edits can land in separate commits.
+- **Rebase** — replaying your commits on top of another branch (e.g. `git rebase main`); linearises history but rewrites commit hashes, so avoid it on shared branches without coordination.
+- **Hook** — a script in `.git/hooks/` that Git runs automatically at a named point in its workflow (e.g. `pre-commit`, `pre-push`); used for linting, testing, or enforcing policy before a Git operation completes.
+- **Feature branch** — a short-lived branch dedicated to a single change or feature; typically rebased onto `main` before merging to keep history clean.
 
 ## Python
 
