@@ -7,11 +7,15 @@ Passed ([x]) git-014 — Git: docs — How I wired Git hooks into my local dev w
 Passed ([x]) con-028 — CI/CD Pipeline Concepts: docs — Combining CI/CD with Version Control: gate-before-merge with branch protection · Level: L3 · 2026-07-30
 Passed ([x]) con-029 — CI/CD Pipeline Concepts: notebook — CI/CD + Observability: pipeline metrics and health dashboards · Level: L3 · 2026-07-30
 Passed ([x]) docs-002 — docs: docs — Remove spurious .github/workflows/ci.yml reference from 0000-primer-ci-cd-pipeline-concepts.md; it is a generic definition example, not a companion file · Level: L1 · 2026-07-30
+Passed ([x]) bash-009 — Bash: script — Build a directory-based system report tool from scratch with Bash · Level: L3 · 2026-07-30
+Passed ([x]) bash-010 — Bash: docs — How I wired Bash strict mode and trap patterns into my script workflow · Level: L3 · 2026-07-30
 
 - git: Add feature branch workflow with interactive rebase script (git-013)
 - git: Add docs on wiring Git hooks into local dev workflow (git-014)
 - concepts: Add gate-before-merge with branch protection doc (con-028)
 - docs: Remove spurious .github/workflows/ci.yml reference from CI/CD primer (docs-002)
+- bash: Add directory-based system report script (bash-009)
+- bash: Add docs on strict mode and trap patterns (bash-010)
  - git: Add docs on wiring Git hooks into local dev workflow (git-014)
 +  - concepts: Add CI/CD + Observability notebook — pipeline metrics and health dashboards (con-029)
 
