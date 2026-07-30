@@ -13,7 +13,7 @@ sources:
 
 ## What is it?
 
-A CI/CD pipeline is an automated workflow that runs a series of checks every time code changes. The typical shape is Source → Build → Test → Package → Deploy → Monitor. Each stage has to pass before the next one runs, so a bad change gets stopped early instead of reaching production.
+A CI/CD pipeline is an automated workflow that runs a series of checks every time code changes. The typical shape is Source → Build → Test → Package → Deploy → Monitor. Each stage has to pass before the next one runs, so a bad change gets stopped early instead of reaching the deployed environment.
 
 It's like a quality conveyor belt for code: instead of a person manually building, testing, and deploying by hand (and forgetting a step), the machine does it the same way every single time. You push code; the pipeline decides if it's safe to go further.
 
@@ -25,7 +25,7 @@ The point for a DevOps practitioner is that it removes manual handoffs and creat
 
 ## Key terminology
 
-- **Pipeline** — the whole automated workflow. Example: a `.github/workflows/ci.yml` file that runs on every push.
+- **Pipeline** — the whole automated workflow. Example: a CI workflow file that runs on every push.
 - **Stage** — a logical phase with a gate, like "Build" or "Test". Example: the test stage only runs if build succeeded.
 - **Gate** — a pass/fail checkpoint. Example: "unit tests must be green" is a gate before deploy.
 - **Artifact** — a build output you can store and ship. Example: a Docker image or a compiled binary.
