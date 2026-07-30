@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# last_verified: 2026-07-29 · git 2.47.3
+# last_verified: 2026-07-30 · git n/a
 
 # Demonstrates a feature branch workflow with interactive rebase.
 # One way to practice this is to set up a temporary repo, create
@@ -34,8 +34,6 @@ echo "v2" > readme.txt
 git add readme.txt
 git commit -m "update readme on main"
 
-# Rebase feature branch onto main. GIT_SEQUENCE_EDITOR is set to
-# a no-op so the todo list is accepted as-is for a linear rebase.
 GIT_SEQUENCE_EDITOR="true" git rebase main
 
 echo "--- Commit graph after rebase ---"
