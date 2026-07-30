@@ -3,9 +3,10 @@
 ## 2026-07-30
 
 - git: Add feature branch workflow with interactive rebase script (git-013)
-- git: Add docs on wiring Git hooks into local dev workflow (git-014)
+ - git: Add docs on wiring Git hooks into local dev workflow (git-014)
++  - concepts: Add CI/CD + Observability notebook — pipeline metrics and health dashboards (con-029)
 
-## 2026-07-29
+ ## 2026-07-29
 
 - git: Add comparison of interactive rebase vs merge commit (git-015)
 - git: Add feature branch workflow with interactive rebase script (git-013)
