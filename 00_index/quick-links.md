@@ -44,6 +44,14 @@
 ### Branch, merge, and revert
 - [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh) — create branches, merge them, and undo a merge
 
+### Set up Git hooks
+- [How I wired Git hooks into my local dev workflow](../git/docs/how-i-wired-git-hooks-into-my-local-dev-workflow.md) — notes on automating Git hooks for consistent local practices
+- [Install Git hooks](../git/hooks/install.sh) — one-command setup for pre-commit and hook utilities in the local repo
+
+### Use interactive rebase effectively
+- [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md) — reference guide comparing the two core Git collaboration strategies
+- [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh) — Bash script for managing feature branch rebase and cleanup workflows
+
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip
 
