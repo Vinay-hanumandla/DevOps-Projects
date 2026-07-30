@@ -2,6 +2,9 @@
 
 ## 2026-07-30
 
+Passed ([x]) git-013 — Git: script — Build a feature branch workflow with interactive rebase from scratch · Level: L3 · 2026-07-30
+Passed ([x]) git-014 — Git: docs — How I wired Git hooks into my local dev workflow · Level: L3 · 2026-07-30
+
 - git: Add feature branch workflow with interactive rebase script (git-013)
 - git: Add docs on wiring Git hooks into local dev workflow (git-014)
 
