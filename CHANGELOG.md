@@ -4,6 +4,9 @@
 
 Passed ([x]) git-013 — Git: script — Build a feature branch workflow with interactive rebase from scratch · Level: L3 · 2026-07-30
 Passed ([x]) git-014 — Git: docs — How I wired Git hooks into my local dev workflow · Level: L3 · 2026-07-30
+Passed ([x]) con-028 — CI/CD Pipeline Concepts: docs — Combining CI/CD with Version Control: gate-before-merge with branch protection · Level: L3 · 2026-07-30
+Passed ([x]) con-029 — CI/CD Pipeline Concepts: notebook — CI/CD + Observability: pipeline metrics and health dashboards · Level: L3 · 2026-07-30
+Passed ([x]) docs-002 — docs: docs — Remove spurious .github/workflows/ci.yml reference from 0000-primer-ci-cd-pipeline-concepts.md; it is a generic definition example, not a companion file · Level: L1 · 2026-07-30
 
 - git: Add feature branch workflow with interactive rebase script (git-013)
 - git: Add docs on wiring Git hooks into local dev workflow (git-014)
