@@ -2,6 +2,12 @@
 
 ## 2026-07-31
 
+- helm: Add quick primer explaining Helm as a Kubernetes package manager (helm-001)
+- helm: Add notes on installing Helm and running `helm version` for the first time (helm-002)
+- helm: Add snippet for deploying a first chart with `helm install` (helm-003)
+
+## 2026-07-31
+
 - bash: Add snippet comparing [ ] vs [[ ]] and other Bash scripting gotchas (bash-011)
 
 ## 2026-07-30
