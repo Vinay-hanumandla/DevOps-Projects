@@ -1,5 +1,5 @@
 # DevOps-Projects
-> A working engineer's DevOps reference for Bash, Docker, Git, Python, Terraform, and the foundational concepts they rest on.
+> A working engineer's DevOps reference for Bash, Docker, Git, Helm, Python, Terraform, and the foundational concepts they rest on.
 
 ![Last commit](https://img.shields.io/github/last-commit/Vinay-hanumandla/DevOps-Projects)
 ![License](https://img.shields.io/github/license/Vinay-hanumandla/DevOps-Projects)
@@ -11,25 +11,26 @@
 
 ## Who this is for
 
-A working DevOps engineer's quick-reference: first-contact notes, runnable snippets, and configs for Bash, Docker, Git, Python, and Terraform, plus primers for the concepts they rest on. Use it as a shelf you grab from, not a tutorial site — each entry is something I actually built while working through a tool's quickstart, kept so I can revisit what tripped me up. It deliberately does not try to replace each tool's official docs.
+A working DevOps engineer's quick-reference: first-contact notes, runnable snippets, and configs for Bash, Docker, Git, Helm, Python, and Terraform, plus primers for the concepts they rest on. Use it as a shelf you grab from, not a tutorial site — each entry is something I actually built while working through a tool's quickstart, kept so I can revisit what tripped me up. It deliberately does not try to replace each tool's official docs.
 
 ## What's in here
 
-A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, or script built while following a tool's quickstart and kept for later. It covers Bash (primer, install notes, trip-ups guide, robust scripting patterns, strict-mode and trap docs, hello-world and safe-template scripts, companion scripts, and a directory-based system report tool), Docker (primer, quickstart trip-ups, install note, multi-stage Dockerfile, sample apps, and container scripts), Git (primer, quickstart trip-ups, undo/commit/push walkthroughs, install note, branch-merge and feature-branch rebase scripts, hooks tooling, and an interactive rebase reference), Python (primer, first script, snippets), Terraform (install note and first config), and foundational concept primers under docs/concepts/ — each joined by a runnable script or snippet, plus a CI/CD + Observability notebook and a gate-before-merge reference.
+A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, or script built while following a tool's quickstart and kept for later. It covers Bash (primer, install notes, trip-ups guide, robust scripting patterns, strict-mode and trap docs, hello-world and safe-template scripts, companion scripts, a directory-based system report tool, and a bracket-comparison snippet), Docker (primer, quickstart trip-ups, install note, multi-stage Dockerfile, sample apps, and container scripts), Git (primer, quickstart trip-ups, undo/commit/push walkthroughs, install note, branch-merge and feature-branch rebase scripts, hooks tooling, and an interactive rebase reference), Helm (primer, install note, and a first-chart deploy snippet), Python (primer, first script, snippets), Terraform (install note and first config), and foundational concept primers under docs/concepts/ — each joined by a runnable script or snippet, plus a CI/CD + Observability notebook and a gate-before-merge reference.
 
 ## Quick links
 
-- [Strict mode and trap patterns](bash/docs/strict-mode-trap-patterns.md) — notes on integrating set -euo pipefail and trap-based cleanup into a Bash script workflow
-- [System report tool](bash/scripts/system-report-tool.sh) — directory-based system report tool with text and JSON output
-- [Gate-before-merge with branch protection](docs/concepts/ci-cd-pipeline-concepts/gate-before-merge-branch-protection.md) — how branch protection rules and pipeline gates combine to block broken merges
-- [Pipeline metrics and health dashboards](docs/concepts/ci-cd-pipeline-concepts/notebooks/pipeline-metrics-and-health-dashboards.ipynb) — CI/CD observability notebook with DORA metrics and health scoring
-- [Interactive rebase vs merge commit](git/docs/interactive-rebase-vs-merge-commit.md) — reference guide comparing the two core Git collaboration strategies
+- [Helm — quick primer](helm/notes/0000-primer-helm.md) — charts, releases, values files, and an end-to-end example
+- [Install Helm and run version](helm/notes/2026-07-31-install-helm-run-version.md) — install the Helm binary and verify with `helm version`
+- [Deploy your first Helm chart](helm/snippets/2026-07-31-deploy-first-chart.sh) — add a repo and install a test chart end-to-end
+- [Comparing [ ] vs [[ ]] Bash gotchas](bash/snippets/comparing-brackets-gotchas.sh) — bracket differences, pattern matching, and `set -e` edge cases
+- [Strict mode and trap patterns](bash/docs/strict-mode-trap-patterns.md) — integrating `set -euo pipefail` and trap-based cleanup into a script workflow
 
 ## Layout
 
-- `bash/` — Bash material: primer, notes, docs, and scripts.
+- `bash/` — Bash material: primer, notes, docs, scripts, and snippets.
 - `docker/` — Docker material: notes, Dockerfiles, source files, and scripts.
 - `git/` — Git material: notes, docs, scripts, and hooks tooling.
+- `helm/` — Helm material: primer, install note, and first-chart deploy snippet.
 - `python/` — Python material: primer, scripts, and snippets.
 - `tf/` — Terraform material: install note and first config.
 - `docs/concepts/` — foundational primers with runnable scripts, snippets, and a notebook (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
@@ -40,9 +41,10 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 | Tool | notes | docs | scripts | hooks | snippets | configs | dockerfiles | src | Last verified |
 |------|-------|------|---------|-------|----------|---------|-------------|-----|---------------|
-| Bash | 3 | 2 | 5 | — | — | — | — | — | 2026-07-30 |
+| Bash | 3 | 2 | 5 | — | 1 | — | — | — | 2026-07-31 |
 | Docker | 4 | — | 3 | — | — | — | 1 | 2 | 2026-07-19 |
 | Git | 12 | 2 | 3 | 1 | — | — | — | — | 2026-07-30 |
+| Helm | 2 | — | — | — | 1 | — | — | — | 2026-07-31 |
 | Python | 1 | — | 1 | — | 1 | — | — | — | 2026-07-22 |
 | Terraform | 1 | — | — | — | — | 1 | — | — | 2026-07-26 |
 
@@ -50,7 +52,7 @@ Foundational concept primers (one each) live under docs/concepts/: CI/CD, contai
 
 ## Status
 
-Expanding Git tool content with workflow scripts and hooks tooling; working through companion notes for the foundational concepts. All eight foundational concept primers are in place and now joined by runnable scripts, code snippets, and a CI/CD + Observability notebook. Bash strict-mode/trap patterns and a directory-based system report tool are the latest additions.
+Expanding Git tool content with workflow scripts and hooks tooling; working through companion notes for the foundational concepts. All eight foundational concept primers are in place and now joined by runnable scripts, code snippets, and a CI/CD + Observability notebook. Helm content has landed — primer, install note, and a first-chart deploy snippet — and the Bash guide got a bracket-comparison snippet and strict-mode/trap documentation. Bash strict-mode/trap patterns and a directory-based system report tool are the latest additions.
 
 ---
 _Last updated: 2026-07-31_

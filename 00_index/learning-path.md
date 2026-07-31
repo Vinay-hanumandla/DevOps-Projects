@@ -18,7 +18,7 @@ The tools unlocked from the start. Start here once the foundations make sense.
 
 - **Git** — [Git primer](../git/notes/0000-primer-git.md), [quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md), and [undo/commit/push](../git/notes/2026-07-13-undo-stage-commit-push.md) cover first contact. [Install Git and first repo](../git/notes/2026-07-20-install-git.md) and [first-repo lifecycle script](../git/scripts/2026-07-20-first-repo.sh) give you a runnable first day. The [branch-merge-revert](../git/scripts/2026-07-20-branch-merge-revert.sh) script adds intermediate workflow practice. Then [feature branch rebase workflows](../git/scripts/feature-branch-rebase-workflow.sh), [Git hooks](../git/hooks/install.sh) and the [hook configuration notes](../git/docs/how-i-wired-git-hooks-into-my-local-dev-workflow.md), and the [interactive rebase guide](../git/docs/interactive-rebase-vs-merge-commit.md) take you deeper into history rewriting and automation.
 - **Docker** — [Docker primer](../docker/notes/0000-primer-docker.md), [quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md), [minimal non-root Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile), [container run scripts](../docker/scripts/2026-07-18-first-port-mapped-container.sh), and the [sample apps](../docker/src/main.go) they build give you hands-on with images, port mapping, and multi-stage builds.
-- **Bash** — [primer](../bash/notes/0000-primer-bash.md), [install and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md), and a [hello-world script](../bash/scripts/2026-07-18-first-hello-world.sh) give you a first-day grounding. Then level up with the [trip-ups guide](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [robust scripting patterns](../bash/docs/2026-07-23-robust-bash-scripts.md), [strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md), the [safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh), the [system report tool](../bash/scripts/system-report-tool.sh), and the companion scripts and tests.
+- **Bash** — [primer](../bash/notes/0000-primer-bash.md), [install and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md), and a [hello-world script](../bash/scripts/2026-07-18-first-hello-world.sh) give you a first-day grounding. Then level up with the [trip-ups guide](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [robust scripting patterns](../bash/docs/2026-07-23-robust-bash-scripts.md), [strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md), the [safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh), the [system report tool](../bash/scripts/system-report-tool.sh), the companion scripts and tests, and the [comparing [ ] vs [[ ]] gotchas snippet](../bash/snippets/comparing-brackets-gotchas.sh).
 - **Python** — [primer](../python/notes/0000-primer-python.md), [create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py), and [first script with variables and types](../python/snippets/2026-07-22-first-script-variables-types.py) give you a first-day grounding in scripting for ops tasks.
 
 ## Stage 3: Building Skills
@@ -35,7 +35,7 @@ These depend on the foundations being in place.
 
 - **Terraform** — declarative infrastructure provisioning (needs Linux + IaC). [Install note and first config](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md), then the [first Terraform config](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl) that creates a local file.
 - **Kubernetes** ⏳ — orchestrating containers at scale (needs Containerization + Linux + Networking).
-- **Helm** ⏳ — packaging Kubernetes workloads (needs Containerization + IaC).
+- **Helm** — packaging Kubernetes workloads. [Helm primer](../helm/notes/0000-primer-helm.md), [install note](../helm/notes/2026-07-31-install-helm-run-version.md), and [deploy first chart snippet](../helm/snippets/2026-07-31-deploy-first-chart.sh). (needs Containerization + IaC.)
 - **Ansible** ⏳ — configuration management and automation (needs Linux + IaC + scripting).
 
 ## Stage 5: Mastery
@@ -47,7 +47,7 @@ These depend on the foundations being in place.
 
 ## Progression Map
 
-Bash, Docker, Git, Python, and Terraform have tool content on disk today, and all eight foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, and networking also have runnable scripts and snippets. The rest of the map shows what unlocks what once the tool notes land.
+Bash, Docker, Git, Helm, Python, and Terraform have tool content on disk today, and all eight foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, and networking also have runnable scripts and snippets. The rest of the map shows what unlocks what once the tool notes land.
 
 ```
 Foundations (Linux, Git workflow, Containerization, IaC, Scripting)  <-- primers + scripts exist

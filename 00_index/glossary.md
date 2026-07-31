@@ -53,6 +53,16 @@
 - **Hook** — a script in `.git/hooks/` that Git runs automatically at a named point in its workflow (e.g. `pre-commit`, `pre-push`); used for linting, testing, or enforcing policy before a Git operation completes.
 - **Feature branch** — a short-lived branch dedicated to a single change or feature; typically rebased onto `main` before merging to keep history clean.
 
+## Helm
+
+- **Helm** — a package manager for Kubernetes that defines, installs, and upgrades complex applications using charts.
+- **Chart** — a Helm package containing templates and default values; `helm install myapp ./mychart/` renders and deploys everything in that chart.
+- **Release** — a running instance of a chart in a cluster; installing the same chart twice with different names gives you two releases.
+- **Values file** — a YAML file that overrides a chart's defaults; `helm install myapp ./mychart/ -f custom-values.yaml` applies custom configuration.
+- **Repository** — a hosted collection of charts others can use; `helm repo add stable https://charts.helm.sh/stable` registers one.
+- **Helmfile** — a declarative file that lists multiple releases to deploy as one group, like a lockfile for Helm.
+- **Dependency** — a chart can depend on other charts; your app chart might pull in a Redis chart and a PostgreSQL chart.
+
 ## Python
 
 - **Type** — the category of a value (`int`, `float`, `str`, `bool`, `list`, `dict`); `type(value)` returns it, and knowing it prevents surprises like `5 / 2` giving `2.5` instead of `2`.
