@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-07-31
+
+- bash: Add snippet comparing [ ] vs [[ ]] and other Bash scripting gotchas (bash-011)
+
 ## 2026-07-30
 
 Passed ([x]) git-013 — Git: script — Build a feature branch workflow with interactive rebase from scratch · Level: L3 · 2026-07-30
