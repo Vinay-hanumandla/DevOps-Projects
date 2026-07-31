@@ -5,6 +5,8 @@
 - helm: Add quick primer explaining Helm as a Kubernetes package manager (helm-001)
 - helm: Add notes on installing Helm and running `helm version` for the first time (helm-002)
 - helm: Add snippet for deploying a first chart with `helm install` (helm-003)
+- concepts: Add multi-stage build patterns doc combining containerization with CI/CD (con-030)
+- concepts: Add Prometheus node_exporter container script (con-031)
 
 ## 2026-07-31
 
