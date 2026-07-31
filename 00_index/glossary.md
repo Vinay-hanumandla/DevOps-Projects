@@ -77,3 +77,7 @@
 - **Protocol** — an agreed set of rules for how machines exchange data (e.g. TCP, HTTP); both ends must speak the same one to communicate.
 - **CLI** — command-line interface: interacting with a system by typing text commands rather than clicking a graphical desktop.
 - **Kernel** — the core of an operating system that manages hardware, processes, and memory; the Linux kernel underpins most servers and containers.
+- **Branch protection** — a repository-level rule that blocks direct pushes to a branch and requires status checks to pass before a pull request can be merged, enforcing the gate-before-merge pattern.
+- **DORA metrics** — the four standard metrics for software delivery performance: deployment frequency, lead time for changes, change failure rate, and mean time to restore (MTTR).
+- **Health dashboard** — a visual display of pipeline metrics and signal trends (build duration, queue time, test flake rate, deploy success) used to detect regressions in developer velocity.
+- **Artifact immutability** — the principle that a build artifact should not change between environments; the same container image or binary runs in dev, staging, and production so failures are configuration problems, not binary-diff debugging.
