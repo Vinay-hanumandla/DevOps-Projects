@@ -71,6 +71,25 @@
 - **Module** — a `.py` file containing functions, classes, or constants; `import os` loads the built-in `os` module for filesystem and environment access.
 - **f-string** — a string with `f""` containing `{}` placeholders evaluated at runtime; faster and more readable than the older `.format()` style.
 
+## Terraform
+
+- **Provider** — a plugin that knows how to talk to a specific cloud or service. Example: the AWS provider lets Terraform create EC2 instances and S3 buckets.
+- **Resource** — a single piece of infrastructure declared in a config file. Example: `aws_instance.example` represents a virtual machine.
+- **State file** — Terraform's record of what it has created. It maps config files to real resources so Terraform knows what to update or skip.
+- **Plan** — Terraform's preview of what changes it will make before applying them. Run `terraform plan` to review the diff before committing changes.
+- **Apply** — the command that makes the planned changes real. After approving the plan, `terraform apply` creates or updates resources.
+- **Drift** — the gap between the real-world state of infrastructure and what Terraform's state file says exists; detected when the actual resources have changed outside Terraform.
+- **Declarative** — describing the desired end state rather than the steps to reach it; Terraform configs are declarative, so you say what you want and Terraform figures out how to get there.
+
+## Helm
+
+- **Chart** — a Helm package containing templates and default values. Example: `helm install myapp ./mychart/` renders and deploys everything in that chart.
+- **Release** — a running instance of a chart in a cluster. Installing the same chart twice with different names gives you two releases.
+- **Values file** — a YAML file that overrides a chart's defaults. Example: `helm install myapp ./mychart/ -f custom-values.yaml` sets custom config.
+- **Repository** — a hosted collection of charts others can use. Example: `helm repo add stable https://charts.helm.sh/stable` adds a public repo.
+- **Helmfile** — a declarative file that lists multiple releases to deploy. A `helmfile.yaml` declares all infra apps in one place.
+- **Dependency** — a chart can depend on other charts. Your app chart might depend on a Redis chart and a PostgreSQL chart.
+
 ## Concepts
 
 - **Artifact** — a build output (binary, package, container image, or report) produced by one pipeline stage and consumed by the next; promoting an artifact means moving a specific version through dev → staging → prod.

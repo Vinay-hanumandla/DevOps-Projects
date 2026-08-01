@@ -33,9 +33,9 @@ Intermediate concepts that unlock more advanced tools.
 
 These depend on the foundations being in place.
 
-- **Terraform** — declarative infrastructure provisioning (needs Linux + IaC). [Install note and first config](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md), then the [first Terraform config](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl) that creates a local file.
+- **Terraform** — declarative infrastructure provisioning (needs Linux + IaC). Start with the [Terraform primer](../tf/notes/0000-primer-terraform.md), then the [install note and first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md), and the [first Terraform config](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl) that creates a local file.
 - **Kubernetes** ⏳ — orchestrating containers at scale (needs Containerization + Linux + Networking).
-- **Helm** — packaging Kubernetes workloads. [Helm primer](../helm/notes/0000-primer-helm.md), [install note](../helm/notes/2026-07-31-install-helm-run-version.md), and [deploy first chart snippet](../helm/snippets/2026-07-31-deploy-first-chart.sh). (needs Containerization + IaC.)
+- **Helm** — packaging Kubernetes workloads (needs Containerization + IaC). Start with the [Helm primer](../helm/notes/0000-primer-helm.md), then the [install and version check](../helm/notes/2026-07-31-install-helm-run-version.md) and the [first chart deployment snippet](../helm/snippets/2026-07-31-deploy-first-chart.sh).
 - **Ansible** ⏳ — configuration management and automation (needs Linux + IaC + scripting).
 
 ## Stage 5: Mastery
@@ -51,16 +51,16 @@ Bash, Docker, Git, Helm, Python, and Terraform have tool content on disk today, 
 
 ```
 Foundations (Linux, Git workflow, Containerization, IaC, Scripting)  <-- primers + scripts exist
-         |
-         v
-   Core Tools: Bash, Docker, Git, Python, Terraform  <-- content exists here
-         |
-         +---> Kubernetes, Helm, Ansible (advanced)
-         |
-    CI/CD + Networking  <-- concept primers exist; both have hands-on scripts,
-                              plus a gate-before-merge reference and an
-                              observability notebook covering DORA metrics
-         |
-         v
-   Prometheus, Grafana, Jenkins, GitHub Actions (mastery)
+          |
+          v
+    Core Tools: Bash, Docker, Git, Helm, Python, Terraform  <-- content exists here
+          |
+          +---> Kubernetes, Ansible (advanced)
+          |
+     CI/CD + Networking  <-- concept primers exist; both have hands-on scripts,
+                               plus a gate-before-merge reference and an
+                               observability notebook covering DORA metrics
+          |
+          v
+    Prometheus, Grafana, Jenkins, GitHub Actions (mastery)
 ```
