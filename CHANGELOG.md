@@ -3,6 +3,7 @@
 ## 2026-08-01
 
 - terraform: Add Terraform quick primer (tf-005)
+- concepts: Add docs on combining Linux CLI with Version Control using pipes (con-034)
 
 ## 2026-07-31
 
