@@ -3,6 +3,8 @@
 ## 2026-08-01
 
 - terraform: Add Terraform quick primer (tf-005)
+- concepts: Add state file management strategies doc (con-032)
+- concepts: Add Docker Compose config generation script (con-033)
 
 ## 2026-07-31
 
