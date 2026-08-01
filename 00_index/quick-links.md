@@ -17,6 +17,7 @@
 ### Write robust Bash
 - [Robust Bash scripting](../bash/docs/2026-07-23-robust-bash-scripts.md) — strict mode, error handling, and safe defaults
 - [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md) — notes on integrating set -euo pipefail and trap-based cleanup into a script workflow
+- [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh) — bracket differences, pattern matching, and `set -e` edge cases
 
 ### Get started with Docker
 - [Docker primer](../docker/notes/0000-primer-docker.md) — what Docker is, images vs containers, and a minimal workflow
@@ -53,6 +54,13 @@
 ### Use interactive rebase effectively
 - [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md) — reference guide comparing the two core Git collaboration strategies
 - [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh) — Bash script for managing feature branch rebase and cleanup workflows
+
+### Get started with Helm
+- [Helm primer](../helm/notes/0000-primer-helm.md) — charts, releases, values files, repositories, and an end-to-end example
+- [Install Helm and run version](../helm/notes/2026-07-31-install-helm-run-version.md) — install the Helm binary and verify with `helm version`
+
+### Deploy a chart
+- [Deploy your first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh) — add a repo and install a test chart end-to-end
 
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip

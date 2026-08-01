@@ -2,12 +2,13 @@
 
 > A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](learning-path.md).
 
-## Bash  ·  10 files
+## Bash  ·  11 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
 - **docs** (2): most recent → [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md), [Robust Bash scripting](../bash/docs/2026-07-23-robust-bash-scripts.md)
 - **scripts** (5): most recent → [System report tool](../bash/scripts/system-report-tool.sh), [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh), [Hello world with argument handling](../bash/scripts/2026-07-18-first-hello-world.sh)
+- **snippets** (1): [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
 - _…and 2 more under `bash/scripts/` — browse the folder._
 
 ## Docker  ·  10 files
@@ -26,6 +27,12 @@
 - **scripts** (3): [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh), [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh), [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh)
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
 - _…and more under `git/` — browse the folder._
+
+## Helm  ·  3 files
+
+- **primer:** [Helm — quick primer](../helm/notes/0000-primer-helm.md)
+- **notes** (2): most recent → [Install Helm and run version](../helm/notes/2026-07-31-install-helm-run-version.md)
+- **snippets** (1): [Deploy your first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh)
 
 ## Python  ·  3 files
 
