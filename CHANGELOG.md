@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-08-01
+
+- terraform: Add Terraform quick primer (tf-005)
+
 ## 2026-07-31
 
 - helm: Add quick primer explaining Helm as a Kubernetes package manager (helm-001)
