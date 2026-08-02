@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-02
+
+- k8s: Add Kubernetes quick primer (k8s-004)
+- k8s: Add Minikube install and kubectl version script (k8s-005)
+- k8s: Add kubectl CLI exploration notes (k8s-006)
+
 ## 2026-08-01
 
 - terraform: Add Terraform quick primer (tf-005)
