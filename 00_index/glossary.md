@@ -81,6 +81,16 @@
 - **Drift** — the gap between the real-world state of infrastructure and what Terraform's state file says exists; detected when the actual resources have changed outside Terraform.
 - **Declarative** — describing the desired end state rather than the steps to reach it; Terraform configs are declarative, so you say what you want and Terraform figures out how to get there.
 
+## Kubernetes
+
+- **Cluster** — a set of Nodes managed by Kubernetes; can be a local Minikube cluster or a cloud-based cluster with dozens of machines.
+- **Deployment** — a controller that manages Pod replicas and handles rolling updates; defines the desired number of copies of an app and the image to use.
+- **kubectl** — the command-line tool for talking to a Kubernetes cluster; used to deploy, inspect, and manage resources (e.g. `kubectl get pods`).
+- **Minikube** — a tool that runs a single-node Kubernetes cluster locally inside a VM, ideal for learning and development.
+- **Node** — a worker machine (physical or virtual) that runs Pods; the smallest unit of compute in a Kubernetes cluster.
+- **Pod** — the smallest unit Kubernetes manages; it wraps one or more containers that share networking and storage.
+- **Service** — a stable network endpoint that routes traffic to Pods; abstracts away the ephemeral nature of Pods so other components can reach them reliably.
+
 ## Helm
 
 - **Chart** — a Helm package containing templates and default values. Example: `helm install myapp ./mychart/` renders and deploys everything in that chart.

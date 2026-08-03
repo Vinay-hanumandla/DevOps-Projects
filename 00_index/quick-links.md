@@ -61,6 +61,11 @@
 ### Deploy with Helm
 - [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh) — install and manage a Helm chart in a local or test cluster
 
+### Get started with Kubernetes
+- [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md) — first-contact notes for Kubernetes concepts and kubectl basics
+- [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh) — install Minikube, start a cluster, and verify kubectl
+- [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md) — kubectl CLI exploration notes with common commands and output explanations
+
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip
 
