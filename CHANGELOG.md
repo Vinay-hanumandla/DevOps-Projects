@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-08-03
+
+- k8s: Refresh Minikube install script and kubectl exploration notes with today's verification date (k8s-005, k8s-006)
+
 ## 2026-08-02
 
 - k8s: Add Kubernetes quick primer (k8s-004)
