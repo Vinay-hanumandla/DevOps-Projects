@@ -2,6 +2,10 @@
 
 ## 2026-08-04
 
+- python: Add notes on Python functions and modules — what tripped me up (python-004)
+- python: Add minimal file processing script with error handling (python-005)
+- python: Add docs on Python modules, packages, and import mechanics (python-006)
+
 - concepts: Add Linux CLI + Networking connectivity exploration notebook (con-035)
 - concepts: Add Networking + Observability network health check automation script (con-037)
 - k8s: Add Kubernetes quickstart trip-ups notes (k8s-001)
