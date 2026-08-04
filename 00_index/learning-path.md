@@ -20,6 +20,7 @@ The tools unlocked from the start. Start here once the foundations make sense.
 - **Docker** — [Docker primer](../docker/notes/0000-primer-docker.md), [quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md), [minimal non-root Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile), [container run scripts](../docker/scripts/2026-07-18-first-port-mapped-container.sh), and the [sample apps](../docker/src/main.go) they build give you hands-on with images, port mapping, and multi-stage builds.
 - **Bash** — [primer](../bash/notes/0000-primer-bash.md), [install and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md), and a [hello-world script](../bash/scripts/2026-07-18-first-hello-world.sh) give you a first-day grounding. Then level up with the [trip-ups guide](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [robust scripting patterns](../bash/docs/2026-07-23-robust-bash-scripts.md), [strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md), the [safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh), the [system report tool](../bash/scripts/system-report-tool.sh), the companion scripts and tests, and the [comparing [ ] vs [[ ]] gotchas snippet](../bash/snippets/comparing-brackets-gotchas.sh).
 - **Python** — [primer](../python/notes/0000-primer-python.md), [create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py), and [first script with variables and types](../python/snippets/2026-07-22-first-script-variables-types.py) give you a first-day grounding in scripting for ops tasks.
+- **Kubernetes** — [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md), [Minikube install and kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh), and [kubectl exploration notes](../k8s/notes/2026-08-03-explore-kubectl-cli.md) give you hands-on with clusters, nodes, and kubectl.
 
 ## Stage 3: Building Skills
 
@@ -34,7 +35,7 @@ Intermediate concepts that unlock more advanced tools.
 These depend on the foundations being in place.
 
 - **Terraform** — declarative infrastructure provisioning (needs Linux + IaC). Start with the [Terraform primer](../tf/notes/0000-primer-terraform.md), then the [install note and first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md), and the [first Terraform config](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl) that creates a local file.
-- **Kubernetes** ⏳ — orchestrating containers at scale (needs Containerization + Linux + Networking).
+- **Kubernetes** — orchestrating containers at scale (needs Containerization + Linux + Networking). Start with the [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md), then the [Minikube install and kubectl version script](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh) and the [kubectl exploration notes](../k8s/notes/2026-08-03-explore-kubectl-cli.md).
 - **Helm** — packaging Kubernetes workloads (needs Containerization + IaC). Start with the [Helm primer](../helm/notes/0000-primer-helm.md), then the [install and version check](../helm/notes/2026-07-31-install-helm-run-version.md) and the [first chart deployment snippet](../helm/snippets/2026-07-31-deploy-first-chart.sh).
 - **Ansible** ⏳ — configuration management and automation (needs Linux + IaC + scripting).
 
@@ -47,15 +48,15 @@ These depend on the foundations being in place.
 
 ## Progression Map
 
-Bash, Docker, Git, Helm, Python, and Terraform have tool content on disk today, and all eight foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, and networking also have runnable scripts and snippets. The rest of the map shows what unlocks what once the tool notes land.
+Bash, Docker, Git, Helm, Kubernetes, Python, and Terraform have tool content on disk today, and all eight foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, and networking also have runnable scripts and snippets. The rest of the map shows what unlocks what once the tool notes land.
 
 ```
 Foundations (Linux, Git workflow, Containerization, IaC, Scripting)  <-- primers + scripts exist
           |
           v
-    Core Tools: Bash, Docker, Git, Helm, Python, Terraform  <-- content exists here
+    Core Tools: Bash, Docker, Git, Helm, Kubernetes, Python, Terraform  <-- content exists here
           |
-          +---> Kubernetes, Ansible (advanced)
+          +---> Ansible (advanced)
           |
      CI/CD + Networking  <-- concept primers exist; both have hands-on scripts,
                                plus a gate-before-merge reference and an
