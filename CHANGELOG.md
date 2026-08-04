@@ -4,6 +4,9 @@
 
 - concepts: Add Linux CLI + Networking connectivity exploration notebook (con-035)
 - concepts: Add Networking + Observability network health check automation script (con-037)
+- k8s: Add Kubernetes quickstart trip-ups notes (k8s-001)
+- k8s: Add minimal Deployment and Service manifest (k8s-002)
+- k8s: Add docs on inspecting Pods, Services, and events (k8s-003)
 
 ## 2026-08-03
 
