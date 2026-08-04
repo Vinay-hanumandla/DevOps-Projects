@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-08-04
+
+- concepts: Add Linux CLI + Networking connectivity exploration notebook (con-035)
+- concepts: Add Networking + Observability network health check automation script (con-037)
+
 ## 2026-08-03
 
 - k8s: Refresh Minikube install script and kubectl exploration notes with today's verification date (k8s-005, k8s-006)
