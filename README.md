@@ -14,15 +14,15 @@ A working DevOps engineer's quick-reference: first-contact notes, runnable snipp
 
 ## What's in here
 
-A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, or script built while following a tool's quickstart and kept for later. It covers Bash, Docker, Git, Helm, Kubernetes, Python, and Terraform, plus eight foundational concept primers under docs/concepts/ — each joined by runnable scripts, snippets, and a CI/CD + Observability notebook.
+A growing collection of hands-on DevOps artifacts — notes, scripts, snippets, configs, and Dockerfiles — built while following each tool's quickstart and kept for later. The kit covers seven tools and eight foundational concept areas, each joined by runnable companions. It is a reference shelf, not a curriculum.
 
 ## Quick links
 
-- [Python — modules, packages, and imports](python/docs/2026-08-04-python-modules-packages-imports.md) — Python module and package mechanics, import resolution, and common pitfalls
-- [Python — functions and modules](python/notes/2026-08-04-python-functions-modules.md) — function definitions, module organisation, and import patterns
-- [Minimal file processing script](python/scripts/2026-08-04-minimal-file-processing.py) — read, process, and write files with Python
-- [Inspecting pods, services, and events](k8s/docs/2026-08-04-inspecting-pods-services-events.md) — kubectl commands for inspecting cluster resources and their events
-- [Minimal deployment and service manifest](k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml) — a minimal Kubernetes Deployment and Service YAML
+- [Branch strategy and pipeline triggers](docs/concepts/version-control-git-workflow/branch-strategy-and-pipeline-triggers.md) — notes on branch strategies and how pipeline triggers connect to Git workflows
+- [Analyzing Git commit history for deployment correlation](docs/concepts/version-control-git-workflow/snippets/analyzing-git-commit-history-for-deployment-correlation.py) — Python snippet correlating Git commit history with deployment events
+- [Combining networking with containerization](docs/concepts/networking-fundamentals/combining-networking-with-containerization.md) — notes on how networking and containerization intersect
+- [Network interface and routing inspection](docs/concepts/networking-fundamentals/scripts/2026-08-05-network-interface-and-routing-inspection.sh) — script to inspect network interfaces and routing tables
+- [Python modules, packages, and imports](python/docs/2026-08-04-python-modules-packages-imports.md) — notes on Python module mechanics and import behavior
 
 ## Layout
 
@@ -31,8 +31,8 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 - `docs/concepts/` — foundational primers with runnable scripts, snippets, and a notebook (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
 - `git/` — Git material: notes, docs, scripts, and hooks tooling.
 - `helm/` — Helm material: primer, install note, and chart snippet.
-- `k8s/` — Kubernetes material: primer, install note, kubectl exploration, and manifests.
-- `python/` — Python material: primer, docs, scripts, and snippets.
+- `k8s/` — Kubernetes material: primer, install note, and kubectl exploration scripts.
+- `python/` — Python material: primer, scripts, snippets, and docs.
 - `tf/` — Terraform material: install note, primer, and first config.
 - `00_index/` — the map: topics, quick links, glossary, and learning path.
 - `CHANGELOG.md` — a dated log of what was added and when.
@@ -41,22 +41,22 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 <details><summary>Coverage table</summary>
 
-| Tool | notes | docs | scripts | snippets | configs | manifests | dockerfiles | src | notebooks | Last verified |
-|------|-------|------|---------|----------|---------|-----------|-------------|-----|-----------|---------------|
-| Bash | 3 | 2 | 5 | 1 | — | — | — | — | — | 2026-07-30 |
-| Docker | 4 | — | 3 | — | — | — | 1 | 2 | — | 2026-07-19 |
-| Git | 12 | 2 | 3 | — | — | — | — | — | — | 2026-07-30 |
-| Helm | 2 | — | — | 1 | — | — | — | — | — | 2026-07-31 |
-| Kubernetes | 4 | 1 | 2 | — | — | 1 | — | — | — | 2026-08-04 |
-| Python | 2 | 1 | 2 | 1 | — | — | — | — | — | 2026-08-04 |
-| Terraform | 2 | — | — | — | 1 | — | — | — | — | 2026-08-01 |
-| Concepts | 3 | 4 | 8 | 5 | — | — | — | — | 2 | 2026-08-01 |
+| Tool | notes | docs | scripts | snippets | configs | dockerfiles | src | hooks | manifests | notebooks | Last verified |
+|------|-------|------|---------|----------|---------|-------------|-----|-------|-----------|-----------|---------------|
+| Bash | 3 | 2 | 5 | 1 | — | — | — | — | — | — | 2026-07-30 |
+| Docker | 4 | — | 3 | — | — | 1 | 2 | — | — | — | 2026-07-19 |
+| Git | 12 | 2 | 3 | — | — | — | — | 1 | — | — | 2026-07-30 |
+| Helm | 2 | — | — | 1 | — | — | — | — | — | — | 2026-07-31 |
+| Kubernetes | 4 | 1 | 2 | — | — | — | — | — | 1 | — | 2026-08-04 |
+| Python | 2 | 1 | 2 | 1 | — | — | — | — | — | — | 2026-08-04 |
+| Terraform | 2 | — | — | — | 1 | — | — | — | — | — | 2026-08-01 |
+| Concepts | 8 | 8 | 5 | 5 | — | — | — | — | — | 2 | 2026-08-05 |
 
 </details>
 
 ## Status
 
-Currently working through Python (modules, packages, functions, and file processing) and Kubernetes (pod/service/event inspection and deployment manifests). All eight foundational concept primers are complete and joined by runnable scripts, code snippets, and a CI/CD + Observability notebook. Bash strict-mode/trap patterns and a directory-based system report tool are the latest additions.
+Currently working through foundational concept docs (branch strategy, container networking, Python modules/packages) and the companion scripts and snippets that reinforce them. All eight foundational concept primers are complete and joined by runnable scripts, code snippets, and a CI/CD + Observability notebook.
 
 ---
 _Last updated: 2026-08-05_
