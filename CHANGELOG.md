@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-08-05
+
+- concepts: Add docs explaining how container network models combine with networking fundamentals (con-036)
+- concepts: Add network interface and routing inspection practice script (con-044)
+
 ## 2026-08-04
 
 - python: Add notes on Python functions and modules — what tripped me up (python-004)
