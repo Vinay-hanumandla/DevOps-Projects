@@ -4,6 +4,8 @@
 
 - concepts: Add docs explaining how container network models combine with networking fundamentals (con-036)
 - concepts: Add network interface and routing inspection practice script (con-044)
+- concepts: Add docs on combining version control with CI/CD branch strategy and pipeline triggers (con-042)
+- concepts: Add Python snippet for analyzing git commit history for deployment correlation (con-043)
 
 ## 2026-08-04
 
