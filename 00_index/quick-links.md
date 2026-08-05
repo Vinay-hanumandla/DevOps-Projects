@@ -65,12 +65,20 @@
 - [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md) — first-contact notes for Kubernetes concepts and kubectl basics
 - [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh) — install Minikube, start a cluster, and verify kubectl
 - [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md) — kubectl CLI exploration notes with common commands and output explanations
+- [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md) — more kubectl gotchas on the second pass
+
+### Inspect Kubernetes resources
+- [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md) — kubectl commands for inspecting cluster resources and their events
+- [Minimal deployment and service manifest](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml) — a minimal Kubernetes Deployment and Service YAML
 
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip
+- [Python modules, packages, and imports](../python/docs/2026-08-04-python-modules-packages-imports.md) — module and package mechanics, import resolution, and common pitfalls
+- [Python functions and modules](../python/notes/2026-08-04-python-functions-modules.md) — function definitions, module organisation, and import patterns
 
 ### Write and run a Python script
 - [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py) — end-to-end virtual-environment setup and a runner inside it
+- [Minimal file processing](../python/scripts/2026-08-04-minimal-file-processing.py) — read, process, and write files with Python
 - [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py) — declare variables, inspect types, and print mixed-type lists
 
 ### Get started with Terraform
@@ -94,12 +102,16 @@
 - [Artifact promotion](../docs/concepts/ci-cd-pipeline-concepts/snippets/2026-07-20-artifact-promotion.py) — promote a build artifact across pipeline stages with an audit trail
 - [Pipeline metrics and health dashboards](../docs/concepts/ci-cd-pipeline-concepts/notebooks/pipeline-metrics-and-health-dashboards.ipynb) — CI/CD observability notebook with DORA metrics and pipeline health scoring
 - [Container lifecycle inspection](../docs/concepts/containerization-concepts/scripts/2026-07-20-container-lifecycle-inspection.sh) — inspect running and stopped containers using the Docker API
+- [Container observability: Prometheus node exporter](../docs/concepts/containerization-concepts/scripts/containerization-observability-prometheus-node-exporter.sh) — run a Prometheus node exporter container to collect host-level metrics
 - [Image manifest parser](../docs/concepts/containerization-concepts/snippets/2026-07-22-image-manifest-parser.py) — parse container image manifests and extract layer metadata
 - [IaC idempotency check](../docs/concepts/infrastructure-as-code-principles/scripts/2026-07-22-iac-idempotency-check.sh) — verify that a provisioning step produces the same result on repeat runs
+- [Generating Docker Compose configs](../docs/concepts/infrastructure-as-code-principles/scripts/generating-docker-compose-configs.sh) — generate Docker Compose configs from IaC definitions
 - [Declarative state diff](../docs/concepts/infrastructure-as-code-principles/snippets/2026-07-22-declarative-state-diff.py) — diff declarative state to detect drift
 - [File permissions and processes](../docs/concepts/linux-cli-fundamentals/scripts/2026-07-24-linux-file-permissions-and-process-management.sh) — inspect and modify Linux file permissions, then list and filter running processes
 - [Subprocess wrapper](../docs/concepts/linux-cli-fundamentals/snippets/2026-07-24-subprocess-wrapper.py) — run a command and capture stdout/stderr/return code from Python
+- [Exploring connectivity with command-line tools](../docs/concepts/linux-cli-fundamentals/notebooks/exploring-connectivity-with-command-line-tools.ipynb) — notebook exploring network connectivity and DNS resolution from the CLI
 - [Network connectivity check](../docs/concepts/networking-fundamentals/scripts/2026-07-25-practice-network-connectivity-dns-port-inspection.sh) — test TCP connectivity to a host:port and diagnose why it's unreachable
+- [Networking observability health check](../docs/concepts/networking-fundamentals/scripts/networking-observability-health-check.sh) — check service health and network observability
 - [Socket connection tester](../docs/concepts/networking-fundamentals/snippets/2026-07-26-socket-connection-tester.py) — Python snippet that tests TCP socket connectivity and reports the result
 - [Combining containerization with CI/CD: multi-stage build patterns](../docs/concepts/containerization-concepts/combining-containerization-with-ci-cd-multi-stage-build-patterns.md) — notes on combining containerization with CI/CD using multi-stage builds
-- [Containerization observability: Prometheus node exporter](../docs/concepts/containerization-concepts/scripts/containerization-observability-prometheus-node-exporter.sh) — run a Prometheus node exporter container to collect host-level metrics
+- [Companion readme for version control](../docs/concepts/version-control-git-workflow/notes/2026-07-28-companion-readme.md) — companion notes on Git workflow practices

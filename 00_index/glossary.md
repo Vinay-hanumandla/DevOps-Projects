@@ -70,6 +70,14 @@
 - **pip** — Python's package installer; `pip install requests` fetches and installs a library, usually combined with a venv to keep dependencies reproducible.
 - **Module** — a `.py` file containing functions, classes, or constants; `import os` loads the built-in `os` module for filesystem and environment access.
 - **f-string** — a string with `f""` containing `{}` placeholders evaluated at runtime; faster and more readable than the older `.format()` style.
+- **Package** — a directory with `__init__.py` that groups related modules together; the `__init__.py` marks the directory as importable.
+- **`sys.path`** — the ordered list of directories Python searches when resolving an `import` statement; includes the current directory, standard library paths, and site-packages.
+- **`sys.modules`** — the internal cache of already-loaded modules; editing a file on disk does not invalidate this cache, so `import` reuses the stale module until it is explicitly reloaded.
+- **`__init__.py`** — a file that runs when a package is first imported; can control what gets exported via `__all__` and can trigger side effects (which should generally be avoided).
+- **Namespace package** — a directory without `__init__.py` that Python 3.3+ can still import; it does not run initialization code and is useful for splitting a single package across multiple locations.
+- **Circular import** — when module A imports module B and module B imports module A, causing one of them to see a half-initialized namespace; the fix is to move shared code to a third module that neither depends on.
+- **Mutable default argument** — a default parameter value that is a mutable object like `[]` or `{}`; it persists across function calls, causing surprising shared state — the fix is to use `None` as the default and create the mutable object inside the function body.
+- **Wildcard import** — `from module import *` imports all public names into the current namespace; it pollutes the namespace and makes it hard to trace where a name comes from, so explicit imports are preferred.
 
 ## Terraform
 
@@ -90,6 +98,10 @@
 - **Node** — a worker machine (physical or virtual) that runs Pods; the smallest unit of compute in a Kubernetes cluster.
 - **Pod** — the smallest unit Kubernetes manages; it wraps one or more containers that share networking and storage.
 - **Service** — a stable network endpoint that routes traffic to Pods; abstracts away the ephemeral nature of Pods so other components can reach them reliably.
+- **Namespace** — a virtual cluster within a Kubernetes cluster that isolates resources; `kubectl get pods` only shows resources in the current namespace, so `--all-namespaces` is needed to see everything.
+- **ClusterIP** — a Service type that exposes the service on a cluster-internal IP, reachable only from within the cluster.
+- **NodePort** — a Service type that exposes the service on each Node's IP at a static port, making it reachable from outside the cluster without a cloud load balancer.
+- **LoadBalancer** — a Service type that provisions an external cloud load balancer to route traffic to the service; on Minikube, `minikube service` is used instead.
 
 ## Helm
 
