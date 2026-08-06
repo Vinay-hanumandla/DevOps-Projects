@@ -6,6 +6,9 @@
 - concepts: Add network interface and routing inspection practice script (con-044)
 - concepts: Add docs on combining version control with CI/CD branch strategy and pipeline triggers (con-042)
 - concepts: Add Python snippet for analyzing git commit history for deployment correlation (con-043)
+- gha: Add GitHub Actions quick primer (gha-004)
+- gha: Add gh CLI install and workflow UI exploration notes (gha-005)
+- gha: Add first GitHub Actions workflow config (gha-006)
 
 ## 2026-08-04
 
