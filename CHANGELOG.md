@@ -5,6 +5,12 @@
 - gha: Add minimal CI workflow config for pushes and pull requests (gha-001)
 - gha: Add quickstart trip-ups notes (gha-002)
 - gha: Add docs on reading workflow logs and debugging failures (gha-003)
+Passed ([x]) gha-004 — GitHub Actions: notes — What is GitHub Actions? — quick primer · Level: L1 · 2026-08-06
+Passed ([x]) gha-005 — GitHub Actions: notes — Install `gh` CLI and explore the workflow UI for the first time · Level: L1 · 2026-08-06
+Passed ([x]) gha-006 — GitHub Actions: config — My first GitHub Actions workflow with a simple job · Level: L1 · 2026-08-06
+Passed ([x]) tf-007 — Terraform: config — Write my first Terraform provider and resource block · Level: L1 · 2026-08-06
+Passed ([x]) tf-008 — Terraform: project — Document tf/ directory in README structure alongside other tool folders · Level: L1 · 2026-08-06
+Passed ([x]) con-045 — Observability & Monitoring Concepts: script — Practice: observability exercises · Level: L2 · 2026-08-06
 
 ## 2026-08-05
 
