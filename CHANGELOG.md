@@ -11,6 +11,9 @@ Passed ([x]) con-045 — Observability & Monitoring Concepts: script — Practic
 - gha: Add minimal CI workflow config for pushes and pull requests (gha-001)
 - gha: Add quickstart trip-ups notes (gha-002)
 - gha: Add docs on reading workflow logs and debugging failures (gha-003)
+- grafana: Add Grafana quick primer (grafana-001)
+- grafana: Add install Grafana and open web UI notes (grafana-002)
+- grafana: Add first dashboard YAML config (grafana-003)
 
 ## 2026-08-05
 
