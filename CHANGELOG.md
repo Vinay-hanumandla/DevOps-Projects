@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-06
+
+- gha: Add minimal CI workflow config for pushes and pull requests (gha-001)
+- gha: Add quickstart trip-ups notes (gha-002)
+- gha: Add docs on reading workflow logs and debugging failures (gha-003)
+
 ## 2026-08-05
 
 - concepts: Add docs explaining how container network models combine with networking fundamentals (con-036)

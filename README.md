@@ -10,11 +10,11 @@
 
 ## Who this is for
 
-A working DevOps engineer's quick-reference: first-contact notes, runnable snippets, and configs for Bash, Docker, Git, Helm, Kubernetes, Python, and Terraform, plus primers for the concepts they rest on. Use it as a shelf you grab from, not a tutorial site — each entry is something I actually built while working through a tool's quickstart, kept so I can revisit what tripped me up. It deliberately does not try to replace each tool's official docs.
+A working DevOps engineer's quick-reference: first-contact notes, runnable snippets, and configs for Bash, Docker, Git, GitHub Actions, Helm, Kubernetes, Python, and Terraform, plus primers for the concepts they rest on. Use it as a shelf you grab from, not a tutorial site — each entry is something I actually built while working through a tool's quickstart, kept so I can revisit what tripped me up. It deliberately does not try to replace each tool's official docs.
 
 ## What's in here
 
-A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, or script built while following a tool's quickstart and kept for later. It covers Bash, Docker, Git, Helm, Kubernetes, Python, and Terraform, plus eight foundational concept primers under docs/concepts/ — each joined by runnable scripts, snippets, and a CI/CD + Observability notebook.
+A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, or script built while following a tool's quickstart and kept for later. It covers Bash, Docker, Git, GitHub Actions, Helm, Kubernetes, Python, and Terraform, plus eight foundational concept primers under docs/concepts/ — each joined by runnable scripts, snippets, and a CI/CD + Observability notebook.
 
 ## Quick links
 
@@ -29,6 +29,7 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 - `bash/` — Bash material: primer, notes, docs, and scripts.
 - `docker/` — Docker material: notes, Dockerfiles, source files, and scripts.
 - `docs/concepts/` — foundational primers with runnable scripts, snippets, and a notebook (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
+- `gha/` — GitHub Actions material: primer, install note, and workflow config.
 - `git/` — Git material: notes, docs, scripts, and hooks tooling.
 - `helm/` — Helm material: primer, install note, and chart snippet.
 - `k8s/` — Kubernetes material: primer, install note, kubectl exploration, and manifests.
@@ -46,6 +47,7 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Bash | 3 | 2 | 5 | 1 | — | — | — | — | — | 2026-07-30 |
 | Docker | 4 | — | 3 | — | — | — | 1 | 2 | — | 2026-07-19 |
 | Git | 12 | 2 | 3 | — | — | — | — | — | — | 2026-07-30 |
+| GitHub Actions | 2 | — | — | — | 1 | — | — | — | — | 2026-08-05 |
 | Helm | 2 | — | — | 1 | — | — | — | — | — | 2026-07-31 |
 | Kubernetes | 4 | 1 | 2 | — | — | 1 | — | — | — | 2026-08-04 |
 | Python | 2 | 1 | 2 | 1 | — | — | — | — | — | 2026-08-04 |
