@@ -1,0 +1,20 @@
+# last_verified: 2026-08-06 · gha n/a
+name: minimal-ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # actions/checkout is the standard first step — it fetches the repo
+      # so subsequent steps can access the code. The docs example uses
+      # actions/checkout@v4 which is the current major version.
+      - uses: actions/checkout@v4
+      # run a simple verification step to confirm the workflow executes
+      # correctly. Using `run` instead of a composite action keeps this
+      # minimal and easy to debug when something goes wrong.
+      - name: Verify workflow
+        run: echo "CI workflow ran successfully"

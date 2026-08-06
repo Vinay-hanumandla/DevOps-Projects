@@ -8,6 +8,9 @@ Passed ([x]) gha-006 — GitHub Actions: config — My first GitHub Actions work
 Passed ([x]) tf-007 — Terraform: config — Write my first Terraform provider and resource block · Level: L1 · 2026-08-06
 Passed ([x]) tf-008 — Terraform: project — Document tf/ directory in README structure alongside other tool folders · Level: L1 · 2026-08-06
 Passed ([x]) con-045 — Observability & Monitoring Concepts: script — Practice: observability exercises · Level: L2 · 2026-08-06
+- gha: Add minimal CI workflow config for pushes and pull requests (gha-001)
+- gha: Add quickstart trip-ups notes (gha-002)
+- gha: Add docs on reading workflow logs and debugging failures (gha-003)
 
 ## 2026-08-05
 
