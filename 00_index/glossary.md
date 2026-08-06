@@ -132,3 +132,12 @@
 - **DORA metrics** — the four standard metrics for software delivery performance: deployment frequency, lead time for changes, change failure rate, and mean time to restore (MTTR).
 - **Health dashboard** — a visual display of pipeline metrics and signal trends (build duration, queue time, test flake rate, deploy success) used to detect regressions in developer velocity.
 - **Artifact immutability** — the principle that a build artifact should not change between environments; the same container image or binary runs in dev, staging, and production so failures are configuration problems, not binary-diff debugging.
+
+## GitHub Actions
+
+- **Workflow** — a YAML file in `.github/workflows/` that defines a automated sequence of jobs triggered by events like pushes or pull requests.
+- **Job** — a set of steps that run on the same runner; a workflow can have multiple jobs running in parallel or in sequence.
+- **Step** — a single task within a job, such as checking out code, running a command, or uploading an artifact.
+- **Secrets** — encrypted variables stored in the repo settings; used to pass tokens, passwords, and API keys to workflows without exposing them in the YAML.
+- **Matrix build** — a strategy that runs the same job across multiple configurations (e.g. different OS versions or language versions) to verify compatibility.
+- **Artifact** — a file or collection of files produced by a workflow run, such as a build output or test report; artifacts can be downloaded after the run completes.

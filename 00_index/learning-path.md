@@ -27,41 +27,41 @@ The tools unlocked from the start. Start here once the foundations make sense.
 Intermediate concepts that unlock more advanced tools.
 
 - **CI/CD Pipeline Concepts** — [primer](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) for the ideas; [CI/CD stage simulation](../docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh) is a pure-Bash pipeline to practice build→test→deploy gating, and the [artifact promotion snippet](../docs/concepts/ci-cd-pipeline-concepts/snippets/2026-07-20-artifact-promotion.py) shows how outputs move between stages. The [gate-before-merge reference](../docs/concepts/ci-cd-pipeline-concepts/gate-before-merge-branch-protection.md) covers branch protection rules and status checks, and the [pipeline metrics and health dashboards notebook](../docs/concepts/ci-cd-pipeline-concepts/notebooks/pipeline-metrics-and-health-dashboards.ipynb) ties CI/CD to observability with DORA metrics. Builds on [Containerization Concepts](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md) and [Infrastructure as Code Principles](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md).
-- **Networking Fundamentals** — [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md): ports, addresses, and how containers talk to each other and the host. The [network connectivity check](../docs/concepts/networking-fundamentals/scripts/2026-07-25-practice-network-connectivity-dns-port-inspection.sh) lets you practice diagnosing reachability. The [socket connection tester](../docs/concepts/networking-fundamentals/snippets/2026-07-26-socket-connection-tester.py) gives a Python companion for the same task.
+- **Networking Fundamentals** — [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md): ports, addresses, and how containers talk to each other and the host. The [network connectivity check](../docs/concepts/networking-fundamentals/scripts/2026-07-25-practice-network-connectivity-dns-port-inspection.sh) lets you practice diagnosing reachability. The [socket connection tester](../docs/concepts/networking-fundamentals/snippets/2026-07-26-socket-connection-tester.py) gives a Python companion for the same task. The [network interface and routing inspection](../docs/concepts/networking-fundamentals/scripts/2026-08-05-network-interface-and-routing-inspection.sh) script deepens your debugging toolkit.
 - **Linux & CLI Fundamentals** — [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md): the shell, processes, and permissions. The [file permissions and processes](../docs/concepts/linux-cli-fundamentals/scripts/2026-07-24-linux-file-permissions-and-process-management.sh) script and [subprocess wrapper](../docs/concepts/linux-cli-fundamentals/snippets/2026-07-24-subprocess-wrapper.py) let you practice common sysadmin tasks.
 
 ## Stage 4: Advanced Tools
 
 These depend on the foundations being in place.
 
-- **Terraform** — declarative infrastructure provisioning (needs Linux + IaC). Start with the [Terraform primer](../tf/notes/0000-primer-terraform.md), then the [install note and first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md), and the [first Terraform config](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl) that creates a local file.
+- **Terraform** — declarative infrastructure provisioning (needs Linux + IaC). Start with the [Terraform primer](../tf/notes/0000-primer-terraform.md), then the [install note and first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md), the [first Terraform config](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl) that creates a local file, the [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md) doc, and the [first Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl) config.
 - **Kubernetes** — orchestrating containers at scale (needs Containerization + Linux + Networking). Start with the [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md), then the [Minikube install and kubectl version script](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh) and the [kubectl exploration notes](../k8s/notes/2026-08-03-explore-kubectl-cli.md).
 - **Helm** — packaging Kubernetes workloads (needs Containerization + IaC). Start with the [Helm primer](../helm/notes/0000-primer-helm.md), then the [install and version check](../helm/notes/2026-07-31-install-helm-run-version.md) and the [first chart deployment snippet](../helm/snippets/2026-07-31-deploy-first-chart.sh).
 - **Ansible** ⏳ — configuration management and automation (needs Linux + IaC + scripting).
 
 ## Stage 5: Mastery
 
-- **Observability & Monitoring Concepts** — [primer](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md): knowing what your systems are doing in production.
+- **Observability & Monitoring Concepts** — [primer](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md): knowing what your systems are doing in production. The [observability exercises](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-06-observability-exercises.sh) script gives hands-on practice.
 - **Prometheus** ⏳ / **Grafana** ⏳ — metrics collection and dashboards.
 - **Jenkins** ⏳ — self-hosted CI/CD pipelines.
-- **GitHub Actions** ⏳ — managed CI/CD wired into the repo.
+- **GitHub Actions** — managed CI/CD wired into the repo. Start with the [GitHub Actions primer](../gha/notes/0000-primer-gha.md), the [install note for the gh CLI](../gha/notes/2026-08-05-install-gh-cli.md), and the [quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md) note. Then try the [minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml) and the [first workflow config](../gha/configs/2026-08-05-first-workflow.yaml). The [how I learned to read workflow logs](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md) doc covers debugging failed runs.
 
 ## Progression Map
 
-Bash, Docker, Git, Helm, Kubernetes, Python, and Terraform have tool content on disk today, and all eight foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, and networking also have runnable scripts and snippets. The rest of the map shows what unlocks what once the tool notes land.
+Bash, Docker, Git, Helm, Kubernetes, Python, Terraform, and GitHub Actions have tool content on disk today, and all eight foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, and networking also have runnable scripts and snippets. The rest of the map shows what unlocks what once the tool notes land.
 
 ```
 Foundations (Linux, Git workflow, Containerization, IaC, Scripting)  <-- primers + scripts exist
-          |
-          v
-    Core Tools: Bash, Docker, Git, Helm, Kubernetes, Python, Terraform  <-- content exists here
-          |
-          +---> Ansible (advanced)
-          |
-     CI/CD + Networking  <-- concept primers exist; both have hands-on scripts,
-                               plus a gate-before-merge reference and an
-                               observability notebook covering DORA metrics
-          |
-          v
-    Prometheus, Grafana, Jenkins, GitHub Actions (mastery)
+           |
+           v
+     Core Tools: Bash, Docker, Git, Helm, Kubernetes, Python, Terraform  <-- content exists here
+           |
+           +---> Ansible (advanced)
+           |
+      CI/CD + Networking  <-- concept primers exist; both have hands-on scripts,
+                                plus a gate-before-merge reference and an
+                                observability notebook covering DORA metrics
+           |
+           v
+     GitHub Actions (active), Prometheus, Grafana, Jenkins (mastery)
 ```

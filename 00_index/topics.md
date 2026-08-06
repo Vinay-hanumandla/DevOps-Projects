@@ -50,13 +50,14 @@
 - **scripts** (2): most recent → [Minimal file processing](../python/scripts/2026-08-04-minimal-file-processing.py), [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py)
 - **snippets** (1): [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
 
-## Terraform  ·  3 files
+## Terraform  ·  5 files
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
 - **notes** (2): most recent → [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
-- **configs** (1): [First Terraform local file resource](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl)
+- **configs** (2): most recent → [First Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl), [First Terraform local file resource](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl)
+- **docs** (1): [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md)
 
-## Concepts (docs/concepts/)  ·  34 files
+## Concepts (docs/concepts/)  ·  35 files
 
 Foundational primers on the ideas the tools build on — one primer per concept, plus runnable scripts, snippets, and notebooks.
 
@@ -65,7 +66,7 @@ Foundational primers on the ideas the tools build on — one primer per concept,
 - **Infrastructure as Code Principles** (5): [primer](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md) · [state file management strategies](../docs/concepts/infrastructure-as-code-principles/state-file-management-strategies.md) · script: [IaC idempotency check](../docs/concepts/infrastructure-as-code-principles/scripts/2026-07-22-iac-idempotency-check.sh) · script: [Generating Docker Compose configs](../docs/concepts/infrastructure-as-code-principles/scripts/generating-docker-compose-configs.sh) · snippet: [Declarative state diff](../docs/concepts/infrastructure-as-code-principles/snippets/2026-07-22-declarative-state-diff.py)
 - **Linux & CLI Fundamentals** (6): [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) · [errors I found](../docs/concepts/linux-cli-fundamentals/notes/2026-07-28-errors-i-found.md) · [combining Linux CLI with version control](../docs/concepts/linux-cli-fundamentals/combining-linux-cli-with-version-control-automating-git-workflows-with-pipes.md) · script: [File permissions and processes](../docs/concepts/linux-cli-fundamentals/scripts/2026-07-24-linux-file-permissions-and-process-management.sh) · snippet: [Subprocess wrapper](../docs/concepts/linux-cli-fundamentals/snippets/2026-07-24-subprocess-wrapper.py) · notebook: [Exploring connectivity with command-line tools](../docs/concepts/linux-cli-fundamentals/notebooks/exploring-connectivity-with-command-line-tools.ipynb)
 - **Networking Fundamentals** (6): [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md) · [combining networking with containerization](../docs/concepts/networking-fundamentals/combining-networking-with-containerization.md) · script: [Network connectivity check](../docs/concepts/networking-fundamentals/scripts/2026-07-25-practice-network-connectivity-dns-port-inspection.sh) · script: [Networking observability health check](../docs/concepts/networking-fundamentals/scripts/networking-observability-health-check.sh) · script: [Network interface and routing inspection](../docs/concepts/networking-fundamentals/scripts/2026-08-05-network-interface-and-routing-inspection.sh) · snippet: [Socket connection tester](../docs/concepts/networking-fundamentals/snippets/2026-07-26-socket-connection-tester.py)
-- **Observability & Monitoring Concepts** (1): [primer](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md)
+- **Observability & Monitoring Concepts** (2): [primer](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md) · script: [Observability exercises](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-06-observability-exercises.sh)
 - **Scripting & Automation Philosophy** (1): [primer](../docs/concepts/scripting-automation-philosophy/0000-primer-scripting-automation-philosophy.md)
 - **Version Control & Git Workflow** (4): [primer](../docs/concepts/version-control-git-workflow/0000-primer-version-control-git-workflow.md) · [branch strategy and pipeline triggers](../docs/concepts/version-control-git-workflow/branch-strategy-and-pipeline-triggers.md) · [companion readme](../docs/concepts/version-control-git-workflow/notes/2026-07-28-companion-readme.md) · snippet: [Analyzing Git commit history for deployment correlation](../docs/concepts/version-control-git-workflow/snippets/analyzing-git-commit-history-for-deployment-correlation.py)
 - _…and more under `docs/concepts/` — browse the folder._
