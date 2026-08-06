@@ -1,0 +1,11 @@
+# last_verified: 2026-08-06 · grafana n/a
+
+dashboard:
+  title: "My First Grafana Dashboard"
+  row:
+    - title: "API Metrics"
+      panel:
+        type: graph
+        title: "Request Rate"
+        query: "rate(http_requests_total[5m])"
+        datasource: "Prometheus"
