@@ -14,6 +14,7 @@ Passed ([x]) con-045 — Observability & Monitoring Concepts: script — Practic
 - grafana: Add Grafana quick primer (grafana-001)
 - grafana: Add install Grafana and open web UI notes (grafana-002)
 - grafana: Add first dashboard YAML config (grafana-003)
+- docker: Add quickstart trip-ups notes (docker-007)
 
 ## 2026-08-05
 
