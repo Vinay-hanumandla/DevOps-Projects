@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-07
+
+- prom: Add quick primer explaining Prometheus as a time-series metrics monitoring toolkit (prom-001)
+- prom: Add install and web UI exploration notes with first-time impressions (prom-002)
+- prom: Add first Prometheus scrape target configuration (prom-003)
+
 ## 2026-08-06
 
 Passed ([x]) gha-004 — GitHub Actions: notes — What is GitHub Actions? — quick primer · Level: L1 · 2026-08-06
