@@ -4,6 +4,9 @@ CHANGELOG.md merge=union
 
 ## 2026-08-07
 
+- scripting-automation-philosophy: Add scripting/automation exercises practice script (con-047)
+- scripting-automation-philosophy: Add Python snippet applying scripting in DevOps (con-048)
+- version-control-git-workflow: Add git workflow practice script (con-049)
 - observability-monitoring-concepts: Add docs combining observability with containerization (con-038)
 - observability-monitoring-concepts: Add CI/CD pipeline metric collection probes script (con-039)
 - prom: Add quick primer explaining Prometheus as a time-series metrics monitoring toolkit (prom-001)
