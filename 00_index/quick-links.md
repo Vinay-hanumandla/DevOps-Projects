@@ -23,6 +23,7 @@
 - [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md) — what to expect and where beginners get stuck
 - [Docker follow-up trip-ups](../docker/notes/2026-07-15-docker-quickstart-trip-ups.md) — more gotchas after the initial run-through
 - [Install Docker](../docker/notes/2026-07-19-install-docker.md) — check installation, verify the daemon is running
+- [Docker trip-ups after the initial run-through](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md) — more gotchas after getting containers running
 - [Hello-world container](../docker/scripts/2026-07-19-first-hello-world.sh) — pull and run the hello-world image to verify Docker works
 
 ### Build a container image
@@ -54,6 +55,11 @@
 - [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md) — reference guide comparing the two core Git collaboration strategies
 - [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh) — Bash script for managing feature branch rebase and cleanup workflows
 
+### Get started with Grafana
+- [Grafana primer](../grafana/notes/0000-primer-grafana.md) — what Grafana is, dashboards vs panels, and a minimal workflow
+- [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md) — install check and first web UI login
+- [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml) — a minimal Grafana dashboard JSON config
+
 ### Get started with Helm
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
 - [Install Helm and run version command](../helm/notes/2026-07-31-install-helm-run-version.md) — install check, version verification, and adding the stable chart repository
@@ -70,6 +76,11 @@
 ### Inspect Kubernetes resources
 - [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md) — kubectl commands for inspecting cluster resources and their events
 - [Minimal deployment and service manifest](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml) — a minimal Kubernetes Deployment and Service YAML
+
+### Get started with Prometheus
+- [Prometheus primer](../prom/notes/0000-primer-prometheus.md) — what Prometheus is, metrics types, and a minimal workflow
+- [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md) — install check and first web UI exploration
+- [First scrape target](../prom/configs/2026-08-07-first-scrape-target.yaml) — a minimal Prometheus scrape target config
 
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip
@@ -120,9 +131,10 @@
 - [Combining containerization with CI/CD: multi-stage build patterns](../docs/concepts/containerization-concepts/combining-containerization-with-ci-cd-multi-stage-build-patterns.md) — notes on combining containerization with CI/CD using multi-stage builds
 - [Companion readme for version control](../docs/concepts/version-control-git-workflow/notes/2026-07-28-companion-readme.md) — companion notes on Git workflow practices
 
-### Set up CI/CD with GitHub Actions
-- [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml) — a minimal GitHub Actions workflow for CI
-- [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml) — a first GitHub Actions workflow configuration
-- [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md) — debugging failed GitHub Actions runs
-- [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md) — more gotchas after the initial run-through
+### Get started with GitHub Actions
+- [GitHub Actions primer](../gha/notes/0000-primer-gha.md) — what GitHub Actions is, workflows vs jobs, and a minimal workflow
 - [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md) — check installation and configure the gh CLI
+- [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml) — a first GitHub Actions workflow configuration
+- [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml) — a minimal GitHub Actions workflow for CI
+- [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md) — what to expect and where beginners get stuck
+- [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md) — debugging failed GitHub Actions runs

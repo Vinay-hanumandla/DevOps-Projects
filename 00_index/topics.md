@@ -10,13 +10,20 @@
 - **scripts** (5): most recent → [System report tool](../bash/scripts/system-report-tool.sh), [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh), [Hello world with argument handling](../bash/scripts/2026-07-18-first-hello-world.sh)
 - **snippets** (1): [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
 
-## Docker  ·  10 files
+## Docker  ·  11 files
 
 - **primer:** [Docker — quick primer](../docker/notes/0000-primer-docker.md)
-- **notes** (4): most recent → [Install Docker](../docker/notes/2026-07-19-install-docker.md), [Docker follow-up trip-ups](../docker/notes/2026-07-15-docker-quickstart-trip-ups.md), [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md)
+- **notes** (5): most recent → [Docker trip-ups after the initial run-through](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md), [Install Docker](../docker/notes/2026-07-19-install-docker.md), [Docker follow-up trip-ups](../docker/notes/2026-07-15-docker-quickstart-trip-ups.md), [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md)
 - **dockerfiles** (1): [Minimal non-root image](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile)
 - **scripts** (3): [Hello-world container](../docker/scripts/2026-07-19-first-hello-world.sh), [Run nginx with port map](../docker/scripts/2026-07-18-first-port-mapped-container.sh), [Run container with port map](../docker/scripts/2026-07-16-run-container-port-map.sh)
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
+
+## GitHub Actions  ·  6 files
+
+- **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
+- **notes** (2): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
+- **docs** (1): [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
+- **configs** (2): [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml), [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml)
 
 ## Git  ·  18 files
 
@@ -26,6 +33,13 @@
 - **scripts** (3): [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh), [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh), [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh)
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
 - _…and more under `git/` — browse the folder._
+
+## Grafana  ·  3 files
+
+- **primer:** [Grafana — quick primer](../grafana/notes/0000-primer-grafana.md)
+- **notes** (1): most recent → [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
+- **configs** (1): [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml)
+- _…and more under `grafana/` — browse the folder._
 
 ## Helm  ·  3 files
 
@@ -41,6 +55,13 @@
 - **docs** (1): [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md)
 - **scripts** (2): most recent → [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh), [Install Minikube and run kubectl version](../k8s/scripts/2026-08-02-install-minikube-and-run-kubectl-version.sh)
 - **manifests** (1): [Minimal deployment and service](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml)
+
+## Prometheus  ·  3 files
+
+- **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
+- **notes** (1): most recent → [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
+- **configs** (1): [First scrape target](../prom/configs/2026-08-07-first-scrape-target.yaml)
+- _…and more under `prom/` — browse the folder._
 
 ## Python  ·  6 files
 

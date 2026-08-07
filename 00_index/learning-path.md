@@ -42,26 +42,27 @@ These depend on the foundations being in place.
 ## Stage 5: Mastery
 
 - **Observability & Monitoring Concepts** — [primer](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md): knowing what your systems are doing in production. The [observability exercises](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-06-observability-exercises.sh) script gives hands-on practice.
-- **Prometheus** ⏳ / **Grafana** ⏳ — metrics collection and dashboards.
+- **Prometheus** — [primer](../prom/notes/0000-primer-prometheus.md): time-series metrics collection. The [install and web UI exploration](../prom/notes/2026-08-07-install-and-explore-web-ui.md) note and [first scrape target config](../prom/configs/2026-08-07-first-scrape-target.yaml) cover first contact.
+- **Grafana** — [primer](../grafana/notes/0000-primer-grafana.md): dashboards and alerting. The [install note](../grafana/notes/2026-08-06-install-grafana.md) and [first dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml) cover first contact.
 - **Jenkins** ⏳ — self-hosted CI/CD pipelines.
 - **GitHub Actions** — managed CI/CD wired into the repo. Start with the [GitHub Actions primer](../gha/notes/0000-primer-gha.md), the [install note for the gh CLI](../gha/notes/2026-08-05-install-gh-cli.md), and the [quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md) note. Then try the [minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml) and the [first workflow config](../gha/configs/2026-08-05-first-workflow.yaml). The [how I learned to read workflow logs](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md) doc covers debugging failed runs.
 
 ## Progression Map
 
-Bash, Docker, Git, Helm, Kubernetes, Python, Terraform, and GitHub Actions have tool content on disk today, and all eight foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, and networking also have runnable scripts and snippets. The rest of the map shows what unlocks what once the tool notes land.
+Bash, Docker, Git, Helm, Kubernetes, Python, Terraform, GitHub Actions, Prometheus, and Grafana have tool content on disk today, and all eight foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, and networking also have runnable scripts and snippets. Observability has exercises and integration notes. The rest of the map shows what unlocks what once the tool notes land.
 
 ```
 Foundations (Linux, Git workflow, Containerization, IaC, Scripting)  <-- primers + scripts exist
            |
            v
-     Core Tools: Bash, Docker, Git, Helm, Kubernetes, Python, Terraform  <-- content exists here
-           |
-           +---> Ansible (advanced)
-           |
-      CI/CD + Networking  <-- concept primers exist; both have hands-on scripts,
-                                plus a gate-before-merge reference and an
-                                observability notebook covering DORA metrics
-           |
-           v
-     GitHub Actions (active), Prometheus, Grafana, Jenkins (mastery)
+  Core Tools: Bash, Docker, Git, Helm, Kubernetes, Python, Terraform  <-- content exists here
+            |
+            +---> Ansible (advanced)
+            |
+       CI/CD + Networking  <-- concept primers exist; both have hands-on scripts,
+                                 plus a gate-before-merge reference and an
+                                 observability notebook covering DORA metrics
+            |
+            v
+      GitHub Actions (active), Prometheus (active), Grafana (active), Jenkins (mastery)
 ```
