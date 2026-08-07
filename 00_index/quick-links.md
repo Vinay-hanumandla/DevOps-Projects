@@ -108,7 +108,10 @@
 - [Gate-before-merge with branch protection](../docs/concepts/ci-cd-pipeline-concepts/gate-before-merge-branch-protection.md) — how branch protection rules and pipeline gates combine to block broken merges
 - [Infrastructure as Code Principles](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md) — describing infrastructure in files, not by hand
 - [Scripting & Automation Philosophy](../docs/concepts/scripting-automation-philosophy/0000-primer-scripting-automation-philosophy.md) — when to reach for a script instead of doing it manually
+- [Combining observability with containerization](../docs/concepts/observability-monitoring-concepts/combining-observability-with-containerization.md) — adapting logs, metrics, and traces for containerized environments
 - [Observability & Monitoring Concepts](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md) — knowing what your systems are doing in production
+- [Combining containerization with CI/CD: multi-stage build patterns](../docs/concepts/containerization-concepts/combining-containerization-with-ci-cd-multi-stage-build-patterns.md) — notes on combining containerization with CI/CD using multi-stage builds
+- [Companion readme for version control](../docs/concepts/version-control-git-workflow/notes/2026-07-28-companion-readme.md) — companion notes on Git workflow practices
 
 ### Practice a concept hands-on
 - [CI/CD stage simulation](../docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh) — a pure-Bash build→test→deploy pipeline with fail-fast gating
@@ -128,8 +131,13 @@
 - [Network interface and routing inspection](../docs/concepts/networking-fundamentals/scripts/2026-08-05-network-interface-and-routing-inspection.sh) — inspect network interfaces and routing tables
 - [Socket connection tester](../docs/concepts/networking-fundamentals/snippets/2026-07-26-socket-connection-tester.py) — Python snippet that tests TCP socket connectivity and reports the result
 - [Observability exercises](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-06-observability-exercises.sh) — hands-on exercises for observability concepts
-- [Combining containerization with CI/CD: multi-stage build patterns](../docs/concepts/containerization-concepts/combining-containerization-with-ci-cd-multi-stage-build-patterns.md) — notes on combining containerization with CI/CD using multi-stage builds
-- [Companion readme for version control](../docs/concepts/version-control-git-workflow/notes/2026-07-28-companion-readme.md) — companion notes on Git workflow practices
+- [CI/CD pipeline metric collection probes](../docs/concepts/observability-monitoring-concepts/scripts/observability-cicd-pipeline-metric-collection-probes.sh) — collects CI/CD pipeline metrics and exports them to a Prometheus pushgateway endpoint
+- [Applying observability in DevOps](../docs/concepts/observability-monitoring-concepts/snippets/2026-08-07-applying-observability-in-devops.py) — Python snippet that extracts RED-method golden signals from request logs
+
+### Practice DevOps scripting and automation
+- [Scripting automation exercises](../docs/concepts/scripting-automation-philosophy/scripts/2026-08-07-scripting-automation-exercises.sh) — hands-on practice for DRY helpers, idempotency, and exit codes from the scripting philosophy primer
+- [Applying scripting in DevOps](../docs/concepts/scripting-automation-philosophy/snippets/2026-08-07-applying-scripting-in-devops.py) — Python snippet that parses a host inventory and applies role/env-based deploy actions
+- [Git workflow practice exercises](../docs/concepts/version-control-git-workflow/scripts/2026-08-07-git-exercises.sh) — read-only script for inspecting repo state, branch, history, and upstream tracking
 
 ### Get started with GitHub Actions
 - [GitHub Actions primer](../gha/notes/0000-primer-gha.md) — what GitHub Actions is, workflows vs jobs, and a minimal workflow

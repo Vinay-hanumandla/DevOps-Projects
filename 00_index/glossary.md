@@ -132,6 +132,11 @@
 - **DORA metrics** — the four standard metrics for software delivery performance: deployment frequency, lead time for changes, change failure rate, and mean time to restore (MTTR).
 - **Health dashboard** — a visual display of pipeline metrics and signal trends (build duration, queue time, test flake rate, deploy success) used to detect regressions in developer velocity.
 - **Artifact immutability** — the principle that a build artifact should not change between environments; the same container image or binary runs in dev, staging, and production so failures are configuration problems, not binary-diff debugging.
+- **DRY** — "Don't Repeat Yourself"; a principle that discourages duplicating logic, typically by extracting it into a reusable function or module instead of copy-pasting for every case.
+- **Blue/green deployment** — a release strategy that keeps two identical production environments and switches traffic between them, enabling zero-downtime deploys and instant rollbacks.
+- **Rolling restart** — a deployment strategy that replaces instances gradually, one at a time, so capacity is maintained throughout the update.
+- **Golden signals** — the four key metrics for monitoring user-facing systems: latency, traffic (request rate), errors, and saturation (utilization of a constrained resource).
+- **RED method** — a monitoring pattern that extracts three metrics per service — Rate (requests per second), Errors (error rate), and Duration (request latency) — so you can dashboard and alert on anything the user experiences.
 
 ## GitHub Actions
 
