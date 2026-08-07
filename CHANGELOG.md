@@ -2,6 +2,8 @@
 
 ## 2026-08-07
 
+- observability-monitoring-concepts: Add docs combining observability with containerization (con-038)
+- observability-monitoring-concepts: Add CI/CD pipeline metric collection probes script (con-039)
 - prom: Add quick primer explaining Prometheus as a time-series metrics monitoring toolkit (prom-001)
 - prom: Add install and web UI exploration notes with first-time impressions (prom-002)
 - prom: Add first Prometheus scrape target configuration (prom-003)
