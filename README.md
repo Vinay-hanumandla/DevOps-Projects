@@ -31,8 +31,10 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 - `docs/concepts/` — foundational primers with runnable scripts, snippets, and a notebook (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
 - `gha/` — GitHub Actions material: primer, install note, and workflow config.
 - `git/` — Git material: notes, docs, scripts, and hooks tooling.
+- `grafana/` — Grafana material: install note, primer, and dashboard config.
 - `helm/` — Helm material: primer, install note, and chart snippet.
 - `k8s/` — Kubernetes material: primer, install note, kubectl exploration, and manifests.
+- `prom/` — Prometheus material: install note, primer, and scrape config.
 - `python/` — Python material: primer, docs, scripts, and snippets.
 - `tf/` — Terraform material: install note, primer, first config, and project structure docs.
 - `00_index/` — the map: topics, quick links, glossary, and learning path.
