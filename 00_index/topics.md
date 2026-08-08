@@ -21,32 +21,32 @@
 ## GitHub Actions  ·  6 files
 
 - **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
-- **notes** (2): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
+- **notes** (3): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
 - **docs** (1): [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
 - **configs** (2): [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml), [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml)
 
-## Git  ·  18 files
+## Git  ·  19 files
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
 - **notes** (12): most recent → [Companion forgotten undo notes 15](../git/notes/2026-07-28-git-companion-forgotten-undo-notes-15.md), [Companion forgotten undo notes](../git/notes/2026-07-28-git-companion-forgotten-undo-notes.md), [Companion readme quickstart trip-ups](../git/notes/2026-07-28-git-companion-readme-quickstart-trip-ups.md), [Companion readme](../git/notes/2026-07-27-git-companion-readme.md), [Install Git](../git/notes/2026-07-20-install-git.md)
 - **docs** (2): [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md), [How I wired Git hooks into my local dev workflow](../git/docs/how-i-wired-git-hooks-into-my-local-dev-workflow.md)
-- **scripts** (3): [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh), [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh), [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh)
+- **scripts** (4): [Semantic-release-like git automation script](../git/scripts/semantic-release-automation.sh), [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh), [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh), [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh)
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
 - _…and more under `git/` — browse the folder._
 
 ## Grafana  ·  3 files
 
 - **primer:** [Grafana — quick primer](../grafana/notes/0000-primer-grafana.md)
-- **notes** (1): most recent → [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
+- **notes** (2): most recent → [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
 - **configs** (1): [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml)
 - _…and more under `grafana/` — browse the folder._
 
-## Helm  ·  3 files
+## Helm  ·  5 files
 
 - **primer:** [Helm — quick primer](../helm/notes/0000-primer-helm.md)
-- **notes** (2): most recent → [Install Helm and run version command](../helm/notes/2026-07-31-install-helm-run-version.md)
+- **notes** (3): most recent → [Helm chart repo exploration notes](../helm/notes/2026-08-08-explore-helm-chart-repo.md), [Install Helm and run version command](../helm/notes/2026-07-31-install-helm-run-version.md)
+- **configs** (1): [First Helm values override config](../helm/configs/2026-08-08-first-values-override.yaml)
 - **snippets** (1): [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh)
-- _…and 1 more under `helm/notes/` — browse the folder._
 
 ## Kubernetes  ·  8 files
 
@@ -59,7 +59,7 @@
 ## Prometheus  ·  3 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
-- **notes** (1): most recent → [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
+- **notes** (2): most recent → [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
 - **configs** (1): [First scrape target](../prom/configs/2026-08-07-first-scrape-target.yaml)
 - _…and more under `prom/` — browse the folder._
 
@@ -71,12 +71,13 @@
 - **scripts** (2): most recent → [Minimal file processing](../python/scripts/2026-08-04-minimal-file-processing.py), [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py)
 - **snippets** (1): [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
 
-## Terraform  ·  5 files
+## Terraform  ·  8 files
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
-- **notes** (2): most recent → [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
-- **configs** (2): most recent → [First Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl), [First Terraform local file resource](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl)
+- **notes** (3): most recent → [Terraform quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
+- **configs** (3): most recent → [Minimal provider resource config](../tf/configs/2026-08-08-minimal-provider-resource.hcl), [First Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl), [First Terraform local file resource](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl)
 - **docs** (1): [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md)
+- **scripts** (1): [Terraform init/plan/apply automation script](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
 
 ## Concepts (docs/concepts/)  ·  41 files
 
