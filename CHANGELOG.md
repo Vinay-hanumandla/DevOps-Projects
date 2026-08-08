@@ -5,6 +5,7 @@ CHANGELOG.md merge=union
 ## 2026-08-08
 
 - git: Add semantic-release-like git automation script (git-016)
+- git: Add docs comparing rebase-based vs merge-based release workflows (git-017)
 - tf: Add quickstart trip-ups notes (tf-009)
 - tf: Add minimal provider and resource HCL config (tf-010)
 - tf: Add init/plan/apply automation script (tf-011)
