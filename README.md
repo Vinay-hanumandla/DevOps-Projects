@@ -18,11 +18,11 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Quick links
 
-- [Minimal CI workflow](gha/configs/2026-08-06-minimal-ci-workflow.yaml) — a minimal GitHub Actions workflow for CI
-- [How I learned to read workflow logs](gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md) — debugging failed GitHub Actions runs
-- [GitHub Actions quickstart trip-ups](gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md) — more gotchas after the initial run-through
-- [Observability exercises](docs/concepts/observability-monitoring-concepts/scripts/2026-08-06-observability-exercises.sh) — hands-on exercises for observability concepts
-- [First Terraform provider resource](tf/configs/2026-08-06-first-terraform-provider-resource.hcl) — a Terraform config that creates a provider resource
+- [Scripting automation exercises](docs/concepts/scripting-automation-philosophy/scripts/2026-08-07-scripting-automation-exercises.sh) — hands-on practice for DRY helpers, idempotency, and exit codes from the scripting philosophy primer
+- [Applying scripting in DevOps](docs/concepts/scripting-automation-philosophy/snippets/2026-08-07-applying-scripting-in-devops.py) — Python snippet that parses a host inventory and applies role/env-based deploy actions
+- [Git workflow practice exercises](docs/concepts/version-control-git-workflow/scripts/2026-08-07-git-exercises.sh) — read-only script for inspecting repo state, branch, history, and upstream tracking
+- [Applying observability in DevOps](docs/concepts/observability-monitoring-concepts/snippets/2026-08-07-applying-observability-in-devops.py) — Python snippet that extracts RED-method golden signals from request logs
+- [Combining observability with containerization](docs/concepts/observability-monitoring-concepts/combining-observability-with-containerization.md) — adapting logs, metrics, and traces for containerized environments
 
 ## Layout
 
@@ -56,13 +56,13 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Python | 2 | 1 | 2 | 1 | — | — | — | — | — | 2026-08-04 |
 | Prometheus | 2 | — | — | — | 1 | — | — | — | — | 2026-08-07 |
 | Terraform | 2 | 1 | — | — | 2 | — | — | — | — | 2026-08-06 |
-| Concepts | 2 | 8 | 8 | 5 | — | — | — | — | 2 | 2026-08-06 |
+| Concepts | 3 | 15 | 13 | 8 | — | — | — | — | 2 | 2026-08-07 |
 
 </details>
 
 ## Status
 
-Currently working through GitHub Actions (workflow configs and log debugging), Terraform (provider resources and project structure), and observability concepts (new exercises script). All eight foundational concept primers are complete and joined by runnable scripts, code snippets, and a CI/CD + Observability notebook. Bash strict-mode/trap patterns and a directory-based system report tool are the latest additions to the Bash section. Grafana and Prometheus have landing pages, install notes, and first configs on disk.
+Currently working through observability concepts (RED-method golden signals, CI/CD pipeline metric collection probes, and combining observability with containerization), scripting & automation philosophy (scripting exercises and DevOps application snippets), and version control git workflow practice (repo state, branch, and upstream tracking exercises). All eight foundational concept primers are complete and joined by runnable scripts, code snippets, and a CI/CD + Observability notebook. Grafana and Prometheus have landing pages, install notes, and first configs on disk. GitHub Actions, Terraform, and Bash sections are also complete with configs, docs, and scripts.
 
 ---
-_Last updated: 2026-08-07_
+_Last updated: 2026-08-08_
