@@ -2,6 +2,12 @@
 
 CHANGELOG.md merge=union
 
+## 2026-08-08
+
+- tf: Add quickstart trip-ups notes (tf-009)
+- tf: Add minimal provider and resource HCL config (tf-010)
+- tf: Add init/plan/apply automation script (tf-011)
+
 ## 2026-08-07
 
 - scripting-automation-philosophy: Add scripting/automation exercises practice script (con-047)
