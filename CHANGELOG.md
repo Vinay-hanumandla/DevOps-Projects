@@ -2,6 +2,10 @@
 
 CHANGELOG.md merge=union
 
+## 2026-08-09
+
+- bash: Add log rotation and retention script with gzip compression and age-based cleanup (bash-012)
+
 ## 2026-08-08
 
 - git: Add semantic-release-like git automation script (git-016)
