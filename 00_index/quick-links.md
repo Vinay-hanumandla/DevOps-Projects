@@ -13,6 +13,7 @@
 - [Companion hello script](../bash/scripts/2026-07-27-companion-hello.sh) — companion script for the hello-world pattern with argument handling and strict mode
 - [Companion test script](../bash/scripts/2026-07-27-companion-test.sh) — test companion that exercises the safe Bash template patterns
 - [System report tool](../bash/scripts/system-report-tool.sh) — directory-based system report tool with text and JSON output
+- [Log rotation and retention](../bash/scripts/log-rotation-retention.sh) — compresses and prunes log files older than a threshold with gzip and age-based retention
 
 ### Write robust Bash
 - [Robust Bash scripting](../bash/docs/2026-07-23-robust-bash-scripts.md) — strict mode, error handling, and safe defaults
@@ -47,16 +48,16 @@
 ### Branch, merge, and revert
 - [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh) — create branches, merge them, and undo a merge
 
+### Use interactive rebase effectively
+- [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md) — reference guide comparing the two core Git collaboration strategies
+- [Rebase-based vs merge-based release workflows](../git/docs/rebase-based-vs-merge-based-release-workflows.md) — comparing rebase and merge strategies for release branches
+
+### Automate releases with Git
+- [Semantic release automation](../git/scripts/semantic-release-automation.sh) — demonstrates a minimal semantic-release-like flow using Git tags and version bumps
+
 ### Set up Git hooks
 - [How I wired Git hooks into my local dev workflow](../git/docs/how-i-wired-git-hooks-into-my-local-dev-workflow.md) — notes on automating Git hooks for consistent local practices
 - [Install Git hooks](../git/hooks/install.sh) — one-command setup for pre-commit and hook utilities in the local repo
-
-### Use interactive rebase effectively
-- [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md) — reference guide comparing the two core Git collaboration strategies
-- [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh) — Bash script for managing feature branch rebase and cleanup workflows
-
-### Automate semantic releases with Git
-- [Semantic-release-like git automation script](../git/scripts/semantic-release-automation.sh) — Bash script that automates version bumping, changelog generation, and git tagging following semantic-release conventions
 
 ### Get started with Grafana
 - [Grafana primer](../grafana/notes/0000-primer-grafana.md) — what Grafana is, dashboards vs panels, and a minimal workflow
@@ -66,11 +67,11 @@
 ### Get started with Helm
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
 - [Install Helm and run version command](../helm/notes/2026-07-31-install-helm-run-version.md) — install check, version verification, and adding the stable chart repository
-- [Helm chart repo exploration notes](../helm/notes/2026-08-08-explore-helm-chart-repo.md) — notes on exploring and adding Helm chart repositories
+- [Explore Helm chart repo and chart structure](../helm/notes/2026-08-08-explore-helm-chart-repo.md) — notes on Helm chart repo anatomy and chart folder structure
 
 ### Deploy with Helm
 - [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh) — install and manage a Helm chart in a local or test cluster
-- [First Helm values override config](../helm/configs/2026-08-08-first-values-override.yaml) — a minimal Helm values override to customise a chart's defaults
+- [First values override](../helm/configs/2026-08-08-first-values-override.yaml) — minimal Helm values override with replica count and image tag
 
 ### Get started with Kubernetes
 - [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md) — first-contact notes for Kubernetes concepts and kubectl basics
@@ -103,9 +104,8 @@
 - [First Terraform local file resource](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl) — a minimal Terraform config that creates a local file
 - [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md) — how to organise Terraform configs and modules
 - [First Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl) — a Terraform config that creates a provider resource
-- [Minimal provider resource config](../tf/configs/2026-08-08-minimal-provider-resource.hcl) — a minimal Terraform config creating a provider resource
-- [Terraform quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md) — what to expect and where beginners get stuck with Terraform
-- [Terraform init/plan/apply automation script](../tf/scripts/2026-08-08-tf-init-plan-apply.sh) — Bash script that wraps `terraform init`, `plan`, and `apply` with safety checks
+- [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl) — a minimal Terraform config with provider and resource blocks
+- [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh) — end-to-end Terraform workflow script for initialising, planning, and applying
 
 ### Understand a DevOps concept before touching a tool
 - [Linux & CLI Fundamentals](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) — the shell, processes, and filesystem basics everything leans on
