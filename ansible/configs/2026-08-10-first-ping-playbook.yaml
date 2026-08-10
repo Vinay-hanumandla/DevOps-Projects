@@ -1,0 +1,6 @@
+# last_verified: 2026-08-10 · Ansible n/a
+- name: ping all hosts
+  hosts: all
+  tasks:
+    - name: check connectivity
+      ansible.builtin.ping:
