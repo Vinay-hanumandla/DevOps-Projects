@@ -39,6 +39,10 @@
 - **scripts** (4): [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh), [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh), [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh)
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
 
+## Git-doc  ·  1 file
+
+- **docs** (1): [Git — my first file index](../git-doc/docs/2026-08-10-git-index.md)
+
 ## Grafana  ·  3 files
 
 - **primer:** [Grafana — quick primer](../grafana/notes/0000-primer-grafana.md)
@@ -52,6 +56,10 @@
 - **notes** (3): most recent → [Explore Helm chart repo and chart structure](../helm/notes/2026-08-08-explore-helm-chart-repo.md), [Install Helm and run version command](../helm/notes/2026-07-31-install-helm-run-version.md)
 - **configs** (1): [First values override](../helm/configs/2026-08-08-first-values-override.yaml)
 - **snippets** (1): [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh)
+
+## Helm-doc  ·  1 file
+
+- **docs** (1): [Helm — coverage check](../helm-doc/docs/2026-08-10-helm-coverage.md)
 
 ## Kubernetes  ·  8 files
 

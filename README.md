@@ -18,11 +18,11 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Quick links
 
+- [Git — my first file index](git-doc/docs/2026-08-10-git-index.md) — how I catalogued every file in the Git learning folder and built a coverage table
+- [Helm — coverage check](helm-doc/docs/2026-08-10-helm-coverage.md) — how I compared the Helm folder against the manifest and fixed the coverage counts
 - [First Ansible primer](ansible/notes/0000-primer-ansible.md) — first-day notes for Ansible: control node, managed node, playbook, inventory, modules, tasks, and roles
 - [Installing Ansible and running my first command](ansible/notes/2026-08-10-install-ansible-and-run-first-command.md) — pipx install, first ping command, and the PEP 668 trap
 - [First ping playbook config](ansible/configs/2026-08-10-first-ping-playbook.yaml) — minimal Ansible playbook to verify SSH connectivity to managed hosts
-- [Log rotation and retention script](bash/scripts/log-rotation-retention.sh) — compresses and prunes log files older than a threshold with gzip and age-based retention
-- [Rebase-based vs merge-based release workflows](git/docs/rebase-based-vs-merge-based-release-workflows.md) — reference guide comparing rebase and merge strategies for release branches
 
 ## Layout
 
@@ -32,8 +32,10 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 - `docs/concepts/` — foundational primers with runnable scripts, snippets, and a notebook (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
 - `gha/` — GitHub Actions material: primer, install note, and workflow config.
 - `git/` — Git material: notes, docs, scripts, and hooks tooling.
+- `git-doc/` — Git file index and coverage docs.
 - `grafana/` — Grafana material: primer and install notes, plus a first dashboard config.
 - `helm/` — Helm material: primer, install note, chart snippet, and values override config.
+- `helm-doc/` — Helm coverage and manifest docs.
 - `k8s/` — Kubernetes material: primer, install note, kubectl exploration, and manifests.
 - `prom/` — Prometheus material: primer and install notes, plus a first scrape target config.
 - `python/` — Python material: primer, docs, scripts, and snippets.
@@ -59,12 +61,14 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Python | 2 | 1 | 2 | 1 | — | — | — | — | — | 2026-08-04 |
 | Terraform | 3 | 1 | 1 | — | 3 | — | — | — | — | 2026-08-08 |
 | Concepts | 3 | 15 | 13 | 8 | — | — | — | — | 2 | 2026-08-07 |
+| Git-doc | — | 1 | — | — | — | — | — | — | — | 2026-08-10 |
+| Helm-doc | — | 1 | — | — | — | — | — | — | — | 2026-08-10 |
 
 </details>
 
 ## Status
 
-Currently working through observability concepts (RED-method golden signals, CI/CD pipeline metric collection probes, and combining observability with containerization), scripting & automation philosophy (scripting exercises and DevOps application snippets), and version control git workflow practice (repo state, branch, and upstream tracking exercises). All eight foundational concept primers are complete and joined by runnable scripts, code snippets, and a CI/CD + Observability notebook. Grafana and Prometheus have landing pages, install notes, and first configs on disk. GitHub Actions, Terraform, and Bash sections are also complete with configs, docs, and scripts. Helm now has a values override config and chart repo exploration notes. Ansible has a first-contact primer, install notes, and a ping playbook config.
+Currently working through Ansible first-contact notes and a ping playbook config, Git file index and Helm coverage docs, and Bash log rotation tooling. All eight foundational concept primers are complete with runnable scripts, code snippets, and notebooks. Git, Docker, Bash, Python, and Kubernetes have full primers through advanced scripts and docs. Helm and GitHub Actions have configs and docs on disk. Grafana and Prometheus have landing pages, install notes, and first configs. Terraform has primers, configs, docs, and scripts. Ansible now has a first-contact primer, install notes, and a ping playbook config.
 
 ---
 _Last updated: 2026-08-10_
