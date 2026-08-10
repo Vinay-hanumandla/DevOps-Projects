@@ -2,6 +2,12 @@
 
 > A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](learning-path.md).
 
+## Ansible  ·  3 files
+
+- **primer:** [Ansible — quick primer](../ansible/notes/0000-primer-ansible.md)
+- **notes** (1): [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md)
+- **configs** (1): [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml)
+
 ## Bash  ·  12 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)

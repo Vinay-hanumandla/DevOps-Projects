@@ -37,32 +37,32 @@ These depend on the foundations being in place.
 - **Terraform** — declarative infrastructure provisioning (needs Linux + IaC). Start with the [Terraform primer](../tf/notes/0000-primer-terraform.md), then the [install note and first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md), the [first Terraform config](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl) that creates a local file, the [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md) doc, and the [first Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl) config.
 - **Kubernetes** — orchestrating containers at scale (needs Containerization + Linux + Networking). Start with the [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md), then the [Minikube install and kubectl version script](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh) and the [kubectl exploration notes](../k8s/notes/2026-08-03-explore-kubectl-cli.md).
 - **Helm** — packaging Kubernetes workloads (needs Containerization + IaC). Start with the [Helm primer](../helm/notes/0000-primer-helm.md), then the [install and version check](../helm/notes/2026-07-31-install-helm-run-version.md) and the [first chart deployment snippet](../helm/snippets/2026-07-31-deploy-first-chart.sh).
-- **Ansible** ⏳ — configuration management and automation (needs Linux + IaC + scripting).
+- **Ansible** — configuration management and automation (needs Linux + IaC + scripting). Start with the [Ansible primer](../ansible/notes/0000-primer-ansible.md), then the [install note and first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md), and the [first ping playbook config](../ansible/configs/2026-08-10-first-ping-playbook.yaml).
+- **Jenkins** ⏳ — self-hosted CI/CD pipelines.
 
 ## Stage 5: Mastery
 
 - **Observability & Monitoring Concepts** — [primer](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md): knowing what your systems are doing in production. The [combining observability with containerization](../docs/concepts/observability-monitoring-concepts/combining-observability-with-containerization.md) guide adapts logs, metrics, and traces for containerized environments. The [observability exercises](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-06-observability-exercises.sh) script gives hands-on practice, the [CI/CD pipeline metric collection probes](../docs/concepts/observability-monitoring-concepts/scripts/observability-cicd-pipeline-metric-collection-probes.sh) script exports pipeline metrics to Prometheus, and the [applying observability in DevOps snippet](../docs/concepts/observability-monitoring-concepts/snippets/2026-08-07-applying-observability-in-devops.py) extracts RED-method golden signals from request logs.
 - **Prometheus** — [primer](../prom/notes/0000-primer-prometheus.md): time-series metrics collection. The [install and web UI exploration](../prom/notes/2026-08-07-install-and-explore-web-ui.md) note and [first scrape target config](../prom/configs/2026-08-07-first-scrape-target.yaml) cover first contact.
 - **Grafana** — [primer](../grafana/notes/0000-primer-grafana.md): dashboards and alerting. The [install note](../grafana/notes/2026-08-06-install-grafana.md) and [first dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml) cover first contact.
-- **Jenkins** ⏳ — self-hosted CI/CD pipelines.
 - **GitHub Actions** — managed CI/CD wired into the repo. Start with the [GitHub Actions primer](../gha/notes/0000-primer-gha.md), the [install note for the gh CLI](../gha/notes/2026-08-05-install-gh-cli.md), and the [quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md) note. Then try the [minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml) and the [first workflow config](../gha/configs/2026-08-05-first-workflow.yaml). The [how I learned to read workflow logs](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md) doc covers debugging failed runs.
 
 ## Progression Map
 
-Bash, Docker, Git, Helm, Kubernetes, Python, Terraform, GitHub Actions, Prometheus, and Grafana have tool content on disk today, and all eight foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, networking, scripting/automation, and observability concepts all have runnable scripts, snippets, and hands-on exercises. The rest of the map shows what unlocks what once the tool notes land.
+Bash, Docker, Git, Helm, Kubernetes, Python, Terraform, GitHub Actions, Prometheus, and Grafana have tool content on disk today, and all nine foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, networking, scripting/automation, and observability concepts all have runnable scripts, snippets, and hands-on exercises. Ansible has a first-contact primer, install notes, and a ping playbook config. The rest of the map shows what unlocks what once the tool notes land.
 
 ```
 Foundations (Linux, Git workflow, Containerization, IaC, Scripting)  <-- primers + scripts exist
-           |
-           v
-  Core Tools: Bash, Docker, Git, Helm, Kubernetes, Python, Terraform  <-- content exists here
-            |
-            +---> Ansible (advanced)
-            |
-       CI/CD + Networking  <-- concept primers exist; both have hands-on scripts,
-                                 plus a gate-before-merge reference and an
-                                 observability notebook covering DORA metrics
             |
             v
-      GitHub Actions (active), Prometheus (active), Grafana (active), Jenkins (mastery)
+   Core Tools: Bash, Docker, Git, Helm, Kubernetes, Python, Terraform  <-- content exists here
+             |
+             +---> Ansible (advanced)
+             |
+        CI/CD + Networking  <-- concept primers exist; both have hands-on scripts,
+                                  plus a gate-before-merge reference and an
+                                  observability notebook covering DORA metrics
+             |
+             v
+       GitHub Actions (active), Prometheus (active), Grafana (active), Jenkins (mastery)
 ```

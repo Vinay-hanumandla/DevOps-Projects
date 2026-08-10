@@ -1,5 +1,18 @@
 # Glossary
 
+## Ansible
+
+- **Control node** — the machine where Ansible runs and from which it connects to managed nodes over SSH.
+- **Managed node** — any machine Ansible controls remotely; typically a Linux server reachable via SSH.
+- **Playbook** — a YAML file that lists the automated steps to run against hosts; the primary Ansible unit of work.
+- **Inventory** — the list of managed nodes Ansible connects to, expressed as a static file or dynamic source.
+- **Module** — a reusable chunk of code that performs one job (e.g. `apt`, `copy`, `service`); modules are the building blocks of tasks.
+- **Task** — a single call to a module inside a playbook, with a name and any arguments the module needs.
+- **Role** — a grouping of tasks, files, templates, and variables meant to be reused across playbooks.
+- **Host key checking** — Ansible's refusal to connect to unknown SSH hosts by default; disable with `host_key_checking = False` in `ansible.cfg` for lab use.
+- **Fact** — information Ansible collects about a host (CPU, RAM, OS) and exposes as `ansible_facts` in templates and conditions.
+- **pipx** — a tool for installing Python applications in isolated environments; the recommended way to install Ansible on systems that block `pip install` (PEP 668).
+
 ## Docker
 
 - **Image** — an immutable, layered template (built from a Dockerfile) that defines a container's filesystem and start command.
