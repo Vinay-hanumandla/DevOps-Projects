@@ -2,6 +2,11 @@
 
 ## I need to...
 
+### Get started with Ansible
+- [Ansible primer](../ansible/notes/0000-primer-ansible.md) — what Ansible is, control/managed nodes, playbooks, inventory, modules, tasks, and roles
+- [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md) — pipx install, first ping command, and the PEP 668 trap
+- [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml) — minimal playbook to verify SSH connectivity to managed hosts
+
 ### Get started with Bash
 - [Bash primer](../bash/notes/0000-primer-bash.md) — what Bash is, key terminology, and a tiny example
 - [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md) — install check, first .sh file, and permission gotcha

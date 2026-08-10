@@ -1,5 +1,5 @@
 # DevOps-Projects
-> A working engineer's DevOps reference for Bash, Docker, Git, GitHub Actions, Helm, Kubernetes, Python, Terraform, Grafana, and Prometheus, plus the foundational concepts they rest on.
+> A working engineer's DevOps reference for Ansible, Bash, Docker, Git, GitHub Actions, Helm, Kubernetes, Python, Terraform, Grafana, and Prometheus, plus the foundational concepts they rest on.
 
 ![Last commit](https://img.shields.io/github/last-commit/Vinay-hanumandla/DevOps-Projects)
 ![Top language](https://img.shields.io/github/languages/top/Vinay-hanumandla/DevOps-Projects)
@@ -10,22 +10,23 @@
 
 ## Who this is for
 
-A working DevOps engineer's quick-reference: first-contact notes, runnable snippets, and configs for Bash, Docker, Git, GitHub Actions, Helm, Kubernetes, Python, Terraform, Grafana, and Prometheus, plus primers for the concepts they rest on. Use it as a shelf you grab from, not a tutorial site — each entry is something I actually built while working through a tool's quickstart, kept so I can revisit what tripped me up. It deliberately does not try to replace each tool's official docs.
+A working DevOps engineer's quick-reference: first-contact notes, runnable snippets, and configs for Ansible, Bash, Docker, Git, GitHub Actions, Helm, Kubernetes, Python, Terraform, and Grafana/Prometheus, plus primers for the concepts they rest on. Use it as a shelf you grab from, not a tutorial site — each entry is something I actually built while working through a tool's quickstart, kept so I can revisit what tripped me up. It deliberately does not try to replace each tool's official docs.
 
 ## What's in here
 
-A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, or script built while following a tool's quickstart and kept for later. It covers Bash, Docker, Git, GitHub Actions, Helm, Kubernetes, Python, Terraform, and Grafana/Prometheus, plus eight foundational concept primers under docs/concepts/ — each joined by runnable scripts, snippets, and a CI/CD + Observability notebook.
+A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, or script built while following a tool's quickstart and kept for later. It covers Ansible, Bash, Docker, Git, GitHub Actions, Helm, Kubernetes, Python, Terraform, and Grafana/Prometheus, plus nine foundational concept primers under docs/concepts/ — each joined by runnable scripts, snippets, and a CI/CD + Observability notebook.
 
 ## Quick links
 
+- [First Ansible primer](ansible/notes/0000-primer-ansible.md) — first-day notes for Ansible: control node, managed node, playbook, inventory, modules, tasks, and roles
+- [Installing Ansible and running my first command](ansible/notes/2026-08-10-install-ansible-and-run-first-command.md) — pipx install, first ping command, and the PEP 668 trap
+- [First ping playbook config](ansible/configs/2026-08-10-first-ping-playbook.yaml) — minimal Ansible playbook to verify SSH connectivity to managed hosts
 - [Log rotation and retention script](bash/scripts/log-rotation-retention.sh) — compresses and prunes log files older than a threshold with gzip and age-based retention
 - [Rebase-based vs merge-based release workflows](git/docs/rebase-based-vs-merge-based-release-workflows.md) — reference guide comparing rebase and merge strategies for release branches
-- [Semantic release automation script](git/scripts/semantic-release-automation.sh) — demonstrates a minimal semantic-release-like flow using Git tags and version bumps
-- [First Helm values override config](helm/configs/2026-08-08-first-values-override.yaml) — minimal Helm values override with replica count and image tag
-- [Exploring the Helm chart repository and chart structure](helm/notes/2026-08-08-explore-helm-chart-repo.md) — notes on Helm chart repo anatomy and chart folder structure
 
 ## Layout
 
+- `ansible/` — Ansible material: primer, install notes, and first playbook config.
 - `bash/` — Bash material: primer, notes, docs, and scripts.
 - `docker/` — Docker material: notes, Dockerfiles, source files, and scripts.
 - `docs/concepts/` — foundational primers with runnable scripts, snippets, and a notebook (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
@@ -46,6 +47,7 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 | Tool | notes | docs | scripts | snippets | configs | manifests | dockerfiles | src | notebooks | Last verified |
 |------|-------|------|---------|----------|---------|-----------|-------------|-----|-----------|---------------|
+| Ansible | 2 | — | — | — | 1 | — | — | — | — | 2026-08-10 |
 | Bash | 3 | 2 | 6 | 1 | — | — | — | — | — | 2026-07-30 |
 | Docker | 5 | — | 3 | — | — | — | 1 | 2 | — | 2026-08-06 |
 | Git | 12 | 3 | 4 | — | — | — | — | — | — | 2026-08-08 |
@@ -53,8 +55,8 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Grafana | 2 | — | — | — | 1 | — | — | — | — | 2026-08-06 |
 | Helm | 3 | — | — | 1 | 1 | — | — | — | — | 2026-08-08 |
 | Kubernetes | 4 | 1 | 2 | — | — | 1 | — | — | — | 2026-08-04 |
-| Python | 2 | 1 | 2 | 1 | — | — | — | — | — | 2026-08-04 |
 | Prometheus | 2 | — | — | — | 1 | — | — | — | — | 2026-08-07 |
+| Python | 2 | 1 | 2 | 1 | — | — | — | — | — | 2026-08-04 |
 | Terraform | 3 | 1 | 1 | — | 3 | — | — | — | — | 2026-08-08 |
 | Concepts | 3 | 15 | 13 | 8 | — | — | — | — | 2 | 2026-08-07 |
 
@@ -62,7 +64,7 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Status
 
-Currently working through observability concepts (RED-method golden signals, CI/CD pipeline metric collection probes, and combining observability with containerization), scripting & automation philosophy (scripting exercises and DevOps application snippets), and version control git workflow practice (repo state, branch, and upstream tracking exercises). All eight foundational concept primers are complete and joined by runnable scripts, code snippets, and a CI/CD + Observability notebook. Grafana and Prometheus have landing pages, install notes, and first configs on disk. GitHub Actions, Terraform, and Bash sections are also complete with configs, docs, and scripts. Helm now has a values override config and chart repo exploration notes.
+Currently working through observability concepts (RED-method golden signals, CI/CD pipeline metric collection probes, and combining observability with containerization), scripting & automation philosophy (scripting exercises and DevOps application snippets), and version control git workflow practice (repo state, branch, and upstream tracking exercises). All nine foundational concept primers are complete and joined by runnable scripts, code snippets, and a CI/CD + Observability notebook. Grafana and Prometheus have landing pages, install notes, and first configs on disk. GitHub Actions, Terraform, and Bash sections are also complete with configs, docs, and scripts. Helm now has a values override config and chart repo exploration notes. Ansible has a first-contact primer, install notes, and a ping playbook config.
 
 ---
-_Last updated: 2026-08-09_
+_Last updated: 2026-08-10_
