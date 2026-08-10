@@ -2,6 +2,12 @@
 
 CHANGELOG.md merge=union
 
+## 2026-08-10
+
+- ansible: Add first-contact primer (ansible-001)
+- ansible: Add install Ansible and run first command notes (ansible-002)
+- ansible: Add first ping playbook config (ansible-003)
+
 ## 2026-08-09
 
 - bash: Add log rotation and retention script with gzip compression and age-based cleanup (bash-012)
