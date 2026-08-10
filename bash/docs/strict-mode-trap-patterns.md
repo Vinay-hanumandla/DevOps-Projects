@@ -11,7 +11,7 @@ sources:
 
 ## Purpose
 
-This doc describes the decisions and missteps involved when adding strict-mode guards and trap-based cleanup to a directory-based system report script (`bash/scripts/system-report-tool.sh`). The goal was to improve reliability without over-engineering the error handling.
+This doc describes the decisions and missteps involved when adding strict-mode guards and trap-based cleanup to a directory-based system report script (`../scripts/system-report-tool.sh`). The goal was to improve reliability without over-engineering the error handling.
 
 ## When to use strict mode
 

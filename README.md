@@ -14,7 +14,7 @@ A working DevOps engineer's quick-reference: first-contact notes, runnable snipp
 
 ## What's in here
 
-A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, or script built while following a tool's quickstart and kept for later. It covers Ansible, Bash, Docker, Git, GitHub Actions, Helm, Kubernetes, Python, Terraform, and Grafana/Prometheus, plus nine foundational concept primers under docs/concepts/ — each joined by runnable scripts, snippets, and a CI/CD + Observability notebook.
+A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, or script built while following a tool's quickstart and kept for later. It covers Ansible, Bash, Docker, Git, GitHub Actions, Helm, Kubernetes, Python, Terraform, and Grafana/Prometheus, plus eight foundational concept primers under docs/concepts/ — each joined by runnable scripts, snippets, and a CI/CD + Observability notebook.
 
 ## Quick links
 
@@ -64,7 +64,7 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Status
 
-Currently working through observability concepts (RED-method golden signals, CI/CD pipeline metric collection probes, and combining observability with containerization), scripting & automation philosophy (scripting exercises and DevOps application snippets), and version control git workflow practice (repo state, branch, and upstream tracking exercises). All nine foundational concept primers are complete and joined by runnable scripts, code snippets, and a CI/CD + Observability notebook. Grafana and Prometheus have landing pages, install notes, and first configs on disk. GitHub Actions, Terraform, and Bash sections are also complete with configs, docs, and scripts. Helm now has a values override config and chart repo exploration notes. Ansible has a first-contact primer, install notes, and a ping playbook config.
+Currently working through observability concepts (RED-method golden signals, CI/CD pipeline metric collection probes, and combining observability with containerization), scripting & automation philosophy (scripting exercises and DevOps application snippets), and version control git workflow practice (repo state, branch, and upstream tracking exercises). All eight foundational concept primers are complete and joined by runnable scripts, code snippets, and a CI/CD + Observability notebook. Grafana and Prometheus have landing pages, install notes, and first configs on disk. GitHub Actions, Terraform, and Bash sections are also complete with configs, docs, and scripts. Helm now has a values override config and chart repo exploration notes. Ansible has a first-contact primer, install notes, and a ping playbook config.
 
 ---
 _Last updated: 2026-08-10_
