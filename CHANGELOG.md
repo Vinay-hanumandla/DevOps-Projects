@@ -7,6 +7,8 @@ CHANGELOG.md merge=union
 - ansible: Add first-contact primer (ansible-001)
 - ansible: Add install Ansible and run first command notes (ansible-002)
 - ansible: Add first ping playbook config (ansible-003)
+- git-doc: Add Git file index with coverage table (git-doc-001, git-doc-002)
+- helm-doc: Add Helm coverage check fixing counts and surfacing key files (helm-doc-001)
 
 ## 2026-08-09
 

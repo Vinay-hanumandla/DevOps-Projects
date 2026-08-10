@@ -49,7 +49,7 @@ These depend on the foundations being in place.
 
 ## Progression Map
 
-Bash, Docker, Git, Helm, Kubernetes, Python, Terraform, GitHub Actions, Prometheus, and Grafana have tool content on disk today, and all nine foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, networking, scripting/automation, and observability concepts all have runnable scripts, snippets, and hands-on exercises. Ansible has a first-contact primer, install notes, and a ping playbook config. The rest of the map shows what unlocks what once the tool notes land.
+Bash, Docker, Git, Helm, Kubernetes, Python, Terraform, GitHub Actions, Prometheus, and Grafana have tool content on disk today, and all eight foundational concepts now have primers. CI/CD, containerization, IaC, Linux & CLI, networking, scripting/automation, and observability concepts all have runnable scripts, snippets, and hands-on exercises. Ansible has a first-contact primer, install notes, and a ping playbook config. The rest of the map shows what unlocks what once the tool notes land.
 
 ```
 Foundations (Linux, Git workflow, Containerization, IaC, Scripting)  <-- primers + scripts exist
