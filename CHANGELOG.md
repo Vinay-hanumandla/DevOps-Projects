@@ -9,6 +9,7 @@ CHANGELOG.md merge=union
 - ansible: Add first ping playbook config (ansible-003)
 - git-doc: Add Git file index with coverage table (git-doc-001, git-doc-002)
 - helm-doc: Add Helm coverage check fixing counts and surfacing key files (helm-doc-001)
+- repo: Reconcile coverage tables with on-disk file counts (repo-doc-002)
 
 ## 2026-08-09
 

@@ -45,20 +45,20 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 <details><summary>Coverage table</summary>
 
-| Tool | notes | docs | scripts | snippets | configs | manifests | dockerfiles | src | notebooks | Last verified |
+| Tool | notes | docs | scripts | snippets | configs | manifests | dockerfiles | src | hooks | notebooks | Last verified |
 |------|-------|------|---------|----------|---------|-----------|-------------|-----|-----------|---------------|
 | Ansible | 2 | — | — | — | 1 | — | — | — | — | 2026-08-10 |
-| Bash | 3 | 2 | 6 | 1 | — | — | — | — | — | 2026-07-30 |
-| Docker | 5 | — | 3 | — | — | — | 1 | 2 | — | 2026-08-06 |
-| Git | 12 | 3 | 4 | — | — | — | — | — | — | 2026-08-08 |
-| GitHub Actions | 3 | 1 | — | — | 2 | — | — | — | — | 2026-08-06 |
-| Grafana | 2 | — | — | — | 1 | — | — | — | — | 2026-08-06 |
-| Helm | 3 | — | — | 1 | 1 | — | — | — | — | 2026-08-08 |
-| Kubernetes | 4 | 1 | 2 | — | — | 1 | — | — | — | 2026-08-04 |
-| Prometheus | 2 | — | — | — | 1 | — | — | — | — | 2026-08-07 |
-| Python | 2 | 1 | 2 | 1 | — | — | — | — | — | 2026-08-04 |
-| Terraform | 3 | 1 | 1 | — | 3 | — | — | — | — | 2026-08-08 |
-| Concepts | 3 | 15 | 13 | 8 | — | — | — | — | 2 | 2026-08-07 |
+| Bash | 3 | 2 | 6 | 1 | — | — | — | — | — | — | 2026-07-30 |
+| Docker | 5 | — | 3 | — | — | — | 1 | 2 | — | — | 2026-08-06 |
+| Git | 12 | 4 | 4 | — | — | — | — | — | 1 | — | 2026-08-08 |
+| GitHub Actions | 3 | 1 | — | — | 2 | — | — | — | — | — | 2026-08-06 |
+| Grafana | 2 | — | — | — | 1 | — | — | — | — | — | 2026-08-06 |
+| Helm | 3 | 1 | — | 1 | 1 | — | — | — | — | — | 2026-08-08 |
+| Kubernetes | 4 | 1 | 2 | — | — | 1 | — | — | — | — | 2026-08-04 |
+| Prometheus | 2 | — | — | — | 1 | — | — | — | — | — | 2026-08-07 |
+| Python | 2 | 1 | 2 | 1 | — | — | — | — | — | — | 2026-08-04 |
+| Terraform | 3 | 1 | 1 | — | 3 | — | — | — | — | — | 2026-08-08 |
+| Concepts | 3 | 15 | 13 | 8 | — | — | — | — | — | 2 | 2026-08-07 |
 
 </details>
 
