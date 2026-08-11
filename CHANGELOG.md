@@ -7,6 +7,9 @@ CHANGELOG.md merge=union
 - tf: Add Terraform coverage check fixing table counts and surfacing key files (tf-doc-001)
 - jenkins: Add first-contact primer (jenkins-001)
 - jenkins: Add install Jenkins and open web UI notes (jenkins-002)
+- bash: Add docs on debugging and profiling with set -x and trace traps (bash-013)
+- version-control-git-workflow: Add Python snippet applying version control in DevOps (con-050)
+- jenkins: Add hello world pipeline Groovy snippet (jenkins-003)
 
 ## 2026-08-10
 
