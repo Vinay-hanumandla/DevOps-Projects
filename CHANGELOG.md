@@ -2,6 +2,12 @@
 
 CHANGELOG.md merge=union
 
+## 2026-08-11
+
+- tf: Add Terraform coverage check fixing table counts and surfacing key files (tf-doc-001)
+- jenkins: Add first-contact primer (jenkins-001)
+- jenkins: Add install Jenkins and open web UI notes (jenkins-002)
+
 ## 2026-08-10
 
 - ansible: Add first-contact primer (ansible-001)
