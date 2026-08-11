@@ -45,7 +45,6 @@
 - [Git follow-up trip-ups](../git/notes/2026-07-15-git-quickstart-trip-ups.md) — more first-contact gotchas on the second pass
 - [Install Git](../git/notes/2026-07-20-install-git.md) — check installation and configure user identity
 - [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh) — init, add, commit, status in a minimal example
-- [Git — my first file index](../git-doc/docs/2026-08-10-git-index.md) — how I catalogued every file in the Git learning folder and built a coverage table
 
 ### Undo and fix a Git mistake
 - [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md) — unstage, discard, revert, and safely rewrite a local commit
@@ -53,6 +52,7 @@
 
 ### Branch, merge, and revert
 - [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh) — create branches, merge them, and undo a merge
+- [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh) — rebase a feature branch onto main and keep history clean
 
 ### Use interactive rebase effectively
 - [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md) — reference guide comparing the two core Git collaboration strategies
@@ -65,6 +65,9 @@
 - [How I wired Git hooks into my local dev workflow](../git/docs/how-i-wired-git-hooks-into-my-local-dev-workflow.md) — notes on automating Git hooks for consistent local practices
 - [Install Git hooks](../git/hooks/install.sh) — one-command setup for pre-commit and hook utilities in the local repo
 
+### Map out the Git folder
+- [Git — my first file index](../git/docs/2026-08-10-git-index.md) — cataloguing the Git folder into a per-category coverage table
+
 ### Get started with Grafana
 - [Grafana primer](../grafana/notes/0000-primer-grafana.md) — what Grafana is, dashboards vs panels, and a minimal workflow
 - [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md) — install check and first web UI login
@@ -74,11 +77,11 @@
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
 - [Install Helm and run version command](../helm/notes/2026-07-31-install-helm-run-version.md) — install check, version verification, and adding the stable chart repository
 - [Explore Helm chart repo and chart structure](../helm/notes/2026-08-08-explore-helm-chart-repo.md) — notes on Helm chart repo anatomy and chart folder structure
-- [Helm — coverage check](../helm-doc/docs/2026-08-10-helm-coverage.md) — how I compared the Helm folder against the manifest and fixed the coverage counts
 
 ### Deploy with Helm
 - [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh) — install and manage a Helm chart in a local or test cluster
 - [First values override](../helm/configs/2026-08-08-first-values-override.yaml) — minimal Helm values override with replica count and image tag
+- [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md) — comparing the Helm folder against the manifest and fixing the counts
 
 ### Get started with Kubernetes
 - [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md) — first-contact notes for Kubernetes concepts and kubectl basics
@@ -161,3 +164,6 @@
 - [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml) — a minimal GitHub Actions workflow for CI
 - [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md) — what to expect and where beginners get stuck
 - [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md) — debugging failed GitHub Actions runs
+
+### Keep the repo's own docs in sync
+- [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md) — how I kept the README coverage table and Git index honest against what's actually on disk
