@@ -13,13 +13,14 @@
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
 - **docs** (2): most recent → [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md), [Robust Bash scripting](../bash/docs/2026-07-23-robust-bash-scripts.md)
-- **scripts** (6): most recent → [Log rotation and retention](../bash/scripts/log-rotation-retention.sh), [System report tool](../bash/scripts/system-report-tool.sh), [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh), [Hello world with argument handling](../bash/scripts/2026-07-18-first-hello-world.sh)
+- **scripts** (6): most recent → [Log rotation and retention](../bash/scripts/log-rotation-retention.sh), [System report tool](../bash/scripts/system-report-tool.sh), [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh)
 - **snippets** (1): [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
+- _…and more under `bash/` — browse the folder._
 
 ## Docker  ·  11 files
 
 - **primer:** [Docker — quick primer](../docker/notes/0000-primer-docker.md)
-- **notes** (5): most recent → [Docker trip-ups after the initial run-through](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md), [Install Docker](../docker/notes/2026-07-19-install-docker.md), [Docker follow-up trip-ups](../docker/notes/2026-07-15-docker-quickstart-trip-ups.md), [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md)
+- **notes** (5): most recent → [Docker trip-ups after the initial run-through](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md), [Install Docker](../docker/notes/2026-07-19-install-docker.md)
 - **dockerfiles** (1): [Minimal non-root image](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile)
 - **scripts** (3): [Hello-world container](../docker/scripts/2026-07-19-first-hello-world.sh), [Run nginx with port map](../docker/scripts/2026-07-18-first-port-mapped-container.sh), [Run container with port map](../docker/scripts/2026-07-16-run-container-port-map.sh)
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
@@ -27,54 +28,46 @@
 ## GitHub Actions  ·  6 files
 
 - **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
-- **notes** (2): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
+- **notes** (3): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
 - **docs** (1): [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
 - **configs** (2): [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml), [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml)
 
-## Git  ·  20 files
+## Git  ·  21 files
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
-- **notes** (12): most recent → [Companion forgotten undo notes 15](../git/notes/2026-07-28-git-companion-forgotten-undo-notes-15.md), [Companion forgotten undo notes](../git/notes/2026-07-28-git-companion-forgotten-undo-notes.md), [Companion readme quickstart trip-ups](../git/notes/2026-07-28-git-companion-readme-quickstart-trip-ups.md), [Companion readme](../git/notes/2026-07-27-git-companion-readme.md), [Install Git](../git/notes/2026-07-20-install-git.md)
-- **docs** (3): [Rebase-based vs merge-based release workflows](../git/docs/rebase-based-vs-merge-based-release-workflows.md), [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md), [How I wired Git hooks into my local dev workflow](../git/docs/how-i-wired-git-hooks-into-my-local-dev-workflow.md)
-- **scripts** (4): [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh), [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh), [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh)
+- **notes** (12): most recent → [Companion forgotten undo notes 15](../git/notes/2026-07-28-git-companion-forgotten-undo-notes-15.md), [Companion forgotten undo notes](../git/notes/2026-07-28-git-companion-forgotten-undo-notes.md), [Companion readme quickstart trip-ups](../git/notes/2026-07-28-git-companion-readme-quickstart-trip-ups.md)
+- **docs** (4): most recent → [Git — my first file index](../git/docs/2026-08-10-git-index.md), [Rebase-based vs merge-based release workflows](../git/docs/rebase-based-vs-merge-based-release-workflows.md), [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md)
+- **scripts** (4): most recent → [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh), [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh)
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
-
-## Git-doc  ·  1 file
-
-- **docs** (1): [Git — my first file index](../git-doc/docs/2026-08-10-git-index.md)
+- _…and more under `git/` — browse the folder._
 
 ## Grafana  ·  3 files
 
 - **primer:** [Grafana — quick primer](../grafana/notes/0000-primer-grafana.md)
-- **notes** (1): most recent → [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
+- **notes** (1): [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
 - **configs** (1): [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml)
-- _…and more under `grafana/` — browse the folder._
 
-## Helm  ·  5 files
+## Helm  ·  6 files
 
 - **primer:** [Helm — quick primer](../helm/notes/0000-primer-helm.md)
 - **notes** (3): most recent → [Explore Helm chart repo and chart structure](../helm/notes/2026-08-08-explore-helm-chart-repo.md), [Install Helm and run version command](../helm/notes/2026-07-31-install-helm-run-version.md)
+- **docs** (1): [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md)
 - **configs** (1): [First values override](../helm/configs/2026-08-08-first-values-override.yaml)
 - **snippets** (1): [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh)
-
-## Helm-doc  ·  1 file
-
-- **docs** (1): [Helm — coverage check](../helm-doc/docs/2026-08-10-helm-coverage.md)
 
 ## Kubernetes  ·  8 files
 
 - **primer:** [Kubernetes — quick primer](../k8s/notes/0000-primer-kubernetes.md)
-- **notes** (4): most recent → [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md), [Install Minikube and run kubectl version](../k8s/notes/2026-08-02-explore-kubectl-cli.md)
+- **notes** (4): most recent → [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md)
 - **docs** (1): [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md)
-- **scripts** (2): most recent → [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh), [Install Minikube and run kubectl version](../k8s/scripts/2026-08-02-install-minikube-and-run-kubectl-version.sh)
+- **scripts** (2): most recent → [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh)
 - **manifests** (1): [Minimal deployment and service](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml)
 
 ## Prometheus  ·  3 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
-- **notes** (1): most recent → [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
+- **notes** (1): [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
 - **configs** (1): [First scrape target](../prom/configs/2026-08-07-first-scrape-target.yaml)
-- _…and more under `prom/` — browse the folder._
 
 ## Python  ·  6 files
 
@@ -88,9 +81,13 @@
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
 - **notes** (3): most recent → [Quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
-- **configs** (3): most recent → [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl), [First Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl), [First Terraform local file resource](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl)
+- **configs** (3): most recent → [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl), [First Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl)
 - **docs** (1): [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md)
 - **scripts** (1): [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
+
+## Repo-doc  ·  1 file
+
+- **docs** (1): [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md)
 
 ## Concepts (docs/concepts/)  ·  41 files
 

@@ -12,6 +12,7 @@
 - **Host key checking** — Ansible's refusal to connect to unknown SSH hosts by default; disable with `host_key_checking = False` in `ansible.cfg` for lab use.
 - **Fact** — information Ansible collects about a host (CPU, RAM, OS) and exposes as `ansible_facts` in templates and conditions.
 - **pipx** — a tool for installing Python applications in isolated environments; the recommended way to install Ansible on systems that block `pip install` (PEP 668).
+- **Ad-hoc command** — a single `ansible` command run directly against hosts (e.g. `ansible all -m ping`) without a playbook file; useful for quick checks and one-off actions.
 
 ## Docker
 
