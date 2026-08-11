@@ -45,6 +45,7 @@
 - [Git follow-up trip-ups](../git/notes/2026-07-15-git-quickstart-trip-ups.md) — more first-contact gotchas on the second pass
 - [Install Git](../git/notes/2026-07-20-install-git.md) — check installation and configure user identity
 - [First repo lifecycle](../git/scripts/2026-07-20-first-repo.sh) — init, add, commit, status in a minimal example
+- [Git — my first file index](../git-doc/docs/2026-08-10-git-index.md) — how I catalogued every file in the Git learning folder and built a coverage table
 
 ### Undo and fix a Git mistake
 - [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md) — unstage, discard, revert, and safely rewrite a local commit
@@ -73,6 +74,7 @@
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
 - [Install Helm and run version command](../helm/notes/2026-07-31-install-helm-run-version.md) — install check, version verification, and adding the stable chart repository
 - [Explore Helm chart repo and chart structure](../helm/notes/2026-08-08-explore-helm-chart-repo.md) — notes on Helm chart repo anatomy and chart folder structure
+- [Helm — coverage check](../helm-doc/docs/2026-08-10-helm-coverage.md) — how I compared the Helm folder against the manifest and fixed the coverage counts
 
 ### Deploy with Helm
 - [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh) — install and manage a Helm chart in a local or test cluster
