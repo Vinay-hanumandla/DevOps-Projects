@@ -152,6 +152,20 @@
 - **Golden signals** — the four key metrics for monitoring user-facing systems: latency, traffic (request rate), errors, and saturation (utilization of a constrained resource).
 - **RED method** — a monitoring pattern that extracts three metrics per service — Rate (requests per second), Errors (error rate), and Duration (request latency) — so you can dashboard and alert on anything the user experiences.
 
+## Jenkins
+
+- **Job** — a single unit of work you define for Jenkins to run; the classic example is "build and test my code on every push."
+- **Pipeline** — a job defined as code in a `Jenkinsfile`, describing stages like checkout → build → test → deploy; the declarative form uses a `pipeline { stages { … } }` block.
+- **Node** — a machine Jenkins can run jobs on, either the main Jenkins server or a separate agent you connect to it.
+- **Executor** — a slot on a node for running one job step at a time; a node with two executors can run two jobs concurrently.
+- **Build** — a single execution of a job, tracked by a number (e.g. "build #42" is the 42nd run).
+- **Workspace** — the folder on a node where Jenkins checks out the code for a job and runs its steps.
+- **Trigger** — what causes a build to start, e.g. a push webhook or a cron schedule.
+- **Console output** — the full log of what a build printed while running; the first place to look when a build fails.
+- **Jenkinsfile** — the pipeline-as-code file kept in the repository so job definitions are versioned alongside the code.
+- **Plugin** — an add-on that gives Jenkins new capabilities (Git integration, Docker, Slack notifications); Jenkins' extensibility is largely plugin-driven.
+- **Initial admin password** — a one-time secret Jenkins writes to a file on disk during install; it's on the filesystem, not in the install output, and is needed for the first web-UI login.
+
 ## GitHub Actions
 
 - **Workflow** — a YAML file in `.github/workflows/` that defines a automated sequence of jobs triggered by events like pushes or pull requests.
