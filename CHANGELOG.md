@@ -230,3 +230,7 @@ Passed ([x]) bash-010 — Bash: docs — How I wired Bash strict mode and trap p
 - git: Add branch-merge-revert workflow script (git-003)
 - concepts: Add CI/CD artifact promotion snippet (con-010)
 - concepts: Add container lifecycle inspection script (con-011)
+
+## 2026-08-12
+
+- bash: Add notebook comparing log rotation approaches: inotifywait vs cron-driven polling (bash-014)
