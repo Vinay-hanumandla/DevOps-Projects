@@ -103,6 +103,39 @@
 - **Drift** — the gap between the real-world state of infrastructure and what Terraform's state file says exists; detected when the actual resources have changed outside Terraform.
 - **Declarative** — describing the desired end state rather than the steps to reach it; Terraform configs are declarative, so you say what you want and Terraform figures out how to get there.
 
+## Jenkins
+
+- **Job** — a single unit of work you've defined for Jenkins to run. Example: "build the backend, run the unit tests."
+- **Pipeline** — a job defined as code in a `Jenkinsfile`, describing stages like checkout → build → test → deploy. Example: a `pipeline { stages { … } }` block.
+- **Node** — a machine Jenkins can run jobs on. Example: the main Jenkins server, or a separate agent you connect to it.
+- **Executor** — a slot on a node for running one job step at a time. Example: a node with 2 executors can run 2 jobs concurrently.
+- **Plugin** — an add-on that gives Jenkins new capabilities (Git integration, Docker, Slack notifications). Example: the "Git plugin" that lets a job clone a repo.
+- **Workspace** — the folder on a node where Jenkins checks out the code for a job and runs the steps. Example: `…/workspace/<job-name>/src/`.
+- **Build** — one execution of a job. Example: "build #42" is the 42nd time the job ran.
+- **Trigger** — what causes a build to start. Example: a webhook fired when a commit is pushed, or a cron schedule.
+- **Console output** — the full log of what a build printed while running. Example: checking this when a test fails to see the failure message.
+- **Jenkinsfile** — the pipeline-as-code file living in the repo so job definitions are versioned. Example: `Jenkinsfile` at the root of a project.
+
+## Grafana
+
+- **Dashboard** — a collection of panels that display related metrics. Example: an "API Health" dashboard with panels for latency, error rate, and request volume.
+- **Panel** — a single visualization on a dashboard. Example: a time-series graph showing CPU usage over the last hour.
+- **Data source** — the backend system Grafana queries. Example: connecting Grafana to a Prometheus server so it can pull metrics.
+- **Query** — the expression Grafana sends to a data source to fetch data. Example: `rate(http_requests_total[5m])` in Prometheus.
+- **Alert** — a rule that triggers a notification when a metric crosses a threshold. Example: alert when error rate exceeds 5% for 5 minutes.
+- **Row** — a horizontal section on a dashboard that groups related panels. Example: a "Network" row containing latency and throughput panels.
+
+## Prometheus
+
+- **Metric** — a named time series identified by its name and optional key/value labels. Example: `http_requests_total` is a counter that increments on every HTTP request.
+- **Series** — one stream of data points for a given metric + label combination. Example: `http_requests_total{method="POST"}` is a separate series from `http_requests_total{method="GET"}`.
+- **Scrape** — Prometheus actively polls an HTTP endpoint that exposes metrics in a simple text format. Example: `prometheus.yml` tells Prometheus to fetch `/metrics` from each target every 15 seconds.
+- **Scrape target** — a single endpoint Prometheus knows to poll. Example: `static_configs: - targets: ["localhost:9090"]` adds localhost:9090 as a target.
+- **Exporter** — a small process that exposes metrics for another service or system. Example: the Node Exporter exposes host CPU, memory, and disk stats.
+- **PromQL** — Prometheus's query language for selecting and aggregating time-series data. Example: `rate(http_requests_total[5m])` returns the per-second request rate over the last 5 minutes.
+- **AlertManager** — receives alerts fired by Prometheus, handles deduplication, grouping, and routing. Example: a high-CPU alert fires to a Slack channel via AlertManager.
+- **Job** — a logical name grouping scrape targets with shared configuration. Example: `job_name: "node"` collects all Node Exporter targets under one label.
+
 ## Kubernetes
 
 - **Cluster** — a set of Nodes managed by Kubernetes; can be a local Minikube cluster or a cloud-based cluster with dozens of machines.

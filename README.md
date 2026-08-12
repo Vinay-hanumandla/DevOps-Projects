@@ -18,28 +18,28 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Quick links
 
-- [Debugging and profiling Bash with set -x and trace traps](bash/docs/debug-and-profile-with-set-x-and-trace-traps.md) — tracing a failing script to its line and timing functions with RETURN traps, using only built-ins
-- [Applying version control in DevOps — commit-history changelog](docs/concepts/version-control-git-workflow/snippets/2026-08-11-applying-version-control-in-devops.py) — grouping conventional commits into release notes straight from git history
-- [Jenkins — hello-world pipeline](jenkins/snippets/2026-08-11-hello-world-pipeline.groovy) — a minimal declarative pipeline job to paste in and hit Build Now
-- [Combining Scripting & Automation with CI/CD pipeline patterns](docs/concepts/scripting-automation-philosophy/combining-scripting-with-cicd-pipeline-automation.md) — keeping logic in scripts and sequencing in the pipeline YAML
-- [Terraform validate → plan → apply idempotent script](docs/concepts/scripting-automation-philosophy/scripts/terraform-plan-apply-idempotent.sh) — plan-as-artifact workflow where apply consumes a reviewed saved plan
+- [Comparing log rotation approaches](bash/notebooks/comparing-log-rotation-approaches.ipynb) — notebook comparing inotifywait-based and cron-based log rotation strategies
+- [Debug and profile with set -x and trace traps](bash/docs/debug-and-profile-with-set-x-and-trace-traps.md) — notes on using Bash's execution trace and DEBUG trap for profiling
+- [Applying version control in DevOps](docs/concepts/version-control-git-workflow/snippets/2026-08-11-applying-version-control-in-devops.py) — Python snippet that parses Git commit history and correlates commits with deployment events
+- [Hello world Jenkins pipeline](jenkins/snippets/2026-08-11-hello-world-pipeline.groovy) — a minimal declarative Jenkins pipeline for a hello-world stage
+- [Terraform coverage check](tf/docs/2026-08-11-terraform-coverage.md) — reconciling the Terraform folder against the manifest and fixing the counts
 
 ## Layout
 
 - `ansible/` — Ansible material: primer, install notes, and first playbook config.
-- `bash/` — Bash material: primer, notes, docs, and scripts.
+- `bash/` — Bash material: primer, notes, docs, scripts, and notebooks.
 - `docker/` — Docker material: notes, Dockerfiles, source files, and scripts.
-- `docs/concepts/` — foundational primers with runnable scripts, snippets, and a notebook (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
-- `gha/` — GitHub Actions material: primer, install note, and workflow config.
+- `docs/concepts/` — foundational primers with runnable scripts, snippets, and notebooks (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
+- `gha/` — GitHub Actions material: primer, install note, workflow configs, and docs.
 - `git/` — Git material: notes, docs, scripts, and hooks tooling.
 - `grafana/` — Grafana material: primer and install notes, plus a first dashboard config.
-- `helm/` — Helm material: primer, install note, chart snippet, and values override config.
-- `jenkins/` — Jenkins material: primer, install notes, and a first pipeline snippet.
-- `k8s/` — Kubernetes material: primer, install note, kubectl exploration, and manifests.
+- `helm/` — Helm material: primer, install note, chart snippet, values override config, and docs.
+- `jenkins/` — Jenkins material: primer, install notes, and pipeline snippet.
+- `k8s/` — Kubernetes material: primer, install note, kubectl exploration, manifests, and docs.
 - `prom/` — Prometheus material: primer and install notes, plus a first scrape target config.
 - `python/` — Python material: primer, docs, scripts, and snippets.
 - `repo-doc/` — notes on keeping the repository's own docs and coverage tables in sync.
-- `tf/` — Terraform material: install note, primer, first config, and project structure docs.
+- `tf/` — Terraform material: install note, primer, configs, docs, and scripts.
 - `00_index/` — the map: topics, quick links, glossary, and learning path.
 - `CHANGELOG.md` — a dated log of what was added and when.
 
@@ -48,26 +48,26 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 <details><summary>Coverage table</summary>
 
 | Tool | notes | docs | scripts | snippets | configs | manifests | dockerfiles | src | hooks | notebooks | Last verified |
-|------|-------|------|---------|----------|---------|-----------|-------------|-----|-----------|---------------|
+|------|-------|------|---------|----------|---------|-----------|-------------|-----|-------|-----------|---------------|
 | Ansible | 2 | — | — | — | 1 | — | — | — | — | — | 2026-08-10 |
-| Bash | 3 | 3 | 6 | 1 | — | — | — | — | — | — | 2026-08-11 |
+| Bash | 3 | 2 | 6 | 1 | — | — | — | — | — | 1 | 2026-08-12 |
 | Docker | 5 | — | 3 | — | — | — | 1 | 2 | — | — | 2026-08-06 |
-| Git | 12 | 4 | 4 | — | — | — | — | — | 1 | — | 2026-08-10 |
+| Git | 12 | 4 | 4 | — | — | — | — | — | 1 | — | 2026-08-11 |
 | GitHub Actions | 3 | 1 | — | — | 2 | — | — | — | — | — | 2026-08-06 |
 | Grafana | 2 | — | — | — | 1 | — | — | — | — | — | 2026-08-06 |
-| Helm | 3 | 1 | — | 1 | 1 | — | — | — | — | — | 2026-08-10 |
+| Helm | 3 | 1 | — | 1 | 1 | — | — | — | — | — | 2026-08-11 |
 | Jenkins | 2 | — | — | 1 | — | — | — | — | — | — | 2026-08-11 |
 | Kubernetes | 4 | 1 | 2 | — | — | 1 | — | — | — | — | 2026-08-04 |
 | Prometheus | 2 | — | — | — | 1 | — | — | — | — | — | 2026-08-07 |
-| Python | 2 | 1 | 2 | 1 | — | — | — | — | — | — | 2026-08-04 |
+| Python | 2 | 1 | 2 | 1 | — | — | — | — | — | — | 2026-08-05 |
 | Terraform | 3 | 2 | 1 | — | 3 | — | — | — | — | — | 2026-08-11 |
-| Concepts | 3 | 16 | 14 | 9 | — | — | — | — | — | 2 | 2026-08-11 |
+| Concepts | 3 | 15 | 13 | 8 | — | — | — | — | — | 2 | 2026-08-11 |
 
 </details>
 
 ## Status
 
-Jenkins joined the fold this cycle: a first-contact primer, an install-and-open-the-UI note, and a hello-world pipeline snippet — the plan of record is to wire up a job that checks out code from a repo next. Also added Bash debugging/profiling notes (set -x and trace traps), a Scripting × CI/CD pipeline-patterns guide with a plan-as-artifact Terraform script, and a commit-history changelog snippet. All eight foundational concept primers are complete and joined by runnable scripts, snippets, and notebooks. Ansible, Grafana, Prometheus, GitHub Actions, and Helm have landing pages, install notes, and first configs on disk; Terraform's coverage table was re-reconciled against the folder.
+Recently added first-contact material for Ansible (primer, install note, ping playbook) and refreshed the Git and Helm coverage tables so they match what's actually on disk. All eight foundational concept primers are complete and joined by runnable scripts, snippets, and a CI/CD + Observability notebook. Grafana, Prometheus, GitHub Actions, Terraform, Bash, and Jenkins have landing pages, install notes, and first configs on disk. Added a Terraform coverage-table check and a Jenkins hello-world pipeline snippet this cycle.
 
 ---
-_Last updated: 2026-08-11_
+_Last updated: 2026-08-12_
