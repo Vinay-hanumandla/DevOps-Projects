@@ -2,6 +2,10 @@
 
 CHANGELOG.md merge=union
 
+## 2026-08-13
+
+- ci-cd-pipeline-concepts: Add docs on combining CI/CD with containerization for multi-stage build pipeline design (con-051)
+
 ## 2026-08-11
 
 - tf: Add Terraform coverage check fixing table counts and surfacing key files (tf-doc-001)
