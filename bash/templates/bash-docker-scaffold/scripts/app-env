@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# last_verified: 2026-08-13 · bash
+# Builds the dev-toolchain image once and runs the given command inside it with
+# the repo mounted read/write. Tags come from a hash of the Dockerfile so the
+# image is rebuilt only when the toolchain changes.
+set -Eeuo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+tag() {
+    # git hash-object of the Dockerfile -> short deterministic tag
+    git -C "$ROOT" hash-object "$ROOT/Dockerfile" | cut -c1-9
+}
+
+IMG_TAG="bash-docker-scaffold-dev:$(tag)"
+
+cmd="${1:-}"
+case "$cmd" in
+    --tag) printf '%s\n' "$IMG_TAG"; exit 0 ;;
+esac
+
+if [ -z "$(docker images -q "$IMG_TAG" 2>/dev/null)" ]; then
+    echo "[app-env] building $IMG_TAG" >&2
+    docker build -t "$IMG_TAG" "$ROOT" >&2
+fi
+
+exec docker run --rm -v "$ROOT:/work" -w /work "$IMG_TAG" "$@"

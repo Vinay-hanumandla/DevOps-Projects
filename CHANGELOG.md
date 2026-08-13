@@ -5,6 +5,8 @@ CHANGELOG.md merge=union
 ## 2026-08-13
 
 - ci-cd-pipeline-concepts: Add docs on combining CI/CD with containerization for multi-stage build pipeline design (con-051)
+- bash: Add Bash + Docker integration project scaffold template (bash-015)
+- ci-cd-pipeline-concepts: Add pipeline failure detection script combining CI/CD gates with observability (con-052)
 
 ## 2026-08-11
 

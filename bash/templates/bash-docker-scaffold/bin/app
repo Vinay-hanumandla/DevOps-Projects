@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# last_verified: 2026-08-13 · bash
+# Executable entry point, no file extension (invoked by name, chmod +x).
+# Wraps the shared logic in lib/common.sh.
+set -Eeuo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source-path=SCRIPT_DIR
+# shellcheck source=../lib/common.sh
+# shellcheck disable=SC1091
+source "$SCRIPT_DIR/../lib/common.sh"
+
+main() {
+    local name="${1:-world}"
+    greet "$name"
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main "$@"
+fi
