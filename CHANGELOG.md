@@ -4,6 +4,7 @@ CHANGELOG.md merge=union
 
 ## 2026-08-14
 
+- git: Add reusable branch-management and PR-automation helper script (git-019)
 - git: Add project scaffold template for a Git-based release workflow (git-018)
 
 ## 2026-08-13
