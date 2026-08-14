@@ -4,6 +4,7 @@ CHANGELOG.md merge=union
 
 ## 2026-08-14
 
+- containerization-concepts: Add docs on combining containerization with observability for monitoring containerized apps (con-053)
 - bash: Add docs on integrating Bash with Git — automation patterns and project layout (bash-016)
 - helm: Add first Helm chart template manifest from helm create (helm-006)
 - git: Add reusable branch-management and PR-automation helper script (git-019)
