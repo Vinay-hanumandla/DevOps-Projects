@@ -4,6 +4,8 @@ CHANGELOG.md merge=union
 
 ## 2026-08-14
 
+- bash: Add docs on integrating Bash with Git — automation patterns and project layout (bash-016)
+- helm: Add first Helm chart template manifest from helm create (helm-006)
 - git: Add project scaffold template for a Git-based release workflow (git-018)
 
 ## 2026-08-13
