@@ -1,0 +1,20 @@
+# last_verified: 2026-08-14 · helm n/a
+# First chart template — what `helm create mychart` scaffolds, trimmed to the Deployment.
+# The {{ .Values.* }} pieces get filled in from values.yaml at install time.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mychart
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: mychart
+  template:
+    metadata:
+      labels:
+        app: mychart
+    spec:
+      containers:
+        - name: mychart
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
