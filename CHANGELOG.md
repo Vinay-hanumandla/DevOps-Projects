@@ -2,6 +2,10 @@
 
 CHANGELOG.md merge=union
 
+## 2026-08-14
+
+- git: Add project scaffold template for a Git-based release workflow (git-018)
+
 ## 2026-08-13
 
 - ci-cd-pipeline-concepts: Add docs on combining CI/CD with containerization for multi-stage build pipeline design (con-051)
