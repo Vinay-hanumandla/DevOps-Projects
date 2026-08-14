@@ -23,7 +23,13 @@
 ### Write robust Bash
 - [Robust Bash scripting](../bash/docs/2026-07-23-robust-bash-scripts.md) — strict mode, error handling, and safe defaults
 - [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md) — notes on integrating set -euo pipefail and trap-based cleanup into a script workflow
-- [Debug and profile with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md) — using Bash's execution trace and DEBUG trap for profiling and debugging
+- [Debugging and profiling with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md) — trace a failing script to its line and time functions with DEBUG/RETURN traps
+
+### Scaffold a Bash project that runs in Docker
+- [Bash + Docker integration scaffold](../bash/templates/bash-docker-scaffold/README.md) — a starting layout where shellcheck, shfmt, and bats all run in a toolchain container, keeping the host clean
+
+### Compare Bash log-rotation approaches
+- [Comparing log rotation approaches](../bash/notebooks/comparing-log-rotation-approaches.ipynb) — notebook comparing inotifywait vs cron-driven polling for log rotation
 
 ### Get started with Docker
 - [Docker primer](../docker/notes/0000-primer-docker.md) — what Docker is, images vs containers, and a minimal workflow
@@ -60,6 +66,10 @@
 - [Rebase-based vs merge-based release workflows](../git/docs/rebase-based-vs-merge-based-release-workflows.md) — comparing rebase and merge strategies for release branches
 
 ### Automate releases with Git
+- [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) — copy-in-and-rename layout for tag-driven releases: VERSION file, make targets, and shell helpers
+- [Release workflow — release.sh](../git/templates/release-workflow/scripts/release.sh) — bump VERSION, commit, annotated tag, and push, refusing to run on a dirty tree
+- [Release workflow — changelog.sh](../git/templates/release-workflow/scripts/changelog.sh) — print a conventional-commit summary since a release tag
+- [Release workflow — verify-release.sh](../git/templates/release-workflow/scripts/verify-release.sh) — end-to-end proof that runs in a throwaway repo and cleans up after itself
 - [Semantic release automation](../git/scripts/semantic-release-automation.sh) — demonstrates a minimal semantic-release-like flow using Git tags and version bumps
 
 ### Set up Git hooks
@@ -85,9 +95,9 @@
 - [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md) — comparing the Helm folder against the manifest and fixing the counts
 
 ### Get started with Jenkins
-- [Jenkins primer](../jenkins/notes/0000-primer-jenkins.md) — first-day notes for Jenkins: jobs, pipelines, nodes, executors, plugins, and workspaces
-- [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md) — install check, first web UI login, and creating a hello-world pipeline job
-- [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy) — a minimal declarative Jenkins pipeline snippet
+- [Jenkins primer](../jenkins/notes/0000-primer-jenkins.md) — what Jenkins is, jobs, pipelines, nodes, and plugins
+- [Installing Jenkins and opening the web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md) — install, initial admin password, and first login
+- [Hello-world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy) — a minimal declarative pipeline job to paste in and hit Build Now
 
 ### Get started with Kubernetes
 - [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md) — first-contact notes for Kubernetes concepts and kubectl basics
@@ -122,7 +132,7 @@
 - [First Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl) — a Terraform config that creates a provider resource
 - [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl) — a minimal Terraform config with provider and resource blocks
 - [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh) — end-to-end Terraform workflow script for initialising, planning, and applying
-- [Terraform coverage check](../tf/docs/2026-08-11-terraform-coverage.md) — reconciling the Terraform folder against the manifest and fixing the counts
+- [Terraform — coverage check](../tf/docs/2026-08-11-terraform-coverage.md) — comparing the tf folder against the coverage table and fixing the counts
 
 ### Understand a DevOps concept before touching a tool
 - [Linux & CLI Fundamentals](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) — the shell, processes, and filesystem basics everything leans on
@@ -131,8 +141,10 @@
 - [Version Control & Git Workflow](../docs/concepts/version-control-git-workflow/0000-primer-version-control-git-workflow.md) — the ideas behind commits, branches, and remotes
 - [CI/CD Pipeline Concepts](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) — build, test, deploy, and why it's automated
 - [Gate-before-merge with branch protection](../docs/concepts/ci-cd-pipeline-concepts/gate-before-merge-branch-protection.md) — how branch protection rules and pipeline gates combine to block broken merges
+- [Multi-stage build pipeline design](../docs/concepts/ci-cd-pipeline-concepts/multi-stage-build-pipeline-design.md) — combining CI/CD with containerization for multi-stage build pipeline design
 - [Infrastructure as Code Principles](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md) — describing infrastructure in files, not by hand
 - [Scripting & Automation Philosophy](../docs/concepts/scripting-automation-philosophy/0000-primer-scripting-automation-philosophy.md) — when to reach for a script instead of doing it manually
+- [Combining scripting with CI/CD pipeline automation](../docs/concepts/scripting-automation-philosophy/combining-scripting-with-cicd-pipeline-automation.md) — keeping logic in scripts and sequencing in the pipeline YAML
 - [Combining observability with containerization](../docs/concepts/observability-monitoring-concepts/combining-observability-with-containerization.md) — adapting logs, metrics, and traces for containerized environments
 - [Observability & Monitoring Concepts](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md) — knowing what your systems are doing in production
 - [Combining containerization with CI/CD: multi-stage build patterns](../docs/concepts/containerization-concepts/combining-containerization-with-ci-cd-multi-stage-build-patterns.md) — notes on combining containerization with CI/CD using multi-stage builds
@@ -140,6 +152,7 @@
 
 ### Practice a concept hands-on
 - [CI/CD stage simulation](../docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh) — a pure-Bash build→test→deploy pipeline with fail-fast gating
+- [Pipeline failure detection](../docs/concepts/ci-cd-pipeline-concepts/scripts/pipeline-failure-detection.sh) — run a stage with retries and emit timestamped, parseable records a monitoring tool can read
 - [Artifact promotion](../docs/concepts/ci-cd-pipeline-concepts/snippets/2026-07-20-artifact-promotion.py) — promote a build artifact across pipeline stages with an audit trail
 - [Pipeline metrics and health dashboards](../docs/concepts/ci-cd-pipeline-concepts/notebooks/pipeline-metrics-and-health-dashboards.ipynb) — CI/CD observability notebook with DORA metrics and pipeline health scoring
 - [Container lifecycle inspection](../docs/concepts/containerization-concepts/scripts/2026-07-20-container-lifecycle-inspection.sh) — inspect running and stopped containers using the Docker API
@@ -161,11 +174,10 @@
 
 ### Practice DevOps scripting and automation
 - [Scripting automation exercises](../docs/concepts/scripting-automation-philosophy/scripts/2026-08-07-scripting-automation-exercises.sh) — hands-on practice for DRY helpers, idempotency, and exit codes from the scripting philosophy primer
+- [Terraform plan/apply idempotent script](../docs/concepts/scripting-automation-philosophy/scripts/terraform-plan-apply-idempotent.sh) — validate → plan → apply workflow where apply consumes a reviewed saved plan
 - [Applying scripting in DevOps](../docs/concepts/scripting-automation-philosophy/snippets/2026-08-07-applying-scripting-in-devops.py) — Python snippet that parses a host inventory and applies role/env-based deploy actions
-- [Combining scripting with CI/CD pipeline automation](../docs/concepts/scripting-automation-philosophy/combining-scripting-with-cicd-pipeline-automation.md) — notes on combining scripting with CI/CD pipeline automation
-- [Terraform plan-apply idempotent](../docs/concepts/scripting-automation-philosophy/scripts/terraform-plan-apply-idempotent.sh) — idempotent Terraform plan and apply wrapper with retry logic
+- [Applying version control in DevOps](../docs/concepts/version-control-git-workflow/snippets/2026-08-11-applying-version-control-in-devops.py) — turn a branch's commit history into a release changelog via conventional commits
 - [Git workflow practice exercises](../docs/concepts/version-control-git-workflow/scripts/2026-08-07-git-exercises.sh) — read-only script for inspecting repo state, branch, history, and upstream tracking
-- [Applying version control in DevOps](../docs/concepts/version-control-git-workflow/snippets/2026-08-11-applying-version-control-in-devops.py) — Python snippet that parses Git commit history and correlates commits with deployment events
 
 ### Get started with GitHub Actions
 - [GitHub Actions primer](../gha/notes/0000-primer-gha.md) — what GitHub Actions is, workflows vs jobs, and a minimal workflow
