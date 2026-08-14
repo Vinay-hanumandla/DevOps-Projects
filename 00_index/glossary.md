@@ -42,6 +42,11 @@
 - **`$PATH`** — a colon-separated list of directories where the shell looks for executables.
 - **Shebang** — the first line of a script (`#!/usr/bin/env bash`) that tells the system which interpreter to use.
 - **`$?`** — the exit code of the last foreground command; useful for inline error checks without an explicit `if`.
+- **Entrypoint** — the container command that runs before `exec "$@"`, executing single-purpose start hooks from a directory like `docker-entrypoint.d/` in order; the real process becomes PID 1, mirroring the official nginx/postgres init scripts.
+- **Start hook** — a small executable script dropped into `docker-entrypoint.d/` that runs at container start before the main command; one hook per concern (env prep, config checks, waiting on a dependency).
+- **Toolchain container** — a dev image that carries all build/test tooling (shellcheck, shfmt, bats, coreutils); the host installs only Docker, and CI runs the exact same environment as local dev.
+- **bats** — Bash Automated Testing System, a TAP-compliant test runner for shell scripts; `common_test.bats` exercises `lib/common.sh` by mocking external commands via `PATH`.
+- **`exec "$@"`** — replacing the shell process with the container's real command so it runs as PID 1 and receives signals directly, instead of being a child the shell must forward signals to.
 - **Stderr** — the separate output stream (`>&2`) for error messages, distinct from normal output (stdout); redirecting it independently keeps diagnostics from polluting a command's real output.
 - **Positional parameters** — the arguments passed to a script or function, accessed as `$1`, `$2`, etc.; `$@` holds all of them as separate words, `$*` as a single string.
 - **Word splitting** — the shell's behaviour of splitting unquoted variable expansions on characters in `$IFS` (space, tab, newline by default), which causes bugs when a value contains spaces unless quoted.
@@ -66,6 +71,10 @@
 - **Rebase** — replaying your commits on top of another branch (e.g. `git rebase main`); linearises history but rewrites commit hashes, so avoid it on shared branches without coordination.
 - **Hook** — a script in `.git/hooks/` that Git runs automatically at a named point in its workflow (e.g. `pre-commit`, `pre-push`); used for linting, testing, or enforcing policy before a Git operation completes.
 - **Feature branch** — a short-lived branch dedicated to a single change or feature; typically rebased onto `main` before merging to keep history clean.
+- **`VERSION` file** — a plain-text file holding the current release number as the single source of truth; `release.sh` reads it, computes the next value, writes it back, and tags the result so versioning lives in the repo rather than in tooling.
+- **Annotated tag** — a Git tag with an attached message and tagger metadata (`git tag -a v1.2.3 -m "…"`); unlike a lightweight tag it records who and when, which keeps `git describe` and changelog tooling unambiguous.
+- **Version bump (major/minor/patch)** — increasing the meaningful part of a semver `X.Y.Z`; `make patch` → `0.1.1`, `make minor` → `0.2.0`, `make major` → `1.0.0`, driven by `release.sh` computing `next_version`.
+- **Dirty working tree** — a working tree with uncommitted changes; the release workflow's `assert_clean_tree` guard refuses to tag a release over half-committed work.
 
 ## Helm
 
@@ -166,6 +175,8 @@
 - **Pipeline** — an ordered sequence of automated stages (typically build → test → deploy) where each stage must pass before the next runs.
 - **Gate** — a checkpoint in a pipeline that must succeed before the next stage runs; examples are test pass/fail, security scan thresholds, and manual approval steps.
 - **Fail-fast** — stopping a pipeline the moment a stage fails so broken changes don't waste time or reach later stages; usually gated on exit codes.
+- **Retry budget** — the number of times a pipeline stage re-runs a command after a transient failure before giving up; the failure-detection helper retries up to `RETRIES` (default 2) times and only exits non-zero after the budget is exhausted.
+- **Structured log record** — a single line of machine-parseable output with key=value fields (e.g. `stage=deploy event=stage_failed attempt=1 exit_code=3`); written so a human or a monitoring tool can see exactly why a stage failed and how long it took.
 - **Infrastructure as Code (IaC)** — managing servers, networks, and services through version-controlled definition files instead of manual clicks, so environments are reproducible.
 - **Idempotence** — applying the same configuration repeatedly yields the same end state; a core property that makes IaC and automation safe to re-run.
 - **Observability** — the ability to understand a system's internal state from its external outputs (metrics, logs, traces) without adding new instrumentation each time.
