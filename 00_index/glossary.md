@@ -30,7 +30,8 @@
 - **Registry** — a server that stores and distributes images; Docker Hub is the default public registry.
 - **Layer** — each instruction in a Dockerfile creates a layer; Docker caches layers so rebuilding is fast when only the last few instructions changed.
 - **Manifest** — the JSON document that describes an image's layers, config, and platform (Docker V2 or OCI format); `docker manifest inspect <image>` shows it.
-- **docker compose** — Docker's built-in multi-container orchestration tool (V2); define services in a `compose.yaml` and start everything with `docker compose up`.
+ - **docker compose** — Docker's built-in multi-container orchestration tool (V2); define services in a `compose.yaml` and start everything with `docker compose up`.
+ - **Sidecar** — a secondary container that runs alongside the main application container in the same Pod or Compose service, sharing its lifecycle and volumes; used to offload cross-cutting concerns like logging, metrics collection, or proxying without baking them into the app image.
 
 ## Bash
 
