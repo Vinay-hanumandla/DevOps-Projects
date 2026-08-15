@@ -2,6 +2,10 @@
 
 CHANGELOG.md merge=union
 
+## 2026-08-15
+
+- bash: Add project scaffold template for a Bash + Docker multi-container health-check stack (bash-017)
+
 ## 2026-08-14
 
 - containerization-concepts: Add docs on combining containerization with observability for monitoring containerized apps (con-053)
