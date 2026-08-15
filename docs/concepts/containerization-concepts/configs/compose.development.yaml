@@ -1,0 +1,15 @@
+# last_verified: 2026-08-15 · Containerization Concepts
+# Development override — hot-reload, debug logging, relaxed resources.
+
+services:
+  web:
+    environment:
+      - LOG_LEVEL=debug
+      - FLASK_ENV=development
+    volumes:
+      - ./web:/app
+    ports:
+      - "8000:8000"
+      - "5678:5678"
+    profiles:
+      - dev

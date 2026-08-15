@@ -1,0 +1,25 @@
+# last_verified: 2026-08-15 · Containerization Concepts
+# Testing override — isolated data, fast health checks, no external access.
+
+services:
+  db:
+    environment:
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=test_pass
+      - POSTGRES_DB=test_db
+    volumes:
+      - pgdata_test:/var/lib/postgresql/data
+    healthcheck:
+      interval: 2s
+      retries: 3
+
+  web:
+    environment:
+      - DATABASE_URL=postgres://test_user:test_pass@db:5432/test_db
+      - LOG_LEVEL=warning
+    healthcheck:
+      interval: 3s
+      retries: 3
+
+volumes:
+  pgdata_test:

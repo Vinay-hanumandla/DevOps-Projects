@@ -1,0 +1,31 @@
+# last_verified: 2026-08-15 · Containerization Concepts
+# Production override — resource limits, log rotation, no bind mounts.
+
+services:
+  web:
+    environment:
+      - LOG_LEVEL=warning
+      - WORKERS=4
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512m
+        reservations:
+          cpus: "0.5"
+          memory: 256m
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    read_only: true
+    tmpfs:
+      - /tmp
+
+  db:
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 1g
