@@ -4,6 +4,7 @@ CHANGELOG.md merge=union
 
 ## 2026-08-15
 
+- bash: Add project scaffold template for a Bash + Docker multi-container health-check stack (bash-017)
 - bash: Add containerised Bash script runner Dockerfile with strict-mode enforcement and non-root user (bash-018)
 
 ## 2026-08-14

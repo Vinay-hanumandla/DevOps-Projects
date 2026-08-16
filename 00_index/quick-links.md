@@ -26,6 +26,17 @@
 - [Debug and profile with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md) — using Bash's execution trace and DEBUG trap for profiling and debugging
 - [Integrating Bash with Git](../bash/docs/integrating-bash-with-git.md) — fail-fast, re-runnable patterns for release scripts that touch git
 
+### Scaffold a Bash project that runs in Docker
+- [Bash + Docker toolchain scaffold](../bash/templates/bash-docker-scaffold/README.md) — a starting layout where shellcheck, shfmt, and bats all run in a toolchain container, keeping the host clean
+
+### Scaffold a multi-container Bash stack with health checks
+- [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) — a small running stack (cache + web + worker) whose startup ordering is wired through Docker health checks
+- [Health-check stack — docker-compose.yml](../bash/templates/bash-docker-healthcheck-scaffold/docker-compose.yml) — the `depends_on: condition: service_healthy` ordering between services
+- [Health-check stack — up.sh](../bash/templates/bash-docker-healthcheck-scaffold/scripts/up.sh) — brings the stack up and waits for every service to report `healthy`
+
+### Compare Bash log-rotation approaches
+- [Comparing log rotation approaches](../bash/notebooks/comparing-log-rotation-approaches.ipynb) — notebook comparing inotifywait vs cron-driven polling for log rotation
+
 ### Get started with Docker
 - [Docker primer](../docker/notes/0000-primer-docker.md) — what Docker is, images vs containers, and a minimal workflow
 - [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md) — what to expect and where beginners get stuck
@@ -62,8 +73,11 @@
 - [Rebase-based vs merge-based release workflows](../git/docs/rebase-based-vs-merge-based-release-workflows.md) — comparing rebase and merge strategies for release branches
 
 ### Automate releases with Git
-- [Semantic release automation](../git/scripts/semantic-release-automation.sh) — demonstrates a minimal semantic-release-like flow using Git tags and version bumps
 - [Release workflow scaffold README](../git/templates/release-workflow/README.md) — copy-in layout for tag-driven releases with make targets and shell helpers
+- [Release workflow — release.sh](../git/templates/release-workflow/scripts/release.sh) — bump VERSION, commit, annotated tag, and push, refusing to run on a dirty tree
+- [Release workflow — changelog.sh](../git/templates/release-workflow/scripts/changelog.sh) — print a conventional-commit summary since a release tag
+- [Release workflow — verify-release.sh](../git/templates/release-workflow/scripts/verify-release.sh) — end-to-end proof that runs in a throwaway repo and cleans up after itself
+- [Semantic release automation](../git/scripts/semantic-release-automation.sh) — demonstrates a minimal semantic-release-like flow using Git tags and version bumps
 
 ### Set up Git hooks
 - [How I wired Git hooks into my local dev workflow](../git/docs/how-i-wired-git-hooks-into-my-local-dev-workflow.md) — notes on automating Git hooks for consistent local practices
@@ -85,8 +99,8 @@
 ### Deploy with Helm
 - [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh) — install and manage a Helm chart in a local or test cluster
 - [First values override](../helm/configs/2026-08-08-first-values-override.yaml) — minimal Helm values override with replica count and image tag
-- [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md) — comparing the Helm folder against the manifest and fixing the counts
 - [First chart template](../helm/manifests/2026-08-14-first-chart-template.yaml) — a minimal trimmed Deployment template with `.Values.*` placeholders
+- [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md) — comparing the Helm folder against the manifest and fixing the counts
 
 ### Get started with Jenkins
 - [Jenkins primer](../jenkins/notes/0000-primer-jenkins.md) — first-day notes for Jenkins: jobs, pipelines, nodes, executors, plugins, and workspaces

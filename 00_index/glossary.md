@@ -32,6 +32,7 @@
 - **Manifest** — the JSON document that describes an image's layers, config, and platform (Docker V2 or OCI format); `docker manifest inspect <image>` shows it.
  - **docker compose** — Docker's built-in multi-container orchestration tool (V2); define services in a `compose.yaml` and start everything with `docker compose up`.
  - **Sidecar** — a secondary container that runs alongside the main application container in the same Pod or Compose service, sharing its lifecycle and volumes; used to offload cross-cutting concerns like logging, metrics collection, or proxying without baking them into the app image.
+ - **Health check** — a command a container runs periodically to report its own liveness; Docker tracks the status (`starting`/`healthy`/`unhealthy`), and Compose's `depends_on: condition: service_healthy` plus host-side `docker inspect` polling use it to sequence startup between services.
 
 ## Bash
 
@@ -53,6 +54,7 @@
 - **Word splitting** — the shell's behaviour of splitting unquoted variable expansions on characters in `$IFS` (space, tab, newline by default), which causes bugs when a value contains spaces unless quoted.
 - **IFS** — the Internal Field Separator, used by the shell to split words after expansion; overriding it (e.g. `IFS=,`) changes how `read` and loops parse delimited input.
 - **`trap`** — a builtin that registers a command to run when the shell receives a signal or event (e.g. `EXIT`, `ERR`, `SIGINT`), used for cleanup and error handling.
+- **`/dev/tcp`** — Bash's built-in TCP pseudo-device; a redirection like `< /dev/tcp/host/port` succeeds only when the port accepts a connection, so a script can probe reachability with a bounded `timeout` without needing `nc` installed.
 
 ## Git
 
@@ -196,6 +198,7 @@
 - **Rolling restart** — a deployment strategy that replaces instances gradually, one at a time, so capacity is maintained throughout the update.
 - **Golden signals** — the four key metrics for monitoring user-facing systems: latency, traffic (request rate), errors, and saturation (utilization of a constrained resource).
 - **RED method** — a monitoring pattern that extracts three metrics per service — Rate (requests per second), Errors (error rate), and Duration (request latency) — so you can dashboard and alert on anything the user experiences.
+- **Distributed tracing** — following a single request across the services it touches by propagating a trace ID, so per-hop latency and failures can be reconstructed even when each service's logs live on a different machine.
 
 ## Jenkins
 
