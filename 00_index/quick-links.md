@@ -28,6 +28,7 @@
 
 ### Scaffold a Bash project that runs in Docker
 - [Bash + Docker toolchain scaffold](../bash/templates/bash-docker-scaffold/README.md) — a starting layout where shellcheck, shfmt, and bats all run in a toolchain container, keeping the host clean
+- [Strict-mode runner Dockerfile](../bash/dockerfiles/strict-mode-runner.Dockerfile) — containerised Bash that enforces `set -euo pipefail` and `set -x` and runs as a non-root user
 
 ### Scaffold a multi-container Bash stack with health checks
 - [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) — a small running stack (cache + web + worker) whose startup ordering is wired through Docker health checks

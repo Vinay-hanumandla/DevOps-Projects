@@ -14,15 +14,15 @@ A working DevOps engineer's quick-reference: first-contact notes, runnable snipp
 
 ## What's in here
 
-A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, script, or project scaffold built while working through a tool's ecosystem and kept for later. It covers Ansible, Bash, Docker, Git, GitHub Actions, Helm, Jenkins, Kubernetes, Python, Terraform, and Grafana/Prometheus, plus eight foundational concept primers under `docs/concepts/` — each joined by runnable scripts, snippets, and CI/CD + observability notebooks. Three full project scaffolds ship as copy-in-and-rename layouts: a Git-based release workflow (`git/templates/release-workflow/`), a Bash + Docker dev toolchain (`bash/templates/bash-docker-scaffold/`), and a Bash + Docker multi-container stack whose startup ordering is wired through health checks (`bash/templates/bash-docker-healthcheck-scaffold/`).
+A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, script, or project scaffold built while working through a tool's ecosystem and kept for later. It covers Ansible, Bash, Docker, Git, GitHub Actions, Helm, Jenkins, Kubernetes, Python, Terraform, and Grafana/Prometheus, plus eight foundational concept primers under `docs/concepts/` — each joined by runnable scripts, snippets, and CI/CD + observability notebooks. Three full project scaffolds ship as copy-in-and-rename layouts: a Git-based release workflow (`git/templates/release-workflow/`), a Bash + Docker dev toolchain (`bash/templates/bash-docker-scaffold/`), and a Bash + Docker multi-container stack whose startup ordering is wired through health checks (`bash/templates/bash-docker-healthcheck-scaffold/`). A containerised strict-mode Bash runner (`bash/dockerfiles/`) rounds out the Bash corner.
 
 ## Quick links
 
+- [Strict-mode runner Dockerfile](bash/dockerfiles/strict-mode-runner.Dockerfile) — a containerised Bash runner with `set -euo pipefail` and `set -x`, running as a non-root user
 - [Bash + Docker health-check scaffold](bash/templates/bash-docker-healthcheck-scaffold/README.md) — a multi-container stack whose startup ordering is wired through Docker health checks
 - [Monitoring containerized apps in production](docs/concepts/containerization-concepts/monitoring-containerized-apps-in-production.md) — instrumenting containers with metrics, logs, and traces so they're no longer black boxes
 - [Integrating Bash with Git](bash/docs/integrating-bash-with-git.md) — fail-fast, re-runnable patterns for release scripts that touch git
 - [Helm first chart template](helm/manifests/2026-08-14-first-chart-template.yaml) — a minimal trimmed Deployment template with `.Values.*` placeholders
-- [Git PR helper](git/scripts/git-pr-helper.sh) — reusable branch-create, delete, clean-check, and PR-open helper with safety guards
 
 ## Layout
 
@@ -50,12 +50,12 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Tool | notes | docs | scripts | snippets | configs | templates | manifests | dockerfiles | src | hooks | notebooks | Last verified |
 |------|-------|------|---------|----------|---------|-----------|-----------|-------------|-----|-------|-----------|---------------|
 | Ansible | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-10 |
-| Bash | 3 | 4 | 6 | 1 | — | 22 | — | — | — | — | 1 | 2026-08-15 |
+| Bash | 3 | 4 | 6 | 1 | — | 22 | — | 1 | — | — | 1 | 2026-08-15 |
 | Docker | 5 | — | 3 | — | — | — | — | 1 | 2 | — | — | 2026-08-06 |
 | Git | 12 | 4 | 5 | — | — | 6 | — | — | — | 1 | — | 2026-08-14 |
 | GitHub Actions | 3 | 1 | — | — | 2 | — | — | — | — | — | — | 2026-08-06 |
 | Grafana | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-06 |
-| Helm | 3 | 1 | — | 1 | 1 | — | 1 | — | — | — | — | 2026-08-10 |
+| Helm | 3 | 1 | — | 1 | 1 | — | 1 | — | — | — | — | 2026-08-14 |
 | Jenkins | 2 | — | — | 1 | — | — | — | — | — | — | — | 2026-08-11 |
 | Kubernetes | 4 | 1 | 2 | — | — | — | 1 | — | — | — | — | 2026-08-04 |
 | Prometheus | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-07 |
@@ -67,7 +67,7 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Status
 
-The newest addition is a third project scaffold: a Bash + Docker multi-container stack where each service declares a health check, the entry point refuses to start until dependencies are reachable, and the bring-up script waits for `healthy` before reporting success. Compose enforces the ordering through `depends_on: condition: service_healthy`, and the same checks run from the host. The rest stays as it was: all eight concept primers complete with runnable companions, and Ansible, Grafana, Prometheus, GitHub Actions, Jenkins, Helm, and Terraform holding landing pages and first configs.
+The last additions kept shaking out of the Bash + Docker corner: a strict-mode Bash runner image (`set -euo pipefail` + `set -x`, non-root user) and the health-check scaffold it complements. Everything else stays as it was: all eight concept primers complete with runnable companions, and Ansible, Grafana, Prometheus, GitHub Actions, Jenkins, Helm, and Terraform holding landing pages and first configs. The next round of work is mostly L2/L3 content for tools that only have first-contact notes so far.
 
 ---
-_Last updated: 2026-08-15_
+_Last updated: 2026-08-16_

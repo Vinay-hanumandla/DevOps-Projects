@@ -54,6 +54,7 @@
 - **Word splitting** — the shell's behaviour of splitting unquoted variable expansions on characters in `$IFS` (space, tab, newline by default), which causes bugs when a value contains spaces unless quoted.
 - **IFS** — the Internal Field Separator, used by the shell to split words after expansion; overriding it (e.g. `IFS=,`) changes how `read` and loops parse delimited input.
 - **`trap`** — a builtin that registers a command to run when the shell receives a signal or event (e.g. `EXIT`, `ERR`, `SIGINT`), used for cleanup and error handling.
+- **Strict mode** — the Bash safeguard combo `set -Eeuo pipefail`: exit on error, treat unset variables as fatal, fail the whole pipeline if any command in it fails, and inherit error trapping through subshells. Containerised runners and entry points apply it up front so a failing script can't ship a green result.
 - **`/dev/tcp`** — Bash's built-in TCP pseudo-device; a redirection like `< /dev/tcp/host/port` succeeds only when the port accepts a connection, so a script can probe reachability with a bounded `timeout` without needing `nc` installed.
 
 ## Git
