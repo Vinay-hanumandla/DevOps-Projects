@@ -2,6 +2,10 @@
 
 CHANGELOG.md merge=union
 
+## 2026-08-15
+
+- bash: Add containerised Bash script runner Dockerfile with strict-mode enforcement and non-root user (bash-018)
+
 ## 2026-08-14
 
 - containerization-concepts: Add docs on combining containerization with observability for monitoring containerized apps (con-053)
