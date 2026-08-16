@@ -2,6 +2,10 @@
 
 CHANGELOG.md merge=union
 
+## 2026-08-16
+
+- containerization-concepts: Add multi-environment Docker Compose config combining Containerization with IaC, CI/CD, and Networking (con-054)
+
 ## 2026-08-15
 
 - bash: Add Bash + Docker multi-container health-check integration project scaffold template (bash-017)

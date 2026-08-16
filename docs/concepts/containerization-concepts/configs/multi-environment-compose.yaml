@@ -1,0 +1,92 @@
+# last_verified: 2026-08-16 · docker-compose n/a
+
+x-base-service: &base-service
+  environment:
+    - APP_ENV=${APP_ENV:-development}
+    - DATABASE_URL=${DATABASE_URL:-postgres://postgres:postgres@db:5432/app}
+    - REDIS_URL=${REDIS_URL:-redis://cache:6379/0}
+  depends_on:
+    db:
+      condition: service_healthy
+    cache:
+      condition: service_healthy
+  networks:
+    - frontend
+    - backend
+
+services:
+  web:
+    build:
+      context: ./app
+      dockerfile: Dockerfile.web
+    profiles: ["dev", "staging", "prod"]
+    <<: *base-service
+    ports:
+      - target: 8000
+        published: 8000
+        protocol: tcp
+        mode: host
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    deploy:
+      replicas: 1
+
+  db:
+    image: postgres
+    profiles: ["dev", "staging", "prod"]
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-app}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - backend
+
+  cache:
+    image: redis
+    profiles: ["dev", "staging", "prod"]
+    command: redis-server --appendonly yes
+    volumes:
+      - cache-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - backend
+
+  worker:
+    build:
+      context: ./worker
+      dockerfile: Dockerfile.worker
+    profiles: ["dev", "staging", "prod"]
+    <<: *base-service
+    healthcheck:
+      test: ["CMD-SHELL", "celery -A worker inspect ping || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 2
+    deploy:
+      replicas: 2
+
+volumes:
+  db-data:
+  cache-data:
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+    internal: true
