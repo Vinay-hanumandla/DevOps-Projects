@@ -1,0 +1,56 @@
+# last_verified: 2026-08-17 · git n/a
+# Purpose: GitLab CI pipeline manifest showing how git events trigger a
+# pipeline end-to-end. The whole flow is driven by git alone: a push, a tag,
+# or a merge request starts a pipeline, and the rules blocks below map each
+# git event to the jobs it should run.
+#
+# This is one way to wire the trigger chain; the pipeline shape is kept small
+# enough to read the mapping between git event and job in one pass.
+stages:
+  - build
+  - test
+  - deploy
+
+# The `default` block applies to every job that does not override `image`.
+# bash:5.3-alpine is the image used by the Bash health-check scaffold in this
+# kit, and it matches the Bash 5.3 series researched for that template.
+default:
+  image: bash:5.3-alpine
+
+# workflow.rules is the first gate: it decides which pipelines are allowed to
+# start at all. Without this block, manual and scheduled pipelines would also
+# run; the block below keeps the pipeline tied to git events only.
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_COMMIT_TAG'
+    - when: never
+
+# The build job runs for every allowed git event. $CI_COMMIT_SHORT_SHA is a
+# GitLab predefined variable holding the abbreviated commit the pipeline was
+# created for, so every artifact is traceable to the exact commit.
+build:
+  stage: build
+  script:
+    - echo "building commit ${CI_COMMIT_SHORT_SHA}"
+
+# The test job runs after the build stage, still for every allowed event.
+# Because it shares the `default` image it needs no further configuration.
+test:
+  stage: test
+  script:
+    - echo "running tests for ${CI_COMMIT_REF_NAME}"
+
+# Deploy only happens on the default branch (a push) or on a tag, never on a
+# merge request. `when: manual` keeps the deploy human-approved on main while
+# tag pipelines still deploy automatically because they match the first rule.
+deploy:
+  stage: deploy
+  rules:
+    - if: '$CI_COMMIT_TAG'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: manual
+    - when: never
+  script:
+    - echo "deploying ${CI_COMMIT_REF_NAME}"
