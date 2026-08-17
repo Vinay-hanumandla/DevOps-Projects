@@ -2,6 +2,10 @@
 
 CHANGELOG.md merge=union
 
+## 2026-08-17
+
+- git: Add GitLab CI pipeline manifest for git-event-triggered CI/CD end-to-end (git-021)
+
 ## 2026-08-15
 
 - bash: Add project scaffold template for a Bash + Docker multi-container health-check stack (bash-017)
