@@ -5,6 +5,7 @@ CHANGELOG.md merge=union
 ## 2026-08-17
 
 - git: Add GitLab CI pipeline manifest for git-event-triggered CI/CD end-to-end (git-021)
+- git: Add doc on tagging Docker images from git describe and pushing to a registry (git-022)
 
 ## 2026-08-15
 
