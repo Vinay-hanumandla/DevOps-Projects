@@ -215,6 +215,14 @@
 - **Plugin** — an add-on that gives Jenkins new capabilities (Git integration, Docker, Slack notifications); Jenkins' extensibility is largely plugin-driven.
 - **Initial admin password** — a one-time secret Jenkins writes to a file on disk during install; it's on the filesystem, not in the install output, and is needed for the first web-UI login.
 
+## GitLab CI
+
+- **Pipeline trigger** — a Git event (push, tag, or merge request) that starts a pipeline; the manifest's `workflow.rules` block allows only those sources through and rejects manual and scheduled runs.
+- **`$CI_PIPELINE_SOURCE`** — a predefined GitLab variable holding what started the pipeline (`merge_request_event`, `push`, and so on); the first gate in `workflow.rules`.
+- **`$CI_COMMIT_TAG`** — the tag name when the pipeline was triggered by a tag push, and empty otherwise; used to make tag pipelines deploy automatically.
+- **`$CI_COMMIT_SHORT_SHA`** — the abbreviated hash of the commit the pipeline was created for, so build artifacts stay traceable to an exact commit.
+- **`$CI_COMMIT_REF_NAME`** — the branch or tag name the pipeline ran against (e.g. `main`); `rules` blocks use it to keep deploys off merge requests.
+
 ## GitHub Actions
 
 - **Workflow** — a YAML file in `.github/workflows/` that defines a automated sequence of jobs triggered by events like pushes or pull requests.

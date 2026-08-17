@@ -26,9 +26,11 @@
 - [Debug and profile with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md) — using Bash's execution trace and DEBUG trap for profiling and debugging
 - [Integrating Bash with Git](../bash/docs/integrating-bash-with-git.md) — fail-fast, re-runnable patterns for release scripts that touch git
 
+### Run Bash in a container
+- [Strict-mode runner image](../bash/dockerfiles/strict-mode-runner.Dockerfile) — a minimal Debian image that wraps Bash in `set -euo pipefail` under an unprivileged user
+
 ### Scaffold a Bash project that runs in Docker
 - [Bash + Docker toolchain scaffold](../bash/templates/bash-docker-scaffold/README.md) — a starting layout where shellcheck, shfmt, and bats all run in a toolchain container, keeping the host clean
-- [Strict-mode runner Dockerfile](../bash/dockerfiles/strict-mode-runner.Dockerfile) — containerised Bash that enforces `set -euo pipefail` and `set -x` and runs as a non-root user
 
 ### Scaffold a multi-container Bash stack with health checks
 - [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) — a small running stack (cache + web + worker) whose startup ordering is wired through Docker health checks
@@ -72,6 +74,9 @@
 ### Use interactive rebase effectively
 - [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md) — reference guide comparing the two core Git collaboration strategies
 - [Rebase-based vs merge-based release workflows](../git/docs/rebase-based-vs-merge-based-release-workflows.md) — comparing rebase and merge strategies for release branches
+
+### Trigger a pipeline from Git events
+- [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps push, tag, and merge-request events to build → test → deploy jobs with `workflow.rules`
 
 ### Automate releases with Git
 - [Release workflow scaffold README](../git/templates/release-workflow/README.md) — copy-in layout for tag-driven releases with make targets and shell helpers

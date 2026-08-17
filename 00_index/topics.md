@@ -35,13 +35,14 @@
 - **docs** (1): [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
 - **configs** (2): [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml), [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml)
 
-## Git  ·  28 files
+## Git  ·  29 files
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
 - **notes** (12): most recent → [Companion forgotten undo notes 15](../git/notes/2026-07-28-git-companion-forgotten-undo-notes-15.md), [Companion forgotten undo notes](../git/notes/2026-07-28-git-companion-forgotten-undo-notes.md), [Companion readme quickstart trip-ups](../git/notes/2026-07-28-git-companion-readme-quickstart-trip-ups.md)
 - **docs** (4): most recent → [Git — my first file index](../git/docs/2026-08-10-git-index.md), [Rebase-based vs merge-based release workflows](../git/docs/rebase-based-vs-merge-based-release-workflows.md), [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md)
 - **scripts** (5): most recent → [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh), [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh), [Git PR helper](../git/scripts/git-pr-helper.sh)
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
+- **manifests** (1): [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps git events (push, tag, merge request) to build → test → deploy jobs
 - **templates** (6): [Git-based release workflow scaffold](../git/templates/release-workflow/README.md)
 - _…and more under `git/` — browse the folder._
 
