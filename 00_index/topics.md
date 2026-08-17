@@ -8,7 +8,7 @@
 - **notes** (1): [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md)
 - **configs** (1): [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml)
 
-## Bash  ·  37 files
+## Bash  ·  38 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
@@ -16,6 +16,7 @@
 - **scripts** (6): most recent → [System report tool](../bash/scripts/system-report-tool.sh), [Log rotation and retention](../bash/scripts/log-rotation-retention.sh), [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh)
 - **snippets** (1): [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
 - **notebooks** (1): [Comparing log rotation approaches](../bash/notebooks/comparing-log-rotation-approaches.ipynb)
+- **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
 - **templates** (22): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md)
 - _…and more under `bash/` — browse the folder._
 
