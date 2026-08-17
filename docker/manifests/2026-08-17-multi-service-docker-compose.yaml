@@ -1,0 +1,32 @@
+# last_verified: 2026-08-17 · docker n/a
+# Multi-service Docker Compose config: web app, cache, and worker.
+# I followed the Docker Compose quickstart and wired three services together
+# on the default network. The web app and worker both talk to the cache.
+
+services:
+  web:
+    build: ./src
+    ports:
+      - "5000:5000"
+    environment:
+      - REDIS_URL=redis://cache:6379
+    depends_on:
+      - cache
+    # Map port 5000 so I can hit the app from the host. The REDIS_URL
+    # points at the cache service by its Compose DNS name.
+
+  cache:
+    image: redis:alpine
+    # Official Redis image on Alpine for a small footprint during local
+    # experimentation.
+
+  worker:
+    build: ./src
+    command: python worker.py
+    environment:
+      - REDIS_URL=redis://cache:6379
+    depends_on:
+      - cache
+    # The worker shares the src build context for simplicity. In a real
+    # project I'd give it its own Dockerfile so the web and worker images
+    # don't carry each other's dependencies.
