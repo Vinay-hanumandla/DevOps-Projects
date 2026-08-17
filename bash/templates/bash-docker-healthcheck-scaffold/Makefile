@@ -1,4 +1,4 @@
-# last_verified: 2026-08-15 · bash 5.3
+# last_verified: 2026-08-17 · bash 5.3
 # Convenience wrappers around the orchestration scripts. docker compose is the
 # only host dependency; the Bash helpers and the demo app run in the container.
 .PHONY: up down ps logs health lint

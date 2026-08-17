@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# last_verified: 2026-08-15 · bash 5.3
+# last_verified: 2026-08-17 · bash 5.3
 # Generic container healthcheck. Probes a TCP endpoint with a single bounded
 # /dev/tcp attempt and exits 0 on success. Wired into docker compose through
 # `healthcheck:` blocks, and reusable on the host for the same service.

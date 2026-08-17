@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# last_verified: 2026-08-15 · bash 5.3
+# last_verified: 2026-08-17 · bash 5.3
 # Shared helpers for the health-check scaffold. Sourced only — this file never
 # executes anything at the top level beyond defining functions and readonly
 # constants, so it is safe to load from a hook, a host script, or a bats test.
@@ -39,7 +39,8 @@ wait_for_port() {
 
 # wait_for_healthy: poll a container's health status until it reports healthy.
 # Accepts a container name or id. The `docker` binary is resolved through PATH
-# so tests can mock it.
+# so tests can mock it. Explicitly logs the `starting` state instead of
+# looping silently, and fails fast when the container has no healthcheck.
 wait_for_healthy() {
     local container="${1:?container name or id required}"
     local attempts="${2:-60}"
@@ -48,6 +49,12 @@ wait_for_healthy() {
     while (( attempt < attempts )); do
         local status
         status="$(docker inspect --format '{{.State.Health.Status}}' "$container" 2>/dev/null || echo unknown)"
+
+        if [[ -z "$status" ]]; then
+            log "$container has no healthcheck defined — cannot wait for healthy" >&2
+            return 1
+        fi
+
         case "$status" in
             healthy)
                 log "$container is healthy"
@@ -55,6 +62,16 @@ wait_for_healthy() {
                 ;;
             unhealthy)
                 log "$container reported unhealthy" >&2
+                return 1
+                ;;
+            starting)
+                log "$container healthcheck is starting (attempt $attempt/$attempts)"
+                ;;
+            unknown)
+                log "$container state is unknown (attempt $attempt/$attempts)"
+                ;;
+            *)
+                log "$container reported unexpected status: $status" >&2
                 return 1
                 ;;
         esac
