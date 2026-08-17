@@ -1,0 +1,15 @@
+# last_verified: 2026-08-17 · bash 5.3
+.git
+.github
+__pycache__
+*.pyc
+.venv
+venv
+.env
+.idea
+.vscode
+*.swp
+*~
+.DS_Store
+tests/
+docs/

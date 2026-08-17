@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# last_verified: 2026-08-15 · bash 5.3
+# last_verified: 2026-08-17 · bash 5.3
 # Container entry point. Runs every hook in /docker-entrypoint.d/*.sh in order,
 # then execs the real CMD so that process becomes PID 1. Without the trailing
 # `exec "$@"` the CMD would run as a child, and a stop/signal would not reach

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# last_verified: 2026-08-15 · bash 5.3
+# last_verified: 2026-08-17 · bash 5.3
 # Demo worker: the "work" it does is to keep verifying the cache dependency is
 # reachable. Startup ordering here is explicit in Bash (wait_for_port) and
 # enforced again in compose via depends_on + service_healthy.

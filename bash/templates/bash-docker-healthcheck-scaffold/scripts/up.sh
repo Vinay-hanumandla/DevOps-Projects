@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# last_verified: 2026-08-15 · bash 5.3
+# last_verified: 2026-08-17 · bash 5.3
 # Bring the stack up and confirm every service reports healthy before handing
 # back to the caller. Uses the same lib helpers the containers themselves use.
 set -Eeuo pipefail

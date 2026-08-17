@@ -1,56 +1,76 @@
 ---
-last_verified: 2026-08-15
+last_verified: 2026-08-17
 tool_version: 5.3
 sources:
-  - https://bashsnippets.xyz/guides/bash-scripting-for-ci-cd-pipelines
-  - https://docs.docker.com/guides/gha/
-  - https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/add-scripts
-  - https://www.gnu.org/software/bash/manual/bash.html
+  - https://kubernetes.recipes/recipes/configuration/kubernetes-kubectl-wait-scripting/
 ---
 
 # Project scaffold: Bash + Docker multi-container health-check integration
 
-A starting layout for a Bash project that runs as several containers and treats
-health checks as the contract between them. Every service declares one, the
-entry point refuses to start a process whose dependency port is not reachable,
-and the host orchestration script waits for `healthy` before it reports a
-successful bring-up.
+A copy-in project layout for a multi-container stack whose startup ordering is
+driven by Docker health checks rather than fixed sleeps. Compose uses
+`depends_on: condition: service_healthy` to enforce ordering, and the entrypoint
+hook refuses to start a process whose dependency port is not yet reachable — so
+ordering holds even when a container is started directly, bypassing Compose.
 
-This is the second Bash + Docker scaffold in the kit — where `bash-docker-scaffold`
-is a dev toolchain container, this one is a small running stack whose startup
-ordering is wired through health checks.
+## When to use
 
-## Layout
+Use this scaffold when a service depends on another service being ready, and
+`docker compose up` alone is not enough because Compose only waits for a
+container to be running, not for its health check to pass. The pattern applies
+to any stack where startup ordering matters: a cache before a web front end,
+a web front end before a background worker, or a database before a migration
+job.
+
+## Prerequisites
+
+- Docker Engine with the `docker compose` v2 plugin.
+- Bash 5.x on the host (the scripts assume `set -Eeuo pipefail` and `/dev/tcp`).
+- `make` is optional; the `scripts/` wrappers can be invoked directly.
+
+## Directory layout
 
 ```
 .
-├── Makefile               # up / down / ps / logs / health / lint shortcuts
-├── docker-compose.yml     # cache + web + worker, service_healthy ordering
-├── Dockerfile             # runtime image: bash 5.3-alpine, non-root app user
-├── docker-entrypoint.sh   # runs hooks, then `exec "$@"` so CMD becomes PID 1
+├── .dockerignore               # keeps build context small
+├── Dockerfile                  # runtime image: bash 5.3-alpine, non-root app user
+├── Makefile                    # up / down / ps / logs / health / lint shortcuts
+├── README.md                   # this file
+├── docker-compose.yml          # cache + web + worker with service_healthy ordering
+├── docker-entrypoint.sh        # runs /docker-entrypoint.d/*.sh hooks, then execs CMD
 ├── docker-entrypoint.d/
-│   └── 10-wait-for-cache.sh  # refuses to start until the cache port is open
+│   └── 10-wait-for-cache.sh    # skips itself for the cache service; waits for others
 ├── app/
-│   ├── healthcheck.sh     # generic TCP healthcheck, used by compose and hosts
-│   ├── responder.sh       # demo TCP listener so checks have a port to probe
-│   └── main.sh            # demo worker that keeps verifying the dependency
+│   ├── healthcheck.sh          # generic TCP probe used by compose and the entrypoint
+│   ├── main.sh                 # demo worker that verifies the cache dependency
+│   └── responder.sh            # demo TCP listener for health-check targets
 ├── lib/
-│   └── common.sh          # log / wait_for_port / wait_for_healthy helpers
+│   └── common.sh               # log / wait_for_port / wait_for_healthy / require_command
 ├── scripts/
-│   ├── up.sh              # compose up -d, then wait for every service healthy
-│   └── down.sh            # compose down
+│   ├── down.sh                 # compose down
+│   └── up.sh                   # compose up -d --build, then poll every service healthy
 └── tests/
-    └── common_test.bats   # bats tests with docker/timeout mocked via PATH
+    └── common_test.bats        # bats unit tests with docker and timeout mocked
 ```
 
-The rule of thumb: `lib/` holds functions you `source`, `app/` holds what runs
-inside a container, `scripts/` holds host-side orchestration, `tests/` holds
-bats tests.
+## How the health-check flow works
+
+1. Compose starts `cache`, `web`, and `worker` in parallel.
+2. `depends_on: condition: service_healthy` blocks `web` until `cache` reports
+   `healthy`, and blocks `worker` until both `cache` and `web` report `healthy`.
+3. Inside each container, `docker-entrypoint.sh` runs
+   `/docker-entrypoint.d/10-wait-for-cache.sh` before the CMD. The hook skips
+   itself for the cache service (`SKIP_ENTRYPOINT_WAIT=true`) and otherwise
+   waits for the cache port to accept connections.
+4. `scripts/up.sh` calls `docker compose up -d --build`, then resolves each
+   service's container id and polls `docker inspect --format
+   '{{.State.Health.Status}}'` until it returns `healthy` or the attempt limit
+   is hit.
+
+The health check logic lives in one place — `app/healthcheck.sh` — so Compose
+and the host scripts judge the same condition.
 
 ## Getting started
-
-Prerequisites: Docker with the `docker compose` v2 plugin. Nothing else needs
-installing — the helpers run inside the same images they manage.
 
 ```sh
 make up       # compose up -d --build, then wait_for_healthy on each service
@@ -60,45 +80,43 @@ make logs     # follow container logs
 make down     # tear the stack down
 ```
 
-`scripts/up.sh` is the interesting part: it builds the stack, then for each of
-`cache`, `web`, `worker` resolves the container id and polls its Docker health
-status. If a service stays `unhealthy`, the script exits nonzero with a message
-instead of pretending the bring-up succeeded.
-
 ## Verify
 
 ```sh
 make health
-# abc123: healthy
-# def456: healthy
-# ghi789: healthy
+# <container-id>: healthy
+# <container-id>: healthy
+# <container-id>: healthy
 ```
 
-Compose enforces the ordering through `depends_on: ... condition:
-service_healthy`, so `web` will not start until `cache` is healthy and `worker`
-will not start until `web` is. The entry point enforces the same rule in Bash
-(10-wait-for-cache.sh), which means ordering also holds if someone starts a
-single container directly, bypassing compose.
+If a service stays `unhealthy`, `scripts/up.sh` exits nonzero with a message
+instead of pretending the bring-up succeeded.
+
+## Common errors
+
+- **Container never becomes healthy.** The most common cause is a port conflict
+  on the host (another process already bound to 6379 or 8080). Check with
+  `docker compose ps` and `docker logs <container>`.
+- **Health check stuck in `starting`.** Docker reports `starting` while the
+  health check command is running but has not yet produced a result. If a
+  service stays in `starting` past its `start_period`, inspect the container
+  logs — the health check script may be hanging on a DNS lookup or a file
+  permission.
+- **Entry-point hook exits before CMD.** Hooks run with `set -Eeuo pipefail`;
+  any unhandled non-zero exit aborts the entrypoint. Make every hook tolerate
+  the container's initial state.
 
 ## Conventions baked in
 
 - Every entry point starts with `#!/usr/bin/env bash` and `set -Eeuo pipefail`.
-  In CI, where `command | tee log` can swallow an exit code, `pipefail` is what
-  keeps a failing step from shipping a green checkmark.
+  In CI, where `command | tee log` can swallow an exit code, `pipefail` keeps
+  a failing step from shipping a green checkmark.
 - The entry point ends with `exec "$@"`. Without it the CMD runs as a child of
   the entry point, stays out of PID 1, and a stop never reaches the real
-  process. The hooks run first so dependencies are confirmed before the main
-  command.
+  process.
 - Port probing uses a bounded `/dev/tcp` attempt wrapped in a short `timeout`,
   retried with backoff capped at 5s, and fails after a set number of attempts
   with a clear message — never blocks forever.
-- Health checks live in one script (`app/healthcheck.sh`) that compose `CMD-SHELL`
-  blocks and the host share, so the container and the orchestrator are judging
-  the same condition.
-
-This is one way to wire the pieces together. Compose also ships a built-in
-`up --wait` flag that polls service health itself; this scaffold keeps the
-polling in Bash so the same helpers are unit-testable on the host without a
-running daemon. The GitHub Actions docs also recommend committing scripts as
-executable and invoking them through `run: bash script.sh` — the entry point
-and hook layout here assume the same contract.
+- Health checks live in one script (`app/healthcheck.sh`) that Compose
+  `CMD-SHELL` blocks and the host share, so the container and the orchestrator
+  judge the same condition.

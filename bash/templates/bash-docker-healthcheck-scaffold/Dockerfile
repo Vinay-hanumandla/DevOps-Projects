@@ -1,4 +1,4 @@
-# last_verified: 2026-08-15 · bash 5.3
+# last_verified: 2026-08-17 · bash 5.3
 # Runtime image for the health-check scaffold. Alpine base keeps it small;
 # busybox-extras provides the nc used by the demo TCP responder. bash 5.3 is
 # the shell of record, matching what the host scripts assume.

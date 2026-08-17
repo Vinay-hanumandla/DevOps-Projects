@@ -1,9 +1,10 @@
-# last_verified: 2026-08-15 · bash 5.3
+# last_verified: 2026-08-17 · bash 5.3
 # Multi-container stack for the health-check scaffold. Every service declares a
 # healthcheck backed by the shared app/healthcheck.sh script; `depends_on` uses
 # the service_healthy condition so compose refuses to start web before cache is
-# healthy and worker before web is healthy. The entry point also waits on the
-# cache port, so ordering holds even if someone bypasses compose.
+# healthy and worker before web is healthy. The cache service sets
+# SKIP_ENTRYPOINT_WAIT=true so its entrypoint hook does not wait for itself;
+# web and worker wait for the cache dependency before their CMD runs.
 name: bash-docker-healthcheck-scaffold
 
 services:
@@ -12,6 +13,8 @@ services:
       context: .
       dockerfile: Dockerfile
     command: ["/opt/app/app/responder.sh", "6379"]
+    environment:
+      SKIP_ENTRYPOINT_WAIT: "true"
     healthcheck:
       test: ["CMD-SHELL", "/opt/app/app/healthcheck.sh --port 6379"]
       interval: 2s
