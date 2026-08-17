@@ -128,6 +128,7 @@
 - **Trigger** — what causes a build to start. Example: a webhook fired when a commit is pushed, or a cron schedule.
 - **Console output** — the full log of what a build printed while running. Example: checking this when a test fails to see the failure message.
 - **Jenkinsfile** — the pipeline-as-code file living in the repo so job definitions are versioned. Example: `Jenkinsfile` at the root of a project.
+- **Initial admin password** — a one-time secret Jenkins writes to a file on disk during install; it's on the filesystem, not in the install output, and is needed for the first web-UI login.
 
 ## Grafana
 
@@ -163,15 +164,6 @@
 - **NodePort** — a Service type that exposes the service on each Node's IP at a static port, making it reachable from outside the cluster without a cloud load balancer.
 - **LoadBalancer** — a Service type that provisions an external cloud load balancer to route traffic to the service; on Minikube, `minikube service` is used instead.
 
-## Helm
-
-- **Chart** — a Helm package containing templates and default values. Example: `helm install myapp ./mychart/` renders and deploys everything in that chart.
-- **Release** — a running instance of a chart in a cluster. Installing the same chart twice with different names gives you two releases.
-- **Values file** — a YAML file that overrides a chart's defaults. Example: `helm install myapp ./mychart/ -f custom-values.yaml` sets custom config.
-- **Repository** — a hosted collection of charts others can use. Example: `helm repo add stable https://charts.helm.sh/stable` adds a public repo.
-- **Helmfile** — a declarative file that lists multiple releases to deploy. A `helmfile.yaml` declares all infra apps in one place.
-- **Dependency** — a chart can depend on other charts. Your app chart might depend on a Redis chart and a PostgreSQL chart.
-
 ## Concepts
 
 - **Artifact** — a build output (binary, package, container image, or report) produced by one pipeline stage and consumed by the next; promoting an artifact means moving a specific version through dev → staging → prod.
@@ -200,20 +192,6 @@
 - **Golden signals** — the four key metrics for monitoring user-facing systems: latency, traffic (request rate), errors, and saturation (utilization of a constrained resource).
 - **RED method** — a monitoring pattern that extracts three metrics per service — Rate (requests per second), Errors (error rate), and Duration (request latency) — so you can dashboard and alert on anything the user experiences.
 - **Distributed tracing** — following a single request across the services it touches by propagating a trace ID, so per-hop latency and failures can be reconstructed even when each service's logs live on a different machine.
-
-## Jenkins
-
-- **Job** — a single unit of work you define for Jenkins to run; the classic example is "build and test my code on every push."
-- **Pipeline** — a job defined as code in a `Jenkinsfile`, describing stages like checkout → build → test → deploy; the declarative form uses a `pipeline { stages { … } }` block.
-- **Node** — a machine Jenkins can run jobs on, either the main Jenkins server or a separate agent you connect to it.
-- **Executor** — a slot on a node for running one job step at a time; a node with two executors can run two jobs concurrently.
-- **Build** — a single execution of a job, tracked by a number (e.g. "build #42" is the 42nd run).
-- **Workspace** — the folder on a node where Jenkins checks out the code for a job and runs its steps.
-- **Trigger** — what causes a build to start, e.g. a push webhook or a cron schedule.
-- **Console output** — the full log of what a build printed while running; the first place to look when a build fails.
-- **Jenkinsfile** — the pipeline-as-code file kept in the repository so job definitions are versioned alongside the code.
-- **Plugin** — an add-on that gives Jenkins new capabilities (Git integration, Docker, Slack notifications); Jenkins' extensibility is largely plugin-driven.
-- **Initial admin password** — a one-time secret Jenkins writes to a file on disk during install; it's on the filesystem, not in the install output, and is needed for the first web-UI login.
 
 ## GitLab CI
 

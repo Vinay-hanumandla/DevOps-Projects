@@ -18,7 +18,8 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Quick links
 
-- [GitLab CI pipeline trigger manifest](git/manifests/ci-cd-pipeline-trigger.yaml) — a compact manifest mapping push, tag, and merge-request events to build → test → deploy jobs
+- [Multi-service Docker Compose config](docker/manifests/2026-08-17-multi-service-docker-compose.yaml) — a multi-service Docker Compose stack with web, cache, and worker services on the default network
+- [Git — tagging Docker images from git describe](git/docs/git-describe-image-tags-registry.md) — deriving traceable Docker image tags from git history and pushing to a registry
 - [Bash + Docker health-check scaffold](bash/templates/bash-docker-healthcheck-scaffold/README.md) — a multi-container stack whose startup ordering is wired through Docker health checks
 - [Strict-mode runner image](bash/dockerfiles/strict-mode-runner.Dockerfile) — a minimal Debian image that wraps Bash in `set -euo pipefail` under an unprivileged user
 - [Monitoring containerized apps in production](docs/concepts/containerization-concepts/monitoring-containerized-apps-in-production.md) — instrumenting containers with metrics, logs, and traces so they're no longer black boxes
@@ -28,12 +29,12 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 - `ansible/` — Ansible material: primer, install notes, and first playbook config.
 - `bash/` — Bash material: primer, notes, docs, scripts, notebooks, a strict-mode runner image, and two Docker project scaffolds (toolchain + health-check stack).
-- `docker/` — Docker material: notes, Dockerfiles, source files, and scripts.
+- `docker/` — Docker material: notes, Dockerfiles, source files, scripts, and a multi-service Compose manifest.
 - `docs/concepts/` — foundational primers with runnable scripts, snippets, and notebooks (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
 - `gha/` — GitHub Actions material: primer, install note, and workflow configs.
 - `git/` — Git material: notes, docs, scripts, hooks tooling, a release-workflow scaffold, and a pipeline-trigger manifest.
 - `grafana/` — Grafana material: primer and install notes, plus a first dashboard config.
-- `helm/` — Helm material: primer, install note, chart snippet, values override config, and manifests.
+- `helm/` — Helm material: primer, install note, chart snippet, values override config, chart template, and manifests.
 - `jenkins/` — Jenkins material: primer, install notes, and a first pipeline snippet.
 - `k8s/` — Kubernetes material: primer, install note, kubectl exploration, and manifests.
 - `prom/` — Prometheus material: primer and install notes, plus a first scrape target config.
@@ -50,12 +51,12 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Tool | notes | docs | scripts | snippets | configs | templates | manifests | dockerfiles | src | hooks | notebooks | Last verified |
 |------|-------|------|---------|----------|---------|-----------|-----------|-------------|-----|-------|-----------|---------------|
 | Ansible | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-10 |
-| Bash | 3 | 4 | 6 | 1 | — | 22 | — | 1 | — | — | 1 | 2026-08-15 |
-| Docker | 5 | — | 3 | — | — | — | — | 1 | 2 | — | — | 2026-08-06 |
-| Git | 12 | 4 | 5 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-17 |
+| Bash | 3 | 4 | 6 | 1 | — | 23 | — | 1 | — | — | 1 | 2026-08-17 |
+| Docker | 5 | — | 3 | — | — | — | 1 | 1 | 2 | — | — | 2026-08-17 |
+| Git | 12 | 5 | 5 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-17 |
 | GitHub Actions | 3 | 1 | — | — | 2 | — | — | — | — | — | — | 2026-08-06 |
 | Grafana | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-06 |
-| Helm | 3 | 1 | — | 1 | 1 | — | 1 | — | — | — | — | 2026-08-10 |
+| Helm | 3 | 1 | — | 1 | 1 | — | 1 | — | — | — | — | 2026-08-14 |
 | Jenkins | 2 | — | — | 1 | — | — | — | — | — | — | — | 2026-08-11 |
 | Kubernetes | 4 | 1 | 2 | — | — | — | 1 | — | — | — | — | 2026-08-04 |
 | Prometheus | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-07 |
@@ -67,7 +68,7 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Status
 
-The newest additions are two Git items: a GitLab CI pipeline trigger manifest under `git/manifests/` that maps push, tag, and merge-request events to build → test → deploy jobs, and a strict-mode Bash runner image under `bash/dockerfiles/`. The rest stays as it was: all eight concept primers complete with runnable companions, and Ansible, Grafana, Prometheus, GitHub Actions, Jenkins, Helm, and Terraform holding landing pages and first configs.
+The newest additions are a multi-service Docker Compose manifest under `docker/manifests/` wiring a web app, cache, and worker together, and a Git doc on deriving Docker image tags from `git describe`. The rest stays as it was: all eight concept primers complete with runnable companions, and Ansible, Grafana, Prometheus, GitHub Actions, Jenkins, Helm, and Terraform holding landing pages and first configs.
 
 ---
 _Last updated: 2026-08-17_
