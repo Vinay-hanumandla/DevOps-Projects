@@ -2,6 +2,11 @@
 
 CHANGELOG.md merge=union
 
+## 2026-08-18
+
+- infrastructure-as-code-principles: Add docs combining IaC with Scripting & Automation for parameterised config generation (con-055)
+- infrastructure-as-code-principles: Add network topology as code script generating Terraform VPC/subnet/route config (con-056)
+
 ## 2026-08-17
 
 - git: Add GitLab CI pipeline manifest for git-event-triggered CI/CD end-to-end (git-021)
