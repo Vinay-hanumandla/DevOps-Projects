@@ -2,6 +2,11 @@
 
 CHANGELOG.md merge=union
 
+## 2026-08-18
+
+- git: Add docs comparing rebase-based vs merge-based workflows for Git history at scale (git-020)
+- helm: Add notes on installing Helm with a package manager and verifying chart repository access (helm-007)
+
 ## 2026-08-17
 
 - git: Add GitLab CI pipeline manifest for git-event-triggered CI/CD end-to-end (git-021)
