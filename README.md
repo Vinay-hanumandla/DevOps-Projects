@@ -18,12 +18,11 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Quick links
 
+- [Rebase vs merge at scale](git/docs/rebase-vs-merge-at-scale.md) — how rebase and merge strategies behave once a repo crosses hundreds of contributors and long-lived release branches
+- [Install Helm with package manager](helm/notes/2026-08-18-install-helm-with-package-manager.md) — package-manager install, version check, and shell completion setup
+- [Parameterised config generation](docs/concepts/infrastructure-as-code-principles/parameterised-config-generation.md) — generating per-environment configs from a single source of truth with loops and conditionals
+- [Network topology Terraform script](docs/concepts/infrastructure-as-code-principles/scripts/network-topology-terraform.sh) — generates a Terraform config from a simple network-topology description
 - [Multi-service Docker Compose config](docker/manifests/2026-08-17-multi-service-docker-compose.yaml) — a multi-service Docker Compose stack with web, cache, and worker services on the default network
-- [Git — tagging Docker images from git describe](git/docs/git-describe-image-tags-registry.md) — deriving traceable Docker image tags from git history and pushing to a registry
-- [Bash + Docker health-check scaffold](bash/templates/bash-docker-healthcheck-scaffold/README.md) — a multi-container stack whose startup ordering is wired through Docker health checks
-- [Strict-mode runner image](bash/dockerfiles/strict-mode-runner.Dockerfile) — a minimal Debian image that wraps Bash in `set -euo pipefail` under an unprivileged user
-- [Monitoring containerized apps in production](docs/concepts/containerization-concepts/monitoring-containerized-apps-in-production.md) — instrumenting containers with metrics, logs, and traces so they're no longer black boxes
-- [Integrating Bash with Git](bash/docs/integrating-bash-with-git.md) — fail-fast, re-runnable patterns for release scripts that touch git
 
 ## Layout
 
@@ -53,22 +52,22 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Ansible | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-10 |
 | Bash | 3 | 4 | 6 | 1 | — | 23 | — | 1 | — | — | 1 | 2026-08-17 |
 | Docker | 5 | — | 3 | — | — | — | 1 | 1 | 2 | — | — | 2026-08-17 |
-| Git | 12 | 5 | 5 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-17 |
+| Git | 12 | 6 | 5 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-17 |
 | GitHub Actions | 3 | 1 | — | — | 2 | — | — | — | — | — | — | 2026-08-06 |
 | Grafana | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-06 |
-| Helm | 3 | 1 | — | 1 | 1 | — | 1 | — | — | — | — | 2026-08-14 |
+| Helm | 4 | 1 | — | 1 | 1 | — | 1 | — | — | — | — | 2026-08-18 |
 | Jenkins | 2 | — | — | 1 | — | — | — | — | — | — | — | 2026-08-11 |
 | Kubernetes | 4 | 1 | 2 | — | — | — | 1 | — | — | — | — | 2026-08-04 |
 | Prometheus | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-07 |
 | Python | 2 | 1 | 2 | 1 | — | — | — | — | — | — | — | 2026-08-04 |
 | Terraform | 3 | 2 | 1 | — | 3 | — | — | — | — | — | — | 2026-08-11 |
-| Concepts | 3 | 18 | 15 | 9 | — | — | — | — | — | — | 2 | 2026-08-14 |
+| Concepts | 3 | 19 | 16 | 9 | — | — | — | — | — | — | 2 | 2026-08-18 |
 
 </details>
 
 ## Status
 
-The newest additions are a multi-service Docker Compose manifest under `docker/manifests/` wiring a web app, cache, and worker together, and a Git doc on deriving Docker image tags from `git describe`. The rest stays as it was: all eight concept primers complete with runnable companions, and Ansible, Grafana, Prometheus, GitHub Actions, Jenkins, Helm, and Terraform holding landing pages and first configs.
+New this cycle: a Git doc comparing rebase vs merge at scale, a Helm note on package-manager install, an IaC doc on parameterised config generation with a companion Terraform script, and a multi-service Docker Compose manifest. The kit now carries 189 files across 13 tool areas, all eight concept primers complete with runnable companions, and three project scaffolds ready to copy in.
 
 ---
-_Last updated: 2026-08-17_
+_Last updated: 2026-08-18_
