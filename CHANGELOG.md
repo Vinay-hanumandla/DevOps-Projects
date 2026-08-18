@@ -4,6 +4,8 @@ CHANGELOG.md merge=union
 
 ## 2026-08-18
 
+- git: Add docs comparing rebase-based vs merge-based workflows for Git history at scale (git-020)
+- helm: Add notes on installing Helm with a package manager and verifying chart repository access (helm-007)
 - infrastructure-as-code-principles: Add docs combining IaC with Scripting & Automation for parameterised config generation (con-055)
 - infrastructure-as-code-principles: Add network topology as code script generating Terraform VPC/subnet/route config (con-056)
 
