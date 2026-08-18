@@ -9,9 +9,9 @@ I set up Helm today on a fresh box and ran into a couple of small things that we
 
 ## What I did
 
-First, I installed Helm with `curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null` and then `sudo apt install helm`. That pulled in the package and put `helm` on my PATH. I verified it with `helm version`, which printed both the client and an empty server side since I haven't connected a cluster yet.
+First, I installed Helm by fetching the signing key with `curl`, piping it through `gpg --dearmor`, and writing it to `/usr/share/keyrings/helm.gpg`, then running `sudo apt install helm`. That pulled in the package and put `helm` on my PATH. I verified it with `helm version`, which printed both the client and an empty server side since I haven't connected a cluster yet.
 
-Next, I added the official Bitnami repo with `helm repo add bitnami https://charts.bitnami.com/bitnami` and ran `helm repo update`. Then I searched for a chart to make sure the index was reachable: `helm search repo nginx`. The command returned a list of nginx charts with version numbers, which told me the repo URL and my local cache were both working.
+Next, I added the official Bitnami repo with `helm repo add bitnami <repo-url>` and ran `helm repo update`. Then I searched for a chart to make sure the index was reachable: `helm search repo nginx`. The command returned a list of nginx charts with version numbers, which told me the repo URL and my local cache were both working.
 
 ## What tripped me up
 
