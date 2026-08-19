@@ -79,6 +79,7 @@
 - **Annotated tag** — a Git tag with an attached message and tagger metadata (`git tag -a v1.2.3 -m "…"`); unlike a lightweight tag it records who and when, which keeps `git describe` and changelog tooling unambiguous.
 - **Version bump (major/minor/patch)** — increasing the meaningful part of a semver `X.Y.Z`; `make patch` → `0.1.1`, `make minor` → `0.2.0`, `make major` → `1.0.0`, driven by `release.sh` computing `next_version`.
 - **Dirty working tree** — a working tree with uncommitted changes; the release workflow's `assert_clean_tree` guard refuses to tag a release over half-committed work.
+- **Conventional commit** — a commit-message convention where the subject starts with a type such as `feat:`, `fix:`, `docs:`, or `chore:`; a changelog helper buckets commits by that prefix to assemble release notes.
 
 ## Helm
 
@@ -89,6 +90,8 @@
 - **Repository** — a hosted collection of charts others can use; `helm repo add stable https://charts.helm.sh/stable` registers one.
 - **Helmfile** — a declarative file that lists multiple releases to deploy as one group, like a lockfile for Helm.
 - **Dependency** — a chart can depend on other charts; your app chart might pull in a Redis chart and a PostgreSQL chart.
+- **`helm status`** — a command that reports a release's real health from the cluster, which is more reliable than guessing from `kubectl get all` when pods land in an unexpected namespace.
+- **`helm upgrade`** — applies values/template changes to an existing release; editing `values.yaml` on disk does nothing until you run it.
 
 ## Python
 
@@ -192,6 +195,9 @@
 - **Golden signals** — the four key metrics for monitoring user-facing systems: latency, traffic (request rate), errors, and saturation (utilization of a constrained resource).
 - **RED method** — a monitoring pattern that extracts three metrics per service — Rate (requests per second), Errors (error rate), and Duration (request latency) — so you can dashboard and alert on anything the user experiences.
 - **Distributed tracing** — following a single request across the services it touches by propagating a trace ID, so per-hop latency and failures can be reconstructed even when each service's logs live on a different machine.
+- **cloud-init** — a cross-distro standard for first-boot configuration; a VM reads a `user-data` file at first boot and applies the declarative setup (users, SSH keys, packages) before it is reachable, so provisioning is repeatable rather than hand-run.
+- **Seed image (cloud-localds)** — the small ISO that carries a VM's cloud-init `user-data`/`meta-data` files; `cloud-localds seed.iso user-data` builds it and `virt-install --disk=…,seed.iso` attaches it as a second drive.
+- **`qcow2`** — the copy-on-write disk image format used by QEMU/KVM; a base image stays immutable while each VM's overlay borrows from it, so many VMs reuse one download.
 
 ## GitLab CI
 
