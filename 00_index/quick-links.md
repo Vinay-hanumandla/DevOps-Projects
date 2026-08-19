@@ -77,6 +77,7 @@
 ### Use interactive rebase effectively
 - [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md) — reference guide comparing the two core Git collaboration strategies
 - [Rebase-based vs merge-based release workflows](../git/docs/rebase-based-vs-merge-based-release-workflows.md) — comparing rebase and merge strategies for release branches
+- [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md) — how the two strategies behave once a repo crosses hundreds of contributors and long-lived release branches
 
 ### Tag and push a Docker image from Git history
 - [Git — tagging Docker images from git describe](../git/docs/git-describe-image-tags-registry.md) — deriving traceable image tags from git history and pushing to a registry
@@ -106,6 +107,7 @@
 ### Get started with Helm
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
 - [Install Helm and run version command](../helm/notes/2026-07-31-install-helm-run-version.md) — install check, version verification, and adding the stable chart repository
+- [Install Helm with package manager](../helm/notes/2026-08-18-install-helm-with-package-manager.md) — package-manager install, version check, and shell completion setup
 - [Explore Helm chart repo and chart structure](../helm/notes/2026-08-08-explore-helm-chart-repo.md) — notes on Helm chart repo anatomy and chart folder structure
 
 ### Deploy with Helm
@@ -162,6 +164,7 @@
 - [CI/CD Pipeline Concepts](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) — build, test, deploy, and why it's automated
 - [Gate-before-merge with branch protection](../docs/concepts/ci-cd-pipeline-concepts/gate-before-merge-branch-protection.md) — how branch protection rules and pipeline gates combine to block broken merges
 - [Infrastructure as Code Principles](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md) — describing infrastructure in files, not by hand
+- [Parameterised config generation](../docs/concepts/infrastructure-as-code-principles/parameterised-config-generation.md) — generating per-environment configs from a single source of truth with loops and conditionals
 - [Scripting & Automation Philosophy](../docs/concepts/scripting-automation-philosophy/0000-primer-scripting-automation-philosophy.md) — when to reach for a script instead of doing it manually
 - [Combining observability with containerization](../docs/concepts/observability-monitoring-concepts/combining-observability-with-containerization.md) — adapting logs, metrics, and traces for containerized environments
 - [Observability & Monitoring Concepts](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md) — knowing what your systems are doing in production
@@ -178,6 +181,7 @@
 - [Image manifest parser](../docs/concepts/containerization-concepts/snippets/2026-07-22-image-manifest-parser.py) — parse container image manifests and extract layer metadata
 - [IaC idempotency check](../docs/concepts/infrastructure-as-code-principles/scripts/2026-07-22-iac-idempotency-check.sh) — verify that a provisioning step produces the same result on repeat runs
 - [Generating Docker Compose configs](../docs/concepts/infrastructure-as-code-principles/scripts/generating-docker-compose-configs.sh) — generate Docker Compose configs from IaC definitions
+- [Network topology Terraform script](../docs/concepts/infrastructure-as-code-principles/scripts/network-topology-terraform.sh) — generates a Terraform config from a simple network-topology description
 - [Declarative state diff](../docs/concepts/infrastructure-as-code-principles/snippets/2026-07-22-declarative-state-diff.py) — diff declarative state to detect drift
 - [File permissions and processes](../docs/concepts/linux-cli-fundamentals/scripts/2026-07-24-linux-file-permissions-and-process-management.sh) — inspect and modify Linux file permissions, then list and filter running processes
 - [Subprocess wrapper](../docs/concepts/linux-cli-fundamentals/snippets/2026-07-24-subprocess-wrapper.py) — run a command and capture stdout/stderr/return code from Python
