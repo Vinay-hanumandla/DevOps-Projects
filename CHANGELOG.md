@@ -4,8 +4,11 @@
 
 - git: Add reusable script generating a changelog from conventional commits (git-024)
 - helm: Add notes following the official Helm quickstart (helm-008)
+- kubernetes: Add bash snippet listing cluster resources with kubectl (k8s-008)
 - linux-cli-fundamentals: Add docs combining Linux CLI with Networking for automated network diagnostics in shell (con-057)
 - linux-cli-fundamentals: Add script provisioning local VMs with cloud-init and libvirt (con-058)
+- grafana: Add bash snippet listing dashboards via the Grafana HTTP API (grafana-005)
+- prometheus: Add bash snippet running a first PromQL query against Prometheus (prom-005)
 
 ## 2026-08-18
 
