@@ -1,0 +1,34 @@
+# last_verified: 2026-08-19 · helm n/a
+# Minimal Helm chart manifest — Deployment and Service together in one template.
+# Save as templates/app.yaml inside a chart directory with a matching Chart.yaml and values.yaml.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mychart
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: mychart
+  template:
+    metadata:
+      labels:
+        app: mychart
+    spec:
+      containers:
+        - name: mychart
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.service.port }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mychart
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+  selector:
+    app: mychart

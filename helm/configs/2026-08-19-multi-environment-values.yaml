@@ -1,0 +1,19 @@
+# last_verified: 2026-08-19 · Helm n/a
+# Multi-environment values override for Helm.
+# Use with --values or -f to layer environment-specific settings on top of values.yaml.
+
+replicaCount:
+  development: 1
+  staging: 2
+  prod: 3
+
+image:
+  repository: nginx
+  tag: "1.25"
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
