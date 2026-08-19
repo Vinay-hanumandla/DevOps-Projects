@@ -1,6 +1,9 @@
 # Changelog
 
-CHANGELOG.md merge=union
+## 2026-08-19
+
+- linux-cli-fundamentals: Add docs combining Linux CLI with Networking for automated network diagnostics in shell (con-057)
+- linux-cli-fundamentals: Add script provisioning local VMs with cloud-init and libvirt (con-058)
 
 ## 2026-08-18
 
