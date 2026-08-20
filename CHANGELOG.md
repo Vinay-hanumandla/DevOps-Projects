@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-08-20
+
+- helm: Rework Helm values override for multi-environment setup with per-environment override files (helm-010)
+
 ## 2026-08-19
 
 - git: Add reusable script generating a changelog from conventional commits (git-024)
