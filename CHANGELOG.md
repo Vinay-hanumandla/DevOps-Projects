@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-08-20
+
+- helm: Rework Helm values override for multi-environment setup with per-environment override files (helm-010)
+
 ## 2026-08-19
 
 - git: Add reusable script generating a changelog from conventional commits (git-024)
@@ -9,6 +13,9 @@
 - linux-cli-fundamentals: Add script provisioning local VMs with cloud-init and libvirt (con-058)
 - grafana: Add bash snippet listing dashboards via the Grafana HTTP API (grafana-005)
 - prometheus: Add bash snippet running a first PromQL query against Prometheus (prom-005)
+- helm: Add Helm values override config for multi-environment setup (helm-010)
+- kubernetes: Add notes on installing kubectl and exploring the cluster for the first time (k8s-007)
+- helm: Add minimal Helm chart manifest with Deployment and Service (helm-009)
 
 ## 2026-08-18
 
