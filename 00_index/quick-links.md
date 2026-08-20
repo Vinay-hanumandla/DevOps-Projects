@@ -104,6 +104,7 @@
 - [Grafana primer](../grafana/notes/0000-primer-grafana.md) — what Grafana is, dashboards vs panels, and a minimal workflow
 - [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md) — install check and first web UI login
 - [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml) — a minimal Grafana dashboard JSON config
+- [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh) — a shell helper that enumerates dashboards via the Grafana API
 
 ### Get started with Helm
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
@@ -116,6 +117,9 @@
 - [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh) — install and manage a Helm chart in a local or test cluster
 - [First values override](../helm/configs/2026-08-08-first-values-override.yaml) — minimal Helm values override with replica count and image tag
 - [First chart template](../helm/manifests/2026-08-14-first-chart-template.yaml) — a minimal trimmed Deployment template with `.Values.*` placeholders
+- [Dev values override](../helm/configs/2026-08-20-dev-values.yaml) — per-environment values for a dev Helm release
+- [Staging values override](../helm/configs/2026-08-20-staging-values.yaml) — per-environment values for a staging Helm release
+- [Prod values override](../helm/configs/2026-08-20-prod-values.yaml) — per-environment values for a production Helm release
 - [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md) — comparing the Helm folder against the manifest and fixing the counts
 
 ### Get started with Jenkins
@@ -132,11 +136,13 @@
 ### Inspect Kubernetes resources
 - [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md) — kubectl commands for inspecting cluster resources and their events
 - [Minimal deployment and service manifest](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml) — a minimal Kubernetes Deployment and Service YAML
+- [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh) — a shell helper that walks common resource types with kubectl
 
 ### Get started with Prometheus
 - [Prometheus primer](../prom/notes/0000-primer-prometheus.md) — what Prometheus is, metrics types, and a minimal workflow
 - [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md) — install check and first web UI exploration
 - [First scrape target](../prom/configs/2026-08-07-first-scrape-target.yaml) — a minimal Prometheus scrape target config
+- [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh) — a shell helper that runs a basic PromQL query against a Prometheus server
 
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip

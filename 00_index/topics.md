@@ -47,18 +47,19 @@
 - **templates** (6): [Git-based release workflow scaffold](../git/templates/release-workflow/README.md)
 - _…and more under `git/` — browse the folder._
 
-## Grafana  ·  3 files
+## Grafana  ·  4 files
 
 - **primer:** [Grafana — quick primer](../grafana/notes/0000-primer-grafana.md)
 - **notes** (1): [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
 - **configs** (1): [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml)
+- **snippets** (1): [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
 
-## Helm  ·  9 files
+## Helm  ·  12 files
 
 - **primer:** [Helm — quick primer](../helm/notes/0000-primer-helm.md)
 - **notes** (5): most recent → [Following the Helm quickstart](../helm/notes/2026-08-19-following-helm-quickstart.md), [Install Helm with package manager](../helm/notes/2026-08-18-install-helm-with-package-manager.md), [Explore Helm chart repo and chart structure](../helm/notes/2026-08-08-explore-helm-chart-repo.md)
 - **docs** (1): [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md)
-- **configs** (1): [First values override](../helm/configs/2026-08-08-first-values-override.yaml)
+- **configs** (4): most recent → [Dev values override](../helm/configs/2026-08-20-dev-values.yaml), [Staging values override](../helm/configs/2026-08-20-staging-values.yaml), [Prod values override](../helm/configs/2026-08-20-prod-values.yaml)
 - **snippets** (1): [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh)
 - **manifests** (1): [First chart template](../helm/manifests/2026-08-14-first-chart-template.yaml)
 
@@ -68,19 +69,21 @@
 - **notes** (1): [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md)
 - **snippets** (1): [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 
-## Kubernetes  ·  8 files
+## Kubernetes  ·  9 files
 
 - **primer:** [Kubernetes — quick primer](../k8s/notes/0000-primer-kubernetes.md)
 - **notes** (4): most recent → [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md)
 - **docs** (1): [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md)
 - **scripts** (2): most recent → [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh)
 - **manifests** (1): [Minimal deployment and service](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml)
+- **snippets** (1): [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh)
 
-## Prometheus  ·  3 files
+## Prometheus  ·  4 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
 - **notes** (1): [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
 - **configs** (1): [First scrape target](../prom/configs/2026-08-07-first-scrape-target.yaml)
+- **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
 
 ## Python  ·  6 files
 
