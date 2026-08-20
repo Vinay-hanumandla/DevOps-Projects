@@ -91,6 +91,7 @@
 - [Release workflow — changelog.sh](../git/templates/release-workflow/scripts/changelog.sh) — print a conventional-commit summary since a release tag
 - [Release workflow — verify-release.sh](../git/templates/release-workflow/scripts/verify-release.sh) — end-to-end proof that runs in a throwaway repo and cleans up after itself
 - [Semantic release automation](../git/scripts/semantic-release-automation.sh) — demonstrates a minimal semantic-release-like flow using Git tags and version bumps
+- [Changelog from conventional commits](../git/scripts/changelog-from-conventional-commits.sh) — reusable helper that buckets commit subjects by type into a Markdown changelog
 
 ### Set up Git hooks
 - [How I wired Git hooks into my local dev workflow](../git/docs/how-i-wired-git-hooks-into-my-local-dev-workflow.md) — notes on automating Git hooks for consistent local practices
@@ -108,6 +109,7 @@
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
 - [Install Helm and run version command](../helm/notes/2026-07-31-install-helm-run-version.md) — install check, version verification, and adding the stable chart repository
 - [Install Helm with package manager](../helm/notes/2026-08-18-install-helm-with-package-manager.md) — package-manager install, version check, and shell completion setup
+- [Following the Helm quickstart](../helm/notes/2026-08-19-following-helm-quickstart.md) — walked through the official quickstart: chart scaffold, install, and lifecycle commands
 - [Explore Helm chart repo and chart structure](../helm/notes/2026-08-08-explore-helm-chart-repo.md) — notes on Helm chart repo anatomy and chart folder structure
 
 ### Deploy with Helm
@@ -170,6 +172,7 @@
 - [Observability & Monitoring Concepts](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md) — knowing what your systems are doing in production
 - [Monitoring containerized apps in production](../docs/concepts/containerization-concepts/monitoring-containerized-apps-in-production.md) — instrumenting containers with metrics, logs, and traces so they're no longer black boxes
 - [Combining containerization with CI/CD: multi-stage build patterns](../docs/concepts/containerization-concepts/combining-containerization-with-ci-cd-multi-stage-build-patterns.md) — notes on combining containerization with CI/CD using multi-stage builds
+- [Combining Linux CLI with networking](../docs/concepts/linux-cli-fundamentals/combining-linux-cli-with-networking-automating-network-diagnostics.md) — automating network diagnostics from the shell
 - [Companion readme for version control](../docs/concepts/version-control-git-workflow/notes/2026-07-28-companion-readme.md) — companion notes on Git workflow practices
 
 ### Practice a concept hands-on
@@ -184,6 +187,7 @@
 - [Network topology Terraform script](../docs/concepts/infrastructure-as-code-principles/scripts/network-topology-terraform.sh) — generates a Terraform config from a simple network-topology description
 - [Declarative state diff](../docs/concepts/infrastructure-as-code-principles/snippets/2026-07-22-declarative-state-diff.py) — diff declarative state to detect drift
 - [File permissions and processes](../docs/concepts/linux-cli-fundamentals/scripts/2026-07-24-linux-file-permissions-and-process-management.sh) — inspect and modify Linux file permissions, then list and filter running processes
+- [Provision local VMs with cloud-init](../docs/concepts/linux-cli-fundamentals/scripts/provision-local-vms-with-cloud-init.sh) — boot repeatable local VMs from a cloud-init user-data file with libvirt
 - [Subprocess wrapper](../docs/concepts/linux-cli-fundamentals/snippets/2026-07-24-subprocess-wrapper.py) — run a command and capture stdout/stderr/return code from Python
 - [Exploring connectivity with command-line tools](../docs/concepts/linux-cli-fundamentals/notebooks/exploring-connectivity-with-command-line-tools.ipynb) — notebook exploring network connectivity and DNS resolution from the CLI
 - [Network connectivity check](../docs/concepts/networking-fundamentals/scripts/2026-07-25-practice-network-connectivity-dns-port-inspection.sh) — test TCP connectivity to a host:port and diagnose why it's unreachable

@@ -18,11 +18,11 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Quick links
 
+- [Changelog from conventional commits](git/scripts/changelog-from-conventional-commits.sh) — a reusable Git helper that turns a conventional-commit history into a changelog
+- [Following the Helm quickstart](helm/notes/2026-08-19-following-helm-quickstart.md) — walk-through of the official Helm quickstart and what tripped me up
+- [Automating network diagnostics](docs/concepts/linux-cli-fundamentals/combining-linux-cli-with-networking-automating-network-diagnostics.md) — putting command-line network checks behind a single script
+- [Provision local VMs with cloud-init](docs/concepts/linux-cli-fundamentals/scripts/provision-local-vms-with-cloud-init.sh) — booting repeatable local VMs from a cloud-init user-data file
 - [Rebase vs merge at scale](git/docs/rebase-vs-merge-at-scale.md) — how rebase and merge strategies behave once a repo crosses hundreds of contributors and long-lived release branches
-- [Install Helm with package manager](helm/notes/2026-08-18-install-helm-with-package-manager.md) — package-manager install, version check, and shell completion setup
-- [Parameterised config generation](docs/concepts/infrastructure-as-code-principles/parameterised-config-generation.md) — generating per-environment configs from a single source of truth with loops and conditionals
-- [Network topology Terraform script](docs/concepts/infrastructure-as-code-principles/scripts/network-topology-terraform.sh) — generates a Terraform config from a simple network-topology description
-- [Multi-service Docker Compose config](docker/manifests/2026-08-17-multi-service-docker-compose.yaml) — a multi-service Docker Compose stack with web, cache, and worker services on the default network
 
 ## Layout
 
@@ -33,7 +33,7 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 - `gha/` — GitHub Actions material: primer, install note, and workflow configs.
 - `git/` — Git material: notes, docs, scripts, hooks tooling, a release-workflow scaffold, and a pipeline-trigger manifest.
 - `grafana/` — Grafana material: primer and install notes, plus a first dashboard config.
-- `helm/` — Helm material: primer, install note, chart snippet, values override config, chart template, and manifests.
+- `helm/` — Helm material: primer, install notes, chart snippet, values override config, chart template, and manifests.
 - `jenkins/` — Jenkins material: primer, install notes, and a first pipeline snippet.
 - `k8s/` — Kubernetes material: primer, install note, kubectl exploration, and manifests.
 - `prom/` — Prometheus material: primer and install notes, plus a first scrape target config.
@@ -52,22 +52,22 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Ansible | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-10 |
 | Bash | 3 | 4 | 6 | 1 | — | 23 | — | 1 | — | — | 1 | 2026-08-17 |
 | Docker | 5 | — | 3 | — | — | — | 1 | 1 | 2 | — | — | 2026-08-17 |
-| Git | 12 | 6 | 5 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-17 |
+| Git | 12 | 6 | 6 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-19 |
 | GitHub Actions | 3 | 1 | — | — | 2 | — | — | — | — | — | — | 2026-08-06 |
 | Grafana | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-06 |
-| Helm | 4 | 1 | — | 1 | 1 | — | 1 | — | — | — | — | 2026-08-18 |
+| Helm | 5 | 1 | — | 1 | 1 | — | 1 | — | — | — | — | 2026-08-19 |
 | Jenkins | 2 | — | — | 1 | — | — | — | — | — | — | — | 2026-08-11 |
 | Kubernetes | 4 | 1 | 2 | — | — | — | 1 | — | — | — | — | 2026-08-04 |
 | Prometheus | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-07 |
 | Python | 2 | 1 | 2 | 1 | — | — | — | — | — | — | — | 2026-08-04 |
 | Terraform | 3 | 2 | 1 | — | 3 | — | — | — | — | — | — | 2026-08-11 |
-| Concepts | 3 | 19 | 16 | 9 | — | — | — | — | — | — | 2 | 2026-08-18 |
+| Concepts | 3 | 20 | 17 | 9 | — | — | — | — | — | — | 2 | 2026-08-19 |
 
 </details>
 
 ## Status
 
-New this cycle: a Git doc comparing rebase vs merge at scale, a Helm note on package-manager install, an IaC doc on parameterised config generation with a companion Terraform script, and a multi-service Docker Compose manifest. The kit now carries 189 files across 13 tool areas, all eight concept primers complete with runnable companions, and three project scaffolds ready to copy in.
+New this cycle: a Git helper that derives a changelog from conventional commits, and a Helm note walking through the official quickstart. The kit now carries 185 artifacts across the tool folders and concepts — all eight concept primers complete with runnable companions, and three project scaffolds ready to copy in.
 
 ---
-_Last updated: 2026-08-18_
+_Last updated: 2026-08-19_
