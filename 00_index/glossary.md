@@ -56,6 +56,8 @@
 - **`trap`** — a builtin that registers a command to run when the shell receives a signal or event (e.g. `EXIT`, `ERR`, `SIGINT`), used for cleanup and error handling.
 - **Strict mode** — the Bash safeguard combo `set -Eeuo pipefail`: exit on error, treat unset variables as fatal, fail the whole pipeline if any command in it fails, and inherit error trapping through subshells. Containerised runners and entry points apply it up front so a failing script can't ship a green result.
 - **`/dev/tcp`** — Bash's built-in TCP pseudo-device; a redirection like `< /dev/tcp/host/port` succeeds only when the port accepts a connection, so a script can probe reachability with a bounded `timeout` without needing `nc` installed.
+- **`paste`** — a coreutils tool that joins the corresponding lines of two or more files side by side; useful for lining up two separately captured metric streams so they can be read as one table.
+
 
 ## Git
 
@@ -80,6 +82,9 @@
 - **Version bump (major/minor/patch)** — increasing the meaningful part of a semver `X.Y.Z`; `make patch` → `0.1.1`, `make minor` → `0.2.0`, `make major` → `1.0.0`, driven by `release.sh` computing `next_version`.
 - **Dirty working tree** — a working tree with uncommitted changes; the release workflow's `assert_clean_tree` guard refuses to tag a release over half-committed work.
 - **Conventional commit** — a commit-message convention where the subject starts with a type such as `feat:`, `fix:`, `docs:`, or `chore:`; a changelog helper buckets commits by that prefix to assemble release notes.
+- **Commit range (`<a>..<b>`)** — the set of commits reachable from `<b>` but not from `<a>`; `git log origin/release..main` therefore lists exactly what has landed on `main` but has not yet reached the release branch.
+- **Release branch** — a long-lived branch that carries what is currently shipped or about to ship, kept separate from `main` so fixes can be selected into a release without dragging in unfinished work.
+
 
 ## Helm
 
@@ -198,6 +203,10 @@
 - **cloud-init** — a cross-distro standard for first-boot configuration; a VM reads a `user-data` file at first boot and applies the declarative setup (users, SSH keys, packages) before it is reachable, so provisioning is repeatable rather than hand-run.
 - **Seed image (cloud-localds)** — the small ISO that carries a VM's cloud-init `user-data`/`meta-data` files; `cloud-localds seed.iso user-data` builds it and `virt-install --disk=…,seed.iso` attaches it as a second drive.
 - **`qcow2`** — the copy-on-write disk image format used by QEMU/KVM; a base image stays immutable while each VM's overlay borrows from it, so many VMs reuse one download.
+- **Error ratio** — the share of requests in a window that returned a non-2xx status; the "Errors" term of the RED method, computable straight from an access log without any dashboard.
+- **Wall-clock latency** — the full elapsed time a client observes for a request (DNS, connect, transfer, and all), as reported by `curl -w '%{time_total}'`; distinct from server-side processing time.
+- **Table-driven checks** — expressing a sequence of checks as data (a list of label/command pairs) and looping over it, so adding or changing a step edits one entry instead of another copy-pasted conditional block.
+
 
 ## GitLab CI
 

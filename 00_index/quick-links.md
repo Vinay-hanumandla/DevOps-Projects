@@ -92,6 +92,7 @@
 - [Release workflow — verify-release.sh](../git/templates/release-workflow/scripts/verify-release.sh) — end-to-end proof that runs in a throwaway repo and cleans up after itself
 - [Semantic release automation](../git/scripts/semantic-release-automation.sh) — demonstrates a minimal semantic-release-like flow using Git tags and version bumps
 - [Changelog from conventional commits](../git/scripts/changelog-from-conventional-commits.sh) — reusable helper that buckets commit subjects by type into a Markdown changelog
+- [Release-readiness commit inventory](../docs/concepts/version-control-git-workflow/snippets/2026-08-20-release-branch-commit-check.py) — lists commits on `main` that have not reached the release branch, using the `release..main` range instead of memory
 
 ### Set up Git hooks
 - [How I wired Git hooks into my local dev workflow](../git/docs/how-i-wired-git-hooks-into-my-local-dev-workflow.md) — notes on automating Git hooks for consistent local practices
@@ -201,12 +202,14 @@
 - [Network interface and routing inspection](../docs/concepts/networking-fundamentals/scripts/2026-08-05-network-interface-and-routing-inspection.sh) — inspect network interfaces and routing tables
 - [Socket connection tester](../docs/concepts/networking-fundamentals/snippets/2026-07-26-socket-connection-tester.py) — Python snippet that tests TCP socket connectivity and reports the result
 - [Observability exercises](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-06-observability-exercises.sh) — hands-on exercises for observability concepts
+- [Observability exercises — round two](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-20-observability-exercises.sh) — reading a raw access log for error ratio, sampling wall-clock latency with curl, and correlating two metric streams
 - [CI/CD pipeline metric collection probes](../docs/concepts/observability-monitoring-concepts/scripts/observability-cicd-pipeline-metric-collection-probes.sh) — collects CI/CD pipeline metrics and exports them to a Prometheus pushgateway endpoint
 - [Applying observability in DevOps](../docs/concepts/observability-monitoring-concepts/snippets/2026-08-07-applying-observability-in-devops.py) — Python snippet that extracts RED-method golden signals from request logs
 
 ### Practice DevOps scripting and automation
 - [Scripting automation exercises](../docs/concepts/scripting-automation-philosophy/scripts/2026-08-07-scripting-automation-exercises.sh) — hands-on practice for DRY helpers, idempotency, and exit codes from the scripting philosophy primer
 - [Applying scripting in DevOps](../docs/concepts/scripting-automation-philosophy/snippets/2026-08-07-applying-scripting-in-devops.py) — Python snippet that parses a host inventory and applies role/env-based deploy actions
+- [Deploy checklist as data](../docs/concepts/scripting-automation-philosophy/snippets/2026-08-20-scripting-deploy-checklist.py) — encodes the pre-deploy sequence as a list of steps and loops over it, so changing a check edits one entry
 - [Combining scripting with CI/CD pipeline automation](../docs/concepts/scripting-automation-philosophy/combining-scripting-with-cicd-pipeline-automation.md) — notes on combining scripting with CI/CD pipeline automation
 - [Terraform plan-apply idempotent](../docs/concepts/scripting-automation-philosophy/scripts/terraform-plan-apply-idempotent.sh) — idempotent Terraform plan and apply wrapper with retry logic
 - [Git workflow practice exercises](../docs/concepts/version-control-git-workflow/scripts/2026-08-07-git-exercises.sh) — read-only script for inspecting repo state, branch, history, and upstream tracking
