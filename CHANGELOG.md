@@ -3,6 +3,9 @@
 ## 2026-08-20
 
 - helm: Rework Helm values override for multi-environment setup with per-environment override files (helm-010)
+- observability-monitoring-concepts: Add observability log and latency exercise script (con-060)
+- scripting-automation-philosophy: Add Python snippet turning a deploy checklist into a data-driven loop (con-062)
+- version-control-git-workflow: Add Python snippet checking commits on main not yet on the release branch (con-064)
 
 ## 2026-08-19
 
