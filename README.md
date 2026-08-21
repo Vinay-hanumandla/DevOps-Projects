@@ -18,11 +18,11 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Quick links
 
-- [Helm — dev values override](helm/configs/2026-08-20-dev-values.yaml) — per-environment values for a dev Helm release
-- [Helm — prod values override](helm/configs/2026-08-20-prod-values.yaml) — per-environment values for a production Helm release
-- [Helm — staging values override](helm/configs/2026-08-20-staging-values.yaml) — per-environment values for a staging Helm release
-- [List Grafana dashboards](grafana/snippets/2026-08-19-list-dashboards.sh) — a shell helper that enumerates dashboards via the Grafana API
-- [List Kubernetes cluster resources](k8s/snippets/2026-08-19-list-cluster-resources.sh) — a shell helper that walks common resource types with kubectl
+- [Observability exercises — round two](docs/concepts/observability-monitoring-concepts/scripts/2026-08-20-observability-exercises.sh) — reading raw logs and latency the way a scraper would, with no dashboard in front of you
+- [Deploy checklist as data](docs/concepts/scripting-automation-philosophy/snippets/2026-08-20-scripting-deploy-checklist.py) — encoding a known deploy sequence as a list and looping over it instead of copy-pasted `if` blocks
+- [Release-readiness commit inventory](docs/concepts/version-control-git-workflow/snippets/2026-08-20-release-branch-commit-check.py) — asking git which commits are on `main` but not yet on the release branch
+- [Dev values override](helm/configs/2026-08-20-dev-values.yaml) — the same chart tuned for a dev release
+- [Prod values override](helm/configs/2026-08-20-prod-values.yaml) — the production counterpart, replica count and all
 
 ## Layout
 
@@ -32,11 +32,11 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 - `docs/concepts/` — foundational primers with runnable scripts, snippets, and notebooks (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
 - `gha/` — GitHub Actions material: primer, install note, and workflow configs.
 - `git/` — Git material: notes, docs, scripts, hooks tooling, a release-workflow scaffold, and a pipeline-trigger manifest.
-- `grafana/` — Grafana material: primer and install notes, a first dashboard config, and a dashboard-listing snippet.
-- `helm/` — Helm material: primer, install notes, chart snippet, values overrides, chart template, and manifests.
+- `grafana/` — Grafana material: primer and install notes, a first dashboard config, and an API snippet.
+- `helm/` — Helm material: primer, install notes, chart snippet, per-environment values overrides, and a chart template.
 - `jenkins/` — Jenkins material: primer, install notes, and a first pipeline snippet.
-- `k8s/` — Kubernetes material: primer, install note, kubectl exploration, a resource-listing snippet, and manifests.
-- `prom/` — Prometheus material: primer, install notes, a first scrape target config, and a PromQL snippet.
+- `k8s/` — Kubernetes material: primer, install note, kubectl exploration, manifests, and a resource-listing snippet.
+- `prom/` — Prometheus material: primer and install notes, a first scrape target config, and a PromQL snippet.
 - `python/` — Python material: primer, docs, scripts, and snippets.
 - `repo-doc/` — notes on keeping the repository's own docs and coverage tables in sync.
 - `tf/` — Terraform material: install note, primer, configs, docs, and scripts.
@@ -61,13 +61,14 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Prometheus | 2 | — | — | 1 | 1 | — | — | — | — | — | — | 2026-08-19 |
 | Python | 2 | 1 | 2 | 1 | — | — | — | — | — | — | — | 2026-08-04 |
 | Terraform | 3 | 2 | 1 | — | 3 | — | — | — | — | — | — | 2026-08-11 |
-| Concepts | 3 | 20 | 17 | 9 | — | — | — | — | — | — | 2 | 2026-08-19 |
+| Repo docs | — | 1 | — | — | — | — | — | — | — | — | — | 2026-08-10 |
+| Concepts | 3 | 20 | 18 | 11 | — | — | — | — | — | — | 2 | 2026-08-20 |
 
 </details>
 
 ## Status
 
-New this cycle: multi-environment Helm values overrides (dev/staging/prod), plus helper snippets that list Grafana dashboards and Kubernetes cluster resources. The kit now carries 199 artifacts across the tool folders and concepts — all eight concept primers complete with runnable companions, and three project scaffolds ready to copy in.
+New this cycle: a second round of observability exercises that read raw logs and latency without a dashboard, a deploy checklist encoded as data rather than repeated `if` blocks, a snippet that asks git what has not reached the release branch yet, and dev/staging/prod values overrides for a single Helm chart. All eight concept primers are complete with runnable companions, and three project scaffolds are ready to copy in.
 
 ---
-_Last updated: 2026-08-20_
+_Last updated: 2026-08-21_
