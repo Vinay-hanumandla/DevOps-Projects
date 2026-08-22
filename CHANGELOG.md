@@ -7,6 +7,9 @@
 - kubernetes: Add first Deployment config with nginx container and resource limits (k8s-009)
 - python: Add Python snippet reading and processing a YAML config file (python-008)
 - grafana: Add bash snippet creating a dashboard via the Grafana HTTP API (grafana-009)
+- grafana: Add datasource provisioning YAML config (grafana-006)
+- prom: Add Prometheus scrape configuration YAML config (prom-006)
+- ansible: Add minimal idempotent nginx install playbook config (ansible-005)
 
 ## 2026-08-20
 
