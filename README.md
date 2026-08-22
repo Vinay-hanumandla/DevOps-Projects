@@ -68,7 +68,7 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Status
 
-New this cycle: a second round of observability exercises that read raw logs and latency without a dashboard, a deploy checklist encoded as data rather than repeated `if` blocks, a snippet that asks git what has not reached the release branch yet, and dev/staging/prod values overrides for a single Helm chart. All eight concept primers are complete with runnable companions, and three project scaffolds are ready to copy in.
+All eight concept primers are complete with runnable companions, and three project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability.
 
 ---
 _Last updated: 2026-08-21_
