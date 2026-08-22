@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-22
+
+- kubernetes: Add first Deployment config with nginx container and resource limits (k8s-009)
+- python: Add Python snippet reading and processing a YAML config file (python-008)
+- grafana: Add bash snippet creating a dashboard via the Grafana HTTP API (grafana-009)
+
 ## 2026-08-20
 
 - helm: Rework Helm values override for multi-environment setup with per-environment override files (helm-010)
