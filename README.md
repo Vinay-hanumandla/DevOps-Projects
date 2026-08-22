@@ -18,11 +18,11 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Quick links
 
-- [Observability exercises — round two](docs/concepts/observability-monitoring-concepts/scripts/2026-08-20-observability-exercises.sh) — reading raw logs and latency the way a scraper would, with no dashboard in front of you
-- [Deploy checklist as data](docs/concepts/scripting-automation-philosophy/snippets/2026-08-20-scripting-deploy-checklist.py) — encoding a known deploy sequence as a list and looping over it instead of copy-pasted `if` blocks
-- [Release-readiness commit inventory](docs/concepts/version-control-git-workflow/snippets/2026-08-20-release-branch-commit-check.py) — asking git which commits are on `main` but not yet on the release branch
-- [Dev values override](helm/configs/2026-08-20-dev-values.yaml) — the same chart tuned for a dev release
-- [Prod values override](helm/configs/2026-08-20-prod-values.yaml) — the production counterpart, replica count and all
+- [Kubernetes first deployment config](k8s/configs/2026-08-22-first-deployment.yaml) — a minimal nginx Deployment with resource requests and limits
+- [Python config file reader](python/snippets/2026-08-22-config-file-reader.py) — reads and pretty-prints a YAML config using PyYAML
+- [Grafana dashboard via API](grafana/snippets/2026-08-22-create-dashboard.sh) — creates a dashboard with a stat panel using curl and the Grafana HTTP API
+- [Python quickstart gotchas](python/notes/2026-08-22-python-quickstart-gotchas.md) — notes on venv activation, indentation, f-strings, and REPL vs script mode
+- [Infrastructure validation gates](docs/concepts/ci-cd-pipeline-concepts/scripts/infrastructure-validation-gates.sh) — validates Terraform and Ansible configs as a CI/CD pipeline gate
 
 ## Layout
 
@@ -32,10 +32,10 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 - `docs/concepts/` — foundational primers with runnable scripts, snippets, and notebooks (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
 - `gha/` — GitHub Actions material: primer, install note, and workflow configs.
 - `git/` — Git material: notes, docs, scripts, hooks tooling, a release-workflow scaffold, and a pipeline-trigger manifest.
-- `grafana/` — Grafana material: primer and install notes, a first dashboard config, and an API snippet.
+- `grafana/` — Grafana material: primer and install notes, a first dashboard config, and API snippets.
 - `helm/` — Helm material: primer, install notes, chart snippet, per-environment values overrides, and a chart template.
 - `jenkins/` — Jenkins material: primer, install notes, and a first pipeline snippet.
-- `k8s/` — Kubernetes material: primer, install note, kubectl exploration, manifests, and a resource-listing snippet.
+- `k8s/` — Kubernetes material: primer, install note, kubectl exploration, manifests, configs, and a resource-listing snippet.
 - `prom/` — Prometheus material: primer and install notes, a first scrape target config, and a PromQL snippet.
 - `python/` — Python material: primer, docs, scripts, and snippets.
 - `repo-doc/` — notes on keeping the repository's own docs and coverage tables in sync.
@@ -50,25 +50,25 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Tool | notes | docs | scripts | snippets | configs | templates | manifests | dockerfiles | src | hooks | notebooks | Last verified |
 |------|-------|------|---------|----------|---------|-----------|-----------|-------------|-----|-------|-----------|---------------|
 | Ansible | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-10 |
-| Bash | 3 | 4 | 6 | 1 | — | 23 | — | 1 | — | — | 1 | 2026-08-17 |
+| Bash | 3 | 4 | 6 | 1 | — | 23 | — | 1 | — | — | 1 | 2026-08-22 |
 | Docker | 5 | — | 3 | — | — | — | 1 | 1 | 2 | — | — | 2026-08-17 |
-| Git | 12 | 6 | 6 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-19 |
+| Git | 12 | 6 | 6 | — | — | 6 | 1 | — | 1 | — | — | 2026-08-19 |
 | GitHub Actions | 3 | 1 | — | — | 2 | — | — | — | — | — | — | 2026-08-06 |
-| Grafana | 2 | — | — | 1 | 1 | — | — | — | — | — | — | 2026-08-19 |
+| Grafana | 2 | — | — | 2 | 1 | — | — | — | — | — | — | 2026-08-22 |
 | Helm | 5 | 1 | — | 1 | 4 | — | 1 | — | — | — | — | 2026-08-20 |
 | Jenkins | 2 | — | — | 1 | — | — | — | — | — | — | — | 2026-08-11 |
-| Kubernetes | 4 | 1 | 2 | 1 | — | — | 1 | — | — | — | — | 2026-08-19 |
+| Kubernetes | 4 | 1 | 2 | 1 | 1 | — | 1 | — | — | — | — | 2026-08-22 |
 | Prometheus | 2 | — | — | 1 | 1 | — | — | — | — | — | — | 2026-08-19 |
-| Python | 2 | 1 | 2 | 1 | — | — | — | — | — | — | — | 2026-08-04 |
-| Terraform | 3 | 2 | 1 | — | 3 | — | — | — | — | — | — | 2026-08-11 |
+| Python | 3 | 1 | 2 | 2 | — | — | — | — | — | — | — | 2026-08-22 |
+| Terraform | 3 | 2 | 1 | — | 3 | — | — | — | — | — | — | 2026-08-18 |
 | Repo docs | — | 1 | — | — | — | — | — | — | — | — | — | 2026-08-10 |
-| Concepts | 3 | 20 | 18 | 11 | — | — | — | — | — | — | 2 | 2026-08-20 |
+| Concepts | 3 | 20 | 19 | 11 | — | — | — | — | — | — | 2 | 2026-08-22 |
 
 </details>
 
 ## Status
 
-All eight concept primers are complete with runnable companions, and three project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability.
+New this cycle: a Kubernetes first deployment config, a Python config-file reader snippet, a Grafana dashboard-creation snippet via the HTTP API, Python quickstart gotchas notes, and an infrastructure validation gates script for CI/CD pipelines. All eight concept primers are complete with runnable companions, and three project scaffolds are ready to copy in.
 
 ---
-_Last updated: 2026-08-21_
+_Last updated: 2026-08-22_
