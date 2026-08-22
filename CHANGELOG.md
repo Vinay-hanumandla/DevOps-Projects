@@ -2,6 +2,8 @@
 
 ## 2026-08-22
 
+- ci-cd-pipeline-concepts: Add infrastructure validation gates script combining CI/CD with Terraform/Ansible/Docker Compose validation (con-067)
+- python: Add quickstart trip-ups notes on Python venv, indentation, and f-strings (python-007)
 - kubernetes: Add first Deployment config with nginx container and resource limits (k8s-009)
 - python: Add Python snippet reading and processing a YAML config file (python-008)
 - grafana: Add bash snippet creating a dashboard via the Grafana HTTP API (grafana-009)
