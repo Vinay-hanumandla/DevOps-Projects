@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-08-22
+
+- ci-cd-pipeline-concepts: Add infrastructure validation gates script combining CI/CD with Terraform/Ansible/Docker Compose validation (con-067)
+- python: Add quickstart trip-ups notes on Python venv, indentation, and f-strings (python-007)
+
 ## 2026-08-20
 
 - helm: Rework Helm values override for multi-environment setup with per-environment override files (helm-010)
