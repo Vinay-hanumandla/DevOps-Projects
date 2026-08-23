@@ -224,3 +224,18 @@
 - **Secrets** — encrypted variables stored in the repo settings; used to pass tokens, passwords, and API keys to workflows without exposing them in the YAML.
 - **Matrix build** — a strategy that runs the same job across multiple configurations (e.g. different OS versions or language versions) to verify compatibility.
 - **Artifact** — a file or collection of files produced by a workflow run, such as a build output or test report; artifacts can be downloaded after the run completes.
+
+## Networking
+
+- **Overlay network** — a virtual network built on top of an existing network (underlay) that allows containers on different hosts to communicate as if they were on the same local network. Docker Swarm and Kubernetes CNI plugins create overlay networks automatically.
+- **Underlay network** — the physical or virtual network that hosts connect to; the overlay tunnels traffic through the underlay. Example: the host's `eth0` network.
+- **VXLAN** — Virtual Extensible LAN, the encapsulation protocol most overlay networks use; it wraps layer-2 Ethernet frames inside UDP packets to tunnel across the underlay. Docker overlay networks use VXLAN by default.
+- **Service mesh** — an infrastructure layer that handles service-to-service communication (load balancing, retries, mTLS, observability) via sidecar proxies injected alongside each service instance. Examples: Istio, Linkerd.
+- **mTLS (mutual TLS)** — both client and server authenticate each other via certificates; service meshes use mTLS to encrypt all inter-service traffic automatically.
+- **Traffic splitting** — routing a percentage of requests to a different service version, e.g. sending 10% of traffic to a canary release.
+- **Service discovery** — the mechanism by which services find each other's network locations; Kubernetes DNS gives each service a predictable hostname.
+
+## Kubernetes (additional)
+
+- **Resource requests** — the minimum CPU and memory a container needs; the scheduler uses this to pick a node with enough capacity.
+- **Resource limits** — the maximum CPU and memory a container can use; exceeding the memory limit kills the container with an OOM error.

@@ -105,8 +105,8 @@
 - [Grafana primer](../grafana/notes/0000-primer-grafana.md) — what Grafana is, dashboards vs panels, and a minimal workflow
 - [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md) — install check and first web UI login
 - [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml) — a minimal Grafana dashboard JSON config
-- [Create dashboard via API](../grafana/snippets/2026-08-22-create-dashboard.sh) — creates a dashboard with a stat panel using curl and the Grafana HTTP API
 - [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh) — a shell helper that enumerates dashboards via the Grafana API
+- [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh) — a shell helper that creates a Grafana dashboard via the API
 
 ### Get started with Helm
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
@@ -138,7 +138,7 @@
 ### Inspect Kubernetes resources
 - [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md) — kubectl commands for inspecting cluster resources and their events
 - [Minimal deployment and service manifest](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml) — a minimal Kubernetes Deployment and Service YAML
-- [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml) — a minimal nginx Deployment with resource requests and limits
+- [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml) — a Kubernetes Deployment config for first contact
 - [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh) — a shell helper that walks common resource types with kubectl
 
 ### Get started with Prometheus
@@ -149,15 +149,15 @@
 
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip
+- [Python quickstart gotchas](../python/notes/2026-08-22-python-quickstart-gotchas.md) — first-contact pitfalls when getting started with Python
 - [Python modules, packages, and imports](../python/docs/2026-08-04-python-modules-packages-imports.md) — module and package mechanics, import resolution, and common pitfalls
 - [Python functions and modules](../python/notes/2026-08-04-python-functions-modules.md) — function definitions, module organisation, and import patterns
-- [Python quickstart gotchas](../python/notes/2026-08-22-python-quickstart-gotchas.md) — notes on venv activation, indentation, f-strings, and REPL vs script mode
 
 ### Write and run a Python script
 - [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py) — end-to-end virtual-environment setup and a runner inside it
 - [Minimal file processing](../python/scripts/2026-08-04-minimal-file-processing.py) — read, process, and write files with Python
-- [Config file reader](../python/snippets/2026-08-22-config-file-reader.py) — reads and pretty-prints a YAML config using PyYAML
 - [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py) — declare variables, inspect types, and print mixed-type lists
+- [Config file reader](../python/snippets/2026-08-22-config-file-reader.py) — read and parse config files with Python
 
 ### Get started with Terraform
 - [Terraform primer](../tf/notes/0000-primer-terraform.md) — what Terraform is, providers, state, and a minimal workflow
@@ -184,11 +184,12 @@
 - [Monitoring containerized apps in production](../docs/concepts/containerization-concepts/monitoring-containerized-apps-in-production.md) — instrumenting containers with metrics, logs, and traces so they're no longer black boxes
 - [Combining containerization with CI/CD: multi-stage build patterns](../docs/concepts/containerization-concepts/combining-containerization-with-ci-cd-multi-stage-build-patterns.md) — notes on combining containerization with CI/CD using multi-stage builds
 - [Combining Linux CLI with networking](../docs/concepts/linux-cli-fundamentals/combining-linux-cli-with-networking-automating-network-diagnostics.md) — automating network diagnostics from the shell
+- [Overlay networks and service mesh exploration](../docs/concepts/networking-fundamentals/notebooks/overlay-networks-and-service-mesh-exploration.ipynb) — notebook exploring overlay networks and service mesh topologies
 - [Companion readme for version control](../docs/concepts/version-control-git-workflow/notes/2026-07-28-companion-readme.md) — companion notes on Git workflow practices
 
 ### Practice a concept hands-on
 - [CI/CD stage simulation](../docs/concepts/ci-cd-pipeline-concepts/scripts/2026-07-19-pipeline-stage-sim.sh) — a pure-Bash build→test→deploy pipeline with fail-fast gating
-- [Infrastructure validation gates](../docs/concepts/ci-cd-pipeline-concepts/scripts/infrastructure-validation-gates.sh) — validates Terraform and Ansible configs as a CI/CD pipeline gate
+- [Infrastructure validation gates](../docs/concepts/ci-cd-pipeline-concepts/scripts/infrastructure-validation-gates.sh) — script that gates infrastructure changes with validation checks
 - [Artifact promotion](../docs/concepts/ci-cd-pipeline-concepts/snippets/2026-07-20-artifact-promotion.py) — promote a build artifact across pipeline stages with an audit trail
 - [Pipeline metrics and health dashboards](../docs/concepts/ci-cd-pipeline-concepts/notebooks/pipeline-metrics-and-health-dashboards.ipynb) — CI/CD observability notebook with DORA metrics and pipeline health scoring
 - [Container lifecycle inspection](../docs/concepts/containerization-concepts/scripts/2026-07-20-container-lifecycle-inspection.sh) — inspect running and stopped containers using the Docker API
@@ -206,6 +207,7 @@
 - [Networking observability health check](../docs/concepts/networking-fundamentals/scripts/networking-observability-health-check.sh) — check service health and network observability
 - [Network interface and routing inspection](../docs/concepts/networking-fundamentals/scripts/2026-08-05-network-interface-and-routing-inspection.sh) — inspect network interfaces and routing tables
 - [Socket connection tester](../docs/concepts/networking-fundamentals/snippets/2026-07-26-socket-connection-tester.py) — Python snippet that tests TCP socket connectivity and reports the result
+- [Applying networking in DevOps](../docs/concepts/networking-fundamentals/snippets/2026-08-23-applying-networking-in-devops.py) — Python snippet connecting networking concepts to real DevOps tasks
 - [Observability exercises](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-06-observability-exercises.sh) — hands-on exercises for observability concepts
 - [Observability exercises — round two](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-20-observability-exercises.sh) — reading a raw access log for error ratio, sampling wall-clock latency with curl, and correlating two metric streams
 - [CI/CD pipeline metric collection probes](../docs/concepts/observability-monitoring-concepts/scripts/observability-cicd-pipeline-metric-collection-probes.sh) — collects CI/CD pipeline metrics and exports them to a Prometheus pushgateway endpoint
