@@ -4,6 +4,8 @@
 
 - networking-fundamentals: Add docs combining networking with observability via distributed tracing and network metrics correlation (con-069)
 - ci-cd-pipeline-concepts: Add branch strategy simulation notebook for trunk-based, GitFlow, and feature branching (con-068)
+- networking-fundamentals: Add Python snippet applying networking in DevOps — TCP/HTTP endpoint checks and DNS resolution (con-066)
+- networking-fundamentals: Add Jupyter notebook exploring overlay networks, VXLAN encapsulation, service mesh architecture, and golden signals observability (con-070)
 
 ## 2026-08-22
 
@@ -12,6 +14,9 @@
 - kubernetes: Add first Deployment config with nginx container and resource limits (k8s-009)
 - python: Add Python snippet reading and processing a YAML config file (python-008)
 - grafana: Add bash snippet creating a dashboard via the Grafana HTTP API (grafana-009)
+- grafana: Add datasource provisioning YAML config (grafana-006)
+- prom: Add Prometheus scrape configuration YAML config (prom-006)
+- ansible: Add minimal idempotent nginx install playbook config (ansible-005)
 
 ## 2026-08-20
 

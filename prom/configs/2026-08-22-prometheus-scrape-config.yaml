@@ -1,0 +1,16 @@
+# last_verified: 2026-08-22 · Prometheus 3.13.2
+# Minimal Prometheus scrape configuration for a node exporter.
+# This configuration scrapes a local node exporter and a remote service.
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "node-exporter"
+    static_configs:
+      - targets: ["localhost:9100"]
+  - job_name: "web-service"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["web-service:8080"]

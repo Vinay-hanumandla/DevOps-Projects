@@ -1,78 +1,74 @@
 ---
 last_verified: 2026-08-23
 tool_version: n/a
+sources: []
 ---
 
-# Combining Networking with Observability: Distributed Tracing and Network Metrics Correlation
+# Combining Networking with Observability — distributed tracing across service boundaries
+
+> How network-level signals (latency, packet loss, DNS resolution time) feed into observability systems and how distributed traces cross network boundaries between services.
 
 ## Purpose
 
-When a service mesh or microservice architecture grows beyond a single host, failures stop being "the server is down" and become "request 7a3f took 4.2 s across three services, two regions, and a load balancer." Distributed tracing and network metrics correlation are the two practices that let you reconstruct that path. This document explains how they fit together and why both are necessary.
+Modern microservice architectures spread a single user request across dozens of services connected by networks. When something goes wrong — a slow response, a dropped connection, a partial failure — the root cause is almost always at a network boundary: a service can't reach another, DNS resolution is slow, a load balancer is dropping packets, or a firewall rule silently blocks traffic. This doc explains how networking fundamentals map into observability systems and how distributed tracing follows a request as it crosses service boundaries over the network.
 
-Distributed tracing gives you a per-request timeline; network metrics give you the health of the links between services. Neither is sufficient alone: a trace tells you where time was spent, but not whether a link was saturated. Metrics tell you a link is saturated, but not which request caused it. Correlating the two turns a vague "latency spike" into a specific "this service-to-service call is retrying because the TCP backlog is full."
+## When to use
 
-## Prerequisites
+Use this reference when debugging latency that doesn't appear in any single service's logs, when a trace shows gaps between spans that suggest network-level delays, when DNS resolution time is inflating response times, or when you need to correlate network metrics (packet loss, retransmits, RTT) with application-level traces. This is the intersection where infrastructure monitoring meets application performance monitoring.
 
-- Basic familiarity with TCP/IP, DNS, and HTTP request flow.
-- Understanding of observability as the combination of metrics, logs, and traces.
-- A mental model of a multi-service deployment (at least two services communicating over a network).
+## The networking-observability bridge
+
+Three categories of network signals feed into observability:
+
+- **Network latency** — the time a packet takes to travel between two services. Measured as round-trip time (RTT) via ICMP ping or TCP handshake timing. When a trace shows a long gap between "service A sent request" and "service B received request," network latency is the first suspect.
+- **DNS resolution time** — the time to resolve a service hostname to an IP address. In containerized environments, DNS lookups happen on every new connection unless connection pooling is in place. Slow DNS (often caused by misconfigured resolvers or overloaded DNS servers) adds invisible latency to every request.
+- **Packet loss and retransmission** — TCP retransmits lost packets, which adds latency and throughput degradation. High retransmit counts on an interface correlate with application-level timeouts and connection resets.
+
+These signals show up differently depending on where you measure:
+
+- **Host-level** — `ss`, `ip -s`, `/proc/net/snmp` provide packet counters, retransmit counts, and connection state. These are the ground truth for what the OS network stack is doing.
+- **Service-level** — application metrics like request duration histograms, error rates, and connection pool stats reflect how network conditions affect the application.
+- **Trace-level** — distributed traces capture the time spent in each network hop between services, making cross-boundary latency visible.
+
+## Distributed tracing across network boundaries
+
+A distributed trace follows a request as it flows through multiple services. Each service creates a span, and the trace context (trace ID, parent span ID) is propagated through HTTP headers or gRPC metadata across network calls.
+
+The key networking concepts that affect tracing:
+
+- **Context propagation** — the trace context travels in-band with the request (usually in HTTP headers like `traceparent` for W3C Trace Context). If a network call fails or times out before the header is read, the downstream span is never created, leaving a gap in the trace.
+- **Span timing** — a span's start and end time are recorded by the service. Network latency between services shows up as the gap between service A's "request sent" event and service B's "request received" event. If both services are on the same host, this gap is microseconds; across a data center, it's milliseconds; across regions, it's tens of milliseconds.
+- **Sampling** — head-based sampling decides at the edge whether to trace a request. If the sampling rate is too low, you miss the slow requests that are most likely to have network issues. Tail-based sampling (deciding after the fact based on latency or errors) catches these but requires more infrastructure.
+- **Baggage** — some tracing systems propagate key-value pairs (baggage) alongside the trace context. Baggage increases header size, which can interact with HTTP/2 SETTINGS_MAX_HEADER_SIZE or nginx's `large_client_header_buffers`.
 
 ## Steps
 
-### 1. Instrument services for distributed tracing
-
-The goal is to assign every inbound request a unique trace ID and propagate that ID across service boundaries. In practice this means:
-
-- Generate or accept a trace ID at the edge (API gateway, load balancer, or first service).
-- Inject the trace ID into the outgoing request headers (e.g., `X-Trace-Id`, `traceparent`).
-- Ensure each service logs the trace ID alongside its own span ID and parent span ID.
-
-This creates a causal chain: if Service A calls Service B, the span for Service B carries Service A's span ID as its parent. When you look at the trace, you see the exact call tree.
-
-### 2. Collect network metrics alongside traces
-
-Network metrics are typically gathered at the host or mesh layer. The most useful signals for correlation are:
-
-- **Connection state counts** — `ESTABLISHED`, `TIME_WAIT`, `SYN_RECV` on each interface. A sudden rise in `SYN_RECV` suggests a SYN flood or a service not completing handshakes.
-- **Retransmission rate** — TCP retransmits indicate packet loss. A spike in retransmits aligned with a latency spike in a specific trace points to a network-level problem rather than application slowness.
-- **DNS resolution time** — If a service depends on dynamic service discovery, DNS latency can appear as random 100–500 ms pauses in traces that have no application-level cause.
-- **Flow statistics** — Bytes and packets per second per socket. A flow with high bytes but low throughput indicates congestion or rate limiting.
-
-Collect these metrics at a fixed interval (e.g., 15 s) and tag them with the same labels you use for traces: service name, namespace, and region.
-
-### 3. Correlate traces with network signals
-
-Correlation is the step most tutorials skip. The practical workflow is:
-
-1. Start from an anomalous trace — a single request with an unexpectedly long span.
-2. Note the timestamp window of that span (e.g., 14:32:10 to 14:32:18 UTC).
-3. Query network metrics for the same service pair and timestamp window.
-4. Look for alignment: did retransmits rise? Did `TIME_WAIT` accumulate? Did DNS latency spike?
-
-If the network metrics show no anomaly during the trace window, the problem is inside the service (database lock, garbage collection, serialization bottleneck). If the network metrics do show an anomaly, the problem is on the link (congestion, firewall rule, MTU mismatch).
-
-### 4. Build a feedback loop
-
-The first correlation is manual, but you can automate the loop:
-
-- Export trace spans and network metrics to the same time-series store.
-- Define a correlation query: "Find all traces where span duration > 2 s and retransmit rate > 1% during the same 30-second window."
-- Alert on the correlation, not on either signal alone.
-
-This is the core insight: network metrics explain *why* a trace is slow; traces explain *which* request was affected by a network event.
+1. **Instrument network-aware metrics at the service level.** Export request duration histograms broken down by target service, DNS resolution time, and connection pool utilization. These metrics answer "how long did this request take?" while traces answer "where did the time go?"
+2. **Propagate trace context across all network calls.** Ensure HTTP clients inject the `traceparent` header (or equivalent) on outgoing requests and servers extract it on incoming requests. Missing propagation breaks the trace chain.
+3. **Correlate network host metrics with traces.** When a trace shows an unusually long inter-service span, check the host's network counters (`ip -s link`, `/proc/net/snmp`) for packet loss or retransmits during that time window.
+4. **Monitor DNS resolution separately.** DNS latency is a common hidden contributor. Export DNS query duration as a metric and alert on p99 values above your baseline.
+5. **Set up span-level error annotations.** When a network call fails (connection refused, timeout, DNS failure), the tracing library should record the error type and message on the span. This makes network failures visible in the trace without digging into logs.
 
 ## Verify
 
-After implementing the four steps above, verify each piece independently before combining them:
+To confirm the networking-observability pipeline is working:
 
-- **Trace propagation test** — Send a request through two instrumented services. Confirm both logs contain the same trace ID and that the parent-child relationship is correct.
-- **Metric collection test** — Run `ss -s` or check your exporter's `/metrics` endpoint. Confirm connection state counts and retransmit counters are updating.
-- **Correlation test** — Introduce a known delay (e.g., `tc qdisc add dev eth0 root netem delay 200ms`). Send a request and verify the trace shows increased span duration while the network metrics show elevated RTT or retransmits in the same window.
-- **Alert test** — Fire a synthetic anomaly and confirm the correlated alert fires. Verify the alert payload includes both the trace ID and the network metric values.
+```bash
+# Check that a service is exporting network-related metrics
+curl -s http://localhost:9090/metrics | grep -E '(dns_resolution|network_latency|http_request_duration)'
+
+# Verify trace context propagation by checking headers on a downstream call
+curl -sI http://service-b:8080/api | grep -i traceparent
+
+# Inspect host network counters to compare with trace data
+ip -s link show
+cat /proc/net/snmp | grep -E '(Tcp:|Udp:)'
+```
 
 ## Common errors
 
-- **Propagating only the trace ID, not the span ID.** Without the parent span ID, the backend reconstructs the call tree as a flat list of independent spans. You lose causality.
-- **Sampling traces but expecting 100% coverage for correlation.** If you sample at 1%, 99% of your network metrics have no matching trace. Either sample at a higher rate for the services you care about, or correlate on aggregates (percentiles) rather than individual requests.
-- **Collecting metrics at the wrong layer.** Host-level `ss` output tells you nothing about a Kubernetes NetworkPolicy silently dropping packets between pods. Collect metrics at the mesh or CNI layer for pod-to-pod traffic.
-- **Ignoring DNS in the correlation.** DNS issues look like random latency because they only affect some requests. If your correlation window is too narrow, you miss them.
+- **Trace gaps between services** — the trace context header is not being propagated. Check that both the client library and server framework are instrumented. A common mistake is instrumenting the server but not the client, or vice versa.
+- **DNS resolution inflating request latency** — the service is doing a DNS lookup on every connection instead of caching the result. Enable DNS caching in the HTTP client or use a local DNS resolver cache.
+- **High retransmit counts correlating with timeouts** — packet loss on the network path is causing TCP retransmissions, which appear as application-level timeouts. Check the network path (switches, routers, firewalls) and the host's TCP retransmission counters.
+- **Missing spans in traces after network errors** — the tracing library's timeout is shorter than the application's timeout, so the span ends before the network call completes. Align timeouts between the tracing library and the application.
+- **Trace sampling too low to catch intermittent network issues** — if only 1% of requests are traced, you'll rarely see the slow ones caused by transient network problems. Use tail-based sampling that keeps traces above a latency threshold.
