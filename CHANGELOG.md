@@ -2,6 +2,8 @@
 
 ## 2026-08-23
 
+- networking-fundamentals: Add docs combining networking with observability via distributed tracing and network metrics correlation (con-069)
+- ci-cd-pipeline-concepts: Add branch strategy simulation notebook for trunk-based, GitFlow, and feature branching (con-068)
 - networking-fundamentals: Add Python snippet applying networking in DevOps — TCP/HTTP endpoint checks and DNS resolution (con-066)
 - networking-fundamentals: Add Jupyter notebook exploring overlay networks, VXLAN encapsulation, service mesh architecture, and golden signals observability (con-070)
 
