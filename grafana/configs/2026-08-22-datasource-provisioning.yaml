@@ -1,0 +1,13 @@
+# last_verified: 2026-08-22 · grafana n/a
+# Grafana datasource provisioning file
+# This is a minimal example of provisioning a Prometheus datasource via YAML.
+
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: true
