@@ -2,11 +2,11 @@
 
 > A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](learning-path.md).
 
-## Ansible  ·  3 files
+## Ansible  ·  4 files
 
 - **primer:** [Ansible — quick primer](../ansible/notes/0000-primer-ansible.md)
 - **notes** (2): [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md)
-- **configs** (1): [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml)
+- **configs** (2): [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml), [Install nginx playbook](../ansible/configs/2026-08-22-install-nginx-playbook.yaml)
 
 ## Bash  ·  39 files
 
@@ -36,7 +36,7 @@
 - **docs** (1): [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
 - **configs** (2): [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml), [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml)
 
-## Git  ·  31 files
+## Git  ·  32 files
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
 - **notes** (12): most recent → [Companion forgotten undo notes 15](../git/notes/2026-07-28-git-companion-forgotten-undo-notes-15.md), [Companion readme quickstart trip-ups](../git/notes/2026-07-28-git-companion-readme-quickstart-trip-ups.md), [Install Git](../git/notes/2026-07-20-install-git.md)
@@ -47,11 +47,11 @@
 - **templates** (6): [Git-based release workflow scaffold](../git/templates/release-workflow/README.md)
 - _…and more under `git/` — browse the folder._
 
-## Grafana  ·  5 files
+## Grafana  ·  6 files
 
 - **primer:** [Grafana — quick primer](../grafana/notes/0000-primer-grafana.md)
 - **notes** (2): [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
-- **configs** (1): [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml)
+- **configs** (2): [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml), [Datasource provisioning](../grafana/configs/2026-08-22-datasource-provisioning.yaml)
 - **snippets** (2): most recent → [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh), [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
 
 ## Helm  ·  12 files
@@ -79,11 +79,11 @@
 - **manifests** (1): [Minimal deployment and service](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml)
 - **snippets** (1): [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh)
 
-## Prometheus  ·  4 files
+## Prometheus  ·  5 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
 - **notes** (2): [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
-- **configs** (1): [First scrape target](../prom/configs/2026-08-07-first-scrape-target.yaml)
+- **configs** (2): [First scrape target](../prom/configs/2026-08-07-first-scrape-target.yaml), [Scrape config](../prom/configs/2026-08-22-prometheus-scrape-config.yaml)
 - **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
 
 ## Python  ·  8 files
@@ -106,15 +106,15 @@
 
 - **docs** (1): [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md)
 
-## Concepts (docs/concepts/)  ·  58 files
+## Concepts (docs/concepts/)  ·  60 files
 
 Foundational primers on the ideas the tools build on — one primer per concept, plus runnable scripts, snippets, and notebooks. Each folder holds more than the highlights below.
 
-- **CI/CD Pipeline Concepts** (9): [primer](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) · [gate-before-merge with branch protection](../docs/concepts/ci-cd-pipeline-concepts/gate-before-merge-branch-protection.md) · [infrastructure validation gates](../docs/concepts/ci-cd-pipeline-concepts/scripts/infrastructure-validation-gates.sh) · notebook: [Pipeline metrics and health dashboards](../docs/concepts/ci-cd-pipeline-concepts/notebooks/pipeline-metrics-and-health-dashboards.ipynb) · _…and 5 more under `docs/concepts/ci-cd-pipeline-concepts/`._
+- **CI/CD Pipeline Concepts** (10): [primer](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) · [gate-before-merge with branch protection](../docs/concepts/ci-cd-pipeline-concepts/gate-before-merge-branch-protection.md) · [infrastructure validation gates](../docs/concepts/ci-cd-pipeline-concepts/scripts/infrastructure-validation-gates.sh) · notebook: [Pipeline metrics and health dashboards](../docs/concepts/ci-cd-pipeline-concepts/notebooks/pipeline-metrics-and-health-dashboards.ipynb) · _…and 6 more under `docs/concepts/ci-cd-pipeline-concepts/`._
 - **Containerization Concepts** (6): [primer](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md) · [monitoring containerized apps in production](../docs/concepts/containerization-concepts/monitoring-containerized-apps-in-production.md) · script: [Container observability with the Prometheus node exporter](../docs/concepts/containerization-concepts/scripts/containerization-observability-prometheus-node-exporter.sh) · _…and 3 more under `docs/concepts/containerization-concepts/`._
 - **Infrastructure as Code Principles** (7): [primer](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md) · [parameterised config generation](../docs/concepts/infrastructure-as-code-principles/parameterised-config-generation.md) · [state file management strategies](../docs/concepts/infrastructure-as-code-principles/state-file-management-strategies.md) · script: [Network topology Terraform generator](../docs/concepts/infrastructure-as-code-principles/scripts/network-topology-terraform.sh) · _…and 3 more under `docs/concepts/infrastructure-as-code-principles/`._
 - **Linux & CLI Fundamentals** (8): [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) · [automating network diagnostics from the shell](../docs/concepts/linux-cli-fundamentals/combining-linux-cli-with-networking-automating-network-diagnostics.md) · script: [Provision local VMs with cloud-init](../docs/concepts/linux-cli-fundamentals/scripts/provision-local-vms-with-cloud-init.sh) · notebook: [Exploring connectivity with command-line tools](../docs/concepts/linux-cli-fundamentals/notebooks/exploring-connectivity-with-command-line-tools.ipynb) · _…and 4 more under `docs/concepts/linux-cli-fundamentals/`._
-- **Networking Fundamentals** (9): [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md) · [combining networking with containerization](../docs/concepts/networking-fundamentals/combining-networking-with-containerization.md) · notebook: [Overlay networks and service mesh exploration](../docs/concepts/networking-fundamentals/notebooks/overlay-networks-and-service-mesh-exploration.ipynb) · snippet: [Applying networking in DevOps](../docs/concepts/networking-fundamentals/snippets/2026-08-23-applying-networking-in-devops.py) · _…and 4 more under `docs/concepts/networking-fundamentals/`._
+- **Networking Fundamentals** (10): [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md) · [combining networking with containerization](../docs/concepts/networking-fundamentals/combining-networking-with-containerization.md) · notebook: [Overlay networks and service mesh exploration](../docs/concepts/networking-fundamentals/notebooks/overlay-networks-and-service-mesh-exploration.ipynb) · snippet: [Applying networking in DevOps](../docs/concepts/networking-fundamentals/snippets/2026-08-23-applying-networking-in-devops.py) · _…and 6 more under `docs/concepts/networking-fundamentals/`._
 - **Observability & Monitoring Concepts** (6): [primer](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md) · script: [Observability exercises — round two](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-20-observability-exercises.sh) · script: [CI/CD pipeline metric collection probes](../docs/concepts/observability-monitoring-concepts/scripts/observability-cicd-pipeline-metric-collection-probes.sh) · snippet: [Applying observability in DevOps](../docs/concepts/observability-monitoring-concepts/snippets/2026-08-07-applying-observability-in-devops.py) · _…and 2 more under `docs/concepts/observability-monitoring-concepts/`._
 - **Scripting & Automation Philosophy** (6): [primer](../docs/concepts/scripting-automation-philosophy/0000-primer-scripting-automation-philosophy.md) · snippet: [Deploy checklist as data](../docs/concepts/scripting-automation-philosophy/snippets/2026-08-20-scripting-deploy-checklist.py) · script: [Terraform plan/apply, made idempotent](../docs/concepts/scripting-automation-philosophy/scripts/terraform-plan-apply-idempotent.sh) · _…and 3 more under `docs/concepts/scripting-automation-philosophy/`._
 - **Version Control & Git Workflow** (7): [primer](../docs/concepts/version-control-git-workflow/0000-primer-version-control-git-workflow.md) · [branch strategy and pipeline triggers](../docs/concepts/version-control-git-workflow/branch-strategy-and-pipeline-triggers.md) · snippet: [Release-readiness commit inventory](../docs/concepts/version-control-git-workflow/snippets/2026-08-20-release-branch-commit-check.py) · snippet: [Correlating commit history with deployments](../docs/concepts/version-control-git-workflow/snippets/analyzing-git-commit-history-for-deployment-correlation.py) · _…and 3 more under `docs/concepts/version-control-git-workflow/`._

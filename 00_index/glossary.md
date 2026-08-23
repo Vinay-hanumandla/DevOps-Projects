@@ -234,6 +234,8 @@
 - **mTLS (mutual TLS)** — both client and server authenticate each other via certificates; service meshes use mTLS to encrypt all inter-service traffic automatically.
 - **Traffic splitting** — routing a percentage of requests to a different service version, e.g. sending 10% of traffic to a canary release.
 - **Service discovery** — the mechanism by which services find each other's network locations; Kubernetes DNS gives each service a predictable hostname.
+- **Default gateway** — the router a host sends traffic to when the destination isn't on a directly-connected network; `ip route show default` reveals the address.
+- **Routing table** — the per-host table the kernel consults to decide the next hop for each destination; `ip route` lists the entries and their metrics.
 
 ## Kubernetes (additional)
 
