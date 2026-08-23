@@ -1,10 +1,8 @@
 # DevOps-Projects
+
 > A working engineer's DevOps reference for Ansible, Bash, Docker, Git, GitHub Actions, Helm, Jenkins, Kubernetes, Python, Terraform, Grafana, and Prometheus, plus the foundational concepts they rest on.
 
-![Last commit](https://img.shields.io/github/last-commit/Vinay-hanumandla/DevOps-Projects)
-![Top language](https://img.shields.io/github/languages/top/Vinay-hanumandla/DevOps-Projects)
-![Languages](https://img.shields.io/github/languages/count/Vinay-hanumandla/DevOps-Projects)
-![Repo size](https://img.shields.io/github/repo-size/Vinay-hanumandla/DevOps-Projects)
+---
 
 > **New here? Start at [the learning path](00_index/learning-path.md).** It walks you from first-contact to confident in a sensible order — read that before this table.
 
@@ -16,13 +14,17 @@ A working DevOps engineer's quick-reference: first-contact notes, runnable snipp
 
 A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, script, or project scaffold built while working through a tool's ecosystem and kept for later. It covers Ansible, Bash, Docker, Git, GitHub Actions, Helm, Jenkins, Kubernetes, Python, Terraform, and Grafana/Prometheus, plus eight foundational concept primers under `docs/concepts/` — each joined by runnable scripts, snippets, and CI/CD + observability notebooks. Three full project scaffolds ship as copy-in-and-rename layouts: a Git-based release workflow (`git/templates/release-workflow/`), a Bash + Docker dev toolchain (`bash/templates/bash-docker-scaffold/`), and a Bash + Docker multi-container stack whose startup ordering is wired through health checks (`bash/templates/bash-docker-healthcheck-scaffold/`).
 
+---
+
 ## Quick links
 
-- [Observability exercises — round two](docs/concepts/observability-monitoring-concepts/scripts/2026-08-20-observability-exercises.sh) — reading raw logs and latency the way a scraper would, with no dashboard in front of you
-- [Deploy checklist as data](docs/concepts/scripting-automation-philosophy/snippets/2026-08-20-scripting-deploy-checklist.py) — encoding a known deploy sequence as a list and looping over it instead of copy-pasted `if` blocks
-- [Release-readiness commit inventory](docs/concepts/version-control-git-workflow/snippets/2026-08-20-release-branch-commit-check.py) — asking git which commits are on `main` but not yet on the release branch
-- [Dev values override](helm/configs/2026-08-20-dev-values.yaml) — the same chart tuned for a dev release
-- [Prod values override](helm/configs/2026-08-20-prod-values.yaml) — the production counterpart, replica count and all
+- [Applying networking in DevOps](docs/concepts/networking-fundamentals/snippets/2026-08-23-applying-networking-in-devops.py) — Python snippet connecting networking concepts to real DevOps tasks
+- [Overlay networks and service mesh exploration](docs/concepts/networking-fundamentals/notebooks/overlay-networks-and-service-mesh-exploration.ipynb) — notebook exploring overlay networks and service mesh topologies
+- [Infrastructure validation gates](docs/concepts/ci-cd-pipeline-concepts/scripts/infrastructure-validation-gates.sh) — script that gates infrastructure changes with validation checks
+- [Python quickstart gotchas](python/notes/2026-08-22-python-quickstart-gotchas.md) — first-contact pitfalls when getting started with Python
+- [Create Grafana dashboard](grafana/snippets/2026-08-22-create-dashboard.sh) — shell helper that creates a Grafana dashboard via the API
+
+---
 
 ## Layout
 
@@ -32,16 +34,18 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 - `docs/concepts/` — foundational primers with runnable scripts, snippets, and notebooks (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
 - `gha/` — GitHub Actions material: primer, install note, and workflow configs.
 - `git/` — Git material: notes, docs, scripts, hooks tooling, a release-workflow scaffold, and a pipeline-trigger manifest.
-- `grafana/` — Grafana material: primer and install notes, a first dashboard config, and an API snippet.
+- `grafana/` — Grafana material: primer and install notes, a first dashboard config, and API snippets.
 - `helm/` — Helm material: primer, install notes, chart snippet, per-environment values overrides, and a chart template.
 - `jenkins/` — Jenkins material: primer, install notes, and a first pipeline snippet.
-- `k8s/` — Kubernetes material: primer, install note, kubectl exploration, manifests, and a resource-listing snippet.
+- `k8s/` — Kubernetes material: primer, install note, kubectl exploration, configs, manifests, and a resource-listing snippet.
 - `prom/` — Prometheus material: primer and install notes, a first scrape target config, and a PromQL snippet.
-- `python/` — Python material: primer, docs, scripts, and snippets.
+- `python/` — Python material: primer, notes, docs, scripts, and snippets.
 - `repo-doc/` — notes on keeping the repository's own docs and coverage tables in sync.
-- `tf/` — Terraform material: install note, primer, configs, docs, and scripts.
+- `tf/` — Terraform material: primer, install note, configs, docs, and scripts.
 - `00_index/` — the map: topics, quick links, glossary, and learning path.
 - `CHANGELOG.md` — a dated log of what was added and when.
+
+---
 
 ## Coverage
 
@@ -54,21 +58,24 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Docker | 5 | — | 3 | — | — | — | 1 | 1 | 2 | — | — | 2026-08-17 |
 | Git | 12 | 6 | 6 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-19 |
 | GitHub Actions | 3 | 1 | — | — | 2 | — | — | — | — | — | — | 2026-08-06 |
-| Grafana | 2 | — | — | 1 | 1 | — | — | — | — | — | — | 2026-08-19 |
+| Grafana | 2 | — | — | 2 | 1 | — | — | — | — | — | — | 2026-08-22 |
 | Helm | 5 | 1 | — | 1 | 4 | — | 1 | — | — | — | — | 2026-08-20 |
 | Jenkins | 2 | — | — | 1 | — | — | — | — | — | — | — | 2026-08-11 |
-| Kubernetes | 4 | 1 | 2 | 1 | — | — | 1 | — | — | — | — | 2026-08-19 |
+| Kubernetes | 4 | 1 | 2 | 1 | 1 | — | 1 | — | — | — | — | 2026-08-22 |
 | Prometheus | 2 | — | — | 1 | 1 | — | — | — | — | — | — | 2026-08-19 |
-| Python | 2 | 1 | 2 | 1 | — | — | — | — | — | — | — | 2026-08-04 |
+| Python | 3 | 1 | 2 | 2 | — | — | — | — | — | — | — | 2026-08-22 |
 | Terraform | 3 | 2 | 1 | — | 3 | — | — | — | — | — | — | 2026-08-11 |
 | Repo docs | — | 1 | — | — | — | — | — | — | — | — | — | 2026-08-10 |
-| Concepts | 3 | 20 | 18 | 11 | — | — | — | — | — | — | 2 | 2026-08-20 |
+| Concepts | 7 | 20 | 18 | 11 | — | — | — | — | — | — | 3 | 2026-08-23 |
 
 </details>
 
+---
+
 ## Status
 
-All eight concept primers are complete with runnable companions, and three project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability.
+All eight concept primers are complete with runnable companions, and three project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability. The newest additions are networking-focused: an overlay networks and service mesh notebook, a networking-in-DevOps snippet, and an infrastructure validation gates script.
 
 ---
-_Last updated: 2026-08-21_
+
+_Last updated: 2026-08-23_
