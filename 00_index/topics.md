@@ -47,12 +47,12 @@
 - **templates** (6): [Git-based release workflow scaffold](../git/templates/release-workflow/README.md)
 - _…and more under `git/` — browse the folder._
 
-## Grafana  ·  4 files
+## Grafana  ·  5 files
 
 - **primer:** [Grafana — quick primer](../grafana/notes/0000-primer-grafana.md)
 - **notes** (2): [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
 - **configs** (1): [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml)
-- **snippets** (1): [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
+- **snippets** (2): most recent → [Create dashboard via API](../grafana/snippets/2026-08-22-create-dashboard.sh), [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
 
 ## Helm  ·  12 files
 
@@ -69,12 +69,13 @@
 - **notes** (2): [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md)
 - **snippets** (1): [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 
-## Kubernetes  ·  9 files
+## Kubernetes  ·  10 files
 
 - **primer:** [Kubernetes — quick primer](../k8s/notes/0000-primer-kubernetes.md)
 - **notes** (4): most recent → [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md)
 - **docs** (1): [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md)
 - **scripts** (2): most recent → [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh)
+- **configs** (1): [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml)
 - **manifests** (1): [Minimal deployment and service](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml)
 - **snippets** (1): [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh)
 
@@ -85,13 +86,13 @@
 - **configs** (1): [First scrape target](../prom/configs/2026-08-07-first-scrape-target.yaml)
 - **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
 
-## Python  ·  6 files
+## Python  ·  8 files
 
 - **primer:** [Python — quick primer](../python/notes/0000-primer-python.md)
-- **notes** (2): [Python functions and modules](../python/notes/2026-08-04-python-functions-modules.md)
+- **notes** (3): most recent → [Python quickstart gotchas](../python/notes/2026-08-22-python-quickstart-gotchas.md), [Python functions and modules](../python/notes/2026-08-04-python-functions-modules.md)
 - **docs** (1): [Python modules, packages, and imports](../python/docs/2026-08-04-python-modules-packages-imports.md)
 - **scripts** (2): most recent → [Minimal file processing](../python/scripts/2026-08-04-minimal-file-processing.py), [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py)
-- **snippets** (1): [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
+- **snippets** (2): most recent → [Config file reader](../python/snippets/2026-08-22-config-file-reader.py), [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
 
 ## Terraform  ·  9 files
 
@@ -105,11 +106,11 @@
 
 - **docs** (1): [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md)
 
-## Concepts (docs/concepts/)  ·  54 files
+## Concepts (docs/concepts/)  ·  55 files
 
 Foundational primers on the ideas the tools build on — one primer per concept, plus runnable scripts, snippets, and notebooks. Each folder holds more than the highlights below.
 
-- **CI/CD Pipeline Concepts** (8): [primer](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) · [gate-before-merge with branch protection](../docs/concepts/ci-cd-pipeline-concepts/gate-before-merge-branch-protection.md) · script: [Pipeline failure detection](../docs/concepts/ci-cd-pipeline-concepts/scripts/pipeline-failure-detection.sh) · notebook: [Pipeline metrics and health dashboards](../docs/concepts/ci-cd-pipeline-concepts/notebooks/pipeline-metrics-and-health-dashboards.ipynb) · _…and 4 more under `docs/concepts/ci-cd-pipeline-concepts/`._
+- **CI/CD Pipeline Concepts** (9): [primer](../docs/concepts/ci-cd-pipeline-concepts/0000-primer-ci-cd-pipeline-concepts.md) · [gate-before-merge with branch protection](../docs/concepts/ci-cd-pipeline-concepts/gate-before-merge-branch-protection.md) · script: [Infrastructure validation gates](../docs/concepts/ci-cd-pipeline-concepts/scripts/infrastructure-validation-gates.sh) · script: [Pipeline failure detection](../docs/concepts/ci-cd-pipeline-concepts/scripts/pipeline-failure-detection.sh) · notebook: [Pipeline metrics and health dashboards](../docs/concepts/ci-cd-pipeline-concepts/notebooks/pipeline-metrics-and-health-dashboards.ipynb) · _…and 4 more under `docs/concepts/ci-cd-pipeline-concepts/`._
 - **Containerization Concepts** (6): [primer](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md) · [monitoring containerized apps in production](../docs/concepts/containerization-concepts/monitoring-containerized-apps-in-production.md) · script: [Container observability with the Prometheus node exporter](../docs/concepts/containerization-concepts/scripts/containerization-observability-prometheus-node-exporter.sh) · _…and 3 more under `docs/concepts/containerization-concepts/`._
 - **Infrastructure as Code Principles** (7): [primer](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md) · [parameterised config generation](../docs/concepts/infrastructure-as-code-principles/parameterised-config-generation.md) · [state file management strategies](../docs/concepts/infrastructure-as-code-principles/state-file-management-strategies.md) · script: [Network topology Terraform generator](../docs/concepts/infrastructure-as-code-principles/scripts/network-topology-terraform.sh) · _…and 3 more under `docs/concepts/infrastructure-as-code-principles/`._
 - **Linux & CLI Fundamentals** (8): [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) · [automating network diagnostics from the shell](../docs/concepts/linux-cli-fundamentals/combining-linux-cli-with-networking-automating-network-diagnostics.md) · script: [Provision local VMs with cloud-init](../docs/concepts/linux-cli-fundamentals/scripts/provision-local-vms-with-cloud-init.sh) · notebook: [Exploring connectivity with command-line tools](../docs/concepts/linux-cli-fundamentals/notebooks/exploring-connectivity-with-command-line-tools.ipynb) · _…and 4 more under `docs/concepts/linux-cli-fundamentals/`._
