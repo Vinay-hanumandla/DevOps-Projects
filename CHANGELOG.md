@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-08-23
+
+- networking-fundamentals: Add Python snippet applying networking in DevOps — TCP/HTTP endpoint checks and DNS resolution (con-066)
+- networking-fundamentals: Add Jupyter notebook exploring overlay networks, VXLAN encapsulation, service mesh architecture, and golden signals observability (con-070)
+
 ## 2026-08-22
 
 - ci-cd-pipeline-concepts: Add infrastructure validation gates script combining CI/CD with Terraform/Ansible/Docker Compose validation (con-067)
