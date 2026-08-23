@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-08-23
+
+- networking-fundamentals: Add docs combining networking with observability via distributed tracing and network metrics correlation (con-069)
+- ci-cd-pipeline-concepts: Add branch strategy simulation notebook for trunk-based, GitFlow, and feature branching (con-068)
+
 ## 2026-08-22
 
 - ci-cd-pipeline-concepts: Add infrastructure validation gates script combining CI/CD with Terraform/Ansible/Docker Compose validation (con-067)
