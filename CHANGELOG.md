@@ -2,6 +2,7 @@
 
 ## 2026-08-24
 
+- networking-fundamentals: Rework con-065 — replace redundant interface/routing script with distinct path MTU discovery practice (con-065)
 - networking-fundamentals: Add network interface and routing inspection practice script (con-065)
 - kubernetes: Add multi-service deployment manifest with frontend, backend, and Redis cache (k8s-011)
 - python: Add Docker Compose service definition validator snippet (python-012)
