@@ -2,6 +2,8 @@
 
 ## 2026-08-24
 
+- python: Add Python configuration validator script with type and port checks (python-010)
+- python: Add Python snippet validating Docker Compose service definitions (python-012)
 - kubernetes: Add multi-pod deployment script with kubectl (k8s-010)
 - python: Add pyproject.toml configuration for a Python project (python-009)
 
