@@ -5,6 +5,8 @@
 - networking-fundamentals: Add network interface and routing inspection practice script (con-065)
 - kubernetes: Add multi-service deployment manifest with frontend, backend, and Redis cache (k8s-011)
 - python: Add Docker Compose service definition validator snippet (python-012)
+- python: Add Python configuration validator script with type and port checks (python-010)
+- python: Add Python snippet validating Docker Compose service definitions (python-012)
 - kubernetes: Add multi-pod deployment script with kubectl (k8s-010)
 - python: Add pyproject.toml configuration for a Python project (python-009)
 
