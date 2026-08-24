@@ -19,10 +19,10 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 ## Quick links
 
 - [Applying networking in DevOps](docs/concepts/networking-fundamentals/snippets/2026-08-23-applying-networking-in-devops.py) — Python snippet connecting networking concepts to real DevOps tasks
+- [Network interface and routing inspection](docs/concepts/networking-fundamentals/scripts/2026-08-23-network-interface-and-routing-inspection-practice.sh) — practice script for inspecting interfaces and routing tables
+- [Combining networking with observability](docs/concepts/networking-fundamentals/combining-networking-with-observability.md) — how networking and observability reinforce each other
 - [Overlay networks and service mesh exploration](docs/concepts/networking-fundamentals/notebooks/overlay-networks-and-service-mesh-exploration.ipynb) — notebook exploring overlay networks and service mesh topologies
-- [Infrastructure validation gates](docs/concepts/ci-cd-pipeline-concepts/scripts/infrastructure-validation-gates.sh) — script that gates infrastructure changes with validation checks
-- [Python quickstart gotchas](python/notes/2026-08-22-python-quickstart-gotchas.md) — first-contact pitfalls when getting started with Python
-- [Create Grafana dashboard](grafana/snippets/2026-08-22-create-dashboard.sh) — shell helper that creates a Grafana dashboard via the API
+- [Branch strategy simulation](docs/concepts/ci-cd-pipeline-concepts/notebooks/branch-strategy-simulation.ipynb) — notebook simulating branch strategies and pipeline triggers
 
 ---
 
@@ -53,20 +53,20 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 | Tool | notes | docs | scripts | snippets | configs | templates | manifests | dockerfiles | src | hooks | notebooks | Last verified |
 |------|-------|------|---------|----------|---------|-----------|-----------|-------------|-----|-------|-----------|---------------|
-| Ansible | 2 | — | — | — | 1 | — | — | — | — | — | — | 2026-08-10 |
+| Ansible | 2 | — | — | — | 2 | — | — | — | — | — | — | 2026-08-10 |
 | Bash | 3 | 4 | 6 | 1 | — | 23 | — | 1 | — | — | 1 | 2026-08-17 |
-| Docker | 5 | — | 3 | — | — | — | 1 | 1 | 2 | — | — | 2026-08-17 |
-| Git | 12 | 6 | 6 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-19 |
+| Docker | 5 | — | 3 | — | — | — | 1 | 1 | 2 | — | — | 2026-08-06 |
+| Git | 12 | 6 | 6 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-18 |
 | GitHub Actions | 3 | 1 | — | — | 2 | — | — | — | — | — | — | 2026-08-06 |
-| Grafana | 2 | — | — | 2 | 1 | — | — | — | — | — | — | 2026-08-22 |
-| Helm | 5 | 1 | — | 1 | 4 | — | 1 | — | — | — | — | 2026-08-20 |
+| Grafana | 2 | — | — | 2 | 2 | — | — | — | — | — | — | 2026-08-06 |
+| Helm | 5 | 1 | — | 1 | 4 | — | 1 | — | — | — | — | 2026-08-19 |
 | Jenkins | 2 | — | — | 1 | — | — | — | — | — | — | — | 2026-08-11 |
-| Kubernetes | 4 | 1 | 2 | 1 | 1 | — | 1 | — | — | — | — | 2026-08-22 |
-| Prometheus | 2 | — | — | 1 | 1 | — | — | — | — | — | — | 2026-08-19 |
+| Kubernetes | 4 | 1 | 2 | 1 | 1 | — | 1 | — | — | — | — | 2026-08-04 |
+| Prometheus | 2 | — | — | 1 | 2 | — | — | — | — | — | — | 2026-08-07 |
 | Python | 3 | 1 | 2 | 2 | — | — | — | — | — | — | — | 2026-08-22 |
 | Terraform | 3 | 2 | 1 | — | 3 | — | — | — | — | — | — | 2026-08-11 |
 | Repo docs | — | 1 | — | — | — | — | — | — | — | — | — | 2026-08-10 |
-| Concepts | 7 | 20 | 18 | 11 | — | — | — | — | — | — | 3 | 2026-08-23 |
+| Concepts | 3 | 21 | 20 | 12 | — | — | — | — | — | — | 4 | 2026-08-23 |
 
 </details>
 
@@ -78,4 +78,4 @@ All eight concept primers are complete with runnable companions, and three proje
 
 ---
 
-_Last updated: 2026-08-23_
+_Last updated: 2026-08-24_
