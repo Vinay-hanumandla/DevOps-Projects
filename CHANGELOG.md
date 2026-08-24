@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-08-24
+
+- kubernetes: Add multi-pod deployment script with kubectl (k8s-010)
+- python: Add pyproject.toml configuration for a Python project (python-009)
+
 ## 2026-08-23
 
 - networking-fundamentals: Add docs combining networking with observability via distributed tracing and network metrics correlation (con-069)
