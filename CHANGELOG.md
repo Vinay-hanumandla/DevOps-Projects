@@ -2,6 +2,7 @@
 
 ## 2026-08-24
 
+- python: Rework python-012 — replace duplicate Docker Compose validator with distinct Dockerfile validation snippet (python-012)
 - networking-fundamentals: Rework con-065 — replace redundant interface/routing script with distinct path MTU discovery practice (con-065)
 - networking-fundamentals: Add network interface and routing inspection practice script (con-065)
 - kubernetes: Add multi-service deployment manifest with frontend, backend, and Redis cache (k8s-011)
