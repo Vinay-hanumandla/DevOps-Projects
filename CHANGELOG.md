@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-08-25
+
+- python: Add docs comparing Python configuration approaches for DevOps workflows (python-011)
+
 ## 2026-08-24
 
 - python: Rework python-012 — replace duplicate Docker Compose validator with distinct Dockerfile validation snippet (python-012)
