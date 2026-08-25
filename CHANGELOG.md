@@ -2,7 +2,7 @@
 
 ## 2026-08-25
 
-- python: Add docs comparing Python configuration approaches for DevOps workflows (python-011)
+- bash: Add Bash 5.3 migration guide covering new command-substitution syntax, GLOBSORT, and shopt changes (bash-020)
 
 ## 2026-08-24
 
