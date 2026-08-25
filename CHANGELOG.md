@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-08-25
+
+- python: Add docs comparing Python configuration approaches for DevOps workflows (python-011)
+
 ## 2026-08-24
 
 - networking-fundamentals: Rework con-065 — replace redundant interface/routing script with distinct path MTU discovery practice (con-065)
