@@ -2,6 +2,7 @@
 
 ## 2026-08-25
 
+- bash: Add production Bash scaffold template with logging, retry, flock, and env-assert helpers plus bats-core tests (bash-021)
 - python: Add docs comparing Python configuration approaches for DevOps workflows (python-011)
 
 ## 2026-08-24
