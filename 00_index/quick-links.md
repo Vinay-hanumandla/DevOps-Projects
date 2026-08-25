@@ -6,6 +6,7 @@
 - [Ansible primer](../ansible/notes/0000-primer-ansible.md) — what Ansible is, control/managed nodes, playbooks, inventory, modules, tasks, and roles
 - [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md) — pipx install, first ping command, and the PEP 668 trap
 - [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml) — minimal playbook to verify SSH connectivity to managed hosts
+- [Install nginx playbook](../ansible/configs/2026-08-22-install-nginx-playbook.yaml) — idempotent nginx install playbook
 
 ### Get started with Bash
 - [Bash primer](../bash/notes/0000-primer-bash.md) — what Bash is, key terminology, and a tiny example
@@ -105,6 +106,7 @@
 - [Grafana primer](../grafana/notes/0000-primer-grafana.md) — what Grafana is, dashboards vs panels, and a minimal workflow
 - [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md) — install check and first web UI login
 - [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml) — a minimal Grafana dashboard JSON config
+- [Datasource provisioning](../grafana/configs/2026-08-22-datasource-provisioning.yaml) — Grafana datasource provisioning YAML config
 - [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh) — a shell helper that enumerates dashboards via the Grafana API
 - [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh) — a shell helper that creates a Grafana dashboard via the API
 
@@ -138,13 +140,16 @@
 ### Inspect Kubernetes resources
 - [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md) — kubectl commands for inspecting cluster resources and their events
 - [Minimal deployment and service manifest](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml) — a minimal Kubernetes Deployment and Service YAML
+- [Multi-service application manifest](../k8s/manifests/multi-service-application.yaml) — Kubernetes Deployment with frontend, backend, and Redis cache
 - [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml) — a Kubernetes Deployment config for first contact
 - [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh) — a shell helper that walks common resource types with kubectl
+- [Multi-pod deployment script](../k8s/scripts/multi-pod-deployment.sh) — kubectl script deploying multiple pods
 
 ### Get started with Prometheus
 - [Prometheus primer](../prom/notes/0000-primer-prometheus.md) — what Prometheus is, metrics types, and a minimal workflow
 - [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md) — install check and first web UI exploration
 - [First scrape target](../prom/configs/2026-08-07-first-scrape-target.yaml) — a minimal Prometheus scrape target config
+- [Prometheus scrape config](../prom/configs/2026-08-22-prometheus-scrape-config.yaml) — Prometheus scrape configuration YAML
 - [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh) — a shell helper that runs a basic PromQL query against a Prometheus server
 
 ### Get started with Python
@@ -156,8 +161,11 @@
 ### Write and run a Python script
 - [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py) — end-to-end virtual-environment setup and a runner inside it
 - [Minimal file processing](../python/scripts/2026-08-04-minimal-file-processing.py) — read, process, and write files with Python
+- [Config validator](../python/scripts/config-validator.py) — Python configuration validator with type and port checks
 - [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py) — declare variables, inspect types, and print mixed-type lists
 - [Config file reader](../python/snippets/2026-08-22-config-file-reader.py) — read and parse config files with Python
+- [Docker Compose validator](../python/snippets/docker-compose-validator.py) — Python snippet validating Docker Compose service definitions
+- [Validate Docker Compose](../python/snippets/validate-docker-compose.py) — Python snippet validating Docker Compose service definitions
 
 ### Get started with Terraform
 - [Terraform primer](../tf/notes/0000-primer-terraform.md) — what Terraform is, providers, state, and a minimal workflow
@@ -206,6 +214,7 @@
 - [Network connectivity check](../docs/concepts/networking-fundamentals/scripts/2026-07-25-practice-network-connectivity-dns-port-inspection.sh) — test TCP connectivity to a host:port and diagnose why it's unreachable
 - [Networking observability health check](../docs/concepts/networking-fundamentals/scripts/networking-observability-health-check.sh) — check service health and network observability
 - [Network interface and routing inspection](../docs/concepts/networking-fundamentals/scripts/2026-08-05-network-interface-and-routing-inspection.sh) — inspect network interfaces and routing tables
+- [Network interface routing practice](../docs/concepts/networking-fundamentals/scripts/2026-08-24-network-interface-and-routing-practice.sh) — hands-on network interface and routing inspection
 - [Socket connection tester](../docs/concepts/networking-fundamentals/snippets/2026-07-26-socket-connection-tester.py) — Python snippet that tests TCP socket connectivity and reports the result
 - [Applying networking in DevOps](../docs/concepts/networking-fundamentals/snippets/2026-08-23-applying-networking-in-devops.py) — Python snippet connecting networking concepts to real DevOps tasks
 - [Observability exercises](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-06-observability-exercises.sh) — hands-on exercises for observability concepts
