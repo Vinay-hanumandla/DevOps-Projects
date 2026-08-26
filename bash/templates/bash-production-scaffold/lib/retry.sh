@@ -2,7 +2,8 @@
 # last_verified: 2026-08-25 · bash 5.3.15
 
 with_retry() {
-    local max="$1" delay="$2" shift 2
+    local max="$1" delay="$2"
+    shift 2
     local cmd=("$@")
     local attempt=0
     until "${cmd[@]}"; do

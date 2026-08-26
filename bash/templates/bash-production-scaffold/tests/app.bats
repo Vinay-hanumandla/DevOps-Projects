@@ -3,6 +3,7 @@
 
 load "../lib/logging.sh"
 load "../lib/retry.sh"
+load "../lib/flock.sh"
 load "../lib/env.sh"
 
 @test "env_assert fails when variable is unset" {
@@ -24,4 +25,9 @@ load "../lib/env.sh"
 @test "with_retry fails after exhausting retries" {
     run with_retry 2 1 false
     [ "$status" -ne 0 ]
+}
+
+@test "with_flock runs a command under an advisory lock" {
+    run with_flock "/tmp/bash-production-scaffold.lock" -- true
+    [ "$status" -eq 0 ]
 }
