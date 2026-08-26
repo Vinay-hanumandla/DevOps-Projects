@@ -5,6 +5,7 @@
 - bash: Rework bash-021 — fix shift syntax bug in lib/retry.sh and lib/flock.sh, add with_flock bats test
 - bash: Add production Bash scaffold template with logging, retry, flock, and env-assert helpers plus bats-core tests (bash-021)
 - python: Add docs comparing Python configuration approaches for DevOps workflows (python-011)
+- bash: Add Bash 5.3 migration guide covering new command-substitution syntax, GLOBSORT, and shopt changes (bash-020)
 
 ## 2026-08-24
 
