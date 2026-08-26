@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-08-26
+
+- bash: Add notebook comparing pipeline exit-code handling (`set -o pipefail` vs `PIPESTATUS` vs Bash 5.3 shell-context substitution) (bash-022)
+
 ## 2026-08-25
 
 - bash: Rework bash-021 — fix shift syntax bug in lib/retry.sh and lib/flock.sh, add with_flock bats test
