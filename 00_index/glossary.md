@@ -112,7 +112,10 @@
 - **Namespace package** — a directory without `__init__.py` that Python 3.3+ can still import; it does not run initialization code and is useful for splitting a single package across multiple locations.
 - **Circular import** — when module A imports module B and module B imports module A, causing one of them to see a half-initialized namespace; the fix is to move shared code to a third module that neither depends on.
 - **Mutable default argument** — a default parameter value that is a mutable object like `[]` or `{}`; it persists across function calls, causing surprising shared state — the fix is to use `None` as the default and create the mutable object inside the function body.
-- **Wildcard import** — `from module import *` imports all public names into the current namespace; it pollutes the namespace and makes it hard to trace where a name comes from, so explicit imports are preferred.
+ - **Wildcard import** — `from module import *` imports all public names into the current namespace; it pollutes the namespace and makes it hard to trace where a name comes from, so explicit imports are preferred.
+ - **pyproject.toml** — the standard Python project metadata file introduced by PEP 621; declares build-system requirements, project metadata, and tool configurations in one place so `pip install -e .` works without setup.py.
+ - **Typed settings class** — a Python class (often a `dataclass` or Pydantic model) that holds configuration as typed attributes, catching invalid values at load time and providing IDE completion.
+ - **Pydantic** — a Python library for data validation using Python type annotations; commonly used to define typed settings classes that validate configuration at startup.
 
 ## Terraform
 
@@ -235,7 +238,9 @@
 - **Traffic splitting** — routing a percentage of requests to a different service version, e.g. sending 10% of traffic to a canary release.
 - **Service discovery** — the mechanism by which services find each other's network locations; Kubernetes DNS gives each service a predictable hostname.
 - **Default gateway** — the router a host sends traffic to when the destination isn't on a directly-connected network; `ip route show default` reveals the address.
-- **Routing table** — the per-host table the kernel consults to decide the next hop for each destination; `ip route` lists the entries and their metrics.
+ - **Routing table** — the per-host table the kernel consults to decide the next hop for each destination; `ip route` lists the entries and their metrics.
+ - **Path MTU** — the largest packet size that can traverse a network path without fragmentation; discovered by binary-searching payload sizes with ping's DF bit.
+ - **DF bit (Don't-Fragment)** — a flag set on IP packets that tells routers not to fragment them; used in path MTU discovery to detect the maximum transmittable unit.
 
 ## Kubernetes (additional)
 
