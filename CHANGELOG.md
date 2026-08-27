@@ -2,6 +2,11 @@
 
 ## 2026-08-27
 
+- tf: Add Terraform quickstart trip-ups notes (tf-012)
+- grafana: Add first Grafana web UI notes (grafana-004)
+
+## 2026-08-27
+
 - grafana: Add Grafana quickstart gotchas notes covering Docker networking, panel editing, and dashboard save pitfalls (grafana-007)
 - grafana: Add Grafana datasource and dashboard provisioning YAML config (grafana-008)
 - github-actions: Add docs following the GitHub Actions quickstart and noting common gotchas (gha-009)
