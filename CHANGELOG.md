@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-08-27
+
+- grafana: Add Grafana quickstart gotchas notes covering Docker networking, panel editing, and dashboard save pitfalls (grafana-007)
+- grafana: Add Grafana datasource and dashboard provisioning YAML config (grafana-008)
+
 ## 2026-08-26
 
 - bash: Add notebook comparing pipeline exit-code handling (`set -o pipefail` vs `PIPESTATUS` vs Bash 5.3 shell-context substitution) (bash-022)

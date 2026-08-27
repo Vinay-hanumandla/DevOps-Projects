@@ -1,0 +1,41 @@
+# last_verified: 2026-08-27 · Grafana provisioning
+#
+# Grafana datasource and dashboard provisioning configuration.
+# Mount these files into /etc/grafana/provisioning/ inside the Grafana container.
+#
+# Usage with Docker:
+#   docker run -d --name=grafana -p 3000:3000 \
+#     -v ./provisioning/datasources:/etc/grafana/provisioning/datasources \
+#     -v ./provisioning/dashboards:/etc/grafana/provisioning/dashboards \
+#     grafana/grafana
+
+# --- Datasource provisioning file ---
+# Place at: provisioning/datasources/datasources.yaml
+
+apiVersion: 1
+
+deleteDatasources: []
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: true
+
+# --- Dashboard provisioning file ---
+# Place at: provisioning/dashboards/dashboards.yaml
+
+apiVersion: 1
+
+providers:
+  - name: default
+    orgId: 1
+    folder: ''
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: false
