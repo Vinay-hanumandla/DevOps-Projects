@@ -55,6 +55,8 @@
 - **IFS** — the Internal Field Separator, used by the shell to split words after expansion; overriding it (e.g. `IFS=,`) changes how `read` and loops parse delimited input.
 - **`trap`** — a builtin that registers a command to run when the shell receives a signal or event (e.g. `EXIT`, `ERR`, `SIGINT`), used for cleanup and error handling.
 - **Strict mode** — the Bash safeguard combo `set -Eeuo pipefail`: exit on error, treat unset variables as fatal, fail the whole pipeline if any command in it fails, and inherit error trapping through subshells. Containerised runners and entry points apply it up front so a failing script can't ship a green result.
+- **PIPESTATUS** — a read-only array populated after a pipeline finishes. `${PIPESTATUS[0]}` is `cmd1`'s status, `${PIPESTATUS[1]}` is `cmd2`'s status, etc.; capture it immediately because the next pipeline overwrites the array.
+- **Shell-context command substitution** — Bash 5.3 syntax `${ command; }` and `${|command;}` that executes in the current shell context instead of forking a subshell, preserving modified state and avoiding fork overhead.
 - **`/dev/tcp`** — Bash's built-in TCP pseudo-device; a redirection like `< /dev/tcp/host/port` succeeds only when the port accepts a connection, so a script can probe reachability with a bounded `timeout` without needing `nc` installed.
 - **`paste`** — a coreutils tool that joins the corresponding lines of two or more files side by side; useful for lining up two separately captured metric streams so they can be read as one table.
 

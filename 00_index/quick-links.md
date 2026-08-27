@@ -25,6 +25,7 @@
 - [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md) — notes on integrating set -euo pipefail and trap-based cleanup into a script workflow
 - [Debug and profile with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md) — using Bash's execution trace and DEBUG trap for profiling and debugging
 - [Integrating Bash with Git](../bash/docs/integrating-bash-with-git.md) — fail-fast, re-runnable patterns for release scripts that touch git
+- [Bash 5.3 migration guide](../bash/docs/bash-5.3-migration-guide.md) — documenting behavioral and syntactic changes in Bash 5.3 for script audits and upgrades
 
 ### Run Bash in a container
 - [Strict-mode runner image](../bash/dockerfiles/strict-mode-runner.Dockerfile) — a minimal Debian image that wraps Bash in `set -euo pipefail` under an unprivileged user
@@ -37,8 +38,14 @@
 - [Health-check stack — docker-compose.yml](../bash/templates/bash-docker-healthcheck-scaffold/docker-compose.yml) — the `depends_on: condition: service_healthy` ordering between services
 - [Health-check stack — up.sh](../bash/templates/bash-docker-healthcheck-scaffold/scripts/up.sh) — brings the stack up and waits for every service to report `healthy`
 
+### Scaffold a production Bash service with retry and logging
+- [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md) — a copy-in layout with retry, logging, and bats tests for a long-running service
+
 ### Compare Bash log-rotation approaches
 - [Comparing log rotation approaches](../bash/notebooks/comparing-log-rotation-approaches.ipynb) — notebook comparing inotifywait vs cron-driven polling for log rotation
+
+### Compare Bash pipeline exit-code handling
+- [Comparing pipeline exit-code handling](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb) — notebook comparing `set -o pipefail`, `PIPESTATUS`, and Bash 5.3 shell-context command substitution
 
 ### Get started with Docker
 - [Docker primer](../docker/notes/0000-primer-docker.md) — what Docker is, images vs containers, and a minimal workflow

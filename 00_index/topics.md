@@ -8,16 +8,16 @@
 - **notes** (2): [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md)
 - **configs** (2): [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml), [Install nginx playbook](../ansible/configs/2026-08-22-install-nginx-playbook.yaml)
 
-## Bash  ·  39 files
+## Bash  ·  48 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
-- **docs** (4): most recent → [Integrating Bash with Git](../bash/docs/integrating-bash-with-git.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md), [Debug and profile with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md)
-- **scripts** (8): most recent → [System report tool](../bash/scripts/system-report-tool.sh), [Log rotation and retention](../bash/scripts/log-rotation-retention.sh), [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh)
+- **docs** (5): most recent → [Bash 5.3 migration guide](../bash/docs/bash-5.3-migration-guide.md), [Integrating Bash with Git](../bash/docs/integrating-bash-with-git.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md)
+- **scripts** (6): most recent → [System report tool](../bash/scripts/system-report-tool.sh), [Log rotation and retention](../bash/scripts/log-rotation-retention.sh), [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh)
 - **snippets** (1): [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
-- **notebooks** (1): [Comparing log rotation approaches](../bash/notebooks/comparing-log-rotation-approaches.ipynb)
+- **notebooks** (2): [Comparing pipeline exit-code handling](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb), [Comparing log rotation approaches](../bash/notebooks/comparing-log-rotation-approaches.ipynb)
 - **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
-- **templates** (23): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md)
+- **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
 - _…and more under `bash/` — browse the folder._
 
 ## Docker  ·  12 files
@@ -41,7 +41,7 @@
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
 - **notes** (12): most recent → [Companion forgotten undo notes 15](../git/notes/2026-07-28-git-companion-forgotten-undo-notes-15.md), [Companion readme quickstart trip-ups](../git/notes/2026-07-28-git-companion-readme-quickstart-trip-ups.md), [Install Git](../git/notes/2026-07-20-install-git.md)
 - **docs** (6): most recent → [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md), [Tagging Docker images from git describe](../git/docs/git-describe-image-tags-registry.md), [Git — my first file index](../git/docs/2026-08-10-git-index.md)
-- **scripts** (9): most recent → [Changelog from conventional commits](../git/scripts/changelog-from-conventional-commits.sh), [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Git PR helper](../git/scripts/git-pr-helper.sh)
+- **scripts** (6): most recent → [Changelog from conventional commits](../git/scripts/changelog-from-conventional-commits.sh), [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Git PR helper](../git/scripts/git-pr-helper.sh)
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
 - **manifests** (1): [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps git events (push, tag, merge request) to build → test → deploy jobs
 - **templates** (6): [Git-based release workflow scaffold](../git/templates/release-workflow/README.md)
@@ -91,7 +91,7 @@
 - **primer:** [Python — quick primer](../python/notes/0000-primer-python.md)
 - **notes** (3): most recent → [Python quickstart gotchas](../python/notes/2026-08-22-python-quickstart-gotchas.md), [Python functions and modules](../python/notes/2026-08-04-python-functions-modules.md)
 - **docs** (2): most recent → [Comparing Python configuration approaches for DevOps workflows](../python/docs/comparing-python-configuration-approaches.md), [Python modules, packages, and imports](../python/docs/2026-08-04-python-modules-packages-imports.md)
-- **scripts** (2): most recent → [Minimal file processing](../python/scripts/2026-08-04-minimal-file-processing.py), [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py)
+- **scripts** (3): most recent → [Config validator](../python/scripts/config-validator.py), [Minimal file processing](../python/scripts/2026-08-04-minimal-file-processing.py), [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py)
 - **snippets** (4): most recent → [Dockerfile validator](../python/snippets/validate-dockerfile.py), [Docker Compose validator](../python/snippets/docker-compose-validator.py), [Config file reader](../python/snippets/2026-08-22-config-file-reader.py), [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
 - **configs** (1): [First pyproject.toml](../python/configs/2026-08-24-pyproject-toml-config.toml)
 
