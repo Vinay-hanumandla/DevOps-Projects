@@ -2,6 +2,8 @@
 
 ## 2026-08-27
 
+- grafana: Add Grafana quickstart gotchas notes covering Docker networking, panel editing, and dashboard save pitfalls (grafana-007)
+- grafana: Add Grafana datasource and dashboard provisioning YAML config (grafana-008)
 - github-actions: Add docs following the GitHub Actions quickstart and noting common gotchas (gha-009)
 - kubernetes: Add docs comparing kubectl imperative vs declarative approaches for deployments (k8s-012)
 
