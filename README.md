@@ -12,24 +12,24 @@ A working DevOps engineer's quick-reference: first-contact notes, runnable snipp
 
 ## What's in here
 
-A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, script, or project scaffold built while working through a tool's ecosystem and kept for later. It covers Ansible, Bash, Docker, Git, GitHub Actions, Helm, Jenkins, Kubernetes, Python, Terraform, and Grafana/Prometheus, plus eight foundational concept primers under `docs/concepts/` — each joined by runnable scripts, snippets, and CI/CD + observability notebooks. Three full project scaffolds ship as copy-in-and-rename layouts: a Git-based release workflow (`git/templates/release-workflow/`), a Bash + Docker dev toolchain (`bash/templates/bash-docker-scaffold/`), and a Bash + Docker multi-container stack whose startup ordering is wired through health checks (`bash/templates/bash-docker-healthcheck-scaffold/`).
+A growing collection of hands-on DevOps artifacts. Each entry is a dated note, snippet, config, script, or project scaffold built while working through a tool's ecosystem and kept for later. It covers Ansible, Bash, Docker, Git, GitHub Actions, Helm, Jenkins, Kubernetes, Python, Terraform, and Grafana/Prometheus, plus eight foundational concept primers under `docs/concepts/` — each joined by runnable scripts, snippets, and CI/CD + observability notebooks. Four project scaffolds ship as copy-in-and-rename layouts: a Git-based release workflow (`git/templates/release-workflow/`), a Bash + Docker dev toolchain (`bash/templates/bash-docker-scaffold/`), a Bash + Docker multi-container stack whose startup ordering is wired through health checks (`bash/templates/bash-docker-healthcheck-scaffold/`), and a Bash production-scaffold with retry, logging, and test harness (`bash/templates/bash-production-scaffold/`).
 
 ---
 
 ## Quick links
 
 - [Comparing Python configuration approaches for DevOps workflows](python/docs/comparing-python-configuration-approaches.md) — comparing environment variables, config files, typed settings, and CLI arguments for Python tooling
+- [Bash 5.3 migration guide](bash/docs/bash-5.3-migration-guide.md) — documenting behavioral and syntactic changes in Bash 5.3 for script audits and upgrades
 - [Dockerfile validator](python/snippets/validate-dockerfile.py) — validates a Dockerfile for missing FROM, USER, WORKDIR, HEALTHCHECK, and `:latest` tags
 - [Path MTU discovery](docs/concepts/networking-fundamentals/scripts/2026-08-24-path-mtu-discovery.sh) — binary-search for the largest packet a network path carries using ping's DF bit
 - [Multi-service application manifest](k8s/manifests/multi-service-application.yaml) — web frontend + API backend + Redis cache with Deployments, Services, and resource requests
-- [Docker Compose validator](python/snippets/docker-compose-validator.py) — validates a Compose file for missing services, port conflicts, and volume mount syntax
 
 ---
 
 ## Layout
 
 - `ansible/` — Ansible material: primer, install notes, and playbook configs.
-- `bash/` — Bash material: primer, notes, docs, scripts, notebooks, a strict-mode runner image, and two Docker project scaffolds (toolchain + health-check stack).
+- `bash/` — Bash material: primer, notes, docs, scripts, notebooks, a strict-mode runner image, and three Docker project scaffolds (toolchain, health-check stack, and production scaffold).
 - `docker/` — Docker material: notes, Dockerfiles, source files, scripts, and a multi-service Compose manifest.
 - `docs/concepts/` — foundational primers with runnable scripts, snippets, and notebooks (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
 - `gha/` — GitHub Actions material: primer, install note, and workflow configs.
@@ -54,16 +54,16 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Tool | notes | docs | scripts | snippets | configs | templates | manifests | dockerfiles | src | hooks | notebooks | Last verified |
 |------|-------|------|---------|----------|---------|-----------|-----------|-------------|-----|-------|-----------|---------------|
 | Ansible | 2 | — | — | — | 2 | — | — | — | — | — | — | 2026-08-10 |
-| Bash | 3 | 4 | 8 | 1 | — | 23 | — | 1 | — | — | 1 | 2026-08-17 |
+| Bash | 3 | 5 | 6 | 1 | — | 30 | — | 1 | — | — | 2 | 2026-08-25 |
 | Docker | 5 | — | 3 | — | — | — | 1 | 1 | 2 | — | — | 2026-08-06 |
-| Git | 12 | 6 | 9 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-18 |
+| Git | 12 | 6 | 6 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-18 |
 | GitHub Actions | 3 | 1 | — | — | 2 | — | — | — | — | — | — | 2026-08-06 |
 | Grafana | 2 | — | — | 2 | 2 | — | — | — | — | — | — | 2026-08-06 |
 | Helm | 5 | 1 | — | 1 | 4 | — | 1 | — | — | — | — | 2026-08-19 |
 | Jenkins | 2 | — | — | 1 | — | — | — | — | — | — | — | 2026-08-11 |
 | Kubernetes | 4 | 1 | 3 | 1 | 1 | — | 2 | — | — | — | — | 2026-08-04 |
 | Prometheus | 2 | — | — | 1 | 2 | — | — | — | — | — | — | 2026-08-07 |
-| Python | 3 | 2 | 2 | 4 | 1 | — | — | — | — | — | — | 2026-08-25 |
+| Python | 3 | 2 | 3 | 4 | 1 | — | — | — | — | — | — | 2026-08-25 |
 | Terraform | 3 | 2 | 1 | — | 3 | — | — | — | — | — | — | 2026-08-11 |
 | Repo docs | — | 1 | — | — | — | — | — | — | — | — | — | 2026-08-10 |
 | Concepts | 20 | 17 | 11 | 9 | — | — | — | — | — | — | 4 | 2026-08-23 |
@@ -74,8 +74,8 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Status
 
-All eight concept primers are complete with runnable companions, and three project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability. The newest additions are a Python configuration-approaches doc, a Dockerfile validator snippet, a Docker Compose validator, a path-MTU-discovery script, and a multi-service Kubernetes manifest.
+All eight concept primers are complete with runnable companions, and four project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability. The newest additions are a Bash 5.3 migration guide, a pipeline exit-code-handling notebook, a Bash production scaffold with retry and logging helpers, and a Docker Compose validator.
 
 ---
 
-_Last updated: 2026-08-25_
+_Last updated: 2026-08-27_
