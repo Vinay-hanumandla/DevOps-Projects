@@ -110,8 +110,11 @@
 
 ### Get started with Grafana
 - [Grafana primer](../grafana/notes/0000-primer-grafana.md) — what Grafana is, dashboards vs panels, and a minimal workflow
+- [First Grafana web UI](../grafana/notes/2026-08-27-first-grafana-web-ui.md) — installed Grafana and opened the web UI for the first time
 - [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md) — install check and first web UI login
+- [Grafana quickstart gotchas](../grafana/notes/2026-08-27-grafana-quickstart-gotchas.md) — Docker install, data sources, panel editing, and dashboard saving traps
 - [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml) — a minimal Grafana dashboard JSON config
+- [Datasource and dashboard provisioning](../grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml) — provisioning datasource and dashboard config
 - [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh) — a shell helper that enumerates dashboards via the Grafana API
 - [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh) — a shell helper that creates a Grafana dashboard via the API
 
@@ -173,6 +176,7 @@
 
 ### Get started with Terraform
 - [Terraform primer](../tf/notes/0000-primer-terraform.md) — what Terraform is, providers, state, and a minimal workflow
+- [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md) — following the official quickstart and where I got stuck
 - [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md) — check installation and run the first Terraform command
 - [First Terraform local file resource](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl) — a minimal Terraform config that creates a local file
 - [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md) — how to organise Terraform configs and modules
@@ -241,6 +245,7 @@
 - [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml) — a first GitHub Actions workflow configuration
 - [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml) — a minimal GitHub Actions workflow for CI
 - [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md) — what to expect and where beginners get stuck
+- [GitHub Actions quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md) — YAML indentation, trigger syntax, runner pinning, and marketplace versioning
 - [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md) — debugging failed GitHub Actions runs
 
 ### Keep the repo's own docs in sync

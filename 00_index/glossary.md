@@ -151,6 +151,7 @@
 - **Query** — the expression Grafana sends to a data source to fetch data. Example: `rate(http_requests_total[5m])` in Prometheus.
 - **Alert** — a rule that triggers a notification when a metric crosses a threshold. Example: alert when error rate exceeds 5% for 5 minutes.
 - **Row** — a horizontal section on a dashboard that groups related panels. Example: a "Network" row containing latency and throughput panels.
+- **Provisioning** — configuring dashboards, data sources, and alert rules via declarative JSON/YAML files instead of the UI, so Grafana's configuration lives in version control and can be deployed with IaC tools.
 
 ## Prometheus
 
@@ -229,6 +230,7 @@
 - **Secrets** — encrypted variables stored in the repo settings; used to pass tokens, passwords, and API keys to workflows without exposing them in the YAML.
 - **Matrix build** — a strategy that runs the same job across multiple configurations (e.g. different OS versions or language versions) to verify compatibility.
 - **Artifact** — a file or collection of files produced by a workflow run, such as a build output or test report; artifacts can be downloaded after the run completes.
+- **Composite action** — a reusable action that bundles multiple steps into a single reference, letting you share common setup (checkout, install, cache) across workflows without copy-pasting YAML.
 
 ## Networking
 

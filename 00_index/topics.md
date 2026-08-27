@@ -29,11 +29,11 @@
 - **manifests** (1): [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml)
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
 
-## GitHub Actions  ·  6 files
+## GitHub Actions  ·  9 files
 
 - **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
 - **notes** (3): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
-- **docs** (1): [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
+- **docs** (2): most recent → [GitHub Actions quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md), [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
 - **configs** (2): [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml), [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml)
 
 ## Git  ·  32 files
@@ -47,11 +47,11 @@
 - **templates** (6): [Git-based release workflow scaffold](../git/templates/release-workflow/README.md)
 - _…and more under `git/` — browse the folder._
 
-## Grafana  ·  6 files
+## Grafana  ·  9 files
 
 - **primer:** [Grafana — quick primer](../grafana/notes/0000-primer-grafana.md)
-- **notes** (2): [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
-- **configs** (2): [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml), [Datasource provisioning](../grafana/configs/2026-08-22-datasource-provisioning.yaml)
+- **notes** (4): most recent → [First Grafana web UI](../grafana/notes/2026-08-27-first-grafana-web-ui.md), [Grafana quickstart gotchas](../grafana/notes/2026-08-27-grafana-quickstart-gotchas.md), [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
+- **configs** (3): most recent → [Datasource and dashboard provisioning](../grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml), [Datasource provisioning](../grafana/configs/2026-08-22-datasource-provisioning.yaml), [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml)
 - **snippets** (2): most recent → [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh), [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
 
 ## Helm  ·  12 files
@@ -73,7 +73,7 @@
 
 - **primer:** [Kubernetes — quick primer](../k8s/notes/0000-primer-kubernetes.md)
 - **notes** (4): most recent → [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md)
-- **docs** (1): [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md)
+- **docs** (2): [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md), [kubectl imperative vs declarative](../k8s/docs/kubectl-imperative-vs-declarative.md)
 - **scripts** (3): most recent → [Multi-pod deployment](../k8s/scripts/multi-pod-deployment.sh), [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh)
 - **configs** (1): [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml)
 - **manifests** (2): [Minimal deployment and service](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml), [Multi-service application](../k8s/manifests/multi-service-application.yaml)
@@ -95,10 +95,10 @@
 - **snippets** (4): most recent → [Dockerfile validator](../python/snippets/validate-dockerfile.py), [Docker Compose validator](../python/snippets/docker-compose-validator.py), [Config file reader](../python/snippets/2026-08-22-config-file-reader.py), [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
 - **configs** (1): [First pyproject.toml](../python/configs/2026-08-24-pyproject-toml-config.toml)
 
-## Terraform  ·  9 files
+## Terraform  ·  10 files
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
-- **notes** (3): most recent → [Quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
+- **notes** (4): most recent → [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md), [Quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
 - **configs** (3): most recent → [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl), [First Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl)
 - **docs** (2): most recent → [Terraform — coverage check](../tf/docs/2026-08-11-terraform-coverage.md), [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md)
 - **scripts** (1): [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
