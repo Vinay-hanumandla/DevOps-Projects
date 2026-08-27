@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-08-27
+
+- github-actions: Add docs following the GitHub Actions quickstart and noting common gotchas (gha-009)
+- kubernetes: Add docs comparing kubectl imperative vs declarative approaches for deployments (k8s-012)
+
 ## 2026-08-26
 
 - bash: Add notebook comparing pipeline exit-code handling (`set -o pipefail` vs `PIPESTATUS` vs Bash 5.3 shell-context substitution) (bash-022)
