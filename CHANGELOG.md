@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-08-29
+
+- observability-monitoring-concepts: Add docs combining distributed tracing with network metrics correlation (con-071)
+- observability-monitoring-concepts: Add Jupyter notebook monitoring infrastructure drift with Prometheus and Terraform (con-072)
+
 ## 2026-08-27
 
 - tf: Add Terraform quickstart trip-ups notes (tf-012)
