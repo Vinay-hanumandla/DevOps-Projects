@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-29
+
+- grafana: Add Grafana datasource provisioning YAML config (grafana-006)
+- prom: Add install Prometheus and explore web UI notes (prom-004)
+- prom: Add Prometheus scrape configuration YAML config (prom-006)
+
 ## 2026-08-27
 
 - tf: Add Terraform quickstart trip-ups notes (tf-012)
