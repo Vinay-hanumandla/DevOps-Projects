@@ -1,6 +1,6 @@
 # DevOps-Projects
 
-> A working engineer's DevOps reference for Ansible, Bash, Docker, Git, GitHub Actions, Helm, Jenkins, Kubernetes, Python, Terraform, Grafana, and Prometheus, plus the foundational concepts they rest on.
+> A working engineer's devops reference for Ansible, Bash, Docker, Git, GitHub Actions, Helm, Jenkins, Kubernetes, Python, Terraform, Grafana, and Prometheus, plus the foundational concepts they rest on.
 
 ---
 
@@ -18,11 +18,11 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Quick links
 
-- [Comparing Python configuration approaches for DevOps workflows](python/docs/comparing-python-configuration-approaches.md) — comparing environment variables, config files, typed settings, and CLI arguments for Python tooling
-- [Bash 5.3 migration guide](bash/docs/bash-5.3-migration-guide.md) — documenting behavioral and syntactic changes in Bash 5.3 for script audits and upgrades
-- [Dockerfile validator](python/snippets/validate-dockerfile.py) — validates a Dockerfile for missing FROM, USER, WORKDIR, HEALTHCHECK, and `:latest` tags
-- [Path MTU discovery](docs/concepts/networking-fundamentals/scripts/2026-08-24-path-mtu-discovery.sh) — binary-search for the largest packet a network path carries using ping's DF bit
-- [Multi-service application manifest](k8s/manifests/multi-service-application.yaml) — web frontend + API backend + Redis cache with Deployments, Services, and resource requests
+- [First Grafana web UI](grafana/notes/2026-08-27-first-grafana-web-ui.md) — installed Grafana and opened the web UI for the first time
+- [Terraform quickstart trip-ups](tf/notes/2026-08-27-terraform-quickstart.md) — following the official quickstart and where I got stuck
+- [Grafana provisioning config](grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml) — datasource and dashboard provisioning config
+- [Grafana quickstart gotchas](grafana/notes/2026-08-27-grafana-quickstart-gotchas.md) — Docker install, data sources, panel editing, and dashboard saving traps
+- [GitHub Actions quickstart gotchas](gha/docs/2026-08-27-quickstart-gotchas.md) — YAML indentation, trigger syntax, runner pinning, and marketplace versioning
 
 ---
 
@@ -32,9 +32,9 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 - `bash/` — Bash material: primer, notes, docs, scripts, notebooks, a strict-mode runner image, and three Docker project scaffolds (toolchain, health-check stack, and production scaffold).
 - `docker/` — Docker material: notes, Dockerfiles, source files, scripts, and a multi-service Compose manifest.
 - `docs/concepts/` — foundational primers with runnable scripts, snippets, and notebooks (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
-- `gha/` — GitHub Actions material: primer, install note, and workflow configs.
+- `gha/` — GitHub Actions material: primer, install note, workflow configs, and debugging docs.
 - `git/` — Git material: notes, docs, scripts, hooks tooling, a release-workflow scaffold, and a pipeline-trigger manifest.
-- `grafana/` — Grafana material: primer and install notes, dashboard configs, and API snippets.
+- `grafana/` — Grafana material: primer, install notes, dashboard configs, and API snippets.
 - `helm/` — Helm material: primer, install notes, chart snippet, per-environment values overrides, and a chart template.
 - `jenkins/` — Jenkins material: primer, install notes, and a first pipeline snippet.
 - `k8s/` — Kubernetes material: primer, install notes, kubectl exploration, configs, manifests, scripts, and a resource-listing snippet.
@@ -56,15 +56,15 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Ansible | 2 | — | — | — | 2 | — | — | — | — | — | — | 2026-08-10 |
 | Bash | 3 | 5 | 6 | 1 | — | 30 | — | 1 | — | — | 2 | 2026-08-25 |
 | Docker | 5 | — | 3 | — | — | — | 1 | 1 | 2 | — | — | 2026-08-06 |
+| GitHub Actions | 3 | 2 | — | — | 2 | — | — | — | — | — | — | 2026-08-27 |
 | Git | 12 | 6 | 6 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-18 |
-| GitHub Actions | 3 | 1 | — | — | 2 | — | — | — | — | — | — | 2026-08-06 |
-| Grafana | 2 | — | — | 2 | 2 | — | — | — | — | — | — | 2026-08-06 |
+| Grafana | 4 | — | — | 2 | 3 | — | — | — | — | — | — | 2026-08-27 |
 | Helm | 5 | 1 | — | 1 | 4 | — | 1 | — | — | — | — | 2026-08-19 |
 | Jenkins | 2 | — | — | 1 | — | — | — | — | — | — | — | 2026-08-11 |
-| Kubernetes | 4 | 1 | 3 | 1 | 1 | — | 2 | — | — | — | — | 2026-08-04 |
+| Kubernetes | 4 | 2 | 3 | 1 | 1 | — | 2 | — | — | — | — | 2026-08-27 |
 | Prometheus | 2 | — | — | 1 | 2 | — | — | — | — | — | — | 2026-08-07 |
 | Python | 3 | 2 | 3 | 4 | 1 | — | — | — | — | — | — | 2026-08-25 |
-| Terraform | 3 | 2 | 1 | — | 3 | — | — | — | — | — | — | 2026-08-11 |
+| Terraform | 4 | 2 | 1 | — | 3 | — | — | — | — | — | — | 2026-08-27 |
 | Repo docs | — | 1 | — | — | — | — | — | — | — | — | — | 2026-08-10 |
 | Concepts | 20 | 17 | 11 | 9 | — | — | — | — | — | — | 4 | 2026-08-23 |
 
@@ -74,7 +74,7 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Status
 
-All eight concept primers are complete with runnable companions, and four project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability. The newest additions are a Bash 5.3 migration guide, a pipeline exit-code-handling notebook, a Bash production scaffold with retry and logging helpers, and a Docker Compose validator.
+All eight concept primers are complete with runnable companions, and four project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability. The newest additions are a Grafana quickstart gotchas note, a Terraform quickstart trip-ups note, a Grafana provisioning config, a Grafana first web UI note, and a GitHub Actions quickstart gotchas doc.
 
 ---
 
