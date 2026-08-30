@@ -6,6 +6,8 @@
 - prom: Add install Prometheus and explore web UI notes (prom-004)
 - prom: Add Prometheus scrape configuration YAML config (prom-006)
 - prom: Rework install Prometheus and explore web UI notes — remove unverifiable version claim, cover new ground (prom-004)
+- observability-monitoring-concepts: Add docs combining distributed tracing with network metrics correlation (con-071)
+- observability-monitoring-concepts: Add Jupyter notebook monitoring infrastructure drift with Prometheus and Terraform (con-072)
 
 ## 2026-08-27
 
