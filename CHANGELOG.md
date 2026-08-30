@@ -346,3 +346,7 @@ Passed ([x]) bash-010 — Bash: docs — How I wired Bash strict mode and trap p
 ## 2026-08-12
 
 - bash: Add notebook comparing log rotation approaches: inotifywait vs cron-driven polling (bash-014)
+
+## 2026-08-30
+
+- prom: Add first Prometheus scrape config with file-based service discovery (prom-006)
