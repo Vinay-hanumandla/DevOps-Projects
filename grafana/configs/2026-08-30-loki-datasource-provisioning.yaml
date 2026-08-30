@@ -1,0 +1,23 @@
+# last_verified: 2026-08-30 · grafana n/a
+
+apiVersion: 1
+
+datasources:
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
+    isDefault: false
+    editable: true
+    jsonData:
+      maxLines: 1000
+      derivedFields:
+        - name: traceID
+          matcherRegex: "trace_id=(\\w+)"
+          url: "http://tempo:3200/tempo/traces/${__value.raw}"
+          datasourceUid: tempo
+    # Example for basic auth if needed:
+    # basicAuth: true
+    # basicAuthUser: loki
+    # secureJsonData:
+    #   basicAuthPassword: ${LOKI_PASSWORD}
