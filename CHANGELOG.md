@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-30
+
+- tf: Add Terraform variables and outputs snippet with validation (tf-014)
+- prom: Add Prometheus quickstart trip-ups notes (prom-007)
+- prom: Add Prometheus alerting rules and Alertmanager routing config (prom-008)
+
 ## 2026-08-29
 
 - grafana: Add Grafana datasource provisioning YAML config (grafana-006)
