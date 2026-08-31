@@ -13,6 +13,9 @@
 - **Fact** — information Ansible collects about a host (CPU, RAM, OS) and exposes as `ansible_facts` in templates and conditions.
 - **pipx** — a tool for installing Python applications in isolated environments; the recommended way to install Ansible on systems that block `pip install` (PEP 668).
 - **Ad-hoc command** — a single `ansible` command run directly against hosts (e.g. `ansible all -m ping`) without a playbook file; useful for quick checks and one-off actions.
+- **ansible-inventory** — a CLI command that lists and inspects the Ansible inventory; `ansible-inventory --list` shows all groups and hosts, useful for debugging missing hosts or typos in group names.
+- **ansible-lint** — a linter that checks Ansible playbooks for bad practices; its strict profile flags unqualified module names and unsafe variable interpolation.
+- **Vault-encrypted password file** — a file containing the Ansible Vault password, stored with `chmod 600` permissions; a 0644 vault password file leaks the master key.
 
 ## Docker
 
@@ -163,6 +166,10 @@
 - **PromQL** — Prometheus's query language for selecting and aggregating time-series data. Example: `rate(http_requests_total[5m])` returns the per-second request rate over the last 5 minutes.
 - **AlertManager** — receives alerts fired by Prometheus, handles deduplication, grouping, and routing. Example: a high-CPU alert fires to a Slack channel via AlertManager.
 - **Job** — a logical name grouping scrape targets with shared configuration. Example: `job_name: "node"` collects all Node Exporter targets under one label.
+- **promtool** — Prometheus's CLI tool for checking configs and rules; `promtool check config prometheus.yml` validates the configuration file before loading it into Prometheus.
+- **`/-/reload`** — a Prometheus endpoint that reloads configuration when triggered with `curl -X POST`; disabled by default, enable with `--web.enable-lifecycle`.
+- **Service discovery** — a mechanism for dynamically finding scrape targets without hardcoding them in `static_configs`; file-based service discovery reads targets from a JSON or YAML file that can be updated independently.
+- **Recording rules** — pre-computed PromQL expressions that Prometheus evaluates and stores as new time series; used to speed up expensive queries or pre-aggregate high-cardinality data.
 
 ## Kubernetes
 

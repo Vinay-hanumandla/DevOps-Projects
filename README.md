@@ -18,11 +18,11 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Quick links
 
-- [First Grafana web UI](grafana/notes/2026-08-27-first-grafana-web-ui.md) — installed Grafana and opened the web UI for the first time
-- [Terraform quickstart trip-ups](tf/notes/2026-08-27-terraform-quickstart.md) — following the official quickstart and where I got stuck
-- [Grafana provisioning config](grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml) — datasource and dashboard provisioning config
-- [Grafana quickstart gotchas](grafana/notes/2026-08-27-grafana-quickstart-gotchas.md) — Docker install, data sources, panel editing, and dashboard saving traps
-- [GitHub Actions quickstart gotchas](gha/docs/2026-08-27-quickstart-gotchas.md) — YAML indentation, trigger syntax, runner pinning, and marketplace versioning
+- [Ansible quickstart gotchas](ansible/notes/2026-08-31-ansible-quickstart-gotchas.md) — following the Ansible quickstart and where I got stuck
+- [Idempotent nginx playbook](ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml) — a playbook that installs and configures nginx idempotently
+- [Ansible ad-hoc toolkit](ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh) — reusable ad-hoc commands for common Ansible tasks
+- [Prometheus alerting rules](prom/configs/2026-08-30-prometheus-alerting-rules.yaml) — alerting rules for Prometheus
+- [Prometheus quickstart trip-ups](prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md) — following the Prometheus quickstart and where I got stuck
 
 ---
 
@@ -38,7 +38,7 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 - `helm/` — Helm material: primer, install notes, chart snippet, per-environment values overrides, and a chart template.
 - `jenkins/` — Jenkins material: primer, install notes, and a first pipeline snippet.
 - `k8s/` — Kubernetes material: primer, install notes, kubectl exploration, configs, manifests, scripts, and a resource-listing snippet.
-- `prom/` — Prometheus material: primer and install notes, scrape target configs, and a PromQL snippet.
+- `prom/` — Prometheus material: primer and install notes, scrape target configs, alerting rules, and a PromQL snippet.
 - `python/` — Python material: primer, notes, docs, scripts, snippets, and configs.
 - `repo-doc/` — notes on keeping the repository's own docs and coverage tables in sync.
 - `tf/` — Terraform material: primer, install notes, configs, docs, and scripts.
@@ -53,18 +53,18 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 | Tool | notes | docs | scripts | snippets | configs | templates | manifests | dockerfiles | src | hooks | notebooks | Last verified |
 |------|-------|------|---------|----------|---------|-----------|-----------|-------------|-----|-------|-----------|---------------|
-| Ansible | 2 | — | — | — | 2 | — | — | — | — | — | — | 2026-08-10 |
+| Ansible | 3 | — | 1 | — | 3 | — | — | — | — | — | — | 2026-08-31 |
 | Bash | 3 | 5 | 6 | 1 | — | 30 | — | 1 | — | — | 2 | 2026-08-25 |
 | Docker | 5 | — | 3 | — | — | — | 1 | 1 | 2 | — | — | 2026-08-06 |
 | GitHub Actions | 3 | 2 | — | — | 2 | — | — | — | — | — | — | 2026-08-27 |
 | Git | 12 | 6 | 6 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-18 |
-| Grafana | 4 | — | — | 2 | 3 | — | — | — | — | — | — | 2026-08-27 |
+| Grafana | 4 | — | — | 2 | 5 | — | — | — | — | — | — | 2026-08-30 |
 | Helm | 5 | 1 | — | 1 | 4 | — | 1 | — | — | — | — | 2026-08-19 |
 | Jenkins | 2 | — | — | 1 | — | — | — | — | — | — | — | 2026-08-11 |
 | Kubernetes | 4 | 2 | 3 | 1 | 1 | — | 2 | — | — | — | — | 2026-08-27 |
-| Prometheus | 2 | — | — | 1 | 2 | — | — | — | — | — | — | 2026-08-07 |
+| Prometheus | 4 | — | — | 1 | 4 | — | — | — | — | — | — | 2026-08-30 |
 | Python | 3 | 2 | 3 | 4 | 1 | — | — | — | — | — | — | 2026-08-25 |
-| Terraform | 4 | 2 | 1 | — | 3 | — | — | — | — | — | — | 2026-08-27 |
+| Terraform | 4 | 2 | 1 | 1 | 3 | — | — | — | — | — | — | 2026-08-30 |
 | Repo docs | — | 1 | — | — | — | — | — | — | — | — | — | 2026-08-10 |
 | Concepts | 20 | 17 | 11 | 9 | — | — | — | — | — | — | 4 | 2026-08-23 |
 
@@ -74,8 +74,8 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Status
 
-All eight concept primers are complete with runnable companions, and four project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability. The newest additions are a Grafana quickstart gotchas note, a Terraform quickstart trip-ups note, a Grafana provisioning config, a Grafana first web UI note, and a GitHub Actions quickstart gotchas doc.
+All eight concept primers are complete with runnable companions, and four project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability. The newest additions are an Ansible quickstart gotchas note, an idempotent nginx playbook, an Ansible ad-hoc toolkit script, Prometheus alerting rules, and a Prometheus quickstart trip-ups note.
 
 ---
 
-_Last updated: 2026-08-27_
+_Last updated: 2026-08-31_

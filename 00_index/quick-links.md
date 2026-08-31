@@ -5,7 +5,10 @@
 ### Get started with Ansible
 - [Ansible primer](../ansible/notes/0000-primer-ansible.md) — what Ansible is, control/managed nodes, playbooks, inventory, modules, tasks, and roles
 - [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md) — pipx install, first ping command, and the PEP 668 trap
+- [Ansible quickstart gotchas](../ansible/notes/2026-08-31-ansible-quickstart-gotchas.md) — following the Ansible quickstart and where I got stuck
 - [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml) — minimal playbook to verify SSH connectivity to managed hosts
+- [Idempotent nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml) — a playbook that installs and configures nginx idempotently
+- [Ansible ad-hoc toolkit](../ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh) — reusable ad-hoc commands for common Ansible tasks
 
 ### Get started with Bash
 - [Bash primer](../bash/notes/0000-primer-bash.md) — what Bash is, key terminology, and a tiny example
@@ -155,7 +158,9 @@
 ### Get started with Prometheus
 - [Prometheus primer](../prom/notes/0000-primer-prometheus.md) — what Prometheus is, metrics types, and a minimal workflow
 - [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md) — install check and first web UI exploration
+- [Prometheus quickstart trip-ups](../prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md) — following the Prometheus quickstart and where I got stuck
 - [First scrape target](../prom/configs/2026-08-07-first-scrape-target.yaml) — a minimal Prometheus scrape target config
+- [Prometheus alerting rules](../prom/configs/2026-08-30-prometheus-alerting-rules.yaml) — alerting rules for Prometheus
 - [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh) — a shell helper that runs a basic PromQL query against a Prometheus server
 
 ### Get started with Python
