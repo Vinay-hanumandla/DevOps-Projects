@@ -1,0 +1,43 @@
+# last_verified: 2026-08-31 · Ansible 2.21.3
+# Minimal idempotent playbook: install nginx and ensure the service is running.
+# Demonstrates handlers for config-change restarts and the FQCN convention.
+# Run with: ansible-playbook -i inventory/hosts nginx-playbook.yaml
+
+- name: install and manage nginx
+  hosts: webservers
+  become: true
+  vars:
+    nginx_port: 80
+    server_name: localhost
+
+  tasks:
+    - name: install nginx package
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+        update_cache: true
+      when: ansible_os_family == "Debian"
+      tags: [install]
+
+    - name: deploy nginx config
+      ansible.builtin.template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/sites-available/default
+        owner: root
+        group: root
+        mode: "0644"
+      notify: reload nginx
+      tags: [config]
+
+    - name: ensure nginx service is running and enabled
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+      tags: [service]
+
+  handlers:
+    - name: reload nginx
+      ansible.builtin.service:
+        name: nginx
+        state: reloaded
