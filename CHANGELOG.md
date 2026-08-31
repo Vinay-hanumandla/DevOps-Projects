@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-31
+
+- ansible: Add Ansible quickstart gotchas notes covering PEP 668, inventory silence, ping ≠ ICMP, YAML booleans, config precedence, and become (ansible-004)
+- ansible: Add idempotent nginx playbook with handlers and FQCN convention (ansible-005)
+- ansible: Add ad-hoc workflow toolkit script for ping, facts, syntax-check, and dry-run (ansible-006)
+
 ## 2026-08-30
 
 - tf: Add Terraform variables and outputs snippet with validation (tf-014)
