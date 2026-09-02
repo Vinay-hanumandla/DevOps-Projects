@@ -1,0 +1,78 @@
+# last_verified: 2026-09-02 · gha n/a
+#
+# Matrix CI workflow: tests across an OS x Node-version grid, caches npm
+# dependencies per matrix cell, and uploads both test results and build
+# artifacts.
+#
+# fail-fast: false is set so one cell failing does not cancel the others —
+# we want full coverage data on every PR. The docs also mention max-parallel
+# to cap concurrent runners, but 4 is a reasonable default for a small repo.
+
+name: ci-multi-dimensional
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }} / Node ${{ matrix.node-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [18, 20]
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node${{ matrix.node-version }}-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node${{ matrix.node-version }}-npm-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ runner.os }}-node${{ matrix.node-version }}
+          path: test-results/
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Build distribution
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ runner.os }}-node${{ matrix.node-version }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 30
