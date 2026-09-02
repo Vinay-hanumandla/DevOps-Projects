@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-02
+
+- tf: Add minimal Terraform config with null provider and null_resource (tf-013)
+
 ## 2026-09-01
 
 - repo-doc: Add Bash script to regenerate the README coverage table from on-disk counts (repo-doc-003)
