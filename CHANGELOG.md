@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-01
+
+- repo-doc: Add Bash script to regenerate the README coverage table from on-disk counts (repo-doc-003)
+- repo-doc: Add primer for the repo documentation tooling: tool folders, category subdirs, coverage tables (repo-doc-004)
+
 ## 2026-08-31
 
 - ansible: Add Ansible quickstart gotchas notes covering PEP 668, inventory silence, ping ≠ ICMP, YAML booleans, config precedence, and become (ansible-004)
