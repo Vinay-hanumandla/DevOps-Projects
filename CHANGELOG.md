@@ -3,6 +3,7 @@
 ## 2026-09-02
 
 - tf: Add minimal Terraform config with null provider and null_resource (tf-013)
+- gha: Add CI workflow config with matrix builds, npm dependency caching, and artifact upload (gha-010)
 
 ## 2026-09-01
 
