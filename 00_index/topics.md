@@ -96,18 +96,20 @@
 - **snippets** (4): most recent → [Dockerfile validator](../python/snippets/validate-dockerfile.py), [Docker Compose validator](../python/snippets/docker-compose-validator.py), [Config file reader](../python/snippets/2026-08-22-config-file-reader.py), [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
 - **configs** (1): [First pyproject.toml](../python/configs/2026-08-24-pyproject-toml-config.toml)
 
-## Terraform  ·  11 files
+## Terraform  ·  12 files
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
 - **notes** (4): most recent → [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md), [Quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
-- **configs** (3): most recent → [Terraform variables and outputs](../tf/snippets/2026-08-30-terraform-variables-outputs.hcl), [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl), [First Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl)
+- **configs** (4): most recent → [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl), [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl), [First Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl)
 - **docs** (2): most recent → [Terraform — coverage check](../tf/docs/2026-08-11-terraform-coverage.md), [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md)
 - **scripts** (1): [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
 - **snippets** (1): [Terraform variables and outputs](../tf/snippets/2026-08-30-terraform-variables-outputs.hcl)
 
-## Repo-doc  ·  1 file
+## Repo-doc  ·  3 files
 
+- **primer:** [Repo-doc — quick primer](../repo-doc/notes/0000-primer-repo-doc.md)
 - **docs** (1): [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md)
+- **scripts** (1): [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh)
 
 ## Concepts (docs/concepts/)  ·  63 files
 

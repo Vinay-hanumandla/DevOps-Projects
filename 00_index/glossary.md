@@ -131,6 +131,7 @@
 - **Apply** — the command that makes the planned changes real. After approving the plan, `terraform apply` creates or updates resources.
 - **Drift** — the gap between the real-world state of infrastructure and what Terraform's state file says exists; detected when the actual resources have changed outside Terraform.
 - **Declarative** — describing the desired end state rather than the steps to reach it; Terraform configs are declarative, so you say what you want and Terraform figures out how to get there.
+- **null_resource** — a Terraform resource block that manages no real infrastructure; it runs provisioners (like `local-exec`) and tracks state only through its `triggers` map, useful for triggering actions or chaining dependencies without provisioning a cloud resource.
 
 ## Jenkins
 
