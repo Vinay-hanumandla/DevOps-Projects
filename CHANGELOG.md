@@ -2,6 +2,7 @@
 
 ## 2026-09-02
 
+- gha: Add docs on wiring tag-triggered GitHub Actions workflows for release automation (gha-011)
 - tf: Add minimal Terraform config with null provider and null_resource (tf-013)
 - gha: Add CI workflow config with matrix builds, npm dependency caching, and artifact upload (gha-010)
 
