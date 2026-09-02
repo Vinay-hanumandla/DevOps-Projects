@@ -187,6 +187,7 @@
 - [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md) — how to organise Terraform configs and modules
 - [First Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl) — a Terraform config that creates a provider resource
 - [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl) — a minimal Terraform config with provider and resource blocks
+- [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl) — a minimal Terraform config using the null provider and null_resource
 - [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh) — end-to-end Terraform workflow script for initialising, planning, and applying
 - [Terraform coverage check](../tf/docs/2026-08-11-terraform-coverage.md) — reconciling the Terraform folder against the manifest and fixing the counts
 
@@ -254,4 +255,6 @@
 - [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md) — debugging failed GitHub Actions runs
 
 ### Keep the repo's own docs in sync
+- [Repo-doc primer](../repo-doc/notes/0000-primer-repo-doc.md) — notes on keeping the repository's own docs and coverage tables in sync
 - [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md) — how I kept the README coverage table and Git index honest against what's actually on disk
+- [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh) — a helper that reconciles the README coverage table with on-disk counts

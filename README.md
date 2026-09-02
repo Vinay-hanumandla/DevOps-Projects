@@ -18,11 +18,11 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Quick links
 
+- [Terraform null resource config](tf/configs/2026-09-02-first-terraform-null-resource.hcl) — a minimal Terraform config using the null provider and null_resource
+- [Repo-doc primer](repo-doc/notes/0000-primer-repo-doc.md) — notes on keeping the repository's own docs and coverage tables in sync
+- [Regenerate coverage tables](repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh) — a helper that reconciles the README coverage table with on-disk counts
 - [Ansible quickstart gotchas](ansible/notes/2026-08-31-ansible-quickstart-gotchas.md) — following the Ansible quickstart and where I got stuck
 - [Idempotent nginx playbook](ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml) — a playbook that installs and configures nginx idempotently
-- [Ansible ad-hoc toolkit](ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh) — reusable ad-hoc commands for common Ansible tasks
-- [Prometheus alerting rules](prom/configs/2026-08-30-prometheus-alerting-rules.yaml) — alerting rules for Prometheus
-- [Prometheus quickstart trip-ups](prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md) — following the Prometheus quickstart and where I got stuck
 
 ---
 
@@ -64,9 +64,9 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 | Kubernetes | 4 | 2 | 3 | 1 | 1 | — | 2 | — | — | — | — | 2026-08-27 |
 | Prometheus | 4 | — | — | 1 | 4 | — | — | — | — | — | — | 2026-08-30 |
 | Python | 3 | 2 | 3 | 4 | 1 | — | — | — | — | — | — | 2026-08-25 |
-| Terraform | 4 | 2 | 1 | 1 | 3 | — | — | — | — | — | — | 2026-08-30 |
-| Repo docs | — | 1 | — | — | — | — | — | — | — | — | — | 2026-08-10 |
-| Concepts | 20 | 17 | 11 | 9 | — | — | — | — | — | — | 4 | 2026-08-23 |
+| Terraform | 4 | 2 | 1 | 1 | 4 | — | — | — | — | — | — | 2026-09-02 |
+| Repo docs | — | 1 | 1 | — | — | — | — | — | — | — | — | 2026-08-10 |
+| Concepts | 20 | 17 | 11 | 9 | — | — | — | — | — | — | 4 | 2026-08-29 |
 
 </details>
 
@@ -74,8 +74,8 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Status
 
-All eight concept primers are complete with runnable companions, and four project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability. The newest additions are an Ansible quickstart gotchas note, an idempotent nginx playbook, an Ansible ad-hoc toolkit script, Prometheus alerting rules, and a Prometheus quickstart trip-ups note.
+All eight concept primers are complete with runnable companions, and four project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability. The newest addition is a Terraform null resource config joining the existing local-file and provider-resource configs, plus a repo-doc primer and a coverage-table regeneration helper.
 
 ---
 
-_Last updated: 2026-08-31_
+_Last updated: 2026-09-02_
