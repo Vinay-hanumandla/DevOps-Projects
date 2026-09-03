@@ -5,6 +5,7 @@
 - tf: Add multi-resource Terraform config with VPC, subnet, security group, and EC2 instance (tf-015)
 - jenkins: Add Jenkins quickstart follow-up notes covering pipeline setup, agent declaration, and stage semantics (jenkins-004)
 - prom: Add reusable Prometheus query helper script with table/json/csv output (prom-009)
+- docker: Add docs on wiring Docker Compose healthchecks into service startup ordering (docker-010)
 - docker: Add script to build a containerized app with custom networks and named volumes (docker-009)
 
 ## 2026-09-02
