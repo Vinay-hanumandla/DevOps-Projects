@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-03
+
+- docker: Add script to build a containerized app with custom networks and named volumes (docker-009)
+
 ## 2026-09-02
 
 - gha: Add docs on wiring tag-triggered GitHub Actions workflows for release automation (gha-011)
