@@ -2,6 +2,7 @@
 
 ## 2026-09-03
 
+- docker: Add docs on wiring Docker Compose healthchecks into service startup ordering (docker-010)
 - docker: Add script to build a containerized app with custom networks and named volumes (docker-009)
 
 ## 2026-09-02
