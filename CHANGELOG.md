@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-03
+
+- docker: Add script to build a containerized app with custom networks and named volumes (docker-009)
+
 ## 2026-09-02
 
 - tf: Add minimal Terraform config with null provider and null_resource (tf-013)
