@@ -7,6 +7,7 @@
 - prom: Add reusable Prometheus query helper script with table/json/csv output (prom-009)
 - docker: Add docs on wiring Docker Compose healthchecks into service startup ordering (docker-010)
 - docker: Add script to build a containerized app with custom networks and named volumes (docker-009)
+- docker: Add multi-stage Dockerfile with non-root runtime user and pinned-UID hardening (docker-011)
 
 ## 2026-09-02
 
