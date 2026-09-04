@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-04
+
+- docker: Rework multi-stage Dockerfile with non-root runtime user, layer-caching best practices, and .dockerignore (docker-011)
+
 ## 2026-09-03
 
 - tf: Add multi-resource Terraform config with VPC, subnet, security group, and EC2 instance (tf-015)
