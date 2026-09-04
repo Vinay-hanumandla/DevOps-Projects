@@ -1,0 +1,14 @@
+# last_verified: 2026-09-04 · gha n/a
+name: minimal-ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Smoke check
+        run: echo "CI workflow ran successfully"
