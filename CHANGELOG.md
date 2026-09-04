@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-04
+
+- tf: Add workflow script to run terraform init, validate, plan, and apply with state-lock wait handling (tf-016)
+- gha: Add minimal CI workflow for push and pull_request triggers with checkout and smoke step (gha-013)
+
 ## 2026-09-03
 
 - tf: Add multi-resource Terraform config with VPC, subnet, security group, and EC2 instance (tf-015)
