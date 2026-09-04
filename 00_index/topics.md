@@ -21,21 +21,22 @@
 - **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
 - _…and more under `bash/` — browse the folder._
 
-## Docker  ·  12 files
+## Docker  ·  16 files
 
 - **primer:** [Docker — quick primer](../docker/notes/0000-primer-docker.md)
 - **notes** (5): most recent → [Docker trip-ups after the initial run-through](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md), [Install Docker](../docker/notes/2026-07-19-install-docker.md)
-- **dockerfiles** (1): [Minimal non-root image](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile)
-- **scripts** (3): [Hello-world container](../docker/scripts/2026-07-19-first-hello-world.sh), [Run nginx with port map](../docker/scripts/2026-07-18-first-port-mapped-container.sh), [Run container with port map](../docker/scripts/2026-07-16-run-container-port-map.sh)
+- **dockerfiles** (2): most recent → [Multi-stage non-root image](../docker/dockerfiles/multi-stage-nonroot.Dockerfile), [Minimal non-root image](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile)
+- **docs** (1): [Docker Compose healthcheck service ordering](../docker/docs/docker-compose-healthcheck-service-ordering.md)
+- **scripts** (4): most recent → [Build containerized app with custom networks and volumes](../docker/scripts/build-containerized-app-custom-networks-volumes.sh), [Hello-world container](../docker/scripts/2026-07-19-first-hello-world.sh), [Run nginx with port map](../docker/scripts/2026-07-18-first-port-mapped-container.sh)
 - **manifests** (1): [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml)
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
 
-## GitHub Actions  ·  7 files
+## GitHub Actions  ·  10 files
 
 - **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
 - **notes** (3): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
-- **docs** (2): most recent → [GitHub Actions quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md), [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
-- **configs** (2): [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml), [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml)
+- **docs** (3): most recent → [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md), [GitHub Actions quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md), [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
+- **configs** (4): most recent → [Minimal CI workflow (2026-09-04 refresh)](../gha/configs/2026-09-04-minimal-ci-workflow.yaml), [Matrix + cache + artifact CI](../gha/configs/matrix-cache-artifact-ci.yaml), [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml), [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml)
 
 ## Git  ·  32 files
 
@@ -64,10 +65,10 @@
 - **snippets** (1): [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh)
 - **manifests** (1): [First chart template](../helm/manifests/2026-08-14-first-chart-template.yaml)
 
-## Jenkins  ·  3 files
+## Jenkins  ·  4 files
 
 - **primer:** [Jenkins — quick primer](../jenkins/notes/0000-primer-jenkins.md)
-- **notes** (2): [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md)
+- **notes** (2): most recent → [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md), [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md)
 - **snippets** (1): [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 
 ## Kubernetes  ·  13 files
@@ -80,12 +81,13 @@
 - **manifests** (2): [Minimal deployment and service](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml), [Multi-service application](../k8s/manifests/multi-service-application.yaml)
 - **snippets** (1): [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh)
 
-## Prometheus  ·  9 files
+## Prometheus  ·  10 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
 - **notes** (4): most recent → [Prometheus quickstart trip-ups](../prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md), [Install Prometheus and explore web UI](../prom/notes/2026-08-29-install-prometheus-explore-web-ui.md), [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
 - **configs** (4): most recent → [Prometheus alerting rules](../prom/configs/2026-08-30-prometheus-alerting-rules.yaml), [Prometheus scrape config](../prom/configs/2026-08-29-prometheus-scrape-config.yaml), [Prometheus scrape config](../prom/configs/2026-08-22-prometheus-scrape-config.yaml)
 - **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
+- **scripts** (1): [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh)
 
 ## Python  ·  13 files
 
@@ -96,13 +98,13 @@
 - **snippets** (4): most recent → [Dockerfile validator](../python/snippets/validate-dockerfile.py), [Docker Compose validator](../python/snippets/docker-compose-validator.py), [Config file reader](../python/snippets/2026-08-22-config-file-reader.py), [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
 - **configs** (1): [First pyproject.toml](../python/configs/2026-08-24-pyproject-toml-config.toml)
 
-## Terraform  ·  12 files
+## Terraform  ·  14 files
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
 - **notes** (4): most recent → [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md), [Quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
-- **configs** (4): most recent → [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl), [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl), [First Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl)
+- **configs** (5): most recent → [Multi-resource Terraform config](../tf/configs/multi-resource-terraform-config.hcl), [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl), [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl)
 - **docs** (2): most recent → [Terraform — coverage check](../tf/docs/2026-08-11-terraform-coverage.md), [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md)
-- **scripts** (1): [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
+- **scripts** (2): most recent → [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh), [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
 - **snippets** (1): [Terraform variables and outputs](../tf/snippets/2026-08-30-terraform-variables-outputs.hcl)
 
 ## Repo-doc  ·  3 files
