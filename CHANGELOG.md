@@ -4,6 +4,8 @@
 
 - jenkins: Add minimal declarative Jenkinsfile with build and test stages (jenkins-005)
 - jenkins: Add Jenkinsfile snippet demonstrating environment variables and credential binding (jenkins-006)
+- bash: Add companion test.sh verifying the install-and-first-script note examples (bash-019)
+- tf: Add docs comparing local vs remote Terraform state for solo and team projects (tf-017)
 
 ## 2026-09-04
 
