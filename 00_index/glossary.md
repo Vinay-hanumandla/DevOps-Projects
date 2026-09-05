@@ -258,3 +258,30 @@
 
 - **Resource requests** — the minimum CPU and memory a container needs; the scheduler uses this to pick a node with enough capacity.
 - **Resource limits** — the maximum CPU and memory a container can use; exceeding the memory limit kills the container with an OOM error.
+
+## Terraform (additional)
+
+- **`terraform plan -lock-timeout=0s`** — a flag used to probe for a held state lock without acquiring it; CI scripts poll with this flag to detect whether a prior run's lock has been released.
+- **`local-exec` provisioner** — a Terraform block that runs a local command on the machine running `terraform apply` (instead of on the provisioned resource); used to trigger side effects like a deploy webhook or a notification.
+- **`triggers` map (null_resource)** — a map inside a `null_resource` whose values, when changed, force the resource to be replaced; the canonical way to make a `null_resource` react to a variable or output without managing real infrastructure.
+
+## Prometheus (additional)
+
+- **Prometheus HTTP API** — the JSON API exposed at `/api/v1/` (notably `/api/v1/query` for instant queries and `/api/v1/query_range` for range queries); scripts and tooling hit it with `curl` rather than scraping the metrics endpoint.
+- **`promtool check rules`** — a `promtool` subcommand that validates alerting/recording rule files against the Prometheus expression parser before deploying them; catches typos and bad-for-rules PromQL without spinning up a server.
+
+## Jenkins (additional)
+
+- **Pipeline script (inline)** — a Jenkinsfile pasted directly into a job's "Pipeline script" field instead of checked into a repo; the fastest path to a first build, and what the official quickstart uses before pointing at a real repository.
+- **Pipeline syntax validator** — the link next to the inline-script box that re-parses the Jenkinsfile against the declarative grammar and surfaces errors before a run starts; catches missing braces and mis-indented blocks before they fail a build.
+- **`agent any`** — the simplest `agent {}` declaration in a declarative pipeline, meaning "run on whichever executor is available"; on a single-node Jenkins this is always the controller.
+
+## Docker Compose (additional)
+
+- **`depends_on: condition: service_healthy`** — a Compose v2 key that holds a dependent service until the referenced service's health check reports `healthy`, instead of just waiting for the process to start; needed because the default `depends_on` only waits for the container to begin, not for the app inside to be ready.
+- **`service_healthy` ordering** — the practice of sequencing cache → API → worker services in a Compose file via health checks so traffic isn't sent to an unready dependency; pairs `HEALTHCHECK` in each Dockerfile with `condition: service_healthy` in `depends_on`.
+
+## GitHub Actions (additional)
+
+- **Tag-triggered workflow** — a workflow whose `on:` block filters to `push: tags: ['v*.*']` (or another pattern), so it fires only when a matching tag is pushed; used to gate releases to an explicit event rather than every commit on `main`.
+- **`GITHUB_TOKEN` permissions block** — the `permissions:` block inside a workflow or job that overrides the default read-only `GITHUB_TOKEN` granted since February 2023; workflows that create a release, push a commit, or write back to the repo must declare the scopes they need or they fail with a 403.

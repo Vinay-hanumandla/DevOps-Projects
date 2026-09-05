@@ -60,6 +60,7 @@
 
 ### Build a container image
 - [Minimal non-root Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile) — multi-stage build to a distroless, non-root runtime
+- [Multi-stage non-root image](../docker/dockerfiles/multi-stage-nonroot.Dockerfile) — reworked multi-stage Dockerfile with a dedicated build stage and a non-root runtime user
 
 ### Run a container
 - [Run container with port map](../docker/scripts/2026-07-16-run-container-port-map.sh) — run a tagged image, map a port, verify, and tear down
@@ -67,6 +68,7 @@
 
 ### Compose multi-service stacks
 - [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml) — web app, cache, and worker on the default network with `depends_on`
+- [Docker Compose healthcheck service ordering](../docker/docs/docker-compose-healthcheck-service-ordering.md) — wiring `depends_on: condition: service_healthy` so cache, web, and worker come up in the right order
 
 ### Get started with Git
 - [Git primer](../git/notes/0000-primer-git.md) — what Git is, key concepts, and a minimal workflow
@@ -140,6 +142,7 @@
 ### Get started with Jenkins
 - [Jenkins primer](../jenkins/notes/0000-primer-jenkins.md) — first-day notes for Jenkins: jobs, pipelines, nodes, executors, plugins, and workspaces
 - [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md) — install check, first web UI login, and creating a hello-world pipeline job
+- [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md) — second-pass notes after the Jenkins quickstart: credentials, agents, and pipeline triggers
 - [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy) — a minimal declarative Jenkins pipeline snippet
 
 ### Get started with Kubernetes
@@ -162,6 +165,7 @@
 - [First scrape target](../prom/configs/2026-08-07-first-scrape-target.yaml) — a minimal Prometheus scrape target config
 - [Prometheus alerting rules](../prom/configs/2026-08-30-prometheus-alerting-rules.yaml) — alerting rules for Prometheus
 - [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh) — a shell helper that runs a basic PromQL query against a Prometheus server
+- [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh) — a shell helper that runs ad-hoc PromQL queries against a running Prometheus server
 
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip
@@ -188,7 +192,9 @@
 - [First Terraform provider resource](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl) — a Terraform config that creates a provider resource
 - [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl) — a minimal Terraform config with provider and resource blocks
 - [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl) — a minimal Terraform config using the null provider and null_resource
+- [Multi-resource Terraform config](../tf/configs/multi-resource-terraform-config.hcl) — multiple resources wired together with locals, variables, and outputs
 - [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh) — end-to-end Terraform workflow script for initialising, planning, and applying
+- [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh) — Terraform workflow script with state-lock handling for CI
 - [Terraform coverage check](../tf/docs/2026-08-11-terraform-coverage.md) — reconciling the Terraform folder against the manifest and fixing the counts
 
 ### Understand a DevOps concept before touching a tool
@@ -250,9 +256,12 @@
 - [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md) — check installation and configure the gh CLI
 - [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml) — a first GitHub Actions workflow configuration
 - [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml) — a minimal GitHub Actions workflow for CI
+- [Minimal CI workflow (refresh)](../gha/configs/2026-09-04-minimal-ci-workflow.yaml) — a refreshed minimal CI workflow with lint, plan, and lock-handled apply
+- [Matrix + cache + artifact CI](../gha/configs/matrix-cache-artifact-ci.yaml) — a CI workflow using matrix builds, dependency caching, and artifact upload
 - [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md) — what to expect and where beginners get stuck
 - [GitHub Actions quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md) — YAML indentation, trigger syntax, runner pinning, and marketplace versioning
 - [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md) — debugging failed GitHub Actions runs
+- [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md) — designing GHA release pipelines that fire on tag pushes
 
 ### Keep the repo's own docs in sync
 - [Repo-doc primer](../repo-doc/notes/0000-primer-repo-doc.md) — notes on keeping the repository's own docs and coverage tables in sync

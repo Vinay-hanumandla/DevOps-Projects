@@ -18,11 +18,11 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Quick links
 
-- [Terraform null resource config](tf/configs/2026-09-02-first-terraform-null-resource.hcl) — a minimal Terraform config using the null provider and null_resource
-- [Repo-doc primer](repo-doc/notes/0000-primer-repo-doc.md) — notes on keeping the repository's own docs and coverage tables in sync
-- [Regenerate coverage tables](repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh) — a helper that reconciles the README coverage table with on-disk counts
-- [Ansible quickstart gotchas](ansible/notes/2026-08-31-ansible-quickstart-gotchas.md) — following the Ansible quickstart and where I got stuck
-- [Idempotent nginx playbook](ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml) — a playbook that installs and configures nginx idempotently
+- [Minimal CI workflow (refresh)](gha/configs/2026-09-04-minimal-ci-workflow.yaml) — a refreshed GitHub Actions CI workflow with lint, plan, and lock-handled Terraform apply
+- [Terraform init/validate/plan/apply with lock handling](tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh) — Terraform workflow script with state-lock handling for CI
+- [Multi-resource Terraform config](tf/configs/multi-resource-terraform-config.hcl) — a Terraform config wiring multiple resources through locals and outputs
+- [Docker Compose healthcheck service ordering](docker/docs/docker-compose-healthcheck-service-ordering.md) — wiring `depends_on: condition: service_healthy` so services come up in the right order
+- [Tag-triggered release workflows](gha/docs/tag-triggered-release-workflows.md) — designing GHA release pipelines that fire on tag pushes
 
 ---
 
@@ -30,18 +30,18 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 - `ansible/` — Ansible material: primer, install notes, and playbook configs.
 - `bash/` — Bash material: primer, notes, docs, scripts, notebooks, a strict-mode runner image, and three Docker project scaffolds (toolchain, health-check stack, and production scaffold).
-- `docker/` — Docker material: notes, Dockerfiles, source files, scripts, and a multi-service Compose manifest.
+- `docker/` — Docker material: notes, Dockerfiles, source files, scripts, a multi-service Compose manifest, and a Compose healthcheck ordering doc.
 - `docs/concepts/` — foundational primers with runnable scripts, snippets, and notebooks (CI/CD, containerization, IaC, Linux, networking, observability, scripting, version control).
-- `gha/` — GitHub Actions material: primer, install note, workflow configs, and debugging docs.
+- `gha/` — GitHub Actions material: primer, install note, workflow configs (including matrix + cache + artifact and a refreshed minimal CI), and docs on debugging and tag-triggered releases.
 - `git/` — Git material: notes, docs, scripts, hooks tooling, a release-workflow scaffold, and a pipeline-trigger manifest.
 - `grafana/` — Grafana material: primer, install notes, dashboard configs, and API snippets.
 - `helm/` — Helm material: primer, install notes, chart snippet, per-environment values overrides, and a chart template.
-- `jenkins/` — Jenkins material: primer, install notes, and a first pipeline snippet.
+- `jenkins/` — Jenkins material: primer, install notes, a quickstart follow-up, and a first pipeline snippet.
 - `k8s/` — Kubernetes material: primer, install notes, kubectl exploration, configs, manifests, scripts, and a resource-listing snippet.
-- `prom/` — Prometheus material: primer and install notes, scrape target configs, alerting rules, and a PromQL snippet.
+- `prom/` — Prometheus material: primer and install notes, scrape target configs, alerting rules, a PromQL snippet, and a query helper script.
 - `python/` — Python material: primer, notes, docs, scripts, snippets, and configs.
 - `repo-doc/` — notes on keeping the repository's own docs and coverage tables in sync.
-- `tf/` — Terraform material: primer, install notes, configs, docs, and scripts.
+- `tf/` — Terraform material: primer, install notes, configs (including a multi-resource and a null_resource), docs, and scripts (including a lock-handled init/validate/plan/apply).
 - `00_index/` — the map: topics, quick links, glossary, and learning path.
 - `CHANGELOG.md` — a dated log of what was added and when.
 
@@ -55,16 +55,16 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 |------|-------|------|---------|----------|---------|-----------|-----------|-------------|-----|-------|-----------|---------------|
 | Ansible | 3 | — | 1 | — | 3 | — | — | — | — | — | — | 2026-08-31 |
 | Bash | 3 | 5 | 6 | 1 | — | 30 | — | 1 | — | — | 2 | 2026-08-25 |
-| Docker | 5 | — | 3 | — | — | — | 1 | 1 | 2 | — | — | 2026-08-06 |
-| GitHub Actions | 3 | 2 | — | — | 2 | — | — | — | — | — | — | 2026-08-27 |
+| Docker | 5 | 1 | 4 | — | — | — | 1 | 2 | 2 | — | — | 2026-09-04 |
+| GitHub Actions | 3 | 3 | — | — | 4 | — | — | — | — | — | — | 2026-09-04 |
 | Git | 12 | 6 | 6 | — | — | 6 | 1 | — | — | 1 | — | 2026-08-18 |
 | Grafana | 4 | — | — | 2 | 5 | — | — | — | — | — | — | 2026-08-30 |
 | Helm | 5 | 1 | — | 1 | 4 | — | 1 | — | — | — | — | 2026-08-19 |
-| Jenkins | 2 | — | — | 1 | — | — | — | — | — | — | — | 2026-08-11 |
+| Jenkins | 2 | — | — | 1 | — | — | — | — | — | — | — | 2026-09-03 |
 | Kubernetes | 4 | 2 | 3 | 1 | 1 | — | 2 | — | — | — | — | 2026-08-27 |
-| Prometheus | 4 | — | — | 1 | 4 | — | — | — | — | — | — | 2026-08-30 |
+| Prometheus | 4 | — | 1 | 1 | 4 | — | — | — | — | — | — | 2026-09-03 |
 | Python | 3 | 2 | 3 | 4 | 1 | — | — | — | — | — | — | 2026-08-25 |
-| Terraform | 4 | 2 | 1 | 1 | 4 | — | — | — | — | — | — | 2026-09-02 |
+| Terraform | 4 | 2 | 2 | 1 | 5 | — | — | — | — | — | — | 2026-09-04 |
 | Repo docs | — | 1 | 1 | — | — | — | — | — | — | — | — | 2026-08-10 |
 | Concepts | 20 | 17 | 11 | 9 | — | — | — | — | — | — | 4 | 2026-08-29 |
 
@@ -74,8 +74,8 @@ A growing collection of hands-on DevOps artifacts. Each entry is a dated note, s
 
 ## Status
 
-All eight concept primers are complete with runnable companions, and four project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability. The newest addition is a Terraform null resource config joining the existing local-file and provider-resource configs, plus a repo-doc primer and a coverage-table regeneration helper.
+All eight concept primers are complete with runnable companions, and four project scaffolds are ready to copy in. The kit covers 12 tools across configuration management, containerization, CI/CD, infrastructure as code, and observability. The newest additions are a refreshed minimal GHA CI workflow, a Terraform init/validate/plan/apply script with state-lock handling, a multi-resource Terraform config, a Docker Compose healthcheck-ordering doc, and a tag-triggered release workflows doc.
 
 ---
 
-_Last updated: 2026-09-02_
+_Last updated: 2026-09-04_
