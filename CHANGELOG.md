@@ -2,6 +2,7 @@
 
 ## 2026-09-05
 
+- gha: Add notebook comparing matrix vs single-job strategies for multi-OS CI coverage (gha-012)
 - jenkins: Add minimal declarative Jenkinsfile with build and test stages (jenkins-005)
 - jenkins: Add Jenkinsfile snippet demonstrating environment variables and credential binding (jenkins-006)
 
