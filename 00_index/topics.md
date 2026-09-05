@@ -9,12 +9,12 @@
 - **configs** (3): most recent → [Idempotent nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml), [Install nginx playbook](../ansible/configs/2026-08-22-install-nginx-playbook.yaml), [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml)
 - **scripts** (1): [Ansible ad-hoc toolkit](../ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh)
 
-## Bash  ·  48 files
+## Bash  ·  50 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
 - **docs** (5): most recent → [Bash 5.3 migration guide](../bash/docs/bash-5.3-migration-guide.md), [Integrating Bash with Git](../bash/docs/integrating-bash-with-git.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md)
-- **scripts** (6): most recent → [System report tool](../bash/scripts/system-report-tool.sh), [Log rotation and retention](../bash/scripts/log-rotation-retention.sh), [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh)
+- **scripts** (8): most recent → [CI-safe build wrapper with ShellCheck gate](../bash/scripts/build-and-check.sh), [System report tool](../bash/scripts/system-report-tool.sh), [Log rotation and retention](../bash/scripts/log-rotation-retention.sh), [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh)  …and 4 more under `bash/scripts/`.
 - **snippets** (1): [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
 - **notebooks** (2): [Comparing pipeline exit-code handling](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb), [Comparing log rotation approaches](../bash/notebooks/comparing-log-rotation-approaches.ipynb)
 - **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
@@ -31,12 +31,13 @@
 - **manifests** (1): [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml)
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
 
-## GitHub Actions  ·  10 files
+## GitHub Actions  ·  11 files
 
 - **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
 - **notes** (3): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
 - **docs** (3): most recent → [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md), [GitHub Actions quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md), [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
 - **configs** (4): most recent → [Minimal CI workflow (2026-09-04 refresh)](../gha/configs/2026-09-04-minimal-ci-workflow.yaml), [Matrix + cache + artifact CI](../gha/configs/matrix-cache-artifact-ci.yaml), [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml), [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml)
+- **notebooks** (1): [Comparing matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 
 ## Git  ·  32 files
 
@@ -99,12 +100,12 @@
 - **snippets** (4): most recent → [Dockerfile validator](../python/snippets/validate-dockerfile.py), [Docker Compose validator](../python/snippets/docker-compose-validator.py), [Config file reader](../python/snippets/2026-08-22-config-file-reader.py), [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
 - **configs** (1): [First pyproject.toml](../python/configs/2026-08-24-pyproject-toml-config.toml)
 
-## Terraform  ·  14 files
+## Terraform  ·  15 files
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
 - **notes** (4): most recent → [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md), [Quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
 - **configs** (5): most recent → [Multi-resource Terraform config](../tf/configs/multi-resource-terraform-config.hcl), [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl), [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl)
-- **docs** (2): most recent → [Terraform — coverage check](../tf/docs/2026-08-11-terraform-coverage.md), [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md)
+- **docs** (3): most recent → [Local vs remote Terraform state](../tf/docs/local-vs-remote-terraform-state.md), [Terraform — coverage check](../tf/docs/2026-08-11-terraform-coverage.md), [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md)
 - **scripts** (2): most recent → [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh), [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
 - **snippets** (1): [Terraform variables and outputs](../tf/snippets/2026-08-30-terraform-variables-outputs.hcl)
 
