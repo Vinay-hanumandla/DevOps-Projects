@@ -1,0 +1,31 @@
+// last_verified: 2026-09-05 · Jenkins n/a
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the application...'
+                // In a real project, you'd run something like: sh './gradlew build'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                // In a real project, you'd run something like: sh './gradlew test'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished.'
+        }
+        success {
+            echo 'All stages passed.'
+        }
+        failure {
+            echo 'One or more stages failed.'
+        }
+    }
+}

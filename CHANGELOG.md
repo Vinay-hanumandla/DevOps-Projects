@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-05
+
+- jenkins: Add minimal declarative Jenkinsfile with build and test stages (jenkins-005)
+- jenkins: Add Jenkinsfile snippet demonstrating environment variables and credential binding (jenkins-006)
+
 ## 2026-09-04
 
 - docker: Rework multi-stage Dockerfile with non-root runtime user, layer-caching best practices, and .dockerignore (docker-011)
