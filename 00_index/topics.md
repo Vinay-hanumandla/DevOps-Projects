@@ -65,11 +65,12 @@
 - **snippets** (1): [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh)
 - **manifests** (1): [First chart template](../helm/manifests/2026-08-14-first-chart-template.yaml)
 
-## Jenkins  ·  4 files
+## Jenkins  ·  6 files
 
 - **primer:** [Jenkins — quick primer](../jenkins/notes/0000-primer-jenkins.md)
 - **notes** (2): most recent → [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md), [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md)
-- **snippets** (1): [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
+- **configs** (1): [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile)
+- **snippets** (2): most recent → [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 
 ## Kubernetes  ·  13 files
 

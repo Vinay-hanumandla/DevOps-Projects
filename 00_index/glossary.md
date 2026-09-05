@@ -275,6 +275,7 @@
 - **Pipeline script (inline)** — a Jenkinsfile pasted directly into a job's "Pipeline script" field instead of checked into a repo; the fastest path to a first build, and what the official quickstart uses before pointing at a real repository.
 - **Pipeline syntax validator** — the link next to the inline-script box that re-parses the Jenkinsfile against the declarative grammar and surfaces errors before a run starts; catches missing braces and mis-indented blocks before they fail a build.
 - **`agent any`** — the simplest `agent {}` declaration in a declarative pipeline, meaning "run on whichever executor is available"; on a single-node Jenkins this is always the controller.
+- **`withCredentials`** — a pipeline step that binds a stored credential (secret text, username/password, or SSH key) to an environment variable for the duration of its block; the variable is unset when the block exits, so the secret never leaks to subsequent stages.
 
 ## Docker Compose (additional)
 

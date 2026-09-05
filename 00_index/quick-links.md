@@ -143,7 +143,9 @@
 - [Jenkins primer](../jenkins/notes/0000-primer-jenkins.md) — first-day notes for Jenkins: jobs, pipelines, nodes, executors, plugins, and workspaces
 - [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md) — install check, first web UI login, and creating a hello-world pipeline job
 - [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md) — second-pass notes after the Jenkins quickstart: credentials, agents, and pipeline triggers
+- [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile) — a minimal declarative Jenkins pipeline config
 - [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy) — a minimal declarative Jenkins pipeline snippet
+- [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy) — a Jenkins pipeline snippet using environment credentials binding
 
 ### Get started with Kubernetes
 - [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md) — first-contact notes for Kubernetes concepts and kubectl basics
