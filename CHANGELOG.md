@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-06
+
+- docker: Add multi-arch buildx script with caching, tagging, and registry push (docker-012)
+- jenkins: Add notes on following the official Jenkins tutorial with declarative pipelines (jenkins-007)
+
 ## 2026-09-05
 
 - bash: Add CI-safe build wrapper with ShellCheck gate and with_retry (bash-023)
