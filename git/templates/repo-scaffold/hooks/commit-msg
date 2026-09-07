@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# last_verified: 2026-09-07 · git n/a
+# commit-msg hook: enforces the conventional-commit format on the message
+# passed in as $1. Install: chmod +x hooks/commit-msg
+#   git config core.hooksPath hooks
+set -Eeuo pipefail
+
+CONVENTIONAL='^(feat|fix|docs|chore|refactor|perf|test|build|ci|style|revert)(\(.+\))?!?: .+'
+
+main() {
+    local msg_file="$1"
+    local msg
+
+    # First non-comment, non-blank line of the message file.
+    msg="$(grep -v '^#' "$msg_file" | awk 'NF' | head -n 1)"
+
+    if [ -z "$msg" ]; then
+        printf 'FAIL: commit message is empty\n' >&2
+        exit 1
+    fi
+
+    if ! printf '%s\n' "$msg" | grep -Eq "$CONVENTIONAL"; then
+        printf 'FAIL: commit message does not match conventional format:\n' >&2
+        printf '  expected: <type>(<scope>): <description>\n' >&2
+        printf '  got:      %s\n' "$msg" >&2
+        printf '  types: feat fix docs chore refactor perf test build ci style revert\n' >&2
+        exit 1
+    fi
+
+    printf 'PASS: commit message matches conventional format\n'
+}
+
+main "$@"

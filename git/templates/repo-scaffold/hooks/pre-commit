@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# last_verified: 2026-09-07 · git n/a
+# pre-commit hook: runs the checks that must pass before a commit is created.
+# Install: chmod +x hooks/pre-commit && git config core.hooksPath hooks
+set -Eeuo pipefail
+
+SECRET_PATTERN='(\.pem|\.key|\.p12|\.pfx|id_rsa|id_ed25519|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY)'
+
+main() {
+    local failures=0
+    local file
+
+    # Reject commits that add obvious secret material.
+    while IFS= read -r -d '' file; do
+        if [[ "$file" =~ $SECRET_PATTERN ]]; then
+            printf 'FAIL: refusing to commit secret file: %s\n' "$file" >&2
+            exit 1
+        fi
+    done < <(git diff --cached --name-only -z)
+
+    # ShellCheck every staged shell script, if the tool is available.
+    if command -v shellcheck >/dev/null 2>&1; then
+        while IFS= read -r -d '' file; do
+            if ! shellcheck --severity=warning "$file"; then
+                failures=$((failures + 1))
+            fi
+        done < <(git diff --cached --name-only -z -- '*.sh' '*.bash')
+    else
+        printf 'WARN: shellcheck not installed; skipping shell lint\n' >&2
+    fi
+
+    # Run the project's own test suite if a test runner is configured.
+    if [ -f Makefile ] && grep -qE '^test:' Makefile; then
+        if make test; then
+            printf 'PASS: make test\n'
+        else
+            printf 'FAIL: make test\n' >&2
+            failures=$((failures + 1))
+        fi
+    fi
+
+    if [ "$failures" -ne 0 ]; then
+        printf '\n%d check(s) failed; aborting commit.\n' "$failures" >&2
+        exit 1
+    fi
+
+    printf 'All pre-commit checks passed.\n'
+}
+
+main "$@"
