@@ -4,6 +4,12 @@
 
 - docker: Add multi-arch buildx script with registry caching, semver tagging, and push (docker-012)
 - git: Add docs on tag-driven release branches and conventional-commit CI gates (git-025)
+- git: Add repo scaffold template with commit hooks, branch protection, CODEOWNERS, and CONTRIBUTING (git-026)
+
+## 2026-09-06
+
+- docker: Add multi-arch buildx script with caching, tagging, and registry push (docker-012)
+- jenkins: Add notes on following the official Jenkins tutorial with declarative pipelines (jenkins-007)
 
 ## 2026-09-05
 
