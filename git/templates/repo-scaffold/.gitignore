@@ -1,0 +1,23 @@
+# last_verified: 2026-09-07 · git n/a
+# Default ignore list for a Git repo scaffold. Covers build artifacts,
+# local editor state, OS cruft, and secrets that should never be committed.
+*.pyc
+__pycache__/
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+.env
+.env.*
+*.local
+*.swp
+*.swo
+*~
+.DS_Store
+.idea/
+.vscode/
+*.iml
+*.log
+*.pid
+*.seed

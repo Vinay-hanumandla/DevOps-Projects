@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-07
+
+- git: Add repo scaffold template with commit hooks, branch protection, CODEOWNERS, and CONTRIBUTING (git-026)
+
 ## 2026-09-06
 
 - docker: Add multi-arch buildx script with caching, tagging, and registry push (docker-012)
