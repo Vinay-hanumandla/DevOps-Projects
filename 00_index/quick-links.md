@@ -20,6 +20,7 @@
 - [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh) — a reusable skeleton with `set -euo pipefail`
 - [Companion hello script](../bash/scripts/2026-07-27-companion-hello.sh) — companion script for the hello-world pattern with argument handling and strict mode
 - [Companion test script](../bash/scripts/2026-07-27-companion-test.sh) — test companion that exercises the safe Bash template patterns
+- [CI-safe build wrapper](../bash/scripts/build-and-check.sh) — build wrapper with ShellCheck gate and retry logic for CI pipelines
 - [System report tool](../bash/scripts/system-report-tool.sh) — directory-based system report tool with text and JSON output
 - [Log rotation and retention](../bash/scripts/log-rotation-retention.sh) — compresses and prunes log files older than a threshold with gzip and age-based retention
 
@@ -62,6 +63,9 @@
 - [Minimal non-root Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile) — multi-stage build to a distroless, non-root runtime
 - [Multi-stage non-root image](../docker/dockerfiles/multi-stage-nonroot.Dockerfile) — reworked multi-stage Dockerfile with a dedicated build stage and a non-root runtime user
 
+### Build multi-arch images with buildx
+- [Multi-arch buildx automation](../docker/scripts/image-build-automation.sh) — Docker buildx script for multi-platform images with registry caching, semver tagging, and push
+
 ### Run a container
 - [Run container with port map](../docker/scripts/2026-07-16-run-container-port-map.sh) — run a tagged image, map a port, verify, and tear down
 - [Run nginx with port map](../docker/scripts/2026-07-18-first-port-mapped-container.sh) — run nginx, map a port, verify, and tear down
@@ -93,6 +97,9 @@
 
 ### Tag and push a Docker image from Git history
 - [Git — tagging Docker images from git describe](../git/docs/git-describe-image-tags-registry.md) — deriving traceable image tags from git history and pushing to a registry
+
+### Wire tag-driven releases and conventional-commit gates
+- [Tag-driven release branches and conventional-commit gates](../git/docs/git-cicd-tag-driven-releases-conventional-commits.md) — two complementary patterns for wiring Git tags and commit-message format into CI/CD release workflows
 
 ### Trigger a pipeline from Git events
 - [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps push, tag, and merge-request events to build → test → deploy jobs with `workflow.rules`
@@ -143,6 +150,7 @@
 - [Jenkins primer](../jenkins/notes/0000-primer-jenkins.md) — first-day notes for Jenkins: jobs, pipelines, nodes, executors, plugins, and workspaces
 - [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md) — install check, first web UI login, and creating a hello-world pipeline job
 - [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md) — second-pass notes after the Jenkins quickstart: credentials, agents, and pipeline triggers
+- [Following the official Jenkins tutorial](../jenkins/notes/2026-09-06-followed-jenkins-tutorial.md) — first real declarative pipeline beyond "Hello World," covering agent declaration and post-block semantics
 - [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile) — a minimal declarative Jenkins pipeline config
 - [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy) — a minimal declarative Jenkins pipeline snippet
 - [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy) — a Jenkins pipeline snippet using environment credentials binding
