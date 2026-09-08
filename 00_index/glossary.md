@@ -288,3 +288,21 @@
 
 - **Tag-triggered workflow** — a workflow whose `on:` block filters to `push: tags: ['v*.*']` (or another pattern), so it fires only when a matching tag is pushed; used to gate releases to an explicit event rather than every commit on `main`.
 - **`GITHUB_TOKEN` permissions block** — the `permissions:` block inside a workflow or job that overrides the default read-only `GITHUB_TOKEN` granted since February 2023; workflows that create a release, push a commit, or write back to the repo must declare the scopes they need or they fail with a 403.
+
+## Helm (additional)
+
+- **`helm lint`** — a command that validates Helm chart templates and values for syntax errors and best-practice violations before installation; catches issues like missing required fields or invalid templating before they reach a cluster.
+- **`helm template`** — renders Helm chart templates locally without connecting to a cluster, useful for validating the rendered manifests and spotting template errors before applying.
+- **`helm diff`** — a Helm plugin (or built-in in newer Helm versions) that shows a unified diff between the current release manifest and the proposed new manifest, so you can review exactly what will change before upgrading.
+- **`helm rollback`** — reverts a Helm release to a previous revision, restoring the previous chart version and values; useful when an upgrade introduces a regression.
+- **`--atomic`** — a Helm flag that automatically rolls back a release if the upgrade fails, leaving the previous working revision in place and avoiding a half-configured state.
+- **values inheritance** — Helm's layered values model where multiple `-f` files are applied left-to-right, so later files override earlier ones; the base `values.yaml` holds defaults, and per-environment files carry only the differences.
+
+## Docker (additional)
+
+- **`--cache-from`** — a Docker buildx flag that imports a build cache from a remote source (registry, local directory, or S3) to speed up rebuilds by reusing unchanged layers.
+- **`--cache-to`** — a Docker buildx flag that exports the build cache after a build so subsequent builds can reuse layers, cutting build time for iterative development.
+
+## Terraform (additional)
+
+- **state-lock handling** — the pattern of polling for a Terraform state lock with `terraform plan -lock-timeout=0s` and waiting before retrying, used in CI to avoid concurrent apply collisions when a prior run's lock has not been released.

@@ -57,14 +57,15 @@
 - **configs** (5): most recent → [Loki datasource provisioning](../grafana/configs/2026-08-30-loki-datasource-provisioning.yaml), [Grafana datasource provisioning](../grafana/configs/2026-08-29-grafana-datasource-provisioning.yaml), [Datasource and dashboard provisioning](../grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml)
 - **snippets** (2): most recent → [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh), [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
 
-## Helm  ·  12 files
+## Helm  ·  14 files
 
 - **primer:** [Helm — quick primer](../helm/notes/0000-primer-helm.md)
 - **notes** (5): most recent → [Following the Helm quickstart](../helm/notes/2026-08-19-following-helm-quickstart.md), [Install Helm with package manager](../helm/notes/2026-08-18-install-helm-with-package-manager.md), [Explore Helm chart repo and chart structure](../helm/notes/2026-08-08-explore-helm-chart-repo.md)
-- **docs** (1): [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md)
+- **docs** (2): most recent → [Helm values inheritance and environment overrides](../helm/docs/helm-values-inheritance.md), [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md)
 - **configs** (4): most recent → [Dev values override](../helm/configs/2026-08-20-dev-values.yaml), [Staging values override](../helm/configs/2026-08-20-staging-values.yaml), [Prod values override](../helm/configs/2026-08-20-prod-values.yaml)
 - **snippets** (1): [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh)
 - **manifests** (1): [First chart template](../helm/manifests/2026-08-14-first-chart-template.yaml)
+- **scripts** (1): [Helm release workflow](../helm/scripts/helm-release-workflow.sh)
 
 ## Jenkins  ·  7 files
 

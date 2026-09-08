@@ -14,13 +14,13 @@
 - [Bash primer](../bash/notes/0000-primer-bash.md) — what Bash is, key terminology, and a tiny example
 - [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md) — install check, first .sh file, and permission gotcha
 - [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md) — quoting, word splitting, exit codes, and trap
+- [CI-safe build wrapper](../bash/scripts/build-and-check.sh) — build wrapper with ShellCheck gate and retry logic for CI pipelines
 
 ### Write and run a Bash script
 - [Hello world with argument handling](../bash/scripts/2026-07-18-first-hello-world.sh) — a minimal script that checks for arguments
 - [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh) — a reusable skeleton with `set -euo pipefail`
 - [Companion hello script](../bash/scripts/2026-07-27-companion-hello.sh) — companion script for the hello-world pattern with argument handling and strict mode
 - [Companion test script](../bash/scripts/2026-07-27-companion-test.sh) — test companion that exercises the safe Bash template patterns
-- [CI-safe build wrapper](../bash/scripts/build-and-check.sh) — build wrapper with ShellCheck gate and retry logic for CI pipelines
 - [System report tool](../bash/scripts/system-report-tool.sh) — directory-based system report tool with text and JSON output
 - [Log rotation and retention](../bash/scripts/log-rotation-retention.sh) — compresses and prunes log files older than a threshold with gzip and age-based retention
 
@@ -136,6 +136,8 @@
 - [Install Helm with package manager](../helm/notes/2026-08-18-install-helm-with-package-manager.md) — package-manager install, version check, and shell completion setup
 - [Following the Helm quickstart](../helm/notes/2026-08-19-following-helm-quickstart.md) — walked through the official quickstart: chart scaffold, install, and lifecycle commands
 - [Explore Helm chart repo and chart structure](../helm/notes/2026-08-08-explore-helm-chart-repo.md) — notes on Helm chart repo anatomy and chart folder structure
+- [Helm values inheritance and environment overrides](../helm/docs/helm-values-inheritance.md) — how values layer across dev, staging, and prod for microservice releases
+- [Helm release workflow](../helm/scripts/helm-release-workflow.sh) — lint, template, diff, upgrade, and rollback in one runnable script
 
 ### Deploy with Helm
 - [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh) — install and manage a Helm chart in a local or test cluster
@@ -203,6 +205,7 @@
 - [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl) — a minimal Terraform config with provider and resource blocks
 - [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl) — a minimal Terraform config using the null provider and null_resource
 - [Multi-resource Terraform config](../tf/configs/multi-resource-terraform-config.hcl) — multiple resources wired together with locals, variables, and outputs
+- [Local vs remote Terraform state](../tf/docs/local-vs-remote-terraform-state.md) — comparing state strategies for solo and team projects
 - [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh) — end-to-end Terraform workflow script for initialising, planning, and applying
 - [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh) — Terraform workflow script with state-lock handling for CI
 - [Terraform coverage check](../tf/docs/2026-08-11-terraform-coverage.md) — reconciling the Terraform folder against the manifest and fixing the counts
@@ -272,6 +275,7 @@
 - [GitHub Actions quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md) — YAML indentation, trigger syntax, runner pinning, and marketplace versioning
 - [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md) — debugging failed GitHub Actions runs
 - [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md) — designing GHA release pipelines that fire on tag pushes
+- [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb) — notebook comparing matrix builds vs single-job workflows for multi-OS coverage
 
 ### Keep the repo's own docs in sync
 - [Repo-doc primer](../repo-doc/notes/0000-primer-repo-doc.md) — notes on keeping the repository's own docs and coverage tables in sync
