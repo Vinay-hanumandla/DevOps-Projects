@@ -4,6 +4,9 @@
 
 - helm: Add release workflow script with lint, template, diff, upgrade, and rollback (helm-011)
 - helm: Add docs on values inheritance and environment overrides for microservice releases (helm-012)
+- helm: Add multi-environment Helm chart values config (helm-013)
+- git: Add notes on choosing between submodules, subtrees, and monorepo (git-033)
+- repo-doc: Add docs on repo documentation tooling, coverage tables, and index conventions (repo-doc-005)
 
 ## 2026-09-07
 
