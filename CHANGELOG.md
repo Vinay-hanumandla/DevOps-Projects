@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-08
+
+- helm: Add release workflow script with lint, template, diff, upgrade, and rollback (helm-011)
+- helm: Add docs on values inheritance and environment overrides for microservice releases (helm-012)
+
 ## 2026-09-07
 
 - docker: Add multi-arch buildx script with registry caching, semver tagging, and push (docker-012)
