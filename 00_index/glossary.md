@@ -224,6 +224,12 @@
 - **Table-driven checks** — expressing a sequence of checks as data (a list of label/command pairs) and looping over it, so adding or changing a step edits one entry instead of another copy-pasted conditional block.
 
 
+## Git
+
+- **Submodule** — a Git repo nested inside another repo, tracked by a commit pointer in the parent; requires `git submodule update --init --recursive` after cloning, and CI pipelines need extra steps to fetch the nested content.
+- **Subtree** — a strategy that merges a child repo's history into a subdirectory of the parent; the parent owns the code, contributors to the child don't need to know about the subtree, but the parent repo's history grows larger.
+- **Monorepo** — a single repository that contains multiple projects or services; avoids submodules and subtree commands but may require tooling like Bazel or careful directory ownership to keep builds fast.
+
 ## GitLab CI
 
 - **Pipeline trigger** — a Git event (push, tag, or merge request) that starts a pipeline; the manifest's `workflow.rules` block allows only those sources through and rejects manual and scheduled runs.
@@ -297,6 +303,11 @@
 - **`helm rollback`** — reverts a Helm release to a previous revision, restoring the previous chart version and values; useful when an upgrade introduces a regression.
 - **`--atomic`** — a Helm flag that automatically rolls back a release if the upgrade fails, leaving the previous working revision in place and avoiding a half-configured state.
 - **values inheritance** — Helm's layered values model where multiple `-f` files are applied left-to-right, so later files override earlier ones; the base `values.yaml` holds defaults, and per-environment files carry only the differences.
+
+## Repo-doc
+
+- **Coverage table** — a Markdown table in README.md that tracks how many files each tool folder contains, broken down by category (notes, scripts, docs, configs, etc.); kept in sync with on-disk counts by a regeneration script.
+- **Tool index** — a per-tool Markdown file (e.g. `git/docs/2026-08-10-git-index.md`) that lists every doc in that tool's folder with a one-line description; walks the subdirectory tree and records what's there.
 
 ## Docker (additional)
 
