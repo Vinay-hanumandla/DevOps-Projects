@@ -2,6 +2,7 @@
 
 ## 2026-09-09
 
+- bash: Add notebook comparing ShellCheck SC2086, SC2068, and SC2206 word-splitting rules and suppression strategies (bash-025)
 - grafana: Add Python snippet for listing dashboards and datasources via the Grafana HTTP API (grafana-010)
 - bash: Add docs on Bash 5.3 parameter expansion exit-status fix, GLOBSORT, and associative array improvements (bash-024)
 
