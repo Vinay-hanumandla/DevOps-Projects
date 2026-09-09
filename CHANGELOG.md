@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-09
+
+- grafana: Add Python snippet for listing dashboards and datasources via the Grafana HTTP API (grafana-010)
+- bash: Add docs on Bash 5.3 parameter expansion exit-status fix, GLOBSORT, and associative array improvements (bash-024)
+
 ## 2026-09-08
 
 - helm: Add release workflow script with lint, template, diff, upgrade, and rollback (helm-011)
