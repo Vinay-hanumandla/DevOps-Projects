@@ -67,4 +67,4 @@ This kit covers 14 tools across the DevOps lifecycle: version control (Git), con
 Currently working through L3–L4 first-contact notes for Helm, Jenkins, and Terraform, with recent additions to GitHub Actions matrix strategies and Docker multi-arch builds.
 
 ---
-_Last updated: 2026-09-08_
+_Last updated: 2026-09-09_
