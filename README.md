@@ -45,20 +45,20 @@ This kit covers 14 tools across the DevOps lifecycle: version control (Git), con
 
 | Tool | notes | docs | scripts | configs | manifests | snippets | notebooks | dockerfiles | templates | src | Last verified |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| Ansible | 3 | — | 1 | 3 | — | — | — | — | — | — | 2026-08-31 |
-| Bash | 3 | 5 | 8 | — | — | 1 | 2 | 1 | 30 | — | 2026-08-25 |
+| Ansible | 3 | — | 1 | 4 | — | — | — | — | — | — | 2026-08-31 |
+| Bash | 3 | 5 | 8 | — | — | 1 | 3 | 1 | 30 | — | 2026-09-05 |
 | Docker | 5 | 1 | 6 | — | 1 | — | — | 2 | — | 2 | 2026-09-03 |
-| GitHub Actions | 3 | 3 | — | 4 | — | — | 1 | — | — | — | 2026-09-02 |
-| Git | 12 | 7 | 6 | — | 1 | — | — | — | 15 | — | 2026-09-07 |
-| Grafana | 4 | — | — | 5 | — | 2 | — | — | — | — | 2026-08-27 |
-| Helm | 5 | 2 | 1 | 4 | 1 | 1 | — | — | — | — | 2026-09-08 |
+| GitHub Actions | 3 | 3 | — | 4 | — | — | 1 | — | — | — | 2026-09-04 |
+| Git | 12 | 8 | 6 | — | 1 | — | — | — | 15 | — | 2026-09-08 |
+| Grafana | 4 | — | — | 5 | — | 3 | — | — | — | — | 2026-09-09 |
+| Helm | 5 | 2 | 1 | 5 | 1 | 1 | — | — | — | — | 2026-09-08 |
 | Jenkins | 4 | — | — | 1 | — | 2 | — | — | — | — | 2026-09-06 |
 | Kubernetes | 4 | 2 | 3 | 1 | 2 | 1 | — | — | — | — | 2026-08-27 |
-| Prometheus | 4 | — | 1 | 4 | — | 1 | — | — | — | — | 2026-08-30 |
+| Prometheus | 4 | — | 1 | 4 | — | 1 | — | — | — | — | 2026-09-03 |
 | Python | 3 | 2 | 3 | 1 | — | 4 | — | — | — | — | 2026-08-25 |
 | Terraform | 4 | 3 | 2 | 5 | — | 1 | — | — | — | — | 2026-09-05 |
 | Concepts | — | 8 | 8 | — | — | 7 | 3 | — | — | — | 2026-08-29 |
-| Repo-doc | 1 | 1 | 1 | — | — | — | — | — | — | — | 2026-09-01 |
+| Repo-doc | 1 | 1 | 1 | — | — | — | — | — | — | — | 2026-09-08 |
 
 </details>
 
@@ -67,4 +67,4 @@ This kit covers 14 tools across the DevOps lifecycle: version control (Git), con
 Currently working through L3–L4 first-contact notes for Helm, Jenkins, and Terraform, with recent additions to GitHub Actions matrix strategies and Docker multi-arch builds.
 
 ---
-_Last updated: 2026-09-09_
+_Last updated: 2026-09-10_

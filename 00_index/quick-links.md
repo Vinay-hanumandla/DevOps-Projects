@@ -8,6 +8,7 @@
 - [Ansible quickstart gotchas](../ansible/notes/2026-08-31-ansible-quickstart-gotchas.md) — following the Ansible quickstart and where I got stuck
 - [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml) — minimal playbook to verify SSH connectivity to managed hosts
 - [Idempotent nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml) — a playbook that installs and configures nginx idempotently
+- [VPS hardening playbook](../ansible/configs/vps-hardening-playbook.yaml) — a playbook for hardening VPS security configurations
 - [Ansible ad-hoc toolkit](../ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh) — reusable ad-hoc commands for common Ansible tasks
 
 ### Get started with Bash
@@ -30,6 +31,7 @@
 - [Debug and profile with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md) — using Bash's execution trace and DEBUG trap for profiling and debugging
 - [Integrating Bash with Git](../bash/docs/integrating-bash-with-git.md) — fail-fast, re-runnable patterns for release scripts that touch git
 - [Bash 5.3 migration guide](../bash/docs/bash-5.3-migration-guide.md) — documenting behavioral and syntactic changes in Bash 5.3 for script audits and upgrades
+- [Bash 5.3 deep dive](../bash/docs/bash-5.3-deep-dive.md) — detailed exploration of Bash 5.3 features and behavior changes
 
 ### Run Bash in a container
 - [Strict-mode runner image](../bash/dockerfiles/strict-mode-runner.Dockerfile) — a minimal Debian image that wraps Bash in `set -euo pipefail` under an unprivileged user
@@ -50,6 +52,9 @@
 
 ### Compare Bash pipeline exit-code handling
 - [Comparing pipeline exit-code handling](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb) — notebook comparing `set -o pipefail`, `PIPESTATUS`, and Bash 5.3 shell-context command substitution
+
+### Compare ShellCheck profiles
+- [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb) — notebook comparing different ShellCheck profiles and their strictness levels
 
 ### Get started with Docker
 - [Docker primer](../docker/notes/0000-primer-docker.md) — what Docker is, images vs containers, and a minimal workflow
@@ -132,6 +137,7 @@
 - [Datasource and dashboard provisioning](../grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml) — provisioning datasource and dashboard config
 - [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh) — a shell helper that enumerates dashboards via the Grafana API
 - [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh) — a shell helper that creates a Grafana dashboard via the API
+- [List dashboards and datasources](../grafana/snippets/2026-09-09-list-dashboards-datasources.py) — Python script to list dashboards and datasources via the Grafana API
 
 ### Get started with Helm
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
