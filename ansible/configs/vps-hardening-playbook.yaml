@@ -1,0 +1,181 @@
+# last_verified: 2026-09-09 · Ansible 2.21.3
+# VPS hardening playbook from scratch: SSH hardening, UFW firewall, sysctl kernel params,
+# deploy user setup, and fail2ban jail config.
+# Handlers ensure services restart only when config changes.
+# Run with: ansible-playbook -i inventory/hosts -K vps-hardening-playbook.yaml
+
+- name: harden a fresh VPS
+  hosts: vps
+  become: true
+  vars:
+    ssh_port: 2222
+    deploy_user: deploy
+    deploy_user_shell: /bin/bash
+    allowed_tcp_ports:
+      - 2222   # SSH
+      - 80     # HTTP
+      - 443    # HTTPS
+    allowed_udp_ports: []
+
+  tasks:
+    - name: set deploy user
+      ansible.builtin.user:
+        name: "{{ deploy_user }}"
+        shell: "{{ deploy_user_shell }}"
+        create_home: true
+        state: present
+      tags: [users]
+
+    - name: add deploy user to sudoers
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers.d/{{ deploy_user }}
+        line: "{{ deploy_user }} ALL=(ALL) NOPASSWD:ALL"
+        create: true
+        mode: "0440"
+        validate: "visudo -cf %s"
+      tags: [users]
+
+    - name: install required packages
+      ansible.builtin.apt:
+        name:
+          - ufw
+          - fail2ban
+        state: present
+        update_cache: true
+      when: ansible_os_family == "Debian"
+      tags: [packages]
+
+    - name: deploy sshd_config
+      ansible.builtin.copy:
+        dest: /etc/ssh/sshd_config
+        content: |
+          Port {{ ssh_port }}
+          Protocol 2
+          PermitRootLogin no
+          PasswordAuthentication no
+          PubkeyAuthentication yes
+          ChallengeResponseAuthentication no
+          UsePAM yes
+          X11Forwarding no
+          PrintMotd no
+          AcceptEnv LANG LC_*
+          Subsystem sftp /usr/lib/openssh/sftp-server
+          MaxAuthTries 3
+          LoginGraceTime 60
+          ClientAliveInterval 300
+          ClientAliveCountMax 2
+        owner: root
+        group: root
+        mode: "0600"
+        validate: "sshd -t -f %s"
+      notify: restart sshd
+      tags: [ssh]
+
+    - name: set UFW default deny incoming
+      community.general.ufw:
+        direction: incoming
+        policy: deny
+      tags: [firewall]
+
+    - name: set UFW default allow outgoing
+      community.general.ufw:
+        direction: outgoing
+        policy: allow
+      tags: [firewall]
+
+    - name: allow TCP ports through UFW
+      community.general.ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp
+      loop: "{{ allowed_tcp_ports }}"
+      tags: [firewall]
+
+    - name: allow UDP ports through UFW
+      community.general.ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: udp
+      loop: "{{ allowed_udp_ports }}"
+      tags: [firewall]
+
+    - name: enable UFW
+      community.general.ufw:
+        state: enabled
+      tags: [firewall]
+
+    - name: deploy kernel hardening sysctl
+      ansible.builtin.copy:
+        dest: /etc/sysctl.d/99-hardening.conf
+        content: |
+          # Ignore ICMP broadcast requests
+          net.ipv4.icmp_echo_ignore_broadcasts = 1
+          # Disable source packet routing
+          net.ipv4.conf.all.accept_source_route = 0
+          net.ipv4.conf.default.accept_source_route = 0
+          # Ignore send redirects
+          net.ipv4.conf.all.send_redirects = 0
+          net.ipv4.conf.default.send_redirects = 0
+          # Block SYN attacks
+          net.ipv4.tcp_syncookies = 1
+          net.ipv4.tcp_max_syn_backlog = 2048
+          net.ipv4.tcp_synack_retries = 2
+          # Log Martian packets
+          net.ipv4.conf.all.log_martians = 1
+          # Ignore ICMP redirects
+          net.ipv4.conf.all.accept_redirects = 0
+          net.ipv4.conf.default.accept_redirects = 0
+          net.ipv6.conf.all.accept_redirects = 0
+          net.ipv6.conf.default.accept_redirects = 0
+          # Disable IPv6 if not needed
+          net.ipv6.conf.all.disable_ipv6 = 1
+          net.ipv6.conf.default.disable_ipv6 = 1
+        owner: root
+        group: root
+        mode: "0644"
+      notify: apply sysctl
+      tags: [kernel]
+
+    - name: configure fail2ban sshd jail
+      ansible.builtin.copy:
+        dest: /etc/fail2ban/jail.local
+        content: |
+          [DEFAULT]
+          bantime = 3600
+          findtime = 600
+          maxretry = 5
+          backend = systemd
+
+          [sshd]
+          enabled = true
+          port = {{ ssh_port }}
+          filter = sshd
+          logpath = /var/log/auth.log
+          maxretry = 3
+        owner: root
+        group: root
+        mode: "0644"
+      notify: restart fail2ban
+      tags: [fail2ban]
+
+    - name: ensure fail2ban is running and enabled
+      ansible.builtin.service:
+        name: fail2ban
+        state: started
+        enabled: true
+      tags: [fail2ban]
+
+  handlers:
+    - name: restart sshd
+      ansible.builtin.service:
+        name: ssh
+        state: restarted
+
+    - name: apply sysctl
+      ansible.builtin.command: sysctl --system
+      become: true
+
+    - name: restart fail2ban
+      ansible.builtin.service:
+        name: fail2ban
+        state: restarted
