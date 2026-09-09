@@ -95,6 +95,9 @@
 - [Rebase-based vs merge-based release workflows](../git/docs/rebase-based-vs-merge-based-release-workflows.md) — comparing rebase and merge strategies for release branches
 - [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md) — how the two strategies behave once a repo crosses hundreds of contributors and long-lived release branches
 
+### Choose between submodules, subtrees, and monorepo
+- [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md) — when to use each approach for managing external dependencies and multi-repo structures
+
 ### Tag and push a Docker image from Git history
 - [Git — tagging Docker images from git describe](../git/docs/git-describe-image-tags-registry.md) — deriving traceable image tags from git history and pushing to a registry
 
@@ -146,6 +149,7 @@
 - [Dev values override](../helm/configs/2026-08-20-dev-values.yaml) — per-environment values for a dev Helm release
 - [Staging values override](../helm/configs/2026-08-20-staging-values.yaml) — per-environment values for a staging Helm release
 - [Prod values override](../helm/configs/2026-08-20-prod-values.yaml) — per-environment values for a production Helm release
+- [Multi-environment Helm values](../helm/configs/multi-environment-helm-values.yaml) — a single file defining dev, staging, and prod values for multi-environment deployments
 - [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md) — comparing the Helm folder against the manifest and fixing the counts
 
 ### Get started with Jenkins
@@ -280,4 +284,5 @@
 ### Keep the repo's own docs in sync
 - [Repo-doc primer](../repo-doc/notes/0000-primer-repo-doc.md) — notes on keeping the repository's own docs and coverage tables in sync
 - [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md) — how I kept the README coverage table and Git index honest against what's actually on disk
+- [Repo-doc tooling overview](../repo-doc/docs/2026-09-08-repo-doc-tooling-overview.md) — overview of the tools and scripts used to maintain the repository's documentation
 - [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh) — a helper that reconciles the README coverage table with on-disk counts
