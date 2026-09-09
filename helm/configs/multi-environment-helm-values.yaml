@@ -1,0 +1,45 @@
+# last_verified: 2026-09-08 · helm n/a
+
+# Base values for a multi-environment Helm chart.
+# Override per environment with separate files passed via `-f`.
+
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+# Per-environment overrides (not in this file):
+#   values-dev.yaml    → replicaCount: 1, resources lowered
+#   values-staging.yaml → replicaCount: 2, ingress enabled
+#   values-prod.yaml    → replicaCount: 3, autoscaling enabled, resources raised
+#
+# Deploy with:
+#   helm install myapp . -f values.yaml -f values-dev.yaml
