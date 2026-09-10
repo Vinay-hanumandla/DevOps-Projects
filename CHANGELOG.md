@@ -6,6 +6,9 @@
 - repo-doc: Add notes on repo-doc quickstart trip-ups — script invocation, tool-folder detection, stdout output, and category validation (repo-doc-005)
 - ansible: Add docs on wiring handlers and idempotency checks into fleet configuration (ansible-008)
 - ansible: Add reusable ansible-playbook wrapper: syntax-check, check-diff, idempotent rerun (ansible-009)
+- git: Add companion file.txt for Git quickstart trip-ups notes (git-029)
+- git: Add companion README.md for Git quickstart trip-ups notes (git-030)
+- git: Add companion readme.txt for Git primer (git-031)
 
 ## 2026-09-09
 
