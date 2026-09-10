@@ -39,10 +39,10 @@
 - **configs** (4): most recent → [Minimal CI workflow (2026-09-04 refresh)](../gha/configs/2026-09-04-minimal-ci-workflow.yaml), [Matrix + cache + artifact CI](../gha/configs/matrix-cache-artifact-ci.yaml), [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml), [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml)
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 
-## Git  ·  43 files
+## Git  ·  47 files
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
-- **notes** (12): most recent → [Companion forgotten undo notes 15](../git/notes/2026-07-28-git-companion-forgotten-undo-notes-15.md), [Companion readme quickstart trip-ups](../git/notes/2026-07-28-git-companion-readme-quickstart-trip-ups.md), [Install Git](../git/notes/2026-07-20-install-git.md)
+- **notes** (15): most recent → [Git companion file quickstart](../git/notes/2026-09-10-git-companion-file-quickstart.txt), [Git companion readme primer](../git/notes/2026-09-10-git-companion-readme-primer.txt), [Git companion readme quickstart](../git/notes/2026-09-10-git-companion-readme-quickstart.md), [Companion forgotten undo notes 15](../git/notes/2026-07-28-git-companion-forgotten-undo-notes-15.md)
 - **docs** (8): most recent → [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md), [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md), [Tagging Docker images from git describe](../git/docs/git-describe-image-tags-registry.md), [Tag-driven releases and conventional-commit gates](../git/docs/git-cicd-tag-driven-releases-conventional-commits.md), [Git — my first file index](../git/docs/2026-08-10-git-index.md)
 - **scripts** (6): most recent → [Changelog from conventional commits](../git/scripts/changelog-from-conventional-commits.sh), [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Git PR helper](../git/scripts/git-pr-helper.sh)
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
@@ -110,9 +110,10 @@
 - **scripts** (2): most recent → [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh), [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
 - **snippets** (1): [Terraform variables and outputs](../tf/snippets/2026-08-30-terraform-variables-outputs.hcl)
 
-## Repo-doc  ·  4 files
+## Repo-doc  ·  5 files
 
 - **primer:** [Repo-doc — quick primer](../repo-doc/notes/0000-primer-repo-doc.md)
+- **notes** (1): [Repo-task quickstart trip-ups](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md)
 - **docs** (2): [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md), [Repo-doc tooling overview](../repo-doc/docs/2026-09-08-repo-doc-tooling-overview.md)
 - **scripts** (1): [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh)
 

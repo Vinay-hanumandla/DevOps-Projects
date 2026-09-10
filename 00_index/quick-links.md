@@ -128,6 +128,11 @@
 ### Map out the Git folder
 - [Git — my first file index](../git/docs/2026-08-10-git-index.md) — cataloguing the Git folder into a per-category coverage table
 
+### Understand Git file-level operations
+- [Git companion file quickstart](../git/notes/2026-09-10-git-companion-file-quickstart.txt) — first-contact notes on Git's file-level operations
+- [Git companion readme primer](../git/notes/2026-09-10-git-companion-readme-primer.txt) — primer on Git's readme and documentation conventions
+- [Git companion readme quickstart](../git/notes/2026-09-10-git-companion-readme-quickstart.md) — quickstart for Git's readme and documentation workflows
+
 ### Get started with Grafana
 - [Grafana primer](../grafana/notes/0000-primer-grafana.md) — what Grafana is, dashboards vs panels, and a minimal workflow
 - [First Grafana web UI](../grafana/notes/2026-08-27-first-grafana-web-ui.md) — installed Grafana and opened the web UI for the first time
@@ -292,3 +297,4 @@
 - [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md) — how I kept the README coverage table and Git index honest against what's actually on disk
 - [Repo-doc tooling overview](../repo-doc/docs/2026-09-08-repo-doc-tooling-overview.md) — overview of the tools and scripts used to maintain the repository's documentation
 - [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh) — a helper that reconciles the README coverage table with on-disk counts
+- [Repo-task quickstart trip-ups](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md) — first-contact pitfalls when using the repo-doc toolkit
