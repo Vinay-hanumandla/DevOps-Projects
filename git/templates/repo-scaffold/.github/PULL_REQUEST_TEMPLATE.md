@@ -16,7 +16,7 @@ sources: []
 
 ## Checklist
 
-- [ ] I have read and followed the [contributing guide](CONTRIBUTING.md).
+- [ ] I have read and followed the [contributing guide](../CONTRIBUTING.md).
 - [ ] Tests added or updated for any behaviour change.
 - [ ] Documentation updated if user-facing behaviour changed.
 - [ ] No secrets, credentials, or internal hostnames are in this diff.

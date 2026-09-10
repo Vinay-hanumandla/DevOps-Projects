@@ -2,21 +2,21 @@
 
 > A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](learning-path.md).
 
-## Ansible  ·  7 files
+## Ansible  ·  8 files
 
 - **primer:** [Ansible — quick primer](../ansible/notes/0000-primer-ansible.md)
 - **notes** (3): most recent → [Ansible quickstart gotchas](../ansible/notes/2026-08-31-ansible-quickstart-gotchas.md), [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md)
-- **configs** (3): most recent → [Idempotent nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml), [Install nginx playbook](../ansible/configs/2026-08-22-install-nginx-playbook.yaml), [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml)
+- **configs** (4): most recent → [VPS hardening playbook](../ansible/configs/vps-hardening-playbook.yaml), [Idempotent nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml), [Install nginx playbook](../ansible/configs/2026-08-22-install-nginx-playbook.yaml), [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml)
 - **scripts** (1): [Ansible ad-hoc toolkit](../ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh)
 
-## Bash  ·  50 files
+## Bash  ·  52 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
-- **docs** (5): most recent → [Bash 5.3 migration guide](../bash/docs/bash-5.3-migration-guide.md), [Integrating Bash with Git](../bash/docs/integrating-bash-with-git.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md)
+- **docs** (6): most recent → [Bash 5.3 deep dive](../bash/docs/bash-5.3-deep-dive.md), [Bash 5.3 migration guide](../bash/docs/bash-5.3-migration-guide.md), [Integrating Bash with Git](../bash/docs/integrating-bash-with-git.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md)
 - **scripts** (8): most recent → [CI-safe build wrapper](../bash/scripts/build-and-check.sh), [System report tool](../bash/scripts/system-report-tool.sh), [Log rotation and retention](../bash/scripts/log-rotation-retention.sh)
 - **snippets** (1): [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
-- **notebooks** (2): [Comparing pipeline exit-code handling](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb), [Comparing log rotation approaches](../bash/notebooks/comparing-log-rotation-approaches.ipynb)
+- **notebooks** (3): most recent → [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb), [Comparing pipeline exit-code handling](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb), [Comparing log rotation approaches](../bash/notebooks/comparing-log-rotation-approaches.ipynb)
 - **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
 - **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
 - _…and more under `bash/` — browse the folder._
@@ -50,12 +50,12 @@
 - **templates** (15): [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) · [Repo scaffold with hooks and branch protection](../git/templates/repo-scaffold/README.md)
 - _…and more under `git/` — browse the folder._
 
-## Grafana  ·  11 files
+## Grafana  ·  12 files
 
 - **primer:** [Grafana — quick primer](../grafana/notes/0000-primer-grafana.md)
 - **notes** (4): most recent → [First Grafana web UI](../grafana/notes/2026-08-27-first-grafana-web-ui.md), [Grafana quickstart gotchas](../grafana/notes/2026-08-27-grafana-quickstart-gotchas.md), [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
 - **configs** (5): most recent → [Loki datasource provisioning](../grafana/configs/2026-08-30-loki-datasource-provisioning.yaml), [Grafana datasource provisioning](../grafana/configs/2026-08-29-grafana-datasource-provisioning.yaml), [Datasource and dashboard provisioning](../grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml)
-- **snippets** (2): most recent → [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh), [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
+- **snippets** (3): most recent → [List dashboards and datasources](../grafana/snippets/2026-09-09-list-dashboards-datasources.py), [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh), [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
 
 ## Helm  ·  15 files
 
