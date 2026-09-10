@@ -1,0 +1,16 @@
+# last_verified: 2026-09-10 · Git n/a
+
+Problem: git add stages a file, it does not commit it.
+Fix: Run git commit after git add, or use git commit -am for tracked files.
+
+Problem: git commit -m without staging step does nothing for new files.
+Fix: Use git commit -am for tracked files, or stage first with git add.
+
+Problem: git log shows full history; hard to scan.
+Fix: Use git log --oneline for one-line-per-commit, or --graph for branch topology.
+
+Problem: git branch creates a branch but stays on current branch.
+Fix: Use git checkout <branch> or git switch <branch> to switch.
+
+Problem: git status shows confusion between staged/unstaged/untracked.
+Fix: Run git status before and after commands to see state changes.
