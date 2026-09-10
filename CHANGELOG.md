@@ -2,6 +2,9 @@
 
 ## 2026-09-10
 
+- repo-doc: Add minimal task automation script combining coverage table regen, changed file listing, and per-tool file counts (repo-doc-006)
+- kubernetes: Add Python snippet for listing pods with CPU and memory usage via the Metrics API (k8s-013)
+- helm: Add Chart.yaml scaffold with conditional dependencies, subchart pinning, and version constraints (helm-014)
 - git: Add docs on Git integration patterns with CI/CD pipelines covering push, PR, tag, path-filter, scheduled, branch-protection, and deployment-on-merge triggers (git-034)
 - repo-doc: Add notes on repo-doc quickstart trip-ups — script invocation, tool-folder detection, stdout output, and category validation (repo-doc-005)
 - ansible: Add docs on wiring handlers and idempotency checks into fleet configuration (ansible-008)

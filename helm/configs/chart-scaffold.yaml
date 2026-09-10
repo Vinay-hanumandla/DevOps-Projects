@@ -1,0 +1,64 @@
+# last_verified: 2026-09-10 · Helm n/a
+#
+# Chart.yaml scaffold demonstrating:
+#   - Conditional dependencies (conditional flag + conditions list)
+#   - Subchart pinning (repository + version)
+#   - Version constraints (ranges, exact pins, and aliases)
+#
+# This is a scaffold I can copy into a real chart and adjust.
+# The `condition` field lets me enable/disable a dependency
+# via values.yaml — the dependency is only imported when
+# values.<dep>.enabled is true.
+
+apiVersion: v2
+name: web-platform
+description: A Helm chart scaffold showing conditional deps and version pinning
+type: application
+version: 0.2.0
+appVersion: "1.8.0"
+
+dependencies:
+  # --- Exact pin: I know this works, I'm locking it down ---
+  - name: postgresql
+    version: "16.4.1"
+    repository: "https://charts.bitnami.com/bitnami"
+    condition: postgresql.enabled
+    alias: pg
+    tags:
+      - database
+      - storage
+
+  # --- Range constraint: accept any 7.x patch ---
+  - name: redis
+    version: "7.4.x"
+    repository: "https://charts.bitnami.com/bitnami"
+    condition: redis.enabled
+    tags:
+      - cache
+      - queue
+
+  # --- Minor-range constraint: 1.x but pin to specific minor ---
+  - name: nginx-ingress
+    version: "~1.12"
+    repository: "https://kubernetes.github.io/ingress-nginx"
+    condition: nginx-ingress.enabled
+    tags:
+      - networking
+      - ingress
+
+  # --- Pre-release / RC pinning (example — not always recommended) ---
+  - name: cert-manager
+    version: "1.17.0-rc.1"
+    repository: "https://charts.jetstack.io"
+    condition: cert-manager.enabled
+    tags:
+      - tls
+      - security
+
+  # --- No version constraint: pulls latest (use with care) ---
+  - name: metrics-server
+    version: "*"
+    repository: "https://kubernetes-sigs.github.io/metrics-server/"
+    condition: metrics-server.enabled
+    tags:
+      - monitoring
