@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-10
+
+- git: Add docs on Git integration patterns with CI/CD pipelines covering push, PR, tag, path-filter, scheduled, branch-protection, and deployment-on-merge triggers (git-034)
+- repo-doc: Add notes on repo-doc quickstart trip-ups — script invocation, tool-folder detection, stdout output, and category validation (repo-doc-005)
+
 ## 2026-09-09
 
 - ansible: Add VPS hardening playbook with sshd validate, UFW firewall, sysctl kernel params, fail2ban, and deploy user setup (ansible-007)
