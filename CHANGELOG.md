@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-10
+
+- ansible: Add docs on wiring handlers and idempotency checks into fleet configuration (ansible-008)
+- ansible: Add reusable ansible-playbook wrapper: syntax-check, check-diff, idempotent rerun (ansible-009)
+
 ## 2026-09-09
 
 - ansible: Add VPS hardening playbook with sshd validate, UFW firewall, sysctl kernel params, fail2ban, and deploy user setup (ansible-007)
