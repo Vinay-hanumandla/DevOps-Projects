@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-13
+
+- helm: Add Helm hooks lifecycle manifest with pre-install, post-upgrade, and rollback hooks (helm-015)
+- git: Add companion forgotten.txt reference for Git undo notes (git-032)
+
 ## 2026-09-10
 
 - repo-doc: Add minimal task automation script combining coverage table regen, changed file listing, and per-tool file counts (repo-doc-006)
