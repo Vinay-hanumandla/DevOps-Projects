@@ -39,11 +39,11 @@
 - **configs** (4): most recent → [Minimal CI workflow (2026-09-04 refresh)](../gha/configs/2026-09-04-minimal-ci-workflow.yaml), [Matrix + cache + artifact CI](../gha/configs/matrix-cache-artifact-ci.yaml), [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml), [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml)
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 
-## Git  ·  47 files
+## Git  ·  48 files
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
-- **notes** (15): most recent → [Git companion file quickstart](../git/notes/2026-09-10-git-companion-file-quickstart.txt), [Git companion readme primer](../git/notes/2026-09-10-git-companion-readme-primer.txt), [Git companion readme quickstart](../git/notes/2026-09-10-git-companion-readme-quickstart.md), [Companion forgotten undo notes 15](../git/notes/2026-07-28-git-companion-forgotten-undo-notes-15.md)
-- **docs** (8): most recent → [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md), [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md), [Tagging Docker images from git describe](../git/docs/git-describe-image-tags-registry.md), [Tag-driven releases and conventional-commit gates](../git/docs/git-cicd-tag-driven-releases-conventional-commits.md), [Git — my first file index](../git/docs/2026-08-10-git-index.md)
+- **notes** (16): most recent → [Companion forgotten undo notes](../git/notes/2026-08-25-forgotten.md), [Git companion file quickstart](../git/notes/2026-09-10-git-companion-file-quickstart.txt), [Git companion readme primer](../git/notes/2026-09-10-git-companion-readme-primer.txt), [Git companion readme quickstart](../git/notes/2026-09-10-git-companion-readme-quickstart.md)
+- **docs** (9): most recent → [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md), [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md), [Tagging Docker images from git describe](../git/docs/git-describe-image-tags-registry.md), [Tag-driven releases and conventional-commit gates](../git/docs/git-cicd-tag-driven-releases-conventional-commits.md), [Git — my first file index](../git/docs/2026-08-10-git-index.md)
 - **scripts** (6): most recent → [Changelog from conventional commits](../git/scripts/changelog-from-conventional-commits.sh), [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Git PR helper](../git/scripts/git-pr-helper.sh)
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
 - **manifests** (1): [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps git events (push, tag, merge request) to build → test → deploy jobs
@@ -57,14 +57,14 @@
 - **configs** (5): most recent → [Loki datasource provisioning](../grafana/configs/2026-08-30-loki-datasource-provisioning.yaml), [Grafana datasource provisioning](../grafana/configs/2026-08-29-grafana-datasource-provisioning.yaml), [Datasource and dashboard provisioning](../grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml)
 - **snippets** (3): most recent → [List dashboards and datasources](../grafana/snippets/2026-09-09-list-dashboards-datasources.py), [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh), [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
 
-## Helm  ·  15 files
+## Helm  ·  17 files
 
 - **primer:** [Helm — quick primer](../helm/notes/0000-primer-helm.md)
 - **notes** (5): most recent → [Following the Helm quickstart](../helm/notes/2026-08-19-following-helm-quickstart.md), [Install Helm with package manager](../helm/notes/2026-08-18-install-helm-with-package-manager.md), [Explore Helm chart repo and chart structure](../helm/notes/2026-08-08-explore-helm-chart-repo.md)
 - **docs** (2): most recent → [Helm values inheritance and environment overrides](../helm/docs/helm-values-inheritance.md), [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md)
-- **configs** (5): most recent → [Multi-environment Helm values](../helm/configs/multi-environment-helm-values.yaml), [Dev values override](../helm/configs/2026-08-20-dev-values.yaml), [Staging values override](../helm/configs/2026-08-20-staging-values.yaml), [Prod values override](../helm/configs/2026-08-20-prod-values.yaml)
+- **configs** (6): most recent → [Chart.yaml scaffold](../helm/configs/chart-scaffold.yaml), [Multi-environment Helm values](../helm/configs/multi-environment-helm-values.yaml), [Dev values override](../helm/configs/2026-08-20-dev-values.yaml), [Staging values override](../helm/configs/2026-08-20-staging-values.yaml), [Prod values override](../helm/configs/2026-08-20-prod-values.yaml)
 - **snippets** (1): [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh)
-- **manifests** (1): [First chart template](../helm/manifests/2026-08-14-first-chart-template.yaml)
+- **manifests** (2): most recent → [Hooks lifecycle manifest](../helm/manifests/hooks-lifecycle.yaml), [First chart template](../helm/manifests/2026-08-14-first-chart-template.yaml)
 - **scripts** (1): [Helm release workflow](../helm/scripts/helm-release-workflow.sh)
 
 ## Jenkins  ·  7 files
@@ -74,14 +74,14 @@
 - **configs** (1): [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile)
 - **snippets** (2): most recent → [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 
-## Kubernetes  ·  13 files
+## Kubernetes  ·  15 files
 
 - **primer:** [Kubernetes — quick primer](../k8s/notes/0000-primer-kubernetes.md)
 - **notes** (4): most recent → [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md)
 - **docs** (2): [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md), [kubectl imperative vs declarative](../k8s/docs/kubectl-imperative-vs-declarative.md)
 - **scripts** (3): most recent → [Multi-pod deployment](../k8s/scripts/multi-pod-deployment.sh), [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh)
 - **configs** (1): [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml)
-- **manifests** (2): [Minimal deployment and service](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml), [Multi-service application](../k8s/manifests/multi-service-application.yaml)
+- **manifests** (3): most recent → [Zero-downtime rolling deployment](../k8s/manifests/zero-downtime-rolling-deployment.yaml), [Multi-service application](../k8s/manifests/multi-service-application.yaml), [Minimal deployment and service](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml)
 - **snippets** (1): [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh)
 
 ## Prometheus  ·  10 files

@@ -187,6 +187,11 @@
 - **ClusterIP** — a Service type that exposes the service on a cluster-internal IP, reachable only from within the cluster.
 - **NodePort** — a Service type that exposes the service on each Node's IP at a static port, making it reachable from outside the cluster without a cloud load balancer.
 - **LoadBalancer** — a Service type that provisions an external cloud load balancer to route traffic to the service; on Minikube, `minikube service` is used instead.
+- **Readiness probe** — a periodic check on a container that tells the kubelet whether the Pod is ready to serve traffic; a failing readiness probe removes the Pod's IP from a Service's endpoints, so requests are not routed to an unready container.
+- **Liveness probe** — a periodic check that tells the kubelet whether the container is still alive; if it fails, the kubelet restarts the container, which is useful for recovering from deadlocks or stuck processes.
+- **PodDisruptionBudget (PDB)** — a Kubernetes object that limits how many Pods in a controller (Deployment/StatefulSet) can be unavailable at once; it protects availability during voluntary disruptions like node drains, autoscaler scale-down, or rolling updates.
+- **Rolling update** — the default Deployment update strategy that replaces old Pods with new ones gradually, keeping a minimum number of ready Pods at all times so the application stays reachable during a deploy.
+- **Surge / maxUnavailable** — the knobs on a Deployment's rolling-update strategy: `maxSurge` lets extra new Pods run alongside the old set during the rollout, and `maxUnavailable` caps how many old Pods can be taken down at once; together they control rollout speed versus capacity.
 
 ## Concepts
 
@@ -272,6 +277,10 @@
 - **`terraform plan -lock-timeout=0s`** — a flag used to probe for a held state lock without acquiring it; CI scripts poll with this flag to detect whether a prior run's lock has been released.
 - **`local-exec` provisioner** — a Terraform block that runs a local command on the machine running `terraform apply` (instead of on the provisioned resource); used to trigger side effects like a deploy webhook or a notification.
 - **`triggers` map (null_resource)** — a map inside a `null_resource` whose values, when changed, force the resource to be replaced; the canonical way to make a `null_resource` react to a variable or output without managing real infrastructure.
+- **VPC** — a Virtual Private Cloud: an isolated network space inside a cloud account where you define your own subnets, route tables, and gateways; the foundation most other resources live inside.
+- **Subnet** — a contiguous range of IP addresses inside a VPC, typically tied to an availability zone; putting resources in different subnets controls reachability and isolates tiers (public vs private).
+- **NAT gateway** — a managed network appliance that lets private subnets initiate outbound internet traffic without exposing them to inbound connections from the internet; the standard way to give a private subnet outbound access without a public IP.
+- **Route table** — a set of routing rules that decide where traffic from a subnet or instance goes; a route table is attached to a subnet, and its entries point at gateways (internet, NAT, peering) or other networks.
 
 ## Prometheus (additional)
 
@@ -303,6 +312,11 @@
 - **`helm rollback`** — reverts a Helm release to a previous revision, restoring the previous chart version and values; useful when an upgrade introduces a regression.
 - **`--atomic`** — a Helm flag that automatically rolls back a release if the upgrade fails, leaving the previous working revision in place and avoiding a half-configured state.
 - **values inheritance** — Helm's layered values model where multiple `-f` files are applied left-to-right, so later files override earlier ones; the base `values.yaml` holds defaults, and per-environment files carry only the differences.
+- **Helm hook** — a Helm chart template that runs at a named lifecycle event (pre-install, post-install, pre-upgrade, post-upgrade, pre-rollback, post-rollback, pre-delete, or release-test) by annotating a standard Kubernetes resource with `helm.sh/hook`; hooks run as separate Jobs or other resources outside the release's normal install/upgrade path, so they can seed databases, run migrations, or clean up before the main workload is reachable.
+- **Chart.yaml** — the manifest file at the root of a Helm chart that declares its identity: `apiVersion`, `name`, `description`, `version`, and `appVersion`, plus optional `dependencies` listing the charts this one pulls in.
+- **Conditional dependency** — a Helm chart dependency gated by a `condition` field in `Chart.yaml`; the subchart is only imported when `values.<dep>.enabled` is true, so a single chart can ship optional components without loading them by default.
+- **Subchart pinning** — specifying a chart dependency with an explicit `repository` URL and `version` constraint in `Chart.yaml`; lets a chart depend on a specific published revision rather than the latest from a repo.
+- **Version constraint** — a Semver-style range or exact pin (e.g. `^1.2.3`, `~1.2.3`, `1.2.3`) in a chart dependency's `version` field; Helm resolves it against the dependency's repository at install time.
 
 ## Repo-doc
 
