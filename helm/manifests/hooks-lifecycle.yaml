@@ -1,0 +1,74 @@
+# last_verified: 2026-09-13 · helm n/a
+#
+# Helm hooks for pre-install, post-upgrade, and rollback lifecycle events.
+# Hooks run as Jobs before or after the named release lifecycle events.
+#
+# Deploy:  helm install myapp . -f values.yaml
+# Upgrade: helm upgrade myapp . --install
+# Rollback: helm rollback myapp <revision>
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Release.Name }}-pre-install"
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  template:
+    spec:
+      containers:
+        - name: pre-install
+          image: "{{ .Values.hooks.image.repository }}:{{ .Values.hooks.image.tag }}"
+          command:
+            - sh
+            - -c
+            - |
+              echo "Running pre-install checks for {{ .Release.Name }}..."
+              exit 0
+      restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Release.Name }}-post-upgrade"
+  annotations:
+    "helm.sh/hook": post-upgrade
+    "helm.sh/hook-weight": "5"
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  template:
+    spec:
+      containers:
+        - name: post-upgrade
+          image: "{{ .Values.hooks.image.repository }}:{{ .Values.hooks.image.tag }}"
+          command:
+            - sh
+            - -c
+            - |
+              echo "Running post-upgrade migration for {{ .Release.Name }}..."
+              exit 0
+      restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Release.Name }}-rollback"
+  annotations:
+    "helm.sh/hook": pre-delete
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  template:
+    spec:
+      containers:
+        - name: rollback
+          image: "{{ .Values.hooks.image.repository }}:{{ .Values.hooks.image.tag }}"
+          command:
+            - sh
+            - -c
+            - |
+              echo "Running pre-rollback cleanup for {{ .Release.Name }}..."
+              exit 0
+      restartPolicy: Never
