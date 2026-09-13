@@ -1,0 +1,87 @@
+# last_verified: 2026-09-12 · kubernetes n/a
+
+# Zero-downtime rolling deployment — readiness probes, PodDisruptionBudget,
+# and surge/unhealthy threshold tuning. This is one way to set it up;
+# the rollingUpdate fields give you fine-grained control over how fast
+# pods cycle and how many can be down during voluntary disruptions.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+  labels:
+    app: web-app
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: web
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 5
+            failureThreshold: 12
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app
+  labels:
+    app: web-app
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: web-app
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: web-app-pdb
+  labels:
+    app: web-app
+spec:
+  minAvailable: 3
+  selector:
+    matchLabels:
+      app: web-app
