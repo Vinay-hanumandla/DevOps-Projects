@@ -4,6 +4,7 @@
 
 - helm: Add Helm hooks lifecycle manifest with pre-install, post-upgrade, and rollback hooks (helm-015)
 - git: Add companion forgotten.txt reference for Git undo notes (git-032)
+- helm: Add notebook comparing Helm values merging — base, override, and environment layering patterns (helm-016)
 ## 2026-09-12
 
 - terraform: Add reusable VPC module config with public/private subnets, NAT gateways, and route tables (tf-022)
