@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-12
+
+- terraform: Add reusable VPC module config with public/private subnets, NAT gateways, and route tables (tf-022)
+- kubernetes: Add zero-downtime rolling deployment manifest with readiness probes, PDB, and surge/unhealthy thresholds (k8s-014)
+
 ## 2026-09-10
 
 - repo-doc: Add minimal task automation script combining coverage table regen, changed file listing, and per-tool file counts (repo-doc-006)
