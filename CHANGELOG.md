@@ -447,3 +447,8 @@ Passed ([x]) bash-010 — Bash: docs — How I wired Bash strict mode and trap p
 ## 2026-08-12
 
 - bash: Add notebook comparing log rotation approaches: inotifywait vs cron-driven polling (bash-014)
+
+## 2026-09-14
+
+- python/dockerfiles/python-app.Dockerfile — Production multi-stage Dockerfile for Python app (python-014)
+- python/configs/pyproject-toml-readme.md — Companion README for pyproject.toml config (python-017)
