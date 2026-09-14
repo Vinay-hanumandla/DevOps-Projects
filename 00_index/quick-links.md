@@ -89,6 +89,7 @@
 ### Undo and fix a Git mistake
 - [Undo, stage, commit, push](../git/notes/2026-07-13-undo-stage-commit-push.md) — unstage, discard, revert, and safely rewrite a local commit
 - [Undo follow-up](../git/notes/2026-07-15-undo-stage-commit-push.md) — more undo patterns: stash, amend after push, recovering lost work
+- [Companion forgotten undo notes](../git/notes/2026-08-25-forgotten.md) — companion notes on Git's forgotten undo patterns: amend, push, and recovering lost work
 
 ### Branch, merge, and revert
 - [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh) — create branches, merge them, and undo a merge
@@ -162,6 +163,8 @@
 - [Prod values override](../helm/configs/2026-08-20-prod-values.yaml) — per-environment values for a production Helm release
 - [Multi-environment Helm values](../helm/configs/multi-environment-helm-values.yaml) — a single file defining dev, staging, and prod values for multi-environment deployments
 - [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md) — comparing the Helm folder against the manifest and fixing the counts
+- [Hooks lifecycle manifest](../helm/manifests/hooks-lifecycle.yaml) — Helm hooks for pre-install, post-upgrade, and rollback lifecycle events
+- [Chart.yaml scaffold](../helm/configs/chart-scaffold.yaml) — Helm chart scaffold demonstrating conditional dependencies, subchart pinning, and version constraints
 
 ### Get started with Jenkins
 - [Jenkins primer](../jenkins/notes/0000-primer-jenkins.md) — first-day notes for Jenkins: jobs, pipelines, nodes, executors, plugins, and workspaces
@@ -182,6 +185,7 @@
 - [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md) — kubectl commands for inspecting cluster resources and their events
 - [Minimal deployment and service manifest](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml) — a minimal Kubernetes Deployment and Service YAML
 - [Multi-service application manifest](../k8s/manifests/multi-service-application.yaml) — web frontend, API backend, and Redis cache with Deployments, Services, and resource requests
+- [Zero-downtime rolling deployment](../k8s/manifests/zero-downtime-rolling-deployment.yaml) — readiness probes, PodDisruptionBudget, and surge/unhealthy thresholds for rolling updates
 - [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml) — a Kubernetes Deployment config for first contact
 - [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh) — a shell helper that walks common resource types with kubectl
 
@@ -220,6 +224,7 @@
 - [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl) — a minimal Terraform config with provider and resource blocks
 - [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl) — a minimal Terraform config using the null provider and null_resource
 - [Multi-resource Terraform config](../tf/configs/multi-resource-terraform-config.hcl) — multiple resources wired together with locals, variables, and outputs
+- [Reusable VPC module](../tf/configs/reusable-vpc-module.hcl) — Terraform module creating a VPC with public and private subnets, NAT gateways, and route tables
 - [Local vs remote Terraform state](../tf/docs/local-vs-remote-terraform-state.md) — comparing state strategies for solo and team projects
 - [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh) — end-to-end Terraform workflow script for initialising, planning, and applying
 - [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh) — Terraform workflow script with state-lock handling for CI
