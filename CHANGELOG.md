@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-14
+
+- kubernetes: Add notebook comparing rollout strategies — rolling-update, blue-green, and canary (k8s-015)
+- python: Add docs on integrating Python with GitHub Actions — matrix testing, dependency caching, and release automation (python-016)
+
 ## 2026-09-13
 
 - python: Add Python CLI tool scaffold template with Docker multi-stage build, GitHub Actions CI, and Click entry point (python-013)
