@@ -2,6 +2,7 @@
 
 ## 2026-09-13
 
+- python: Add Python CLI tool scaffold template with Docker multi-stage build, GitHub Actions CI, and Click entry point (python-013)
 - helm: Add Helm hooks lifecycle manifest with pre-install, post-upgrade, and rollback hooks (helm-015)
 - git: Add companion forgotten.txt reference for Git undo notes (git-032)
 - helm: Add notebook comparing Helm values merging — base, override, and environment layering patterns (helm-016)
