@@ -1,0 +1,17 @@
+# last_verified: 2026-09-15 · python n/a
+
+# 2026-09-15-app-config.yaml — companion for snippets/2026-08-22-config-file-reader.py
+# I made this so I have something to point the reader at.
+# Run from python/: python snippets/2026-08-22-config-file-reader.py configs/2026-09-15-app-config.yaml
+# TODO: not sure yet how to handle missing keys — reader just prints what is there.
+
+app:
+  name: demo-app
+  debug: true
+
+server:
+  host: localhost
+  port: 8000
+
+logging:
+  level: info

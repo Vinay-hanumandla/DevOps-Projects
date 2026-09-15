@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-15
+
+- python: Add companion app-config.yaml for config-file-reader.py (python-018)
+
 ## 2026-09-14
 
 - kubernetes: Add notebook comparing rollout strategies — rolling-update, blue-green, and canary (k8s-015)
