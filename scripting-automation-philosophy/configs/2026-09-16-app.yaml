@@ -1,0 +1,9 @@
+# last_verified: 2026-09-16 · scripting-automation-philosophy n/a
+# Companion for ../../docs/concepts/scripting-automation-philosophy/snippets/2026-08-20-scripting-deploy-checklist.py
+# I wrote this so the checklist's "config file parses" step has something to load.
+# Copy this file next to the snippet as app.yaml, then run the snippet.
+app: demo
+port: 8080  # must match the health URL the checklist curls
+health_path: /health
+worker: demo-worker  # must match the pgrep name in the checklist
+workers: 2  # TODO: bump once I know how many my laptop can hold
