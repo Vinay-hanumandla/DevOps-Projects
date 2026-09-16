@@ -1,0 +1,6 @@
+# last_verified: 2026-09-16 · ansible n/a
+- name: Converge
+  hosts: all
+  become: true
+  roles:
+    - role: app_example

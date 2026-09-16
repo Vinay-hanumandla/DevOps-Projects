@@ -1,0 +1,10 @@
+# last_verified: 2026-09-16 · ansible n/a
+# Handoff vars written by `make configure` from `terraform output -json`.
+# Placeholder values so the scaffold lints before real outputs exist.
+---
+# Auto-generated from `terraform output -json`. Do not edit by hand.
+vpc_id: ""
+db_endpoint: ""
+redis_endpoint: ""
+s3_bucket: ""
+lb_dns: ""

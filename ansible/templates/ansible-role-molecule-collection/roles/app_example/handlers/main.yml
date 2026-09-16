@@ -1,0 +1,5 @@
+# last_verified: 2026-09-16 · ansible n/a
+- name: Restart app_example
+  ansible.builtin.service:
+    name: app_example
+    state: restarted

@@ -1,0 +1,16 @@
+# last_verified: 2026-09-16 · ansible n/a
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Check rendered application config exists
+      ansible.builtin.stat:
+        path: /etc/app_example/app.conf
+      register: app_conf
+
+    - name: Assert config file is present
+      ansible.builtin.assert:
+        that:
+          - app_conf.stat.exists
+        fail_msg: "app.conf was not rendered by the role"
+        success_msg: "app.conf rendered as expected"

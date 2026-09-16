@@ -1,0 +1,26 @@
+# last_verified: 2026-09-16 · ansible n/a
+# CI for the role scaffold. Only actions/checkout is pinned because it is the
+# one action version verified against the pipeline reference; tool installs
+# stay unpinned so the template cites no version it did not verify.
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install test tools
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install molecule "molecule-plugins[docker]" ansible ansible-lint
+
+      - name: Lint the role
+        run: ansible-lint roles/app_example
+
+      - name: Run Molecule scenario
+        run: molecule test

@@ -1,0 +1,18 @@
+# last_verified: 2026-09-16 · ansible n/a
+# Top-level play: readiness gate runs from localhost, then the role configures
+# everything the inventory returns.
+- name: Configure application hosts
+  hosts: app
+  become: true
+
+  pre_tasks:
+    - name: Wait for SSH to become reachable
+      ansible.builtin.wait_for:
+        port: 22
+        delay: 30
+        timeout: 300
+      delegate_to: localhost
+      become: false
+
+  roles:
+    - role: app_example
