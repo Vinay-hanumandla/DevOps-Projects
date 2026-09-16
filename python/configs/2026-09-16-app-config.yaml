@@ -1,0 +1,15 @@
+# last_verified: 2026-09-16 · python n/a
+#
+# Companion config for scripts/config-loader-pydantic-settings.py
+# Run from python/: python scripts/config-loader-pydantic-settings.py configs/2026-09-16-app-config.yaml
+# Override on the command line: APP_PORT=9000 python scripts/config-loader-pydantic-settings.py configs/2026-09-16-app-config.yaml
+
+app_name: demo-service
+debug: false
+host: 0.0.0.0
+port: 8080
+log_level: info
+
+database_url: postgresql://app:secret@db.internal:5432/appdb
+database_pool_size: 10
+database_timeout: 15.0
