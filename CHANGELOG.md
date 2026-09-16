@@ -8,6 +8,8 @@
 - python: Add companion app-config.yaml for config-loader-pydantic-settings.py (python-015)
 - grafana: Add provisioning bundle with datasources, dashboard provider, and alert rules as code (grafana-011)
 - kubernetes: Add quickstart follow-up notes on kind contexts and a Service port mismatch (k8s-016)
+- grafana: Add notebook comparing Grafana unified alerting vs Prometheus Alertmanager for routing, silencing, and notifications (grafana-013)
+- scripting-automation-philosophy: Add companion app.yaml for the deploy-checklist.py scripting exercise (scripting-automation-philosophy-001)
 
 ## 2026-09-15
 
