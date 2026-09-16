@@ -1,0 +1,84 @@
+# last_verified: 2026-09-16 · grafana n/a
+# Grafana provisioning bundle: datasources, dashboards, and alert rules as code.
+# Purpose: check this one file (split per section by Grafana at load time) into
+# provisioning so every environment renders the same datasources, picks up the
+# same dashboard files, and evaluates the same alert rules.
+# Layout: three YAML documents. Grafana loads each provisioning type from its
+# own directory, so when deploying, split this file on the `---` lines into
+# provisioning/datasources/bundle.yaml, provisioning/dashboards/bundle.yaml,
+# and provisioning/alerting/bundle.yaml. Keeping them in one authored file
+# means a datasource rename and the dashboard/alert that depends on it stay
+# in the same review.
+
+# ── Document 1: datasources ──────────────────────────────────────────────
+# Two entries: Prometheus for metrics (set as default so new panels query it
+# without an explicit source) and Alertmanager so alert state can be viewed
+# next to the metrics. Access `proxy` keeps the browser out of direct contact
+# with the backends; requests go through the Grafana server instead.
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    uid: prometheus-datasource
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: false
+  - name: Alertmanager
+    type: alertmanager
+    access: proxy
+    url: http://alertmanager:9093
+    isDefault: false
+    editable: false
+---
+# ── Document 2: dashboards ───────────────────────────────────────────────
+# A file provider watches the dashboards directory and reloads changed JSON
+# without a restart. `disableDeletion: true` means a dashboard removed from
+# the repo stays visible until someone deletes it in the UI on purpose —
+# safer than having a bad commit wipe a panel everyone relies on.
+apiVersion: 1
+
+providers:
+  - name: team-dashboards
+    orgId: 1
+    folder: Provisioned
+    type: file
+    disableDeletion: true
+    updateIntervalSeconds: 30
+    allowUiUpdates: false
+    options:
+      path: /var/lib/grafana/dashboards
+---
+# ── Document 3: alert rules ──────────────────────────────────────────────
+# One group, one rule: page the on-call contact point when the API error
+# budget burns faster than the threshold for longer than the pending window.
+# `for: 5m` is the anti-flap guard — a single bad scrape interval pages
+# nobody. Route this group to the contact point named below in the
+# notification policy; the name here must match it exactly or pages go
+# nowhere, which is the first thing to check when alerts stay silent.
+apiVersion: 1
+
+groups:
+  - orgId: 1
+    name: api-availability
+    folder: Provisioned
+    interval: 1m
+    rules:
+      - uid: api-high-error-rate
+        title: API error rate above threshold
+        condition: HighErrors
+        for: 5m
+        data:
+          - refId: ErrorRate
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: prometheus-datasource
+            model:
+              expr: sum(rate(http_requests_total{status=~"5.."}[5m])) / sum(rate(http_requests_total[5m]))
+        annotations:
+          summary: API 5xx rate has been high for 5 minutes
+        labels:
+          severity: critical
+          team: on-call
