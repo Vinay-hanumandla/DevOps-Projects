@@ -6,6 +6,8 @@
 - networking: Add hands-on network interface and routing inspection practice script (networking-fundamentals-001)
 - python: Add reusable config loader with Pydantic settings and environment overrides (python-015)
 - python: Add companion app-config.yaml for config-loader-pydantic-settings.py (python-015)
+- grafana: Add provisioning bundle with datasources, dashboard provider, and alert rules as code (grafana-011)
+- kubernetes: Add quickstart follow-up notes on kind contexts and a Service port mismatch (k8s-016)
 
 ## 2026-09-15
 
