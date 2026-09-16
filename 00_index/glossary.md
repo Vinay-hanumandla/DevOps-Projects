@@ -335,3 +335,11 @@
 ## Terraform (additional)
 
 - **state-lock handling** — the pattern of polling for a Terraform state lock with `terraform plan -lock-timeout=0s` and waiting before retrying, used in CI to avoid concurrent apply collisions when a prior run's lock has not been released.
+
+## Ansible (additional)
+
+- **Molecule** — a test runner for Ansible roles; `molecule test` creates an ephemeral instance, applies the role (converge), runs checks (verify), and tears the instance down, so merges are gated on a real run rather than a lint pass.
+- **Converge / verify** — the two Molecule steps that matter most: converge applies the role to the test instance, verify runs assertions against the result; `converge.yml` declares the play, `verify.yml` the checks.
+- **`galaxy.yml`** — the manifest at the root of an Ansible collection declaring its namespace, name, and version; shipping a role inside a collection gives it versioning that a bare playbook directory lacks.
+- **Dynamic inventory plugin** — an inventory source that discovers hosts from a cloud API at run time instead of a static file; the `aws_ec2.yml` inventory finds hosts by tag (e.g. `ManagedBy: terraform`) so Terraform-provisioned machines appear without hand-editing inventory.
+- **Terraform-outputs handoff file** — a generated variables file (here `group_vars/all/terraform_outputs.yml`) produced from `terraform output -json`; the decoupling point where Terraform-owned provisioning facts become Ansible-readable variables without inline provisioners.
