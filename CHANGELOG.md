@@ -476,3 +476,4 @@ Passed ([x]) bash-010 — Bash: docs — How I wired Bash strict mode and trap p
 
 - python/dockerfiles/python-app.Dockerfile — Production multi-stage Dockerfile for Python app (python-014)
 - python/configs/pyproject-toml-readme.md — Companion README for pyproject.toml config (python-017)
+- gha: Add reusable composite action with conditional steps, defaults, and a caller workflow that uses it (gha-014)

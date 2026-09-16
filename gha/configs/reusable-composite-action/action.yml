@@ -1,0 +1,91 @@
+# last_verified: 2026-09-16 · gha n/a
+#
+# Reusable composite action: install a Node toolchain, cache dependencies,
+# and run a smoke test. Built for the gha-014 task to demonstrate the three
+# things a reusable composite action needs:
+#
+#   1. inputs with defaults      — node-version, cache, smoke-command,
+#                                  upload-artifacts, artifact-path all have
+#                                  sensible defaults so a caller can use the
+#                                  action with zero arguments.
+#   2. conditional steps         — the npm cache and the artifact upload
+#                                   only run when their input says so.
+#   3. outputs                   — toolchain-version is exposed to the
+#                                  caller workflow.
+#
+# A composite action is just a YAML file with `runs: using: composite` and a
+# list of steps; there is no separate binary.
+
+name: 'Setup Node toolchain and smoke test'
+description: >
+  Checks out the repo, installs a pinned Node.js version, optionally caches
+  npm dependencies, runs a smoke command, and optionally uploads build
+  artifacts. Reusable from any workflow in the repository.
+
+inputs:
+  node-version:
+    description: 'Node.js major/minor version to install.'
+    required: false
+    default: '20'
+  cache:
+    description: 'Whether to restore/cache npm dependencies before the smoke test.'
+    required: false
+    default: 'true'
+  smoke-command:
+    description: 'Shell command to run as the smoke test.'
+    required: false
+    default: 'npm test'
+  upload-artifacts:
+    description: 'Whether to upload the build artifact at the end.'
+    required: false
+    default: 'false'
+  artifact-path:
+    description: 'Path to the build artifact to upload (only used when upload-artifacts is true).'
+    required: false
+    default: 'dist/'
+
+outputs:
+  toolchain-version:
+    description: 'The Node.js version that was actually installed.'
+    value: ${{ steps.set-version.outputs.result }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Record installed toolchain version
+      id: set-version
+      shell: bash
+      run: echo "result=${{ inputs.node-version }}" >> "$GITHUB_OUTPUT"
+
+    - name: Checkout source
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Cache npm dependencies
+      if: ${{ inputs.cache == 'true' }}
+      uses: actions/cache@v4
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node${{ inputs.node-version }}-npm-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node${{ inputs.node-version }}-npm-
+
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
+
+    - name: Run smoke test
+      shell: bash
+      run: ${{ inputs.smoke-command }}
+
+    - name: Upload build artifacts
+      if: ${{ inputs.upload-artifacts == 'true' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifact-${{ inputs.node-version }}
+        path: ${{ inputs.artifact-path }}
+        if-no-files-found: warn
