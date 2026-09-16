@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-16
+
+- grafana: Add provisioning bundle with datasources, dashboard provider, and alert rules as code (grafana-011)
+- kubernetes: Add quickstart follow-up notes on kind contexts and a Service port mismatch (k8s-016)
+
 ## 2026-09-15
 
 - python: Add companion app-config.yaml for config-file-reader.py (python-018)
