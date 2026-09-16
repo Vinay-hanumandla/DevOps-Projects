@@ -2,18 +2,18 @@
 
 > A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](learning-path.md).
 
-## Ansible  ·  8 files
+## Ansible  ·  10 files
 
 - **primer:** [Ansible — quick primer](../ansible/notes/0000-primer-ansible.md)
 - **notes** (3): most recent → [Ansible quickstart gotchas](../ansible/notes/2026-08-31-ansible-quickstart-gotchas.md), [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md)
-- **configs** (4): most recent → [VPS hardening playbook](../ansible/configs/vps-hardening-playbook.yaml), [Idempotent nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml), [Install nginx playbook](../ansible/configs/2026-08-22-install-nginx-playbook.yaml), [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml)
-- **scripts** (1): [Ansible ad-hoc toolkit](../ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh)
+- **configs** (4): most recent → [VPS hardening playbook](../ansible/configs/vps-hardening-playbook.yaml), [Idempotent nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml), [Install nginx playbook](../ansible/configs/2026-08-22-install-nginx-playbook.yaml)
+- **scripts** (2): [Ansible ad-hoc toolkit](../ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh), [Wired handlers and idempotency for a fleet](../ansible/docs/wired-handlers-idempotency-fleet.md)
 
 ## Bash  ·  52 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
-- **docs** (6): most recent → [Bash 5.3 deep dive](../bash/docs/bash-5.3-deep-dive.md), [Bash 5.3 migration guide](../bash/docs/bash-5.3-migration-guide.md), [Integrating Bash with Git](../bash/docs/integrating-bash-with-git.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md)
+- **docs** (6): most recent → [Bash 5.3 deep dive](../bash/docs/bash-5.3-deep-dive.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md), [Debug and profile with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md)
 - **scripts** (8): most recent → [CI-safe build wrapper](../bash/scripts/build-and-check.sh), [System report tool](../bash/scripts/system-report-tool.sh), [Log rotation and retention](../bash/scripts/log-rotation-retention.sh)
 - **snippets** (1): [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
 - **notebooks** (3): most recent → [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb), [Comparing pipeline exit-code handling](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb), [Comparing log rotation approaches](../bash/notebooks/comparing-log-rotation-approaches.ipynb)
@@ -21,7 +21,7 @@
 - **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
 - _…and more under `bash/` — browse the folder._
 
-## Docker  ·  18 files
+## Docker  ·  17 files
 
 - **primer:** [Docker — quick primer](../docker/notes/0000-primer-docker.md)
 - **notes** (5): most recent → [Docker trip-ups after the initial run-through](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md), [Install Docker](../docker/notes/2026-07-19-install-docker.md)
@@ -50,14 +50,16 @@
 - **templates** (15): [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) · [Repo scaffold with hooks and branch protection](../git/templates/repo-scaffold/README.md)
 - _…and more under `git/` — browse the folder._
 
-## Grafana  ·  12 files
+## Grafana  ·  14 files
 
 - **primer:** [Grafana — quick primer](../grafana/notes/0000-primer-grafana.md)
 - **notes** (4): most recent → [First Grafana web UI](../grafana/notes/2026-08-27-first-grafana-web-ui.md), [Grafana quickstart gotchas](../grafana/notes/2026-08-27-grafana-quickstart-gotchas.md), [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
 - **configs** (5): most recent → [Loki datasource provisioning](../grafana/configs/2026-08-30-loki-datasource-provisioning.yaml), [Grafana datasource provisioning](../grafana/configs/2026-08-29-grafana-datasource-provisioning.yaml), [Datasource and dashboard provisioning](../grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml)
+- **docs** (1): [Prometheus + Alertmanager on-call pipeline](../grafana/docs/prometheus-alertmanager-oncall-pipeline.md)
+- **manifests** (1): [Production provisioning bundle](../grafana/manifests/production-provisioning-datasources-dashboards-alerts.yaml)
 - **snippets** (3): most recent → [List dashboards and datasources](../grafana/snippets/2026-09-09-list-dashboards-datasources.py), [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh), [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
 
-## Helm  ·  17 files
+## Helm  ·  18 files
 
 - **primer:** [Helm — quick primer](../helm/notes/0000-primer-helm.md)
 - **notes** (5): most recent → [Following the Helm quickstart](../helm/notes/2026-08-19-following-helm-quickstart.md), [Install Helm with package manager](../helm/notes/2026-08-18-install-helm-with-package-manager.md), [Explore Helm chart repo and chart structure](../helm/notes/2026-08-08-explore-helm-chart-repo.md)
@@ -66,6 +68,7 @@
 - **snippets** (1): [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh)
 - **manifests** (2): most recent → [Hooks lifecycle manifest](../helm/manifests/hooks-lifecycle.yaml), [First chart template](../helm/manifests/2026-08-14-first-chart-template.yaml)
 - **scripts** (1): [Helm release workflow](../helm/scripts/helm-release-workflow.sh)
+- **notebooks** (1): [Comparing Helm values merging](../helm/notebooks/comparing-helm-values-merging.ipynb)
 
 ## Jenkins  ·  7 files
 
@@ -74,50 +77,54 @@
 - **configs** (1): [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile)
 - **snippets** (2): most recent → [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 
-## Kubernetes  ·  15 files
+## Kubernetes  ·  17 files
 
 - **primer:** [Kubernetes — quick primer](../k8s/notes/0000-primer-kubernetes.md)
-- **notes** (4): most recent → [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md)
+- **notes** (5): most recent → [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Quickstart kind contexts and port mismatch](../k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md), [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md)
 - **docs** (2): [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md), [kubectl imperative vs declarative](../k8s/docs/kubectl-imperative-vs-declarative.md)
 - **scripts** (3): most recent → [Multi-pod deployment](../k8s/scripts/multi-pod-deployment.sh), [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh)
 - **configs** (1): [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml)
 - **manifests** (3): most recent → [Zero-downtime rolling deployment](../k8s/manifests/zero-downtime-rolling-deployment.yaml), [Multi-service application](../k8s/manifests/multi-service-application.yaml), [Minimal deployment and service](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml)
 - **snippets** (1): [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh)
+- **notebooks** (1): [Comparing Kubernetes rollout strategies](../k8s/notebooks/comparing-kubernetes-rollout-strategies.ipynb)
 
 ## Prometheus  ·  10 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
 - **notes** (4): most recent → [Prometheus quickstart trip-ups](../prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md), [Install Prometheus and explore web UI](../prom/notes/2026-08-29-install-prometheus-explore-web-ui.md), [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
 - **configs** (4): most recent → [Prometheus alerting rules](../prom/configs/2026-08-30-prometheus-alerting-rules.yaml), [Prometheus scrape config](../prom/configs/2026-08-29-prometheus-scrape-config.yaml), [Prometheus scrape config](../prom/configs/2026-08-22-prometheus-scrape-config.yaml)
-- **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
 - **scripts** (1): [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh)
+- **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
 
-## Python  ·  13 files
+## Python  ·  27 files
 
 - **primer:** [Python — quick primer](../python/notes/0000-primer-python.md)
 - **notes** (3): most recent → [Python quickstart gotchas](../python/notes/2026-08-22-python-quickstart-gotchas.md), [Python functions and modules](../python/notes/2026-08-04-python-functions-modules.md)
-- **docs** (2): most recent → [Comparing Python configuration approaches for DevOps workflows](../python/docs/comparing-python-configuration-approaches.md), [Python modules, packages, and imports](../python/docs/2026-08-04-python-modules-packages-imports.md)
-- **scripts** (3): most recent → [Config validator](../python/scripts/config-validator.py), [Minimal file processing](../python/scripts/2026-08-04-minimal-file-processing.py), [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py)
+- **docs** (3): most recent → [Comparing Python configuration approaches for DevOps workflows](../python/docs/comparing-python-configuration-approaches.md), [Python modules, packages, and imports](../python/docs/2026-08-04-python-modules-packages-imports.md)
+- **scripts** (4): most recent → [Config loader with Pydantic settings](../python/scripts/config-loader-pydantic-settings.py), [Config validator](../python/scripts/config-validator.py), [Minimal file processing](../python/scripts/2026-08-04-minimal-file-processing.py), [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py)
 - **snippets** (4): most recent → [Dockerfile validator](../python/snippets/validate-dockerfile.py), [Docker Compose validator](../python/snippets/docker-compose-validator.py), [Config file reader](../python/snippets/2026-08-22-config-file-reader.py), [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
-- **configs** (1): [First pyproject.toml](../python/configs/2026-08-24-pyproject-toml-config.toml)
+- **configs** (4): most recent → [App config for the Pydantic loader](../python/configs/2026-09-16-app-config.yaml), [pyproject.toml README guide](../python/configs/2026-09-14-pyproject-toml-readme.md), [App config](../python/configs/2026-09-15-app-config.yaml), [pyproject.toml config](../python/configs/2026-08-24-pyproject-toml-config.toml)
+- **dockerfiles** (1): [Python app Dockerfile](../python/dockerfiles/python-app.Dockerfile)
+- **templates** (8): [Python CLI + Docker + GHA scaffold](../python/templates/python-cli-docker-gha/README.md)
+- _…and more under `python/` — browse the folder._
 
-## Terraform  ·  15 files
+## Terraform  ·  16 files
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
 - **notes** (4): most recent → [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md), [Quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
-- **configs** (5): most recent → [Multi-resource Terraform config](../tf/configs/multi-resource-terraform-config.hcl), [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl), [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl)
+- **configs** (6): most recent → [Multi-resource Terraform config](../tf/configs/multi-resource-terraform-config.hcl), [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl), [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl)
 - **docs** (3): most recent → [Terraform — coverage check](../tf/docs/2026-08-11-terraform-coverage.md), [Local vs remote Terraform state](../tf/docs/local-vs-remote-terraform-state.md), [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md)
 - **scripts** (2): most recent → [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh), [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
 - **snippets** (1): [Terraform variables and outputs](../tf/snippets/2026-08-30-terraform-variables-outputs.hcl)
 
-## Repo-doc  ·  5 files
+## Repo-doc  ·  6 files
 
 - **primer:** [Repo-doc — quick primer](../repo-doc/notes/0000-primer-repo-doc.md)
-- **notes** (1): [Repo-task quickstart trip-ups](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md)
+- **notes** (2): [Repo-task quickstart trip-ups](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md), [Reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md)
 - **docs** (2): [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md), [Repo-doc tooling overview](../repo-doc/docs/2026-09-08-repo-doc-tooling-overview.md)
-- **scripts** (1): [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh)
+- **scripts** (2): [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh), [Minimal task automation](../repo-doc/scripts/2026-09-10-minimal-task-automation.sh)
 
-## Concepts (docs/concepts/)  ·  63 files
+## Concepts (docs/concepts/)  ·  64 files
 
 Foundational primers on the ideas the tools build on — one primer per concept, plus runnable scripts, snippets, and notebooks. Each folder holds more than the highlights below.
 
@@ -125,7 +132,7 @@ Foundational primers on the ideas the tools build on — one primer per concept,
 - **Containerization Concepts** (6): [primer](../docs/concepts/containerization-concepts/0000-primer-containerization-concepts.md) · [monitoring containerized apps in production](../docs/concepts/containerization-concepts/monitoring-containerized-apps-in-production.md) · script: [Container observability with the Prometheus node exporter](../docs/concepts/containerization-concepts/scripts/containerization-observability-prometheus-node-exporter.sh) · _…and 3 more under `docs/concepts/containerization-concepts/`._
 - **Infrastructure as Code Principles** (7): [primer](../docs/concepts/infrastructure-as-code-principles/0000-primer-infrastructure-as-code-principles.md) · [parameterised config generation](../docs/concepts/infrastructure-as-code-principles/parameterised-config-generation.md) · [state file management strategies](../docs/concepts/infrastructure-as-code-principles/state-file-management-strategies.md) · script: [Network topology Terraform generator](../docs/concepts/infrastructure-as-code-principles/scripts/network-topology-terraform.sh) · _…and 3 more under `docs/concepts/infrastructure-as-code-principles/`._
 - **Linux & CLI Fundamentals** (8): [primer](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) · [automating network diagnostics from the shell](../docs/concepts/linux-cli-fundamentals/combining-linux-cli-with-networking-automating-network-diagnostics.md) · script: [Provision local VMs with cloud-init](../docs/concepts/linux-cli-fundamentals/scripts/provision-local-vms-with-cloud-init.sh) · notebook: [Exploring connectivity with command-line tools](../docs/concepts/linux-cli-fundamentals/notebooks/exploring-connectivity-with-command-line-tools.ipynb) · _…and 4 more under `docs/concepts/linux-cli-fundamentals/`._
-- **Networking Fundamentals** (11): [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md) · [combining networking with containerization](../docs/concepts/networking-fundamentals/combining-networking-with-containerization.md) · notebook: [Overlay networks and service mesh exploration](../docs/concepts/networking-fundamentals/notebooks/overlay-networks-and-service-mesh-exploration.ipynb) · snippet: [Applying networking in DevOps](../docs/concepts/networking-fundamentals/snippets/2026-08-23-applying-networking-in-devops.py) · script: [Path MTU discovery](../docs/concepts/networking-fundamentals/scripts/2026-08-24-path-mtu-discovery.sh) · _…and 5 more under `docs/concepts/networking-fundamentals/`._
-- **Observability & Monitoring Concepts** (6): [primer](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md) · script: [Observability exercises — round two](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-20-observability-exercises.sh) · script: [CI/CD pipeline metric collection probes](../docs/concepts/observability-monitoring-concepts/scripts/observability-cicd-pipeline-metric-collection-probes.sh) · snippet: [Applying observability in DevOps](../docs/concepts/observability-monitoring-concepts/snippets/2026-08-07-applying-observability-in-devops.py) · _…and 2 more under `docs/concepts/observability-monitoring-concepts/`._
+- **Networking Fundamentals** (12): [primer](../docs/concepts/networking-fundamentals/0000-primer-networking-fundamentals.md) · [combining networking with containerization](../docs/concepts/networking-fundamentals/combining-networking-with-containerization.md) · notebook: [Overlay networks and service mesh exploration](../docs/concepts/networking-fundamentals/notebooks/overlay-networks-and-service-mesh-exploration.ipynb) · snippet: [Applying networking in DevOps](../docs/concepts/networking-fundamentals/snippets/2026-08-23-applying-networking-in-devops.py) · script: [Path MTU discovery](../docs/concepts/networking-fundamentals/scripts/2026-08-24-path-mtu-discovery.sh) · _…and 5 more under `docs/concepts/networking-fundamentals/`._
+- **Observability & Monitoring Concepts** (8): [primer](../docs/concepts/observability-monitoring-concepts/0000-primer-observability-monitoring-concepts.md) · script: [Observability exercises — round two](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-20-observability-exercises.sh) · script: [CI/CD pipeline metric collection probes](../docs/concepts/observability-monitoring-concepts/scripts/observability-cicd-pipeline-metric-collection-probes.sh) · snippet: [Applying observability in DevOps](../docs/concepts/observability-monitoring-concepts/snippets/2026-08-07-applying-observability-in-devops.py) · _…and 3 more under `docs/concepts/observability-monitoring-concepts/`._
 - **Scripting & Automation Philosophy** (6): [primer](../docs/concepts/scripting-automation-philosophy/0000-primer-scripting-automation-philosophy.md) · snippet: [Deploy checklist as data](../docs/concepts/scripting-automation-philosophy/snippets/2026-08-20-scripting-deploy-checklist.py) · script: [Terraform plan/apply, made idempotent](../docs/concepts/scripting-automation-philosophy/scripts/terraform-plan-apply-idempotent.sh) · _…and 3 more under `docs/concepts/scripting-automation-philosophy/`._
 - **Version Control & Git Workflow** (7): [primer](../docs/concepts/version-control-git-workflow/0000-primer-version-control-git-workflow.md) · [branch strategy and pipeline triggers](../docs/concepts/version-control-git-workflow/branch-strategy-and-pipeline-triggers.md) · snippet: [Release-readiness commit inventory](../docs/concepts/version-control-git-workflow/snippets/2026-08-20-release-branch-commit-check.py) · snippet: [Correlating commit history with deployments](../docs/concepts/version-control-git-workflow/snippets/analyzing-git-commit-history-for-deployment-correlation.py) · _…and 3 more under `docs/concepts/version-control-git-workflow/`._
