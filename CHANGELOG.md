@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-09-16
+
+- grafana: Add docs on wiring Grafana into a Prometheus + Alertmanager on-call pipeline (grafana-012)
+- networking: Add hands-on network interface and routing inspection practice script (networking-fundamentals-001)
+- python: Add reusable config loader with Pydantic settings and environment overrides (python-015)
+- python: Add companion app-config.yaml for config-loader-pydantic-settings.py (python-015)
+
 ## 2026-09-15
 
 - python: Add companion app-config.yaml for config-file-reader.py (python-018)
