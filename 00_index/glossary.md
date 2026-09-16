@@ -123,6 +123,7 @@
   - **pyproject.toml** — the standard Python project metadata file introduced by PEP 621; declares build-system requirements, project metadata, and tool configurations in one place so `pip install -e .` works without setup.py.
   - **Typed settings class** — a Python class (often a `dataclass` or Pydantic model) that holds configuration as typed attributes, catching invalid values at load time and providing IDE completion.
   - **Pydantic** — a Python library for data validation using Python type annotations; commonly used to define typed settings classes that validate configuration at startup.
+- **pydantic_settings** — a Pydantic v2 module (`from pydantic_settings import BaseSettings`) that loads settings from environment variables and `.env` files into a typed model; supports `env_prefix`, `env_file`, and `extra="ignore"` for per-environment configuration without changing code.
 
 ## Terraform
 
@@ -192,6 +193,9 @@
 - **PodDisruptionBudget (PDB)** — a Kubernetes object that limits how many Pods in a controller (Deployment/StatefulSet) can be unavailable at once; it protects availability during voluntary disruptions like node drains, autoscaler scale-down, or rolling updates.
 - **Rolling update** — the default Deployment update strategy that replaces old Pods with new ones gradually, keeping a minimum number of ready Pods at all times so the application stays reachable during a deploy.
 - **Surge / maxUnavailable** — the knobs on a Deployment's rolling-update strategy: `maxSurge` lets extra new Pods run alongside the old set during the rollout, and `maxUnavailable` caps how many old Pods can be taken down at once; together they control rollout speed versus capacity.
+- **kind** — Kubernetes in Docker; a tool for running local Kubernetes clusters inside Docker containers, useful for testing and development where a full cloud cluster isn't available.
+- **kubectl port-forward** — a `kubectl` command that forwards one or more local ports to a pod or service, enabling local access to cluster applications without exposing them externally.
+- **targetPort** — the field in a Kubernetes Service spec that tells the Service which container port to forward traffic to; can differ from the Service's own port, allowing multiple services on the same node port.
 
 ## Concepts
 

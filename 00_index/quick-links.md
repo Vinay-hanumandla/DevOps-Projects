@@ -104,7 +104,7 @@
 ### Choose between submodules, subtrees, and monorepo
 - [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md) — when to use each approach for managing external dependencies and multi-repo structures
 
-### Tag and push a Docker image from Git history
+### Tag and push a Docker image from Git History
 - [Git — tagging Docker images from git describe](../git/docs/git-describe-image-tags-registry.md) — deriving traceable image tags from git history and pushing to a registry
 
 ### Wire tag-driven releases and conventional-commit gates
@@ -141,9 +141,12 @@
 - [Grafana quickstart gotchas](../grafana/notes/2026-08-27-grafana-quickstart-gotchas.md) — Docker install, data sources, panel editing, and dashboard saving traps
 - [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml) — a minimal Grafana dashboard JSON config
 - [Datasource and dashboard provisioning](../grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml) — provisioning datasource and dashboard config
+- [Production provisioning bundle](../grafana/configs/2026-08-29-grafana-datasource-provisioning.yaml) — datasources, dashboards, and alert rules for production
+- [Loki datasource provisioning](../grafana/configs/2026-08-30-loki-datasource-provisioning.yaml) — Loki as a datasource for Grafana log queries
 - [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh) — a shell helper that enumerates dashboards via the Grafana API
 - [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh) — a shell helper that creates a Grafana dashboard via the API
 - [List dashboards and datasources](../grafana/snippets/2026-09-09-list-dashboards-datasources.py) — Python script to list dashboards and datasources via the Grafana API
+- [Prometheus + Alertmanager on-call pipeline](../grafana/docs/prometheus-alertmanager-oncall-pipeline.md) — wiring Grafana dashboards into a Prometheus and Alertmanager on-call flow
 
 ### Get started with Helm
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
@@ -180,9 +183,11 @@
 - [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh) — install Minikube, start a cluster, and verify kubectl
 - [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md) — kubectl CLI exploration notes with common commands and output explanations
 - [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md) — more kubectl gotchas on the second pass
+- [Quickstart kind contexts and port mismatch](../k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md) — kind setup quirks, context switching, and port-forwarding gotchas
 
 ### Inspect Kubernetes resources
 - [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md) — kubectl commands for inspecting cluster resources and their events
+- [kubectl imperative vs declarative](../k8s/docs/kubectl-imperative-vs-declarative.md) — when each approach fits, and how to convert between them
 - [Minimal deployment and service manifest](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml) — a minimal Kubernetes Deployment and Service YAML
 - [Multi-service application manifest](../k8s/manifests/multi-service-application.yaml) — web frontend, API backend, and Redis cache with Deployments, Services, and resource requests
 - [Zero-downtime rolling deployment](../k8s/manifests/zero-downtime-rolling-deployment.yaml) — readiness probes, PodDisruptionBudget, and surge/unhealthy thresholds for rolling updates
@@ -194,6 +199,7 @@
 - [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md) — install check and first web UI exploration
 - [Prometheus quickstart trip-ups](../prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md) — following the Prometheus quickstart and where I got stuck
 - [First scrape target](../prom/configs/2026-08-07-first-scrape-target.yaml) — a minimal Prometheus scrape target config
+- [Prometheus scrape config](../prom/configs/2026-08-22-prometheus-scrape-config.yaml) — scrape targets for Prometheus
 - [Prometheus alerting rules](../prom/configs/2026-08-30-prometheus-alerting-rules.yaml) — alerting rules for Prometheus
 - [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh) — a shell helper that runs a basic PromQL query against a Prometheus server
 - [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh) — a shell helper that runs ad-hoc PromQL queries against a running Prometheus server
@@ -204,11 +210,13 @@
 - [Python modules, packages, and imports](../python/docs/2026-08-04-python-modules-packages-imports.md) — module and package mechanics, import resolution, and common pitfalls
 - [Comparing Python configuration approaches for DevOps workflows](../python/docs/comparing-python-configuration-approaches.md) — comparing environment variables, config files, typed settings, and CLI arguments
 - [Python functions and modules](../python/notes/2026-08-04-python-functions-modules.md) — function definitions, module organisation, and import patterns
+- [Python github-actions integration](../python/docs/python-github-actions-integration.md) — wiring Python projects into GitHub Actions workflows
 
 ### Write and run a Python script
 - [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py) — end-to-end virtual-environment setup and a runner inside it
 - [Minimal file processing](../python/scripts/2026-08-04-minimal-file-processing.py) — read, process, and write files with Python
 - [Config validator](../python/scripts/config-validator.py) — reads a YAML config and validates required keys, value types, and port ranges
+- [Config loader with Pydantic settings](../python/scripts/config-loader-pydantic-settings.py) — reusable Python config loader with typed settings and environment-variable overrides
 - [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py) — declare variables, inspect types, and print mixed-type lists
 - [Config file reader](../python/snippets/2026-08-22-config-file-reader.py) — read and parse config files with Python
 - [Docker Compose validator](../python/snippets/docker-compose-validator.py) — validates a Compose file for missing services, port conflicts, and volume mount syntax
