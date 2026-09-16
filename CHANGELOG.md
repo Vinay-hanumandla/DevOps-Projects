@@ -2,6 +2,8 @@
 
 ## 2026-09-16
 
+- kubernetes: Add development Dockerfile for building and testing operators or controllers (k8s-018)
+
 - grafana: Add docs on wiring Grafana into a Prometheus + Alertmanager on-call pipeline (grafana-012)
 - networking: Add hands-on network interface and routing inspection practice script (networking-fundamentals-001)
 - python: Add reusable config loader with Pydantic settings and environment overrides (python-015)
