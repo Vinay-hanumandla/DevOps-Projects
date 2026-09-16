@@ -2,6 +2,8 @@
 
 ## 2026-09-16
 
+- ansible: Add role scaffold with Molecule tests, GHA CI, and collection structure (ansible-012)
+
 - kubernetes: Add development Dockerfile for building and testing operators or controllers (k8s-018)
 
 - grafana: Add docs on wiring Grafana into a Prometheus + Alertmanager on-call pipeline (grafana-012)

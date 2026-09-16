@@ -1,0 +1,8 @@
+# last_verified: 2026-09-16 · ansible n/a
+galaxy_info:
+  role_name: app_example
+  description: Installs and configures the example application.
+  license: MIT
+  min_ansible_version: null
+  platforms: []
+dependencies: []

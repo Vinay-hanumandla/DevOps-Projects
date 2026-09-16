@@ -1,0 +1,10 @@
+# last_verified: 2026-09-16 · ansible n/a
+# Default settings for the app_example role. Every value here is overridable
+# per group/host or via the Terraform handoff vars file.
+app_user: appsvc
+app_dir: /opt/app_example
+app_port: 8080
+app_config_path: /etc/app_example/app.conf
+# Endpoints normally arrive from Terraform outputs; empty means "not wired yet".
+app_db_endpoint: "{{ db_endpoint | default('') }}"
+app_redis_endpoint: "{{ redis_endpoint | default('') }}"

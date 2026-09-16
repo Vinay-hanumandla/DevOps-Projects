@@ -1,0 +1,13 @@
+# last_verified: 2026-09-16 · ansible n/a
+# Scaffold collection metadata. Rename namespace/name for real use.
+# Version 1.0.0 is the scaffold's own starting point, not a tool release.
+namespace: example_org
+name: app_collection
+version: 1.0.0
+readme: README.md
+description: Application roles shipped as a collection with Molecule tests.
+license:
+  - MIT
+tags:
+  - application
+  - configuration
