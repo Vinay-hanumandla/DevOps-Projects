@@ -19,6 +19,12 @@
 ### Hand Terraform outputs to Ansible inventory
 - [Terraform dynamic inventory](../ansible/manifests/terraform-dynamic-inventory.yaml) — builds the inventory from Terraform workspace outputs via the `tfc_inv` plugin, no CLI or backend credentials on the control node
 
+### Gate a playbook apply before it touches hosts
+- [Gated playbook run](../ansible/scripts/ansible-playbook-gated-run.sh) — syntax-check, check-mode dry run, and optional lint first, then apply plus an idempotency rerun that must report changed=0
+
+### Manage Kubernetes workloads with Ansible
+- [Managing Kubernetes with Ansible](../ansible/docs/managing-kubernetes-with-ansible.md) — raw manifests and CRDs, Helm releases, and Kustomize overlays through the kubernetes.core collection, ordered CRDs-first
+
 ### Get started with Bash
 - [Bash primer](../bash/notes/0000-primer-bash.md) — what Bash is, key terminology, and a tiny example
 - [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md) — install check, first .sh file, and permission gotcha

@@ -18,11 +18,11 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 ## Quick links
 
+- [Gated playbook run](ansible/scripts/ansible-playbook-gated-run.sh) — syntax-check, check-mode dry run, and optional lint before the apply, then an idempotency rerun that must report changed=0
+- [Managing Kubernetes with Ansible](ansible/docs/managing-kubernetes-with-ansible.md) — raw manifests and CRDs, Helm releases, and Kustomize overlays through the kubernetes.core collection
 - [Terraform dynamic inventory for Ansible](ansible/manifests/terraform-dynamic-inventory.yaml) — builds the Ansible inventory straight from Terraform workspace outputs, no CLI or backend credentials on the control node
 - [Comparing environment-aware Python config](python/notebooks/comparing-env-aware-config.ipynb) — typed settings classes vs layered loaders vs minimal env readers, side by side
 - [Reusable composite action caller](gha/configs/reusable-composite-action-caller.yaml) — example caller showing defaults, per-call overrides, and outputs from a shared action
-- [Reusable composite action](gha/configs/reusable-composite-action/action.yml) — Node toolchain install with npm cache, smoke test, and optional artifact upload
-- [Ansible role scaffold with Molecule](ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role layout with Molecule tests, collection packaging, and a Terraform-outputs handoff
 
 ## Layout
 
@@ -50,7 +50,7 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 | Tool | notes | docs | scripts | configs | manifests | notebooks | dockerfiles | templates | src | hooks | snippets | Last verified |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Ansible | 3 | 1 | 2 | 4 | 1 | — | — | 16 | — | — | — | 2026-09-17 |
+| Ansible | 3 | 2 | 3 | 4 | 1 | — | — | 16 | — | — | — | 2026-09-17 |
 | Bash | 3 | 6 | 8 | — | — | 3 | 1 | 30 | — | — | 1 | 2026-09-09 |
 | Docker | 5 | 1 | 6 | — | 1 | — | 2 | — | 2 | — | — | 2026-09-07 |
 | GitHub Actions | 3 | 3 | — | 6 | — | 1 | — | — | — | — | — | 2026-09-16 |
@@ -69,7 +69,7 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 ## Status
 
-Currently working through L4–L5 first-contact notes for Ansible, Python, and GitHub Actions. Recent additions include a Terraform dynamic inventory manifest for the provision-to-configure handoff, an environment-aware Python config notebook, a reusable composite action with a caller workflow, and a Molecule-tested Ansible role scaffold with collection packaging.
+Currently working through L4–L5 first-contact notes for Ansible, Python, and GitHub Actions. Recent additions include a gated playbook-run wrapper with syntax-check, check-diff, and idempotency rerun, a guide to managing Kubernetes workloads through the kubernetes.core collection, and a Terraform dynamic inventory manifest for the provision-to-configure handoff.
 
 ---
 _Last updated: 2026-09-17_
