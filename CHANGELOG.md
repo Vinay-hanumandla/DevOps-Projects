@@ -2,6 +2,7 @@
 
 ## 2026-09-17
 
+- docker: Add multi-service Compose app scaffold with health-gated startup, file-based secrets, and tools profile (docker-016)
 - ansible: Add docs on managing Kubernetes with Ansible via the kubernetes.core collection for CRDs, Helm releases, and Kustomize (ansible-015)
 - python: Add notebook comparing typed settings, layered loaders, and minimal env readers for environment-aware configuration (python-019)
 - ansible: Add tfc_inv dynamic inventory manifest for the Terraform-to-Ansible handoff via workspace outputs (ansible-013)
