@@ -3,6 +3,7 @@
 ## 2026-09-17
 
 - python: Add notebook comparing typed settings, layered loaders, and minimal env readers for environment-aware configuration (python-019)
+- ansible: Add tfc_inv dynamic inventory manifest for the Terraform-to-Ansible handoff via workspace outputs (ansible-013)
 
 ## 2026-09-16
 

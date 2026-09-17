@@ -1,0 +1,45 @@
+# last_verified: 2026-09-17 · hashicorp.terraform 2.0.0
+# Purpose: dynamic Ansible inventory built straight from Terraform workspace
+# outputs via the hashicorp.terraform collection's tfc_inv plugin — no Terraform
+# CLI or backend credentials needed on the control node.
+# When to use this: Terraform provisions (Day 0) and Ansible configures (Day 1+).
+# This file covers the API-first handoff; the sibling scaffold under
+# ansible/templates/ansible-role-molecule-collection covers the other two
+# handoffs (aws_ec2 cloud-plugin inventory and generated group_vars from
+# `terraform output -json`), so pick one handoff per project, not all three.
+# Prerequisites:
+#   - ansible-galaxy collection install hashicorp.terraform:==2.0.0
+#   - TFE_TOKEN (and TFE_ADDRESS for private Terraform Enterprise) exported;
+#     the plugin reads canonical auth tfe_token/tfe_address from these env vars.
+#   - The workspace's outputs already applied — inventory reflects outputs only.
+# Steps:
+#   1. Add the workspace-targeting options (see the trailing comment for how
+#      to confirm their exact names) pointing at the Terraform workspace.
+#   2. Keep the handoff decoupled: pass `terraform output -json` as an artifact
+#      between separate CI stages (provision -> configure -> test) instead of
+#      coupling the tools with local-exec provisioners or null_resource blocks,
+#      which can leave Terraform state inconsistent when the Ansible run fails.
+#   3. Gate the configure stage: ansible-playbook --syntax-check, then a --check
+#      dry run, plus ansible-lint before the real run.
+# Verify: ansible-inventory -i ansible/manifests/terraform-dynamic-inventory.yaml --graph
+# should list the hosts derived from the workspace outputs. If it errors on
+# auth, confirm TFE_TOKEN is exported; if it lists nothing, confirm the
+# workspace has applied outputs (empty outputs mean an empty inventory, which is
+# expected, not a plugin bug).
+# Notes from what I found while wiring this up:
+#   - The alternative source=statefile mode exists on the same plugin for
+#     workspaces whose outputs are not the right shape; commented below.
+#   - SSH keys for the configure stage do not belong in this file: materialize
+#     them at runtime (e.g. a local_file resource with file_permission = "0400"
+#     or cloud-init), since minimal CI images will not have your laptop key.
+plugin: hashicorp.terraform.tfc_inv
+source: outputs
+tfe_address: "{{ lookup('env', 'TFE_ADDRESS') }}"
+tfe_token: "{{ lookup('env', 'TFE_TOKEN') }}"
+# Workspace targeting (organization/workspace selection) is intentionally not
+# filled in here: confirm the exact option names with
+# `ansible-doc hashicorp.terraform.tfc_inv` against the installed 2.0.0
+# collection and add them below, then re-run the Verify step.
+# Alternative: read raw state instead of outputs (useful when the workspace
+# exposes no outputs yet). Uncomment to switch modes.
+# source: statefile
