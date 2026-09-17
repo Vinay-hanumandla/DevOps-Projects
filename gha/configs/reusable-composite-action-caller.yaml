@@ -1,0 +1,52 @@
+# last_verified: 2026-09-16 · gha n/a
+#
+# Caller workflow that uses the reusable composite action
+# (reusable-composite-action/action.yml). Demonstrates the three things a
+# reusable composite action needs to be worth its salt:
+#
+#   1. defaults make it callable with zero arguments — the smoke test below
+#      passes only `node-version: '20'` and everything else falls through.
+#   2. inputs can be overridden per call — the upload job flips
+#      `upload-artifacts: 'true'` and points `artifact-path` at the dist dir.
+#   3. outputs are exposed back to the caller — `toolchain-version` is echoed
+#      back so a downstream job can log what was actually installed.
+
+name: reusable-composite-action-caller
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  smoke-test:
+    name: Smoke test through the reusable action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run reusable composite action (defaults)
+        uses: ./reusable-composite-action
+        id: run-reusable-action
+        with:
+          node-version: '20'
+
+      - name: Report installed toolchain
+        run: echo "Toolchain was ${{ steps.run-reusable-action.outputs.toolchain-version }}"
+
+  build-and-upload:
+    name: Build and upload artifacts through the reusable action
+    runs-on: ubuntu-latest
+    needs: smoke-test
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+      - name: Run reusable composite action with artifact upload
+        uses: ./.github/actions/reusable-composite-action
+        id: run-reusable-action
+        with:
+          node-version: '20'
+          smoke-command: 'npm run build'
+          upload-artifacts: 'true'
+          artifact-path: 'dist/'
+
+      - name: Report installed toolchain
+        run: echo "Toolchain was ${{ steps.run-reusable-action.outputs.toolchain-version }}"
