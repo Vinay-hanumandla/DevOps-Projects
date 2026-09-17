@@ -10,6 +10,11 @@
 - [Idempotent nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml) — a playbook that installs and configures nginx idempotently
 - [VPS hardening playbook](../ansible/configs/vps-hardening-playbook.yaml) — a playbook for hardening VPS security configurations
 - [Ansible ad-hoc toolkit](../ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh) — reusable ad-hoc commands for common Ansible tasks
+- [Ansible playbook wrapper](../ansible/scripts/ansible-playbook-wrapper.sh) — wrapper that runs playbooks with consistent flags and pre-flight checks
+
+### Scaffold an Ansible role with Molecule tests
+- [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, collection packaging, and CI gating merges
+- [Terraform outputs to group vars](../ansible/templates/ansible-role-molecule-collection/scripts/tf_outputs_to_vars.py) — converts `terraform output -json` into the `group_vars` file the role reads, keeping provisioning and configuration decoupled
 
 ### Get started with Bash
 - [Bash primer](../bash/notes/0000-primer-bash.md) — what Bash is, key terminology, and a tiny example
@@ -147,6 +152,7 @@
 - [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh) — a shell helper that creates a Grafana dashboard via the API
 - [List dashboards and datasources](../grafana/snippets/2026-09-09-list-dashboards-datasources.py) — Python script to list dashboards and datasources via the Grafana API
 - [Prometheus + Alertmanager on-call pipeline](../grafana/docs/prometheus-alertmanager-oncall-pipeline.md) — wiring Grafana dashboards into a Prometheus and Alertmanager on-call flow
+- [Comparing Grafana unified alerting vs Alertmanager](../grafana/notebooks/comparing-grafana-unified-alerting-vs-alertmanager.ipynb) — notebook comparing built-in Grafana alerting with an external Alertmanager
 
 ### Get started with Helm
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
@@ -193,6 +199,8 @@
 - [Zero-downtime rolling deployment](../k8s/manifests/zero-downtime-rolling-deployment.yaml) — readiness probes, PodDisruptionBudget, and surge/unhealthy thresholds for rolling updates
 - [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml) — a Kubernetes Deployment config for first contact
 - [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh) — a shell helper that walks common resource types with kubectl
+- [Pod metrics via the API](../k8s/snippets/kubectl-pod-metrics.py) — Python helper that pulls pod CPU and memory usage through kubectl
+- [Operator development image](../k8s/dockerfiles/operator-dev.Dockerfile) — containerised toolchain for building Kubernetes operators
 
 ### Get started with Prometheus
 - [Prometheus primer](../prom/notes/0000-primer-prometheus.md) — what Prometheus is, metrics types, and a minimal workflow
@@ -287,6 +295,7 @@
 - [Scripting automation exercises](../docs/concepts/scripting-automation-philosophy/scripts/2026-08-07-scripting-automation-exercises.sh) — hands-on practice for DRY helpers, idempotency, and exit codes from the scripting philosophy primer
 - [Applying scripting in DevOps](../docs/concepts/scripting-automation-philosophy/snippets/2026-08-07-applying-scripting-in-devops.py) — Python snippet that parses a host inventory and applies role/env-based deploy actions
 - [Deploy checklist as data](../docs/concepts/scripting-automation-philosophy/snippets/2026-08-20-scripting-deploy-checklist.py) — encodes the pre-deploy sequence as a list of steps and loops over it, so changing a check edits one entry
+- [Deploy-checklist companion app config](../scripting-automation-philosophy/configs/2026-09-16-app.yaml) — sample `app.yaml` the deploy-checklist snippet loads and validates
 - [Combining scripting with CI/CD pipeline automation](../docs/concepts/scripting-automation-philosophy/combining-scripting-with-cicd-pipeline-automation.md) — notes on combining scripting with CI/CD pipeline automation
 - [Terraform plan-apply idempotent](../docs/concepts/scripting-automation-philosophy/scripts/terraform-plan-apply-idempotent.sh) — idempotent Terraform plan and apply wrapper with retry logic
 - [Git workflow practice exercises](../docs/concepts/version-control-git-workflow/scripts/2026-08-07-git-exercises.sh) — read-only script for inspecting repo state, branch, history, and upstream tracking

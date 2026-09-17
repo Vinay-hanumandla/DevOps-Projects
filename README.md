@@ -18,11 +18,11 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 ## Quick links
 
-- [Network interface and routing inspection practice](docs/concepts/networking-fundamentals/scripts/2026-09-16-network-interface-routing-inspection-practice.sh) — hands-on script for inspecting network interfaces, addresses, and routing tables
-- [Prometheus + Alertmanager on-call pipeline](grafana/docs/prometheus-alertmanager-oncall-pipeline.md) — wiring Grafana dashboards into a Prometheus and Alertmanager on-call flow
-- [Config loader with Pydantic settings](python/scripts/config-loader-pydantic-settings.py) — reusable Python config loader with typed settings and environment-variable overrides
-- [App config for the Pydantic loader](python/configs/2026-09-16-app-config.yaml) — companion YAML config consumed by the Pydantic settings loader
-- [Grafana provisioning bundle](grafana/manifests/production-provisioning-datasources-dashboards-alerts.yaml) — datasources, dashboard provider, and alert rules declared as code
+- [Ansible role scaffold with Molecule](ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role layout with Molecule tests, collection packaging, and a Terraform-outputs handoff
+- [Operator development Dockerfile](k8s/dockerfiles/operator-dev.Dockerfile) — containerised toolchain image for building Kubernetes operators
+- [Unified alerting vs Alertmanager notebook](grafana/notebooks/comparing-grafana-unified-alerting-vs-alertmanager.ipynb) — notebook comparing Grafana's built-in alerting with an external Alertmanager
+- [Kind contexts and port mismatch](k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md) — kind setup quirks, context switching, and port-forwarding gotchas
+- [Deploy-checklist companion app config](scripting-automation-philosophy/configs/2026-09-16-app.yaml) — sample `app.yaml` the scripting deploy-checklist snippet loads and validates
 
 ## Layout
 
@@ -40,6 +40,7 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 `prom/` — scrape configs, alerting rules, and PromQL query helpers.
 `python/` — config validators, file processors, and DevOps utility scripts.
 `repo-doc/` — helpers for keeping the kit's own coverage tables and docs in sync.
+`scripting-automation-philosophy/` — companion app config for the scripting deploy-checklist snippet.
 `tf/` — provider configs, null resources, multi-resource setups, and state-lock workflow scripts.
 
 ## Coverage
@@ -49,26 +50,26 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 | Tool | notes | docs | scripts | configs | manifests | notebooks | dockerfiles | templates | src | hooks | snippets | Last verified |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Ansible | 3 | 1 | 2 | 4 | — | — | — | — | — | — | — | 2026-09-10 |
+| Ansible | 3 | 1 | 2 | 4 | — | — | — | 17 | — | — | — | 2026-09-16 |
 | Bash | 3 | 6 | 8 | — | — | 3 | 1 | 30 | — | — | 1 | 2026-09-09 |
 | Docker | 5 | 1 | 6 | — | 1 | — | 2 | — | 2 | — | — | 2026-09-03 |
 | GitHub Actions | 3 | 3 | — | 4 | — | 1 | — | — | — | — | — | 2026-09-04 |
 | Git | 16 | 9 | 6 | — | 1 | — | — | 15 | — | 1 | — | 2026-09-13 |
-| Grafana | 4 | 1 | — | 5 | 1 | — | — | — | — | — | 3 | 2026-09-16 |
+| Grafana | 4 | 1 | — | 5 | 1 | 1 | — | — | — | — | 3 | 2026-09-16 |
 | Helm | 5 | 2 | 1 | 6 | 2 | 1 | — | — | — | — | 1 | 2026-09-13 |
 | Jenkins | 4 | — | — | 1 | — | — | — | — | — | — | 2 | 2026-09-06 |
-| Kubernetes | 5 | 2 | 3 | 1 | 3 | 1 | — | — | — | — | 2 | 2026-09-16 |
+| Kubernetes | 5 | 2 | 3 | 1 | 3 | 1 | 1 | — | — | — | 2 | 2026-09-16 |
 | Prometheus | 4 | — | 1 | 4 | — | — | — | — | — | — | 1 | 2026-08-30 |
 | Python | 3 | 3 | 4 | 4 | — | — | 1 | 8 | — | — | 4 | 2026-09-16 |
 | Terraform | 4 | 3 | 2 | 6 | — | — | — | — | — | — | 1 | 2026-09-05 |
 | Repo-doc | 2 | 2 | 2 | — | — | — | — | — | — | — | — | 2026-09-10 |
-| Concepts | — | 22 | 22 | — | — | 5 | — | — | — | — | 12 | 2026-08-29 |
+| Concepts | — | 22 | 22 | — | — | 5 | — | — | — | — | 13 | 2026-09-16 |
 
 </details>
 
 ## Status
 
-Currently working through L3–L4 first-contact notes for Grafana, Kubernetes, and Python. Recent additions include a Prometheus + Alertmanager on-call pipeline doc, a network interface and routing inspection practice script, a reusable Pydantic settings config loader with companion app config, and a Grafana provisioning bundle with datasources, dashboard provider, and alert rules as code.
+Currently working through L3–L4 first-contact notes for Grafana, Kubernetes, and Ansible. Recent additions include a Molecule-tested Ansible role scaffold with collection packaging, a Kubernetes operator development Dockerfile, a Grafana unified-alerting vs Alertmanager notebook, and kind context and port-forwarding notes.
 
 ---
 _Last updated: 2026-09-16_
