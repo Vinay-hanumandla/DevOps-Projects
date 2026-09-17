@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-17
+
+- python: Add notebook comparing typed settings, layered loaders, and minimal env readers for environment-aware configuration (python-019)
+
 ## 2026-09-16
 
 - ansible: Add role scaffold with Molecule tests, GHA CI, and collection structure (ansible-012)
