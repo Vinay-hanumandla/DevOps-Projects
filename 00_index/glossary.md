@@ -343,3 +343,8 @@
 - **`galaxy.yml`** — the manifest at the root of an Ansible collection declaring its namespace, name, and version; shipping a role inside a collection gives it versioning that a bare playbook directory lacks.
 - **Dynamic inventory plugin** — an inventory source that discovers hosts from a cloud API at run time instead of a static file; the `aws_ec2.yml` inventory finds hosts by tag (e.g. `ManagedBy: terraform`) so Terraform-provisioned machines appear without hand-editing inventory.
 - **Terraform-outputs handoff file** — a generated variables file (here `group_vars/all/terraform_outputs.yml`) produced from `terraform output -json`; the decoupling point where Terraform-owned provisioning facts become Ansible-readable variables without inline provisioners.
+- **`tfc_inv` plugin** — the `hashicorp.terraform.tfc_inv` dynamic inventory plugin, which builds the Ansible inventory straight from a Terraform workspace's outputs (or raw state) over the API; the control node needs a token, not the Terraform CLI or backend credentials.
+
+## Python (additional)
+
+- **Layered config loader** — a configuration pattern that merges several sources with a defined precedence (environment values win over per-environment files, which win over built-in defaults) so call sites read a single view; the dynaconf pattern, contrasted with typed settings classes and minimal env readers.
