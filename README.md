@@ -18,11 +18,11 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 ## Quick links
 
+- [Terraform dynamic inventory for Ansible](ansible/manifests/terraform-dynamic-inventory.yaml) — builds the Ansible inventory straight from Terraform workspace outputs, no CLI or backend credentials on the control node
+- [Comparing environment-aware Python config](python/notebooks/comparing-env-aware-config.ipynb) — typed settings classes vs layered loaders vs minimal env readers, side by side
+- [Reusable composite action caller](gha/configs/reusable-composite-action-caller.yaml) — example caller showing defaults, per-call overrides, and outputs from a shared action
+- [Reusable composite action](gha/configs/reusable-composite-action/action.yml) — Node toolchain install with npm cache, smoke test, and optional artifact upload
 - [Ansible role scaffold with Molecule](ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role layout with Molecule tests, collection packaging, and a Terraform-outputs handoff
-- [Operator development Dockerfile](k8s/dockerfiles/operator-dev.Dockerfile) — containerised toolchain image for building Kubernetes operators
-- [Unified alerting vs Alertmanager notebook](grafana/notebooks/comparing-grafana-unified-alerting-vs-alertmanager.ipynb) — notebook comparing Grafana's built-in alerting with an external Alertmanager
-- [Kind contexts and port mismatch](k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md) — kind setup quirks, context switching, and port-forwarding gotchas
-- [Deploy-checklist companion app config](scripting-automation-philosophy/configs/2026-09-16-app.yaml) — sample `app.yaml` the scripting deploy-checklist snippet loads and validates
 
 ## Layout
 
@@ -50,26 +50,26 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 | Tool | notes | docs | scripts | configs | manifests | notebooks | dockerfiles | templates | src | hooks | snippets | Last verified |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Ansible | 3 | 1 | 2 | 4 | — | — | — | 17 | — | — | — | 2026-09-16 |
+| Ansible | 3 | 1 | 2 | 4 | 1 | — | — | 16 | — | — | — | 2026-09-17 |
 | Bash | 3 | 6 | 8 | — | — | 3 | 1 | 30 | — | — | 1 | 2026-09-09 |
-| Docker | 5 | 1 | 6 | — | 1 | — | 2 | — | 2 | — | — | 2026-09-03 |
-| GitHub Actions | 3 | 3 | — | 4 | — | 1 | — | — | — | — | — | 2026-09-04 |
+| Docker | 5 | 1 | 6 | — | 1 | — | 2 | — | 2 | — | — | 2026-09-07 |
+| GitHub Actions | 3 | 3 | — | 6 | — | 1 | — | — | — | — | — | 2026-09-16 |
 | Git | 16 | 9 | 6 | — | 1 | — | — | 15 | — | 1 | — | 2026-09-13 |
 | Grafana | 4 | 1 | — | 5 | 1 | 1 | — | — | — | — | 3 | 2026-09-16 |
 | Helm | 5 | 2 | 1 | 6 | 2 | 1 | — | — | — | — | 1 | 2026-09-13 |
 | Jenkins | 4 | — | — | 1 | — | — | — | — | — | — | 2 | 2026-09-06 |
 | Kubernetes | 5 | 2 | 3 | 1 | 3 | 1 | 1 | — | — | — | 2 | 2026-09-16 |
-| Prometheus | 4 | — | 1 | 4 | — | — | — | — | — | — | 1 | 2026-08-30 |
-| Python | 3 | 3 | 4 | 4 | — | — | 1 | 8 | — | — | 4 | 2026-09-16 |
-| Terraform | 4 | 3 | 2 | 6 | — | — | — | — | — | — | 1 | 2026-09-05 |
+| Prometheus | 4 | — | 1 | 4 | — | — | — | — | — | — | 1 | 2026-09-03 |
+| Python | 3 | 3 | 4 | 4 | — | 1 | 1 | 8 | — | — | 4 | 2026-09-17 |
+| Terraform | 4 | 3 | 2 | 6 | — | — | — | — | — | — | 1 | 2026-09-12 |
 | Repo-doc | 2 | 2 | 2 | — | — | — | — | — | — | — | — | 2026-09-10 |
-| Concepts | — | 22 | 22 | — | — | 5 | — | — | — | — | 13 | 2026-09-16 |
+| Concepts | — | 22 | 22 | — | — | 5 | — | — | — | — | 12 | 2026-09-16 |
 
 </details>
 
 ## Status
 
-Currently working through L3–L4 first-contact notes for Grafana, Kubernetes, and Ansible. Recent additions include a Molecule-tested Ansible role scaffold with collection packaging, a Kubernetes operator development Dockerfile, a Grafana unified-alerting vs Alertmanager notebook, and kind context and port-forwarding notes.
+Currently working through L4–L5 first-contact notes for Ansible, Python, and GitHub Actions. Recent additions include a Terraform dynamic inventory manifest for the provision-to-configure handoff, an environment-aware Python config notebook, a reusable composite action with a caller workflow, and a Molecule-tested Ansible role scaffold with collection packaging.
 
 ---
-_Last updated: 2026-09-16_
+_Last updated: 2026-09-17_

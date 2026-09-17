@@ -16,6 +16,9 @@
 - [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, collection packaging, and CI gating merges
 - [Terraform outputs to group vars](../ansible/templates/ansible-role-molecule-collection/scripts/tf_outputs_to_vars.py) — converts `terraform output -json` into the `group_vars` file the role reads, keeping provisioning and configuration decoupled
 
+### Hand Terraform outputs to Ansible inventory
+- [Terraform dynamic inventory](../ansible/manifests/terraform-dynamic-inventory.yaml) — builds the inventory from Terraform workspace outputs via the `tfc_inv` plugin, no CLI or backend credentials on the control node
+
 ### Get started with Bash
 - [Bash primer](../bash/notes/0000-primer-bash.md) — what Bash is, key terminology, and a tiny example
 - [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md) — install check, first .sh file, and permission gotcha
@@ -230,6 +233,9 @@
 - [Docker Compose validator](../python/snippets/docker-compose-validator.py) — validates a Compose file for missing services, port conflicts, and volume mount syntax
 - [Dockerfile validator](../python/snippets/validate-dockerfile.py) — validates a Dockerfile for missing FROM, USER, WORKDIR, HEALTHCHECK, and `:latest` tags
 
+### Compare environment-aware Python config
+- [Comparing environment-aware config](../python/notebooks/comparing-env-aware-config.ipynb) — typed settings classes vs layered loaders vs minimal env readers for config that changes per environment
+
 ### Get started with Terraform
 - [Terraform primer](../tf/notes/0000-primer-terraform.md) — what Terraform is, providers, state, and a minimal workflow
 - [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md) — following the official quickstart and where I got stuck
@@ -313,6 +319,8 @@
 - [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md) — debugging failed GitHub Actions runs
 - [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md) — designing GHA release pipelines that fire on tag pushes
 - [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb) — notebook comparing matrix builds vs single-job workflows for multi-OS coverage
+- [Reusable composite action](../gha/configs/reusable-composite-action/action.yml) — shared Node toolchain setup with npm cache, smoke test, and optional artifact upload
+- [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml) — example caller showing defaults, per-call overrides, and outputs from the shared action
 
 ### Keep the repo's own docs in sync
 - [Repo-doc primer](../repo-doc/notes/0000-primer-repo-doc.md) — notes on keeping the repository's own docs and coverage tables in sync
