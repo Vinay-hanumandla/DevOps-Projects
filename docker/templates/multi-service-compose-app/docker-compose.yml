@@ -1,0 +1,116 @@
+# last_verified: 2026-09-17 · docker n/a
+# Multi-service Compose scaffold: web + api + db + cache, with
+# healthchecks gating startup order, file-based secrets, and a
+# "tools" profile for one-shot helpers (migrate, db-shell).
+# Copy .env.example to .env and secrets/*.example to secrets/* (no
+# extension), then: docker compose up --build
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_DB: ${POSTGRES_DB:-appdb}
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    # No ports published: only peers on the Compose network reach the db.
+
+  cache:
+    image: redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  api:
+    build: ./api
+    environment:
+      DB_HOST: db
+      DB_USER: ${POSTGRES_USER:-app}
+      DB_NAME: ${POSTGRES_DB:-appdb}
+      DB_PASSWORD_FILE: /run/secrets/db_password
+      CACHE_URL: redis://cache:6379
+      API_PORT: 8000
+    secrets:
+      - db_password
+      - api_key
+    ports:
+      - "${API_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/health')\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    # Long-form depends_on waits for healthy, not just started; without
+    # the condition the api would boot while postgres is still initializing.
+
+  web:
+    image: nginx
+    volumes:
+      - ./web:/usr/share/nginx/html:ro
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    # No healthcheck here on purpose: ordering is enforced through the
+    # healthy api instead, which keeps this service's definition small.
+
+  migrate:
+    build: ./api
+    command: ["python", "migrate.py"]
+    environment:
+      DB_HOST: db
+      DB_USER: ${POSTGRES_USER:-app}
+      DB_NAME: ${POSTGRES_DB:-appdb}
+      DB_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles: ["tools"]
+    # One-shot helper: only runs with
+    #   docker compose --profile tools run --rm migrate
+
+  db-shell:
+    image: postgres
+    command: ["sleep", "infinity"]
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles: ["tools"]
+    # Idle shell box for ad-hoc psql via
+    #   docker compose --profile tools run --rm db-shell \
+    #     psql -h db -U app -d appdb
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt
+  api_key:
+    file: ./secrets/api_key.txt
+
+volumes:
+  pgdata:
