@@ -30,10 +30,11 @@
 - **notes** (5): most recent → [Docker trip-ups after the initial run-through](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md), [Install Docker](../docker/notes/2026-07-19-install-docker.md)
 - **dockerfiles** (3): most recent → [Production distroless image with SBOM](../docker/dockerfiles/production-distroless-sbom.Dockerfile), [Multi-stage non-root image](../docker/dockerfiles/multi-stage-nonroot.Dockerfile), [Minimal non-root image](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile)
 - **docs** (1): [Docker Compose healthcheck service ordering](../docker/docs/docker-compose-healthcheck-service-ordering.md)
-- **scripts** (6): most recent → [Multi-arch buildx automation](../docker/scripts/image-build-automation.sh), [Build containerized app with custom networks and volumes](../docker/scripts/build-containerized-app-custom-networks-volumes.sh), [Hello-world container](../docker/scripts/2026-07-19-first-hello-world.sh)
+- **scripts** (7): most recent → [Image vuln scan and policy enforcement](../docker/scripts/image-vuln-scan-policy.sh), [Multi-arch buildx automation](../docker/scripts/image-build-automation.sh), [Build containerized app with custom networks and volumes](../docker/scripts/build-containerized-app-custom-networks-volumes.sh)
 - **manifests** (2): most recent → [GitOps image build, sign, and push](../docker/manifests/gitops-image-build-and-push.yaml), [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml)
 - **templates** (10): [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack with health-gated startup, file-based secrets, and a tools profile · _…and 9 more under `docker/templates/multi-service-compose-app/`._
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
+- **templates** (10): [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — web, API, and Redis services on a Compose stack with TLS secrets and health checks · _…and 9 more under `docker/templates/multi-service-compose-app/`._
 
 ## GitHub Actions  ·  13 files
 
@@ -94,12 +95,13 @@
 - **notebooks** (1): [Comparing Kubernetes rollout strategies](../k8s/notebooks/comparing-kubernetes-rollout-strategies.ipynb)
 - **dockerfiles** (1): [Operator development image](../k8s/dockerfiles/operator-dev.Dockerfile)
 
-## Prometheus  ·  10 files
+## Prometheus  ·  12 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
 - **notes** (4): most recent → [Prometheus quickstart trip-ups](../prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md), [Install Prometheus and explore web UI](../prom/notes/2026-08-29-install-prometheus-explore-web-ui.md), [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
+- **docs** (1): [Hybrid service discovery](../prom/docs/hybrid-service-discovery.md) — combining file-based, DNS, and Consul service discovery with priority fallbacks
 - **configs** (4): most recent → [Prometheus alerting rules](../prom/configs/2026-08-30-prometheus-alerting-rules.yaml), [Prometheus scrape config](../prom/configs/2026-08-29-prometheus-scrape-config.yaml), [Prometheus scrape config](../prom/configs/2026-08-22-prometheus-scrape-config.yaml)
-- **scripts** (1): [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh)
+- **scripts** (2): [Rules evaluator](../prom/scripts/rules-evaluator.go) — evaluates Prometheus recording and alerting rules against fetched metrics · [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh)
 - **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
 
 ## Python  ·  28 files
