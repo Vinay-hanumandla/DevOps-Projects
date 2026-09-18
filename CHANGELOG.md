@@ -2,6 +2,7 @@
 
 ## 2026-09-18
 
+- prometheus: Add docs on wiring Consul-backed, file-backed, and Kubernetes-backed service discovery for hybrid targets (prom-014)
 - prom: Add rules evaluator in Go for recording and alerting rules with template-expanded annotations (prom-013)
 - docker: Add image vulnerability scan and policy enforcement script with Trivy severity gate and Cosign signature verification (docker-019)
 - docker: Add in-cluster build-sign-push Job with RBAC, build settings, and pushed-reference recording for GitOps deployment (docker-018)
