@@ -1,0 +1,41 @@
+# last_verified: 2026-09-18 · ansible 14.4.0
+# Minimal block/rescue/always play with a handler:
+# tries a deploy step, rolls back the config file on failure,
+# always reports the outcome, and restarts the service only on change.
+- name: Deploy with error handling and handlers
+  hosts: web
+  tasks:
+    - name: Deploy application config
+      block:
+        - name: Install new config file
+          ansible.builtin.copy:
+            src: files/app.conf
+            dest: /etc/myapp/app.conf
+            mode: "0644"
+          notify: Restart myapp
+
+        - name: Validate new config
+          ansible.builtin.command: /usr/sbin/myapp --check-config
+          register: config_check
+          changed_when: false
+      rescue:
+        - name: Restore previous config file
+          ansible.builtin.copy:
+            src: /etc/myapp/app.conf.bak
+            dest: /etc/myapp/app.conf
+            mode: "0644"
+          notify: Restart myapp
+
+        - name: Flag the failed deploy
+          ansible.builtin.debug:
+            msg: "Deploy failed on {{ inventory_hostname }}; previous config restored."
+      always:
+        - name: Report deploy attempt finished
+          ansible.builtin.debug:
+            msg: "Deploy block finished on {{ inventory_hostname }} (check rc={{ config_check.rc | default('n/a') }})."
+
+  handlers:
+    - name: Restart myapp
+      ansible.builtin.service:
+        name: myapp
+        state: restarted
