@@ -332,6 +332,8 @@
 
 - **`--cache-from`** — a Docker buildx flag that imports a build cache from a remote source (registry, local directory, or S3) to speed up rebuilds by reusing unchanged layers.
 - **`--cache-to`** — a Docker buildx flag that exports the build cache after a build so subsequent builds can reuse layers, cutting build time for iterative development.
+- **SBOM** — a software bill of materials: a machine-readable inventory (here SPDX JSON via Syft) of what went into an image, so scanners and auditors can check for known-vulnerable packages without rebuilding.
+- **GitOps** — operating deployments from git as the source of truth: an in-cluster Job (or external CI) builds, signs, and pushes the image by immutable digest, and the deployment repo pins exactly that digest so the cluster converges on it.
 
 ## Terraform (additional)
 

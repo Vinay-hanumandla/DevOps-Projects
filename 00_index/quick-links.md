@@ -81,6 +81,7 @@
 ### Build a container image
 - [Minimal non-root Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile) — multi-stage build to a distroless, non-root runtime
 - [Multi-stage non-root image](../docker/dockerfiles/multi-stage-nonroot.Dockerfile) — reworked multi-stage Dockerfile with a dedicated build stage and a non-root runtime user
+- [Production distroless image with SBOM](../docker/dockerfiles/production-distroless-sbom.Dockerfile) — Go build, Syft-generated SPDX bill of materials, and a non-root distroless runtime
 
 ### Build multi-arch images with buildx
 - [Multi-arch buildx automation](../docker/scripts/image-build-automation.sh) — Docker buildx script for multi-platform images with registry caching, semver tagging, and push
@@ -92,6 +93,10 @@
 ### Compose multi-service stacks
 - [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml) — web app, cache, and worker on the default network with `depends_on`
 - [Docker Compose healthcheck service ordering](../docker/docs/docker-compose-healthcheck-service-ordering.md) — wiring `depends_on: condition: service_healthy` so cache, web, and worker come up in the right order
+- [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack (web front, API, database, cache) with health-gated startup, file-based secrets, and a tools profile for one-shot helpers
+
+### Ship images the GitOps way
+- [GitOps image build, sign, and push](../docker/manifests/gitops-image-build-and-push.yaml) — in-cluster Job pipeline that builds an image, signs it, pushes by immutable digest, and records the reference for the deployment repo to pin
 
 ### Get started with Git
 - [Git primer](../git/notes/0000-primer-git.md) — what Git is, key concepts, and a minimal workflow
