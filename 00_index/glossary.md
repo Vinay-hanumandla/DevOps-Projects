@@ -276,6 +276,9 @@
 - **Resource requests** — the minimum CPU and memory a container needs; the scheduler uses this to pick a node with enough capacity.
 - **Resource limits** — the maximum CPU and memory a container can use; exceeding the memory limit kills the container with an OOM error.
 - **CRD (CustomResourceDefinition)** — a Kubernetes object that extends the API with a new resource type; install the CRD first and wait for it to be established before creating instances of it, or the apply fails with "resource not found".
+- **HPA (HorizontalPodAutoscaler)** — a Kubernetes object that scales a Deployment's replica count up or down against observed metrics (CPU, memory, or custom); the production deployment pairs it with resource requests so the target has something to measure against.
+- **NetworkPolicy** — a Kubernetes object that declares which pods may talk to which peers and ports; without one, every pod in the cluster can reach every other pod by default.
+- **ResourceQuota** — a namespace-scoped Kubernetes object that caps total resource consumption (CPU, memory, pod count) inside one namespace, so a single workload cannot starve its neighbours.
 
 ## Terraform (additional)
 
@@ -292,6 +295,9 @@
 - **Prometheus HTTP API** — the JSON API exposed at `/api/v1/` (notably `/api/v1/query` for instant queries and `/api/v1/query_range` for range queries); scripts and tooling hit it with `curl` rather than scraping the metrics endpoint.
 - **`promtool check rules`** — a `promtool` subcommand that validates alerting/recording rule files against the Prometheus expression parser before deploying them; catches typos and bad-for-rules PromQL without spinning up a server.
 - **Target contract** — a declared set of labels and metadata that every discovered Prometheus target must carry, ensuring consistent routing, alerting, and deduction regardless of which discovery mechanism produced the target.
+- **`kubernetes_sd_configs`** — a Prometheus scrape-config section that discovers targets from the Kubernetes API (here `role: pod`) instead of static addresses; paired with `relabel_configs` that keep only annotated pods and rewrite address, path, and labels from pod metadata.
+- **`relabel_configs`** — an ordered list of keep/drop/replace rules applied to each discovered target's labels before scraping; the mechanism that turns raw `__meta_kubernetes_*` labels into the `namespace`, `pod`, and `__address__` values the scrape uses.
+- **Remote-write vs federation** — the two paths for getting series into long-term storage: remote-write pushes samples from each Prometheus to a central endpoint as they arrive, while federation has a central Prometheus scrape `/federate` on its peers for selected series; the config keeps both so the trade-off is explicit.
 
 ## Jenkins (additional)
 
@@ -349,6 +355,9 @@
 - **Dynamic inventory plugin** — an inventory source that discovers hosts from a cloud API at run time instead of a static file; the `aws_ec2.yml` inventory finds hosts by tag (e.g. `ManagedBy: terraform`) so Terraform-provisioned machines appear without hand-editing inventory.
 - **Terraform-outputs handoff file** — a generated variables file (here `group_vars/all/terraform_outputs.yml`) produced from `terraform output -json`; the decoupling point where Terraform-owned provisioning facts become Ansible-readable variables without inline provisioners.
 - **`tfc_inv` plugin** — the `hashicorp.terraform.tfc_inv` dynamic inventory plugin, which builds the Ansible inventory straight from a Terraform workspace's outputs (or raw state) over the API; the control node needs a token, not the Terraform CLI or backend credentials.
+- **block / rescue / always** — Ansible's error-handling shape inside a task list: `block` holds the steps to try, `rescue` runs only if one fails (typically a rollback), and `always` runs either way for reporting; paired with a handler so the service restarts only when config actually changed.
+- **`changed_when`** — a task-level guard that decides changed/ok from the command output instead of the default (always changed); the escape hatch that keeps a necessary `command`/`shell` task honest on reruns.
+- **`creates` / `removes` guards** — `args` on a `command`/`shell` task that skip it when a marker file already exists (`creates`) or run it only while a stale file still exists (`removes`); the cheapest way to make an unavoidable shell-out idempotent.
 - **Gated run** — sequencing a playbook apply behind gates that must all pass first: `--syntax-check`, `--check --diff` dry run, optional lint, then the real apply plus a rerun that must report `changed=0` per host; a failing gate or a non-idempotent rerun stops the run before hosts are touched.
 - **`kubernetes.core` collection** — the Ansible collection that manages Kubernetes objects without shelling out: `kubernetes.core.k8s` applies manifests and CRD instances with `state: present`, and `kubernetes.core.helm` declares releases with `name:`, `chart_ref:`, and `release_namespace:`.
 - **Kustomize overlay** — a directory pairing a shared `base/` of manifests with per-environment patches, so only the delta (replica counts, image tags, resource requests) differs between environments; Ansible points at the overlay instead of duplicating the manifests as templates.
