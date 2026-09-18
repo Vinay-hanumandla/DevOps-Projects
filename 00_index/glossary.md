@@ -275,6 +275,7 @@
 
 - **Resource requests** — the minimum CPU and memory a container needs; the scheduler uses this to pick a node with enough capacity.
 - **Resource limits** — the maximum CPU and memory a container can use; exceeding the memory limit kills the container with an OOM error.
+- **CRD (CustomResourceDefinition)** — a Kubernetes object that extends the API with a new resource type; install the CRD first and wait for it to be established before creating instances of it, or the apply fails with "resource not found".
 
 ## Terraform (additional)
 
@@ -344,6 +345,9 @@
 - **Dynamic inventory plugin** — an inventory source that discovers hosts from a cloud API at run time instead of a static file; the `aws_ec2.yml` inventory finds hosts by tag (e.g. `ManagedBy: terraform`) so Terraform-provisioned machines appear without hand-editing inventory.
 - **Terraform-outputs handoff file** — a generated variables file (here `group_vars/all/terraform_outputs.yml`) produced from `terraform output -json`; the decoupling point where Terraform-owned provisioning facts become Ansible-readable variables without inline provisioners.
 - **`tfc_inv` plugin** — the `hashicorp.terraform.tfc_inv` dynamic inventory plugin, which builds the Ansible inventory straight from a Terraform workspace's outputs (or raw state) over the API; the control node needs a token, not the Terraform CLI or backend credentials.
+- **Gated run** — sequencing a playbook apply behind gates that must all pass first: `--syntax-check`, `--check --diff` dry run, optional lint, then the real apply plus a rerun that must report `changed=0` per host; a failing gate or a non-idempotent rerun stops the run before hosts are touched.
+- **`kubernetes.core` collection** — the Ansible collection that manages Kubernetes objects without shelling out: `kubernetes.core.k8s` applies manifests and CRD instances with `state: present`, and `kubernetes.core.helm` declares releases with `name:`, `chart_ref:`, and `release_namespace:`.
+- **Kustomize overlay** — a directory pairing a shared `base/` of manifests with per-environment patches, so only the delta (replica counts, image tags, resource requests) differs between environments; Ansible points at the overlay instead of duplicating the manifests as templates.
 
 ## Python (additional)
 
