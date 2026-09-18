@@ -43,6 +43,8 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 `scripting-automation-philosophy/` — companion app config for the scripting deploy-checklist snippet.
 `tf/` — provider configs, null resources, multi-resource setups, and state-lock workflow scripts.
 
+> Counts below were regenerated from the filesystem on 2026-09-18 and include every file under each tool's category folders (recursively, so scaffolded template trees under `templates/` are counted in full).
+
 ## Coverage
 
 <details>
@@ -50,20 +52,20 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 | Tool | notes | docs | scripts | configs | manifests | notebooks | dockerfiles | templates | src | hooks | snippets | Last verified |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Ansible | 3 | 2 | 3 | 4 | 1 | — | — | 16 | — | — | — | 2026-09-17 |
-| Bash | 3 | 6 | 8 | — | — | 3 | 1 | 30 | — | — | 1 | 2026-09-09 |
-| Docker | 5 | 1 | 6 | — | 2 | — | 3 | 10 | 2 | — | — | 2026-09-18 |
-| GitHub Actions | 3 | 3 | — | 6 | — | 1 | — | — | — | — | — | 2026-09-16 |
-| Git | 16 | 9 | 6 | — | 1 | — | — | 15 | — | 1 | — | 2026-09-13 |
-| Grafana | 4 | 1 | — | 5 | 1 | 1 | — | — | — | — | 3 | 2026-09-16 |
-| Helm | 5 | 2 | 1 | 6 | 2 | 1 | — | — | — | — | 1 | 2026-09-13 |
-| Jenkins | 4 | — | — | 1 | — | — | — | — | — | — | 2 | 2026-09-06 |
-| Kubernetes | 5 | 2 | 3 | 1 | 3 | 1 | 1 | — | — | — | 2 | 2026-09-16 |
-| Prometheus | 4 | — | 1 | 4 | — | — | — | — | — | — | 1 | 2026-09-03 |
-| Python | 3 | 3 | 4 | 4 | — | 1 | 1 | 8 | — | — | 4 | 2026-09-17 |
-| Terraform | 4 | 3 | 2 | 6 | — | — | — | — | — | — | 1 | 2026-09-12 |
-| Repo-doc | 2 | 2 | 2 | — | — | — | — | — | — | — | — | 2026-09-10 |
-| Concepts | — | 22 | 22 | — | — | 5 | — | — | — | — | 12 | 2026-09-16 |
+| Ansible | 3 | 2 | 4 | 4 | 1 | — | — | 16 | — | — | — | 2026-09-18 |
+| Bash | 3 | 6 | 11 | — | — | 3 | 1 | 30 | — | — | 1 | 2026-09-18 |
+| Docker | 5 | 1 | 7 | — | 2 | — | 3 | 10 | 2 | — | — | 2026-09-18 |
+| GitHub Actions | 3 | 3 | — | 5 | — | 1 | — | — | — | — | — | 2026-09-18 |
+| Git | 16 | 9 | 9 | — | 1 | — | — | 15 | — | 4 | — | 2026-09-18 |
+| Grafana | 4 | 1 | — | 5 | 1 | 1 | — | — | — | — | 3 | 2026-09-18 |
+| Helm | 5 | 2 | 1 | 6 | 2 | 1 | — | — | — | — | 1 | 2026-09-18 |
+| Jenkins | 4 | — | — | 1 | — | — | — | — | — | — | 2 | 2026-09-18 |
+| Kubernetes | 5 | 2 | 3 | 1 | 3 | 1 | 1 | — | — | — | 2 | 2026-09-18 |
+| Prometheus | 4 | 1 | 2 | 6 | — | — | — | — | — | — | 1 | 2026-09-18 |
+| Python | 3 | 3 | 4 | 4 | — | 1 | 1 | 8 | — | — | 4 | 2026-09-18 |
+| Terraform | 4 | 3 | 2 | 6 | — | — | — | — | — | — | 1 | 2026-09-18 |
+| Repo-doc | 2 | 2 | 2 | — | — | — | — | — | — | — | — | 2026-09-18 |
+| Concepts | — | 22 | 22 | — | — | 5 | — | — | — | — | 12 | 2026-09-18 |
 
 </details>
 

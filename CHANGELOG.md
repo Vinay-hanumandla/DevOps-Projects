@@ -2,12 +2,16 @@
 
 ## 2026-09-18
 
+Passed ([x]) prom-015 — Prometheus: config — Comparing Prometheus remote write vs federation for multi-cluster metrics aggregation and HA · Level: L3 · 2026-09-18
+Passed ([x]) prom-010 — Prometheus: config — Minimal prometheus.yml with service discovery for Kubernetes pods · Level: L2 · 2026-09-18
+Passed ([x]) k8s-020 — Kubernetes: docs — Integrating Kubernetes with Terraform: provisioning clusters and managing workloads declaratively · Level: L4 · 2026-09-18
 - prometheus: Add docs on wiring Consul-backed, file-backed, and Kubernetes-backed service discovery for hybrid targets (prom-014)
 - prom: Add rules evaluator in Go for recording and alerting rules with template-expanded annotations (prom-013)
 - kubernetes: Add docs on integrating Kubernetes with Terraform for cluster provisioning and declarative workload management (k8s-020)
 - prom: Add remote-write and federation comparison config for multi-cluster metrics aggregation (prom-015)
 - prom: Add minimal Kubernetes pod service-discovery configuration (prom-010)
 - docker: Add image vulnerability scan and policy enforcement script with Trivy severity gate and Cosign signature verification (docker-019)
+- kubernetes: Add production-ready deployment manifest with HPA, PDB, network policy, and resource quota (k8s-019)
 - docker: Add in-cluster build-sign-push Job with RBAC, build settings, and pushed-reference recording for GitOps deployment (docker-018)
 
 ## 2026-09-17
