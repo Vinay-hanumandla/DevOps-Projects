@@ -291,6 +291,7 @@
 
 - **Prometheus HTTP API** — the JSON API exposed at `/api/v1/` (notably `/api/v1/query` for instant queries and `/api/v1/query_range` for range queries); scripts and tooling hit it with `curl` rather than scraping the metrics endpoint.
 - **`promtool check rules`** — a `promtool` subcommand that validates alerting/recording rule files against the Prometheus expression parser before deploying them; catches typos and bad-for-rules PromQL without spinning up a server.
+- **Target contract** — a declared set of labels and metadata that every discovered Prometheus target must carry, ensuring consistent routing, alerting, and deduction regardless of which discovery mechanism produced the target.
 
 ## Jenkins (additional)
 
@@ -334,6 +335,7 @@
 - **`--cache-to`** — a Docker buildx flag that exports the build cache after a build so subsequent builds can reuse layers, cutting build time for iterative development.
 - **SBOM** — a software bill of materials: a machine-readable inventory (here SPDX JSON via Syft) of what went into an image, so scanners and auditors can check for known-vulnerable packages without rebuilding.
 - **GitOps** — operating deployments from git as the source of truth: an in-cluster Job (or external CI) builds, signs, and pushes the image by immutable digest, and the deployment repo pins exactly that digest so the cluster converges on it.
+- **Immutable reference** — a container image reference pinned by digest (e.g. `image@sha256:...`) rather than by tag; once pushed it never changes, guaranteeing the exact same binary runs in every environment.
 
 ## Terraform (additional)
 
