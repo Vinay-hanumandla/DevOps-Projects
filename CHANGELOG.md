@@ -2,6 +2,7 @@
 
 ## 2026-09-18
 
+- docker: Add image vulnerability scan and policy enforcement script with Trivy severity gate and Cosign signature verification (docker-019)
 - docker: Add in-cluster build-sign-push Job with RBAC, build settings, and pushed-reference recording for GitOps deployment (docker-018)
 
 ## 2026-09-17
