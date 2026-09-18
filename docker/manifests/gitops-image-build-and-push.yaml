@@ -1,0 +1,252 @@
+# last_verified: 2026-09-18 · docker n/a
+
+# Docker + Kubernetes: building, signing, and pushing images to registry for GitOps deployment.
+#
+# Purpose: run the image supply side of a GitOps workflow inside the cluster —
+# fetch sources, build the image, sign it, push by immutable reference, and record
+# the exact reference the deployment repo should pin. The deployment manifests
+# themselves live in git; this file only produces and records the artifact they point at.
+#
+# When to use: this is one way to wire build-sign-push into a cluster where the
+# build team cannot reach an external CI runner but can run Jobs. For a small side
+# project an external CI pipeline pushing straight to the registry is simpler.
+#
+# Prerequisites: a registry account; a docker-registry secret named
+# registry-credentials in this namespace holding the push credentials; a builder
+# image published by your platform team (pin every helper image below before
+# relying on this beyond experiments).
+#
+# Steps:
+#   1. Fill in build-settings (registry host, repository, context, Dockerfile).
+#   2. Create the push secret the Job references.
+#   3. Apply the file, then create one Job run per release candidate.
+#   4. Copy the reference stored in the deployed-image ConfigMap into the
+#      deployment repo so GitOps converges on exactly that digest.
+#
+# Verify: the Job completes, the deployed-image ConfigMap holds the pushed
+# reference, and pulling that reference from a clean machine yields the image.
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gitops-images
+  labels:
+    app: gitops-image-pipeline
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: image-builder
+  namespace: gitops-images
+  labels:
+    app: gitops-image-pipeline
+---
+# Lets the Job read its own settings and record the pushed reference, and read
+# (not write) the push secret. Nothing here grants access outside this namespace.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: image-builder
+  namespace: gitops-images
+  labels:
+    app: gitops-image-pipeline
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list", "update", "patch"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: image-builder
+  namespace: gitops-images
+  labels:
+    app: gitops-image-pipeline
+subjects:
+  - kind: ServiceAccount
+    name: image-builder
+    namespace: gitops-images
+roleRef:
+  kind: Role
+  name: image-builder
+  apiGroup: rbac.authorization.k8s.io
+---
+# Non-secret build inputs. The secret (registry-credentials) is created
+# out-of-band so credentials never sit in this file.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: build-settings
+  namespace: gitops-images
+  labels:
+    app: gitops-image-pipeline
+data:
+  registry-host: "registry.internal"
+  repository: "team/gitops-app"
+  context-dir: "."
+  dockerfile: "Dockerfile"
+  # Tag scheme for release candidates; the sign-and-record step resolves the
+  # pushed tag to its immutable digest and stores that, not the tag.
+  candidate-tag: "rc-gitops"
+---
+# Holds the last pushed image reference. The sign-and-record step overwrites
+# image-ref after every successful push; the deployment repo pins that value.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deployed-image
+  namespace: gitops-images
+  labels:
+    app: gitops-image-pipeline
+data:
+  image-ref: "not-built-yet"
+---
+# One Job run == one release candidate. Steps run in order as init containers
+# sharing an emptyDir workspace; the main container just reports the result so
+# the Job has a readable terminal state.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: build-sign-push
+  namespace: gitops-images
+  labels:
+    app: gitops-image-pipeline
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 3600
+  template:
+    metadata:
+      labels:
+        app: gitops-image-pipeline
+    spec:
+      serviceAccountName: image-builder
+      restartPolicy: Never
+      imagePullSecrets:
+        - name: registry-credentials
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: push-secret
+          secret:
+            secretName: registry-credentials
+      initContainers:
+        # 1. Fetch the exact sources to build. Replace this helper with your
+        # team's source fetcher; it must check out one commit into /workspace/src.
+        - name: fetch-sources
+          image: source-fetcher:replace-with-pinned-version
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          env:
+            - name: REPO_URL
+              value: "set-me-in-an-overlay"
+            - name: COMMIT
+              value: "set-me-per-run"
+          command: ["sh", "-c", "fetcher --repo \"$REPO_URL\" --commit \"$COMMIT\" --dest /workspace/src"]
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+        # 2. Build and push. Resolves the pushed tag to its digest and writes
+        # /workspace/digest.txt for the next step. Attestation flags stay on so
+        # every pushed image carries build provenance alongside it.
+        - name: build-and-push
+          image: oci-image-builder:replace-with-pinned-version
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: push-secret
+              mountPath: /secrets/registry
+              readOnly: true
+          env:
+            - name: REGISTRY_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: build-settings
+                  key: registry-host
+            - name: REPOSITORY
+              valueFrom:
+                configMapKeyRef:
+                  name: build-settings
+                  key: repository
+            - name: CANDIDATE_TAG
+              valueFrom:
+                configMapKeyRef:
+                  name: build-settings
+                  key: candidate-tag
+          command:
+            - sh
+            - -c
+            - |
+              set -u
+              IMAGE="$REGISTRY_HOST/$REPOSITORY:$CANDIDATE_TAG"
+              builder login "$REGISTRY_HOST" --credentials-file /secrets/registry/credentials
+              builder build /workspace/src \
+                --push "$IMAGE" \
+                --attest-provenance \
+                --metadata-file /workspace/metadata.json
+              builder digest "$IMAGE" > /workspace/digest.txt
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: "2"
+              memory: 4Gi
+        # 3. Sign the pushed reference, then record the immutable reference for
+        # GitOps. Signing the digest (not the tag) means the signature stays
+        # valid even after the tag moves on to a later build.
+        - name: sign-and-record
+          image: image-signer:replace-with-pinned-version
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          env:
+            - name: REGISTRY_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: build-settings
+                  key: registry-host
+            - name: REPOSITORY
+              valueFrom:
+                configMapKeyRef:
+                  name: build-settings
+                  key: repository
+          command:
+            - sh
+            - -c
+            - |
+              set -u
+              DIGEST="$(cat /workspace/digest.txt)"
+              REF="$REGISTRY_HOST/$REPOSITORY@$DIGEST"
+              signer sign "$REF"
+              kubectl -n gitops-images patch configmap deployed-image \
+                -p "{\"data\":{\"image-ref\":\"$REF\"}}"
+              echo "$REF" > /workspace/image-ref.txt
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      containers:
+        - name: report
+          image: image-signer:replace-with-pinned-version
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          command: ["sh", "-c", "echo Pushed and signed:; cat /workspace/image-ref.txt"]
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
