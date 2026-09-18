@@ -2,6 +2,7 @@
 
 ## 2026-09-18
 
+- bash: Add bats-core test suite covering health check, log rotation, and secret rotation for production Bash scripts (bash-026)
 - ansible: Add docs comparing command/shell with purpose-built idempotent modules, with creates and changed_when guards (ansible-010)
 - ansible: Add block/rescue/always playbook snippet with config rollback and restart handler (ansible-011)
 Passed ([x]) prom-015 — Prometheus: config — Comparing Prometheus remote write vs federation for multi-cluster metrics aggregation and HA · Level: L3 · 2026-09-18
