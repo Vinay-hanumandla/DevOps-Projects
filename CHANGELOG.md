@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-18
+
+- docker: Add in-cluster build-sign-push Job with RBAC, build settings, and pushed-reference recording for GitOps deployment (docker-018)
+
 ## 2026-09-17
 
 - docker: Add distroless multi-stage Dockerfile with non-root runtime and SBOM generation (docker-017)
