@@ -83,6 +83,9 @@
 - [Multi-stage non-root image](../docker/dockerfiles/multi-stage-nonroot.Dockerfile) — reworked multi-stage Dockerfile with a dedicated build stage and a non-root runtime user
 - [Production distroless image with SBOM](../docker/dockerfiles/production-distroless-sbom.Dockerfile) — Go build, Syft-generated SPDX bill of materials, and a non-root distroless runtime
 
+### Scan and policy-check images
+- [Image vuln scan and policy enforcement](../docker/scripts/image-vuln-scan-policy.sh) — scans a built image for known vulnerabilities and blocks deployment on policy breaches
+
 ### Build multi-arch images with buildx
 - [Multi-arch buildx automation](../docker/scripts/image-build-automation.sh) — Docker buildx script for multi-platform images with registry caching, semver tagging, and push
 
@@ -225,6 +228,7 @@
 - [Prometheus alerting rules](../prom/configs/2026-08-30-prometheus-alerting-rules.yaml) — alerting rules for Prometheus
 - [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh) — a shell helper that runs a basic PromQL query against a Prometheus server
 - [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh) — a shell helper that runs ad-hoc PromQL queries against a running Prometheus server
+- [Hybrid service discovery](../prom/docs/hybrid-service-discovery.md) — combining Consul, file, and Kubernetes service discovery with a shared target contract
 
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip
