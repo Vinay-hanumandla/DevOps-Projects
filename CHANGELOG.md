@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-19
+
+- gha: Add minimal custom JavaScript action — action.yml plus a Node 20 entrypoint that reads inputs and exposes message/length outputs (gha-015)
+
 ## 2026-09-18
 
 - bash: Add bats-core test suite covering health check, log rotation, and secret rotation for production Bash scripts (bash-026)
