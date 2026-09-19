@@ -18,7 +18,7 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 ## Quick links
 
-- [Moving the Jenkinsfile from inline script to SCM](jenkins/docs/2026-09-19-moving-jenkinsfile-to-scm-gotchas.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas when a job points at a repo
+- [What tripped me up following the Jenkins declarative pipeline tutorial](jenkins/docs/2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas when a job points at a repo
 - [Provisioned dashboard with panels and variables](grafana/configs/provisioned-dashboard-panels-variables.yaml) — file-provisioned datasource, dashboard provider, and service-overview dashboard with a templating variable, no UI clicks
 - [Shared-library + credentials pipeline](jenkins/snippets/2026-09-19-shared-library-credentials.groovy) — pulls a helper from a global shared library and binds a secret-text credential without printing it
 - [Grafana dashboard API wrapper](grafana/scripts/grafana-http-api-dashboard-wrapper.sh) — one CLI for list, idempotent create/update, and safe delete of dashboards via the HTTP API
