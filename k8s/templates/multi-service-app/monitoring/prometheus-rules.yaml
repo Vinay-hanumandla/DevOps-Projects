@@ -1,0 +1,47 @@
+# last_verified: 2026-09-19 · kubernetes n/a
+#
+# Prometheus alert rules for the multi-service-app scaffold.
+# Load this file into Prometheus (for example via a ConfigMap mounted
+# next to the main config and referenced under `rule_files`).
+# The Service objects in the chart carry prometheus.io/scrape annotations
+# so a Prometheus that honors Kubernetes service discovery picks them up.
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: multi-service-app-alerts
+  labels:
+    app.kubernetes.io/name: multi-service-app
+data:
+  alerts.yaml: |
+    groups:
+      - name: multi-service-app
+        interval: 1m
+        rules:
+          - alert: ServiceDown
+            expr: up{job=~"multi-service-.+"} == 0
+            for: 5m
+            labels:
+              severity: critical
+            annotations:
+              summary: "A multi-service-app target has been down for 5 minutes"
+          - alert: HighErrorRate
+            expr: |
+              sum by (job) (rate(http_requests_total{code=~"5.."}[5m]))
+              /
+              sum by (job) (rate(http_requests_total[5m])) > 0.05
+            for: 10m
+            labels:
+              severity: warning
+            annotations:
+              summary: "Error rate above 5% for 10 minutes"
+          - alert: HighLatency
+            expr: |
+              histogram_quantile(0.95,
+                sum by (job, le) (rate(http_request_duration_seconds_bucket[5m]))
+              ) > 1
+            for: 10m
+            labels:
+              severity: warning
+            annotations:
+              summary: "95th-percentile latency above 1 second for 10 minutes"

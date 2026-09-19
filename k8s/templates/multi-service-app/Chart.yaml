@@ -1,0 +1,6 @@
+apiVersion: v2
+name: multi-service-app
+description: Starter chart for a two-service web app (static frontend plus backend API) with ingress routing and Prometheus monitoring hooks.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
