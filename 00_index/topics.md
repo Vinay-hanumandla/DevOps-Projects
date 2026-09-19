@@ -25,23 +25,24 @@
 - **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
 - _…and more under `bash/` — browse the folder._
 
-## Docker  ·  30 files
+## Docker  ·  32 files
 
 - **primer:** [Docker — quick primer](../docker/notes/0000-primer-docker.md)
 - **notes** (5): most recent → [Docker trip-ups after the initial run-through](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md), [Install Docker](../docker/notes/2026-07-19-install-docker.md)
 - **dockerfiles** (3): most recent → [Production distroless image with SBOM](../docker/dockerfiles/production-distroless-sbom.Dockerfile), [Multi-stage non-root image](../docker/dockerfiles/multi-stage-nonroot.Dockerfile), [Minimal non-root image](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile)
-- **docs** (1): [Docker Compose healthcheck service ordering](../docker/docs/docker-compose-healthcheck-service-ordering.md)
+- **docs** (2): most recent → [Storage drivers and volume types for stateful workloads](../docker/docs/storage-drivers-volume-types-comparison.md), [Docker Compose healthcheck service ordering](../docker/docs/docker-compose-healthcheck-service-ordering.md)
 - **scripts** (7): most recent → [Image vuln scan and policy enforcement](../docker/scripts/image-vuln-scan-policy.sh), [Multi-arch buildx automation](../docker/scripts/image-build-automation.sh), [Build containerized app with custom networks and volumes](../docker/scripts/build-containerized-app-custom-networks-volumes.sh)
 - **manifests** (2): most recent → [GitOps image build, sign, and push](../docker/manifests/gitops-image-build-and-push.yaml), [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml)
 - **templates** (10): [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack with health-gated startup, file-based secrets, and a tools profile · _…and 9 more under `docker/templates/multi-service-compose-app/`._
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
 
-## GitHub Actions  ·  13 files
+## GitHub Actions  ·  15 files
 
 - **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
 - **notes** (3): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
 - **docs** (3): most recent → [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md), [GitHub Actions quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md), [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
-- **configs** (6): most recent → [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml), [Reusable composite action](../gha/configs/reusable-composite-action/action.yml), [Minimal CI workflow (2026-09-04 refresh)](../gha/configs/2026-09-04-minimal-ci-workflow.yaml) · _…and 3 more under `gha/configs/`._
+- **configs** (7): most recent → [Minimal custom JavaScript action](../gha/configs/minimal-custom-js-action.yml), [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml), [Reusable composite action](../gha/configs/reusable-composite-action/action.yml) · _…and 4 more under `gha/configs/`._
+- **scripts** (1): [Minimal custom JavaScript action entrypoint](../gha/scripts/minimal-custom-js-action.js) — reads two inputs, composes a greeting, and exposes it via `$GITHUB_OUTPUT`
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 
 ## Git  ·  48 files
@@ -83,7 +84,7 @@
 - **configs** (1): [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile)
 - **snippets** (2): most recent → [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 
-## Kubernetes  ·  20 files
+## Kubernetes  ·  30 files
 
 - **primer:** [Kubernetes — quick primer](../k8s/notes/0000-primer-kubernetes.md)
 - **notes** (5): most recent → [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Quickstart kind contexts and port mismatch](../k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md), [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md)
@@ -94,6 +95,7 @@
 - **snippets** (2): [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh), [Pod metrics via the API](../k8s/snippets/kubectl-pod-metrics.py)
 - **notebooks** (1): [Comparing Kubernetes rollout strategies](../k8s/notebooks/comparing-kubernetes-rollout-strategies.ipynb)
 - **dockerfiles** (1): [Operator development image](../k8s/dockerfiles/operator-dev.Dockerfile)
+- **templates** (10): [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — two-tier frontend/backend chart with ingress routing and Prometheus alert rules · _…and 9 more under `k8s/templates/multi-service-app/`._
 
 ## Prometheus  ·  14 files
 

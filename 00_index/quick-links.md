@@ -110,6 +110,9 @@
 ### Ship images the GitOps way
 - [GitOps image build, sign, and push](../docker/manifests/gitops-image-build-and-push.yaml) — in-cluster Job pipeline that builds an image, signs it, pushes by immutable digest, and records the reference for the deployment repo to pin
 
+### Choose storage for stateful workloads
+- [Storage drivers and volume types comparison](../docker/docs/storage-drivers-volume-types-comparison.md) — overlay2 vs alternatives, volumes vs bind mounts vs tmpfs, with a decision matrix and verification steps
+
 ### Get started with Git
 - [Git primer](../git/notes/0000-primer-git.md) — what Git is, key concepts, and a minimal workflow
 - [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md) — first contact with Git and where it tripped me up
@@ -232,6 +235,11 @@
 ### Split cluster provisioning from workloads
 - [Integrating Kubernetes with Terraform](../k8s/docs/integrating-kubernetes-with-terraform.md) — where cluster provisioning ends and workload management begins, and how to keep the two from owning the same resource
 
+### Scaffold a two-tier app with ingress and monitoring
+- [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — frontend/backend chart with ingress routing and Prometheus alert rules in one copy-in layout
+- [Scaffold values](../k8s/templates/multi-service-app/values.yaml) — placeholder images, ingress host, and scrape annotations to point at real services
+- [Scaffold alert rules](../k8s/templates/multi-service-app/monitoring/prometheus-rules.yaml) — baseline alerts that ship with the workloads instead of being bolted on later
+
 ### Get started with Prometheus
 - [Prometheus primer](../prom/notes/0000-primer-prometheus.md) — what Prometheus is, metrics types, and a minimal workflow
 - [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md) — install check and first web UI exploration
@@ -352,6 +360,10 @@
 - [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb) — notebook comparing matrix builds vs single-job workflows for multi-OS coverage
 - [Reusable composite action](../gha/configs/reusable-composite-action/action.yml) — shared Node toolchain setup with npm cache, smoke test, and optional artifact upload
 - [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml) — example caller showing defaults, per-call overrides, and outputs from the shared action
+
+### Write a minimal custom JavaScript action
+- [Minimal custom JavaScript action](../gha/configs/minimal-custom-js-action.yml) — the smallest viable custom action: two inputs in, one greeting output out, on the node20 runtime
+- [Custom action entrypoint](../gha/scripts/minimal-custom-js-action.js) — reads the inputs, composes the message, and exposes it via `$GITHUB_OUTPUT`
 
 ### Keep the repo's own docs in sync
 - [Repo-doc primer](../repo-doc/notes/0000-primer-repo-doc.md) — notes on keeping the repository's own docs and coverage tables in sync
