@@ -18,11 +18,11 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 ## Quick links
 
-- [Multi-service app Helm-chart scaffold](k8s/templates/multi-service-app/README.md) — two-tier frontend/backend chart with ingress routing and Prometheus alert rules in one copy-in layout
-- [Minimal custom JavaScript action](gha/configs/minimal-custom-js-action.yml) — the smallest viable custom action: two inputs in, one greeting output out, on the node20 runtime
-- [Custom action entrypoint](gha/scripts/minimal-custom-js-action.js) — reads the inputs, composes the message, and exposes it via `$GITHUB_OUTPUT`
-- [Storage drivers and volume types for stateful workloads](docker/docs/storage-drivers-volume-types-comparison.md) — overlay2 vs alternatives, volumes vs bind mounts, and a decision matrix for stateful services
-- [Bats-core production test suite](bash/notebooks/bats-core-production-test-suite.ipynb) — health-check, log-rotation, and secret-rotation suites with per-test isolation, runnable in CI via `bats tests/`
+- [Moving the Jenkinsfile from inline script to SCM](jenkins/docs/2026-09-19-moving-jenkinsfile-to-scm-gotchas.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas when a job points at a repo
+- [Provisioned dashboard with panels and variables](grafana/configs/provisioned-dashboard-panels-variables.yaml) — file-provisioned datasource, dashboard provider, and service-overview dashboard with a templating variable, no UI clicks
+- [Shared-library + credentials pipeline](jenkins/snippets/2026-09-19-shared-library-credentials.groovy) — pulls a helper from a global shared library and binds a secret-text credential without printing it
+- [Grafana dashboard API wrapper](grafana/scripts/grafana-http-api-dashboard-wrapper.sh) — one CLI for list, idempotent create/update, and safe delete of dashboards via the HTTP API
+- [Minimal custom JavaScript action](gha/scripts/action.yml) — the smallest viable custom action: two inputs in, one greeting output out, on the node20 runtime
 
 ## Layout
 
@@ -55,11 +55,11 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 | Ansible | 3 | 3 | 3 | 4 | 1 | — | — | 16 | — | — | 1 | 2026-09-18 |
 | Bash | 3 | 6 | 8 | — | — | 4 | 1 | 30 | — | — | 1 | 2026-09-18 |
 | Docker | 5 | 2 | 7 | — | 2 | — | 3 | 10 | 2 | — | — | 2026-09-19 |
-| GitHub Actions | 3 | 3 | 1 | 7 | — | 1 | — | — | — | — | — | 2026-09-19 |
+| GitHub Actions | 3 | 3 | 2 | 6 | — | 1 | — | — | — | — | — | 2026-09-19 |
 | Git | 16 | 9 | 6 | — | 1 | — | — | 15 | — | 4 | — | 2026-09-18 |
-| Grafana | 4 | 1 | — | 5 | 1 | 1 | — | — | — | — | 3 | 2026-09-18 |
+| Grafana | 4 | 1 | 1 | 6 | 1 | 1 | — | — | — | — | 3 | 2026-09-19 |
 | Helm | 5 | 2 | 1 | 6 | 2 | 1 | — | — | — | — | 1 | 2026-09-18 |
-| Jenkins | 4 | — | — | 1 | — | — | — | — | — | — | 2 | 2026-09-18 |
+| Jenkins | 4 | 1 | — | 1 | — | — | — | — | — | — | 3 | 2026-09-19 |
 | Kubernetes | 5 | 3 | 3 | 1 | 4 | 1 | 1 | 10 | — | — | 2 | 2026-09-19 |
 | Prometheus | 4 | 1 | 2 | 6 | — | — | — | — | — | — | 1 | 2026-09-18 |
 | Python | 3 | 3 | 4 | 4 | — | 1 | 1 | 8 | — | — | 4 | 2026-09-18 |
@@ -71,7 +71,7 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 ## Status
 
-Currently working through L4–L5 first-contact notes for Ansible, Python, and GitHub Actions. Recent additions tighten the Ansible shelf (replacing shell-outs with idempotent modules, block/rescue error handling) and the Kubernetes shelf (a production deployment with HPA, PDB, NetworkPolicy, and quota, plus a Terraform ownership-boundary guide), alongside Prometheus configs for Kubernetes service discovery and the remote-write vs federation choice. The newest additions are a two-tier Helm-chart scaffold with ingress and alert rules, a minimal custom JavaScript action for GitHub Actions, and a storage-driver/volume-type comparison for stateful Docker workloads.
+Currently working through L4–L5 first-contact notes for Ansible, Python, and GitHub Actions. Recent additions tighten the Ansible shelf (replacing shell-outs with idempotent modules, block/rescue error handling) and the Kubernetes shelf (a production deployment with HPA, PDB, NetworkPolicy, and quota, plus a Terraform ownership-boundary guide), alongside Prometheus configs for Kubernetes service discovery and the remote-write vs federation choice. The newest additions move Jenkins from inline pipeline scripts to SCM-backed jobs (Script Path and checkout gotchas, plus a shared-library credentials snippet) and make Grafana fully declarative (a file-provisioned dashboard with panels and variables, plus a single API wrapper for list, create/update, and delete).
 
 ---
 _Last updated: 2026-09-19_

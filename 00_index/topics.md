@@ -41,8 +41,8 @@
 - **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
 - **notes** (3): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
 - **docs** (3): most recent → [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md), [GitHub Actions quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md), [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
-- **configs** (7): most recent → [Minimal custom JavaScript action](../gha/configs/minimal-custom-js-action.yml), [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml), [Reusable composite action](../gha/configs/reusable-composite-action/action.yml) · _…and 4 more under `gha/configs/`._
-- **scripts** (1): [Minimal custom JavaScript action entrypoint](../gha/scripts/minimal-custom-js-action.js) — reads two inputs, composes a greeting, and exposes it via `$GITHUB_OUTPUT`
+- **configs** (6): most recent → [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml), [Reusable composite action](../gha/configs/reusable-composite-action/action.yml) · _…and 4 more under `gha/configs/`._
+- **scripts** (2): [Minimal custom JavaScript action](../gha/scripts/action.yml) — action definition on the node20 runtime; [Minimal custom JavaScript action entrypoint](../gha/scripts/minimal-custom-js-action.js) — reads two inputs, composes a greeting, and exposes it via `$GITHUB_OUTPUT`
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 
 ## Git  ·  48 files
@@ -56,13 +56,14 @@
 - **templates** (15): [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) · [Repo scaffold with hooks and branch protection](../git/templates/repo-scaffold/README.md)
 - _…and more under `git/` — browse the folder._
 
-## Grafana  ·  15 files
+## Grafana  ·  17 files
 
 - **primer:** [Grafana — quick primer](../grafana/notes/0000-primer-grafana.md)
 - **notes** (4): most recent → [First Grafana web UI](../grafana/notes/2026-08-27-first-grafana-web-ui.md), [Grafana quickstart gotchas](../grafana/notes/2026-08-27-grafana-quickstart-gotchas.md), [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
-- **configs** (5): most recent → [Loki datasource provisioning](../grafana/configs/2026-08-30-loki-datasource-provisioning.yaml), [Grafana datasource provisioning](../grafana/configs/2026-08-29-grafana-datasource-provisioning.yaml), [Datasource and dashboard provisioning](../grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml)
+- **configs** (6): most recent → [Provisioned dashboard with panels and variables](../grafana/configs/provisioned-dashboard-panels-variables.yaml), [Loki datasource provisioning](../grafana/configs/2026-08-30-loki-datasource-provisioning.yaml), [Grafana datasource provisioning](../grafana/configs/2026-08-29-grafana-datasource-provisioning.yaml)
 - **docs** (1): [Prometheus + Alertmanager on-call pipeline](../grafana/docs/prometheus-alertmanager-oncall-pipeline.md)
 - **manifests** (1): [Production provisioning bundle](../grafana/manifests/production-provisioning-datasources-dashboards-alerts.yaml)
+- **scripts** (1): [Grafana dashboard API wrapper](../grafana/scripts/grafana-http-api-dashboard-wrapper.sh) — list, idempotent create/update, and safe delete via the HTTP API
 - **snippets** (3): most recent → [List dashboards and datasources](../grafana/snippets/2026-09-09-list-dashboards-datasources.py), [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh), [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
 - **notebooks** (1): [Comparing Grafana unified alerting vs Alertmanager](../grafana/notebooks/comparing-grafana-unified-alerting-vs-alertmanager.ipynb)
 
@@ -77,12 +78,13 @@
 - **scripts** (1): [Helm release workflow](../helm/scripts/helm-release-workflow.sh)
 - **notebooks** (1): [Comparing Helm values merging](../helm/notebooks/comparing-helm-values-merging.ipynb)
 
-## Jenkins  ·  7 files
+## Jenkins  ·  9 files
 
 - **primer:** [Jenkins — quick primer](../jenkins/notes/0000-primer-jenkins.md)
 - **notes** (4): most recent → [Following the official Jenkins tutorial](../jenkins/notes/2026-09-06-followed-jenkins-tutorial.md), [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md), [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md)
 - **configs** (1): [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile)
-- **snippets** (2): most recent → [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
+- **docs** (1): [Moving the Jenkinsfile from inline script to SCM](../jenkins/docs/2026-09-19-moving-jenkinsfile-to-scm-gotchas.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas
+- **snippets** (3): most recent → [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy), [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 
 ## Kubernetes  ·  30 files
 
