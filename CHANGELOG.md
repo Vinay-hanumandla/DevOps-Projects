@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-19
+
+- docker: Add docs comparing storage drivers (overlay2, btrfs, zfs, vfs) and volume types (named, bind, tmpfs) for stateful workloads with decision matrix and verification steps (docker-013)
+
 ## 2026-09-18
 
 - bash: Add bats-core test suite covering health check, log rotation, and secret rotation for production Bash scripts (bash-026)
