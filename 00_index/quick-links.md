@@ -22,6 +22,12 @@
 ### Gate a playbook apply before it touches hosts
 - [Gated playbook run](../ansible/scripts/ansible-playbook-gated-run.sh) — syntax-check, check-mode dry run, and optional lint first, then apply plus an idempotency rerun that must report changed=0
 
+### Keep shell-outs idempotent
+- [command/shell vs purpose-built idempotent modules](../ansible/docs/command-shell-vs-idempotent-modules.md) — when a shell-out is a bug, which module replaces it, and how to guard the ones that must stay with `creates`, `removes`, or `changed_when`
+
+### Recover cleanly inside a playbook
+- [Block/rescue/always deploy with handlers](../ansible/snippets/block-rescue-always-handlers.yaml) — tries a config deploy, rolls back on failure, always reports the outcome, and restarts the service only on change
+
 ### Manage Kubernetes workloads with Ansible
 - [Managing Kubernetes with Ansible](../ansible/docs/managing-kubernetes-with-ansible.md) — raw manifests and CRDs, Helm releases, and Kustomize overlays through the kubernetes.core collection, ordered CRDs-first
 
@@ -163,7 +169,7 @@
 - [Grafana quickstart gotchas](../grafana/notes/2026-08-27-grafana-quickstart-gotchas.md) — Docker install, data sources, panel editing, and dashboard saving traps
 - [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml) — a minimal Grafana dashboard JSON config
 - [Datasource and dashboard provisioning](../grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml) — provisioning datasource and dashboard config
-- [Production provisioning bundle](../grafana/configs/2026-08-29-grafana-datasource-provisioning.yaml) — datasources, dashboards, and alert rules for production
+- [Production provisioning bundle](../grafana/manifests/production-provisioning-datasources-dashboards-alerts.yaml) — datasources, dashboards, and alert rules for production
 - [Loki datasource provisioning](../grafana/configs/2026-08-30-loki-datasource-provisioning.yaml) — Loki as a datasource for Grafana log queries
 - [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh) — a shell helper that enumerates dashboards via the Grafana API
 - [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh) — a shell helper that creates a Grafana dashboard via the API
@@ -214,10 +220,14 @@
 - [Minimal deployment and service manifest](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml) — a minimal Kubernetes Deployment and Service YAML
 - [Multi-service application manifest](../k8s/manifests/multi-service-application.yaml) — web frontend, API backend, and Redis cache with Deployments, Services, and resource requests
 - [Zero-downtime rolling deployment](../k8s/manifests/zero-downtime-rolling-deployment.yaml) — readiness probes, PodDisruptionBudget, and surge/unhealthy thresholds for rolling updates
+- [Production-ready deployment](../k8s/manifests/production-deployment.yaml) — hardens the rolling-update shape with an HPA, NetworkPolicy, and ResourceQuota for production traffic
 - [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml) — a Kubernetes Deployment config for first contact
 - [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh) — a shell helper that walks common resource types with kubectl
 - [Pod metrics via the API](../k8s/snippets/kubectl-pod-metrics.py) — Python helper that pulls pod CPU and memory usage through kubectl
 - [Operator development image](../k8s/dockerfiles/operator-dev.Dockerfile) — containerised toolchain for building Kubernetes operators
+
+### Split cluster provisioning from workloads
+- [Integrating Kubernetes with Terraform](../k8s/docs/integrating-kubernetes-with-terraform.md) — where cluster provisioning ends and workload management begins, and how to keep the two from owning the same resource
 
 ### Get started with Prometheus
 - [Prometheus primer](../prom/notes/0000-primer-prometheus.md) — what Prometheus is, metrics types, and a minimal workflow
@@ -229,6 +239,9 @@
 - [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh) — a shell helper that runs a basic PromQL query against a Prometheus server
 - [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh) — a shell helper that runs ad-hoc PromQL queries against a running Prometheus server
 - [Hybrid service discovery](../prom/docs/hybrid-service-discovery.md) — combining Consul, file, and Kubernetes service discovery with a shared target contract
+- [Kubernetes pod service discovery](../prom/configs/2026-09-18-kubernetes-service-discovery.yaml) — scrapes annotated pods with relabelling for address, path, namespace, and pod labels
+- [Remote-write vs federation](../prom/configs/remote-write-vs-federation.yaml) — the two long-term-storage paths side by side: push series to a remote endpoint or let a peer scrape this one
+- [Rules evaluator](../prom/scripts/rules-evaluator.go) — runs recording and alerting rules offline against sample data with Go-template annotation expansion
 
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip

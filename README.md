@@ -18,11 +18,11 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 ## Quick links
 
-- [GitOps image build, sign, and push](docker/manifests/gitops-image-build-and-push.yaml) — in-cluster Job pipeline that builds an image, signs it, pushes by immutable digest, and records the reference for the deployment repo to pin
-- [Production distroless Dockerfile with SBOM](docker/dockerfiles/production-distroless-sbom.Dockerfile) — multi-stage Go build, Syft-generated SPDX bill of materials, and a non-root distroless runtime
-- [Multi-service Compose app scaffold](docker/templates/multi-service-compose-app/README.md) — copy-in stack (web front, API, database, cache) with health-gated startup, file-based secrets, and a tools profile for one-shot helpers
-- [Gated playbook run](ansible/scripts/ansible-playbook-gated-run.sh) — syntax-check, check-mode dry run, and optional lint before the apply, then an idempotency rerun that must report changed=0
-- [Managing Kubernetes with Ansible](ansible/docs/managing-kubernetes-with-ansible.md) — raw manifests and CRDs, Helm releases, and Kustomize overlays through the kubernetes.core collection
+- [command/shell vs purpose-built idempotent modules](ansible/docs/command-shell-vs-idempotent-modules.md) — when a shell-out is a bug, which module replaces it, and how to guard the ones that must stay
+- [Block/rescue/always deploy with handlers](ansible/snippets/block-rescue-always-handlers.yaml) — tries a config deploy, rolls back on failure, always reports, and restarts the service only on change
+- [Production-ready Kubernetes deployment](k8s/manifests/production-deployment.yaml) — Deployment with HPA, PodDisruptionBudget, NetworkPolicy, and ResourceQuota for production traffic
+- [Integrating Kubernetes with Terraform](k8s/docs/integrating-kubernetes-with-terraform.md) — where cluster provisioning ends and workload management begins, and how to keep the two from owning the same resource
+- [Kubernetes pod service discovery for Prometheus](prom/configs/2026-09-18-kubernetes-service-discovery.yaml) — scrapes annotated pods with relabelling for address, path, namespace, and pod labels
 
 ## Layout
 
@@ -52,26 +52,26 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 | Tool | notes | docs | scripts | configs | manifests | notebooks | dockerfiles | templates | src | hooks | snippets | Last verified |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Ansible | 3 | 2 | 4 | 4 | 1 | — | — | 16 | — | — | — | 2026-09-18 |
-| Bash | 3 | 6 | 11 | — | — | 3 | 1 | 30 | — | — | 1 | 2026-09-18 |
+| Ansible | 3 | 3 | 3 | 4 | 1 | — | — | 16 | — | — | 1 | 2026-09-18 |
+| Bash | 3 | 6 | 8 | — | — | 3 | 1 | 30 | — | — | 1 | 2026-09-18 |
 | Docker | 5 | 1 | 7 | — | 2 | — | 3 | 10 | 2 | — | — | 2026-09-18 |
-| GitHub Actions | 3 | 3 | — | 5 | — | 1 | — | — | — | — | — | 2026-09-18 |
-| Git | 16 | 9 | 9 | — | 1 | — | — | 15 | — | 4 | — | 2026-09-18 |
+| GitHub Actions | 3 | 3 | — | 6 | — | 1 | — | — | — | — | — | 2026-09-18 |
+| Git | 16 | 9 | 6 | — | 1 | — | — | 15 | — | 4 | — | 2026-09-18 |
 | Grafana | 4 | 1 | — | 5 | 1 | 1 | — | — | — | — | 3 | 2026-09-18 |
 | Helm | 5 | 2 | 1 | 6 | 2 | 1 | — | — | — | — | 1 | 2026-09-18 |
 | Jenkins | 4 | — | — | 1 | — | — | — | — | — | — | 2 | 2026-09-18 |
-| Kubernetes | 5 | 2 | 3 | 1 | 3 | 1 | 1 | — | — | — | 2 | 2026-09-18 |
+| Kubernetes | 5 | 3 | 3 | 1 | 4 | 1 | 1 | — | — | — | 2 | 2026-09-18 |
 | Prometheus | 4 | 1 | 2 | 6 | — | — | — | — | — | — | 1 | 2026-09-18 |
 | Python | 3 | 3 | 4 | 4 | — | 1 | 1 | 8 | — | — | 4 | 2026-09-18 |
 | Terraform | 4 | 3 | 2 | 6 | — | — | — | — | — | — | 1 | 2026-09-18 |
 | Repo-doc | 2 | 2 | 2 | — | — | — | — | — | — | — | — | 2026-09-18 |
-| Concepts | — | 22 | 22 | — | — | 5 | — | — | — | — | 12 | 2026-09-18 |
+| Concepts | 8 | 17 | 22 | — | — | 5 | — | — | — | — | 12 | 2026-09-18 |
 
 </details>
 
 ## Status
 
-Currently working through L4–L5 first-contact notes for Ansible, Python, and GitHub Actions. Recent additions round out the Docker shelf: an in-cluster GitOps build-sign-push manifest that records an immutable image reference, a production distroless Dockerfile with a Syft-generated SBOM, and a multi-service Compose app scaffold with health-gated startup and file-based secrets.
+Currently working through L4–L5 first-contact notes for Ansible, Python, and GitHub Actions. Recent additions tighten the Ansible shelf (replacing shell-outs with idempotent modules, block/rescue error handling) and the Kubernetes shelf (a production deployment with HPA, PDB, NetworkPolicy, and quota, plus a Terraform ownership-boundary guide), alongside Prometheus configs for Kubernetes service discovery and the remote-write vs federation choice.
 
 ---
 _Last updated: 2026-09-18_
