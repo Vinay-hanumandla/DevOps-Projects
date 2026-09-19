@@ -9,7 +9,7 @@
 - gha: Add minimal custom JavaScript action — action.yml plus a Node 20 entrypoint that reads inputs and exposes message/length outputs (gha-015)
 - docker: Add docs comparing storage drivers (overlay2, btrfs, zfs, vfs) and volume types (named, bind, tmpfs) for stateful workloads with decision matrix and verification steps (docker-013)
 - grafana: Add reusable bash wrapper script for the Grafana HTTP API to list, create, and delete dashboards idempotently (grafana-015)
-- jenkins: Add notes on what tripped me up following the official Jenkins declarative pipeline tutorial (jenkins-008)
+- jenkins: Add docs on what tripped me up following the official Jenkins declarative pipeline tutorial (jenkins-008)
 - kubernetes: Add multi-service app scaffold with Helm chart (frontend/backend), ingress routing, and Prometheus alert rules (k8s-017)
 
 ## 2026-09-18
