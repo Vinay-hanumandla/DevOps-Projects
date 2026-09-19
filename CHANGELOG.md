@@ -2,6 +2,9 @@
 
 ## 2026-09-19
 
+- grafana: Add provisioned dashboard config with datasource, panels, and variables as YAML (grafana-014)
+- jenkins: Add minimal Jenkinsfile snippet using a shared library and credentials binding (jenkins-009)
+
 - gha: Rework minimal custom JavaScript action with a colocated action.yml and Node entrypoint that writes outputs (gha-015)
 - gha: Add minimal custom JavaScript action — action.yml plus a Node 20 entrypoint that reads inputs and exposes message/length outputs (gha-015)
 - docker: Add docs comparing storage drivers (overlay2, btrfs, zfs, vfs) and volume types (named, bind, tmpfs) for stateful workloads with decision matrix and verification steps (docker-013)
