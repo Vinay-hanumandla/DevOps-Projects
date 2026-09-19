@@ -1,52 +1,68 @@
 #!/usr/bin/env bash
 # last_verified: 2026-09-19 · Grafana n/a
 
-# Grafana HTTP API wrapper — list, create, and delete dashboards idempotently.
-# Usage: ./grafana-http-api-dashboard-wrapper.sh {list|create|delete} [args]
-# Requires: curl, jq, and a Grafana API key with dashboard admin permissions.
+# Grafana dashboard API wrapper — one CLI for list, idempotent create/update,
+# and safe delete of dashboards.
+#
+# Purpose: fold my earlier one-off API snippets (a list-dashboards curl and a
+#   create-dashboard curl) into a single reusable command so everyday dashboard
+#   chores stop being copy-pasted curl flags. The new behavior versus those
+#   snippets is the update path (same uid + overwrite flag) and delete-by-uid
+#   that is a no-op when the dashboard is already gone.
+# Usage:
+#   GRAFANA_API_KEY=<service-account-token> ./grafana-http-api-dashboard-wrapper.sh list
+#   GRAFANA_API_KEY=<token> ./grafana-http-api-dashboard-wrapper.sh create ./dashboard.json
+#   GRAFANA_API_KEY=<token> ./grafana-http-api-dashboard-wrapper.sh delete <uid>
+# Requires: curl, jq, and a token allowed to manage dashboards.
 
 set -euo pipefail
 
 GRAFANA_URL="${GRAFANA_URL:-http://localhost:3000}"
-API_KEY="${GRAFANA_API_KEY:?GRAFANA_API_KEY must be set}"
-HEADERS=(
-    "Authorization: Bearer ${API_KEY}"
-    "Content-Type: application/json"
-    "Accept: application/json"
+API_KEY="${GRAFANA_API_KEY:?Set GRAFANA_API_KEY to a Grafana service-account token.}"
+
+# One -H flag per header. An earlier version of this script kept the headers in
+# an array and passed them as -H "${HEADERS[@]}", which gives curl a single -H
+# flag and leaves the remaining headers to be parsed as URLs — every authed
+# call failed. Expanding the flags inline here keeps each header attached to
+# its own -H.
+AUTH_FLAGS=(
+    -H "Authorization: Bearer ${API_KEY}"
+    -H "Content-Type: application/json"
+    -H "Accept: application/json"
 )
 
 log() {
     printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$1" >&2
 }
 
-dashboard_exists() {
+# Fetch the full dashboard payload for a uid. Exits nonzero (curl -f) on 404,
+# which the callers treat as "does not exist".
+get_by_uid() {
     local uid="$1"
-    local response
-    response=$(curl -sf -X GET "${GRAFANA_URL}/api/dashboards/uid/${uid}" \
-        -H "${HEADERS[@]}" 2>/dev/null || echo "")
-    if [[ -n "${response}" ]]; then
-        echo "${response}" | jq -e '.meta.id' >/dev/null 2>&1
-    else
-        return 1
-    fi
+    curl -sf -X GET "${GRAFANA_URL}/api/dashboards/uid/${uid}" "${AUTH_FLAGS[@]}"
+}
+
+dashboard_exists() {
+    get_by_uid "$1" >/dev/null 2>&1
 }
 
 cmd_list() {
     local response
-    response=$(curl -sf -X GET "${GRAFANA_URL}/api/search" \
-        -H "${HEADERS[@]}" \
-        -H "X-Grafana-Org-Id: 1" \
-        -H "Type: dash-db" || true)
+    response=$(curl -sf -X GET "${GRAFANA_URL}/api/search?type=dash-db" \
+        "${AUTH_FLAGS[@]}")
 
-    if [[ -z "${response}" ]]; then
-        log "No dashboards found or failed to connect."
+    if [[ "${response}" == "[]" ]]; then
+        log "No dashboards found."
         return 0
     fi
 
-    echo "${response}" | jq -r '.[] | "\(.id)\t\(.title)\t\(.uid)"' | \
+    echo "${response}" | jq -r '.[] | "\(.uid)\t\(.title)"' | \
         column -t -s $'\t'
 }
 
+# POST the dashboard through the dashboards-db endpoint with overwrite set, so
+# re-running create for the same uid updates instead of erroring. Accepts both
+# a raw dashboard object and an exported file shaped like {"dashboard": {...}}.
 cmd_create() {
     local dashboard_file="$1"
 
@@ -55,51 +71,34 @@ cmd_create() {
         return 1
     fi
 
-    local uid
-    uid=$(jq -r '.uid' "${dashboard_file}")
+    local payload uid action
+    payload=$(jq '{dashboard: (if has("dashboard") then .dashboard else . end),
+                   overwrite: true}' "${dashboard_file}")
+    uid=$(echo "${payload}" | jq -r '.dashboard.uid // empty')
 
-    if [[ -z "${uid}" || "${uid}" == "null" ]]; then
-        log "Dashboard file missing uid field: ${dashboard_file}"
-        return 1
-    fi
-
-    if dashboard_exists "${uid}"; then
-        log "Dashboard with uid '${uid}' already exists — updating."
-        local existing_id
-        existing_id=$(curl -sf -X GET "${GRAFANA_URL}/api/dashboards/uid/${uid}" \
-            -H "${HEADERS[@]}" | jq -r '.dashboard.id')
-
-        curl -sf -X POST "${GRAFANA_URL}/api/dashboards/${existing_id}" \
-            -H "${HEADERS[@]}" \
-            -d @"${dashboard_file}" >/dev/null
-
-        log "Dashboard '${uid}' updated successfully."
+    if [[ -n "${uid}" ]] && dashboard_exists "${uid}"; then
+        action="Updating"
     else
-        log "Dashboard with uid '${uid}' does not exist — creating."
-        curl -sf -X POST "${GRAFANA_URL}/api/dashboards/uid/${uid}" \
-            -H "${HEADERS[@]}" \
-            -d @"${dashboard_file}" >/dev/null
-
-        log "Dashboard '${uid}' created successfully."
+        action="Creating"
     fi
+
+    log "${action} dashboard '${uid:-<no uid — server assigns one>}'."
+    echo "${payload}" | curl -sf -X POST "${GRAFANA_URL}/api/dashboards/db" \
+        "${AUTH_FLAGS[@]}" -d @- | jq -r '"status: \(.status), uid: \(.uid)"'
 }
 
 cmd_delete() {
     local uid="$1"
 
     if ! dashboard_exists "${uid}"; then
-        log "Dashboard with uid '${uid}' does not exist — nothing to delete."
+        log "Dashboard '${uid}' does not exist — nothing to delete."
         return 0
     fi
 
-    local dashboard_id
-    dashboard_id=$(curl -sf -X GET "${GRAFANA_URL}/api/dashboards/uid/${uid}" \
-        -H "${HEADERS[@]}" | jq -r '.dashboard.id')
+    curl -sf -X DELETE "${GRAFANA_URL}/api/dashboards/uid/${uid}" \
+        "${AUTH_FLAGS[@]}" >/dev/null
 
-    curl -sf -X DELETE "${GRAFANA_URL}/api/dashboards/${dashboard_id}" \
-        -H "${HEADERS[@]}" >/dev/null
-
-    log "Dashboard '${uid}' (id: ${dashboard_id}) deleted."
+    log "Dashboard '${uid}' deleted."
 }
 
 usage() {
@@ -107,15 +106,22 @@ usage() {
 Usage: ${0##*/} {list|create|delete} [args]
 
 Commands:
-  list                    List all dashboards.
+  list                    List all dashboards (uid + title).
   create <file.json>      Create or update a dashboard from a JSON file (idempotent).
   delete <uid>            Delete a dashboard by its UID (safe — no-op if absent).
 
 Environment:
   GRAFANA_URL     Grafana base URL (default: http://localhost:3000)
-  GRAFANA_API_KEY API key with dashboard admin permissions (required)
+  GRAFANA_API_KEY Service-account token allowed to manage dashboards (required)
 EOF
 }
+
+# Verify (against a local Grafana):
+#   GRAFANA_API_KEY=<token> ./grafana-http-api-dashboard-wrapper.sh list
+#   GRAFANA_API_KEY=<token> ./grafana-http-api-dashboard-wrapper.sh create ./dashboard.json
+#   GRAFANA_API_KEY=<token> ./grafana-http-api-dashboard-wrapper.sh create ./dashboard.json  # second run updates
+#   GRAFANA_API_KEY=<token> ./grafana-http-api-dashboard-wrapper.sh delete <uid>
+#   GRAFANA_API_KEY=<token> ./grafana-http-api-dashboard-wrapper.sh delete <uid>             # second run is a no-op
 
 main() {
     local action="${1:-}"
