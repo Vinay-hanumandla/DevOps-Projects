@@ -13,14 +13,14 @@
 - **snippets** (1): [Block/rescue/always deploy with handlers](../ansible/snippets/block-rescue-always-handlers.yaml) — config deploy with rollback, outcome report, and a change-gated service restart
 - **templates** (16): [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, `galaxy.yml`, dynamic cloud inventory, and a Terraform-outputs handoff script · _…and 15 more under `ansible/templates/ansible-role-molecule-collection/`._
 
-## Bash  ·  52 files
+## Bash  ·  53 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
 - **docs** (6): most recent → [Bash 5.3 deep dive](../bash/docs/bash-5.3-deep-dive.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md), [Debug and profile with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md)
 - **scripts** (8): most recent → [CI-safe build wrapper](../bash/scripts/build-and-check.sh), [System report tool](../bash/scripts/system-report-tool.sh), [Log rotation and retention](../bash/scripts/log-rotation-retention.sh)
 - **snippets** (1): [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
-- **notebooks** (3): most recent → [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb), [Comparing pipeline exit-code handling](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb), [Comparing log rotation approaches](../bash/notebooks/comparing-log-rotation-approaches.ipynb)
+- **notebooks** (4): most recent → [Bats-core production test suite](../bash/notebooks/bats-core-production-test-suite.ipynb), [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb), [Comparing pipeline exit-code handling](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb)
 - **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
 - **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
 - _…and more under `bash/` — browse the folder._
