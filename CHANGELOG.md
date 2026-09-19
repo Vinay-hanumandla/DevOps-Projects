@@ -515,3 +515,8 @@ Passed ([x]) bash-010 — Bash: docs — How I wired Bash strict mode and trap p
 - python/dockerfiles/python-app.Dockerfile — Production multi-stage Dockerfile for Python app (python-014)
 - python/configs/pyproject-toml-readme.md — Companion README for pyproject.toml config (python-017)
 - gha: Add reusable composite action with conditional steps, defaults, and a caller workflow that uses it (gha-014)
+
+## 2026-09-19
+
+- k8s/docs/kubernetes-helm-argocd-gitops-workflow.md — End-to-end GitOps workflow from app repo to cluster with Helm and Argo CD (k8s-021)
+- prom/docs/2026-09-19-promql-rate-increase-histogram-quantile.md — PromQL fundamentals: rate, increase, and histogram_quantile (prom-011)
