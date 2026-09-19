@@ -367,3 +367,20 @@
 ## Python (additional)
 
 - **Layered config loader** — a configuration pattern that merges several sources with a defined precedence (environment values win over per-environment files, which win over built-in defaults) so call sites read a single view; the dynaconf pattern, contrasted with typed settings classes and minimal env readers.
+
+## Docker (storage)
+
+- **Storage driver** — the pluggable backend Docker uses to store image layers and the container writable layer on the host filesystem; the choice affects build speed, disk usage, and which backing filesystems are supported.
+- **overlay2** — the default storage driver on modern Linux: layers are directories merged through an OverlayFS union mount, so creating a container is cheap and unchanged layers are shared between images.
+- **Bind mount** — a container mount that maps a host path directly into the container (`-v /host/path:/data`); fast and transparent, but ties the container to that host's layout, so it suits local development more than portable deployments.
+- **tmpfs mount** — a container mount backed by host memory instead of disk; contents vanish when the container stops, which makes it the right place for secrets or scratch space that must never hit persistent storage.
+- **Volume driver (plugin)** — a pluggable backend that provisions Docker volumes from external storage (NFS, cloud disks) instead of the local `/var/lib/docker`; lets stateful containers keep their data when they move between hosts.
+
+## Kubernetes (routing)
+
+- **Ingress** — a cluster object that exposes HTTP(S) routes to Services from outside the cluster; an ingress controller watches it and programs the actual proxy, with `ingressClassName` selecting which controller owns the route.
+
+## GitHub Actions (custom actions)
+
+- **JavaScript action** — a custom action whose logic runs as Node on the runner (`runs.using: 'node20'` with a `main` entrypoint); inputs arrive as `INPUT_*` environment variables and outputs leave through the `$GITHUB_OUTPUT` file.
+- **`$GITHUB_OUTPUT`** — the file a step or action appends `name=value` lines to in order to publish outputs; later steps read them as `steps.<id>.outputs.<name>`, which is how a custom action hands data back to its caller workflow.
