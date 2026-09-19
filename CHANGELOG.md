@@ -3,6 +3,8 @@
 ## 2026-09-19
 
 - gha: Add minimal custom JavaScript action — action.yml plus a Node 20 entrypoint that reads inputs and exposes message/length outputs (gha-015)
+- docker: Add docs comparing storage drivers (overlay2, btrfs, zfs, vfs) and volume types (named, bind, tmpfs) for stateful workloads with decision matrix and verification steps (docker-013)
+- kubernetes: Add multi-service app scaffold with Helm chart (frontend/backend), ingress routing, and Prometheus alert rules (k8s-017)
 
 ## 2026-09-18
 

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-backend
+  labels:
+    app.kubernetes.io/name: multi-service-app
+    app.kubernetes.io/component: backend
+  {{- if .Values.monitoring.scrapeAnnotations }}
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "{{ .Values.backend.port }}"
+  {{- end }}
+spec:
+  selector:
+    app.kubernetes.io/component: backend
+  ports:
+    - name: {{ .Values.monitoring.metricsPortName }}
+      port: {{ .Values.backend.port }}
+      targetPort: http

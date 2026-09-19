@@ -231,6 +231,7 @@
 - **Error ratio** — the share of requests in a window that returned a non-2xx status; the "Errors" term of the RED method, computable straight from an access log without any dashboard.
 - **Wall-clock latency** — the full elapsed time a client observes for a request (DNS, connect, transfer, and all), as reported by `curl -w '%{time_total}'`; distinct from server-side processing time.
 - **Table-driven checks** — expressing a sequence of checks as data (a list of label/command pairs) and looping over it, so adding or changing a step edits one entry instead of another copy-pasted conditional block.
+- **Secret rotation** — the practice of regularly replacing credentials (passwords, tokens, keys) and redistributing them to consumers; the bats-core suite tests the rotation script the same way as any other production code — deterministically, in isolation, and on every change.
 
 
 ## Git
@@ -276,6 +277,7 @@
 - **Resource requests** — the minimum CPU and memory a container needs; the scheduler uses this to pick a node with enough capacity.
 - **Resource limits** — the maximum CPU and memory a container can use; exceeding the memory limit kills the container with an OOM error.
 - **CRD (CustomResourceDefinition)** — a Kubernetes object that extends the API with a new resource type; install the CRD first and wait for it to be established before creating instances of it, or the apply fails with "resource not found".
+- **Infrastructure/workload ownership boundary** — the line between what Terraform provisions (cluster lifecycle, networking, node capacity, access) and what Kubernetes reconciles (application state inside the cluster); each side treats the other's objects as inputs, so no two controllers own the same resource.
 - **HPA (HorizontalPodAutoscaler)** — a Kubernetes object that scales a Deployment's replica count up or down against observed metrics (CPU, memory, or custom); the production deployment pairs it with resource requests so the target has something to measure against.
 - **NetworkPolicy** — a Kubernetes object that declares which pods may talk to which peers and ports; without one, every pod in the cluster can reach every other pod by default.
 - **ResourceQuota** — a namespace-scoped Kubernetes object that caps total resource consumption (CPU, memory, pod count) inside one namespace, so a single workload cannot starve its neighbours.
