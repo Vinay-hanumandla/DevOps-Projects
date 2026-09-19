@@ -83,7 +83,7 @@
 - **primer:** [Jenkins — quick primer](../jenkins/notes/0000-primer-jenkins.md)
 - **notes** (4): most recent → [Following the official Jenkins tutorial](../jenkins/notes/2026-09-06-followed-jenkins-tutorial.md), [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md), [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md)
 - **configs** (1): [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile)
-- **docs** (1): [Moving the Jenkinsfile from inline script to SCM](../jenkins/docs/2026-09-19-moving-jenkinsfile-to-scm-gotchas.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas
+- **docs** (1): [What tripped me up following the Jenkins declarative pipeline tutorial](../jenkins/docs/2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas
 - **snippets** (3): most recent → [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy), [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 
 ## Kubernetes  ·  30 files
