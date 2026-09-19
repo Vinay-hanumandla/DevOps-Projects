@@ -177,8 +177,10 @@
 - [Datasource and dashboard provisioning](../grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml) — provisioning datasource and dashboard config
 - [Production provisioning bundle](../grafana/manifests/production-provisioning-datasources-dashboards-alerts.yaml) — datasources, dashboards, and alert rules for production
 - [Loki datasource provisioning](../grafana/configs/2026-08-30-loki-datasource-provisioning.yaml) — Loki as a datasource for Grafana log queries
+- [Provisioned dashboard with panels and variables](../grafana/configs/provisioned-dashboard-panels-variables.yaml) — file-provisioned datasource, dashboard provider, and service-overview dashboard with a service variable, no UI clicks
 - [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh) — a shell helper that enumerates dashboards via the Grafana API
 - [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh) — a shell helper that creates a Grafana dashboard via the API
+- [Grafana dashboard API wrapper](../grafana/scripts/grafana-http-api-dashboard-wrapper.sh) — one CLI for list, idempotent create/update, and safe delete of dashboards via the HTTP API
 - [List dashboards and datasources](../grafana/snippets/2026-09-09-list-dashboards-datasources.py) — Python script to list dashboards and datasources via the Grafana API
 - [Prometheus + Alertmanager on-call pipeline](../grafana/docs/prometheus-alertmanager-oncall-pipeline.md) — wiring Grafana dashboards into a Prometheus and Alertmanager on-call flow
 - [Comparing Grafana unified alerting vs Alertmanager](../grafana/notebooks/comparing-grafana-unified-alerting-vs-alertmanager.ipynb) — notebook comparing built-in Grafana alerting with an external Alertmanager
@@ -212,6 +214,8 @@
 - [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile) — a minimal declarative Jenkins pipeline config
 - [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy) — a minimal declarative Jenkins pipeline snippet
 - [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy) — a Jenkins pipeline snippet using environment credentials binding
+- [Moving the Jenkinsfile from inline script to SCM](../jenkins/docs/2026-09-19-moving-jenkinsfile-to-scm-gotchas.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas when pointing a job at a repo
+- [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy) — pulls a helper from a global shared library and binds a secret-text credential without printing it
 
 ### Get started with Kubernetes
 - [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md) — first-contact notes for Kubernetes concepts and kubectl basics
@@ -362,7 +366,7 @@
 - [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml) — example caller showing defaults, per-call overrides, and outputs from the shared action
 
 ### Write a minimal custom JavaScript action
-- [Minimal custom JavaScript action](../gha/configs/minimal-custom-js-action.yml) — the smallest viable custom action: two inputs in, one greeting output out, on the node20 runtime
+- [Minimal custom JavaScript action](../gha/scripts/action.yml) — the smallest viable custom action: two inputs in, one greeting output out, on the node20 runtime
 - [Custom action entrypoint](../gha/scripts/minimal-custom-js-action.js) — reads the inputs, composes the message, and exposes it via `$GITHUB_OUTPUT`
 
 ### Keep the repo's own docs in sync

@@ -159,6 +159,8 @@
 - **Alert** — a rule that triggers a notification when a metric crosses a threshold. Example: alert when error rate exceeds 5% for 5 minutes.
 - **Row** — a horizontal section on a dashboard that groups related panels. Example: a "Network" row containing latency and throughput panels.
 - **Provisioning** — configuring dashboards, data sources, and alert rules via declarative JSON/YAML files instead of the UI, so Grafana's configuration lives in version control and can be deployed with IaC tools.
+- **Templating variable** — a dashboard-level variable (here `service`, populated from `label_values(http_requests_total, service)`) that rewrites each panel's queries when switched; one dashboard serves every service instead of one dashboard per service.
+- **Dashboard UID** — the stable identifier Grafana assigns a dashboard; API create/update calls carry the same UID with an overwrite flag so reruns update in place, and delete-by-UID is a no-op when the dashboard is already gone.
 
 ## Prometheus
 
@@ -307,6 +309,11 @@
 - **Pipeline syntax validator** — the link next to the inline-script box that re-parses the Jenkinsfile against the declarative grammar and surfaces errors before a run starts; catches missing braces and mis-indented blocks before they fail a build.
 - **`agent any`** — the simplest `agent {}` declaration in a declarative pipeline, meaning "run on whichever executor is available"; on a single-node Jenkins this is always the controller.
 - **`withCredentials`** — a pipeline step that binds a stored credential (secret text, username/password, or SSH key) to an environment variable for the duration of its block; the variable is unset when the block exits, so the secret never leaks to subsequent stages.
+- **Pipeline script from SCM** — a job definition that loads the Jenkinsfile from a versioned repo instead of the inline script box; the job needs a repo URL, a credentials entry, a branch specifier, and a Script Path pointing at the Jenkinsfile.
+- **Script Path** — the job field giving the Jenkinsfile location inside the repo (defaults to `Jenkinsfile` at the root); a Jenkinsfile committed under a subfolder is missed unless this field matches its path.
+- **Branch specifier** — the job field telling Jenkins which branch to check out (prefilled with `*/master`); repos whose default branch is `main` fail checkout until it is changed to `*/main`.
+- **Lightweight checkout** — a job option that fetches only the Jenkinsfile to start the run; the rest of the repo never lands in the workspace, so steps needing repo files must run an explicit `checkout scm` first.
+- **Shared library** — versioned pipeline code (`vars/*.groovy`) configured once under Global Pipeline Libraries and pulled into any Jenkinsfile with `@Library('lib-name') _`; the annotation must sit outside the `pipeline {}` block and the name must match the configured library exactly.
 
 ## Docker Compose (additional)
 
