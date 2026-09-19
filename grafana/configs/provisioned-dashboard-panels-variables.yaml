@@ -1,0 +1,83 @@
+# last_verified: 2026-09-19 · Grafana n/a
+#
+# Provisioned Grafana dashboard from scratch: datasource, panels, and variables as YAML.
+#
+# Purpose: stand up a complete file-provisioned monitoring view without clicking
+# through the UI — one datasource, one dashboard with two panels, and one
+# templating variable, all declared as YAML.
+#
+# Steps:
+#   1. Copy each document below to its path under the Grafana provisioning dir.
+#   2. Restart Grafana (or wait for its provisioning poll) so it picks up the files.
+#   3. Open the "Service overview" dashboard and switch the `service` variable.
+#
+# Verify:
+#   - The datasource list shows an entry named after the one declared here.
+#   - The dashboard renders both panels and the variable dropdown changes them.
+#   - Grafana logs no provisioning errors on restart.
+#
+# Note on layout: this keeps the datasource, the dashboard provider, and the
+# dashboard model in one file for review. In a real deployment these would live
+# as three separate files; the target path for each is noted above its document.
+# This file deliberately overlaps the older datasource-only provisioning notes in
+# this folder by adding the dashboard model (panels + variables), which those
+# files do not define.
+
+# --- File 1: provisioning/datasources/service-datasource.yaml ---
+apiVersion: 1
+
+deleteDatasources: []
+
+datasources:
+  - name: ServiceMetrics
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: false
+---
+# --- File 2: provisioning/dashboards/service-dashboards.yaml ---
+apiVersion: 1
+
+providers:
+  - name: service-dashboards
+    folder: Services
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: false
+    options:
+      path: /etc/grafana/provisioning/dashboards/service
+---
+# --- File 3: provisioning/dashboards/service/service-overview.yaml ---
+# Dashboard model in YAML: title, tags, one templating variable, two panels.
+# The queries assume a metrics endpoint exposing per-service request counters
+# and latency histograms under the `service` label.
+title: Service overview
+tags:
+  - provisioned
+  - services
+timezone: browser
+templating:
+  variables:
+    - name: service
+      label: Service
+      type: query
+      datasource: ServiceMetrics
+      query: 'label_values(http_requests_total, service)'
+      multi: false
+      includeAll: false
+      current: all
+panels:
+  - title: Request rate
+    type: timeseries
+    datasource: ServiceMetrics
+    targets:
+      - expr: 'sum(rate(http_requests_total{service="$service"}[5m]))'
+        legendFormat: requests/sec
+  - title: Error share
+    type: stat
+    datasource: ServiceMetrics
+    targets:
+      - expr: 'sum(rate(http_requests_total{service="$service",status=~"5.."}[5m])) / sum(rate(http_requests_total{service="$service"}[5m]))'
+        legendFormat: error share
