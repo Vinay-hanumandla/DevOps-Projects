@@ -1,0 +1,38 @@
+# last_verified: 2026-09-19 · gha n/a
+#
+# action.yml for the minimal custom JavaScript action.
+#
+# A custom action is just a contract: this file tells the runner which runtime
+# to use (node20), which entrypoint to execute, and what inputs/outputs the
+# action exposes. The entrypoint (minimal-custom-js-action.js) does the work.
+#
+# This is the smallest action that does something useful: it takes a greeting
+# and a name, composes a message, and exposes it as an output. A caller workflow
+# can then use that output in a later step, which is the whole point of an
+# action beyond "just run a command."
+
+name: 'Minimal custom JavaScript action'
+description: >
+  Composes a greeting message from two inputs and exposes it as a workflow
+  output. Demonstrates the smallest viable custom action: inputs in, outputs
+  out, nothing else.
+
+inputs:
+  greeting:
+    description: 'Opening word of the message (e.g. "Hello", "Hi").'
+    required: false
+    default: 'Hello'
+  name:
+    description: 'Name to greet (e.g. "world", "GitHub").'
+    required: false
+    default: 'world'
+
+outputs:
+  message:
+    description: 'The composed greeting, e.g. "Hello, world!".'
+  length:
+    description: 'Character length of the composed message.'
+
+runs:
+  using: 'node20'
+  main: 'scripts/minimal-custom-js-action.js'
