@@ -2,6 +2,7 @@
 
 ## 2026-09-19
 
+- terraform: Add AWS VPC module with public/private subnets, NAT gateways via for_each, dynamic AZ discovery, and optional VPC flow logs to CloudWatch (tf-018)
 - grafana: Add provisioned dashboard config with datasource, panels, and variables as YAML (grafana-014)
 - jenkins: Add minimal Jenkinsfile snippet using a shared library and credentials binding (jenkins-009)
 
