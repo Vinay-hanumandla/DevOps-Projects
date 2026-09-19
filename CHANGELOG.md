@@ -2,7 +2,7 @@
 
 ## 2026-09-19
 
-- gha: Add minimal custom JavaScript action — action.yml plus a Node 20 entrypoint that reads inputs and exposes message/length outputs (gha-015)
+- gha: Rework minimal custom JavaScript action with a colocated action.yml and Node entrypoint that writes outputs (gha-015)
 
 ## 2026-09-18
 
