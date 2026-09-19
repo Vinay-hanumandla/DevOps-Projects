@@ -1,0 +1,11 @@
+The multi-service-app release is installed.
+
+Frontend:  http://{{ .Values.ingress.host }}/
+Backend:   http://{{ .Values.ingress.host }}/api/healthz
+
+Check rollout status with:
+  kubectl rollout status deployment/{{ .Release.Name }}-frontend
+  kubectl rollout status deployment/{{ .Release.Name }}-backend
+
+Metrics endpoints are annotated for Prometheus scraping; load the alert
+rules in ../monitoring/prometheus-rules.yaml into your Prometheus setup.
