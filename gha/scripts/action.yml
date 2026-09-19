@@ -1,0 +1,17 @@
+# last_verified: 2026-09-19 · gha n/a
+name: 'Minimal JavaScript action'
+description: 'Reads a name input and exposes a greeting output.'
+
+inputs:
+  name:
+    description: 'Name to greet.'
+    required: false
+    default: 'World'
+
+outputs:
+  greeting:
+    description: 'Greeting produced for the supplied name.'
+
+runs:
+  using: 'node20'
+  main: 'minimal-custom-js-action.js'
