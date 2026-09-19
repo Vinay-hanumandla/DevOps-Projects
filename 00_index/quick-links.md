@@ -76,6 +76,9 @@
 ### Compare ShellCheck profiles
 - [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb) — notebook comparing different ShellCheck profiles and their strictness levels
 
+### Test production Bash scripts with BATS
+- [Bats-core production test suite](../bash/notebooks/bats-core-production-test-suite.ipynb) — health-check, log-rotation, and secret-rotation suites with per-test isolation and setup/teardown hooks, runnable in CI via `bats tests/`
+
 ### Get started with Docker
 - [Docker primer](../docker/notes/0000-primer-docker.md) — what Docker is, images vs containers, and a minimal workflow
 - [Docker quickstart trip-ups](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md) — what to expect and where beginners get stuck

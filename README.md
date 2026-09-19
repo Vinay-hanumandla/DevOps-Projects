@@ -18,11 +18,11 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 ## Quick links
 
+- [Bats-core production test suite](bash/notebooks/bats-core-production-test-suite.ipynb) — health-check, log-rotation, and secret-rotation suites with per-test isolation, runnable in CI via `bats tests/`
 - [command/shell vs purpose-built idempotent modules](ansible/docs/command-shell-vs-idempotent-modules.md) — when a shell-out is a bug, which module replaces it, and how to guard the ones that must stay
 - [Block/rescue/always deploy with handlers](ansible/snippets/block-rescue-always-handlers.yaml) — tries a config deploy, rolls back on failure, always reports, and restarts the service only on change
 - [Production-ready Kubernetes deployment](k8s/manifests/production-deployment.yaml) — Deployment with HPA, PodDisruptionBudget, NetworkPolicy, and ResourceQuota for production traffic
 - [Integrating Kubernetes with Terraform](k8s/docs/integrating-kubernetes-with-terraform.md) — where cluster provisioning ends and workload management begins, and how to keep the two from owning the same resource
-- [Kubernetes pod service discovery for Prometheus](prom/configs/2026-09-18-kubernetes-service-discovery.yaml) — scrapes annotated pods with relabelling for address, path, namespace, and pod labels
 
 ## Layout
 
@@ -43,7 +43,7 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 `scripting-automation-philosophy/` — companion app config for the scripting deploy-checklist snippet.
 `tf/` — provider configs, null resources, multi-resource setups, and state-lock workflow scripts.
 
-> Counts below were regenerated from the filesystem on 2026-09-18 and include every file under each tool's category folders (recursively, so scaffolded template trees under `templates/` are counted in full).
+> Counts below were regenerated from the filesystem on 2026-09-19 and include every file under each tool's category folders (recursively, so scaffolded template trees under `templates/` are counted in full).
 
 ## Coverage
 
@@ -53,7 +53,7 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 | Tool | notes | docs | scripts | configs | manifests | notebooks | dockerfiles | templates | src | hooks | snippets | Last verified |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Ansible | 3 | 3 | 3 | 4 | 1 | — | — | 16 | — | — | 1 | 2026-09-18 |
-| Bash | 3 | 6 | 8 | — | — | 3 | 1 | 30 | — | — | 1 | 2026-09-18 |
+| Bash | 3 | 6 | 8 | — | — | 4 | 1 | 30 | — | — | 1 | 2026-09-18 |
 | Docker | 5 | 1 | 7 | — | 2 | — | 3 | 10 | 2 | — | — | 2026-09-18 |
 | GitHub Actions | 3 | 3 | — | 6 | — | 1 | — | — | — | — | — | 2026-09-18 |
 | Git | 16 | 9 | 6 | — | 1 | — | — | 15 | — | 4 | — | 2026-09-18 |
@@ -71,7 +71,7 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 ## Status
 
-Currently working through L4–L5 first-contact notes for Ansible, Python, and GitHub Actions. Recent additions tighten the Ansible shelf (replacing shell-outs with idempotent modules, block/rescue error handling) and the Kubernetes shelf (a production deployment with HPA, PDB, NetworkPolicy, and quota, plus a Terraform ownership-boundary guide), alongside Prometheus configs for Kubernetes service discovery and the remote-write vs federation choice.
+Currently working through L4–L5 first-contact notes for Ansible, Python, and GitHub Actions. Recent additions tighten the Ansible shelf (replacing shell-outs with idempotent modules, block/rescue error handling) and the Kubernetes shelf (a production deployment with HPA, PDB, NetworkPolicy, and quota, plus a Terraform ownership-boundary guide), alongside Prometheus configs for Kubernetes service discovery and the remote-write vs federation choice. The newest addition is a bats-core notebook that puts production Bash scripts — health checks, log rotation, secret rotation — under per-test isolation runnable in CI.
 
 ---
-_Last updated: 2026-09-18_
+_Last updated: 2026-09-19_
