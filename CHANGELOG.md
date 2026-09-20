@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-20
+
+- terraform: Add notebook comparing state-management strategies (local, shared object storage with lock table, Terraform Cloud remote) with rendered backend configs and a solo-vs-team decision helper (tf-021)
+
 ## 2026-09-19
 
 - terraform: Add AWS VPC module with public/private subnets, NAT gateways via for_each, dynamic AZ discovery, and optional VPC flow logs to CloudWatch (tf-018)
