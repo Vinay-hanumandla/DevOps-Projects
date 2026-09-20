@@ -10,6 +10,7 @@
 - terraform: Add notebook comparing state-management strategies (local, shared object storage with lock table, Terraform Cloud remote) with rendered backend configs and a solo-vs-team decision helper (tf-021)
 - bash: Add reusable production trap-library template with EXIT/ERR/INT handling, run() wrapper, and require_cmd() guard (bash-027)
 - gha: Add minimal reusable-workflow caller snippet with inputs, secrets, and outputs (gha-016)
+- docker: Add docs comparing slim, distroless, and Alpine runtime profiles for multi-stage Python service builds (docker-024)
 Passed ([x]) tf-021 — Terraform: notebook — Comparing Terraform state-management strategies: local, S3+DynamoDB, and Terraform Cloud for solo vs team use · Level: L3 · 2026-09-20
 Passed ([x]) bash-027 — Bash: script — Reusable production trap-library template: EXIT/ERR/INT handling, run() wrapper, and require_cmd() guard · Level: L5 · 2026-09-20
 Passed ([x]) gha-016 — GitHub Actions: snippet — Minimal reusable-workflow caller: invoking a shared workflow with inputs, secrets, and outputs · Level: L3 · 2026-09-20
