@@ -4,6 +4,7 @@
 
 - terraform: Add root module manifest composing VPC, EKS, and RDS submodules wired via outputs (tf-020)
 
+- docker: Add production-hardened multi-stage Dockerfile for Python web service with non-root user, distroless-style runtime, SBOM generation, Trivy vulnerability scanning, health checks, and OCI labels (docker-015)
 
 - docker: Add local dev cluster template combining Docker Compose external services (PostgreSQL, Redis) with a kind Kubernetes cluster and bootstrap script (docker-014)
 - terraform: Add notebook comparing state-management strategies (local, shared object storage with lock table, Terraform Cloud remote) with rendered backend configs and a solo-vs-team decision helper (tf-021)
@@ -12,6 +13,10 @@
 Passed ([x]) tf-021 — Terraform: notebook — Comparing Terraform state-management strategies: local, S3+DynamoDB, and Terraform Cloud for solo vs team use · Level: L3 · 2026-09-20
 Passed ([x]) bash-027 — Bash: script — Reusable production trap-library template: EXIT/ERR/INT handling, run() wrapper, and require_cmd() guard · Level: L5 · 2026-09-20
 Passed ([x]) gha-016 — GitHub Actions: snippet — Minimal reusable-workflow caller: invoking a shared workflow with inputs, secrets, and outputs · Level: L3 · 2026-09-20
+- jenkins: Add docs on moving a Jenkinsfile from inline script to SCM-backed job with Script Path, branch specifier, lightweight checkout, and credential-ID gotchas (jenkins-010)
+- repo-doc: Phase 4 audit — fix coverage table discrepancies: Bash scripts count 8→9, Git hooks count 4→1; create missing jenkins-010 doc; update last-verified dates for Bash, Git, Jenkins (repo-doc-007)
+Passed ([x]) jenkins-010 — Jenkins: docs — Moving a Jenkinsfile from inline script to SCM: Script Path, branch specifier, lightweight checkout, and credential-ID gotchas · Level: L3 · 2026-09-20
+Passed ([x]) repo-doc-007 — Repo-doc: audit — Phase 4 audit: coverage table fixes and missing Jenkins doc creation · Level: L1 · 2026-09-20
 
 ## 2026-09-19
 
