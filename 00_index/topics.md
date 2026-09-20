@@ -78,19 +78,19 @@
 - **scripts** (1): [Helm release workflow](../helm/scripts/helm-release-workflow.sh)
 - **notebooks** (1): [Comparing Helm values merging](../helm/notebooks/comparing-helm-values-merging.ipynb)
 
-## Jenkins  ·  9 files
+## Jenkins  ·  10 files
 
 - **primer:** [Jenkins — quick primer](../jenkins/notes/0000-primer-jenkins.md)
 - **notes** (4): most recent → [Following the official Jenkins tutorial](../jenkins/notes/2026-09-06-followed-jenkins-tutorial.md), [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md), [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md)
 - **configs** (1): [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile)
-- **docs** (1): [What tripped me up following the Jenkins declarative pipeline tutorial](../jenkins/docs/2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas
+- **docs** (2): [Moving a Jenkinsfile from inline script to SCM](../jenkins/docs/2026-09-19-moving-jenkinsfile-to-scm-gotchas.md), [What tripped me up following the Jenkins declarative pipeline tutorial](../jenkins/docs/2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas
 - **snippets** (3): most recent → [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy), [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 
-## Kubernetes  ·  30 files
+## Kubernetes  ·  31 files
 
 - **primer:** [Kubernetes — quick primer](../k8s/notes/0000-primer-kubernetes.md)
 - **notes** (5): most recent → [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Quickstart kind contexts and port mismatch](../k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md), [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md)
-- **docs** (3): [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md), [kubectl imperative vs declarative](../k8s/docs/kubectl-imperative-vs-declarative.md), [Integrating Kubernetes with Terraform](../k8s/docs/integrating-kubernetes-with-terraform.md)
+- **docs** (4): [Kubernetes with Helm, ArgoCD, and GitOps](../k8s/docs/kubernetes-helm-argocd-gitops-workflow.md) — end-to-end GitOps workflow using Helm chart packaging, ArgoCD sync, and sealed-secrets for continuous delivery, [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md), [kubectl imperative vs declarative](../k8s/docs/kubectl-imperative-vs-declarative.md), [Integrating Kubernetes with Terraform](../k8s/docs/integrating-kubernetes-with-terraform.md)
 - **scripts** (3): most recent → [Multi-pod deployment](../k8s/scripts/multi-pod-deployment.sh), [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh)
 - **configs** (1): [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml)
 - **manifests** (4): most recent → [Production-ready deployment](../k8s/manifests/production-deployment.yaml), [Zero-downtime rolling deployment](../k8s/manifests/zero-downtime-rolling-deployment.yaml), [Multi-service application](../k8s/manifests/multi-service-application.yaml), [Minimal deployment and service](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml)
@@ -99,11 +99,11 @@
 - **dockerfiles** (1): [Operator development image](../k8s/dockerfiles/operator-dev.Dockerfile)
 - **templates** (10): [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — two-tier frontend/backend chart with ingress routing and Prometheus alert rules · _…and 9 more under `k8s/templates/multi-service-app/`._
 
-## Prometheus  ·  14 files
+## Prometheus  ·  15 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
 - **notes** (4): most recent → [Prometheus quickstart trip-ups](../prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md), [Install Prometheus and explore web UI](../prom/notes/2026-08-29-install-prometheus-explore-web-ui.md), [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
-- **docs** (1): [Hybrid service discovery](../prom/docs/hybrid-service-discovery.md) — combining file-based, DNS, and Consul service discovery with priority fallbacks
+- **docs** (2): [PromQL rate increase, histogram, and quantile](../prom/docs/2026-09-19-promql-rate-increase-histogram-quantile.md) — detecting sudden error-rate increases with `rate()`, bucket histograms, and `quantile_over_time()` for SLO burn-rate alerts, [Hybrid service discovery](../prom/docs/hybrid-service-discovery.md) — combining file-based, DNS, and Consul service discovery with priority fallbacks
 - **configs** (6): most recent → [Kubernetes pod service discovery](../prom/configs/2026-09-18-kubernetes-service-discovery.yaml), [Remote-write vs federation](../prom/configs/remote-write-vs-federation.yaml), [Prometheus alerting rules](../prom/configs/2026-08-30-prometheus-alerting-rules.yaml) · _…and 3 more under `prom/configs/`._
 - **scripts** (2): [Rules evaluator](../prom/scripts/rules-evaluator.go) — evaluates Prometheus recording and alerting rules against fetched metrics · [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh)
 - **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
@@ -125,7 +125,7 @@
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
 - **notes** (4): most recent → [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md), [Quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
-- **configs** (6): most recent → [Multi-resource Terraform config](../tf/configs/multi-resource-terraform-config.hcl), [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl), [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl)
+- **configs** (7): most recent → [AWS VPC NAT module](../tf/configs/aws-vpc-nat-module.hcl), [Multi-resource Terraform config](../tf/configs/multi-resource-terraform-config.hcl), [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl), [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl)
 - **docs** (3): most recent → [Terraform — coverage check](../tf/docs/2026-08-11-terraform-coverage.md), [Local vs remote Terraform state](../tf/docs/local-vs-remote-terraform-state.md), [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md)
 - **scripts** (2): most recent → [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh), [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
 - **snippets** (1): [Terraform variables and outputs](../tf/snippets/2026-08-30-terraform-variables-outputs.hcl)
