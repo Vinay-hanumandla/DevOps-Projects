@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-20
+
+- bash: Add reusable production trap-library template with EXIT/ERR/INT handling, run() wrapper, and require_cmd() guard (bash-027)
+- gha: Add minimal reusable-workflow caller snippet with inputs, secrets, and outputs (gha-016)
+
 ## 2026-09-19
 
 - terraform: Add AWS VPC module with public/private subnets, NAT gateways via for_each, dynamic AZ discovery, and optional VPC flow logs to CloudWatch (tf-018)
