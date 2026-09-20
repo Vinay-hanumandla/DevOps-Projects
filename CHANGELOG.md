@@ -2,6 +2,7 @@
 
 ## 2026-09-20
 
+- terraform: Add notebook comparing state-management strategies (local, shared object storage with lock table, Terraform Cloud remote) with rendered backend configs and a solo-vs-team decision helper (tf-021)
 - bash: Add reusable production trap-library template with EXIT/ERR/INT handling, run() wrapper, and require_cmd() guard (bash-027)
 - gha: Add minimal reusable-workflow caller snippet with inputs, secrets, and outputs (gha-016)
 
