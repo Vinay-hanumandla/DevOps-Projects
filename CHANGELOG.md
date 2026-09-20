@@ -2,6 +2,8 @@
 
 ## 2026-09-20
 
+- terraform: Add Terragrunt multi-environment module template with shared remote-state root config, per-environment inputs for dev/staging/prod, and a validated naming/tagging module (tf-027)
+
 - python: Add notebook comparing asyncio, trio, and anyio async patterns for I/O-bound DevOps tooling with runnable semaphore, timeout, and sequential-vs-concurrent cells (python-024)
 
 - git: Add docs on worktree workflows for parallel feature development with per-worktree CI pushes, detached review checkouts, and cleanup (git-036)
