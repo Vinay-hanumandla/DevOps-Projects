@@ -1,0 +1,81 @@
+# last_verified: 2026-09-20 · Docker n/a
+# Sample application that connects to the PostgreSQL instance running
+# as a Docker Compose service outside the kind cluster.
+# Pods reach host-network services via host.docker.internal
+# (Linux kind nodes; on macOS/Windows Docker Desktop this resolves automatically).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sample-app-config
+data:
+  DB_HOST: host.docker.internal
+  DB_PORT: "5432"
+  DB_NAME: appdb
+  DB_USER: app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-app
+  labels:
+    app: sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+        - name: app
+          image: python
+          command: ["python", "-c", "import time; time.sleep(3600)"]
+          envFrom:
+            - configMapRef:
+                name: sample-app-config
+          env:
+            - name: DB_PASSWORD_FILE
+              value: /etc/db-password/password
+          volumeMounts:
+            - name: db-password
+              mountPath: /etc/db-password
+              readOnly: true
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
+      volumes:
+        - name: db-password
+          secret:
+            secretName: sample-app-db-password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-app
+  labels:
+    app: sample-app
+spec:
+  type: NodePort
+  ports:
+    - port: 8000
+      targetPort: 8000
+      nodePort: 30080
+  selector:
+    app: sample-app
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sample-app-db-password
+type: Opaque
+stringData:
+  password: changeme

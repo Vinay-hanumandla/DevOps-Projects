@@ -1,0 +1,4 @@
+# last_verified: 2026-09-20 · Docker n/a
+.env
+secrets/db_password.txt
+secrets/api_key.txt
