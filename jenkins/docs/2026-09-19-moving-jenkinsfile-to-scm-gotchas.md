@@ -1,0 +1,1 @@
+> Notes to come — placeholder for moving a Jenkinsfile from inline script to SCM-backed job: Script Path, branch specifier, lightweight checkout, and credential-ID gotchas when pointing a job at a repo.

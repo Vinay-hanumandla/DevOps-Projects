@@ -2,6 +2,8 @@
 
 ## 2026-09-20
 
+- terraform: Add root module manifest composing VPC, EKS, and RDS submodules wired via outputs (tf-020)
+
 - docker: Add production-hardened multi-stage Dockerfile for Python web service with non-root user, distroless-style runtime, SBOM generation, Trivy vulnerability scanning, health checks, and OCI labels (docker-015)
 
 - docker: Add local dev cluster template combining Docker Compose external services (PostgreSQL, Redis) with a kind Kubernetes cluster and bootstrap script (docker-014)
