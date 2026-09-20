@@ -215,6 +215,7 @@
 - [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy) — a minimal declarative Jenkins pipeline snippet
 - [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy) — a Jenkins pipeline snippet using environment credentials binding
 - [What tripped me up following the Jenkins declarative pipeline tutorial](../jenkins/docs/2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas when pointing a job at a repo
+- [Moving a Jenkinsfile from inline script to SCM](../jenkins/docs/2026-09-19-moving-jenkinsfile-to-scm-gotchas.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas when a Jenkins job points at a repo with the Jenkinsfile in a subfolder
 - [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy) — pulls a helper from a global shared library and binds a secret-text credential without printing it
 
 ### Get started with Kubernetes
@@ -238,6 +239,7 @@
 
 ### Split cluster provisioning from workloads
 - [Integrating Kubernetes with Terraform](../k8s/docs/integrating-kubernetes-with-terraform.md) — where cluster provisioning ends and workload management begins, and how to keep the two from owning the same resource
+- [Kubernetes with Helm, ArgoCD, and GitOps](../k8s/docs/kubernetes-helm-argocd-gitops-workflow.md) — end-to-end GitOps workflow using Helm chart packaging, ArgoCD sync, and sealed-secrets for continuous delivery
 
 ### Scaffold a two-tier app with ingress and monitoring
 - [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — frontend/backend chart with ingress routing and Prometheus alert rules in one copy-in layout
@@ -254,6 +256,7 @@
 - [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh) — a shell helper that runs a basic PromQL query against a Prometheus server
 - [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh) — a shell helper that runs ad-hoc PromQL queries against a running Prometheus server
 - [Hybrid service discovery](../prom/docs/hybrid-service-discovery.md) — combining Consul, file, and Kubernetes service discovery with a shared target contract
+- [PromQL rate increase, histogram, and quantile](../prom/docs/2026-09-19-promql-rate-increase-histogram-quantile.md) — detecting sudden error-rate increases with `rate()`, bucket histograms, and `quantile_over_time()` for SLO burn-rate alerts
 - [Kubernetes pod service discovery](../prom/configs/2026-09-18-kubernetes-service-discovery.yaml) — scrapes annotated pods with relabelling for address, path, namespace, and pod labels
 - [Remote-write vs federation](../prom/configs/remote-write-vs-federation.yaml) — the two long-term-storage paths side by side: push series to a remote endpoint or let a peer scrape this one
 - [Rules evaluator](../prom/scripts/rules-evaluator.go) — runs recording and alerting rules offline against sample data with Go-template annotation expansion
@@ -290,6 +293,7 @@
 - [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl) — a minimal Terraform config using the null provider and null_resource
 - [Multi-resource Terraform config](../tf/configs/multi-resource-terraform-config.hcl) — multiple resources wired together with locals, variables, and outputs
 - [Reusable VPC module](../tf/configs/reusable-vpc-module.hcl) — Terraform module creating a VPC with public and private subnets, NAT gateways, and route tables
+- [AWS VPC NAT module](../tf/configs/aws-vpc-nat-module.hcl) — VPC with public/private subnets, NAT gateways via for_each, dynamic AZ discovery, and optional VPC flow logs
 - [Local vs remote Terraform state](../tf/docs/local-vs-remote-terraform-state.md) — comparing state strategies for solo and team projects
 - [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh) — end-to-end Terraform workflow script for initialising, planning, and applying
 - [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh) — Terraform workflow script with state-lock handling for CI

@@ -176,6 +176,7 @@
 - **`/-/reload`** — a Prometheus endpoint that reloads configuration when triggered with `curl -X POST`; disabled by default, enable with `--web.enable-lifecycle`.
 - **Service discovery** — a mechanism for dynamically finding scrape targets without hardcoding them in `static_configs`; file-based service discovery reads targets from a JSON or YAML file that can be updated independently.
 - **Recording rules** — pre-computed PromQL expressions that Prometheus evaluates and stores as new time series; used to speed up expensive queries or pre-aggregate high-cardinality data.
+- **`increase`** — a PromQL function that returns the absolute growth of a counter over a time window (e.g. `increase(http_requests_total{status="500"}[30m])`); unlike `rate`, it gives totals rather than per-second speeds, useful for "how much happened during this window" questions.
 
 ## Kubernetes
 
@@ -198,6 +199,7 @@
 - **kind** — Kubernetes in Docker; a tool for running local Kubernetes clusters inside Docker containers, useful for testing and development where a full cloud cluster isn't available.
 - **kubectl port-forward** — a `kubectl` command that forwards one or more local ports to a pod or service, enabling local access to cluster applications without exposing them externally.
 - **targetPort** — the field in a Kubernetes Service spec that tells the Service which container port to forward traffic to; can differ from the Service's own port, allowing multiple services on the same node port.
+- **Argo CD** — a declarative GitOps continuous delivery tool for Kubernetes; watches a Git repo path and reconciles the cluster toward the declared state, surfacing drift as a sync status in its UI.
 
 ## Concepts
 
