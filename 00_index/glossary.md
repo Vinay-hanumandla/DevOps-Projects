@@ -357,6 +357,10 @@
 ## Terraform (additional)
 
 - **state-lock handling** — the pattern of polling for a Terraform state lock with `terraform plan -lock-timeout=0s` and waiting before retrying, used in CI to avoid concurrent apply collisions when a prior run's lock has not been released.
+- **Terragrunt** — a thin wrapper around Terraform that keeps backend configuration and per-environment inputs DRY; a root `terragrunt.hcl` owns the remote-state backend once while each environment folder supplies only its own `inputs`.
+- **Root `terragrunt.hcl`** — the shared config at the top of a Terragrunt layout, pulled in by every environment via an `include` block; the single place where the backend bucket, region, and state-key prefix live.
+- **`run-all`** — a Terragrunt command that runs the same subcommand (e.g. `plan`) across every environment folder at once, so dev, staging, and prod are previewed from one invocation instead of three separate runs.
+- **Fan-out composition** — a root Terraform module that wires focused submodules (here VPC, EKS, RDS) together by passing one module's outputs as another module's inputs, keeping each submodule small while the root owns the glue.
 
 ## Ansible (additional)
 
@@ -376,6 +380,7 @@
 ## Python (additional)
 
 - **Layered config loader** — a configuration pattern that merges several sources with a defined precedence (environment values win over per-environment files, which win over built-in defaults) so call sites read a single view; the dynaconf pattern, contrasted with typed settings classes and minimal env readers.
+- **asyncio / trio / anyio** — Python's competing async runtimes for I/O-bound work: `asyncio` is the standard library event loop, `trio` is the structured-concurrency alternative with nurseries instead of bare tasks, and `anyio` is the compatibility layer that lets the same code run on either backend.
 
 ## Docker (storage)
 
@@ -393,3 +398,8 @@
 
 - **JavaScript action** — a custom action whose logic runs as Node on the runner (`runs.using: 'node20'` with a `main` entrypoint); inputs arrive as `INPUT_*` environment variables and outputs leave through the `$GITHUB_OUTPUT` file.
 - **`$GITHUB_OUTPUT`** — the file a step or action appends `name=value` lines to in order to publish outputs; later steps read them as `steps.<id>.outputs.<name>`, which is how a custom action hands data back to its caller workflow.
+- **Reusable workflow** — a whole workflow in a central repo, triggered with `on: workflow_call`, that other repos invoke by reference (`uses: ORG/repo/.github/workflows/deploy.yml@main`); configuration travels via `with:`, credentials via `secrets:`, and results come back through `needs.<job>.outputs`.
+
+## Git (worktrees)
+
+- **Linked worktree** — an additional working directory attached to the same repository via `git worktree add <path> <branch>`; each worktree checks out its own branch while all of them share one object store, so parallel features keep separate build state without extra clones.

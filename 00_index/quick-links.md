@@ -42,6 +42,7 @@
 - [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh) — a reusable skeleton with `set -euo pipefail`
 - [Companion hello script](../bash/scripts/2026-07-27-companion-hello.sh) — companion script for the hello-world pattern with argument handling and strict mode
 - [Companion test script](../bash/scripts/2026-07-27-companion-test.sh) — test companion that exercises the safe Bash template patterns
+- [Companion test for the first script](../bash/scripts/2026-09-05-companion-test.sh) — runnable check that the install note's first-script example works
 - [System report tool](../bash/scripts/system-report-tool.sh) — directory-based system report tool with text and JSON output
 - [Log rotation and retention](../bash/scripts/log-rotation-retention.sh) — compresses and prunes log files older than a threshold with gzip and age-based retention
 
@@ -91,6 +92,8 @@
 - [Minimal non-root Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile) — multi-stage build to a distroless, non-root runtime
 - [Multi-stage non-root image](../docker/dockerfiles/multi-stage-nonroot.Dockerfile) — reworked multi-stage Dockerfile with a dedicated build stage and a non-root runtime user
 - [Production distroless image with SBOM](../docker/dockerfiles/production-distroless-sbom.Dockerfile) — Go build, Syft-generated SPDX bill of materials, and a non-root distroless runtime
+- [Production-hardened Python web service](../docker/dockerfiles/production-hardened-python-web-service.Dockerfile) — multi-stage Python build with non-root user, read-only rootfs, health checks, and SBOM plus scan hooks
+- [Multi-stage build patterns for Python services](../docker/docs/multi-stage-build-patterns-python-services.md) — slim vs distroless vs Alpine runtime profiles and the trade-offs that pick between them
 
 ### Scan and policy-check images
 - [Image vuln scan and policy enforcement](../docker/scripts/image-vuln-scan-policy.sh) — scans a built image for known vulnerabilities and blocks deployment on policy breaches
@@ -106,6 +109,10 @@
 - [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml) — web app, cache, and worker on the default network with `depends_on`
 - [Docker Compose healthcheck service ordering](../docker/docs/docker-compose-healthcheck-service-ordering.md) — wiring `depends_on: condition: service_healthy` so cache, web, and worker come up in the right order
 - [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack (web front, API, database, cache) with health-gated startup, file-based secrets, and a tools profile for one-shot helpers
+
+### Spin up a throwaway local dev loop
+- [Local dev cluster scaffold](../docker/templates/local-dev-cluster/README.md) — kind config, Compose file, and k8s manifests with file-based secrets for a repeatable local loop
+- [Local dev cluster bootstrap](../docker/templates/local-dev-cluster/bootstrap.sh) — brings the kind cluster and Compose stack up in one command
 
 ### Ship images the GitOps way
 - [GitOps image build, sign, and push](../docker/manifests/gitops-image-build-and-push.yaml) — in-cluster Job pipeline that builds an image, signs it, pushes by immutable digest, and records the reference for the deployment repo to pin
@@ -129,6 +136,9 @@
 - [Branch, merge, revert](../git/scripts/2026-07-20-branch-merge-revert.sh) — create branches, merge them, and undo a merge
 - [Feature branch rebase workflow](../git/scripts/feature-branch-rebase-workflow.sh) — rebase a feature branch onto main and keep history clean
 - [Git PR helper](../git/scripts/git-pr-helper.sh) — reusable helper for creating, deleting, and opening PRs for feature branches
+
+### Work on parallel branches without stashing
+- [Worktree workflows for parallel feature development](../git/docs/worktree-parallel-feature-development.md) — one clone hosting several checked-out branches at once, sharing a single object store
 
 ### Use interactive rebase effectively
 - [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md) — reference guide comparing the two core Git collaboration strategies
@@ -281,6 +291,7 @@
 
 ### Compare environment-aware Python config
 - [Comparing environment-aware config](../python/notebooks/comparing-env-aware-config.ipynb) — typed settings classes vs layered loaders vs minimal env readers for config that changes per environment
+- [Async patterns comparison](../python/notebooks/async-patterns-comparison.ipynb) — asyncio vs trio vs anyio for I/O-bound DevOps tooling like endpoint probing and artifact copies
 
 ### Get started with Terraform
 - [Terraform primer](../tf/notes/0000-primer-terraform.md) — what Terraform is, providers, state, and a minimal workflow
@@ -298,6 +309,11 @@
 - [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh) — end-to-end Terraform workflow script for initialising, planning, and applying
 - [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh) — Terraform workflow script with state-lock handling for CI
 - [Terraform coverage check](../tf/docs/2026-08-11-terraform-coverage.md) — reconciling the Terraform folder against the manifest and fixing the counts
+
+### Share one Terraform module across environments
+- [Terragrunt multi-environment scaffold](../tf/templates/terragrunt-multi-env/README.md) — one reusable module deployed to dev, staging, and prod with per-environment inputs and a shared remote-state backend
+- [Root module fan-out composition](../tf/manifests/root-module-fan-out-composition.hcl) — VPC, EKS, and RDS submodules wired together by passing outputs between module blocks
+- [State management strategies](../tf/notebooks/state-management-strategies.ipynb) — notebook comparing approaches to Terraform state handling
 
 ### Understand a DevOps concept before touching a tool
 - [Linux & CLI Fundamentals](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) — the shell, processes, and filesystem basics everything leans on
@@ -368,6 +384,7 @@
 - [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb) — notebook comparing matrix builds vs single-job workflows for multi-OS coverage
 - [Reusable composite action](../gha/configs/reusable-composite-action/action.yml) — shared Node toolchain setup with npm cache, smoke test, and optional artifact upload
 - [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml) — example caller showing defaults, per-call overrides, and outputs from the shared action
+- [Reusable workflow caller](../gha/snippets/reusable-workflow-caller.yaml) — minimal caller of a centrally maintained reusable workflow, passing inputs and secrets and reading outputs downstream
 
 ### Write a minimal custom JavaScript action
 - [Minimal custom JavaScript action](../gha/scripts/action.yml) — the smallest viable custom action: two inputs in, one greeting output out, on the node20 runtime
