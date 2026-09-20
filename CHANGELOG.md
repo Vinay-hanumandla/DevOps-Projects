@@ -2,6 +2,8 @@
 
 ## 2026-09-20
 
+- python: Add notebook comparing asyncio, trio, and anyio async patterns for I/O-bound DevOps tooling with runnable semaphore, timeout, and sequential-vs-concurrent cells (python-024)
+
 - git: Add docs on worktree workflows for parallel feature development with per-worktree CI pushes, detached review checkouts, and cleanup (git-036)
 
 - terraform: Add root module manifest composing VPC, EKS, and RDS submodules wired via outputs (tf-020)
