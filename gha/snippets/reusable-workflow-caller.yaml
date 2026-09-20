@@ -1,0 +1,31 @@
+# last_verified: 2026-09-20 · gha n/a
+# reusable-workflow-caller — minimal caller of a shared reusable workflow.
+# Purpose: invoke a centrally maintained workflow with inputs, secrets, and
+# outputs. One way to wire it: pass configuration via `with`, credentials
+# via `secrets`, then read results through `needs.<job>.outputs` in a
+# downstream job. The shared workflow itself declares `on: workflow_call`.
+# Verify: push to a branch and confirm the called workflow receives the
+# inputs, the secret resolves, and the downstream job prints the output.
+
+name: call-shared-workflow
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  call-shared:
+    # The reusable workflow lives at this path in its own repo.
+    uses: ORG/central-workflows/.github/workflows/deploy.yml@main
+    with:
+      app-name: web
+      environment: staging
+    secrets:
+      deploy-token: ${{ secrets.DEPLOY_TOKEN }}
+
+  report:
+    needs: call-shared
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show output from the shared workflow
+        run: echo "image=${{ needs.call-shared.outputs.image-tag }}"
