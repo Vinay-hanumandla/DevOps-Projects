@@ -2,6 +2,9 @@
 
 ## 2026-09-20
 
+- terraform: Add root module manifest composing VPC, EKS, and RDS submodules wired via outputs (tf-020)
+
+
 - docker: Add local dev cluster template combining Docker Compose external services (PostgreSQL, Redis) with a kind Kubernetes cluster and bootstrap script (docker-014)
 - terraform: Add notebook comparing state-management strategies (local, shared object storage with lock table, Terraform Cloud remote) with rendered backend configs and a solo-vs-team decision helper (tf-021)
 - bash: Add reusable production trap-library template with EXIT/ERR/INT handling, run() wrapper, and require_cmd() guard (bash-027)
