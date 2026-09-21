@@ -6,6 +6,8 @@ Passed ([x]) grafana-020 — Dashboard provisioning as code: declarative dashboa
 
 - grafana: Add manifest with Jsonnet dashboard source, rendered dashboard JSON, and file provider ConfigMaps for Kubernetes dashboard provisioning as code (grafana-020)
 
+- docker: Add Buildx Bake template for monorepo services with shared remote-cache target, provenance and SBOM attestations, multi-registry tags, and a push-free check target (docker-025)
+
 ## 2026-09-20
 
 - terraform: Add Terragrunt multi-environment module template with shared remote-state root config, per-environment inputs for dev/staging/prod, and a validated naming/tagging module (tf-027)
