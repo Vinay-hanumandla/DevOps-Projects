@@ -91,7 +91,9 @@
 - **Conventional commit** — a commit-message convention where the subject starts with a type such as `feat:`, `fix:`, `docs:`, or `chore:`; a changelog helper buckets commits by that prefix to assemble release notes.
 - **Commit range (`<a>..<b>`)** — the set of commits reachable from `<b>` but not from `<a>`; `git log origin/release..main` therefore lists exactly what has landed on `main` but has not yet reached the release branch.
 - **Release branch** — a long-lived branch that carries what is currently shipped or about to ship, kept separate from `main` so fixes can be selected into a release without dragging in unfinished work.
-
+- **GPG signing** — signing commits with a GPG private key (`git commit -S`); the signature is stored in the commit object and verified with `git verify-commit`, proving author identity against a published public key.
+- **SSH signing** — signing commits with an SSH key instead of GPG, enabled via `git config gpg.format ssh` and `git config user.signingkey <key-id>`; useful when SSH is already the team's key material.
+- **Push protection** — a branch-level rule that blocks unsigned or unauthorized commits from being pushed to a protected branch, complementing commit signing with a server-side gate.
 
 ## Helm
 
@@ -329,6 +331,8 @@
 
 ## Helm (additional)
 
+- **Values precedence** — the order in which Helm applies multiple value sources: defaults in `values.yaml` are overridden by `-f` values files (left-to-right, later wins), which are in turn overridden by `--set` flags on the command line.
+
 - **`helm lint`** — a command that validates Helm chart templates and values for syntax errors and best-practice violations before installation; catches issues like missing required fields or invalid templating before they reach a cluster.
 - **`helm template`** — renders Helm chart templates locally without connecting to a cluster, useful for validating the rendered manifests and spotting template errors before applying.
 - **`helm diff`** — a Helm plugin (or built-in in newer Helm versions) that shows a unified diff between the current release manifest and the proposed new manifest, so you can review exactly what will change before upgrading.
@@ -353,6 +357,8 @@
 - **SBOM** — a software bill of materials: a machine-readable inventory (here SPDX JSON via Syft) of what went into an image, so scanners and auditors can check for known-vulnerable packages without rebuilding.
 - **GitOps** — operating deployments from git as the source of truth: an in-cluster Job (or external CI) builds, signs, and pushes the image by immutable digest, and the deployment repo pins exactly that digest so the cluster converges on it.
 - **Immutable reference** — a container image reference pinned by digest (e.g. `image@sha256:...`) rather than by tag; once pushed it never changes, guaranteeing the exact same binary runs in every environment.
+- **Attestation** — a machine-readable cryptographic proof that a build artifact was produced by a specific pipeline from a specific source, recorded in a registry alongside the artifact.
+- **Provenance** — the verifiable chain of custody from source commit through build to published artifact; CI systems produce provenance records so consumers can confirm an image came from a trusted pipeline.
 
 ## Terraform (additional)
 
