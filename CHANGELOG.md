@@ -559,3 +559,4 @@ Passed ([x]) bash-010 — Bash: docs — How I wired Bash strict mode and trap p
 
 - jenkins/docs/moving-jenkinsfile-to-scm-gotchas.md — Moving a Jenkinsfile from inline script to SCM: Script Path, branch specifier, lightweight checkout, and credential-ID gotchas (jenkins-011)
 - repo-doc/notes/2026-09-21-repo-doc-cli-install-and-scaffold.md — repo-doc CLI install and first project documentation scaffold (repo-doc-006)
+- helm/notes/2026-09-21-values-merge-set-vs-file.md — Working out Helm values merge order: chart defaults, -f files, and --set flags via helm template (helm-017)
