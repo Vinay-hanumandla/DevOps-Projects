@@ -2,6 +2,8 @@
 
 ## 2026-09-21
 
+Passed ([x]) grafana-020 — Dashboard provisioning as code: declarative dashboards with Grafonnet/Jsonnet for Kubernetes · Level: L4 · 2026-09-21
+
 - grafana: Add manifest with Jsonnet dashboard source, rendered dashboard JSON, and file provider ConfigMaps for Kubernetes dashboard provisioning as code (grafana-020)
 
 ## 2026-09-20
@@ -550,3 +552,8 @@ Passed ([x]) bash-010 — Bash: docs — How I wired Bash strict mode and trap p
 
 - k8s/docs/kubernetes-helm-argocd-gitops-workflow.md — End-to-end GitOps workflow from app repo to cluster with Helm and Argo CD (k8s-021)
 - prom/docs/2026-09-19-promql-rate-increase-histogram-quantile.md — PromQL fundamentals: rate, increase, and histogram_quantile (prom-011)
+
+## 2026-09-21
+
+- jenkins/docs/moving-jenkinsfile-to-scm-gotchas.md — Moving a Jenkinsfile from inline script to SCM: Script Path, branch specifier, lightweight checkout, and credential-ID gotchas (jenkins-011)
+- repo-doc/notes/2026-09-21-repo-doc-cli-install-and-scaffold.md — repo-doc CLI install and first project documentation scaffold (repo-doc-006)
