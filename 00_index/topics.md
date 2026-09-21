@@ -13,30 +13,30 @@
 - **snippets** (1): [Block/rescue/always deploy with handlers](../ansible/snippets/block-rescue-always-handlers.yaml) — config deploy with rollback, outcome report, and a change-gated service restart
 - **templates** (16): [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, `galaxy.yml`, dynamic cloud inventory, and a Terraform-outputs handoff script · _…and 15 more under `ansible/templates/ansible-role-molecule-collection/`._
 
-## Bash  ·  53 files
+## Bash  ·  54 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
 - **docs** (6): most recent → [Bash 5.3 deep dive](../bash/docs/bash-5.3-deep-dive.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md), [Debug and profile with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md)
-- **scripts** (8): most recent → [CI-safe build wrapper](../bash/scripts/build-and-check.sh), [System report tool](../bash/scripts/system-report-tool.sh), [Log rotation and retention](../bash/scripts/log-rotation-retention.sh)
+- **scripts** (9): most recent → [Companion test for the first script](../bash/scripts/2026-09-05-companion-test.sh), [CI-safe build wrapper](../bash/scripts/build-and-check.sh), [System report tool](../bash/scripts/system-report-tool.sh)
 - **snippets** (1): [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
 - **notebooks** (4): most recent → [Bats-core production test suite](../bash/notebooks/bats-core-production-test-suite.ipynb), [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb), [Comparing pipeline exit-code handling](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb)
 - **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
 - **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
 - _…and more under `bash/` — browse the folder._
 
-## Docker  ·  32 files
+## Docker  ·  42 files
 
 - **primer:** [Docker — quick primer](../docker/notes/0000-primer-docker.md)
 - **notes** (5): most recent → [Docker trip-ups after the initial run-through](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md), [Install Docker](../docker/notes/2026-07-19-install-docker.md)
-- **dockerfiles** (3): most recent → [Production distroless image with SBOM](../docker/dockerfiles/production-distroless-sbom.Dockerfile), [Multi-stage non-root image](../docker/dockerfiles/multi-stage-nonroot.Dockerfile), [Minimal non-root image](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile)
-- **docs** (2): most recent → [Storage drivers and volume types for stateful workloads](../docker/docs/storage-drivers-volume-types-comparison.md), [Docker Compose healthcheck service ordering](../docker/docs/docker-compose-healthcheck-service-ordering.md)
+- **dockerfiles** (4): most recent → [Production-hardened Python web service](../docker/dockerfiles/production-hardened-python-web-service.Dockerfile), [Production distroless image with SBOM](../docker/dockerfiles/production-distroless-sbom.Dockerfile), [Multi-stage non-root image](../docker/dockerfiles/multi-stage-nonroot.Dockerfile)
+- **docs** (3): most recent → [Multi-stage build patterns for Python services](../docker/docs/multi-stage-build-patterns-python-services.md), [Storage drivers and volume types for stateful workloads](../docker/docs/storage-drivers-volume-types-comparison.md), [Docker Compose healthcheck service ordering](../docker/docs/docker-compose-healthcheck-service-ordering.md)
 - **scripts** (7): most recent → [Image vuln scan and policy enforcement](../docker/scripts/image-vuln-scan-policy.sh), [Multi-arch buildx automation](../docker/scripts/image-build-automation.sh), [Build containerized app with custom networks and volumes](../docker/scripts/build-containerized-app-custom-networks-volumes.sh)
 - **manifests** (2): most recent → [GitOps image build, sign, and push](../docker/manifests/gitops-image-build-and-push.yaml), [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml)
-- **templates** (10): [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack with health-gated startup, file-based secrets, and a tools profile · _…and 9 more under `docker/templates/multi-service-compose-app/`._
+- **templates** (18): [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack with health-gated startup, file-based secrets, and a tools profile · [Local dev cluster scaffold](../docker/templates/local-dev-cluster/README.md) — kind config, Compose file, and k8s manifests for a throwaway dev loop · _…and 16 more under `docker/templates/`._
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
 
-## GitHub Actions  ·  15 files
+## GitHub Actions  ·  16 files
 
 - **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
 - **notes** (3): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
@@ -44,12 +44,13 @@
 - **configs** (6): most recent → [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml), [Reusable composite action](../gha/configs/reusable-composite-action/action.yml) · _…and 4 more under `gha/configs/`._
 - **scripts** (2): [Minimal custom JavaScript action](../gha/scripts/action.yml) — action definition on the node20 runtime; [Minimal custom JavaScript action entrypoint](../gha/scripts/minimal-custom-js-action.js) — reads two inputs, composes a greeting, and exposes it via `$GITHUB_OUTPUT`
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
+- **snippets** (1): [Reusable workflow caller](../gha/snippets/reusable-workflow-caller.yaml) — minimal caller of a centrally maintained reusable workflow, passing inputs and secrets and reading outputs downstream
 
-## Git  ·  48 files
+## Git  ·  49 files
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
 - **notes** (16): most recent → [Companion forgotten undo notes](../git/notes/2026-08-25-forgotten.md), [Git companion file quickstart](../git/notes/2026-09-10-git-companion-file-quickstart.txt), [Git companion readme primer](../git/notes/2026-09-10-git-companion-readme-primer.txt), [Git companion readme quickstart](../git/notes/2026-09-10-git-companion-readme-quickstart.md)
-- **docs** (9): most recent → [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md), [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md), [Tagging Docker images from git describe](../git/docs/git-describe-image-tags-registry.md), [Tag-driven releases and conventional-commit gates](../git/docs/git-cicd-tag-driven-releases-conventional-commits.md), [Git — my first file index](../git/docs/2026-08-10-git-index.md)
+- **docs** (10): most recent → [Worktree workflows for parallel feature development](../git/docs/worktree-parallel-feature-development.md), [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md), [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md)
 - **scripts** (6): most recent → [Changelog from conventional commits](../git/scripts/changelog-from-conventional-commits.sh), [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Git PR helper](../git/scripts/git-pr-helper.sh)
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
 - **manifests** (1): [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps git events (push, tag, merge request) to build → test → deploy jobs
@@ -108,7 +109,7 @@
 - **scripts** (2): [Rules evaluator](../prom/scripts/rules-evaluator.go) — evaluates Prometheus recording and alerting rules against fetched metrics · [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh)
 - **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
 
-## Python  ·  28 files
+## Python  ·  29 files
 
 - **primer:** [Python — quick primer](../python/notes/0000-primer-python.md)
 - **notes** (3): most recent → [Python quickstart gotchas](../python/notes/2026-08-22-python-quickstart-gotchas.md), [Python functions and modules](../python/notes/2026-08-04-python-functions-modules.md)
@@ -117,11 +118,11 @@
 - **snippets** (4): most recent → [Dockerfile validator](../python/snippets/validate-dockerfile.py), [Docker Compose validator](../python/snippets/docker-compose-validator.py), [Config file reader](../python/snippets/2026-08-22-config-file-reader.py), [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
 - **configs** (4): most recent → [App config for the Pydantic loader](../python/configs/2026-09-16-app-config.yaml), [pyproject.toml README guide](../python/configs/2026-09-14-pyproject-toml-readme.md), [App config](../python/configs/2026-09-15-app-config.yaml), [pyproject.toml config](../python/configs/2026-08-24-pyproject-toml-config.toml)
 - **dockerfiles** (1): [Python app Dockerfile](../python/dockerfiles/python-app.Dockerfile)
-- **notebooks** (1): [Comparing environment-aware config](../python/notebooks/comparing-env-aware-config.ipynb) — typed settings vs layered loaders vs minimal env readers
+- **notebooks** (2): most recent → [Async patterns comparison](../python/notebooks/async-patterns-comparison.ipynb) — asyncio vs trio vs anyio for I/O-bound DevOps tooling, [Comparing environment-aware config](../python/notebooks/comparing-env-aware-config.ipynb) — typed settings vs layered loaders vs minimal env readers
 - **templates** (8): [Python CLI + Docker + GHA scaffold](../python/templates/python-cli-docker-gha/README.md)
 - _…and more under `python/` — browse the folder._
 
-## Terraform  ·  16 files
+## Terraform  ·  27 files
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
 - **notes** (4): most recent → [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md), [Quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
@@ -129,6 +130,9 @@
 - **docs** (3): most recent → [Terraform — coverage check](../tf/docs/2026-08-11-terraform-coverage.md), [Local vs remote Terraform state](../tf/docs/local-vs-remote-terraform-state.md), [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md)
 - **scripts** (2): most recent → [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh), [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
 - **snippets** (1): [Terraform variables and outputs](../tf/snippets/2026-08-30-terraform-variables-outputs.hcl)
+- **manifests** (1): [Root module fan-out composition](../tf/manifests/root-module-fan-out-composition.hcl) — VPC, EKS, and RDS submodules wired via outputs from one root module
+- **notebooks** (1): [State management strategies](../tf/notebooks/state-management-strategies.ipynb)
+- **templates** (8): [Terragrunt multi-environment scaffold](../tf/templates/terragrunt-multi-env/README.md) — one reusable module shared across dev, staging, and prod with per-environment inputs · _…and 7 more under `tf/templates/terragrunt-multi-env/`._
 
 ## Repo-doc  ·  6 files
 

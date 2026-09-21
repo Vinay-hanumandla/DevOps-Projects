@@ -18,11 +18,11 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 ## Quick links
 
-- [Kubernetes with Helm, ArgoCD, and GitOps](k8s/docs/kubernetes-helm-argocd-gitops-workflow.md) — end-to-end GitOps workflow using Helm chart packaging, ArgoCD sync, and sealed-secrets for continuous delivery
-- [PromQL rate increase, histogram, and quantile](prom/docs/2026-09-19-promql-rate-increase-histogram-quantile.md) — detecting sudden error-rate increases with `rate()`, bucket histograms, and `quantile_over_time()` for SLO burn-rate alerts
-- [Moving a Jenkinsfile from inline script to SCM](jenkins/docs/2026-09-19-moving-jenkinsfile-to-scm-gotchas.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas when pointing a job at a repo
-- [What tripped me up following the Jenkins declarative pipeline tutorial](jenkins/docs/2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas when a job points at a repo
-- [Provisioned dashboard with panels and variables](grafana/configs/provisioned-dashboard-panels-variables.yaml) — file-provisioned datasource, dashboard provider, and service-overview dashboard with a templating variable, no UI clicks
+- [Terragrunt multi-environment layout](tf/templates/terragrunt-multi-env/README.md) — one reusable Terraform module shared across dev, staging, and prod with per-environment inputs and a shared remote-state backend
+- [Async patterns comparison](python/notebooks/async-patterns-comparison.ipynb) — asyncio vs trio vs anyio for I/O-bound DevOps tooling like endpoint probing and artifact copies
+- [Worktree workflows for parallel feature development](git/docs/worktree-parallel-feature-development.md) — one clone hosting several checked-out branches at once, sharing a single object store
+- [Multi-stage build patterns for Python services](docker/docs/multi-stage-build-patterns-python-services.md) — slim vs distroless vs Alpine runtime profiles and the trade-offs that pick between them
+- [Root module fan-out composition](tf/manifests/root-module-fan-out-composition.hcl) — VPC, EKS, and RDS submodules wired together by passing outputs between module blocks
 
 ## Layout
 
@@ -41,7 +41,7 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 `python/` — config validators, file processors, and DevOps utility scripts.
 `repo-doc/` — helpers for keeping the kit's own coverage tables and docs in sync.
 `scripting-automation-philosophy/` — companion app config for the scripting deploy-checklist snippet.
-`tf/` — provider configs, null resources, multi-resource setups, and state-lock workflow scripts.
+`tf/` — provider configs, null resources, multi-resource setups, state-lock workflow scripts, and a Terragrunt multi-environment scaffold.
 
 > Counts below were regenerated from the filesystem on 2026-09-20 and include every file under each tool's category folders (recursively, so scaffolded template trees under `templates/` are counted in full).
 
@@ -53,17 +53,17 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 | Tool | notes | docs | scripts | configs | manifests | notebooks | dockerfiles | templates | src | hooks | snippets | Last verified |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Ansible | 3 | 3 | 3 | 4 | 1 | — | — | 16 | — | — | 1 | 2026-09-18 |
-| Bash | 3 | 6 | 8 | — | — | 4 | 1 | 30 | — | — | 1 | 2026-09-18 |
-| Docker | 5 | 2 | 7 | — | 2 | — | 3 | 10 | 2 | — | — | 2026-09-19 |
-| GitHub Actions | 3 | 3 | 2 | 6 | — | 1 | — | — | — | — | — | 2026-09-19 |
-| Git | 16 | 9 | 6 | — | 1 | — | — | 15 | — | 4 | — | 2026-09-18 |
+| Bash | 3 | 6 | 9 | — | — | 4 | 1 | 30 | — | — | 1 | 2026-09-20 |
+| Docker | 5 | 3 | 7 | — | 2 | — | 4 | 18 | 2 | — | — | 2026-09-20 |
+| GitHub Actions | 3 | 3 | 2 | 6 | — | 1 | — | — | — | — | 1 | 2026-09-20 |
+| Git | 16 | 10 | 6 | — | 1 | — | — | 15 | — | 1 | — | 2026-09-20 |
 | Grafana | 4 | 1 | 1 | 6 | 1 | 1 | — | — | — | — | 3 | 2026-09-19 |
 | Helm | 5 | 2 | 1 | 6 | 2 | 1 | — | — | — | — | 1 | 2026-09-18 |
-| Jenkins | 4 | 2 | — | 1 | — | — | — | — | — | 3 | 2026-09-19 |
+| Jenkins | 4 | 2 | — | 1 | — | — | — | — | — | — | 3 | 2026-09-19 |
 | Kubernetes | 5 | 4 | 3 | 1 | 4 | 1 | 1 | 10 | — | — | 2 | 2026-09-19 |
 | Prometheus | 4 | 2 | 2 | 6 | — | — | — | — | — | — | 1 | 2026-09-19 |
-| Python | 3 | 3 | 4 | 4 | — | 1 | 1 | 8 | — | — | 4 | 2026-09-18 |
-| Terraform | 4 | 3 | 2 | 7 | — | — | — | — | — | — | 1 | 2026-09-18 |
+| Python | 3 | 3 | 4 | 4 | — | 2 | 1 | 8 | — | — | 4 | 2026-09-20 |
+| Terraform | 4 | 3 | 2 | 7 | 1 | 1 | — | 8 | — | — | 1 | 2026-09-20 |
 | Repo-doc | 2 | 2 | 2 | — | — | — | — | — | — | — | — | 2026-09-18 |
 | Concepts | 8 | 17 | 22 | — | — | 5 | — | — | — | — | 12 | 2026-09-16 |
 
@@ -71,7 +71,7 @@ This kit covers 13 tools across the DevOps lifecycle: version control (Git), con
 
 ## Status
 
-Currently working through L4–L5 first-contact notes for Ansible, Python, and GitHub Actions. Recent additions tighten the Ansible shelf (replacing shell-outs with idempotent modules, block/rescue error handling) and the Kubernetes shelf (a production deployment with HPA, PDB, NetworkPolicy, and quota, plus a Terraform ownership-boundary guide), alongside Prometheus configs for Kubernetes service discovery and the remote-write vs federation choice. The newest additions move Jenkins from inline pipeline scripts to SCM-backed jobs (Script Path and checkout gotchas, plus a shared-library credentials snippet) and make Grafana fully declarative (a file-provisioned dashboard with panels and variables, plus a single API wrapper for list, create/update, and delete).
+Currently rounding out the Terraform shelf past single-root modules: a Terragrunt multi-environment scaffold that shares one module across dev, staging, and prod, plus a root-module fan-out composition wiring VPC, EKS, and RDS through outputs. Alongside that, the Git shelf gained worktree workflows for parallel branches, Docker gained multi-stage Python runtime profiles and a hardened production Dockerfile, and Python gained an asyncio/trio/anyio comparison for I/O-bound tooling.
 
 ---
 _Last updated: 2026-09-20_
