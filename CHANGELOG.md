@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-21
+
+- grafana: Add manifest with Jsonnet dashboard source, rendered dashboard JSON, and file provider ConfigMaps for Kubernetes dashboard provisioning as code (grafana-020)
+
 ## 2026-09-20
 
 - terraform: Add Terragrunt multi-environment module template with shared remote-state root config, per-environment inputs for dev/staging/prod, and a validated naming/tagging module (tf-027)

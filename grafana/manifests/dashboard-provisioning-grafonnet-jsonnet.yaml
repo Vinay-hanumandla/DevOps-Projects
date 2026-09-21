@@ -1,0 +1,130 @@
+# last_verified: 2026-09-21 · grafana n/a
+# Purpose: provision Grafana dashboards as code on Kubernetes. The dashboard
+# source lives in Jsonnet (dashboard.jsonnet in Document 1), the rendered
+# JSON is checked in next to it (Document 2), and a file provider
+# (Document 3) picks the JSON up from a mounted volume, so every cluster
+# renders the same dashboards from the same commit. Teams using the Grafonnet
+# library can generate the same JSON from its dashboard constructors instead
+# of hand-writing the source object; the provider and mounting below stay
+# unchanged either way.
+# This is one way to wire it; teams that already render Jsonnet in CI can
+# skip checking in the rendered JSON and mount a render step instead.
+#
+# Layout: three ConfigMaps. Apply the file, then mount all three into the
+# Grafana pod — the volume wiring snippet is repeated in the Document 3
+# comments. The datasource uid referenced by the panels must match the
+# datasource provisioning already on disk in this directory
+# (production-provisioning-datasources-dashboards-alerts.yaml).
+#
+# Steps:
+#   1. Edit the dashboard.jsonnet source in Document 1.
+#   2. Render it and store the output as the api-overview.json value in
+#      Document 2, so source and rendered output stay in the same review.
+#   3. Apply this file and mount the three ConfigMaps into the Grafana pod.
+# Verify: the dashboard appears under the folder named in the provider;
+# re-render the Jsonnet locally and diff it against the checked-in JSON to
+# confirm source and output match.
+
+# ── Document 1: dashboard source (Jsonnet) ─────────────────────────────
+# Shared defaults merged with per-panel overrides, so a new panel reuses
+# the same datasource and interval without copying the whole block.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-source
+  labels:
+    app: grafana
+data:
+  dashboard.jsonnet: |
+    local defaults = {
+      datasource: { type: 'prometheus', uid: 'prometheus-datasource' },
+      interval: '1m',
+    };
+    {
+      title: 'API overview',
+      uid: 'api-overview',
+      tags: ['provisioned', 'api'],
+      panels: [
+        defaults + {
+          title: 'Request rate',
+          targets: [{ expr: 'sum(rate(http_requests_total[5m]))' }],
+        },
+        defaults + {
+          title: 'Error ratio',
+          targets: [{
+            expr: 'sum(rate(http_requests_total{status=~"5.."}[5m])) / sum(rate(http_requests_total[5m]))',
+          }],
+        },
+      ],
+    }
+---
+# ── Document 2: rendered dashboard JSON ────────────────────────────────
+# The checked-in render of Document 1. Mounted as a file; the provider in
+# Document 3 watches this directory and reloads changed JSON without a
+# restart.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards
+  labels:
+    app: grafana
+data:
+  api-overview.json: |
+    {
+      "title": "API overview",
+      "uid": "api-overview",
+      "tags": ["provisioned", "api"],
+      "panels": [
+        {
+          "title": "Request rate",
+          "datasource": { "type": "prometheus", "uid": "prometheus-datasource" },
+          "interval": "1m",
+          "targets": [{ "expr": "sum(rate(http_requests_total[5m]))" }]
+        },
+        {
+          "title": "Error ratio",
+          "datasource": { "type": "prometheus", "uid": "prometheus-datasource" },
+          "interval": "1m",
+          "targets": [{
+            "expr": "sum(rate(http_requests_total{status=~\"5..\"}[5m])) / sum(rate(http_requests_total[5m]))"
+          }]
+        }
+      ]
+    }
+---
+# ── Document 3: file provider ──────────────────────────────────────────
+# Points Grafana at the mounted dashboards directory. disableDeletion keeps
+# a dashboard removed from the repo visible until someone deletes it in the
+# UI on purpose, so a bad commit cannot wipe a panel everyone relies on.
+#
+# Mount wiring (volumes and mounts for the Grafana pod):
+#   volumes:
+#     - name: dashboard-provider
+#       configMap: { name: grafana-dashboard-provider }
+#     - name: dashboards
+#       configMap: { name: grafana-dashboards }
+#   volumeMounts:
+#     - name: dashboard-provider
+#       mountPath: /etc/grafana/provisioning/dashboards/provider.yaml
+#       subPath: provider.yaml
+#     - name: dashboards
+#       mountPath: /var/lib/grafana/dashboards
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-provider
+  labels:
+    app: grafana
+data:
+  provider.yaml: |
+    apiVersion: 1
+    providers:
+      - name: team-dashboards
+        orgId: 1
+        folder: Provisioned
+        type: file
+        disableDeletion: true
+        updateIntervalSeconds: 30
+        allowUiUpdates: false
+        options:
+          path: /var/lib/grafana/dashboards
