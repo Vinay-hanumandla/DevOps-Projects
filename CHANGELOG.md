@@ -559,3 +559,10 @@ Passed ([x]) bash-010 — Bash: docs — How I wired Bash strict mode and trap p
 
 - jenkins/docs/moving-jenkinsfile-to-scm-gotchas.md — Moving a Jenkinsfile from inline script to SCM: Script Path, branch specifier, lightweight checkout, and credential-ID gotchas (jenkins-011)
 - repo-doc/notes/2026-09-21-repo-doc-cli-install-and-scaffold.md — repo-doc CLI install and first project documentation scaffold (repo-doc-006)
+
+## 2026-09-21
+
+- helm/notes/2026-09-21-following-helm-quickstart.md — Helm quickstart walkthrough: what worked and what tripped me up (helm-017)
+- prom/manifests/local-monitoring-stack.yaml — Local Kubernetes monitoring stack: Prometheus + Alertmanager + node-exporter (prom-012)
+- git/docs/signed-commits-and-ci-provenance.md — Signed commits (GPG/SSH), push protection, and build attestation (git-037)
+- tf/docs/module-composition-patterns.md — Terraform module composition: root-module fan-out vs dedicated composition module vs stacks (tf-019)
