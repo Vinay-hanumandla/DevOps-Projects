@@ -2,6 +2,8 @@
 
 ## 2026-09-22
 
+- jenkins: Add reusable shared-library step covering checkout, build, test, image push, and gated deploy for common service pipelines (jenkins-015)
+
 - terraform: Add docs comparing module composition patterns — root-module fan-out, dedicated composition module, and orchestrated multi-configuration deploys — with selection guidance (tf-019)
 
 ## 2026-09-21
