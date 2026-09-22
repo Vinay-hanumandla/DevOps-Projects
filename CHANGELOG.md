@@ -2,6 +2,8 @@
 
 ## 2026-09-21
 
+- prom: Add local Kubernetes monitoring stack manifest with Prometheus, Alertmanager, and node-exporter DaemonSet plus RBAC for pod service discovery (prom-012)
+
 Passed ([x]) grafana-020 — Dashboard provisioning as code: declarative dashboards with Grafonnet/Jsonnet for Kubernetes · Level: L4 · 2026-09-21
 
 - grafana: Add manifest with Jsonnet dashboard source, rendered dashboard JSON, and file provider ConfigMaps for Kubernetes dashboard provisioning as code (grafana-020)
