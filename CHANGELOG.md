@@ -2,6 +2,10 @@
 
 ## 2026-09-22
 
+- ansible: Add docs comparing retry strategies for unreliable targets — until/retries loops, wait_for gating, and async polling — with selection guidance (ansible-017)
+
+- jenkins: Add notes on setting up a first controller — suggested plugins and restarts, permanent agent launch and label matching, and global credential store IDs (jenkins-014)
+
 - jenkins: Add reusable shared-library step covering checkout, build, test, image push, and gated deploy for common service pipelines (jenkins-015)
 
 - terraform: Add docs comparing module composition patterns — root-module fan-out, dedicated composition module, and orchestrated multi-configuration deploys — with selection guidance (tf-019)
