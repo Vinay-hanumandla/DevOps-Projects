@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-22
+
+- terraform: Add docs comparing module composition patterns — root-module fan-out, dedicated composition module, and orchestrated multi-configuration deploys — with selection guidance (tf-019)
+
 ## 2026-09-21
 
 - prom: Add local Kubernetes monitoring stack manifest with Prometheus, Alertmanager, and node-exporter DaemonSet plus RBAC for pod service discovery (prom-012)
