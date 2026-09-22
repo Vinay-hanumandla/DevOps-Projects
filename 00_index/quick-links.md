@@ -99,6 +99,8 @@
 - [Image vuln scan and policy enforcement](../docker/scripts/image-vuln-scan-policy.sh) — scans a built image for known vulnerabilities and blocks deployment on policy breaches
 
 ### Build multi-arch images with buildx
+- [Buildx Bake monorepo template](../docker/templates/buildx-bake-monorepo/README.md) — one entrypoint for shared cache, attestations, and dual-registry image outputs
+- [Buildx Bake monorepo environment example](../docker/templates/buildx-bake-monorepo/.env.example) — registry, tag, and cache tunables for a multi-service build
 - [Multi-arch buildx automation](../docker/scripts/image-build-automation.sh) — Docker buildx script for multi-platform images with registry caching, semver tagging, and push
 
 ### Run a container
@@ -141,6 +143,7 @@
 - [Worktree workflows for parallel feature development](../git/docs/worktree-parallel-feature-development.md) — one clone hosting several checked-out branches at once, sharing a single object store
 
 ### Use interactive rebase effectively
+- [Signed commits and CI provenance](../git/docs/signed-commits-and-ci-provenance.md) — signing keys, envelope signing, and how CI verifies commit provenance
 - [Interactive rebase vs merge commit](../git/docs/interactive-rebase-vs-merge-commit.md) — reference guide comparing the two core Git collaboration strategies
 - [Rebase-based vs merge-based release workflows](../git/docs/rebase-based-vs-merge-based-release-workflows.md) — comparing rebase and merge strategies for release branches
 - [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md) — how the two strategies behave once a repo crosses hundreds of contributors and long-lived release branches
@@ -197,6 +200,7 @@
 
 ### Get started with Helm
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
+- [Values merge vs file](../helm/notes/2026-09-21-values-merge-set-vs-file.md) — when `--values` merges against `--set` and why order matters
 - [Install Helm and run version command](../helm/notes/2026-07-31-install-helm-run-version.md) — install check, version verification, and adding the stable chart repository
 - [Install Helm with package manager](../helm/notes/2026-08-18-install-helm-with-package-manager.md) — package-manager install, version check, and shell completion setup
 - [Following the Helm quickstart](../helm/notes/2026-08-19-following-helm-quickstart.md) — walked through the official quickstart: chart scaffold, install, and lifecycle commands
@@ -205,6 +209,7 @@
 - [Helm release workflow](../helm/scripts/helm-release-workflow.sh) — lint, template, diff, upgrade, and rollback in one runnable script
 
 ### Deploy with Helm
+- [Minimal static web app values](../helm/configs/2026-09-21-minimal-static-web-app-values.yaml) — slim nginx Helm values with ConfigMap-backed static content
 - [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh) — install and manage a Helm chart in a local or test cluster
 - [First values override](../helm/configs/2026-08-08-first-values-override.yaml) — minimal Helm values override with replica count and image tag
 - [First chart template](../helm/manifests/2026-08-14-first-chart-template.yaml) — a minimal trimmed Deployment template with `.Values.*` placeholders
