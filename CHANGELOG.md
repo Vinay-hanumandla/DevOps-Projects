@@ -2,6 +2,9 @@
 
 ## 2026-09-23
 
+- bash: Add parallel execution patterns script comparing xargs -P, GNU parallel, and named-pipe pooling with bounded concurrency (bash-030)
+- bash: Add advanced parameter expansion snippet covering global substitution, affix stripping, alternate values, and nesting (bash-031)
+
 - jenkins: Add docs on splitting delivery across Jenkins builds, GitHub Actions gates, and Argo CD progressive rollout with per-environment promotion commits (jenkins-019)
 
 - repo-doc: Add notes on following the repo-task tutorial end to end — coverage script loop, stdout workflow, and file-naming trip-ups (repo-doc-006)
