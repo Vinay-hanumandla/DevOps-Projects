@@ -1,0 +1,85 @@
+# last_verified: 2026-09-23 · Jenkins Configuration as Code (n/a)
+
+# Jenkins Configuration as Code — multi-controller HA setup
+#
+# JCasC treats the controller configuration as a YAML file that can be versioned,
+# reviewed, and applied identically to every controller in a fleet. In a
+# multi-controller HA setup each controller runs the same JCasC file, so a node
+# that comes up is configured the same way as the one that went down.
+
+# Apply this file from Manage Jenkins → Manage Configuration as Code, or via the
+# CLI:  jenkins-cli -s <controller-url> groovy applyConfiguration.jenkins
+
+jenkins:
+  systemMessage: "Multi-controller HA fleet — configured via JCasC"
+  agentProtocols:
+    - "jnlp"
+    - "jnlp2"
+  numExecutors: 2
+
+  # One configuration file shared across controllers means every controller is
+  # configured identically. Pin the JCasC plugin in the controller image so the
+  # schema does not drift between upgrades.
+  systemProperties:
+    - key: "jenkins.model.JenkinsLocationConfiguration.url"
+      value: "https://jenkins.example.com/"
+
+securityRealm:
+  local:
+    allowSignup: false
+    users:
+      - id: "ci-bot"
+        password: "ci-bot-password"
+        name: "CI Bot"
+        email: "ci-bot@example.com"
+      - id: "admin"
+        name: "Administrator"
+        email: "admin@example.com"
+
+authorizationStrategy:
+  roleBased:
+    roles:
+      global:
+        - name: "admin"
+          members:
+            - "admin"
+      agent:
+        - name: "agent"
+          members:
+            - "ci-bot"
+
+globalNodeProperties:
+  - envVars:
+      env:
+        - key: "DOCKER_HOST"
+          value: "tcp://docker-registry.internal:2375"
+        - key: "REGISTRY"
+          value: "registry.example.com"
+
+unclassified:
+  location:
+    url: "https://jenkins.example.com/"
+    adminEmailAddress: "admin@example.com"
+
+  # Every controller in the fleet exposes the same set of agents so that a job
+  # can run on any controller without reconfiguration.
+  agentProvider:
+    - docker:
+        agentId: "docker-agent"
+        dockerfileDir: "Dockerfile"
+        dockerImage: "jenkins/agent:latest"
+        pullCredentialsId: "registry-credentials-id"
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: "SYSTEM"
+              id: "registry-credentials-id"
+              username: "ci-bot"
+              password: "registry-password"
+              description: "Registry push credentials"
+
+jobs:
+  - "scripts/*.groovy"
