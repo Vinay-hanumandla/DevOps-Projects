@@ -2,6 +2,10 @@
 
 ## 2026-09-23
 
+- jenkins: Add docs on splitting delivery across Jenkins builds, GitHub Actions gates, and Argo CD progressive rollout with per-environment promotion commits (jenkins-019)
+
+- repo-doc: Add notes on following the repo-task tutorial end to end — coverage script loop, stdout workflow, and file-naming trip-ups (repo-doc-006)
+
 - jenkins: Add JCasC YAML configuration for reproducible controller setup with security realm, role-based authorization, Docker agent provisioning, and credentials (jenkins-012)
 
 ## 2026-09-22
