@@ -1,0 +1,52 @@
+// last_verified: 2026-09-23 · Jenkins shared library
+// Example pipeline that calls the three integration steps from the scaffold.
+// Reference the library with: @Library('jenkins-shared-library') _
+
+@Library('jenkins-shared-library') _
+
+pipeline {
+    agent any
+
+    environment {
+        REGISTRY = 'registry.example.com'
+        NAMESPACE = 'default'
+    }
+
+    stages {
+        stage('Checkout & lint') {
+            steps {
+                script {
+                    env.CHECKED_OUT = checkoutAndLint(
+                        'https://github.com/example/app.git',
+                        'main',
+                        'github-credentials-id'
+                    )
+                }
+            }
+        }
+
+        stage('Build & push Docker') {
+            steps {
+                script {
+                    buildAndPushDocker(
+                        'app',
+                        env.BUILD_ID,
+                        env.REGISTRY
+                    )
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    deployToK8s(
+                        "${env.REGISTRY}/app:${env.BUILD_ID}",
+                        env.NAMESPACE,
+                        'app'
+                    )
+                }
+            }
+        }
+    }
+}

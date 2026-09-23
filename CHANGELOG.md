@@ -575,3 +575,8 @@ Passed ([x]) bash-010 — Bash: docs — How I wired Bash strict mode and trap p
 - repo-doc/notes/2026-09-21-repo-doc-cli-install-and-scaffold.md — repo-doc CLI install and first project documentation scaffold (repo-doc-006)
 - helm/notes/2026-09-21-values-merge-set-vs-file.md — Working out Helm values merge order: chart defaults, -f files, and --set flags via helm template (helm-017)
 - 2026-09-22: jenkins-013 - Jenkinsfile for Node.js app (build, test, artifact archive, deploy stages)
+
+## 2026-09-23
+
+- jenkins/templates/jenkins-shared-library/ — Project scaffold: Jenkins shared library with Git, Docker, and Kubernetes integration (jenkins-017)
+- jenkins/configs/jenkins-casc-ha.yaml — Jenkins Configuration as Code for production multi-controller HA setup (jenkins-018)
