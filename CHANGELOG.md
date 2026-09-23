@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-23
+
+- jenkins: Add JCasC YAML configuration for reproducible controller setup with security realm, role-based authorization, Docker agent provisioning, and credentials (jenkins-012)
+
 ## 2026-09-22
 
 - ansible: Add docs comparing retry strategies for unreliable targets — until/retries loops, wait_for gating, and async polling — with selection guidance (ansible-017)
