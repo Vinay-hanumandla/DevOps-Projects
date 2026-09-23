@@ -582,6 +582,8 @@ Passed ([x]) bash-010 — Bash: docs — How I wired Bash strict mode and trap p
 
 ## 2026-09-23
 
+- ansible: Add script for Ansible Vault patterns covering encrypt, decrypt, rotate, and debug for multi-environment secrets (ansible-016)
+
 Passed ([x]) jenkins-017 — Jenkins: template — Project scaffold: Jenkins shared library with Git, Docker, and Kubernetes integration · Level: L4 · 2026-09-23
 Passed ([x]) jenkins-018 — Jenkins: config — Jenkins Configuration as Code for production multi-controller HA setup · Level: L4 · 2026-09-23
 - jenkins/templates/jenkins-shared-library/ — Project scaffold: Jenkins shared library with Git, Docker, and Kubernetes integration (jenkins-017)
