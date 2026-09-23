@@ -19,11 +19,11 @@ The repository holds content files across notes, docs, scripts, snippets, config
 
 ## Quick links
 
-- [Terraform — module composition patterns](tf/docs/module-composition-patterns.md) — composing Terraform modules with fan-out patterns and shared state boundaries.
-- [Prometheus local monitoring stack](prom/manifests/local-monitoring-stack.yaml) — a one-shot Prometheus + Alertmanager + Node Exporter stack for local evaluation.
-- [Git — signed commits and CI provenance](git/docs/signed-commits-and-ci-provenance.md) — signing commits and verifying build origins in CI.
-- [Helm — values merge: set vs file](helm/notes/2026-09-21-values-merge-set-vs-file.md) — how `--set` and `--values` interact, and when each wins.
-- [Helm — minimal static web app values](helm/configs/2026-09-21-minimal-static-web-app-values.yaml) — slim nginx Helm values with ConfigMap-backed static content.
+- [Ansible Vault patterns for multi-environment secrets](ansible/scripts/ansible-vault-patterns.sh) — encrypt, decrypt, rotate, and debug Vault-encrypted content across dev, staging, and prod.
+- [Jenkins shared library scaffold](jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline code with `vars/*.groovy` and a tested structure.
+- [Jenkins HA CASC config](jenkins/configs/jenkins-casc-ha.yaml) — Jenkins Configuration as Code for a reproducible, high-availability controller setup.
+- [Jenkins reproducible controller setup](jenkins/configs/jenkins-casc-reproducible-controller-setup.yaml) — a CASC bundle that produces a deterministic controller from a single config.
+- [Jenkins shared library Jenkinsfile](jenkins/templates/jenkins-shared-library/Jenkinsfile) — entrypoint for the shared library demonstrating `@Library` usage and pipeline structure.
 
 ## Layout
 
@@ -53,14 +53,14 @@ Counts include files nested inside template trees. `Other` is a root-level suppo
 
 | Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Other | Last verified |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| Ansible | 3 | 3 | 3 | 1 | 4 | 1 | 0 | 0 | 15 | 0 | 0 | 0 | 2026-09-18 |
+| Ansible | 3 | 4 | 4 | 1 | 4 | 1 | 0 | 0 | 15 | 0 | 0 | 0 | 2026-09-23 |
 | Bash | 3 | 6 | 9 | 1 | 0 | 0 | 4 | 1 | 30 | 0 | 0 | 0 | 2026-09-09 |
 | Docker | 5 | 3 | 7 | 0 | 0 | 2 | 0 | 4 | 25 | 2 | 0 | 1 | 2026-09-21 |
 | GitHub Actions | 3 | 3 | 2 | 1 | 6 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-02 |
-| Git | 16 | 11 | 6 | 0 | 0 | 1 | 0 | 0 | 12 | 0 | 1 | 0 | 2026-09-21 |
+| Git | 16 | 11 | 6 | 0 | 0 | 1 | 0 | 0 | 14 | 0 | 1 | 0 | 2026-09-21 |
 | Grafana | 4 | 1 | 1 | 3 | 6 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-16 |
 | Helm | 6 | 2 | 1 | 1 | 7 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-21 |
-| Jenkins | 4 | 2 | 0 | 3 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-21 |
+| Jenkins | 5 | 2 | 2 | 3 | 3 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 2026-09-23 |
 | Kubernetes | 5 | 4 | 3 | 2 | 1 | 4 | 1 | 1 | 10 | 0 | 0 | 0 | 2026-09-19 |
 | Prometheus | 4 | 2 | 2 | 1 | 6 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-19 |
 | Python | 3 | 3 | 4 | 4 | 4 | 0 | 2 | 1 | 7 | 0 | 0 | 0 | 2026-09-14 |
@@ -77,4 +77,4 @@ Currently expanding first-contact and integration coverage across Docker Buildx 
 
 ---
 
-_Last updated: 2026-09-22_
+_Last updated: 2026-09-23_

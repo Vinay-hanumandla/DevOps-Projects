@@ -21,6 +21,7 @@
 
 ### Gate a playbook apply before it touches hosts
 - [Gated playbook run](../ansible/scripts/ansible-playbook-gated-run.sh) — syntax-check, check-mode dry run, and optional lint first, then apply plus an idempotency rerun that must report changed=0
+- [Ansible Vault patterns for multi-environment secrets](../ansible/scripts/ansible-vault-patterns.sh) — encrypt, decrypt, rotate, and debug Vault-encrypted content across dev, staging, and prod
 
 ### Keep shell-outs idempotent
 - [command/shell vs purpose-built idempotent modules](../ansible/docs/command-shell-vs-idempotent-modules.md) — when a shell-out is a bug, which module replaces it, and how to guard the ones that must stay with `creates`, `removes`, or `changed_when`
@@ -226,12 +227,27 @@
 - [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md) — install check, first web UI login, and creating a hello-world pipeline job
 - [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md) — second-pass notes after the Jenkins quickstart: credentials, agents, and pipeline triggers
 - [Following the official Jenkins tutorial](../jenkins/notes/2026-09-06-followed-jenkins-tutorial.md) — first real declarative pipeline beyond "Hello World," covering agent declaration and post-block semantics
+- [First controller plugins, agents, credentials](../jenkins/notes/2026-09-22-first-controller-plugins-agents-credentials.md) — installing plugins, configuring agents, and securing credentials on a Jenkins controller
 - [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile) — a minimal declarative Jenkins pipeline config
 - [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy) — a minimal declarative Jenkins pipeline snippet
 - [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy) — a Jenkins pipeline snippet using environment credentials binding
 - [What tripped me up following the Jenkins declarative pipeline tutorial](../jenkins/docs/2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas when pointing a job at a repo
 - [Moving a Jenkinsfile from inline script to SCM](../jenkins/docs/moving-jenkinsfile-to-scm-gotchas.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas when a Jenkins job points at a repo with the Jenkinsfile in a subfolder
 - [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy) — pulls a helper from a global shared library and binds a secret-text credential without printing it
+
+### Configure Jenkins controller
+- [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile) — a minimal declarative Jenkins pipeline config
+- [Jenkins CASC reproducible controller setup](../jenkins/configs/jenkins-casc-reproducible-controller-setup.yaml) — a CASC bundle that produces a deterministic controller from a single config
+- [Jenkins HA CASC config](../jenkins/configs/jenkins-casc-ha.yaml) — Jenkins Configuration as Code for a reproducible, high-availability controller setup
+
+### Write Jenkins shared library code
+- [Jenkins shared library scaffold](../jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline library with `vars/*.groovy`, tests, and CI gating
+- [Shared library Jenkinsfile](../jenkins/templates/jenkins-shared-library/Jenkinsfile) — entrypoint for the shared library demonstrating `@Library` usage and pipeline structure
+- [Deploy to K8s step](../jenkins/templates/jenkins-shared-library/vars/deployToK8s.groovy) — shared library step for deploying to Kubernetes with rollback on failure
+- [Check out and lint step](../jenkins/templates/jenkins-shared-library/vars/checkoutAndLint.groovy) — shared library step that checks out code and runs lint checks
+- [Build and push Docker step](../jenkins/templates/jenkins-shared-library/vars/buildAndPushDocker.groovy) — shared library step that builds a Docker image and pushes it to a registry
+- [Common CI/CD shared library groovy](../jenkins/scripts/common-cicd-shared-library.groovy) — shared library logic with buildAndPushDocker, checkoutAndLint, and deployToK8s steps
+- [NodeJS Jenkinsfile](../jenkins/scripts/2026-09-22-nodejs-jenkinsfile.groovy) — declarative pipeline for building and testing a Node.js app
 
 ### Get started with Kubernetes
 - [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md) — first-contact notes for Kubernetes concepts and kubectl basics
@@ -401,3 +417,6 @@
 - [Repo-doc tooling overview](../repo-doc/docs/2026-09-08-repo-doc-tooling-overview.md) — overview of the tools and scripts used to maintain the repository's documentation
 - [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh) — a helper that reconciles the README coverage table with on-disk counts
 - [Repo-task quickstart trip-ups](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md) — first-contact pitfalls when using the repo-doc toolkit
+
+### Ansible reference docs
+- [Retry strategies for unreliable targets](../ansible/docs/retry-strategies-unreliable-targets.md) — strategies for handling transient failures when targets drop connectivity during a playbook run
