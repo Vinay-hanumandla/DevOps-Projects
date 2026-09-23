@@ -1,0 +1,148 @@
+# last_verified: 2026-09-23 · Jenkins n/a
+
+# Purpose
+# This JCasC (Jenkins Configuration as Code) YAML defines a reproducible
+# controller setup so that a Jenkins controller can be provisioned from a single
+# file and come up in a known state every time. The intent is that the same
+# configuration applies whether the controller runs on a developer laptop, a
+# CI server, or a cloud instance — version the file alongside infrastructure
+# and the controller configuration stays in sync.
+#
+# This is one approach; teams with existing Jenkins infrastructure may also
+# layer JCasC on top of manually configured controllers rather than replacing
+# them wholesale.
+
+# Steps — what this configuration covers:
+#   1. Controller identity: system message, URL, and executor allocation.
+#   2. Security realm: local user accounts with disabled signup.
+#   3. Authorization: role-based strategy with global and agent roles.
+#   4. Node properties: environment variables for agent connectivity.
+#   5. Cloud agent provisioning: Docker-based ephemeral agents.
+#   6. Credentials: system-scoped credential store for registries and tools.
+#   7. Job discovery: automatic loading of pipeline definitions from scripts.
+
+jenkins:
+  systemMessage: "Controller configured via JCasC — reproducible setup"
+  agentProtocols:
+    - "jnlp"
+    - "jnlp2"
+  numExecutors: 2
+
+  systemProperties:
+    - key: "jenkins.model.JenkinsLocationConfiguration.url"
+      value: "https://jenkins.internal/"
+    - key: "jenkins.model.JenkinsLocationConfiguration.adminAddress"
+      value: "admin@example.com"
+
+# Security realm — local users only, no self-registration. This keeps the
+# controller's identity tied to a known set of accounts; the trade-off is that
+# every new user requires an admin to add them manually.
+securityRealm:
+  local:
+    allowSignup: false
+    users:
+      - id: "admin"
+        password: "CHANGE_ME"
+        name: "Administrator"
+        email: "admin@example.com"
+      - id: "ci-bot"
+        password: "CHANGE_ME"
+        name: "CI Bot"
+        email: "ci-bot@example.com"
+
+# Authorization — role-based strategy. Roles define what actions a user or
+# group may perform. Adjust the role assignments to match the team's access
+# model; over-permissioning is a common misconfiguration that this layout
+# does not guard against automatically.
+authorizationStrategy:
+  roleBased:
+    roles:
+      global:
+        - name: "admin"
+          permissions:
+            - "Overall/Administer"
+            - "Job/Create"
+            - "Job/Delete"
+            - "Job/Configure"
+            - "Job/Read"
+            - "Job/Build"
+          members:
+            - "admin"
+        - name: "viewer"
+          permissions:
+            - "Job/Read"
+            - "Job/Build"
+          members:
+            - "ci-bot"
+      agent:
+        - name: "agent"
+          permissions:
+            - "Job/Read"
+            - "Job/Build"
+          members:
+            - "ci-bot"
+
+# Node environment variables — set at the global level so every controller
+# in the fleet inherits them. These are picked up by agents and build
+# processes. If different environments need different values, consider
+# scoping these per-node instead.
+globalNodeProperties:
+  - envVars:
+      env:
+        - key: "DOCKER_HOST"
+          value: "tcp://docker-registry.internal:2375"
+        - key: "REGISTRY"
+          value: "registry.internal"
+
+unclassified:
+  location:
+    url: "https://jenkins.internal/"
+    adminEmailAddress: "admin@example.com"
+
+# Agent provider — Docker-based agents spin up ephemeral containers for
+# build workloads. This keeps build environments consistent and isolated.
+# The image referenced here is an example; teams should pin to a specific
+# tag in production to avoid unexpected upgrades.
+  agentProvider:
+    - docker:
+        agentId: "docker-agent"
+        dockerfileDir: "Dockerfile"
+        dockerImage: "jenkins/agent"
+        pullCredentialsId: "registry-credentials"
+
+# Credentials — system-scoped credentials available to all pipelines.
+# Passwords and tokens should be supplied at deploy time (e.g. via a
+# secrets manager or environment variables) rather than committed here.
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: "SYSTEM"
+              id: "registry-credentials"
+              username: "ci-bot"
+              password: "CHANGE_ME"
+              description: "Container registry push credentials"
+
+# Job discovery — Jenkins loads pipeline definitions from scripts in this
+# directory. This allows a controller to rebuild its job inventory from
+# version-controlled files on startup. If the scripts directory doesn't
+# exist yet, the controller starts without error and picks up jobs once
+# the directory is populated.
+jobs:
+  - "scripts/*.groovy"
+
+# Verify — confirming the configuration works as intended:
+#   1. Start a controller with this JCasC file pointed at via the
+#      JCasC plugin's configuration URI and confirm it loads without
+#      schema errors.
+#   2. Check Manage Jenkins → Configuration as Code to see all sections
+#      rendered from this file.
+#   3. Verify that a Jenkinsfile from scripts/ appears as a job in the
+#      dashboard after the controller reloads.
+#   4. Confirm the security realm rejects unauthenticated access and that
+#      the ci-bot identity can trigger builds.
+#   5. If any section fails to load, compare the error output against the
+#      JCasC schema documentation — schema drift between plugin versions
+#      is a common source of failures, though this layout follows the
+#      documented structure as closely as possible.
