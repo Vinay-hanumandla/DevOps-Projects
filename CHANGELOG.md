@@ -3,6 +3,8 @@
 ## 2026-09-24
 
 - gha: Add reusable composite action for a shared shell lint-and-test gate with toggleable stages and lint/test outputs, plus a caller workflow (gha-017)
+- bash: Add reference documentation for Bash 5.3 nameref, coproc, and in-process command substitution features (bash-028)
+Passed ([x]) gha-017 — GitHub Actions: config — Reusable composite action with inputs, conditional steps, and outputs for shared CI logic · Level: L4 · 2026-09-24
 
 ## 2026-09-23
 
