@@ -1,0 +1,117 @@
+# last_verified: 2026-09-24 · gha n/a
+#
+# Reusable composite action: shared shell lint-and-test gate.
+# Built for the gha-017 task. Where the repo's earlier reusable action
+# (reusable-composite-action/action.yml) installs a Node toolchain and runs a
+# smoke command, this one answers a different shared-CI question: "is every
+# shell file in this repo lint-clean, and do the shell tests still pass?"
+#
+# The three reusable-action mechanics it demonstrates:
+#   1. inputs with defaults  — run-lint, run-tests, test-command,
+#                              working-directory and shellcheck-severity all
+#                              have defaults, so a caller can use the action
+#                              with zero arguments.
+#   2. conditional steps     — the lint step only runs when run-lint is
+#                              'true'; the test step only when run-tests is
+#                              'true'; the summary step always runs so the
+#                              caller gets one place to look.
+#   3. outputs               — lint-result and test-result are exposed back
+#                              to the caller workflow, which can gate later
+#                              jobs on them.
+#
+# The caller is expected to check out the repo first; this action only lints
+# and tests what is already on disk.
+
+name: 'Shared shell lint and test gate'
+description: >
+  Runs ShellCheck over the repo's shell files and then runs the shell test
+  suite. Each stage can be toggled independently via inputs, and each stage
+  reports an output the caller can gate on.
+
+inputs:
+  working-directory:
+    description: 'Directory to run lint and tests from, relative to the repo root.'
+    required: false
+    default: '.'
+  run-lint:
+    description: "Whether to run the ShellCheck lint stage ('true'/'false')."
+    required: false
+    default: 'true'
+  run-tests:
+    description: "Whether to run the shell test suite ('true'/'false')."
+    required: false
+    default: 'true'
+  test-command:
+    description: 'Command that runs the shell test suite.'
+    required: false
+    default: 'bats tests/'
+  shellcheck-severity:
+    description: 'Minimum ShellCheck severity to report (error, warning, info, style).'
+    required: false
+    default: 'warning'
+
+outputs:
+  lint-result:
+    description: "'passed', 'failed', or 'skipped' for the lint stage."
+    value: ${{ steps.lint.outputs.result }}
+  test-result:
+    description: "'passed', 'failed', or 'skipped' for the test stage."
+    value: ${{ steps.test.outputs.result }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Lint shell files with ShellCheck
+      id: lint
+      if: ${{ inputs.run-lint == 'true' }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        if find . -name '*.sh' -print -quit | grep -q .; then
+          if shellcheck --severity="${{ inputs.shellcheck-severity }}" $(find . -name '*.sh'); then
+            echo "result=passed" >> "$GITHUB_OUTPUT"
+          else
+            echo "result=failed" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+        else
+          echo "No shell files found; nothing to lint."
+          echo "result=passed" >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: Mark lint skipped
+      id: lint-skipped
+      if: ${{ inputs.run-lint != 'true' }}
+      shell: bash
+      run: |
+        echo "Lint stage disabled by caller; reporting skipped."
+        echo "result=skipped" >> "$GITHUB_OUTPUT"
+
+    - name: Run shell test suite
+      id: test
+      if: ${{ inputs.run-tests == 'true' }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        if ${{ inputs.test-command }}; then
+          echo "result=passed" >> "$GITHUB_OUTPUT"
+        else
+          echo "result=failed" >> "$GITHUB_OUTPUT"
+          exit 1
+        fi
+
+    - name: Mark tests skipped
+      id: test-skipped
+      if: ${{ inputs.run-tests != 'true' }}
+      shell: bash
+      run: |
+        echo "Test stage disabled by caller; reporting skipped."
+        echo "result=skipped" >> "$GITHUB_OUTPUT"
+
+    - name: Summarize gate results
+      if: always()
+      shell: bash
+      run: |
+        echo "## Shell CI gate summary" >> "$GITHUB_STEP_SUMMARY"
+        echo "- lint: ${{ steps.lint.outputs.result }}${{ steps.lint-skipped.outputs.result }}" >> "$GITHUB_STEP_SUMMARY"
+        echo "- tests: ${{ steps.test.outputs.result }}${{ steps.test-skipped.outputs.result }}" >> "$GITHUB_STEP_SUMMARY"

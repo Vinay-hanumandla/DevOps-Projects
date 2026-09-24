@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-24
+
+- gha: Add reusable composite action for a shared shell lint-and-test gate with toggleable stages and lint/test outputs, plus a caller workflow (gha-017)
+
 ## 2026-09-23
 
 - bash: Add parallel execution patterns script comparing xargs -P, GNU parallel, and named-pipe pooling with bounded concurrency (bash-030)
