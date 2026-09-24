@@ -13,13 +13,13 @@
 - **snippets** (1): [Block/rescue/always deploy with handlers](../ansible/snippets/block-rescue-always-handlers.yaml) — config deploy with rollback, outcome report, and a change-gated service restart
 - **templates** (15): [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, `galaxy.yml`, dynamic cloud inventory, and a Terraform-outputs handoff script · _…and 14 more under `ansible/templates/ansible-role-molecule-collection/`._
 
-## Bash  ·  54 files
+## Bash  ·  56 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
 - **docs** (6): most recent → [Bash 5.3 deep dive](../bash/docs/bash-5.3-deep-dive.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md), [Debug and profile with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md)
-- **scripts** (9): most recent → [Companion test for the first script](../bash/scripts/2026-09-05-companion-test.sh), [CI-safe build wrapper](../bash/scripts/build-and-check.sh), [System report tool](../bash/scripts/system-report-tool.sh)
-- **snippets** (1): [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
+- **scripts** (10): most recent → [Parallel execution patterns](../bash/scripts/parallel-execution-patterns.sh), [Companion test for the first script](../bash/scripts/2026-09-05-companion-test.sh), [CI-safe build wrapper](../bash/scripts/build-and-check.sh)
+- **snippets** (2): [Advanced parameter expansion](../bash/snippets/parameter-expansion-advanced.sh) — global substitution, prefix/suffix stripping, and nested expansions without subshells; [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
 - **notebooks** (4): most recent → [Bats-core production test suite](../bash/notebooks/bats-core-production-test-suite.ipynb), [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb), [Comparing pipeline exit-code handling](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb)
 - **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
 - **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
@@ -36,12 +36,12 @@
 - **templates** (25): [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack with health-gated startup, file-based secrets, and a tools profile · [Local dev cluster scaffold](../docker/templates/local-dev-cluster/README.md) — kind config, Compose file, and k8s manifests for a throwaway dev loop · [Buildx Bake monorepo scaffold](../docker/templates/buildx-bake-monorepo/README.md) — shared cache, attestations, and dual-registry image outputs · _…and 22 more under `docker/templates/`._
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
 
-## GitHub Actions  ·  16 files
+## GitHub Actions  ·  18 files
 
 - **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
 - **notes** (3): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
 - **docs** (3): most recent → [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md), [GitHub Actions quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md), [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
-- **configs** (6): most recent → [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml), [Reusable composite action](../gha/configs/reusable-composite-action/action.yml) · _…and 4 more under `gha/configs/`._
+- **configs** (8): most recent → [Shared shell lint-and-test gate](../gha/configs/shared-shell-ci/action.yml), [Shared shell CI caller](../gha/configs/shared-shell-ci-caller.yaml), [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml) · _…and 5 more under `gha/configs/`._
 - **scripts** (2): [Minimal custom JavaScript action](../gha/scripts/action.yml) — action definition on the node20 runtime; [Minimal custom JavaScript action entrypoint](../gha/scripts/minimal-custom-js-action.js) — reads two inputs, composes a greeting, and exposes it via `$GITHUB_OUTPUT`
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 - **snippets** (1): [Reusable workflow caller](../gha/snippets/reusable-workflow-caller.yaml) — minimal caller of a centrally maintained reusable workflow, passing inputs and secrets and reading outputs downstream
@@ -79,12 +79,12 @@
 - **scripts** (1): [Helm release workflow](../helm/scripts/helm-release-workflow.sh)
 - **notebooks** (1): [Comparing Helm values merging](../helm/notebooks/comparing-helm-values-merging.ipynb)
 
-## Jenkins  ·  20 files
+## Jenkins  ·  21 files
 
 - **primer:** [Jenkins — quick primer](../jenkins/notes/0000-primer-jenkins.md)
 - **notes** (5): most recent → [First controller plugins, agents, credentials](../jenkins/notes/2026-09-22-first-controller-plugins-agents-credentials.md), [Following the official Jenkins tutorial](../jenkins/notes/2026-09-06-followed-jenkins-tutorial.md), [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md)
 - **configs** (3): most recent → [Jenkins CASC reproducible controller setup](../jenkins/configs/jenkins-casc-reproducible-controller-setup.yaml), [Jenkins CASC HA config](../jenkins/configs/jenkins-casc-ha.yaml), [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile)
-- **docs** (2): [Moving a Jenkinsfile from inline script to SCM](../jenkins/docs/moving-jenkinsfile-to-scm-gotchas.md), [What tripped me up following the Jenkins declarative pipeline tutorial](../jenkins/docs/2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas
+- **docs** (3): most recent → [Jenkins + GitHub Actions + Argo CD progressive delivery](../jenkins/docs/integrating-jenkins-github-actions-argocd-progressive-delivery.md), [Moving a Jenkinsfile from inline script to SCM](../jenkins/docs/moving-jenkinsfile-to-scm-gotchas.md), [What tripped me up following the Jenkins declarative pipeline tutorial](../jenkins/docs/2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas
 - **scripts** (2): [Jenkinsfile for NodeJS pipeline](../jenkins/scripts/2026-09-22-nodejs-jenkinsfile.groovy) — declarative pipeline for building and testing a Node.js app, [Common CI/CD shared library groovy](../jenkins/scripts/common-cicd-shared-library.groovy) — shared library logic with buildAndPushDocker, checkoutAndLint, and deployToK8s steps
 - **snippets** (3): most recent → [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy), [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 - **templates** (5): [Jenkins shared library scaffold](../jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline library with `vars/*.groovy`, tests, and CI gating · _…and 4 more under `jenkins/templates/jenkins-shared-library/`._
@@ -110,6 +110,7 @@
 - **configs** (6): most recent → [Kubernetes pod service discovery](../prom/configs/2026-09-18-kubernetes-service-discovery.yaml), [Remote-write vs federation](../prom/configs/remote-write-vs-federation.yaml), [Prometheus alerting rules](../prom/configs/2026-08-30-prometheus-alerting-rules.yaml) · _…and 3 more under `prom/configs/`._
 - **scripts** (2): [Rules evaluator](../prom/scripts/rules-evaluator.go) — evaluates Prometheus recording and alerting rules against fetched metrics · [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh)
 - **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
+- **manifests** (1): [Local monitoring stack](../prom/manifests/local-monitoring-stack.yaml) — one-shot Prometheus + Alertmanager + Node Exporter stack for local evaluation
 
 ## Python  ·  28 files
 
@@ -136,10 +137,10 @@
 - **notebooks** (1): [State management strategies](../tf/notebooks/state-management-strategies.ipynb)
 - **templates** (8): [Terragrunt multi-environment scaffold](../tf/templates/terragrunt-multi-env/README.md) — one reusable module shared across dev, staging, and prod with per-environment inputs · _…and 7 more under `tf/templates/terragrunt-multi-env/`._
 
-## Repo-doc  ·  7 files
+## Repo-doc  ·  8 files
 
 - **primer:** [Repo-doc — quick primer](../repo-doc/notes/0000-primer-repo-doc.md)
-- **notes** (1): [Repo-task quickstart trip-ups](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md)
+- **notes** (4): most recent → [Following the repo-task tutorial](../repo-doc/notes/2026-09-23-following-repo-task-tutorial-workflows.md), [Repo-doc CLI install and first scaffold](../repo-doc/notes/2026-09-21-repo-doc-cli-install-and-scaffold.md), [Repo-task quickstart trip-ups](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md)
 - **docs** (2): [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md), [Repo-doc tooling overview](../repo-doc/docs/2026-09-08-repo-doc-tooling-overview.md)
 - **scripts** (2): [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh), [Minimal task automation](../repo-doc/scripts/2026-09-10-minimal-task-automation.sh)
 

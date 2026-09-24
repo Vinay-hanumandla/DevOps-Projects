@@ -19,11 +19,11 @@ The repository holds content files across notes, docs, scripts, snippets, config
 
 ## Quick links
 
-- [Ansible Vault patterns for multi-environment secrets](ansible/scripts/ansible-vault-patterns.sh) — encrypt, decrypt, rotate, and debug Vault-encrypted content across dev, staging, and prod.
-- [Jenkins shared library scaffold](jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline code with `vars/*.groovy` and a tested structure.
-- [Jenkins HA CASC config](jenkins/configs/jenkins-casc-ha.yaml) — Jenkins Configuration as Code for a reproducible, high-availability controller setup.
-- [Jenkins reproducible controller setup](jenkins/configs/jenkins-casc-reproducible-controller-setup.yaml) — a CASC bundle that produces a deterministic controller from a single config.
-- [Jenkins shared library Jenkinsfile](jenkins/templates/jenkins-shared-library/Jenkinsfile) — entrypoint for the shared library demonstrating `@Library` usage and pipeline structure.
+- [Shared shell lint-and-test composite action](gha/configs/shared-shell-ci/action.yml) — reusable action that runs ShellCheck and shell tests with independently toggleable stages and outputs callers can gate on.
+- [Shared shell CI caller workflow](gha/configs/shared-shell-ci-caller.yaml) — example caller showing zero-argument defaults, per-call overrides, and downstream jobs gated on the shared action's outputs.
+- [Bash parallel execution patterns](bash/scripts/parallel-execution-patterns.sh) — xargs process slots, GNU parallel, and a named-pipe pool for running shell work in parallel.
+- [Bash advanced parameter expansion](bash/snippets/parameter-expansion-advanced.sh) — global substitution, prefix/suffix stripping, and nested expansions without spawning subshells.
+- [Jenkins + GitHub Actions + Argo CD progressive delivery](jenkins/docs/integrating-jenkins-github-actions-argocd-progressive-delivery.md) — splitting delivery across Jenkins builds, GitHub Actions policy checks, and Argo CD progressive sync.
 
 ## Layout
 
@@ -54,27 +54,27 @@ Counts include files nested inside template trees. `Other` is a root-level suppo
 | Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Other | Last verified |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | Ansible | 3 | 4 | 4 | 1 | 4 | 1 | 0 | 0 | 15 | 0 | 0 | 0 | 2026-09-23 |
-| Bash | 3 | 6 | 9 | 1 | 0 | 0 | 4 | 1 | 30 | 0 | 0 | 0 | 2026-09-09 |
+| Bash | 3 | 6 | 10 | 2 | 0 | 0 | 4 | 1 | 30 | 0 | 0 | 0 | 2026-09-23 |
 | Docker | 5 | 3 | 7 | 0 | 0 | 2 | 0 | 4 | 25 | 2 | 0 | 1 | 2026-09-21 |
-| GitHub Actions | 3 | 3 | 2 | 1 | 6 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-02 |
+| GitHub Actions | 3 | 3 | 2 | 1 | 8 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-24 |
 | Git | 16 | 11 | 6 | 0 | 0 | 1 | 0 | 0 | 14 | 0 | 1 | 0 | 2026-09-21 |
-| Grafana | 4 | 1 | 1 | 3 | 6 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-16 |
+| Grafana | 4 | 1 | 1 | 3 | 6 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-21 |
 | Helm | 6 | 2 | 1 | 1 | 7 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-21 |
-| Jenkins | 5 | 2 | 2 | 3 | 3 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 2026-09-23 |
+| Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 2026-09-23 |
 | Kubernetes | 5 | 4 | 3 | 2 | 1 | 4 | 1 | 1 | 10 | 0 | 0 | 0 | 2026-09-19 |
-| Prometheus | 4 | 2 | 2 | 1 | 6 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-19 |
-| Python | 3 | 3 | 4 | 4 | 4 | 0 | 2 | 1 | 7 | 0 | 0 | 0 | 2026-09-14 |
-| repo-doc | 3 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-21 |
+| Prometheus | 4 | 2 | 2 | 1 | 6 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-21 |
+| Python | 3 | 3 | 4 | 4 | 4 | 0 | 2 | 1 | 7 | 0 | 0 | 0 | 2026-09-20 |
+| repo-doc | 4 | 2 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-23 |
 | Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-16 |
 | Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 8 | 0 | 0 | 0 | 2026-09-22 |
-| Foundational concepts | 8 | 17 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 2026-09-22 |
+| Foundational concepts | 8 | 17 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 2026-09-16 |
 
 </details>
 
 ## Status
 
-Currently expanding first-contact and integration coverage across Docker Buildx Bake, Helm values, Jenkins SCM-backed pipelines, Grafana provisioning, Terragrunt layouts, and Python async tooling.
+Currently expanding Jenkins controller setup (Configuration as Code, shared libraries, progressive delivery with GitHub Actions and Argo CD), reusable GitHub Actions for shell lint-and-test gates, and Bash parallel-execution patterns.
 
 ---
 
-_Last updated: 2026-09-23_
+_Last updated: 2026-09-24_

@@ -411,3 +411,23 @@
 ## Git (worktrees)
 
 - **Linked worktree** — an additional working directory attached to the same repository via `git worktree add <path> <branch>`; each worktree checks out its own branch while all of them share one object store, so parallel features keep separate build state without extra clones.
+
+## Jenkins (controller setup)
+
+- **Configuration as Code (JCasC)** — managing the Jenkins controller itself (identity, security realm, authorization, agents) from a versioned YAML file instead of UI clicks, so a fresh controller comes up in a known state every time; a multi-controller HA setup runs the same file on every controller.
+- **Controller / agent** — the split Jenkins assumes after the first toy job: the controller schedules work and serves the UI, while agents are separate processes that connect back and run the builds; a pipeline picks where it runs with `agent { label '...' }`, and the label string must match the node entry exactly or the build waits in the queue.
+- **Credentials store / credentials ID** — the server-side vault (Manage Jenkins → Credentials) holding secrets by ID; a pipeline references the ID instead of the value, and a typo in the ID fails the checkout with "credentials could not be found" rather than an auth error.
+
+## Progressive delivery
+
+- **Progressive delivery** — promoting a change through environments in slices instead of all at once: Jenkins builds and publishes the artifact, GitHub Actions runs policy and integration checks on it, and Argo CD syncs each environment (automated for dev, manual or windowed for staging and prod) so promotion is a reviewable commit.
+- **Canary slice** — the first small subset of production traffic a change reaches (a labeled workload subset or a separate Argo CD application); widening the slice to full traffic is itself a config-repo commit, so history shows exactly when the rollout expanded.
+
+## Ansible (vault)
+
+- **Vault ID** — a named label pairing an encrypted file with the password source that unlocks it (`--vault-id env/dev@vault-password/vault-pass-dev`); lets one repo carry per-environment secrets where each file decrypts only with its own password.
+
+## Bash (parallelism)
+
+- **`xargs -P`** — the dependency-free way to run shell work in parallel: `xargs -P N` keeps N process slots filled from stdin, fitting uniform jobs where the tool is already installed everywhere.
+- **Named-pipe worker pool** — a concurrency pattern built from a FIFO and background jobs that enforces strict parallelism without extra dependencies; pick it when neither `xargs -P` uniformity nor GNU parallel's per-job logging fits.
