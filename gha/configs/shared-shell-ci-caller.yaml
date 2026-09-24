@@ -1,0 +1,63 @@
+# last_verified: 2026-09-24 · gha n/a
+#
+# Caller workflow for the shared shell lint-and-test gate
+# (shared-shell-ci/action.yml). Demonstrates the three things a reusable
+# composite action needs to be worth its salt:
+#
+#   1. defaults make it callable with zero arguments — lint-and-test runs
+#      with every input at its default and reports both outputs.
+#   2. stages can be toggled per call — lint-only flips run-tests to 'false'
+#      and the test output comes back 'skipped' instead of running.
+#   3. outputs gate downstream work — the report job only runs when both
+#      upstream outputs are 'passed'.
+
+name: shared-shell-ci-caller
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    name: Full gate with defaults
+    runs-on: ubuntu-latest
+    outputs:
+      lint-result: ${{ steps.gate.outputs.lint-result }}
+      test-result: ${{ steps.gate.outputs.test-result }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Run shared shell gate (defaults)
+        id: gate
+        uses: ./shared-shell-ci
+
+  lint-only:
+    name: Lint stage only
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Run shared shell gate without tests
+        id: gate
+        uses: ./shared-shell-ci
+        with:
+          run-tests: 'false'
+
+      - name: Confirm tests were skipped
+        if: ${{ steps.gate.outputs.test-result != 'skipped' }}
+        run: |
+          echo "Expected test-result 'skipped', got '${{ steps.gate.outputs.test-result }}'"
+          exit 1
+
+  report:
+    name: Report gate outcome
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    if: ${{ needs.lint-and-test.outputs.lint-result == 'passed' && needs.lint-and-test.outputs.test-result == 'passed' }}
+    steps:
+      - name: Announce green gate
+        run: echo "Shell gate green: lint and tests both passed."
