@@ -16,6 +16,7 @@
 - **ansible-inventory** — a CLI command that lists and inspects the Ansible inventory; `ansible-inventory --list` shows all groups and hosts, useful for debugging missing hosts or typos in group names.
 - **ansible-lint** — a linter that checks Ansible playbooks for bad practices; its strict profile flags unqualified module names and unsafe variable interpolation.
 - **Vault-encrypted password file** — a file containing the Ansible Vault password, stored with `chmod 600` permissions; a 0644 vault password file leaks the master key.
+- **ansible-vault** — the Ansible CLI subcommand for encrypting and decrypting YAML files containing sensitive data; `ansible-vault encrypt` creates an encrypted file, `ansible-vault decrypt` reveals it in plaintext, `ansible-vault edit` opens it in an editor, and `ansible-vault rotate` changes the encryption key for all Vault-encrypted files in scope.
 
 ## Docker
 
@@ -151,6 +152,7 @@
 - **Console output** — the full log of what a build printed while running. Example: checking this when a test fails to see the failure message.
 - **Jenkinsfile** — the pipeline-as-code file living in the repo so job definitions are versioned. Example: `Jenkinsfile` at the root of a project.
 - **Initial admin password** — a one-time secret Jenkins writes to a file on disk during install; it's on the filesystem, not in the install output, and is needed for the first web-UI login.
+- **Configuration as Code (CASC)** — Jenkins Configuration as Code plugin (`jenkins.yaml` or `.yml` files) that defines controller configuration — security, tools, plugins, credentials, and system settings — as declarative YAML so the controller can be rebuilt from a single file.
 
 ## Grafana
 

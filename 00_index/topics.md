@@ -2,13 +2,13 @@
 
 > A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](learning-path.md).
 
-## Ansible  ·  30 files
+## Ansible  ·  32 files
 
 - **primer:** [Ansible — quick primer](../ansible/notes/0000-primer-ansible.md)
 - **notes** (3): most recent → [Ansible quickstart gotchas](../ansible/notes/2026-08-31-ansible-quickstart-gotchas.md), [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md)
-- **docs** (3): most recent → [command/shell vs purpose-built idempotent modules](../ansible/docs/command-shell-vs-idempotent-modules.md), [Managing Kubernetes with Ansible](../ansible/docs/managing-kubernetes-with-ansible.md), [Wired handlers and idempotency for a fleet](../ansible/docs/wired-handlers-idempotency-fleet.md)
+- **docs** (4): most recent → [Retry strategies for unreliable targets](../ansible/docs/retry-strategies-unreliable-targets.md), [command/shell vs purpose-built idempotent modules](../ansible/docs/command-shell-vs-idempotent-modules.md), [Managing Kubernetes with Ansible](../ansible/docs/managing-kubernetes-with-ansible.md), [Wired handlers and idempotency for a fleet](../ansible/docs/wired-handlers-idempotency-fleet.md)
 - **configs** (4): most recent → [VPS hardening playbook](../ansible/configs/vps-hardening-playbook.yaml), [Idempotent nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml), [Install nginx playbook](../ansible/configs/2026-08-22-install-nginx-playbook.yaml)
-- **scripts** (3): most recent → [Gated playbook run](../ansible/scripts/ansible-playbook-gated-run.sh), [Ansible ad-hoc toolkit](../ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh), [Ansible playbook wrapper](../ansible/scripts/ansible-playbook-wrapper.sh)
+- **scripts** (4): most recent → [Ansible Vault patterns](../ansible/scripts/ansible-vault-patterns.sh), [Gated playbook run](../ansible/scripts/ansible-playbook-gated-run.sh), [Ansible ad-hoc toolkit](../ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh), [Ansible playbook wrapper](../ansible/scripts/ansible-playbook-wrapper.sh)
 - **manifests** (1): [Terraform dynamic inventory](../ansible/manifests/terraform-dynamic-inventory.yaml) — builds the inventory from Terraform workspace outputs via the `tfc_inv` plugin
 - **snippets** (1): [Block/rescue/always deploy with handlers](../ansible/snippets/block-rescue-always-handlers.yaml) — config deploy with rollback, outcome report, and a change-gated service restart
 - **templates** (15): [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, `galaxy.yml`, dynamic cloud inventory, and a Terraform-outputs handoff script · _…and 14 more under `ansible/templates/ansible-role-molecule-collection/`._
@@ -50,11 +50,11 @@
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
 - **notes** (16): most recent → [Companion forgotten undo notes](../git/notes/2026-08-25-forgotten.md), [Git companion file quickstart](../git/notes/2026-09-10-git-companion-file-quickstart.txt), [Git companion readme primer](../git/notes/2026-09-10-git-companion-readme-primer.txt), [Git companion readme quickstart](../git/notes/2026-09-10-git-companion-readme-quickstart.md)
-- **docs** (10): most recent → [Worktree workflows for parallel feature development](../git/docs/worktree-parallel-feature-development.md), [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md), [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md)
+- **docs** (11): most recent → [Worktree workflows for parallel feature development](../git/docs/worktree-parallel-feature-development.md), [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md), [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md)
 - **scripts** (6): most recent → [Changelog from conventional commits](../git/scripts/changelog-from-conventional-commits.sh), [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Git PR helper](../git/scripts/git-pr-helper.sh)
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
 - **manifests** (1): [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps git events (push, tag, merge request) to build → test → deploy jobs
-- **templates** (15): [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) · [Repo scaffold with hooks and branch protection](../git/templates/repo-scaffold/README.md)
+- **templates** (14): [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) · [Repo scaffold with hooks and branch protection](../git/templates/repo-scaffold/README.md)
 - _…and more under `git/` — browse the folder._
 
 ## Grafana  ·  18 files
@@ -79,13 +79,15 @@
 - **scripts** (1): [Helm release workflow](../helm/scripts/helm-release-workflow.sh)
 - **notebooks** (1): [Comparing Helm values merging](../helm/notebooks/comparing-helm-values-merging.ipynb)
 
-## Jenkins  ·  10 files
+## Jenkins  ·  20 files
 
 - **primer:** [Jenkins — quick primer](../jenkins/notes/0000-primer-jenkins.md)
-- **notes** (4): most recent → [Following the official Jenkins tutorial](../jenkins/notes/2026-09-06-followed-jenkins-tutorial.md), [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md), [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md)
-- **configs** (1): [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile)
+- **notes** (5): most recent → [First controller plugins, agents, credentials](../jenkins/notes/2026-09-22-first-controller-plugins-agents-credentials.md), [Following the official Jenkins tutorial](../jenkins/notes/2026-09-06-followed-jenkins-tutorial.md), [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md)
+- **configs** (3): most recent → [Jenkins CASC reproducible controller setup](../jenkins/configs/jenkins-casc-reproducible-controller-setup.yaml), [Jenkins CASC HA config](../jenkins/configs/jenkins-casc-ha.yaml), [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile)
 - **docs** (2): [Moving a Jenkinsfile from inline script to SCM](../jenkins/docs/moving-jenkinsfile-to-scm-gotchas.md), [What tripped me up following the Jenkins declarative pipeline tutorial](../jenkins/docs/2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas
+- **scripts** (2): [Jenkinsfile for NodeJS pipeline](../jenkins/scripts/2026-09-22-nodejs-jenkinsfile.groovy) — declarative pipeline for building and testing a Node.js app, [Common CI/CD shared library groovy](../jenkins/scripts/common-cicd-shared-library.groovy) — shared library logic with buildAndPushDocker, checkoutAndLint, and deployToK8s steps
 - **snippets** (3): most recent → [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy), [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
+- **templates** (5): [Jenkins shared library scaffold](../jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline library with `vars/*.groovy`, tests, and CI gating · _…and 4 more under `jenkins/templates/jenkins-shared-library/`._
 
 ## Kubernetes  ·  31 files
 
@@ -100,7 +102,7 @@
 - **dockerfiles** (1): [Operator development image](../k8s/dockerfiles/operator-dev.Dockerfile)
 - **templates** (10): [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — two-tier frontend/backend chart with ingress routing and Prometheus alert rules · _…and 9 more under `k8s/templates/multi-service-app/`._
 
-## Prometheus  ·  15 files
+## Prometheus  ·  16 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
 - **notes** (4): most recent → [Prometheus quickstart trip-ups](../prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md), [Install Prometheus and explore web UI](../prom/notes/2026-08-29-install-prometheus-explore-web-ui.md), [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
@@ -122,7 +124,7 @@
 - **templates** (8): [Python CLI + Docker + GHA scaffold](../python/templates/python-cli-docker-gha/README.md)
 - _…and more under `python/` — browse the folder._
 
-## Terraform  ·  27 files
+## Terraform  ·  28 files
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
 - **notes** (4): most recent → [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md), [Quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
