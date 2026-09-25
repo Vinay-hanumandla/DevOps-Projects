@@ -2,6 +2,7 @@
 
 ## 2026-09-25
 
+- gha: Rework OIDC token exchange docs — replace the unsupported `actions/id-token-request@v2` action with the documented `ACTIONS_ID_TOKEN_REQUEST_URL`/`ACTIONS_ID_TOKEN_REQUEST_TOKEN` env-var approach and remove unverifiable specifics (gha-019)
 - gha: Add custom JavaScript action with validated repository/token/label/state inputs and GitHub API issue lookup outputs (gha-018)
 
 ## 2026-09-24
