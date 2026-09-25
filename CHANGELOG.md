@@ -604,3 +604,5 @@ Passed ([x]) jenkins-017 — Jenkins: template — Project scaffold: Jenkins sha
 Passed ([x]) jenkins-018 — Jenkins: config — Jenkins Configuration as Code for production multi-controller HA setup · Level: L4 · 2026-09-23
 - jenkins/templates/jenkins-shared-library/ — Project scaffold: Jenkins shared library with Git, Docker, and Kubernetes integration (jenkins-017)
 - jenkins/configs/jenkins-casc-ha.yaml — Jenkins Configuration as Code for production multi-controller HA setup (jenkins-018)
+- prom/configs/remote-write-long-term-storage.yaml — Prometheus remote write fan-out to Thanos, VictoriaMetrics, and Mimir long-term storage (prom-017)
+- repo-doc/scripts/2026-09-25-check-folders-and-report-gaps.sh — Automate the repo task workflow: coverage tables, folder validation, gap report (repo-doc-007)

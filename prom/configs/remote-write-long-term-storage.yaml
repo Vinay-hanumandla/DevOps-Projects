@@ -1,0 +1,52 @@
+# last_verified: 2026-09-25 · prom n/a
+#
+# Remote write to long-term storage backends (Thanos, VictoriaMetrics, Mimir).
+#
+# Purpose: keep short-term series in local Prometheus and fan the same
+# samples out to a long-term store via remote_write. This is one way to
+# do it — the docs also describe running a sidecar or agent per backend,
+# but a plain remote_write block needs no extra container.
+#
+# How to use it: uncomment exactly one receiver block below, fill in the
+# placeholder endpoint for that backend, then reload Prometheus. I keep
+# all three here so I can compare them side by side before picking one.
+#
+# Verify: after reload, open the Prometheus status page and confirm the
+# remote-write shard shows no errors, then query the backend's own UI
+# for a recent series with the cluster label below.
+
+global:
+  external_labels:
+    cluster: "<cluster-name>"
+    replica: "<prometheus-replica-name>"
+
+remote_write:
+  # Option 1 — Thanos receiver. Uncomment to send samples to Thanos
+  # for global query + downsampled retention.
+  - url: "<thanos-receive-endpoint>"
+    name: "thanos"
+    queue_config:
+      capacity: 10000
+      max_shards: 10
+      max_samples_per_send: 1000
+      batch_send_deadline: 5s
+
+  # Option 2 — VictoriaMetrics single-node or cluster insert path.
+  # Uncomment to send the same series to VictoriaMetrics instead.
+  # - url: "<victoriametrics-insert-endpoint>"
+  #   name: "victoriametrics"
+  #   queue_config:
+  #     capacity: 10000
+  #     max_shards: 10
+  #     max_samples_per_send: 1000
+  #     batch_send_deadline: 5s
+
+  # Option 3 — Mimir distributor push path. Uncomment to send the
+  # same series to Grafana Mimir instead.
+  # - url: "<mimir-push-endpoint>"
+  #   name: "mimir"
+  #   queue_config:
+  #     capacity: 10000
+  #     max_shards: 10
+  #     max_samples_per_send: 1000
+  #     batch_send_deadline: 5s
