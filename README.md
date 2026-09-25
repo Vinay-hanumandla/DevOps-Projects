@@ -19,11 +19,11 @@ The repository holds content files across notes, docs, scripts, snippets, config
 
 ## Quick links
 
+- [OIDC token exchange](gha/docs/oidc-token-exchange.md) — replacing long-lived cloud keys in workflows with short-lived tokens, including the trust relationship you configure on the other side.
+- [Labeled-issue JavaScript action](gha/scripts/custom-js-action/action.yml) — a real custom action: validated inputs, three outputs, and a Node entrypoint that talks to the REST API.
 - [Shared shell lint-and-test composite action](gha/configs/shared-shell-ci/action.yml) — reusable action that runs ShellCheck and shell tests with independently toggleable stages and outputs callers can gate on.
 - [Shared shell CI caller workflow](gha/configs/shared-shell-ci-caller.yaml) — example caller showing zero-argument defaults, per-call overrides, and downstream jobs gated on the shared action's outputs.
-- [Bash parallel execution patterns](bash/scripts/parallel-execution-patterns.sh) — xargs process slots, GNU parallel, and a named-pipe pool for running shell work in parallel.
-- [Bash advanced parameter expansion](bash/snippets/parameter-expansion-advanced.sh) — global substitution, prefix/suffix stripping, and nested expansions without spawning subshells.
-- [Jenkins + GitHub Actions + Argo CD progressive delivery](jenkins/docs/integrating-jenkins-github-actions-argocd-progressive-delivery.md) — splitting delivery across Jenkins builds, GitHub Actions policy checks, and Argo CD progressive sync.
+- [Helm values merge: `--set` vs `-f`](helm/notes/2026-09-21-values-merge-set-vs-file.md) — which value source actually wins, settled by rendering a scratch chart and reading the output.
 
 ## Layout
 
@@ -56,7 +56,7 @@ Counts include files nested inside template trees. `Other` is a root-level suppo
 | Ansible | 3 | 4 | 4 | 1 | 4 | 1 | 0 | 0 | 15 | 0 | 0 | 0 | 2026-09-23 |
 | Bash | 3 | 6 | 10 | 2 | 0 | 0 | 4 | 1 | 30 | 0 | 0 | 0 | 2026-09-23 |
 | Docker | 5 | 3 | 7 | 0 | 0 | 2 | 0 | 4 | 25 | 2 | 0 | 1 | 2026-09-21 |
-| GitHub Actions | 3 | 3 | 2 | 1 | 8 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-24 |
+| GitHub Actions | 3 | 4 | 4 | 1 | 8 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-25 |
 | Git | 16 | 11 | 6 | 0 | 0 | 1 | 0 | 0 | 14 | 0 | 1 | 0 | 2026-09-21 |
 | Grafana | 4 | 1 | 1 | 3 | 6 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-21 |
 | Helm | 6 | 2 | 1 | 1 | 7 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-21 |
@@ -73,8 +73,8 @@ Counts include files nested inside template trees. `Other` is a root-level suppo
 
 ## Status
 
-Currently expanding Jenkins controller setup (Configuration as Code, shared libraries, progressive delivery with GitHub Actions and Argo CD), reusable GitHub Actions for shell lint-and-test gates, and Bash parallel-execution patterns.
+Currently working through GitHub Actions authentication — OIDC token exchange against cloud providers and Vault, plus a worked custom JavaScript action that validates its inputs and returns structured results.
 
 ---
 
-_Last updated: 2026-09-24_
+_Last updated: 2026-09-25_

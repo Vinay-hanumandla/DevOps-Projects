@@ -36,13 +36,13 @@
 - **templates** (25): [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack with health-gated startup, file-based secrets, and a tools profile · [Local dev cluster scaffold](../docker/templates/local-dev-cluster/README.md) — kind config, Compose file, and k8s manifests for a throwaway dev loop · [Buildx Bake monorepo scaffold](../docker/templates/buildx-bake-monorepo/README.md) — shared cache, attestations, and dual-registry image outputs · _…and 22 more under `docker/templates/`._
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
 
-## GitHub Actions  ·  18 files
+## GitHub Actions  ·  21 files
 
 - **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
 - **notes** (3): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
-- **docs** (3): most recent → [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md), [GitHub Actions quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md), [How I learned to read workflow logs and debug failures](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
+- **docs** (4): most recent → [OIDC token exchange with GitHub Actions](../gha/docs/oidc-token-exchange.md) — short-lived tokens against AWS, GCP, Azure, and Vault instead of stored keys, [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md), [Quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md)
 - **configs** (8): most recent → [Shared shell lint-and-test gate](../gha/configs/shared-shell-ci/action.yml), [Shared shell CI caller](../gha/configs/shared-shell-ci-caller.yaml), [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml) · _…and 5 more under `gha/configs/`._
-- **scripts** (2): [Minimal custom JavaScript action](../gha/scripts/action.yml) — action definition on the node20 runtime; [Minimal custom JavaScript action entrypoint](../gha/scripts/minimal-custom-js-action.js) — reads two inputs, composes a greeting, and exposes it via `$GITHUB_OUTPUT`
+- **scripts** (4): most recent → [Labeled-issue custom action](../gha/scripts/custom-js-action/action.yml) — four inputs in, three outputs out, Node runtime · [Its Node entrypoint](../gha/scripts/custom-js-action/index.js) — validates inputs, calls the REST API, writes `$GITHUB_OUTPUT` · [Minimal custom JavaScript action](../gha/scripts/action.yml) · [Minimal custom action entrypoint](../gha/scripts/minimal-custom-js-action.js)
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 - **snippets** (1): [Reusable workflow caller](../gha/snippets/reusable-workflow-caller.yaml) — minimal caller of a centrally maintained reusable workflow, passing inputs and secrets and reading outputs downstream
 
@@ -71,9 +71,9 @@
 ## Helm  ·  20 files
 
 - **primer:** [Helm — quick primer](../helm/notes/0000-primer-helm.md)
-- **notes** (5): most recent → [Following the Helm quickstart](../helm/notes/2026-08-19-following-helm-quickstart.md), [Install Helm with package manager](../helm/notes/2026-08-18-install-helm-with-package-manager.md), [Explore Helm chart repo and chart structure](../helm/notes/2026-08-08-explore-helm-chart-repo.md)
+- **notes** (6): most recent → [Values merge: `--set` vs `-f`](../helm/notes/2026-09-21-values-merge-set-vs-file.md), [Following the Helm quickstart](../helm/notes/2026-08-19-following-helm-quickstart.md), [Install Helm with package manager](../helm/notes/2026-08-18-install-helm-with-package-manager.md)
 - **docs** (2): most recent → [Helm values inheritance and environment overrides](../helm/docs/helm-values-inheritance.md), [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md)
-- **configs** (6): most recent → [Chart.yaml scaffold](../helm/configs/chart-scaffold.yaml), [Multi-environment Helm values](../helm/configs/multi-environment-helm-values.yaml), [Dev values override](../helm/configs/2026-08-20-dev-values.yaml), [Staging values override](../helm/configs/2026-08-20-staging-values.yaml), [Prod values override](../helm/configs/2026-08-20-prod-values.yaml)
+- **configs** (7): most recent → [Minimal static web app values](../helm/configs/2026-09-21-minimal-static-web-app-values.yaml), [Chart.yaml scaffold](../helm/configs/chart-scaffold.yaml), [Multi-environment Helm values](../helm/configs/multi-environment-helm-values.yaml) · _…and 4 more under `helm/configs/`._
 - **snippets** (1): [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh)
 - **manifests** (2): most recent → [Hooks lifecycle manifest](../helm/manifests/hooks-lifecycle.yaml), [First chart template](../helm/manifests/2026-08-14-first-chart-template.yaml)
 - **scripts** (1): [Helm release workflow](../helm/scripts/helm-release-workflow.sh)
@@ -122,15 +122,14 @@
 - **configs** (4): most recent → [App config for the Pydantic loader](../python/configs/2026-09-16-app-config.yaml), [pyproject.toml README guide](../python/configs/2026-09-14-pyproject-toml-readme.md), [App config](../python/configs/2026-09-15-app-config.yaml), [pyproject.toml config](../python/configs/2026-08-24-pyproject-toml-config.toml)
 - **dockerfiles** (1): [Python app Dockerfile](../python/dockerfiles/python-app.Dockerfile)
 - **notebooks** (2): most recent → [Async patterns comparison](../python/notebooks/async-patterns-comparison.ipynb) — asyncio vs trio vs anyio for I/O-bound DevOps tooling, [Comparing environment-aware config](../python/notebooks/comparing-env-aware-config.ipynb) — typed settings vs layered loaders vs minimal env readers
-- **templates** (8): [Python CLI + Docker + GHA scaffold](../python/templates/python-cli-docker-gha/README.md)
-- _…and more under `python/` — browse the folder._
+- **templates** (7): [Python CLI + Docker + GHA scaffold](../python/templates/python-cli-docker-gha/README.md) — one copy-in layout with a typed CLI, a container image, and a workflow that tests it · _…and 6 more under `python/templates/python-cli-docker-gha/`._
 
 ## Terraform  ·  28 files
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
 - **notes** (4): most recent → [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md), [Quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
-- **configs** (7): most recent → [AWS VPC NAT module](../tf/configs/aws-vpc-nat-module.hcl), [Multi-resource Terraform config](../tf/configs/multi-resource-terraform-config.hcl), [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl), [Minimal provider resource](../tf/configs/2026-08-08-minimal-provider-resource.hcl)
-- **docs** (3): most recent → [Terraform — coverage check](../tf/docs/2026-08-11-terraform-coverage.md), [Local vs remote Terraform state](../tf/docs/local-vs-remote-terraform-state.md), [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md)
+- **configs** (7): most recent → [AWS VPC NAT module](../tf/configs/aws-vpc-nat-module.hcl), [Multi-resource Terraform config](../tf/configs/multi-resource-terraform-config.hcl), [Terraform null resource](../tf/configs/2026-09-02-first-terraform-null-resource.hcl) · _…and 4 more under `tf/configs/`._
+- **docs** (4): most recent → [Terraform module composition patterns](../tf/docs/module-composition-patterns.md) — root fan-out vs a dedicated composition module vs stacked multi-config deploys, [Terraform — coverage check](../tf/docs/2026-08-11-terraform-coverage.md), [Local vs remote Terraform state](../tf/docs/local-vs-remote-terraform-state.md), [Terraform project structure](../tf/docs/2026-08-06-terraform-project-structure.md)
 - **scripts** (2): most recent → [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh), [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
 - **snippets** (1): [Terraform variables and outputs](../tf/snippets/2026-08-30-terraform-variables-outputs.hcl)
 - **manifests** (1): [Root module fan-out composition](../tf/manifests/root-module-fan-out-composition.hcl) — VPC, EKS, and RDS submodules wired via outputs from one root module
