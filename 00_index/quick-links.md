@@ -47,6 +47,12 @@
 - [System report tool](../bash/scripts/system-report-tool.sh) — directory-based system report tool with text and JSON output
 - [Log rotation and retention](../bash/scripts/log-rotation-retention.sh) — compresses and prunes log files older than a threshold with gzip and age-based retention
 
+### Run shell work in parallel
+- [Parallel execution patterns](../bash/scripts/parallel-execution-patterns.sh) — xargs process slots, GNU parallel, and a named-pipe pool compared so you can pick the right one for the workload
+
+### Reshape strings without subshells
+- [Advanced parameter expansion](../bash/snippets/parameter-expansion-advanced.sh) — global substitution, prefix/suffix stripping, and nested expansions for inline path and env-value rewrites
+
 ### Write robust Bash
 - [Robust Bash scripting](../bash/docs/2026-07-23-robust-bash-scripts.md) — strict mode, error handling, and safe defaults
 - [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md) — notes on integrating set -euo pipefail and trap-based cleanup into a script workflow
@@ -236,7 +242,6 @@
 - [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy) — pulls a helper from a global shared library and binds a secret-text credential without printing it
 
 ### Configure Jenkins controller
-- [Minimal declarative Jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile) — a minimal declarative Jenkins pipeline config
 - [Jenkins CASC reproducible controller setup](../jenkins/configs/jenkins-casc-reproducible-controller-setup.yaml) — a CASC bundle that produces a deterministic controller from a single config
 - [Jenkins HA CASC config](../jenkins/configs/jenkins-casc-ha.yaml) — Jenkins Configuration as Code for a reproducible, high-availability controller setup
 
@@ -248,6 +253,9 @@
 - [Build and push Docker step](../jenkins/templates/jenkins-shared-library/vars/buildAndPushDocker.groovy) — shared library step that builds a Docker image and pushes it to a registry
 - [Common CI/CD shared library groovy](../jenkins/scripts/common-cicd-shared-library.groovy) — shared library logic with buildAndPushDocker, checkoutAndLint, and deployToK8s steps
 - [NodeJS Jenkinsfile](../jenkins/scripts/2026-09-22-nodejs-jenkinsfile.groovy) — declarative pipeline for building and testing a Node.js app
+
+### Roll out progressively with Jenkins, GitHub Actions, and Argo CD
+- [Integrating Jenkins, GitHub Actions, and Argo CD](../jenkins/docs/integrating-jenkins-github-actions-argocd-progressive-delivery.md) — Jenkins builds and publishes the artifact, GitHub Actions runs policy checks, Argo CD syncs progressively per environment with canary slices
 
 ### Get started with Kubernetes
 - [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md) — first-contact notes for Kubernetes concepts and kubectl basics
@@ -411,12 +419,18 @@
 - [Minimal custom JavaScript action](../gha/scripts/action.yml) — the smallest viable custom action: two inputs in, one greeting output out, on the node20 runtime
 - [Custom action entrypoint](../gha/scripts/minimal-custom-js-action.js) — reads the inputs, composes the message, and exposes it via `$GITHUB_OUTPUT`
 
+### Share a shell lint-and-test gate across workflows
+- [Shared shell lint-and-test gate](../gha/configs/shared-shell-ci/action.yml) — reusable composite action that runs ShellCheck and shell tests with independently toggleable stages and outputs callers can gate on
+- [Shared shell CI caller](../gha/configs/shared-shell-ci-caller.yaml) — example caller showing zero-argument defaults, per-call overrides, and downstream jobs gated on the shared action's outputs
+
 ### Keep the repo's own docs in sync
 - [Repo-doc primer](../repo-doc/notes/0000-primer-repo-doc.md) — notes on keeping the repository's own docs and coverage tables in sync
 - [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md) — how I kept the README coverage table and Git index honest against what's actually on disk
 - [Repo-doc tooling overview](../repo-doc/docs/2026-09-08-repo-doc-tooling-overview.md) — overview of the tools and scripts used to maintain the repository's documentation
 - [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh) — a helper that reconciles the README coverage table with on-disk counts
 - [Repo-task quickstart trip-ups](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md) — first-contact pitfalls when using the repo-doc toolkit
+- [Repo-doc CLI install and first scaffold](../repo-doc/notes/2026-09-21-repo-doc-cli-install-and-scaffold.md) — installing the repo-doc tooling and generating a project documentation scaffold
+- [Following the repo-task tutorial](../repo-doc/notes/2026-09-23-following-repo-task-tutorial-workflows.md) — end-to-end walkthrough of adding a learning file and re-running the coverage tooling
 
 ### Ansible reference docs
 - [Retry strategies for unreliable targets](../ansible/docs/retry-strategies-unreliable-targets.md) — strategies for handling transient failures when targets drop connectivity during a playbook run
