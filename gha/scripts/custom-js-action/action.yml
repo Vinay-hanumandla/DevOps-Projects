@@ -1,0 +1,30 @@
+# last_verified: 2026-09-25 · gha n/a
+name: 'Find labeled repository issues'
+description: 'Validates repository inputs and lists GitHub issues carrying a label.'
+
+inputs:
+  repository:
+    description: 'Repository in owner/name format.'
+    required: true
+  token:
+    description: 'GitHub token with read access to the repository.'
+    required: true
+  label:
+    description: 'Label used to filter repository issues.'
+    required: true
+  state:
+    description: 'Issue state to list: open, closed, or all.'
+    required: false
+    default: 'open'
+
+outputs:
+  count:
+    description: 'Number of matching issues returned by the API.'
+  issue-urls:
+    description: 'Newline-separated URLs for the matching issues.'
+  issues-json:
+    description: 'JSON representation of the matching issues.'
+
+runs:
+  using: 'node20'
+  main: 'index.js'

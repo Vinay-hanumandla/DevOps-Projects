@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-25
+
+- gha: Add custom JavaScript action with validated repository/token/label/state inputs and GitHub API issue lookup outputs (gha-018)
+
 ## 2026-09-24
 
 - gha: Add reusable composite action for a shared shell lint-and-test gate with toggleable stages and lint/test outputs, plus a caller workflow (gha-017)
