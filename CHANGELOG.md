@@ -2,6 +2,9 @@
 
 ## 2026-09-26
 
+- helm: Add reusable Helm release management wrapper with pre-flight checks, install/diff/upgrade/rollback (helm-022)
+- helm: Add Helm production best practices reference — chart structure, test hooks, release management (helm-023)
+- prom: Add PromQL advanced patterns reference — histograms, subqueries, predictive recording rules, federation (prom-016)
 - helm: Add production multi-tier deployment manifest with security contexts, resource quotas, HPA, and PDB (helm-021)
 - gha: Add hello-world workflow config for first GitHub Actions run on push (gha-021)
 - bash: Add first-script follow-up — runnable argument and file-check example (bash-032)
