@@ -1,0 +1,9 @@
+# last_verified: 2026-09-26 · Helm n/a
+# Chart for the values-inheritance guide.
+# Base defaults live here; environment files only carry what differs.
+apiVersion: v2
+name: my-service
+description: Example service chart for the values inheritance guide
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

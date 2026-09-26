@@ -1,0 +1,6 @@
+# last_verified: 2026-09-26 · Helm n/a
+# Dev overrides for my-service. Only what differs from values.yaml.
+replicaCount: 1
+
+image:
+  tag: "latest"
