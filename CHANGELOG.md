@@ -2,6 +2,8 @@
 
 ## 2026-09-26
 
+- helm: Add production multi-tier deployment manifest with security contexts, resource quotas, HPA, and PDB (helm-021)
+- gha: Add hello-world workflow config for first GitHub Actions run on push (gha-021)
 - bash: Add first-script follow-up — runnable argument and file-check example (bash-032)
 - helm: Add my-service chart scaffold referenced by the values inheritance guide (helm-020)
 - helm: Add library-chart scaffold template — lib-common named templates, web-api app chart with values schema validation, and helm test hook (helm-019)
