@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-26
+
+- repo-doc: Add tool folder convention reference — required subdirectories, file naming patterns, and primer exclusion rules (repo-doc-008)
+
 ## 2026-09-25
 
 - gha: Rework OIDC token exchange docs — replace the unsupported `actions/id-token-request@v2` action with the documented `ACTIONS_ID_TOKEN_REQUEST_URL`/`ACTIONS_ID_TOKEN_REQUEST_TOKEN` env-var approach and remove unverifiable specifics (gha-019)
