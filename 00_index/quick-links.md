@@ -148,6 +148,7 @@
 
 ### Work on parallel branches without stashing
 - [Worktree workflows for parallel feature development](../git/docs/worktree-parallel-feature-development.md) — one clone hosting several checked-out branches at once, sharing a single object store
+- [Worktree workflows for hotfix isolation](../git/docs/worktree-hotfix-isolation.md) — cut the fix from the release line in a fresh worktree, verify and push from there, then forward-merge to active features
 
 ### Use interactive rebase effectively
 - [Signed commits and CI provenance](../git/docs/signed-commits-and-ci-provenance.md) — signing keys, envelope signing, and how CI verifies commit provenance
@@ -298,6 +299,7 @@
 - [PromQL rate increase, histogram, and quantile](../prom/docs/2026-09-19-promql-rate-increase-histogram-quantile.md) — detecting sudden error-rate increases with `rate()`, bucket histograms, and `quantile_over_time()` for SLO burn-rate alerts
 - [Kubernetes pod service discovery](../prom/configs/2026-09-18-kubernetes-service-discovery.yaml) — scrapes annotated pods with relabelling for address, path, namespace, and pod labels
 - [Remote-write vs federation](../prom/configs/remote-write-vs-federation.yaml) — the two long-term-storage paths side by side: push series to a remote endpoint or let a peer scrape this one
+- [Remote-write long-term storage](../prom/configs/remote-write-long-term-storage.yaml) — fan the same series out to Thanos, VictoriaMetrics, or Mimir with queue tuning, one receiver at a time
 - [Rules evaluator](../prom/scripts/rules-evaluator.go) — runs recording and alerting rules offline against sample data with Go-template annotation expansion
 
 ### Get started with Python
@@ -439,6 +441,9 @@
 - [Repo-task quickstart trip-ups](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md) — first-contact pitfalls when using the repo-doc toolkit
 - [Repo-doc CLI install and first scaffold](../repo-doc/notes/2026-09-21-repo-doc-cli-install-and-scaffold.md) — installing the repo-doc tooling and generating a project documentation scaffold
 - [Following the repo-task tutorial](../repo-doc/notes/2026-09-23-following-repo-task-tutorial-workflows.md) — end-to-end walkthrough of adding a learning file and re-running the coverage tooling
+- [Tool folder conventions](../repo-doc/configs/2026-09-26-tool-folder-conventions.md) — required subdirs, file-naming patterns, and primer rules for where files live in this kit
+- [Following the tutorial again — the pre-PR validation loop](../repo-doc/docs/2026-09-26-tutorial-validation-loop-trip-ups.md) — front-matter, CHANGELOG entry, folder-check script, and reading the gap report before opening a PR
+- [Check folders and report gaps](../repo-doc/scripts/2026-09-25-check-folders-and-report-gaps.sh) — one script that regenerates coverage tables, validates tool-folder structure, and reports gaps
 
 ### Ansible reference docs
 - [Retry strategies for unreliable targets](../ansible/docs/retry-strategies-unreliable-targets.md) — strategies for handling transient failures when targets drop connectivity during a playbook run

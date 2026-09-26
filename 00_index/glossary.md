@@ -308,6 +308,7 @@
 - **`kubernetes_sd_configs`** — a Prometheus scrape-config section that discovers targets from the Kubernetes API (here `role: pod`) instead of static addresses; paired with `relabel_configs` that keep only annotated pods and rewrite address, path, and labels from pod metadata.
 - **`relabel_configs`** — an ordered list of keep/drop/replace rules applied to each discovered target's labels before scraping; the mechanism that turns raw `__meta_kubernetes_*` labels into the `namespace`, `pod`, and `__address__` values the scrape uses.
 - **Remote-write vs federation** — the two paths for getting series into long-term storage: remote-write pushes samples from each Prometheus to a central endpoint as they arrive, while federation has a central Prometheus scrape `/federate` on its peers for selected series; the config keeps both so the trade-off is explicit.
+- **Remote-write receiver** — the long-term store a `remote_write` block fans samples out to (here Thanos, VictoriaMetrics, or Mimir); local Prometheus keeps short-term series while the receiver owns retention, downsampling, and global queries — uncomment exactly one receiver block per Prometheus.
 
 ## Jenkins (additional)
 
@@ -351,6 +352,8 @@
 
 - **Coverage table** — a Markdown table in README.md that tracks how many files each tool folder contains, broken down by category (notes, scripts, docs, configs, etc.); kept in sync with on-disk counts by a regeneration script.
 - **Tool index** — a per-tool Markdown file (e.g. `git/docs/2026-08-10-git-index.md`) that lists every doc in that tool's folder with a one-line description; walks the subdirectory tree and records what's there.
+- **Folder conventions** — the agreed layout for where files live: each tool holds only the category subdirs it uses (`notes/`, `docs/`, `scripts/`, `snippets/`, `configs/`, `manifests/`, `dockerfiles/`, `notebooks/`, `templates/`), learner-stage files carry a `YYYY-MM-DD-` prefix, and each tool gets exactly one `notes/0000-primer-<tool>.md`.
+- **Pre-PR validation loop** — the checks run after a file is written and before a PR goes up: confirm the category subdir, add the front-matter block, add the CHANGELOG one-liner, then run the folder-check script and read the gap report for complaints about your file.
 
 ## Docker (additional)
 
@@ -417,6 +420,7 @@
 ## Git (worktrees)
 
 - **Linked worktree** — an additional working directory attached to the same repository via `git worktree add <path> <branch>`; each worktree checks out its own branch while all of them share one object store, so parallel features keep separate build state without extra clones.
+- **Hotfix isolation** — cutting an urgent fix from the release line in a fresh linked worktree instead of switching the busy main checkout; the fix is verified and pushed from its own tree, merged through the normal review flow, then forward-merged into active feature trees.
 
 ## Jenkins (controller setup)
 
