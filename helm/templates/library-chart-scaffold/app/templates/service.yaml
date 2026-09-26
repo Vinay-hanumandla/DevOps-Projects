@@ -1,0 +1,16 @@
+# last_verified: 2026-09-26 · Helm n/a
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "lib-common.fullname" . }}
+  labels:
+    {{- include "lib-common.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

@@ -1,0 +1,19 @@
+# last_verified: 2026-09-26 · Helm n/a
+# Test hook pod. `helm test <release>` runs every manifest under
+# templates/tests/ carrying the `helm.sh/hook: test` annotation
+# and reports pass/fail per pod. This one just confirms the
+# Service answers on the configured port after install.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "lib-common.fullname" . }}-test-connection"
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command:
+        - wget
+        - "{{ include "lib-common.fullname" . }}:{{ .Values.service.port }}"
+  restartPolicy: Never

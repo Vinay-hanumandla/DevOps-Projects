@@ -1,0 +1,7 @@
+# last_verified: 2026-09-26 · Helm n/a
+# Override file used by the chart-testing loop in the README.
+# Only carries what differs from values.yaml; the schema still
+# applies, so a bad key here fails lint the same way.
+replicaCount: 2
+service:
+  port: 8080

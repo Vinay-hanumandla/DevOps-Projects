@@ -1,0 +1,9 @@
+# last_verified: 2026-09-26 · Helm n/a
+# Library chart holding shared named templates.
+# The app chart pulls these in with `include` so every
+# service renders labels, names, and image strings the same way.
+apiVersion: v2
+name: lib-common
+description: Shared library chart — named templates for labels, names, and image strings
+type: library
+version: 0.1.0

@@ -1,0 +1,6 @@
+# last_verified: 2026-09-26 · Helm n/a
+# Library-chart defaults. These are documentation more than
+# configuration — the consuming chart's own values win.
+# Kept here so `helm show values` on the library reads sensibly.
+commonLabels: {}
+imagePullPolicy: IfNotPresent
