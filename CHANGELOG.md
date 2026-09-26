@@ -2,6 +2,7 @@
 
 ## 2026-09-26
 
+- helm: Add library-chart scaffold template — lib-common named templates, web-api app chart with values schema validation, and helm test hook (helm-019)
 - git: Add worktree hotfix-isolation workflow — release-line hotfix trees, forward-merge to active features, and teardown/rollback (git-035)
 - repo-doc: Add notes on following the tutorial for the pre-PR validation loop — front-matter, CHANGELOG, and gap-report trip-ups (repo-doc-009)
 - repo-doc: Add tool folder convention reference — required subdirectories, file naming patterns, and primer exclusion rules (repo-doc-008)

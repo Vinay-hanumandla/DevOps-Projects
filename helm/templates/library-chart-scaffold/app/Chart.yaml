@@ -1,0 +1,15 @@
+# last_verified: 2026-09-26 · Helm n/a
+# Application chart. Shared rendering lives in the lib-common
+# library chart (a local file:// dependency); this chart only
+# holds its own values, schema, and workload manifests.
+apiVersion: v2
+name: web-api
+description: Example service chart consuming the lib-common library chart
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+
+dependencies:
+  - name: lib-common
+    version: 0.1.0
+    repository: file://../lib-common

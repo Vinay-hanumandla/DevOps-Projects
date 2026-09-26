@@ -1,0 +1,29 @@
+# last_verified: 2026-09-26 · Helm n/a
+# Deployment rendered through the library chart's named templates.
+# Labels, resource name, and image string all come from lib-common
+# so a second service chart reuses the exact same rendering.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "lib-common.fullname" . }}
+  labels:
+    {{- include "lib-common.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Chart.Name }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        {{- include "lib-common.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ include "lib-common.image" . }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
