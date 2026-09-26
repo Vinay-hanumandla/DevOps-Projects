@@ -13,12 +13,12 @@
 - **snippets** (1): [Block/rescue/always deploy with handlers](../ansible/snippets/block-rescue-always-handlers.yaml) — config deploy with rollback, outcome report, and a change-gated service restart
 - **templates** (15): [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, `galaxy.yml`, dynamic cloud inventory, and a Terraform-outputs handoff script · _…and 14 more under `ansible/templates/ansible-role-molecule-collection/`._
 
-## Bash  ·  56 files
+## Bash  ·  57 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
 - **docs** (6): most recent → [Bash 5.3 deep dive](../bash/docs/bash-5.3-deep-dive.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md), [Debug and profile with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md)
-- **scripts** (10): most recent → [Parallel execution patterns](../bash/scripts/parallel-execution-patterns.sh), [Companion test for the first script](../bash/scripts/2026-09-05-companion-test.sh), [CI-safe build wrapper](../bash/scripts/build-and-check.sh)
+- **scripts** (11): most recent → [First script with argument handling](../bash/scripts/2026-09-26-first-script-with-args.sh) — takes a positional argument, defaults it with `${1:-…}`, and tests whether the path exists · [Parallel execution patterns](../bash/scripts/parallel-execution-patterns.sh), [Companion test for the first script](../bash/scripts/2026-09-05-companion-test.sh) · _…and 7 more under `bash/scripts/`._
 - **snippets** (2): [Advanced parameter expansion](../bash/snippets/parameter-expansion-advanced.sh) — global substitution, prefix/suffix stripping, and nested expansions without subshells; [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
 - **notebooks** (4): most recent → [Bats-core production test suite](../bash/notebooks/bats-core-production-test-suite.ipynb), [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb), [Comparing pipeline exit-code handling](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb)
 - **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
@@ -36,12 +36,13 @@
 - **templates** (25): [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack with health-gated startup, file-based secrets, and a tools profile · [Local dev cluster scaffold](../docker/templates/local-dev-cluster/README.md) — kind config, Compose file, and k8s manifests for a throwaway dev loop · [Buildx Bake monorepo scaffold](../docker/templates/buildx-bake-monorepo/README.md) — shared cache, attestations, and dual-registry image outputs · _…and 22 more under `docker/templates/`._
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
 
-## GitHub Actions  ·  21 files
+## GitHub Actions  ·  23 files
 
 - **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
 - **notes** (3): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
 - **docs** (4): most recent → [OIDC token exchange with GitHub Actions](../gha/docs/oidc-token-exchange.md) — short-lived tokens against AWS, GCP, Azure, and Vault instead of stored keys, [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md), [Quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md)
-- **configs** (8): most recent → [Shared shell lint-and-test gate](../gha/configs/shared-shell-ci/action.yml), [Shared shell CI caller](../gha/configs/shared-shell-ci-caller.yaml), [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml) · _…and 5 more under `gha/configs/`._
+- **configs** (9): most recent → [Hello-world workflow](../gha/configs/2026-09-26-hello-world-workflow.yaml) — checkout, runner and commit context, plus a manual trigger · [Shared shell lint-and-test gate](../gha/configs/shared-shell-ci/action.yml), [Shared shell CI caller](../gha/configs/shared-shell-ci-caller.yaml) · _…and 6 more under `gha/configs/`._
+- **manifests** (1): [GitOps app-of-apps](../gha/manifests/gitops-app-of-apps.yaml) — an AppProject, a root app rendering an `apps/` directory, Helm- and Kustomize-sourced children, and a workflow that validates them and asks Argo CD to re-read after a merge
 - **scripts** (4): most recent → [Labeled-issue custom action](../gha/scripts/custom-js-action/action.yml) — four inputs in, three outputs out, Node runtime · [Its Node entrypoint](../gha/scripts/custom-js-action/index.js) — validates inputs, calls the REST API, writes `$GITHUB_OUTPUT` · [Minimal custom JavaScript action](../gha/scripts/action.yml) · [Minimal custom action entrypoint](../gha/scripts/minimal-custom-js-action.js)
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 - **snippets** (1): [Reusable workflow caller](../gha/snippets/reusable-workflow-caller.yaml) — minimal caller of a centrally maintained reusable workflow, passing inputs and secrets and reading outputs downstream
@@ -68,16 +69,17 @@
 - **snippets** (3): most recent → [List dashboards and datasources](../grafana/snippets/2026-09-09-list-dashboards-datasources.py), [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh), [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
 - **notebooks** (1): [Comparing Grafana unified alerting vs Alertmanager](../grafana/notebooks/comparing-grafana-unified-alerting-vs-alertmanager.ipynb)
 
-## Helm  ·  20 files
+## Helm  ·  41 files
 
 - **primer:** [Helm — quick primer](../helm/notes/0000-primer-helm.md)
 - **notes** (6): most recent → [Values merge: `--set` vs `-f`](../helm/notes/2026-09-21-values-merge-set-vs-file.md), [Following the Helm quickstart](../helm/notes/2026-08-19-following-helm-quickstart.md), [Install Helm with package manager](../helm/notes/2026-08-18-install-helm-with-package-manager.md)
-- **docs** (2): most recent → [Helm values inheritance and environment overrides](../helm/docs/helm-values-inheritance.md), [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md)
+- **docs** (3): most recent → [Helm production best practices](../helm/docs/helm-production-best-practices.md) — chart layout and naming, size limits, test hooks, and the `values.schema.json` gate · [Values inheritance and environment overrides](../helm/docs/helm-values-inheritance.md) · [Helm — coverage check](../helm/docs/2026-08-10-helm-coverage.md)
 - **configs** (7): most recent → [Minimal static web app values](../helm/configs/2026-09-21-minimal-static-web-app-values.yaml), [Chart.yaml scaffold](../helm/configs/chart-scaffold.yaml), [Multi-environment Helm values](../helm/configs/multi-environment-helm-values.yaml) · _…and 4 more under `helm/configs/`._
 - **snippets** (1): [Deploy first chart](../helm/snippets/2026-07-31-deploy-first-chart.sh)
-- **manifests** (2): most recent → [Hooks lifecycle manifest](../helm/manifests/hooks-lifecycle.yaml), [First chart template](../helm/manifests/2026-08-14-first-chart-template.yaml)
+- **manifests** (3): most recent → [Production multi-tier deployment](../helm/manifests/production-multi-tier-deployment.yaml) — namespaced production manifest with security contexts, quotas, an HPA, and a PDB · [Hooks lifecycle manifest](../helm/manifests/hooks-lifecycle.yaml), [First chart template](../helm/manifests/2026-08-14-first-chart-template.yaml)
 - **scripts** (1): [Helm release workflow](../helm/scripts/helm-release-workflow.sh)
 - **notebooks** (1): [Comparing Helm values merging](../helm/notebooks/comparing-helm-values-merging.ipynb)
+- **templates** (19): [Library chart scaffold](../helm/templates/library-chart-scaffold/README.md) — a `lib-common` chart of named templates, an app chart consuming them, a `values.schema.json`, and a `helm test` hook · [my-service chart scaffold](../helm/templates/my-service/README.md) — the plain chart the values-inheritance guide's `-f values-staging.yaml` runs against, with one override file per environment · _…and 15 more under `helm/templates/`._
 
 ## Jenkins  ·  21 files
 
