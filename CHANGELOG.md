@@ -2,6 +2,8 @@
 
 ## 2026-09-26
 
+- bash: Add first-script follow-up — runnable argument and file-check example (bash-032)
+- helm: Add my-service chart scaffold referenced by the values inheritance guide (helm-020)
 - helm: Add library-chart scaffold template — lib-common named templates, web-api app chart with values schema validation, and helm test hook (helm-019)
 - git: Add worktree hotfix-isolation workflow — release-line hotfix trees, forward-merge to active features, and teardown/rollback (git-035)
 - repo-doc: Add notes on following the tutorial for the pre-PR validation loop — front-matter, CHANGELOG, and gap-report trip-ups (repo-doc-009)

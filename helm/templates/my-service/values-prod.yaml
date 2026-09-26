@@ -1,0 +1,18 @@
+# last_verified: 2026-09-26 · Helm n/a
+# Prod overrides for my-service. Only what differs from values.yaml.
+replicaCount: 4
+
+image:
+  tag: "v1.4.1"
+  pullPolicy: Always
+
+service:
+  type: LoadBalancer
+
+resources:
+  limits:
+    cpu: "1"
+    memory: 1Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi

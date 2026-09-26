@@ -1,0 +1,11 @@
+# last_verified: 2026-09-26 · Helm n/a
+# Staging overrides for my-service. Only what differs from values.yaml.
+replicaCount: 2
+
+image:
+  tag: "v1.4.2-rc1"
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
