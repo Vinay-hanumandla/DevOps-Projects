@@ -1,0 +1,281 @@
+# last_verified: 2026-09-26 · gha n/a · argocd n/a
+#
+# GitOps delivery with Argo CD app-of-apps, synchronized from GitHub Actions.
+#
+# Layout of this file (multi-document):
+#
+#   doc 1  AppProject          — which repos and namespaces the root app may touch
+#   doc 2  Application (root)  — app-of-apps: renders the apps/ directory
+#   doc 3  Application (child) — Helm-sourced workload
+#   doc 4  Application (child) — Kustomize-sourced workload
+#   doc 5  GitHub Actions      — validates the Argo CD documents, then asks
+#                                Argo CD to re-read them after a merge
+#
+# Documents 1-4 are cluster objects and are applied with
+# `kubectl apply -f` (or handed to Argo CD as the root of a bootstrap repo).
+# Document 5 is a workflow, not a cluster object — the validate job in it
+# selects the four documents above out of this file before touching anything.
+#
+# The split is deliberate. Argo CD owns desired state; the workflow never
+# applies a workload manifest itself. It only (a) proves the declarations parse
+# and are complete before review, and (b) asks Argo CD for a hard refresh so
+# reconciliation does not wait on the webhook. Every change to a workload still
+# travels as a commit to the config repo.
+#
+# repoURL values use SSH form, and the example-org org name is a placeholder:
+# replace it with the org that actually holds these three repos before the
+# declarations are applied anywhere real.
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: platform
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Workloads delivered from the platform config repo only
+  sourceRepos:
+    - 'git@github.com:example-org/platform-config.git'
+    - 'git@github.com:example-org/web-app.git'
+    - 'git@github.com:example-org/api-service.git'
+  destinations:
+    - server: 'https://kubernetes.default.svc'
+      namespace: argocd
+    - server: 'https://kubernetes.default.svc'
+      namespace: web
+    - server: 'https://kubernetes.default.svc'
+      namespace: api
+  clusterResourceWhitelist:
+    - group: 'argoproj.io'
+      kind: Application
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: platform-root
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: platform
+  source:
+    repoURL: 'git@github.com:example-org/platform-config.git'
+    # The root tracks the branch head on purpose: the child Applications it
+    # renders are the reviewable unit, and each of those pins its own
+    # revision. Pinning the root as well would freeze new applications until
+    # someone remembers to bump a second ref.
+    targetRevision: main
+    path: apps
+    directory:
+      recurse: true
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - ApplyOutOfSyncOnly=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 3m
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web-frontend
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    # Wave 0: the front end is the entry point, so it converges before the API
+    # it calls. Waves are the only ordering primitive Argo CD offers inside one
+    # app-of-apps, and they apply per sync wave, not per child order.
+    argocd.argoproj.io/sync-wave: '0'
+spec:
+  project: platform
+  source:
+    repoURL: 'git@github.com:example-org/web-app.git'
+    targetRevision: main
+    path: charts/web
+    helm:
+      releaseName: web
+      valueFiles:
+        - values-prod.yaml
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: web
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 2m
+  ignoreDifferences:
+    # A horizontal pod autoscaler owns the replica count for this Deployment,
+    # and the chart does not. Without this entry the application reports
+    # OutOfSync on every scale event and the automated sync keeps retrying a
+    # diff it will never be able to close.
+    - group: 'apps'
+      kind: Deployment
+      name: web
+      jsonPointers:
+        - /spec/replicas
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: api-service
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: '1'
+spec:
+  project: platform
+  source:
+    repoURL: 'git@github.com:example-org/api-service.git'
+    targetRevision: main
+    path: deploy/overlays/prod
+    kustomize:
+      # Images are pinned by the workload repo, not by this file. The pattern
+      # is: build once, tag once, commit the tag; Argo CD then only has to read
+      # the tag that Git already recorded.
+      images:
+        - api-service=ghcr.io/example-org/api-service:1.0.0
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: api
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 2m
+
+---
+# This document is the workflow that guards the declarations above it, kept in
+# one file so the two cannot drift apart. In a real config repo the same
+# declarations sit in a directory the workflow owns and the path filters below
+# point at that directory instead of at this file's path in the kit.
+name: gitops-sync
+on:
+  pull_request:
+    paths:
+      - 'gha/manifests/gitops-app-of-apps.yaml'
+  push:
+    branches: [main]
+    paths:
+      - 'gha/manifests/gitops-app-of-apps.yaml'
+permissions:
+  contents: read
+concurrency:
+  group: gitops-sync-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  validate:
+    name: Validate Argo CD declarations
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the config repo
+        uses: actions/checkout@v4
+
+      - name: Collect the Argo CD documents
+        # This file also carries the workflow that is running right now, so it
+        # is not applied as a whole. Selecting on kind keeps the step honest
+        # about what reaches the cluster.
+        run: |
+          yq eval-all 'select(.kind == "AppProject" or .kind == "Application")' \
+            "$GITHUB_WORKSPACE/gha/manifests/gitops-app-of-apps.yaml" \
+            > "$RUNNER_TEMP/argocd-docs.yaml"
+          test -s "$RUNNER_TEMP/argocd-docs.yaml"
+
+      - name: Parse and decode the declarations
+        # Client-side dry run decodes each object without contacting an API
+        # server, so it works on a pull request from a fork where no cluster
+        # credentials exist.
+        run: |
+          kubectl apply --dry-run=client -f "$RUNNER_TEMP/argocd-docs.yaml" -o name
+
+      - name: Require the app-of-apps invariants
+        run: |
+          apps=$(yq eval-all 'select(.kind == "Application") | .metadata.name' \
+            "$RUNNER_TEMP/argocd-docs.yaml")
+          echo "$apps" | grep -qx 'platform-root'
+          echo "$apps" | grep -qx 'web-frontend'
+          echo "$apps" | grep -qx 'api-service'
+          missing=$(yq eval-all 'select(.kind == "Application" and .metadata.name != "platform-root") | select(.metadata.annotations."argocd.argoproj.io/sync-wave" == null) | .metadata.name' \
+            "$RUNNER_TEMP/argocd-docs.yaml")
+          if [ -n "$missing" ]; then
+            echo "::error::child applications without a sync-wave: $missing"
+            exit 1
+          fi
+
+  reconcile:
+    name: Ask Argo CD to re-read the config repo
+    # Only after a merge to main. Pull requests have no business touching the
+    # cluster, and the validate job is the whole story for them.
+    if: github.event_name == 'push'
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore the cluster credentials
+        env:
+          KUBECONFIG_B64: ${{ secrets.ARGOCD_KUBECONFIG }}
+        run: |
+          if [ -z "$KUBECONFIG_B64" ]; then
+            echo "::error::secret ARGOCD_KUBECONFIG is not set"
+            exit 1
+          fi
+          echo "$KUBECONFIG_B64" | base64 -d > "$RUNNER_TEMP/kubeconfig"
+          chmod 600 "$RUNNER_TEMP/kubeconfig"
+
+      - name: Request a hard refresh of the root application
+        env:
+          KUBECONFIG: ${{ runner.temp }}/kubeconfig
+        run: |
+          # A refresh re-reads the config repo immediately instead of waiting
+          # for the webhook. The root application then syncs its children
+          # because automated sync is enabled; nothing in this workflow applies
+          # a manifest itself.
+          kubectl annotate application platform-root \
+            --namespace argocd \
+            argocd.argoproj.io/refresh=hard \
+            --overwrite
+
+      - name: Report the resulting state
+        env:
+          KUBECONFIG: ${{ runner.temp }}/kubeconfig
+        run: |
+          kubectl get application platform-root \
+            --namespace argocd \
+            -o jsonpath='{.status.sync.status} {.status.health.status}{"\n"}'

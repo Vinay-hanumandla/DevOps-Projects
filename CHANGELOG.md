@@ -615,3 +615,4 @@ Passed ([x]) jenkins-018 — Jenkins: config — Jenkins Configuration as Code f
 - jenkins/configs/jenkins-casc-ha.yaml — Jenkins Configuration as Code for production multi-controller HA setup (jenkins-018)
 - prom/configs/remote-write-long-term-storage.yaml — Prometheus remote write fan-out to Thanos, VictoriaMetrics, and Mimir long-term storage (prom-017)
 - repo-doc/scripts/2026-09-25-check-folders-and-report-gaps.sh — Automate the repo task workflow: coverage tables, folder validation, gap report (repo-doc-007)
+- gha/manifests/gitops-app-of-apps.yaml — GitOps delivery with an Argo CD app-of-apps root, Helm and Kustomize child Applications, and a GitHub Actions workflow that validates the declarations and requests a hard refresh (gha-020)
