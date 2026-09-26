@@ -369,6 +369,7 @@
 - **Root `terragrunt.hcl`** — the shared config at the top of a Terragrunt layout, pulled in by every environment via an `include` block; the single place where the backend bucket, region, and state-key prefix live.
 - **`run-all`** — a Terragrunt command that runs the same subcommand (e.g. `plan`) across every environment folder at once, so dev, staging, and prod are previewed from one invocation instead of three separate runs.
 - **Fan-out composition** — a root Terraform module that wires focused submodules (here VPC, EKS, RDS) together by passing one module's outputs as another module's inputs, keeping each submodule small while the root owns the glue.
+- **Composition module** — the alternative to fan-out: one dedicated module owns the wiring between other modules, so each environment folder stays a thin caller. Worth the extra indirection when the number of environments or teams makes the root's argument lists unwieldy.
 
 ## Ansible (additional)
 
@@ -407,6 +408,11 @@
 - **JavaScript action** — a custom action whose logic runs as Node on the runner (`runs.using: 'node20'` with a `main` entrypoint); inputs arrive as `INPUT_*` environment variables and outputs leave through the `$GITHUB_OUTPUT` file.
 - **`$GITHUB_OUTPUT`** — the file a step or action appends `name=value` lines to in order to publish outputs; later steps read them as `steps.<id>.outputs.<name>`, which is how a custom action hands data back to its caller workflow.
 - **Reusable workflow** — a whole workflow in a central repo, triggered with `on: workflow_call`, that other repos invoke by reference (`uses: ORG/repo/.github/workflows/deploy.yml@main`); configuration travels via `with:`, credentials via `secrets:`, and results come back through `needs.<job>.outputs`.
+- **OIDC token exchange** — trading GitHub's identity token for a short-lived credential from an external system, so a workflow authenticates without a stored access key. The external side registers a trust relationship that pins the expected issuer, audience, and subject; anything the workflow can influence, it validates all three.
+- **`id-token: write`** — the permission a workflow or job needs before it can request an OIDC token; without it the token endpoint returns nothing, and granting it is the whole workflow-side setup for keyless auth.
+- **Audience (`aud`) claim** — the identifier the token was minted for, naming who it is meant to be consumed by. A trust policy that matches the wrong audience accepts tokens minted for a different service, so the audience is part of the trust relationship, not a detail.
+- **Subject (`sub`) claim** — the identity of the thing the run represents (a repo, an environment, a reusable workflow, a branch); pinning the expected subject is what stops a fork or another environment from borrowing the credential.
+- **Keyless / federated credentials** — a cloud credential obtained by presenting a trusted OIDC token instead of a long-lived access key; the credential expires with the job, so there is nothing stored to leak or rotate.
 
 ## Git (worktrees)
 

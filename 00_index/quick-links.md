@@ -335,6 +335,7 @@
 - [Reusable VPC module](../tf/configs/reusable-vpc-module.hcl) — Terraform module creating a VPC with public and private subnets, NAT gateways, and route tables
 - [AWS VPC NAT module](../tf/configs/aws-vpc-nat-module.hcl) — VPC with public/private subnets, NAT gateways via for_each, dynamic AZ discovery, and optional VPC flow logs
 - [Local vs remote Terraform state](../tf/docs/local-vs-remote-terraform-state.md) — comparing state strategies for solo and team projects
+- [Terraform module composition patterns](../tf/docs/module-composition-patterns.md) — root-module fan-out, a dedicated composition module, and stacked multi-configuration deploys, with the trade-off that picks between them
 - [Terraform init, plan, apply](../tf/scripts/2026-08-08-tf-init-plan-apply.sh) — end-to-end Terraform workflow script for initialising, planning, and applying
 - [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh) — Terraform workflow script with state-lock handling for CI
 - [Terraform coverage check](../tf/docs/2026-08-11-terraform-coverage.md) — reconciling the Terraform folder against the manifest and fixing the counts
@@ -414,6 +415,13 @@
 - [Reusable composite action](../gha/configs/reusable-composite-action/action.yml) — shared Node toolchain setup with npm cache, smoke test, and optional artifact upload
 - [Reusable composite action caller](../gha/configs/reusable-composite-action-caller.yaml) — example caller showing defaults, per-call overrides, and outputs from the shared action
 - [Reusable workflow caller](../gha/snippets/reusable-workflow-caller.yaml) — minimal caller of a centrally maintained reusable workflow, passing inputs and secrets and reading outputs downstream
+
+### Write a custom JavaScript action that calls an API
+- [Labeled-issue custom action](../gha/scripts/custom-js-action/action.yml) — a real action rather than a hello-world: four inputs in, three outputs out, on the node20 runtime
+- [Its Node entrypoint](../gha/scripts/custom-js-action/index.js) — validates every input before use, calls the REST API, and writes results back through `$GITHUB_OUTPUT`
+
+### Authenticate a workflow without storing cloud keys
+- [OIDC token exchange with GitHub Actions](../gha/docs/oidc-token-exchange.md) — the `id-token: write` permission, the audience and subject claims to trust, and the trust-relationship setup on the AWS, GCP, Azure, and HashiCorp Vault side
 
 ### Write a minimal custom JavaScript action
 - [Minimal custom JavaScript action](../gha/scripts/action.yml) — the smallest viable custom action: two inputs in, one greeting output out, on the node20 runtime
