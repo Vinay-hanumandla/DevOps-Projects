@@ -2,6 +2,10 @@
 
 ## 2026-09-26
 
+- repo-doc: Make the coverage-table script count template trees recursively and cover the `src`/`hooks` categories, so regenerating no longer zeroes the Templates column or drops the Docker `src` and Git `hooks` counts (repo-doc)
+- repo-doc: Teach the folder-check script the `src` and `hooks` subdirs and detect empty category dirs recursively, clearing the false "unknown subdir" and "exists but is empty" reports (repo-doc)
+- README: Reconcile the coverage table — Bash scripts 10→11, GitHub Actions configs 8→9 and manifests 0→1, Helm manifests 2→3 and templates 0→19 (repo-doc)
+
 - helm: Add production multi-tier deployment manifest with security contexts, resource quotas, HPA, and PDB (helm-021)
 - gha: Add hello-world workflow config for first GitHub Actions run on push (gha-021)
 - bash: Add first-script follow-up — runnable argument and file-check example (bash-032)
@@ -618,3 +622,4 @@ Passed ([x]) jenkins-018 — Jenkins: config — Jenkins Configuration as Code f
 - prom/configs/remote-write-long-term-storage.yaml — Prometheus remote write fan-out to Thanos, VictoriaMetrics, and Mimir long-term storage (prom-017)
 - repo-doc/scripts/2026-09-25-check-folders-and-report-gaps.sh — Automate the repo task workflow: coverage tables, folder validation, gap report (repo-doc-007)
 - gha/manifests/gitops-app-of-apps.yaml — GitOps delivery with an Argo CD app-of-apps root, Helm and Kustomize child Applications, and a GitHub Actions workflow that validates the declarations and requests a hard refresh (gha-020)
+- helm/docs/helm-production-best-practices.md — Helm production best practices reference: chart structure conventions, test hooks, release management checklist, environment layering, and pre-flight checks (helm-023)
