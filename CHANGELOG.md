@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-09-28
+
+- helm: Rework the release-management wrapper — arg arrays instead of a space-joined string so `helm install`/`helm upgrade`/`helm diff upgrade` each get correct arguments, `--release-name` no longer leaks into `helm upgrade`, `--dry-run` honoured on the upgrade path, and the diff gate runs before apply so it can actually show a change (helm-022)
+- prom: Add advanced PromQL reference — subquery resolution trade-offs, `predict_linear` pitfalls (counter resets, extrapolation horizon), and multi-cluster federation sample-pull config (prom-016)
+
 ## 2026-09-26
 
 - repo-doc: Make the coverage-table script count template trees recursively and cover the `src`/`hooks` categories, so regenerating no longer zeroes the Templates column or drops the Docker `src` and Git `hooks` counts (repo-doc)
