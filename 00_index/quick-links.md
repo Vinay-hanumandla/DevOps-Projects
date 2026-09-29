@@ -17,6 +17,7 @@
 - [Terraform outputs to group vars](../ansible/templates/ansible-role-molecule-collection/scripts/tf_outputs_to_vars.py) — converts `terraform output -json` into the `group_vars` file the role reads, keeping provisioning and configuration decoupled
 
 ### Hand Terraform outputs to Ansible inventory
+- [Ansible + Terraform integration](../ansible/docs/ansible-terraform-integration.md) — where Terraform provisioning ends and Ansible configuration begins, with the outputs-to-inventory handoff and two-stage run ordering
 - [Terraform dynamic inventory](../ansible/manifests/terraform-dynamic-inventory.yaml) — builds the inventory from Terraform workspace outputs via the `tfc_inv` plugin, no CLI or backend credentials on the control node
 
 ### Gate a playbook apply before it touches hosts
@@ -315,6 +316,7 @@
 - [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh) — a shell helper that runs ad-hoc PromQL queries against a running Prometheus server
 - [Hybrid service discovery](../prom/docs/hybrid-service-discovery.md) — combining Consul, file, and Kubernetes service discovery with a shared target contract
 - [PromQL rate increase, histogram, and quantile](../prom/docs/2026-09-19-promql-rate-increase-histogram-quantile.md) — detecting sudden error-rate increases with `rate()`, bucket histograms, and `quantile_over_time()` for SLO burn-rate alerts
+- [PromQL advanced patterns](../prom/docs/promql-advanced-patterns.md) — subqueries, `predict_linear` headroom rules, and cross-cluster federation with a sample-pull config
 - [Kubernetes pod service discovery](../prom/configs/2026-09-18-kubernetes-service-discovery.yaml) — scrapes annotated pods with relabelling for address, path, namespace, and pod labels
 - [Remote-write vs federation](../prom/configs/remote-write-vs-federation.yaml) — the two long-term-storage paths side by side: push series to a remote endpoint or let a peer scrape this one
 - [Remote-write long-term storage](../prom/configs/remote-write-long-term-storage.yaml) — fan the same series out to Thanos, VictoriaMetrics, or Mimir with queue tuning, one receiver at a time

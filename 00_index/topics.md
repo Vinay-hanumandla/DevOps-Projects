@@ -2,11 +2,11 @@
 
 > A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](learning-path.md).
 
-## Ansible  ·  32 files
+## Ansible  ·  33 files
 
 - **primer:** [Ansible — quick primer](../ansible/notes/0000-primer-ansible.md)
 - **notes** (3): most recent → [Ansible quickstart gotchas](../ansible/notes/2026-08-31-ansible-quickstart-gotchas.md), [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md)
-- **docs** (4): most recent → [Retry strategies for unreliable targets](../ansible/docs/retry-strategies-unreliable-targets.md), [command/shell vs purpose-built idempotent modules](../ansible/docs/command-shell-vs-idempotent-modules.md), [Managing Kubernetes with Ansible](../ansible/docs/managing-kubernetes-with-ansible.md), [Wired handlers and idempotency for a fleet](../ansible/docs/wired-handlers-idempotency-fleet.md)
+- **docs** (5): most recent → [Ansible + Terraform integration](../ansible/docs/ansible-terraform-integration.md), [Retry strategies for unreliable targets](../ansible/docs/retry-strategies-unreliable-targets.md), [command/shell vs purpose-built idempotent modules](../ansible/docs/command-shell-vs-idempotent-modules.md), [Managing Kubernetes with Ansible](../ansible/docs/managing-kubernetes-with-ansible.md), [Wired handlers and idempotency for a fleet](../ansible/docs/wired-handlers-idempotency-fleet.md)
 - **configs** (4): most recent → [VPS hardening playbook](../ansible/configs/vps-hardening-playbook.yaml), [Idempotent nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml), [Install nginx playbook](../ansible/configs/2026-08-22-install-nginx-playbook.yaml)
 - **scripts** (4): most recent → [Ansible Vault patterns](../ansible/scripts/ansible-vault-patterns.sh), [Gated playbook run](../ansible/scripts/ansible-playbook-gated-run.sh), [Ansible ad-hoc toolkit](../ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh), [Ansible playbook wrapper](../ansible/scripts/ansible-playbook-wrapper.sh)
 - **manifests** (1): [Terraform dynamic inventory](../ansible/manifests/terraform-dynamic-inventory.yaml) — builds the inventory from Terraform workspace outputs via the `tfc_inv` plugin
@@ -104,11 +104,11 @@
 - **dockerfiles** (1): [Operator development image](../k8s/dockerfiles/operator-dev.Dockerfile)
 - **templates** (10): [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — two-tier frontend/backend chart with ingress routing and Prometheus alert rules · _…and 9 more under `k8s/templates/multi-service-app/`._
 
-## Prometheus  ·  17 files
+## Prometheus  ·  18 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
 - **notes** (4): most recent → [Prometheus quickstart trip-ups](../prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md), [Install Prometheus and explore web UI](../prom/notes/2026-08-29-install-prometheus-explore-web-ui.md), [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
-- **docs** (2): [PromQL rate increase, histogram, and quantile](../prom/docs/2026-09-19-promql-rate-increase-histogram-quantile.md) — detecting sudden error-rate increases with `rate()`, bucket histograms, and `quantile_over_time()` for SLO burn-rate alerts, [Hybrid service discovery](../prom/docs/hybrid-service-discovery.md) — combining file-based, DNS, and Consul service discovery with priority fallbacks
+- **docs** (3): [PromQL advanced patterns](../prom/docs/promql-advanced-patterns.md) — subqueries, `predict_linear` headroom rules, and cross-cluster federation with a sample-pull config, [PromQL rate increase, histogram, and quantile](../prom/docs/2026-09-19-promql-rate-increase-histogram-quantile.md) — detecting sudden error-rate increases with `rate()`, bucket histograms, and `quantile_over_time()` for SLO burn-rate alerts, [Hybrid service discovery](../prom/docs/hybrid-service-discovery.md) — combining file-based, DNS, and Consul service discovery with priority fallbacks
 - **configs** (7): most recent → [Remote-write long-term storage](../prom/configs/remote-write-long-term-storage.yaml), [Kubernetes pod service discovery](../prom/configs/2026-09-18-kubernetes-service-discovery.yaml), [Remote-write vs federation](../prom/configs/remote-write-vs-federation.yaml), [Prometheus alerting rules](../prom/configs/2026-08-30-prometheus-alerting-rules.yaml) · _…and 3 more under `prom/configs/`._
 - **scripts** (2): [Rules evaluator](../prom/scripts/rules-evaluator.go) — evaluates Prometheus recording and alerting rules against fetched metrics · [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh)
 - **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
