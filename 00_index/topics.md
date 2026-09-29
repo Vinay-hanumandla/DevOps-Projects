@@ -2,25 +2,25 @@
 
 > A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](learning-path.md).
 
-## Ansible  ·  33 files
+## Ansible  ·  40 files
 
 - **primer:** [Ansible — quick primer](../ansible/notes/0000-primer-ansible.md)
 - **notes** (3): most recent → [Ansible quickstart gotchas](../ansible/notes/2026-08-31-ansible-quickstart-gotchas.md), [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md)
 - **docs** (5): most recent → [Ansible + Terraform integration](../ansible/docs/ansible-terraform-integration.md), [Retry strategies for unreliable targets](../ansible/docs/retry-strategies-unreliable-targets.md), [command/shell vs purpose-built idempotent modules](../ansible/docs/command-shell-vs-idempotent-modules.md), [Managing Kubernetes with Ansible](../ansible/docs/managing-kubernetes-with-ansible.md), [Wired handlers and idempotency for a fleet](../ansible/docs/wired-handlers-idempotency-fleet.md)
 - **configs** (4): most recent → [VPS hardening playbook](../ansible/configs/vps-hardening-playbook.yaml), [Idempotent nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml), [Install nginx playbook](../ansible/configs/2026-08-22-install-nginx-playbook.yaml)
-- **scripts** (4): most recent → [Ansible Vault patterns](../ansible/scripts/ansible-vault-patterns.sh), [Gated playbook run](../ansible/scripts/ansible-playbook-gated-run.sh), [Ansible ad-hoc toolkit](../ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh), [Ansible playbook wrapper](../ansible/scripts/ansible-playbook-wrapper.sh)
+- **scripts** (5): most recent → [ansible-lint + yamllint pre-commit wrapper](../ansible/scripts/ansible-lint-yamllint-pre-commit-wrapper.sh), [Ansible Vault patterns](../ansible/scripts/ansible-vault-patterns.sh), [Gated playbook run](../ansible/scripts/ansible-playbook-gated-run.sh) · _…and 2 more under `ansible/scripts/`._
 - **manifests** (1): [Terraform dynamic inventory](../ansible/manifests/terraform-dynamic-inventory.yaml) — builds the inventory from Terraform workspace outputs via the `tfc_inv` plugin
 - **snippets** (1): [Block/rescue/always deploy with handlers](../ansible/snippets/block-rescue-always-handlers.yaml) — config deploy with rollback, outcome report, and a change-gated service restart
-- **templates** (15): [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, `galaxy.yml`, dynamic cloud inventory, and a Terraform-outputs handoff script · _…and 14 more under `ansible/templates/ansible-role-molecule-collection/`._
+- **templates** (21): [Collection scaffold with Molecule and galaxy-importer](../ansible/templates/ansible-collection-scaffold/README.md) — copy-in collection with Molecule tests, `galaxy.yml`, CI workflow, and a galaxy-importer lint pass · [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, `galaxy.yml`, dynamic cloud inventory, and a Terraform-outputs handoff script · _…and 13 more under `ansible/templates/`._
 
-## Bash  ·  57 files
+## Bash  ·  58 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
 - **docs** (6): most recent → [Bash 5.3 deep dive](../bash/docs/bash-5.3-deep-dive.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md), [Debug and profile with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md)
 - **scripts** (11): most recent → [First script with argument handling](../bash/scripts/2026-09-26-first-script-with-args.sh) — takes a positional argument, defaults it with `${1:-…}`, and tests whether the path exists · [Parallel execution patterns](../bash/scripts/parallel-execution-patterns.sh), [Companion test for the first script](../bash/scripts/2026-09-05-companion-test.sh) · _…and 7 more under `bash/scripts/`._
 - **snippets** (2): [Advanced parameter expansion](../bash/snippets/parameter-expansion-advanced.sh) — global substitution, prefix/suffix stripping, and nested expansions without subshells; [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
-- **notebooks** (4): most recent → [Bats-core production test suite](../bash/notebooks/bats-core-production-test-suite.ipynb), [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb), [Comparing pipeline exit-code handling](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb)
+- **notebooks** (5): most recent → [Bash 5.2 → 5.3 migration checklist](../bash/notebooks/bash-53-migration-checklist.ipynb), [Bats-core production test suite](../bash/notebooks/bats-core-production-test-suite.ipynb), [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb) · _…and 2 more under `bash/notebooks/`._
 - **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
 - **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
 - _…and more under `bash/` — browse the folder._
