@@ -5,6 +5,7 @@
 - Passed ([x]) ansible-018 — Ansible + Terraform integration: when to use each for provisioning vs configuration · Level: L4 · 2026-09-29
 - ansible: Add reusable pre-commit wrapper for ansible-lint + yamllint with auto-fix and reporting (ansible-019)
 - ansible: Add collection scaffold template with Molecule, CI, and galaxy-importer config (ansible-020)
+- bash: Add hands-on migration checklist notebook verifying the 5.2→5.3 breaking changes — in-shell command substitution, GLOBSORT, test/`[` precedence, and MULTIPLE_COPROCS (bash-029)
 
 ## 2026-09-28
 
