@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-29
+
+- ansible: Add Ansible + Terraform integration doc — provisioning vs configuration boundary, terraform-output-to-inventory pattern, and two-stage run ordering (ansible-018)
+
 ## 2026-09-28
 
 - prom: Add advanced PromQL reference — subquery resolution trade-offs, `predict_linear` pitfalls (counter resets, extrapolation horizon), and multi-cluster federation sample-pull config (prom-016)
