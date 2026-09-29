@@ -347,6 +347,25 @@
 - **Conditional dependency** — a Helm chart dependency gated by a `condition` field in `Chart.yaml`; the subchart is only imported when `values.<dep>.enabled` is true, so a single chart can ship optional components without loading them by default.
 - **Subchart pinning** — specifying a chart dependency with an explicit `repository` URL and `version` constraint in `Chart.yaml`; lets a chart depend on a specific published revision rather than the latest from a repo.
 - **Version constraint** — a Semver-style range or exact pin (e.g. `^1.2.3`, `~1.2.3`, `1.2.3`) in a chart dependency's `version` field; Helm resolves it against the dependency's repository at install time.
+- **`values.schema.json`** — a JSON Schema file at a chart root that validates the values a release is installed with; Helm rejects a bad override at install time instead of letting it produce a half-configured rollout.
+- **`helm test`** — a command that runs the chart's templates under `templates/tests/` as real Pods against the installed release, so a passing install is proven to actually answer traffic rather than merely having applied.
+- **`templates/tests/`** — the conventional directory for those test Pods; a `helm.sh/hook: test` annotation keeps them out of the normal install/upgrade path so they run only when asked.
+- **Library chart** — a chart of type `library` that ships named templates and no installable workload of its own; consuming charts pull it in as a dependency and call its templates, which is how a shared `_helpers.tpl` stops drifting between charts.
+- **`_helpers.tpl`** — the partials file where repeated template logic (labels, selectors, annotations) is defined once under a `define`/`include` pair instead of being copied into every template file.
+- **`Chart.lock`** — the resolved dependency manifest Helm writes after `helm dependency update`; it pins the exact chart versions fetched into `charts/` so a later install renders the same output.
+- **`NOTES.txt`** — the chart template rendered after a release lands, printing credentials, connection strings, or next steps to the operator running `helm install`.
+
+## Argo CD
+
+- **Application** — a custom resource naming one workload to reconcile: the source (repo path, Helm chart, or Kustomize overlay), the destination cluster and namespace, and sync policy; Argo CD compares desired state to live state and reports the difference as sync status.
+- **App-of-apps** — a root Application whose source is a directory of more Application manifests, so one sync brings up a whole set of workloads and a single commit promotes the entire group.
+- **AppProject** — the guardrail an Application's source and destination must fall inside: which repositories may be read and which clusters and namespaces may be written.
+- **Sync wave** — an ordering annotation on Argo CD resources so one group is applied and healthy before the next is reconciled; how a database and its migrations land before the application that needs them.
+
+## GitHub Actions (triggers)
+
+- **`workflow_dispatch`** — the trigger that makes a workflow startable by hand from the Actions tab; pairs with a `push` trigger so a workflow is both automatic on merge and testable before you trust it.
+- **Runner context** — the `runner.os`, `github.ref_name`, `github.sha`, and `github.actor` values exposed to a running job; printing them in a first workflow is the quickest way to learn what the runner actually knows about the run.
 
 ## Repo-doc
 

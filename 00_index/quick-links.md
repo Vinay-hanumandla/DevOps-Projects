@@ -40,6 +40,7 @@
 
 ### Write and run a Bash script
 - [Hello world with argument handling](../bash/scripts/2026-07-18-first-hello-world.sh) — a minimal script that checks for arguments
+- [First script with argument handling](../bash/scripts/2026-09-26-first-script-with-args.sh) — takes a positional argument, defaults it with `${1:-stranger}`, and tests whether the path it names exists
 - [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh) — a reusable skeleton with `set -euo pipefail`
 - [Companion hello script](../bash/scripts/2026-07-27-companion-hello.sh) — companion script for the hello-world pattern with argument handling and strict mode
 - [Companion test script](../bash/scripts/2026-07-27-companion-test.sh) — test companion that exercises the safe Bash template patterns
@@ -229,6 +230,23 @@
 - [Hooks lifecycle manifest](../helm/manifests/hooks-lifecycle.yaml) — Helm hooks for pre-install, post-upgrade, and rollback lifecycle events
 - [Chart.yaml scaffold](../helm/configs/chart-scaffold.yaml) — Helm chart scaffold demonstrating conditional dependencies, subchart pinning, and version constraints
 
+### Build a chart that holds up in production
+- [Helm production best practices](../helm/docs/helm-production-best-practices.md) — chart layout and naming, template size limits, test hooks, and the `values.schema.json` early-rejection gate
+- [Production multi-tier deployment](../helm/manifests/production-multi-tier-deployment.yaml) — a namespaced production manifest carrying security contexts, resource quotas, an HPA, and a PodDisruptionBudget together
+- [Library chart scaffold](../helm/templates/library-chart-scaffold/README.md) — a `lib-common` chart of named templates, an app chart that consumes them, a values schema, and a `helm test` hook
+- [Shared named templates](../helm/templates/library-chart-scaffold/lib-common/templates/_helpers.tpl) — the labels, selectors, and annotations every consuming chart inherits instead of copying
+- [Values schema for the app chart](../helm/templates/library-chart-scaffold/app/values.schema.json) — the JSON Schema that rejects a bad override at install time rather than halfway through a rollout
+- [Chart test connection hook](../helm/templates/library-chart-scaffold/app/templates/tests/test-connection.yaml) — the Pod `helm test` runs to prove the release answers after install
+- [Staging values for the library chart](../helm/templates/library-chart-scaffold/app/ci/staging-values.yaml) — a per-environment override file the chart's own CI renders against
+
+### Build a plain app chart with one values file per environment
+- [my-service chart scaffold](../helm/templates/my-service/README.md) — the plain chart the values-inheritance guide's `-f values-staging.yaml` runs against
+- [my-service base values](../helm/templates/my-service/values.yaml) — the defaults every environment override starts from
+- [my-service staging override](../helm/templates/my-service/values-staging.yaml) — the environment-specific delta the inheritance guide walks through
+
+### Reconcile cluster state from Git with Argo CD
+- [GitOps app-of-apps](../gha/manifests/gitops-app-of-apps.yaml) — AppProject, root app rendering an `apps/` directory, Helm- and Kustomize-sourced children, and the workflow that validates them and asks Argo CD to re-read after a merge
+
 ### Get started with Jenkins
 - [Jenkins primer](../jenkins/notes/0000-primer-jenkins.md) — first-day notes for Jenkins: jobs, pipelines, nodes, executors, plugins, and workspaces
 - [Install Jenkins and open web UI](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md) — install check, first web UI login, and creating a hello-world pipeline job
@@ -406,6 +424,7 @@
 - [GitHub Actions primer](../gha/notes/0000-primer-gha.md) — what GitHub Actions is, workflows vs jobs, and a minimal workflow
 - [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md) — check installation and configure the gh CLI
 - [First workflow config](../gha/configs/2026-08-05-first-workflow.yaml) — a first GitHub Actions workflow configuration
+- [Hello-world workflow](../gha/configs/2026-09-26-hello-world-workflow.yaml) — the smallest useful workflow: checkout, print runner and commit context, and a manual trigger for testing on demand
 - [Minimal CI workflow](../gha/configs/2026-08-06-minimal-ci-workflow.yaml) — a minimal GitHub Actions workflow for CI
 - [Minimal CI workflow (refresh)](../gha/configs/2026-09-04-minimal-ci-workflow.yaml) — a refreshed minimal CI workflow with lint, plan, and lock-handled apply
 - [Matrix + cache + artifact CI](../gha/configs/matrix-cache-artifact-ci.yaml) — a CI workflow using matrix builds, dependency caching, and artifact upload
