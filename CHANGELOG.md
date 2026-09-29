@@ -7,6 +7,7 @@
 - ansible: Add collection scaffold template with Molecule, CI, and galaxy-importer config (ansible-020)
 - bash: Add hands-on migration checklist notebook verifying the 5.2→5.3 breaking changes — in-shell command substitution, GLOBSORT, test/`[` precedence, and MULTIPLE_COPROCS (bash-029)
 - bash: Rework bash-029 migration checklist notebook — valid ipynb JSON, version pinned to research-backed Bash 5.3 patchlevel 20 (15→20 window), lint gate on ShellCheck 0.10.0, unverified 0.11.0/MULTIPLE_COPROCS/test-precedence claims removed (bash-029)
+- bash: Add L6 production reference docs covering shell options, signal traps, process substitution, and coprocess patterns with research-backed patterns (bash-033)
 
 ## 2026-09-28
 
