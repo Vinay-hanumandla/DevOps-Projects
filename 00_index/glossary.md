@@ -302,6 +302,8 @@
 
 ## Prometheus (additional)
 
+- **Subquery** — a PromQL expression that runs an inner query over a range and re-aggregates the result on an outer step (`[range:resolution]`); the resolution is a hard floor on how often the result can change, so it should match or beat the alert's `for` duration.
+- **`predict_linear`** — a PromQL function that extrapolates a series forward on a linear model (`predict_linear(metric[1h], 3600)`); used in recording rules for capacity headroom, with counter resets and extrapolation horizon as the two pitfalls to watch.
 - **Prometheus HTTP API** — the JSON API exposed at `/api/v1/` (notably `/api/v1/query` for instant queries and `/api/v1/query_range` for range queries); scripts and tooling hit it with `curl` rather than scraping the metrics endpoint.
 - **`promtool check rules`** — a `promtool` subcommand that validates alerting/recording rule files against the Prometheus expression parser before deploying them; catches typos and bad-for-rules PromQL without spinning up a server.
 - **Target contract** — a declared set of labels and metadata that every discovered Prometheus target must carry, ensuring consistent routing, alerting, and deduction regardless of which discovery mechanism produced the target.

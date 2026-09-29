@@ -19,11 +19,11 @@ The `templates/` subfolders are copy-in starting points: a chart, a role, a stac
 
 ## Quick links
 
+- [Ansible + Terraform integration](ansible/docs/ansible-terraform-integration.md) — where Terraform provisioning ends and Ansible configuration begins, with the outputs-to-inventory handoff and two-stage run ordering.
+- [PromQL advanced patterns](prom/docs/promql-advanced-patterns.md) — subquery resolution trade-offs, `predict_linear` headroom rules, and a multi-cluster federation sample-pull config.
 - [Helm production best practices](helm/docs/helm-production-best-practices.md) — chart layout and naming, size limits, `values.schema.json` as an early rejection gate, and what belongs in a production chart rather than a demo one.
-- [GitOps app-of-apps](gha/manifests/gitops-app-of-apps.yaml) — an AppProject, a root app that renders an `apps/` directory, two child Applications, and the workflow that validates them and asks Argo CD to re-read after a merge.
 - [Hello-world workflow](gha/configs/2026-09-26-hello-world-workflow.yaml) — the smallest useful Actions workflow: checkout, print runner and commit context, plus a manual `workflow_dispatch` trigger for testing on demand.
 - [Production multi-tier deployment](helm/manifests/production-multi-tier-deployment.yaml) — a namespaced production manifest carrying security contexts, quotas, an HPA, and a PodDisruptionBudget together.
-- [First script with arguments](bash/scripts/2026-09-26-first-script-with-args.sh) — taking a positional argument, defaulting it with `${1:-…}`, and testing whether the path it names exists.
 
 ## Layout
 
@@ -53,7 +53,7 @@ Counts include files nested inside template trees. `Src`, `Hooks`, and `Other` a
 
 | Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Other | Last verified |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| Ansible | 3 | 4 | 4 | 1 | 4 | 1 | 0 | 0 | 15 | 0 | 0 | 0 | 2026-09-23 |
+| Ansible | 3 | 5 | 4 | 1 | 4 | 1 | 0 | 0 | 15 | 0 | 0 | 0 | 2026-09-29 |
 | Bash | 3 | 6 | 11 | 2 | 0 | 0 | 4 | 1 | 30 | 0 | 0 | 0 | 2026-09-26 |
 | Docker | 5 | 3 | 7 | 0 | 0 | 2 | 0 | 4 | 25 | 2 | 0 | 1 | 2026-09-21 |
 | GitHub Actions | 3 | 4 | 4 | 1 | 9 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-26 |
@@ -62,7 +62,7 @@ Counts include files nested inside template trees. `Src`, `Hooks`, and `Other` a
 | Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 0 | 2026-09-26 |
 | Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 2026-09-23 |
 | Kubernetes | 5 | 4 | 3 | 2 | 1 | 4 | 1 | 1 | 10 | 0 | 0 | 0 | 2026-09-19 |
-| Prometheus | 4 | 2 | 2 | 1 | 7 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-25 |
+| Prometheus | 4 | 3 | 2 | 1 | 7 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-28 |
 | Python | 3 | 3 | 4 | 4 | 4 | 0 | 2 | 1 | 7 | 0 | 0 | 0 | 2026-09-20 |
 | Repo-doc | 4 | 3 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-26 |
 | Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 8 | 0 | 0 | 0 | 2026-09-22 |
@@ -73,7 +73,7 @@ Counts include files nested inside template trees. `Src`, `Hooks`, and `Other` a
 
 ## Status
 
-Chart scaffolding is where the kit is moving: library charts, a `values.schema.json` early-rejection gate, and a `helm test` hook that proves a release answers after install. Alongside that, the GitOps path from commit to a running cluster — app-of-apps, Helm-sourced and Kustomize-sourced children, and a workflow that validates the declarations instead of applying them.
+Currently drawing the line between provisioning and configuration — Terraform owns what the provider API owns, Ansible owns what happens inside a reachable host — and going deeper on PromQL with subqueries, predictive headroom rules, and cross-cluster federation.
 
 ---
-_Last updated: 2026-09-27_
+_Last updated: 2026-09-29_
