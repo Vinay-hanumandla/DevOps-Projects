@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-28
+
+- prom: Add advanced PromQL reference — subquery resolution trade-offs, `predict_linear` pitfalls (counter resets, extrapolation horizon), and multi-cluster federation sample-pull config (prom-016)
+
 ## 2026-09-26
 
 - repo-doc: Make the coverage-table script count template trees recursively and cover the `src`/`hooks` categories, so regenerating no longer zeroes the Templates column or drops the Docker `src` and Git `hooks` counts (repo-doc)
