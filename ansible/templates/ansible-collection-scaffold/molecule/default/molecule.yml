@@ -1,0 +1,19 @@
+# last_verified: 2026-09-29 · ansible n/a
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: geerlingguy/docker-ubuntu2204-ansible:latest
+    pre_build_image: yes
+    command: /lib/systemd/systemd
+    cgroupns_mode: host
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+provisioner:
+  name: ansible
+verifier:
+  name: ansible

@@ -1,0 +1,13 @@
+---
+- name: Install the example service
+  ansible.builtin.apt:
+    name: example-service
+    state: present
+    update_cache: yes
+  notify: Restart example-service
+
+- name: Render the example config
+  ansible.builtin.template:
+    src: example.conf.j2
+    dest: /etc/example/example.conf
+  notify: Restart example-service

@@ -1,0 +1,16 @@
+# last_verified: 2026-09-29 · ansible n/a
+# Scaffold collection metadata. Rename namespace/name for real use.
+# Version 1.0.0 is the scaffold's own starting point, not a tool release.
+namespace: example_org
+name: collection_example
+version: 1.0.0
+readme: README.md
+description: Example Ansible collection scaffold with Molecule tests and galaxy-importer validation.
+license:
+  - MIT
+tags:
+  - example
+  - scaffold
+dependencies:
+  # ansible.builtin collections needed at runtime; leave empty or add real ones.
+  # 'community.general': '>=1.0.0'

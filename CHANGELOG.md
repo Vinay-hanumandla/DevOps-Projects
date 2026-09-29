@@ -2,7 +2,9 @@
 
 ## 2026-09-29
 
-- ansible: Add Ansible + Terraform integration doc — provisioning vs configuration boundary, terraform-output-to-inventory pattern, and two-stage run ordering (ansible-018)
+- Passed ([x]) ansible-018 — Ansible + Terraform integration: when to use each for provisioning vs configuration · Level: L4 · 2026-09-29
+- ansible: Add reusable pre-commit wrapper for ansible-lint + yamllint with auto-fix and reporting (ansible-019)
+- ansible: Add collection scaffold template with Molecule, CI, and galaxy-importer config (ansible-020)
 
 ## 2026-09-28
 
