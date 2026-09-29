@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
-# last_verified: 2026-09-28 · Helm 3.x
+# last_verified: 2026-09-08 · Helm 3.x
+set -Eeuo pipefail
 
 #
 # helm-release-workflow.sh
-# A reusable release workflow: lint → diff → upgrade → (optional) rollback.
-#
-# Ordering note: the diff step runs BEFORE apply so the gate can actually
-# show a change. Pass --dry-run to render and validate only.
-#
-# All helm invocations use bash arrays so option values with spaces or
-# leading dashes are never swallowed by word-splitting.
+# A reusable release workflow: lint → template → diff → upgrade → (optional) rollback.
+# Designed for CI pipelines or manual releases where you want each gate to pass
+# before the next step runs.
 #
 
 usage() {
@@ -46,18 +43,18 @@ ROLLBACK_TO=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    -c|--chart)       CHART="$2";          shift 2 ;;
-    -n|--namespace)   NAMESPACE="$2";     shift 2 ;;
-    -r|--release)     RELEASE="$2";        shift 2 ;;
-    -f|--values)      VALUES_FILES+=("$2"); shift 2 ;;
-    -e|--env)         ENV_NAME="$2";       shift 2 ;;
-    -s|--skip-diff)   SKIP_DIFF=true;     shift ;;
-    -w|--wait)        WAIT=true;           shift ;;
-    --atomic)         ATOMIC=true;         shift ;;
-    --dry-run)        DRY_RUN=true;        shift ;;
-    --rollback-to)    ROLLBACK_TO="$2";    shift 2 ;;
-    -h|--help)        usage; exit 0 ;;
-    *)                echo "Unknown option: $1" >&2; usage >&2; exit 1 ;;
+    -c|--chart)    CHART="$2";          shift 2 ;;
+    -n|--namespace) NAMESPACE="$2";     shift 2 ;;
+    -r|--release)  RELEASE="$2";        shift 2 ;;
+    -f|--values)   VALUES_FILES+=("$2"); shift 2 ;;
+    -e|--env)      ENV_NAME="$2";       shift 2 ;;
+    -s|--skip-diff) SKIP_DIFF=true;     shift ;;
+    -w|--wait)     WAIT=true;           shift ;;
+    --atomic)      ATOMIC=true;         shift ;;
+    --dry-run)     DRY_RUN=true;        shift ;;
+    --rollback-to) ROLLBACK_TO="$2";    shift 2 ;;
+    -h|--help)     usage; exit 0 ;;
+    *)             echo "Unknown option: $1" >&2; usage >&2; exit 1 ;;
   esac
 done
 
@@ -78,19 +75,19 @@ fi
 log()  { echo "[$(date -u '+%Y-%m-%dT%H:%M:%SZ')] $*"; }
 fail() { echo "[$(date -u '+%Y-%m-%dT%H:%M:%SZ')] FAIL: $*" >&2; exit 1; }
 
-# Build the common helm arguments array (chart, namespace, release-name, values).
-# Returns the array via a global so callers can reuse it without re-parsing.
+# Build the common helm arguments array
 build_helm_args() {
-  HELM_ARGS=()
-  HELM_ARGS+=("$CHART")
-  HELM_ARGS+=(--namespace "$NAMESPACE")
-  HELM_ARGS+=(--release-name "$RELEASE")
+  local args=()
+  args+=("$CHART")
+  args+=(--namespace "$NAMESPACE")
+  args+=(--release-name "$RELEASE")
   for vf in "${VALUES_FILES[@]}"; do
-    HELM_ARGS+=(-f "$vf")
+    args+=(-f "$vf")
   done
   if [[ -n "$ENV_NAME" ]]; then
-    HELM_ARGS+=(-f "${CHART}/values-${ENV_NAME}.yaml")
+    args+=(-f "${CHART}/values-${ENV_NAME}.yaml")
   fi
+  echo "${args[@]}"
 }
 
 # ---------------------------------------------------------------------------
@@ -106,31 +103,37 @@ fi
 # ---------------------------------------------------------------------------
 # Step 1 — Lint
 # ---------------------------------------------------------------------------
-log "Step 1/4: Linting chart ..."
+log "Step 1/5: Linting chart ..."
 helm lint "$CHART" --namespace "$NAMESPACE"
 log "Lint passed."
 
 # ---------------------------------------------------------------------------
-# Step 2 — Diff (before apply, so the gate can show a change)
+# Step 2 — Template (local render to catch template errors)
 # ---------------------------------------------------------------------------
-build_helm_args
+log "Step 2/5: Templating chart locally ..."
+HELM_ARGS=$(build_helm_args)
+# shellcheck disable=SC2086
+helm template $HELM_ARGS > /dev/null
+log "Template render succeeded."
 
+# ---------------------------------------------------------------------------
+# Step 3 — Diff (optional, requires helm-diff plugin)
+# ---------------------------------------------------------------------------
 if [[ "$SKIP_DIFF" == "false" ]]; then
   if helm plugin list 2>/dev/null | grep -q '^diff'; then
-    log "Step 2/4: Diffing against current release ..."
-    # helm diff upgrade accepts the same args as helm upgrade; --release-name
-    # is valid here because it names the target release, not a positional chart.
-    helm diff upgrade "${HELM_ARGS[@]}" || true
+    log "Step 3/5: Diffing against current release ..."
+    # shellcheck disable=SC2086
+    helm diff upgrade $HELM_ARGS --namespace "$NAMESPACE" || true
     log "Diff complete (review output above)."
   else
-    log "Step 2/4: helm-diff plugin not installed — skipping."
+    log "Step 3/5: helm-diff plugin not installed — skipping."
   fi
 else
-  log "Step 2/4: Diff skipped (--skip-diff)."
+  log "Step 3/5: Diff skipped (--skip-diff)."
 fi
 
 # ---------------------------------------------------------------------------
-# Step 3 — Upgrade (--install for idempotent apply)
+# Step 4 — Upgrade (--install for idempotent apply)
 # ---------------------------------------------------------------------------
 UPGRADE_ARGS=()
 UPGRADE_ARGS+=(--namespace "$NAMESPACE")
@@ -152,15 +155,14 @@ if [[ -n "$ENV_NAME" ]]; then
   UPGRADE_ARGS+=(-f "${CHART}/values-${ENV_NAME}.yaml")
 fi
 
-log "Step 3/4: Upgrading release ..."
-# --release-name is NOT passed to helm upgrade: the release name is the
-# first positional argument, and passing it again is rejected.
-helm upgrade "$RELEASE" "${HELM_ARGS[@]}" "${UPGRADE_ARGS[@]}"
+log "Step 4/5: Upgrading release ..."
+# shellcheck disable=SC2086
+helm upgrade "$RELEASE" "$CHART" ${UPGRADE_ARGS[@]+"${UPGRADE_ARGS[@]}"}
 log "Upgrade succeeded."
 
 # ---------------------------------------------------------------------------
-# Step 4 — Verify (status check)
+# Step 5 — Verify (status check)
 # ---------------------------------------------------------------------------
-log "Step 4/4: Checking release status ..."
+log "Step 5/5: Checking release status ..."
 helm status "$RELEASE" --namespace "$NAMESPACE"
 log "Release '$RELEASE' is deployed in namespace '$NAMESPACE'."
