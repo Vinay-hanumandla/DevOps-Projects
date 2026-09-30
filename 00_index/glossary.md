@@ -65,6 +65,8 @@
 - **Shell-context command substitution** — Bash 5.3 syntax `${ command; }` and `${|command;}` that executes in the current shell context instead of forking a subshell, preserving modified state and avoiding fork overhead.
 - **`/dev/tcp`** — Bash's built-in TCP pseudo-device; a redirection like `< /dev/tcp/host/port` succeeds only when the port accepts a connection, so a script can probe reachability with a bounded `timeout` without needing `nc` installed.
 - **`paste`** — a coreutils tool that joins the corresponding lines of two or more files side by side; useful for lining up two separately captured metric streams so they can be read as one table.
+- **Process substitution** — passing a command's output where a filename is expected using `<(command)` or `>(command)`, so the shell hands the consumer a real file descriptor instead of a temporary file; the write side must be drained or the producing command blocks on a full pipe.
+- **Coprocess** — a Bash built-in pair (`coproc NAME { …; }`) that starts a background subprocess connected to the current shell for bidirectional I/O, with `read -u` and `write` on the named file descriptors; how you keep a long-lived helper (a log tail, a language REPL) alive across many commands without a FIFO or a temp file.
 
 
 ## Git
@@ -469,3 +471,11 @@
 
 - **`BASH_VERSINFO`** — the array Bash exposes with its own version (`${BASH_VERSINFO[0]}.${BASH_VERSINFO[1]}`); a migration checklist reads it first so version-specific probes self-skip on older runtimes instead of failing mid-run.
 - **`BASH_PATCHLEVEL`** — the patch counter for the running Bash build; a pkgsrc or distro bump moves it (here 15 → 20), so the checklist records the window it was tested against and flags anything outside it as unverified.
+
+## Git (repository governance)
+
+- **CODEOWNERS** — a file that maps path patterns to the teams or individuals GitHub should request reviews from; the last matching pattern wins, so a catch-all `*` entry goes at the top and narrower paths override it below.
+- **Linear history** — a branch-protection setting that rejects merge commits, forcing every change onto the branch as a rebase or fast-forward; it keeps `git log` readable at the cost of losing the record of what a merge combined.
+- **Stale-review dismissal** — a branch-protection setting that drops approvals when new commits are pushed, so a reviewer signs off on the code that actually landed rather than on an earlier revision of it.
+- **`[Unreleased]` block** — the top section of a Keep-a-Changelog-style `CHANGELOG.md` holding merged-but-untagged work; release tooling moves its entries into a versioned block when a tag is cut, and the file is append-only because changelog parsers key off line order.
+- **Conventional-commit grouping** — bucketing changelog entries by the commit subject prefix (`feat:`, `fix:`, `docs:`, `chore:`) so a reader sees what changed by kind rather than as one chronological list.

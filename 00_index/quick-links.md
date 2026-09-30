@@ -61,6 +61,7 @@
 
 ### Write robust Bash
 - [Robust Bash scripting](../bash/docs/2026-07-23-robust-bash-scripts.md) — strict mode, error handling, and safe defaults
+- [Bash production reference patterns](../bash/docs/production-reference-patterns.md) — the four mechanisms unattended scripts lean on: shell-option flags for fail-fast, signal traps for guaranteed cleanup, process substitution, and coprocesses
 - [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md) — notes on integrating set -euo pipefail and trap-based cleanup into a script workflow
 - [Debug and profile with set -x and trace traps](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md) — using Bash's execution trace and DEBUG trap for profiling and debugging
 - [Integrating Bash with Git](../bash/docs/integrating-bash-with-git.md) — fail-fast, re-runnable patterns for release scripts that touch git
@@ -189,6 +190,14 @@
 ### Set up Git hooks
 - [How I wired Git hooks into my local dev workflow](../git/docs/how-i-wired-git-hooks-into-my-local-dev-workflow.md) — notes on automating Git hooks for consistent local practices
 - [Install Git hooks](../git/hooks/install.sh) — one-command setup for pre-commit and hook utilities in the local repo
+
+### Give a new repository a collaboration contract
+- [Repo scaffold README](../git/templates/repo-scaffold/README.md) — the copy-in layout: hooks, CODEOWNERS, a PR template, a contributing guide, and the two workflows below
+- [CODEOWNERS](../git/templates/repo-scaffold/.github/CODEOWNERS) — routes review requests per path, so contributors don't have to remember who owns what
+- [Branch protection workflow](../git/templates/repo-scaffold/.github/workflows/branch-protection.yml) — applies status-check, review, linear-history, and stale-review rules through the REST API on the first release tag
+- [Changelog automation workflow](../git/templates/repo-scaffold/.github/workflows/changelog-automation.yml) — regenerates the changelog from commit history on merge, grouped by conventional-commit type
+- [Changelog template](../git/templates/repo-scaffold/CHANGELOG.md) — the append-only `[Unreleased]`-first layout the workflow expects
+- [Contributing guide](../git/templates/repo-scaffold/CONTRIBUTING.md) — branch, commit-message, and review conventions to hand a new contributor
 
 ### Map out the Git folder
 - [Git — my first file index](../git/docs/2026-08-10-git-index.md) — cataloguing the Git folder into a per-category coverage table
