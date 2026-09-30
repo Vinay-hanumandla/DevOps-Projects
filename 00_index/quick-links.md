@@ -16,12 +16,16 @@
 - [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, collection packaging, and CI gating merges
 - [Terraform outputs to group vars](../ansible/templates/ansible-role-molecule-collection/scripts/tf_outputs_to_vars.py) — converts `terraform output -json` into the `group_vars` file the role reads, keeping provisioning and configuration decoupled
 
+### Scaffold an Ansible collection for Galaxy
+- [Collection scaffold with Molecule and galaxy-importer](../ansible/templates/ansible-collection-scaffold/README.md) — copy-in collection with Molecule tests, `galaxy.yml`, a CI workflow, and a galaxy-importer lint pass before publication
+
 ### Hand Terraform outputs to Ansible inventory
 - [Ansible + Terraform integration](../ansible/docs/ansible-terraform-integration.md) — where Terraform provisioning ends and Ansible configuration begins, with the outputs-to-inventory handoff and two-stage run ordering
 - [Terraform dynamic inventory](../ansible/manifests/terraform-dynamic-inventory.yaml) — builds the inventory from Terraform workspace outputs via the `tfc_inv` plugin, no CLI or backend credentials on the control node
 
 ### Gate a playbook apply before it touches hosts
 - [Gated playbook run](../ansible/scripts/ansible-playbook-gated-run.sh) — syntax-check, check-mode dry run, and optional lint first, then apply plus an idempotency rerun that must report changed=0
+- [ansible-lint + yamllint pre-commit wrapper](../ansible/scripts/ansible-lint-yamllint-pre-commit-wrapper.sh) — runs both linters over staged YAML, auto-fixes where possible, and reports a machine-readable summary
 - [Ansible Vault patterns for multi-environment secrets](../ansible/scripts/ansible-vault-patterns.sh) — encrypt, decrypt, rotate, and debug Vault-encrypted content across dev, staging, and prod
 
 ### Keep shell-outs idempotent
@@ -88,6 +92,9 @@
 
 ### Test production Bash scripts with BATS
 - [Bats-core production test suite](../bash/notebooks/bats-core-production-test-suite.ipynb) — health-check, log-rotation, and secret-rotation suites with per-test isolation and setup/teardown hooks, runnable in CI via `bats tests/`
+
+### Verify a Bash 5.2 → 5.3 upgrade
+- [Bash 5.2 → 5.3 migration checklist](../bash/notebooks/bash-53-migration-checklist.ipynb) — run every cell on 5.2, save the output, re-run on 5.3 and diff, with a `BASH_VERSINFO` guard so mixed-version CI skips instead of failing
 
 ### Get started with Docker
 - [Docker primer](../docker/notes/0000-primer-docker.md) — what Docker is, images vs containers, and a minimal workflow

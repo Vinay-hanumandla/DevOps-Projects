@@ -19,11 +19,11 @@ The `templates/` subfolders are copy-in starting points: a chart, a role, a stac
 
 ## Quick links
 
+- [Bash 5.2 → 5.3 migration checklist](bash/notebooks/bash-53-migration-checklist.ipynb) — run every cell on 5.2, save the output, re-run on 5.3 and diff before swapping a fleet, with a `BASH_VERSINFO` guard so mixed-version CI skips instead of failing.
+- [Ansible collection scaffold](ansible/templates/ansible-collection-scaffold/README.md) — a starting layout for a collection with Molecule tests, `galaxy.yml`, a CI workflow, and a galaxy-importer lint pass before publication.
+- [ansible-lint + yamllint pre-commit wrapper](ansible/scripts/ansible-lint-yamllint-pre-commit-wrapper.sh) — runs both linters over staged YAML, auto-fixes where possible, and reports a machine-readable summary.
 - [Ansible + Terraform integration](ansible/docs/ansible-terraform-integration.md) — where Terraform provisioning ends and Ansible configuration begins, with the outputs-to-inventory handoff and two-stage run ordering.
 - [PromQL advanced patterns](prom/docs/promql-advanced-patterns.md) — subquery resolution trade-offs, `predict_linear` headroom rules, and a multi-cluster federation sample-pull config.
-- [Helm production best practices](helm/docs/helm-production-best-practices.md) — chart layout and naming, size limits, `values.schema.json` as an early rejection gate, and what belongs in a production chart rather than a demo one.
-- [Hello-world workflow](gha/configs/2026-09-26-hello-world-workflow.yaml) — the smallest useful Actions workflow: checkout, print runner and commit context, plus a manual `workflow_dispatch` trigger for testing on demand.
-- [Production multi-tier deployment](helm/manifests/production-multi-tier-deployment.yaml) — a namespaced production manifest carrying security contexts, quotas, an HPA, and a PodDisruptionBudget together.
 
 ## Layout
 
@@ -53,8 +53,8 @@ Counts include files nested inside template trees. `Src`, `Hooks`, and `Other` a
 
 | Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Other | Last verified |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| Ansible | 3 | 5 | 4 | 1 | 4 | 1 | 0 | 0 | 15 | 0 | 0 | 0 | 2026-09-29 |
-| Bash | 3 | 6 | 11 | 2 | 0 | 0 | 4 | 1 | 30 | 0 | 0 | 0 | 2026-09-26 |
+| Ansible | 3 | 5 | 5 | 1 | 4 | 1 | 0 | 0 | 21 | 0 | 0 | 0 | 2026-09-29 |
+| Bash | 3 | 6 | 11 | 2 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 0 | 2026-09-26 |
 | Docker | 5 | 3 | 7 | 0 | 0 | 2 | 0 | 4 | 25 | 2 | 0 | 1 | 2026-09-21 |
 | GitHub Actions | 3 | 4 | 4 | 1 | 9 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-26 |
 | Git | 16 | 12 | 6 | 0 | 0 | 1 | 0 | 0 | 14 | 0 | 1 | 0 | 2026-09-26 |

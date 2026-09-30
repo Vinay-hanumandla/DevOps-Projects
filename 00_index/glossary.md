@@ -409,6 +409,8 @@
 - **Gated run** — sequencing a playbook apply behind gates that must all pass first: `--syntax-check`, `--check --diff` dry run, optional lint, then the real apply plus a rerun that must report `changed=0` per host; a failing gate or a non-idempotent rerun stops the run before hosts are touched.
 - **`kubernetes.core` collection** — the Ansible collection that manages Kubernetes objects without shelling out: `kubernetes.core.k8s` applies manifests and CRD instances with `state: present`, and `kubernetes.core.helm` declares releases with `name:`, `chart_ref:`, and `release_namespace:`.
 - **Kustomize overlay** — a directory pairing a shared `base/` of manifests with per-environment patches, so only the delta (replica counts, image tags, resource requests) differs between environments; Ansible points at the overlay instead of duplicating the manifests as templates.
+- **galaxy-importer** — the linter Galaxy runs against a collection before publication; it checks `galaxy.yml` metadata, file layout, and documentation, so running it in CI catches publish-time rejections before the release.
+- **yamllint** — a linter for YAML syntax and style (indentation, line length, truthy strings); paired with ansible-lint in a pre-commit wrapper so malformed playbooks never reach a commit, with auto-fix applied where the rule allows it.
 
 ## Python (additional)
 
@@ -462,3 +464,8 @@
 
 - **`xargs -P`** — the dependency-free way to run shell work in parallel: `xargs -P N` keeps N process slots filled from stdin, fitting uniform jobs where the tool is already installed everywhere.
 - **Named-pipe worker pool** — a concurrency pattern built from a FIFO and background jobs that enforces strict parallelism without extra dependencies; pick it when neither `xargs -P` uniformity nor GNU parallel's per-job logging fits.
+
+## Bash (migration)
+
+- **`BASH_VERSINFO`** — the array Bash exposes with its own version (`${BASH_VERSINFO[0]}.${BASH_VERSINFO[1]}`); a migration checklist reads it first so version-specific probes self-skip on older runtimes instead of failing mid-run.
+- **`BASH_PATCHLEVEL`** — the patch counter for the running Bash build; a pkgsrc or distro bump moves it (here 15 → 20), so the checklist records the window it was tested against and flags anything outside it as unverified.
