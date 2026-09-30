@@ -15,17 +15,28 @@ sources: []
 ```
 repo-scaffold/
 ├── README.md
+├── CHANGELOG.md
 ├── .gitignore
 ├── .github/
 │   ├── CODEOWNERS
 │   ├── PULL_REQUEST_TEMPLATE.md
 │   └── workflows/
+│       └── changelog-automation.yml
 ├── hooks/
 │   ├── pre-commit
 │   ├── commit-msg
 │   └── README.md
 └── CONTRIBUTING.md
 ```
+
+## Changelog
+
+`CHANGELOG.md` is append-only. New entries go under `## [Unreleased]` at the
+top of the file and are moved into a versioned block when a tag is cut. The
+`.github/workflows/changelog-automation.yml` job regenerates this file from
+the commit history on every push to `main` and on PRs that are ready to
+merge, then commits the result — so the changelog stays in sync without a
+manual step.
 
 ## Install
 

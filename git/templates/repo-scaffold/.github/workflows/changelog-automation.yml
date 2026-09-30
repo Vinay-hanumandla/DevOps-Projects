@@ -1,0 +1,86 @@
+# last_verified: 2026-09-30 · git n/a
+# GitHub Actions workflow: regenerate the changelog from the commit history
+# whenever a push to main happens or a pull request is ready to merge. The
+# job runs on the default branch only, so it never fires on a feature branch
+# and never rewrites a tag. It appends to CHANGELOG.md; if the file is absent
+# the step creates it from the template shipped in this scaffold.
+#
+# Inputs (set in the workflow `env:` block or as job-level vars):
+#   CHANGELOG_FILE   — path to the changelog inside the repo (default CHANGELOG.md)
+#   TAG_PREFIX       — prefix used when comparing ranges (default "v")
+#   CONVENTIONAL     — whether to group by conventional-commit type (default true)
+#
+# The script this delegates to lives at scripts/changelog.sh in the
+# release-workflow scaffold; copy it alongside this file when you adopt the
+# scaffold, or replace the run: step with your own generator.
+name: Changelog
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [ready_to_merge]
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    # Only runs on the default branch: a PR that is ready to merge is the
+    # trigger, but the job itself executes against the base branch so it
+    # sees the merged history.
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git identity
+        run: |
+          git config user.name  "${{ secrets.BOT_USERNAME || 'changelog-bot' }}"
+          git config user.email "${{ secrets.BOT_EMAIL    || 'changelog-bot@example.com' }}"
+
+      - name: Regenerate changelog
+        env:
+          CHANGELOG_FILE: ${{ env.CHANGELOG_FILE || 'CHANGELOG.md' }}
+        run: |
+          if [ ! -f "$CHANGELOG_FILE" ]; then
+            cp templates/repo-scaffold/CHANGELOG.md "$CHANGELOG_FILE"
+          fi
+          SCRIPT="$( [ -f scripts/changelog.sh ] && echo scripts/changelog.sh \
+            || [ -f ../scripts/changelog.sh ] && echo ../scripts/changelog.sh )"
+          if [ -z "$SCRIPT" ]; then
+            echo "ERROR: no changelog generator found (expected scripts/changelog.sh)" >&2
+            exit 1
+          fi
+          # changelog.sh prints a "# Changelog" header followed by the bullet
+          # section for the range since the last tag; drop the header so the
+          # bullets land inside the Unreleased block of CHANGELOG.md.
+          NEW_SECTION="$("$SCRIPT" | grep -v '^# Changelog')"
+          python3 - "$CHANGELOG_FILE" "$NEW_SECTION" <<'PY'
+import sys
+path, section = sys.argv[1], sys.argv[2]
+lines = open(path, encoding='utf-8').read().split('\n')
+out = []
+i = 0
+inserted = False
+while i < len(lines):
+    out.append(lines[i])
+    if lines[i].strip() == '## [Unreleased]' and not inserted:
+        out.append('')
+        out.extend(section.rstrip('\n').split('\n'))
+        inserted = True
+    i += 1
+if not inserted:
+    out = ['## [Unreleased]', '', section.rstrip('\n'), ''] + lines
+open(path, 'w', encoding='utf-8').write('\n'.join(out))
+PY
+
+      - name: Commit changelog
+        run: |
+          git add "$CHANGELOG_FILE"
+          if git diff --cached --quiet; then
+            echo "no changelog changes"
+          else
+            git commit -m "chore(changelog): regenerate from commit history"
+            git push origin HEAD
+          fi

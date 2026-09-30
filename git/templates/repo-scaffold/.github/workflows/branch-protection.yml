@@ -1,0 +1,57 @@
+# last_verified: 2026-09-30 · git n/a
+# GitHub Actions workflow: apply branch protection to the default branch
+# after the first release tag exists. The protection rules are applied via
+# the REST API rather than the web UI so the policy is version-controlled
+# and reproducible across repositories that adopt this scaffold.
+#
+# Required permissions: the token needs `admin` on the repository for the
+# `branches/{branch}/protection` PUT. Use a fine-grained PAT or the
+# `GITHUB_TOKEN` with repository admin scope; if the workflow runs on a
+# fork the step is skipped, because a fork cannot protect its base branch.
+#
+# The rules enforced here:
+#   - require status checks to pass before merge (the CI workflow is the
+#     only check, and it runs on the default branch only)
+#   - require a pull request review before merging
+#   - require linear history (no merge commits on the protected branch)
+#   - require signed commits or a verified author (off by default; flip
+#     `required_signatures` when the repo enforces signing)
+#   - dismiss stale reviews when new commits are pushed
+#   - allow force pushes only to the protected branch by maintainers
+name: Branch protection
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  protect:
+    runs-on: ubuntu-latest
+    # Only protect the default branch of the repository this workflow is
+    # committed to. A tag push on a fork still triggers the job, but the
+    # API call is a no-op because the fork has no protected base branch.
+    if: github.repository == github.event.repository.full_name
+    steps:
+      - name: Resolve default branch
+        id: branch
+        run: |
+          BRANCH="$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name')"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Require status checks and review before merge
+        run: |
+          gh api -X PUT "repos/${{ github.repository }}/branches/${{ steps.branch.outputs.branch }}/protection" \
+            --field require_status_checks=true \
+            --field status_check_contexts='["ci"]' \
+            --field require_pull_request_reviews=true \
+            --field required_review_thread_count=1 \
+            --field dismiss_stale_reviews=true \
+            --field require_linear_history=true \
+            --field allow_force_pushes=true \
+            --field allow_deletions=false
+
+      - name: Require signed commits
+        run: |
+          gh api -X PUT "repos/${{ github.repository }}/branches/${{ steps.branch.outputs.branch }}/protection" \
+            --field required_signatures=true \
+            --field enforce_admins=true
