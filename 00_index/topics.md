@@ -13,19 +13,19 @@
 - **snippets** (1): [Block/rescue/always deploy with handlers](../ansible/snippets/block-rescue-always-handlers.yaml) — config deploy with rollback, outcome report, and a change-gated service restart
 - **templates** (21): [Collection scaffold with Molecule and galaxy-importer](../ansible/templates/ansible-collection-scaffold/README.md) — copy-in collection with Molecule tests, `galaxy.yml`, CI workflow, and a galaxy-importer lint pass · [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, `galaxy.yml`, dynamic cloud inventory, and a Terraform-outputs handoff script · _…and 13 more under `ansible/templates/`._
 
-## Bash  ·  59 files
+## Bash  ·  61 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
 - **docs** (7): most recent → [Production reference patterns](../bash/docs/production-reference-patterns.md) — shell-option flags for fail-fast, signal traps for guaranteed cleanup, process substitution, and coprocesses, each with the failure mode it prevents · [Bash 5.3 deep dive](../bash/docs/bash-5.3-deep-dive.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md) · _…and 4 more under `bash/docs/`._
-- **scripts** (11): most recent → [First script with argument handling](../bash/scripts/2026-09-26-first-script-with-args.sh) — takes a positional argument, defaults it with `${1:-…}`, and tests whether the path exists · [Parallel execution patterns](../bash/scripts/parallel-execution-patterns.sh), [Companion test for the first script](../bash/scripts/2026-09-05-companion-test.sh) · _…and 7 more under `bash/scripts/`._
-- **snippets** (2): [Advanced parameter expansion](../bash/snippets/parameter-expansion-advanced.sh) — global substitution, prefix/suffix stripping, and nested expansions without subshells; [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
+- **scripts** (12): most recent → [Retry with circuit breaker](../bash/scripts/retry-with-circuit-breaker.sh) — jittered exponential-backoff retries plus a consecutive-failure breaker with structured key=value logging · [First script with argument handling](../bash/scripts/2026-09-26-first-script-with-args.sh) — takes a positional argument, defaults it with `${1:-…}`, and tests whether the path exists · [Parallel execution patterns](../bash/scripts/parallel-execution-patterns.sh) · _…and 8 more under `bash/scripts/`._
+- **snippets** (3): [Coproc, FIFO, and nameref patterns](../bash/snippets/coproc-fifo-and-named-variables.sh) — one long-lived coproc worker, a kernel-scheduled FIFO pool, and nameref dispatch without eval; [Advanced parameter expansion](../bash/snippets/parameter-expansion-advanced.sh) — global substitution, prefix/suffix stripping, and nested expansions without subshells; [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
 - **notebooks** (5): most recent → [Bash 5.2 → 5.3 migration checklist](../bash/notebooks/bash-53-migration-checklist.ipynb), [Bats-core production test suite](../bash/notebooks/bats-core-production-test-suite.ipynb), [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb) · _…and 2 more under `bash/notebooks/`._
 - **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
 - **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
 - _…and more under `bash/` — browse the folder._
 
-## Docker  ·  49 files
+## Docker  ·  61 files
 
 - **primer:** [Docker — quick primer](../docker/notes/0000-primer-docker.md)
 - **notes** (5): most recent → [Docker trip-ups after the initial run-through](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md), [Install Docker](../docker/notes/2026-07-19-install-docker.md)
@@ -33,7 +33,7 @@
 - **docs** (3): most recent → [Multi-stage build patterns for Python services](../docker/docs/multi-stage-build-patterns-python-services.md), [Storage drivers and volume types for stateful workloads](../docker/docs/storage-drivers-volume-types-comparison.md), [Docker Compose healthcheck service ordering](../docker/docs/docker-compose-healthcheck-service-ordering.md)
 - **scripts** (7): most recent → [Image vuln scan and policy enforcement](../docker/scripts/image-vuln-scan-policy.sh), [Multi-arch buildx automation](../docker/scripts/image-build-automation.sh), [Build containerized app with custom networks and volumes](../docker/scripts/build-containerized-app-custom-networks-volumes.sh)
 - **manifests** (2): most recent → [GitOps image build, sign, and push](../docker/manifests/gitops-image-build-and-push.yaml), [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml)
-- **templates** (25): [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack with health-gated startup, file-based secrets, and a tools profile · [Local dev cluster scaffold](../docker/templates/local-dev-cluster/README.md) — kind config, Compose file, and k8s manifests for a throwaway dev loop · [Buildx Bake monorepo scaffold](../docker/templates/buildx-bake-monorepo/README.md) — shared cache, attestations, and dual-registry image outputs · _…and 22 more under `docker/templates/`._
+- **templates** (37): [Microservices multistage scaffold](../docker/templates/microservices-multistage-scaffold/README.md) — api + worker + web where every built service uses a two-stage Dockerfile, with health-gated startup and file-based secrets · [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack with health-gated startup, file-based secrets, and a tools profile · [Local dev cluster scaffold](../docker/templates/local-dev-cluster/README.md) — kind config, Compose file, and k8s manifests for a throwaway dev loop · _…and 34 more under `docker/templates/`._
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
 
 ## GitHub Actions  ·  23 files

@@ -19,11 +19,11 @@ The `templates/` subfolders are copy-in starting points: a chart, a role, a coll
 
 ## Quick links
 
+- [Microservices multistage scaffold](docker/templates/microservices-multistage-scaffold/README.md) — a Compose stack where every built service uses a two-stage Dockerfile, with health-gated startup and file-based secrets.
+- [Retry with circuit breaker](bash/scripts/retry-with-circuit-breaker.sh) — wraps any command in jittered exponential-backoff retries and stops calling a dependency after enough consecutive failures.
+- [Coproc, FIFO, and nameref patterns](bash/snippets/coproc-fifo-and-named-variables.sh) — a long-lived coproc worker, a kernel-scheduled FIFO pool, and dispatch without eval or globals.
 - [Pull-mode localhost inventory](ansible/manifests/pull-mode-local-execution.yaml) — each node clones the playbooks and converges itself with `ansible-pull` on a schedule, for fleets unreachable from a control node.
 - [Repo health check](git/scripts/git-repo-health-check.sh) — a read-only gate combining fsck integrity, a deprecated-config audit for the Git 3.0 migration, and a partial-clone adoption report.
-- [Update-changelog helper](git/templates/repo-scaffold/scripts/update-changelog.sh) — rewrites the `[Unreleased]` block from commits since the last tag; replacing, never appending, so reruns are byte-identical.
-- [Branch protection workflow](git/templates/repo-scaffold/.github/workflows/branch-protection.yml) — applies status-check, review, linear-history, and stale-review-dismissal rules through the REST API on the first release tag, so the policy is version-controlled rather than clicked into the UI.
-- [Changelog automation workflow](git/templates/repo-scaffold/.github/workflows/changelog-automation.yml) — regenerates the changelog from commit history on merge, optionally grouped by conventional-commit type, and creates the file from the template if it is missing.
 
 ## Layout
 
@@ -55,8 +55,8 @@ In the `docs/concepts/` row, the `Notes` column holds the eight foundational pri
 | Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Other | Last verified |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | Ansible | 3 | 5 | 5 | 1 | 4 | 2 | 0 | 0 | 21 | 0 | 0 | 0 | 2026-09-30 |
-| Bash | 3 | 7 | 11 | 2 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 0 | 2026-09-29 |
-| Docker | 5 | 3 | 7 | 0 | 0 | 2 | 0 | 4 | 25 | 2 | 0 | 1 | 2026-09-21 |
+| Bash | 3 | 7 | 12 | 3 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 0 | 2026-09-30 |
+| Docker | 5 | 3 | 7 | 0 | 0 | 2 | 0 | 4 | 37 | 2 | 0 | 1 | 2026-09-30 |
 | GitHub Actions | 3 | 4 | 4 | 1 | 9 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-26 |
 | Git | 16 | 12 | 7 | 0 | 0 | 1 | 0 | 0 | 18 | 0 | 1 | 0 | 2026-09-30 |
 | Grafana | 4 | 1 | 1 | 3 | 6 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-21 |
@@ -74,7 +74,7 @@ In the `docs/concepts/` row, the `Notes` column holds the eight foundational pri
 
 ## Status
 
-Currently hardening the two ends of the automation story: Bash scripts that run unattended long enough for process substitution, coprocesses, and trap-based cleanup to matter, and repository scaffolds that carry their own branch protection and changelog policy. Just landed: pull-mode convergence for Ansible fleets no control node can reach, and a read-only Git health gate (fsck, deprecated-config audit, partial-clone report) ahead of the Git 3.0 migration.
+Currently hardening the two ends of the automation story: Bash scripts that survive unattended runs — retry budgets with a circuit breaker, coprocesses and FIFO pools instead of re-spawned helpers — and Compose scaffolds where every built service ships a two-stage Dockerfile with health-gated startup. Just landed: a microservices multistage scaffold (api + worker + web), a retry wrapper with exponential backoff and breaker state, and pull-mode convergence for Ansible fleets no control node can reach.
 
 ---
-_Last updated: 2026-09-30_
+_Last updated: 2026-10-01_
