@@ -1,9 +1,7 @@
 ---
-last_verified: 2026-08-14
+last_verified: 2026-09-30
 tool_version: n/a
-sources:
-  - https://github.com/gamgi/github-actions-vanilla-monorepo-example
-  - https://linuxiq.org/shell-scripting-practical-notes-from-production/
+sources: []
 ---
 
 # Project scaffold: Git-based release workflow
@@ -26,6 +24,26 @@ steps so the same commands run identically from a terminal and from a pipeline.
     ├── changelog.sh         # print conventional-commit summary since a tag
     └── verify-release.sh    # end-to-end proof in a throwaway repo
 ```
+
+## Changelog automation
+
+The scaffold ships a `CHANGELOG.md` template plus a CI job that regenerates
+the changelog from the commit history. Copy both into a repository that wants
+auto-maintained release notes:
+
+- `templates/repo-scaffold/CHANGELOG.md` — append-only changelog with an
+  `[Unreleased]` block at the top and versioned blocks below it. Never
+  rewrite history in this file: external tooling keys off line order.
+- `templates/repo-scaffold/.github/workflows/changelog-automation.yml` —
+  runs on pushes to `main` and on PRs that are ready to merge, regenerates
+  the changelog with `scripts/changelog.sh`, and commits the result. The job
+  is guarded to the default branch only, so it never fires on a feature
+  branch and never rewrites a tag.
+
+To adopt the workflow, copy the YAML into `.github/workflows/` and point the
+`run:` step at the `changelog.sh` that ships with this scaffold (or at your
+own generator). Set the `CHANGELOG_FILE`, `TAG_PREFIX`, and `CONVENTIONAL`
+environment variables at the workflow or repo level to override the defaults.
 
 The rule of thumb: `lib/` holds functions you `source` (never executes on its
 own), `scripts/` holds the executable steps, and `verify-release.sh` replaces a

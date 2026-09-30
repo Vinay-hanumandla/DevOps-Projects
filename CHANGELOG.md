@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-30
+
+- git: Add CHANGELOG template and branch-protection + changelog-automation workflow to the repo scaffold — completes the CODEOWNERS / commit-msg / pre-commit / release-workflow set with versioned release notes and default-branch protection (git-038)
+
 ## 2026-09-29
 
 - Passed ([x]) ansible-018 — Ansible + Terraform integration: when to use each for provisioning vs configuration · Level: L4 · 2026-09-29
