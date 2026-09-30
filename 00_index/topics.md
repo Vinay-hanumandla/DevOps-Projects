@@ -2,14 +2,14 @@
 
 > A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](learning-path.md).
 
-## Ansible  ·  40 files
+## Ansible  ·  41 files
 
 - **primer:** [Ansible — quick primer](../ansible/notes/0000-primer-ansible.md)
 - **notes** (3): most recent → [Ansible quickstart gotchas](../ansible/notes/2026-08-31-ansible-quickstart-gotchas.md), [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md)
 - **docs** (5): most recent → [Ansible + Terraform integration](../ansible/docs/ansible-terraform-integration.md), [Retry strategies for unreliable targets](../ansible/docs/retry-strategies-unreliable-targets.md), [command/shell vs purpose-built idempotent modules](../ansible/docs/command-shell-vs-idempotent-modules.md), [Managing Kubernetes with Ansible](../ansible/docs/managing-kubernetes-with-ansible.md), [Wired handlers and idempotency for a fleet](../ansible/docs/wired-handlers-idempotency-fleet.md)
 - **configs** (4): most recent → [VPS hardening playbook](../ansible/configs/vps-hardening-playbook.yaml), [Idempotent nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml), [Install nginx playbook](../ansible/configs/2026-08-22-install-nginx-playbook.yaml)
 - **scripts** (5): most recent → [ansible-lint + yamllint pre-commit wrapper](../ansible/scripts/ansible-lint-yamllint-pre-commit-wrapper.sh), [Ansible Vault patterns](../ansible/scripts/ansible-vault-patterns.sh), [Gated playbook run](../ansible/scripts/ansible-playbook-gated-run.sh) · _…and 2 more under `ansible/scripts/`._
-- **manifests** (1): [Terraform dynamic inventory](../ansible/manifests/terraform-dynamic-inventory.yaml) — builds the inventory from Terraform workspace outputs via the `tfc_inv` plugin
+- **manifests** (2): most recent → [Pull-mode localhost inventory](../ansible/manifests/pull-mode-local-execution.yaml) — each node clones the playbooks and converges itself with `ansible-pull` on a schedule, for fleets unreachable from a control node · [Terraform dynamic inventory](../ansible/manifests/terraform-dynamic-inventory.yaml) — builds the inventory from Terraform workspace outputs via the `tfc_inv` plugin
 - **snippets** (1): [Block/rescue/always deploy with handlers](../ansible/snippets/block-rescue-always-handlers.yaml) — config deploy with rollback, outcome report, and a change-gated service restart
 - **templates** (21): [Collection scaffold with Molecule and galaxy-importer](../ansible/templates/ansible-collection-scaffold/README.md) — copy-in collection with Molecule tests, `galaxy.yml`, CI workflow, and a galaxy-importer lint pass · [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, `galaxy.yml`, dynamic cloud inventory, and a Terraform-outputs handoff script · _…and 13 more under `ansible/templates/`._
 
@@ -47,15 +47,15 @@
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 - **snippets** (1): [Reusable workflow caller](../gha/snippets/reusable-workflow-caller.yaml) — minimal caller of a centrally maintained reusable workflow, passing inputs and secrets and reading outputs downstream
 
-## Git  ·  53 files
+## Git  ·  55 files
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
 - **notes** (16): most recent → [Companion forgotten undo notes](../git/notes/2026-08-25-forgotten.md), [Git companion file quickstart](../git/notes/2026-09-10-git-companion-file-quickstart.txt), [Git companion readme primer](../git/notes/2026-09-10-git-companion-readme-primer.txt), [Git companion readme quickstart](../git/notes/2026-09-10-git-companion-readme-quickstart.md)
 - **docs** (12): most recent → [Worktree workflows for hotfix isolation](../git/docs/worktree-hotfix-isolation.md), [Worktree workflows for parallel feature development](../git/docs/worktree-parallel-feature-development.md), [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md), [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md)
-- **scripts** (6): most recent → [Changelog from conventional commits](../git/scripts/changelog-from-conventional-commits.sh), [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Git PR helper](../git/scripts/git-pr-helper.sh)
+- **scripts** (7): most recent → [Repo health check](../git/scripts/git-repo-health-check.sh) — read-only gate combining fsck integrity, a deprecated-config audit for the Git 3.0 migration, and a partial-clone adoption report · [Changelog from conventional commits](../git/scripts/changelog-from-conventional-commits.sh), [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Git PR helper](../git/scripts/git-pr-helper.sh) · _…and 3 more under `git/scripts/`._
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
 - **manifests** (1): [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps git events (push, tag, merge request) to build → test → deploy jobs
-- **templates** (17): [Repo scaffold with hooks and branch protection](../git/templates/repo-scaffold/README.md) — hooks, CODEOWNERS, a PR template, a contributing guide, and workflows that apply branch protection and regenerate the changelog · [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) · _…and 15 more under `git/templates/`._
+- **templates** (18): [Repo scaffold with hooks and branch protection](../git/templates/repo-scaffold/README.md) — hooks, CODEOWNERS, a PR template, a contributing guide, and workflows that apply branch protection and regenerate the changelog · [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) · _…and 16 more under `git/templates/`._
 - _…and more under `git/` — browse the folder._
 
 ## Grafana  ·  18 files

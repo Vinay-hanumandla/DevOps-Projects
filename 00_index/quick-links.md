@@ -37,6 +37,9 @@
 ### Manage Kubernetes workloads with Ansible
 - [Managing Kubernetes with Ansible](../ansible/docs/managing-kubernetes-with-ansible.md) — raw manifests and CRDs, Helm releases, and Kustomize overlays through the kubernetes.core collection, ordered CRDs-first
 
+### Converge nodes in pull mode
+- [Pull-mode localhost inventory](../ansible/manifests/pull-mode-local-execution.yaml) — each node clones the playbooks and converges itself with `ansible-pull` on a schedule, for fleets unreachable from a control node
+
 ### Get started with Bash
 - [Bash primer](../bash/notes/0000-primer-bash.md) — what Bash is, key terminology, and a tiny example
 - [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md) — install check, first .sh file, and permission gotcha
@@ -196,11 +199,15 @@
 - [CODEOWNERS](../git/templates/repo-scaffold/.github/CODEOWNERS) — routes review requests per path, so contributors don't have to remember who owns what
 - [Branch protection workflow](../git/templates/repo-scaffold/.github/workflows/branch-protection.yml) — applies status-check, review, linear-history, and stale-review rules through the REST API on the first release tag
 - [Changelog automation workflow](../git/templates/repo-scaffold/.github/workflows/changelog-automation.yml) — regenerates the changelog from commit history on merge, grouped by conventional-commit type
+- [Update-changelog helper](../git/templates/repo-scaffold/scripts/update-changelog.sh) — rewrites the `[Unreleased]` block from commits since the last tag; replacing, never appending, so reruns are byte-identical
 - [Changelog template](../git/templates/repo-scaffold/CHANGELOG.md) — the append-only `[Unreleased]`-first layout the workflow expects
 - [Contributing guide](../git/templates/repo-scaffold/CONTRIBUTING.md) — branch, commit-message, and review conventions to hand a new contributor
 
 ### Map out the Git folder
 - [Git — my first file index](../git/docs/2026-08-10-git-index.md) — cataloguing the Git folder into a per-category coverage table
+
+### Check repo health before migrating
+- [Repo health check](../git/scripts/git-repo-health-check.sh) — read-only gate combining fsck integrity, a deprecated-config audit for the Git 3.0 migration, and a partial-clone adoption report
 
 ### Understand Git file-level operations
 - [Git companion file quickstart](../git/notes/2026-09-10-git-companion-file-quickstart.txt) — first-contact notes on Git's file-level operations

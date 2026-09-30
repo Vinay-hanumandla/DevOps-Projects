@@ -479,3 +479,14 @@
 - **Stale-review dismissal** — a branch-protection setting that drops approvals when new commits are pushed, so a reviewer signs off on the code that actually landed rather than on an earlier revision of it.
 - **`[Unreleased]` block** — the top section of a Keep-a-Changelog-style `CHANGELOG.md` holding merged-but-untagged work; release tooling moves its entries into a versioned block when a tag is cut, and the file is append-only because changelog parsers key off line order.
 - **Conventional-commit grouping** — bucketing changelog entries by the commit subject prefix (`feat:`, `fix:`, `docs:`, `chore:`) so a reader sees what changed by kind rather than as one chronological list.
+
+## Ansible (pull mode)
+
+- **ansible-pull** — the mode where each managed node clones the playbooks from git and converges itself, instead of waiting for pushes from a control node; scheduled locally (cron or a timer unit) so already-converged nodes report no changes.
+- **Pull-mode inventory** — a minimal inventory (here just `localhost` with `ansible_connection: local`) that lives beside the checkout on the node, giving `ansible-pull` something to read without a central inventory service.
+
+## Git (repository health)
+
+- **fsck** — Git's integrity check (`git fsck`) that walks every object looking for corruption, dangling commits, and missing links; the first gate to run before migrating a server or trusting a mirror.
+- **Partial clone** — a clone that fetches only the objects it needs (e.g. `--filter=blob:none`), downloading the rest on demand from a promisor remote; keeps large repos fast to clone at the cost of needing the remote for missing blobs.
+- **Promisor remote** — the remote a partial clone promises to fetch missing objects from later; the health check reports its URL, the clone filter in use, and how many promisor objects are still outstanding.
