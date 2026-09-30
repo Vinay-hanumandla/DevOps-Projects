@@ -9,10 +9,10 @@
 #   (1) fsck integrity check for corrupt or missing objects, (2) deprecated-
 #   configuration audit for the Git 3.0 migration (grafts, shallow clones,
 #   legacy remote shorthands, deprecated extensions), and (3) partial-clone
-#   adoption report (promisor remote, clone filter, promisor objects, and
-#   the blob-limit setting for repack --drop-filtered). Run before migrating
-#   a Git server to Git 3.0 or before cutting over to a partial-clone
-#   workflow on a large repository.
+#   adoption report (promisor remote, clone filter, promisor objects, and the
+#   blob limit carried by the clone filter for 'git repack --drop-filtered').
+#   Run before migrating a Git server to Git 3.0 or before cutting over to a
+#   partial-clone workflow on a large repository.
 #
 # When to use:
 #   Before migrating a Git server to Git 3.0. As a pre-flight check before
@@ -20,9 +20,9 @@
 #   CI for mirrored or bare repositories.
 #
 # Prerequisites:
-#   Git 2.40+. Tested against Git 2.56.0. Run from within a checkout or
-#   bare repository. Requires write access only if --fix is passed (not yet
-#   implemented — this version is read-only).
+#   Git 2.56.0 (the version this script was written against). Run from within
+#   a checkout or a bare repository. This version is read-only: it never writes
+#   to the repository.
 #
 # Steps:
 #   Run with no arguments to execute all three checks. Pass --check <name>
@@ -39,6 +39,8 @@
 #   - info/grafts present: migrates to 'git replace' refs before Git 3.0.
 #   - Remote-URL shorthand dirs present: migrate to git remote add before
 #     Git 3.0 (these are removed in favor of config).
+#   - Clone filter without a blob:limit= component: nothing to compare against
+#     when running 'git repack --drop-filtered'; pass --filter=blob:limit=<n>.
 #
 # References:
 #   Git 2.56.0 release notes:
@@ -69,8 +71,8 @@ git_dir() { git rev-parse --absolute-git-dir 2>/dev/null || git rev-parse --git-
 
 # ── Check 1/3: fsck integrity ─────────────────────────────────────────────────
 # git fsck --full --strict --unreachable detects corrupt, missing, or
-# dangling objects and broken links. Git 3.0 hardens the ort merge backend
-# to abort on corrupt trees instead of proceeding silently.
+# dangling objects and broken links. Git 2.56 also hardens the ort merge
+# backend to abort on corrupt trees instead of proceeding silently.
 
 check_fsck() {
   section "1/3  Repository integrity (git fsck)"
@@ -155,8 +157,10 @@ check_deprecated() {
 }
 
 # ── Check 3/3: Partial-clone adoption report ───────────────────────────────────
-# Reports on promisor remote, clone filter, promisor objects, and the
-# blob-limit for 'git repack --drop-filtered' (Git 2.56.0).
+# Reports on promisor remote, clone filter, promisor objects, and the blob limit
+# carried by the clone filter. There is no config key for that limit: it lives in
+# the partialclonefilter value (e.g. blob:limit=1m) and is passed to
+# 'git repack --drop-filtered' on the command line as --filter=blob:limit=<n>.
 # Git 2.56 adds pack-objects --path-walk for path-scoped pack generation.
 
 report_partial_clone() {
@@ -165,11 +169,10 @@ report_partial_clone() {
   gd="$(git_dir)"
 
   # Promisor remote (client.partialClone)
-  local promisor
+  local promisor="" filter=""
   promisor="$(git config --get client.partialClone 2>/dev/null || true)"
   if [[ -n "$promisor" ]]; then
     ok "promisor remote configured: $promisor"
-    local filter
     filter="$(git config --get "remote.${promisor}.partialclonefilter" 2>/dev/null || true)"
     if [[ -n "$filter" ]]; then
       ok "clone filter: $filter"
@@ -191,20 +194,32 @@ report_partial_clone() {
     fi
   fi
 
-  # Blob limit for 'git repack --drop-filtered <limit>'
-  local blob_limit
-  blob_limit="$(git config --get gc.partialCloneRepackBlobLimit 2>/dev/null || true)"
+  # Blob limit for 'git repack --drop-filtered'. The limit is the blob:limit=
+  # component of the clone filter — there is no gc.* config key for it — and it
+  # is handed to repack on the command line as --filter=blob:limit=<n>.
+  local blob_limit="" filter_spec=""
+  if [[ -n "$filter" ]]; then
+    for filter_spec in ${filter//,/ }; do
+      if [[ "$filter_spec" == blob:limit=* ]]; then
+        blob_limit="${filter_spec#blob:limit=}"
+        break
+      fi
+    done
+  fi
+
   if [[ -n "$blob_limit" ]]; then
-    ok "gc.partialCloneRepackBlobLimit: $blob_limit"
+    ok "effective blob limit (from clone filter): $blob_limit"
+    info "  'git repack --drop-filtered --filter=blob:limit=$blob_limit'"
   else
-    info "gc.partialCloneRepackBlobLimit not set"
-    info "  set it before running 'git repack --drop-filtered <limit>'"
+    info "no blob:limit= component in the clone filter"
+    info "  pass the limit on the command line:"
+    info "    'git repack --drop-filtered --filter=blob:limit=<n>'"
   fi
 
   echo ""
   info "Git 2.56.0 migration notes:"
-  info "  - 'git repack --drop-filtered <limit>' removes promisor blobs"
-  info "    above the configured blob limit to reclaim space"
+  info "  - 'git repack --drop-filtered --filter=blob:limit=<n>' deletes local"
+  info "    promisor blobs over that limit to reclaim space"
   info "  - 'git pack-objects --path-walk <paths>' combines reachability"
   info "    bitmaps and delta-islands for path-scoped pack generation"
   info "  - Git 3.0 will default SHA-256 for new repos; grafts and"
