@@ -1,0 +1,93 @@
+# last_verified: 2026-09-30 · docker n/a
+# Microservices scaffold: api + worker built from multi-stage Dockerfiles,
+# static web front, db + cache with health-gated startup, file-based secrets.
+# Copy .env.example to .env and secrets/*.example to secrets/* (no extension),
+# then: docker compose up --build
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_DB: ${POSTGRES_DB:-appdb}
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  cache:
+    image: redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  api:
+    build: ./api
+    environment:
+      DB_HOST: db
+      DB_USER: ${POSTGRES_USER:-app}
+      DB_NAME: ${POSTGRES_DB:-appdb}
+      DB_PASSWORD_FILE: /run/secrets/db_password
+      CACHE_URL: redis://cache:6379
+      API_PORT: 8000
+    secrets:
+      - db_password
+      - api_key
+    ports:
+      - "${API_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/health')\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  worker:
+    build: ./worker
+    environment:
+      DB_HOST: db
+      API_KEY_FILE: /run/secrets/api_key
+      POLL_INTERVAL: 30
+    secrets:
+      - api_key
+      - db_password
+    depends_on:
+      api:
+        condition: service_healthy
+    # No ports published: background consumer only. Restart on failure
+    # so a transient db/cache outage does not need a manual re-run.
+    restart: unless-stopped
+
+  web:
+    image: nginx
+    volumes:
+      - ./web:/usr/share/nginx/html:ro
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt
+  api_key:
+    file: ./secrets/api_key.txt
+
+volumes:
+  pgdata:

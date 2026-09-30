@@ -2,6 +2,7 @@
 
 ## 2026-09-30
 
+- docker: Add microservices multistage scaffold template with two-stage api/worker builds, health-gated Compose startup, and file-based secrets (docker-020)
 - ansible: Add pull-mode localhost inventory manifest for git-sourced playbooks with scheduled idempotent drift correction (ansible-021)
 - git: Add repository health and migration wrapper script — fsck integrity checks, deprecated-config audit (grafts, shallow clones, remote-URL shorthands), and partial-clone adoption reporting with Git 2.56.0 notes (git-040)
 - git: Add CHANGELOG template and branch-protection + changelog-automation workflow to the repo scaffold — completes the CODEOWNERS / commit-msg / pre-commit / release-workflow set with versioned release notes and default-branch protection (git-038)
