@@ -643,3 +643,4 @@ Passed ([x]) jenkins-018 — Jenkins: config — Jenkins Configuration as Code f
 - repo-doc/scripts/2026-09-25-check-folders-and-report-gaps.sh — Automate the repo task workflow: coverage tables, folder validation, gap report (repo-doc-007)
 - gha/manifests/gitops-app-of-apps.yaml — GitOps delivery with an Argo CD app-of-apps root, Helm and Kustomize child Applications, and a GitHub Actions workflow that validates the declarations and requests a hard refresh (gha-020)
 - helm/docs/helm-production-best-practices.md — Helm production best practices reference: chart structure conventions, test hooks, release management checklist, environment layering, and pre-flight checks (helm-023)
+- git/scripts/git-repo-health-check.sh — Rework (git-040): report the partial-clone blob limit from the clone filter (`blob:limit=`) instead of the nonexistent `gc.partialCloneRepackBlobLimit` config key, and correct the ort corrupt-tree hardening note to Git 2.56
