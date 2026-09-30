@@ -15,15 +15,15 @@ It deliberately leaves out credentials, environment secrets, and a walkthrough f
 
 Notes, scripts, configs, manifests, and reusable templates for the tooling a DevOps engineer actually operates: version control and shell first, then containers and orchestration, then infrastructure as code and CI/CD, with observability and dashboarding on top.
 `docs/concepts/` holds the conceptual spine — eight foundational primers, each with runnable companions — and every tool folder holds the material you reach for when putting those ideas into practice.
-The `templates/` subfolders are copy-in starting points: a chart, a role, a stack, or a release workflow you can adopt wholesale rather than write from scratch.
+The `templates/` subfolders are copy-in starting points: a chart, a role, a collection, a repository, or a release workflow you can adopt wholesale rather than write from scratch.
 
 ## Quick links
 
-- [Bash 5.2 → 5.3 migration checklist](bash/notebooks/bash-53-migration-checklist.ipynb) — run every cell on 5.2, save the output, re-run on 5.3 and diff before swapping a fleet, with a `BASH_VERSINFO` guard so mixed-version CI skips instead of failing.
-- [Ansible collection scaffold](ansible/templates/ansible-collection-scaffold/README.md) — a starting layout for a collection with Molecule tests, `galaxy.yml`, a CI workflow, and a galaxy-importer lint pass before publication.
-- [ansible-lint + yamllint pre-commit wrapper](ansible/scripts/ansible-lint-yamllint-pre-commit-wrapper.sh) — runs both linters over staged YAML, auto-fixes where possible, and reports a machine-readable summary.
-- [Ansible + Terraform integration](ansible/docs/ansible-terraform-integration.md) — where Terraform provisioning ends and Ansible configuration begins, with the outputs-to-inventory handoff and two-stage run ordering.
-- [PromQL advanced patterns](prom/docs/promql-advanced-patterns.md) — subquery resolution trade-offs, `predict_linear` headroom rules, and a multi-cluster federation sample-pull config.
+- [Bash production reference patterns](bash/docs/production-reference-patterns.md) — the four Bash mechanisms that harden unattended scripts: shell-option flags for fail-fast, signal traps for guaranteed cleanup, process substitution, and coprocesses.
+- [Changelog template](git/templates/repo-scaffold/CHANGELOG.md) — an append-only `CHANGELOG.md` skeleton with an `[Unreleased]` block on top and versioned blocks beneath, laid out the way release-note tooling expects.
+- [Changelog automation workflow](git/templates/repo-scaffold/.github/workflows/changelog-automation.yml) — regenerates the changelog from commit history on merge, optionally grouped by conventional-commit type, and creates the file from the template if it is missing.
+- [Branch protection workflow](git/templates/repo-scaffold/.github/workflows/branch-protection.yml) — applies status-check, review, linear-history, and stale-review-dismissal rules through the REST API on the first release tag, so the policy is version-controlled rather than clicked into the UI.
+- [Bash 5.2 → 5.3 migration checklist](bash/notebooks/bash-53-migration-checklist.ipynb) — runs each probe on both versions, saves the output, and diffs them, with a `BASH_VERSINFO` guard so mixed-version CI skips instead of failing.
 
 ## Layout
 
@@ -47,6 +47,7 @@ The `templates/` subfolders are copy-in starting points: a chart, a role, a stac
 ## Coverage
 
 Counts include files nested inside template trees. `Src`, `Hooks`, and `Other` are support locations that only a few tools use.
+In the `docs/concepts/` row, the `Notes` column holds the eight foundational primers and `Docs` the cross-tool concept articles; `Other` covers their companion notes and follow-on docs.
 
 <details>
 <summary>Coverage table</summary>
@@ -54,10 +55,10 @@ Counts include files nested inside template trees. `Src`, `Hooks`, and `Other` a
 | Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Other | Last verified |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | Ansible | 3 | 5 | 5 | 1 | 4 | 1 | 0 | 0 | 21 | 0 | 0 | 0 | 2026-09-29 |
-| Bash | 3 | 6 | 11 | 2 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 0 | 2026-09-26 |
+| Bash | 3 | 7 | 11 | 2 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 0 | 2026-09-29 |
 | Docker | 5 | 3 | 7 | 0 | 0 | 2 | 0 | 4 | 25 | 2 | 0 | 1 | 2026-09-21 |
 | GitHub Actions | 3 | 4 | 4 | 1 | 9 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-26 |
-| Git | 16 | 12 | 6 | 0 | 0 | 1 | 0 | 0 | 14 | 0 | 1 | 0 | 2026-09-26 |
+| Git | 16 | 12 | 6 | 0 | 0 | 1 | 0 | 0 | 17 | 0 | 1 | 0 | 2026-09-30 |
 | Grafana | 4 | 1 | 1 | 3 | 6 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-21 |
 | Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 0 | 2026-09-26 |
 | Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 2026-09-23 |
@@ -67,13 +68,13 @@ Counts include files nested inside template trees. `Src`, `Hooks`, and `Other` a
 | Repo-doc | 4 | 3 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-26 |
 | Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 8 | 0 | 0 | 0 | 2026-09-22 |
 | Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-16 |
-| Foundational concepts | 3 | 22 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 0 | 2026-09-16 |
+| Foundational concepts | 8 | 13 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 4 | 2026-09-16 |
 
 </details>
 
 ## Status
 
-Currently drawing the line between provisioning and configuration — Terraform owns what the provider API owns, Ansible owns what happens inside a reachable host — and going deeper on PromQL with subqueries, predictive headroom rules, and cross-cluster federation.
+Currently hardening the two ends of the automation story: Bash scripts that run unattended long enough for process substitution, coprocesses, and trap-based cleanup to matter, and repository scaffolds that carry their own branch protection and changelog policy. Git history strategy and repository health are next.
 
 ---
-_Last updated: 2026-09-29_
+_Last updated: 2026-09-30_
