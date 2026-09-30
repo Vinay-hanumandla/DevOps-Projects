@@ -1,57 +1,140 @@
 # last_verified: 2026-09-30 · git n/a
-# GitHub Actions workflow: apply branch protection to the default branch
-# after the first release tag exists. The protection rules are applied via
-# the REST API rather than the web UI so the policy is version-controlled
-# and reproducible across repositories that adopt this scaffold.
+# GitHub Actions workflow: apply a branch-protection policy to the default
+# branch once the first release tag exists. The policy is applied through the
+# REST API rather than the web UI so it is version-controlled and reproducible
+# across every repository that adopts this scaffold.
 #
-# Required permissions: the token needs `admin` on the repository for the
-# `branches/{branch}/protection` PUT. Use a fine-grained PAT or the
-# `GITHUB_TOKEN` with repository admin scope; if the workflow runs on a
-# fork the step is skipped, because a fork cannot protect its base branch.
+# Corrections carried by this revision, all of them behaviour changes rather
+# than cosmetics:
+#   * `required_review_thread_count` is not part of the branch protection
+#     payload; sending it makes the PUT fail with 422 and the whole policy is
+#     rejected, so it has been removed. The number of reviews is expressed
+#     with `required_approving_review_count` instead.
+#   * The two protection calls were merged into one. PUT /branches/{branch}
+#     /protection replaces the entire policy, so a second call carrying only
+#     the signing flags would have wiped the status-check and review settings
+#     the first call had just applied.
+#   * Signed commits are opt-in. The previous revision applied
+#     `required_signatures` unconditionally while the header promised "off by
+#     default"; it is now driven by the `require_signatures` input, and the
+#     header above describes what the code actually does.
+#   * The fork guard compared `github.repository` with
+#     `github.event.repository.full_name`, which are the same value on every
+#     event, so the comparison never excluded anything. It now tests the
+#     repository's `fork` flag.
+#   * `allow_force_pushes` is false. It was true while the header described
+#     force pushes as a maintainer-only escape hatch; as written it let anyone
+#     with push access rewrite the protected branch.
 #
-# The rules enforced here:
-#   - require status checks to pass before merge (the CI workflow is the
-#     only check, and it runs on the default branch only)
-#   - require a pull request review before merging
-#   - require linear history (no merge commits on the protected branch)
-#   - require signed commits or a verified author (off by default; flip
-#     `required_signatures` when the repo enforces signing)
-#   - dismiss stale reviews when new commits are pushed
-#   - allow force pushes only to the protected branch by maintainers
+# The policy enforced on the default branch:
+#   - required status checks, listed in the `required_checks` input
+#   - a pull request review before merge, stale approvals dismissed on push
+#   - linear history, so no merge commits land on the protected branch
+#   - force pushes and branch deletion disabled
+#   - verified signed commits, only when `require_signatures` is set
+#
+# Credentials: the PUT needs admin on the repository. `GITHUB_TOKEN` is not
+# sufficient for it, so supply an admin-scoped credential as the ADMIN_TOKEN
+# repository secret. The default `required_checks` value is an empty list
+# because a freshly scaffolded repository has no checks yet — set the input to
+# the job names your CI workflow reports (for example `["build", "test"]`)
+# before treating the policy as meaningful.
 name: Branch protection
 
 on:
   push:
     tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      require_signatures:
+        description: Require verified, signed commits on the protected branch
+        type: boolean
+        required: false
+        default: false
+      required_checks:
+        description: 'JSON array of required status check names, e.g. ["build","test"]'
+        type: string
+        required: false
+        default: '[]'
+
+permissions:
+  contents: read
 
 jobs:
   protect:
+    name: Apply branch protection
     runs-on: ubuntu-latest
-    # Only protect the default branch of the repository this workflow is
-    # committed to. A tag push on a fork still triggers the job, but the
-    # API call is a no-op because the fork has no protected base branch.
-    if: github.repository == github.event.repository.full_name
+    # Only the upstream repository can protect its own default branch. A tag
+    # pushed from a fork still triggers the workflow, so the guard has to be
+    # explicit.
+    if: github.event.repository.fork == false
+    env:
+      GH_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+      REPO: ${{ github.repository }}
+      REQUIRE_SIGNATURES: ${{ inputs.require_signatures || 'false' }}
+      REQUIRED_CHECKS: ${{ inputs.required_checks || '[]' }}
     steps:
-      - name: Resolve default branch
+      - name: Resolve the default branch
         id: branch
         run: |
-          BRANCH="$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name')"
-          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+          branch="$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name')"
+          if [ -z "$branch" ]; then
+            echo "ERROR: could not resolve the default branch of $REPO" >&2
+            exit 1
+          fi
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          echo "protecting '$branch' on $REPO"
 
-      - name: Require status checks and review before merge
+      - name: Build the protection payload
         run: |
-          gh api -X PUT "repos/${{ github.repository }}/branches/${{ steps.branch.outputs.branch }}/protection" \
-            --field require_status_checks=true \
-            --field status_check_contexts='["ci"]' \
-            --field require_pull_request_reviews=true \
-            --field required_review_thread_count=1 \
-            --field dismiss_stale_reviews=true \
-            --field require_linear_history=true \
-            --field allow_force_pushes=true \
-            --field allow_deletions=false
+          case "$REQUIRE_SIGNATURES" in
+            true|false) signatures="$REQUIRE_SIGNATURES" ;;
+            *) echo "ERROR: require_signatures must be true or false, got '$REQUIRE_SIGNATURES'" >&2
+               exit 1 ;;
+          esac
+          if ! printf '%s' "$REQUIRED_CHECKS" | jq -e 'type == "array"' >/dev/null; then
+            echo "ERROR: required_checks must be a JSON array, got '$REQUIRED_CHECKS'" >&2
+            exit 1
+          fi
+          # One PUT, because the endpoint replaces the whole policy. Passing
+          # the body as JSON rather than as gh --field pairs keeps booleans
+          # booleans instead of letting them become strings.
+          jq -n \
+            --argjson checks "$REQUIRED_CHECKS" \
+            --argjson signatures "$signatures" \
+            '{
+               required_status_checks: {strict: true, contexts: $checks},
+               enforce_admins: true,
+               required_pull_request_reviews: {
+                 required_approving_review_count: 1,
+                 dismiss_stale_reviews: true
+               },
+               required_signatures: {enabled: $signatures},
+               required_linear_history: true,
+               allow_force_pushes: false,
+               allow_deletions: false
+             }' > protection.json
+          cat protection.json
 
-      - name: Require signed commits
+      - name: Apply the policy
+        env:
+          BRANCH: ${{ steps.branch.outputs.branch }}
         run: |
-          gh api -X PUT "repos/${{ github.repository }}/branches/${{ steps.branch.outputs.branch }}/protection" \
-            --field required_signatures=true \
-            --field enforce_admins=true
+          gh api -X PUT "repos/$REPO/branches/$BRANCH/protection" \
+            --input protection.json \
+            --silent
+          echo "protection applied to $REPO/$BRANCH"
+
+      - name: Read the policy back
+        env:
+          BRANCH: ${{ steps.branch.outputs.branch }}
+        run: |
+          gh api "repos/$REPO/branches/$BRANCH/protection" --jq '{
+            status_checks: .required_status_checks.contexts,
+            reviews: .required_pull_request_reviews.required_approving_review_count,
+            dismiss_stale_reviews: .required_pull_request_reviews.dismiss_stale_reviews,
+            signed_commits: .required_signatures.enabled,
+            linear_history: .required_linear_history.enabled,
+            force_pushes: .allow_force_pushes.enabled,
+            deletions: .allow_deletions.enabled
+          }'
