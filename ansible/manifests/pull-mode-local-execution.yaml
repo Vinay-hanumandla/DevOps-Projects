@@ -1,0 +1,34 @@
+# last_verified: 2026-09-30 · ansible n/a
+# Purpose: localhost inventory for ansible-pull mode — each managed node clones
+# the site playbooks from git and converges itself, instead of waiting for
+# pushes from a control node.
+# When to use this: fleets where nodes are ephemeral or unreachable from a
+# central host (autoscaled groups, edge devices, laptops), or anywhere drift
+# correction should run on a schedule local to the node. Prefer push mode when
+# a single control node must coordinate ordering across tiers.
+# Prerequisites:
+#   - ansible-pull available on the node and the site-playbooks repo readable
+#     from it (deploy key or token materialized at runtime, never committed).
+#   - This file placed where the pull command can read it, e.g. alongside the
+#     checkout directory the schedule syncs.
+# Steps:
+#   1. Point pull_repo_url at the git source of truth for the playbooks and
+#      pull_branch at the tracked branch.
+#   2. Set pull_playbook to the entry playbook that converges the node.
+#   3. Schedule `ansible-pull -U <repo> -i pull-mode-local-execution.yaml`
+#      on the node (cron or a timer unit) at the cadence drift correction
+#      needs; each run re-clones and re-applies, so already-converged nodes
+#      report no changes.
+# Verify: ansible-inventory -i ansible/manifests/pull-mode-local-execution.yaml --graph
+# should list localhost. Then run ansible-pull against a test node and re-run
+# it immediately — the second run should report no changes, confirming the
+# playbooks are idempotent under pull.
+all:
+  hosts:
+    localhost:
+      ansible_connection: local
+  vars:
+    pull_repo_url: "git@your-git-host:your-org/site-playbooks.git"
+    pull_branch: "main"
+    pull_playbook: "site.yaml"
+    pull_checkout_dir: "/var/lib/ansible/pull"
