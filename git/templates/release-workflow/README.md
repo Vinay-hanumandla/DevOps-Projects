@@ -1,7 +1,9 @@
 ---
 last_verified: 2026-09-30
 tool_version: n/a
-sources: []
+sources:
+  - https://github.com/gamgi/github-actions-vanilla-monorepo-example
+  - https://linuxiq.org/shell-scripting-practical-notes-from-production/
 ---
 
 # Project scaffold: Git-based release workflow

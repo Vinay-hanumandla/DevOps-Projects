@@ -1,86 +1,121 @@
 # last_verified: 2026-09-30 · git n/a
-# GitHub Actions workflow: regenerate the changelog from the commit history
-# whenever a push to main happens or a pull request is ready to merge. The
-# job runs on the default branch only, so it never fires on a feature branch
-# and never rewrites a tag. It appends to CHANGELOG.md; if the file is absent
-# the step creates it from the template shipped in this scaffold.
+# GitHub Actions workflow: keep CHANGELOG.md in step with the default branch.
 #
-# Inputs (set in the workflow `env:` block or as job-level vars):
-#   CHANGELOG_FILE   — path to the changelog inside the repo (default CHANGELOG.md)
-#   TAG_PREFIX       — prefix used when comparing ranges (default "v")
-#   CONVENTIONAL     — whether to group by conventional-commit type (default true)
+# Two jobs, deliberately not one:
+#   * `regenerate` runs on a push to main. It rewrites the `## [Unreleased]`
+#     block from the conventional commits landed since the last release tag
+#     and commits the result back to main.
+#   * `verify` runs on every pull request. It runs the same script against the
+#     changelog as it stands in the PR and fails if the generator breaks, so a
+#     PR that breaks the generator is caught before it reaches main. It never
+#     writes to the repository.
 #
-# The script this delegates to lives at scripts/changelog.sh in the
-# release-workflow scaffold; copy it alongside this file when you adopt the
-# scaffold, or replace the run: step with your own generator.
+# Why two jobs: the previous revision triggered on
+# `pull_request: types: [ready_to_merge]` and then gated its single job with
+# `if: github.ref == 'refs/heads/main'`. For a pull_request event `github.ref`
+# is the merge ref, so that condition was false for every such event — the
+# ready-to-merge trigger was dead code and the changelog only ever moved on
+# the next push to main. Splitting the two cases removes the dead trigger
+# rather than papering over it.
+#
+# The generator itself lives in scripts/update-changelog.sh in this scaffold,
+# so there is no dependency on a script from another template directory. It
+# is plain bash + git + awk and can be run locally against a scratch copy.
+#
+# Job environment:
+#   CHANGELOG_FILE — changelog inside the repository (default CHANGELOG.md)
+#   TAG_PREFIX     — release-tag prefix used to find the last release (default v)
+#   SKIP_TYPES     — commit types kept out of the changelog (default "chore ci build")
+#   BOT_NAME       — committer name for the regenerated changelog
+#   BOT_EMAIL      — committer email for the regenerated changelog
+#
+# Interaction with branch protection: if `main` is protected by
+# branch-protection.yml, the push this job makes can be rejected by that
+# policy. Either allow the workflow's own token to bypass it, or let a
+# maintainer land the regenerated file.
 name: Changelog
 
 on:
   push:
     branches: [main]
   pull_request:
-    types: [ready_to_merge]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
 
 jobs:
-  changelog:
+  regenerate:
+    name: Regenerate changelog
     runs-on: ubuntu-latest
-    # Only runs on the default branch: a PR that is ready to merge is the
-    # trigger, but the job itself executes against the base branch so it
-    # sees the merged history.
+    # Redundant for this repository — the push trigger is already filtered to
+    # main — but it keeps the job correct if the file is reused on a mirror
+    # whose default branch is not called main.
     if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    env:
+      CHANGELOG_FILE: CHANGELOG.md
+      TAG_PREFIX: v
+      SKIP_TYPES: chore ci build
+      BOT_NAME: ${{ vars.BOT_NAME || 'changelog-bot' }}
+      BOT_EMAIL: ${{ vars.BOT_EMAIL || 'changelog-bot@users.noreply.github.com' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Full history: the generator compares the last release tag with HEAD
+          # and a shallow clone has no tags to compare against.
+          fetch-depth: 0
+
+      - name: Set up the commit identity
+        run: |
+          git config user.name  "$BOT_NAME"
+          git config user.email "$BOT_EMAIL"
+
+      - name: Rewrite the Unreleased block
+        run: bash scripts/update-changelog.sh
+
+      - name: Commit the regenerated changelog
+        run: |
+          git add "$CHANGELOG_FILE"
+          if git diff --cached --quiet; then
+            echo "changelog already current"
+            exit 0
+          fi
+          git commit -m "chore(changelog): regenerate unreleased block"
+          git push origin "HEAD:${{ github.ref_name }}"
+
+  verify:
+    name: Verify changelog generator
+    runs-on: ubuntu-latest
+    env:
+      CHANGELOG_FILE: CHANGELOG.md
+      TAG_PREFIX: v
+      SKIP_TYPES: chore ci build
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set up Git identity
+      - name: Run the generator against the pull request's changelog
         run: |
-          git config user.name  "${{ secrets.BOT_USERNAME || 'changelog-bot' }}"
-          git config user.email "${{ secrets.BOT_EMAIL    || 'changelog-bot@example.com' }}"
-
-      - name: Regenerate changelog
-        env:
-          CHANGELOG_FILE: ${{ env.CHANGELOG_FILE || 'CHANGELOG.md' }}
-        run: |
-          if [ ! -f "$CHANGELOG_FILE" ]; then
-            cp templates/repo-scaffold/CHANGELOG.md "$CHANGELOG_FILE"
-          fi
-          SCRIPT="$( [ -f scripts/changelog.sh ] && echo scripts/changelog.sh \
-            || [ -f ../scripts/changelog.sh ] && echo ../scripts/changelog.sh )"
-          if [ -z "$SCRIPT" ]; then
-            echo "ERROR: no changelog generator found (expected scripts/changelog.sh)" >&2
+          if ! bash scripts/update-changelog.sh; then
+            echo "::error::scripts/update-changelog.sh failed on this pull request"
             exit 1
           fi
-          # changelog.sh prints a "# Changelog" header followed by the bullet
-          # section for the range since the last tag; drop the header so the
-          # bullets land inside the Unreleased block of CHANGELOG.md.
-          NEW_SECTION="$("$SCRIPT" | grep -v '^# Changelog')"
-          python3 - "$CHANGELOG_FILE" "$NEW_SECTION" <<'PY'
-import sys
-path, section = sys.argv[1], sys.argv[2]
-lines = open(path, encoding='utf-8').read().split('\n')
-out = []
-i = 0
-inserted = False
-while i < len(lines):
-    out.append(lines[i])
-    if lines[i].strip() == '## [Unreleased]' and not inserted:
-        out.append('')
-        out.extend(section.rstrip('\n').split('\n'))
-        inserted = True
-    i += 1
-if not inserted:
-    out = ['## [Unreleased]', '', section.rstrip('\n'), ''] + lines
-open(path, 'w', encoding='utf-8').write('\n'.join(out))
-PY
-
-      - name: Commit changelog
-        run: |
-          git add "$CHANGELOG_FILE"
-          if git diff --cached --quiet; then
-            echo "no changelog changes"
-          else
-            git commit -m "chore(changelog): regenerate from commit history"
-            git push origin HEAD
+          if ! grep -Fxq '## [Unreleased]' "$CHANGELOG_FILE"; then
+            echo "::error::the changelog lost its '## [Unreleased]' heading"
+            exit 1
           fi
+          if ! awk '/^## \[Unreleased\]$/ { block = 1; next }
+                       block && /^## / { ok = 1; exit }
+                       block && /^### / { ok = 1; exit }
+                       block && /^[[:space:]]*$/ { next }
+                       block { exit }
+                       END { exit (ok ? 0 : 1) }' "$CHANGELOG_FILE"; then
+            echo "::error::the regenerated Unreleased block is not a grouped list"
+            exit 1
+          fi
+          echo "generator ran clean; the Unreleased block is well formed"

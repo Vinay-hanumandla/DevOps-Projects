@@ -13,8 +13,15 @@ sources: []
 #
 # Sections present in this template, in the order they appear:
 #   ## [Unreleased]          — work that has landed on main but has no tag yet
-#   ## [9.9.9] - 2026-09-30  — a released version, with its date
-# The version heading is followed by a blank line, then bullet entries.
+#   ## [0.1.0] - 2026-09-30  — the most recently released version, with its date
+# The version heading is followed by a blank line, then bullet entries. Every
+# released block ends with a `[0.1.0]: <compare-url>` link definition; replace
+# the placeholder with the compare link for your own repository.
+#
+# The `## [Unreleased]` block is the only region `scripts/update-changelog.sh`
+# rewrites: it replaces the heading's body up to the next `## ` heading and
+# leaves the rest of the file alone. Keep hand-written prose out of that block
+# or it will be replaced on the next push to the default branch.
 
 # Unreleased changes go here. Nothing under this heading has shipped.
 
@@ -34,4 +41,4 @@ sources: []
 
 - None yet.
 
-[0.1.0]: https://example.com/my-repo/compare/v0.0.0...v0.1.0
+[0.1.0]: <compare-url-for-this-repository>
