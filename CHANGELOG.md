@@ -2,6 +2,7 @@
 
 ## 2026-09-30
 
+- docker: Add production distroless Dockerfile with named build/test/production stages, non-root runtime, attestation-based SBOM, and vulnerability-scan promotion gate (docker-021)
 - docker: Add microservices multistage scaffold template with two-stage api/worker builds, health-gated Compose startup, and file-based secrets (docker-020)
 - ansible: Add pull-mode localhost inventory manifest for git-sourced playbooks with scheduled idempotent drift correction (ansible-021)
 - git: Add repository health and migration wrapper script — fsck integrity checks, deprecated-config audit (grafts, shallow clones, remote-URL shorthands), and partial-clone adoption reporting with Git 2.56.0 notes (git-040)
