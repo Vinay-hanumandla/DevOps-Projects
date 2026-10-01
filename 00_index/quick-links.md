@@ -119,6 +119,7 @@
 - [Multi-stage non-root image](../docker/dockerfiles/multi-stage-nonroot.Dockerfile) — reworked multi-stage Dockerfile with a dedicated build stage and a non-root runtime user
 - [Production distroless image with SBOM](../docker/dockerfiles/production-distroless-sbom.Dockerfile) — Go build, Syft-generated SPDX bill of materials, and a non-root distroless runtime
 - [Production-hardened Python web service](../docker/dockerfiles/production-hardened-python-web-service.Dockerfile) — multi-stage Python build with non-root user, read-only rootfs, health checks, and SBOM plus scan hooks
+- [Production distroless image with vulnerability gate](../docker/dockerfiles/production-distroless-vuln-gated.Dockerfile) — Go build in named build/test stages with a non-root distroless runtime, SBOM attestation, and a scan gate before the digest is promoted
 - [Multi-stage build patterns for Python services](../docker/docs/multi-stage-build-patterns-python-services.md) — slim vs distroless vs Alpine runtime profiles and the trade-offs that pick between them
 
 ### Scan and policy-check images
@@ -145,6 +146,7 @@
 
 ### Ship images the GitOps way
 - [GitOps image build, sign, and push](../docker/manifests/gitops-image-build-and-push.yaml) — in-cluster Job pipeline that builds an image, signs it, pushes by immutable digest, and records the reference for the deployment repo to pin
+- [Signed image promotion for GitOps](../docker/manifests/gitops-image-promotion.yaml) — moves one built digest through dev → staging → prod without rebuilding, verifying its signature before each step and recording the reference the deployment repo pins
 
 ### Choose storage for stateful workloads
 - [Storage drivers and volume types comparison](../docker/docs/storage-drivers-volume-types-comparison.md) — overlay2 vs alternatives, volumes vs bind mounts vs tmpfs, with a decision matrix and verification steps

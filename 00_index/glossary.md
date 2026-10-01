@@ -387,6 +387,9 @@
 - **Immutable reference** — a container image reference pinned by digest (e.g. `image@sha256:...`) rather than by tag; once pushed it never changes, guaranteeing the exact same binary runs in every environment.
 - **Attestation** — a machine-readable cryptographic proof that a build artifact was produced by a specific pipeline from a specific source, recorded in a registry alongside the artifact.
 - **Provenance** — the verifiable chain of custody from source commit through build to published artifact; CI systems produce provenance records so consumers can confirm an image came from a trusted pipeline.
+- **Image promotion** — moving one already-built image reference through channels (here dev → staging → prod) without rebuilding, verifying its signature before each step and recording the promoted digest the deployment repo should pin.
+- **Signature verification** — checking an image's recorded signature before promoting or running it, so only artifacts a trusted build pipeline signed can advance to the next channel.
+- **Vulnerability gate** — a pipeline checkpoint that runs a scanner against the pushed digest and promotes it only on a clean result; a failing scan blocks the digest from reaching the deployment repo.
 
 ## Terraform (additional)
 
