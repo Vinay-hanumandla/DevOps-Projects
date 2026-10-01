@@ -490,3 +490,13 @@
 - **fsck** — Git's integrity check (`git fsck`) that walks every object looking for corruption, dangling commits, and missing links; the first gate to run before migrating a server or trusting a mirror.
 - **Partial clone** — a clone that fetches only the objects it needs (e.g. `--filter=blob:none`), downloading the rest on demand from a promisor remote; keeps large repos fast to clone at the cost of needing the remote for missing blobs.
 - **Promisor remote** — the remote a partial clone promises to fetch missing objects from later; the health check reports its URL, the clone filter in use, and how many promisor objects are still outstanding.
+
+## Bash (resilience)
+
+- **Circuit breaker** — a guard that stops calling a dependency after enough consecutive failures and rejects calls without running anything until a reset timeout passes; keeps a retry loop against a down service from turning one outage into a saturating pile of requests.
+- **Exponential backoff with jitter** — spacing retry attempts by a growing delay (base × multiplier per attempt, capped at a max) plus a random spread, so competing waiters don't wake in lockstep and thundering-herd the recovering service.
+- **Breaker state dir** — an optional directory where a retry wrapper records consecutive-failure counts per key (one file per dependency) so separate invocations share the same breaker; without it the breaker lives only in memory for the life of one process.
+
+## Bash (namerefs)
+
+- **Nameref (`declare -n`)** — a variable that acts as an alias for another variable named at runtime, letting a helper read or extend a caller's variable or array by name without `eval` and without globals; rejected as a circular reference if it names itself.

@@ -71,6 +71,12 @@
 - [Bash 5.3 migration guide](../bash/docs/bash-5.3-migration-guide.md) — documenting behavioral and syntactic changes in Bash 5.3 for script audits and upgrades
 - [Bash 5.3 deep dive](../bash/docs/bash-5.3-deep-dive.md) — detailed exploration of Bash 5.3 features and behavior changes
 
+### Retry flaky commands without hammering a down dependency
+- [Retry with circuit breaker](../bash/scripts/retry-with-circuit-breaker.sh) — wraps any command in jittered exponential-backoff retries and stops calling after enough consecutive failures, with structured key=value logging
+
+### Keep a long-lived helper alive between calls
+- [Coproc, FIFO, and nameref patterns](../bash/snippets/coproc-fifo-and-named-variables.sh) — one long-lived coproc worker addressed by name, a kernel-scheduled FIFO pool that pays startup cost once, and nameref dispatch without eval or globals
+
 ### Run Bash in a container
 - [Strict-mode runner image](../bash/dockerfiles/strict-mode-runner.Dockerfile) — a minimal Debian image that wraps Bash in `set -euo pipefail` under an unprivileged user
 
@@ -131,6 +137,7 @@
 - [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml) — web app, cache, and worker on the default network with `depends_on`
 - [Docker Compose healthcheck service ordering](../docker/docs/docker-compose-healthcheck-service-ordering.md) — wiring `depends_on: condition: service_healthy` so cache, web, and worker come up in the right order
 - [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack (web front, API, database, cache) with health-gated startup, file-based secrets, and a tools profile for one-shot helpers
+- [Microservices multistage scaffold](../docker/templates/microservices-multistage-scaffold/README.md) — api + worker + web where every built service uses a two-stage Dockerfile, with health-gated startup and file-based secrets
 
 ### Spin up a throwaway local dev loop
 - [Local dev cluster scaffold](../docker/templates/local-dev-cluster/README.md) — kind config, Compose file, and k8s manifests with file-based secrets for a repeatable local loop
