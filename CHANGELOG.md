@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-01
+
+- docker: Add signed image promotion manifest with signature verification and per-channel promotion state for GitOps dev-to-staging-to-prod workflow (docker-022)
+
 ## 2026-09-30
 
 - docker: Add production distroless Dockerfile with named build/test/production stages, non-root runtime, attestation-based SBOM, and vulnerability-scan promotion gate (docker-021)

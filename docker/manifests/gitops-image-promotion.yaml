@@ -1,0 +1,249 @@
+# last_verified: 2026-10-01 · docker n/a
+
+# Docker + Kubernetes: signed image promotion for a GitOps workflow.
+#
+# Purpose: move one already-built image reference through promotion channels
+# (dev -> staging -> prod) without rebuilding, verifying its signature before
+# each step and recording the exact promoted reference the deployment repo
+# should pin. The deployment manifests themselves live in git; this file only
+# decides which immutable reference each channel points at.
+#
+# When to use: this is one way to wire promotion into a cluster where the
+# release team runs Jobs but cannot reach an external CI runner. For a small
+# side project, retagging by hand from a workstation and committing the new
+# reference to the deployment repo is simpler.
+#
+# Prerequisites: a registry account readable from this namespace; a
+# docker-registry secret named registry-credentials holding the pull
+# credentials; a build pipeline that writes the dev channel reference after
+# every signed build (pin every helper image below before relying on this
+# beyond experiments).
+#
+# Steps:
+#   1. Fill in promotion-settings (registry host, repository, target channel).
+#   2. Record the signed dev reference in promotion-state under dev-ref.
+#   3. Apply the file, then create one Job run per promotion step.
+#   4. Copy the reference stored under the target channel key into the
+#      deployment repo so GitOps converges on exactly that digest.
+#
+# Verify: the Job completes, promotion-state holds the same digest under the
+# target channel key as under dev-ref, and pulling that reference from a
+# clean machine yields the image.
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gitops-promotion
+  labels:
+    app: gitops-image-promotion
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: image-promoter
+  namespace: gitops-promotion
+  labels:
+    app: gitops-image-promotion
+---
+# Lets the Job read its own settings and advance one promotion channel, and
+# read (not write) the pull secret. Nothing here grants access outside this
+# namespace.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: image-promoter
+  namespace: gitops-promotion
+  labels:
+    app: gitops-image-promotion
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list", "update", "patch"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: image-promoter
+  namespace: gitops-promotion
+  labels:
+    app: gitops-image-promotion
+subjects:
+  - kind: ServiceAccount
+    name: image-promoter
+    namespace: gitops-promotion
+roleRef:
+  kind: Role
+  name: image-promoter
+  apiGroup: rbac.authorization.k8s.io
+---
+# Non-secret promotion inputs. The secret (registry-credentials) is created
+# out-of-band so credentials never sit in this file.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: promotion-settings
+  namespace: gitops-promotion
+  labels:
+    app: gitops-image-promotion
+data:
+  registry-host: "registry.internal"
+  repository: "team/gitops-app"
+  # Target channel for this run: staging or prod. One Job run promotes exactly
+  # one step (dev -> staging, then staging -> prod as a second run).
+  target-channel: "staging"
+---
+# Holds the promoted reference per channel. A promotion run copies the source
+# channel digest into the target channel key after signature verification;
+# the deployment repo pins the value under the matching key.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: promotion-state
+  namespace: gitops-promotion
+  labels:
+    app: gitops-image-promotion
+data:
+  dev-ref: "not-promoted-yet"
+  staging-ref: "not-promoted-yet"
+  prod-ref: "not-promoted-yet"
+---
+# One Job run == one promotion step. Steps run in order as init containers
+# sharing an emptyDir workspace; the main container just reports the result
+# so the Job has a readable terminal state.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: verify-and-promote
+  namespace: gitops-promotion
+  labels:
+    app: gitops-image-promotion
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 1800
+  template:
+    metadata:
+      labels:
+        app: gitops-image-promotion
+    spec:
+      serviceAccountName: image-promoter
+      restartPolicy: Never
+      imagePullSecrets:
+        - name: registry-credentials
+      volumes:
+        - name: workspace
+          emptyDir: {}
+        - name: pull-secret
+          secret:
+            secretName: registry-credentials
+      initContainers:
+        # 1. Resolve the source reference for this run. Staging promotes from
+        # dev; prod promotes from staging. Writes /workspace/source-ref.txt.
+        - name: resolve-source
+          image: image-signer:replace-with-pinned-version
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          env:
+            - name: TARGET_CHANNEL
+              valueFrom:
+                configMapKeyRef:
+                  name: promotion-settings
+                  key: target-channel
+          command:
+            - sh
+            - -c
+            - |
+              set -u
+              SOURCE_KEY="dev-ref"
+              if [ "$TARGET_CHANNEL" = "prod" ]; then
+                SOURCE_KEY="staging-ref"
+              fi
+              kubectl -n gitops-promotion get configmap promotion-state \
+                -o "jsonpath={.data.$SOURCE_KEY}" > /workspace/source-ref.txt
+              echo "Promoting from $SOURCE_KEY:"
+              cat /workspace/source-ref.txt
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+        # 2. Verify the signature on the source reference before anything is
+        # copied. The run stops here when verification fails, so an unsigned
+        # or mismatched image never reaches the next channel.
+        - name: verify-signature
+          image: image-signer:replace-with-pinned-version
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+            - name: pull-secret
+              mountPath: /secrets/registry
+              readOnly: true
+          command:
+            - sh
+            - -c
+            - |
+              set -u
+              REF="$(cat /workspace/source-ref.txt)"
+              signer verify "$REF" --credentials-file /secrets/registry/credentials
+              echo "$REF" > /workspace/verified-ref.txt
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+        # 3. Record the verified reference under the target channel key. The
+        # digest is copied as-is; promotion never rebuilds or retags.
+        - name: record-promotion
+          image: image-signer:replace-with-pinned-version
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          env:
+            - name: TARGET_CHANNEL
+              valueFrom:
+                configMapKeyRef:
+                  name: promotion-settings
+                  key: target-channel
+          command:
+            - sh
+            - -c
+            - |
+              set -u
+              REF="$(cat /workspace/verified-ref.txt)"
+              if [ "$TARGET_CHANNEL" = "prod" ]; then
+                KEY="prod-ref"
+              else
+                KEY="staging-ref"
+              fi
+              kubectl -n gitops-promotion patch configmap promotion-state \
+                -p "{\"data\":{\"$KEY\":\"$REF\"}}"
+              echo "$REF" > /workspace/promoted-ref.txt
+              echo "$KEY" > /workspace/promoted-key.txt
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+      containers:
+        - name: report
+          image: image-signer:replace-with-pinned-version
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          command: ["sh", "-c", "echo Promoted channel:; cat /workspace/promoted-key.txt; echo Reference:; cat /workspace/promoted-ref.txt"]
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
