@@ -1,0 +1,139 @@
+# last_verified: 2026-10-02 · gha n/a
+#
+# Purpose: reusable composite action that validates its inputs up front, then
+#   runs plan/apply stages conditionally and reports what happened via outputs.
+#   Built for the gha-022 task. Where the repo's earlier reusable actions
+#   (reusable-composite-action, shared-shell-ci) trust their inputs and branch
+#   on toggle flags, this one answers a stricter question: "did the caller
+#   pass a legal environment, mode, and replica count — and if so, what ran?"
+#
+# When to use: any workflow that promotes a build through dev, staging, or
+#   prod and wants one shared gate instead of copy-pasted validation steps.
+#
+# Prerequisites: the caller checks out the repo first; this action only reads
+#   its inputs and writes step summaries — it deploys nothing by itself.
+#
+# Steps: validate inputs (fail fast) -> plan (always) -> staging-only note
+#   (staging only) -> prod confirmation gate (prod + apply only) -> apply
+#   (apply only) -> summary (always).
+#
+# Verify: call it from input-validated-deploy-gate-caller.yaml and check the
+#   three outputs (environment, mode, applied) in the downstream report job.
+
+name: 'Input-validated deploy gate'
+description: >
+  Validates environment, mode, and replica inputs, runs a plan stage on every
+  call, optionally runs an apply stage, and maps the outcome back to the
+  caller through outputs.
+
+inputs:
+  environment:
+    description: "Target environment. Must be one of 'dev', 'staging', 'prod'."
+    required: false
+    default: 'staging'
+  mode:
+    description: "Gate mode. 'plan' runs the plan stage only; 'apply' also runs the apply stage."
+    required: false
+    default: 'plan'
+  replicas:
+    description: 'Desired replica count. Must be an integer from 1 to 10.'
+    required: false
+    default: '3'
+  confirm-prod:
+    description: "Safety switch for prod applies. Must be 'true' when environment is 'prod' and mode is 'apply'."
+    required: false
+    default: 'false'
+
+outputs:
+  environment:
+    description: 'The validated environment this run targeted.'
+    value: ${{ steps.validate.outputs.environment }}
+  mode:
+    description: 'The validated mode this run executed in.'
+    value: ${{ steps.validate.outputs.mode }}
+  applied:
+    description: "'true' when the apply stage ran, 'skipped' when mode was 'plan'."
+    value: ${{ steps.apply.outputs.applied }}${{ steps.apply-skipped.outputs.applied }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Validate inputs
+      id: validate
+      shell: bash
+      run: |
+        case "${{ inputs.environment }}" in
+          dev|staging|prod) ;;
+          *)
+            echo "::error::environment must be one of 'dev', 'staging', 'prod' (got '${{ inputs.environment }}')"
+            exit 1
+            ;;
+        esac
+        case "${{ inputs.mode }}" in
+          plan|apply) ;;
+          *)
+            echo "::error::mode must be one of 'plan', 'apply' (got '${{ inputs.mode }}')"
+            exit 1
+            ;;
+        esac
+        case "${{ inputs.replicas }}" in
+          ''|*[!0-9]*)
+            echo "::error::replicas must be an integer from 1 to 10 (got '${{ inputs.replicas }}')"
+            exit 1
+            ;;
+        esac
+        if [ "${{ inputs.replicas }}" -lt 1 ] || [ "${{ inputs.replicas }}" -gt 10 ]; then
+          echo "::error::replicas must be an integer from 1 to 10 (got '${{ inputs.replicas }}')"
+          exit 1
+        fi
+        echo "environment=${{ inputs.environment }}" >> "$GITHUB_OUTPUT"
+        echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+        echo "Inputs valid: environment=${{ inputs.environment }} mode=${{ inputs.mode }} replicas=${{ inputs.replicas }}"
+
+    - name: Plan deployment
+      shell: bash
+      run: |
+        echo "Planning ${{ inputs.replicas }} replica(s) for '${{ inputs.environment }}' (mode: ${{ inputs.mode }})."
+        echo "### Deploy-gate plan" >> "$GITHUB_STEP_SUMMARY"
+        echo "- environment: ${{ inputs.environment }}" >> "$GITHUB_STEP_SUMMARY"
+        echo "- replicas: ${{ inputs.replicas }}" >> "$GITHUB_STEP_SUMMARY"
+
+    - name: Staging-only preflight note
+      if: ${{ inputs.environment == 'staging' }}
+      shell: bash
+      run: echo "Staging preflight: integration checks would run here before apply."
+
+    - name: Prod apply confirmation gate
+      if: ${{ inputs.environment == 'prod' && inputs.mode == 'apply' }}
+      shell: bash
+      run: |
+        if [ "${{ inputs.confirm-prod }}" != 'true' ]; then
+          echo "::error::refusing prod apply without confirm-prod set to 'true'"
+          exit 1
+        fi
+        echo "Prod apply confirmed by caller."
+
+    - name: Apply deployment
+      id: apply
+      if: ${{ inputs.mode == 'apply' }}
+      shell: bash
+      run: |
+        echo "Applying ${{ inputs.replicas }} replica(s) to '${{ inputs.environment }}'."
+        echo "applied=true" >> "$GITHUB_OUTPUT"
+
+    - name: Mark apply skipped
+      id: apply-skipped
+      if: ${{ inputs.mode != 'apply' }}
+      shell: bash
+      run: |
+        echo "Mode is 'plan'; apply stage skipped."
+        echo "applied=skipped" >> "$GITHUB_OUTPUT"
+
+    - name: Summarize gate outcome
+      if: always()
+      shell: bash
+      run: |
+        echo "### Deploy-gate outcome" >> "$GITHUB_STEP_SUMMARY"
+        echo "- environment: ${{ steps.validate.outputs.environment }}" >> "$GITHUB_STEP_SUMMARY"
+        echo "- mode: ${{ steps.validate.outputs.mode }}" >> "$GITHUB_STEP_SUMMARY"
+        echo "- applied: ${{ steps.apply.outputs.applied }}${{ steps.apply-skipped.outputs.applied }}" >> "$GITHUB_STEP_SUMMARY"
