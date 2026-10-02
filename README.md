@@ -19,11 +19,11 @@ The `templates/` subfolders are copy-in starting points: a chart, a role, a coll
 
 ## Quick links
 
+- [Signed image promotion for GitOps](docker/manifests/gitops-image-promotion.yaml) — moves one built digest through dev → staging → prod without rebuilding, verifying its signature before each step and recording the reference the deployment repo pins.
+- [Production distroless image with vulnerability gate](docker/dockerfiles/production-distroless-vuln-gated.Dockerfile) — Go build in named build/test stages with a non-root distroless runtime, SBOM attestation, and a scan gate before the digest is promoted.
 - [Microservices multistage scaffold](docker/templates/microservices-multistage-scaffold/README.md) — a Compose stack where every built service uses a two-stage Dockerfile, with health-gated startup and file-based secrets.
 - [Retry with circuit breaker](bash/scripts/retry-with-circuit-breaker.sh) — wraps any command in jittered exponential-backoff retries and stops calling a dependency after enough consecutive failures.
 - [Coproc, FIFO, and nameref patterns](bash/snippets/coproc-fifo-and-named-variables.sh) — a long-lived coproc worker, a kernel-scheduled FIFO pool, and dispatch without eval or globals.
-- [Pull-mode localhost inventory](ansible/manifests/pull-mode-local-execution.yaml) — each node clones the playbooks and converges itself with `ansible-pull` on a schedule, for fleets unreachable from a control node.
-- [Repo health check](git/scripts/git-repo-health-check.sh) — a read-only gate combining fsck integrity, a deprecated-config audit for the Git 3.0 migration, and a partial-clone adoption report.
 
 ## Layout
 
@@ -56,7 +56,7 @@ In the `docs/concepts/` row, the `Notes` column holds the eight foundational pri
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | Ansible | 3 | 5 | 5 | 1 | 4 | 2 | 0 | 0 | 21 | 0 | 0 | 0 | 2026-09-30 |
 | Bash | 3 | 7 | 12 | 3 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 0 | 2026-09-30 |
-| Docker | 5 | 3 | 7 | 0 | 0 | 2 | 0 | 4 | 37 | 2 | 0 | 1 | 2026-09-30 |
+| Docker | 5 | 3 | 7 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 1 | 2026-10-01 |
 | GitHub Actions | 3 | 4 | 4 | 1 | 9 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-26 |
 | Git | 16 | 12 | 7 | 0 | 0 | 1 | 0 | 0 | 18 | 0 | 1 | 0 | 2026-09-30 |
 | Grafana | 4 | 1 | 1 | 3 | 6 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-21 |
@@ -74,7 +74,7 @@ In the `docs/concepts/` row, the `Notes` column holds the eight foundational pri
 
 ## Status
 
-Currently hardening the two ends of the automation story: Bash scripts that survive unattended runs — retry budgets with a circuit breaker, coprocesses and FIFO pools instead of re-spawned helpers — and Compose scaffolds where every built service ships a two-stage Dockerfile with health-gated startup. Just landed: a microservices multistage scaffold (api + worker + web), a retry wrapper with exponential backoff and breaker state, and pull-mode convergence for Ansible fleets no control node can reach.
+Currently hardening the image-supply side of the story: Dockerfiles that ship a non-root distroless runtime with an SBOM attestation and a vulnerability-scan gate, and a signed promotion manifest that moves one digest through dev → staging → prod without rebuilding. Just landed: the promotion manifest and the vuln-gated distroless Dockerfile, on top of the microservices multistage scaffold and the Bash retry-with-breaker work.
 
 ---
-_Last updated: 2026-10-01_
+_Last updated: 2026-10-02_
