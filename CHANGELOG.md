@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-02
+
+- docker: Add reusable build wrapper script with registry cache-from, multi-platform buildx, SBOM generation, and Trivy scan gate (docker-023)
+
 ## 2026-10-01
 
 - docker: Add signed image promotion manifest with signature verification and per-channel promotion state for GitOps dev-to-staging-to-prod workflow (docker-022)
