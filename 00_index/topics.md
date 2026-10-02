@@ -23,27 +23,26 @@
 - **notebooks** (5): most recent → [Bash 5.2 → 5.3 migration checklist](../bash/notebooks/bash-53-migration-checklist.ipynb), [Bats-core production test suite](../bash/notebooks/bats-core-production-test-suite.ipynb), [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb) · _…and 2 more under `bash/notebooks/`._
 - **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
 - **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
-- _…and more under `bash/` — browse the folder._
 
-## Docker  ·  62 files
+## Docker  ·  63 files
 
 - **primer:** [Docker — quick primer](../docker/notes/0000-primer-docker.md)
 - **notes** (5): most recent → [Docker trip-ups after the initial run-through](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md), [Install Docker](../docker/notes/2026-07-19-install-docker.md)
 - **dockerfiles** (5): most recent → [Production distroless image with vulnerability gate](../docker/dockerfiles/production-distroless-vuln-gated.Dockerfile) — Go build in named build/test stages with a non-root distroless runtime, SBOM attestation, and a scan gate before promotion · [Production-hardened Python web service](../docker/dockerfiles/production-hardened-python-web-service.Dockerfile), [Production distroless image with SBOM](../docker/dockerfiles/production-distroless-sbom.Dockerfile)
 - **docs** (3): most recent → [Multi-stage build patterns for Python services](../docker/docs/multi-stage-build-patterns-python-services.md), [Storage drivers and volume types for stateful workloads](../docker/docs/storage-drivers-volume-types-comparison.md), [Docker Compose healthcheck service ordering](../docker/docs/docker-compose-healthcheck-service-ordering.md)
-- **scripts** (7): most recent → [Image vuln scan and policy enforcement](../docker/scripts/image-vuln-scan-policy.sh), [Multi-arch buildx automation](../docker/scripts/image-build-automation.sh), [Build containerized app with custom networks and volumes](../docker/scripts/build-containerized-app-custom-networks-volumes.sh)
+- **scripts** (8): most recent → [Docker build wrapper](../docker/scripts/docker-build-wrapper.sh) — one entry point for a buildx build with registry cache reuse, SBOM and provenance attestations, and a Trivy scan gate that fails the run · [Image vuln scan and policy enforcement](../docker/scripts/image-vuln-scan-policy.sh), [Multi-arch buildx automation](../docker/scripts/image-build-automation.sh) · _…and 5 more under `docker/scripts/`._
 - **manifests** (3): most recent → [Signed image promotion for GitOps](../docker/manifests/gitops-image-promotion.yaml) — moves one built digest through dev → staging → prod without rebuilding, verifying its signature before each step · [GitOps image build, sign, and push](../docker/manifests/gitops-image-build-and-push.yaml), [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml)
 - **templates** (36): [Microservices multistage scaffold](../docker/templates/microservices-multistage-scaffold/README.md) — api + worker + web where every built service uses a two-stage Dockerfile, with health-gated startup and file-based secrets · [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack with health-gated startup, file-based secrets, and a tools profile · [Local dev cluster scaffold](../docker/templates/local-dev-cluster/README.md) — kind config, Compose file, and k8s manifests for a throwaway dev loop · _…and 33 more under `docker/templates/`._
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
 
-## GitHub Actions  ·  23 files
+## GitHub Actions  ·  27 files
 
 - **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
 - **notes** (3): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
 - **docs** (4): most recent → [OIDC token exchange with GitHub Actions](../gha/docs/oidc-token-exchange.md) — short-lived tokens against AWS, GCP, Azure, and Vault instead of stored keys, [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md), [Quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md)
-- **configs** (9): most recent → [Hello-world workflow](../gha/configs/2026-09-26-hello-world-workflow.yaml) — checkout, runner and commit context, plus a manual trigger · [Shared shell lint-and-test gate](../gha/configs/shared-shell-ci/action.yml), [Shared shell CI caller](../gha/configs/shared-shell-ci-caller.yaml) · _…and 6 more under `gha/configs/`._
+- **configs** (11): most recent → [Input-validated deploy gate](../gha/configs/input-validated-deploy-gate/action.yml) — validates environment, mode, and replica count up front, then runs plan/apply conditionally and reports what ran · [Its caller workflow](../gha/configs/input-validated-deploy-gate-caller.yaml), [Hello-world workflow](../gha/configs/2026-09-26-hello-world-workflow.yaml) — checkout, runner and commit context, plus a manual trigger · _…and 8 more under `gha/configs/`._
 - **manifests** (1): [GitOps app-of-apps](../gha/manifests/gitops-app-of-apps.yaml) — an AppProject, a root app rendering an `apps/` directory, Helm- and Kustomize-sourced children, and a workflow that validates them and asks Argo CD to re-read after a merge
-- **scripts** (4): most recent → [Labeled-issue custom action](../gha/scripts/custom-js-action/action.yml) — four inputs in, three outputs out, Node runtime · [Its Node entrypoint](../gha/scripts/custom-js-action/index.js) — validates inputs, calls the REST API, writes `$GITHUB_OUTPUT` · [Minimal custom JavaScript action](../gha/scripts/action.yml) · [Minimal custom action entrypoint](../gha/scripts/minimal-custom-js-action.js)
+- **scripts** (6): most recent → [Repository dispatch with retry](../gha/scripts/repository-dispatch-retry/action.yml) — fires a `repository_dispatch` event and retries only transient failures, with jittered backoff over `Retry-After` · [Its Node entrypoint](../gha/scripts/repository-dispatch-retry/index.js) — no runtime dependencies, hyphen-preserving `INPUT_*` lookup, 204 treated as success · [Labeled-issue custom action](../gha/scripts/custom-js-action/action.yml) — four inputs in, three outputs out, Node runtime · _…and 3 more under `gha/scripts/`._
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 - **snippets** (1): [Reusable workflow caller](../gha/snippets/reusable-workflow-caller.yaml) — minimal caller of a centrally maintained reusable workflow, passing inputs and secrets and reading outputs downstream
 
@@ -56,7 +55,6 @@
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
 - **manifests** (1): [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps git events (push, tag, merge request) to build → test → deploy jobs
 - **templates** (18): [Repo scaffold with hooks and branch protection](../git/templates/repo-scaffold/README.md) — hooks, CODEOWNERS, a PR template, a contributing guide, and workflows that apply branch protection and regenerate the changelog · [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) · _…and 16 more under `git/templates/`._
-- _…and more under `git/` — browse the folder._
 
 ## Grafana  ·  18 files
 
