@@ -1,0 +1,40 @@
+# last_verified: 2026-10-02 · gha n/a
+name: 'Repository dispatch with retry'
+description: 'Creates a repository_dispatch event through the REST API with jittered exponential backoff, retrying only transient failures.'
+
+inputs:
+  token:
+    description: 'GitHub token with contents write access to the target repository.'
+    required: true
+  repository:
+    description: 'Target repository in owner/name format.'
+    required: true
+  event-type:
+    description: 'Custom event type name carried by the repository_dispatch event.'
+    required: true
+  client-payload:
+    description: 'JSON object delivered to the receiving workflow.'
+    required: false
+    default: '{}'
+  max-retries:
+    description: 'Additional attempts after the first one, for transient failures only (0-10).'
+    required: false
+    default: '3'
+  base-delay-ms:
+    description: 'First backoff delay in milliseconds; doubled per attempt, jittered, capped at 60000.'
+    required: false
+    default: '1000'
+
+outputs:
+  status:
+    description: 'Final outcome: success, rate-limited, or failed.'
+  http-status:
+    description: 'HTTP status code of the last request: 204 on success, 0 when no response arrived.'
+  attempts:
+    description: 'Number of requests issued, including the successful one.'
+
+runs:
+  # The Node runtime ships no node_modules, so this action has no dependencies:
+  # index.js calls the REST API with the runtime's built-in fetch and needs no bundle.
+  using: 'node20'
+  main: 'index.js'
