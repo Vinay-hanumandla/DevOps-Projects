@@ -2,6 +2,7 @@
 
 ## 2026-10-02
 
+- gha: Add custom JavaScript action with Octokit API calls, input sanitization, and exponential backoff retry logic (gha-023)
 - gha: Add input-validated deploy-gate composite action with environment/mode/replica validation, conditional plan/apply stages, and output mapping (gha-022)
 - docker: Add reusable build wrapper script with registry cache-from, multi-platform buildx, SBOM generation, and Trivy scan gate (docker-023)
 
