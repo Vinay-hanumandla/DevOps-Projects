@@ -2,6 +2,9 @@
 
 ## 2026-10-02
 
+- gha: Rework (gha-023) — repository_dispatch action rebuilt with zero runtime dependencies (built-in `fetch` instead of an unbundled `require`), hyphen-preserving `INPUT_*` lookup for hyphenated inputs, and 204 handled as success with no dispatch id; outputs are now `status`, `http-status`, and `attempts`
+- gha/scripts/repository-dispatch-retry/index.js — Repository dispatch with jittered exponential backoff over Retry-After, retrying only 408/429/5xx and rate-limited 403 responses (gha-023)
+- gha/scripts/repository-dispatch-retry/action.yml — Action metadata for the dispatch-and-retry action: six inputs, three outputs, node20 runtime, no bundle step (gha-023)
 - gha: Add input-validated deploy-gate composite action with environment/mode/replica validation, conditional plan/apply stages, and output mapping (gha-022)
 - docker: Add reusable build wrapper script with registry cache-from, multi-platform buildx, SBOM generation, and Trivy scan gate (docker-023)
 
