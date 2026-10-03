@@ -1,0 +1,55 @@
+# last_verified: 2026-10-03 · python n/a
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-service-scaffold"
+version = "0.1.0"
+description = "A FastAPI service scaffold with SQLAlchemy, Alembic, pytest, Ruff, and mypy"
+# Add `requires-python` pinned to the interpreter floor of the deployment image,
+# then mirror that same value in [tool.ruff] target-version below.
+dependencies = [
+    "alembic",
+    "fastapi",
+    "psycopg[binary]",
+    "pydantic",
+    "pydantic-settings",
+    "sqlalchemy",
+    "uvicorn",
+]
+
+[project.optional-dependencies]
+dev = [
+    "httpx",  # transport behind fastapi.testclient.TestClient
+    "mypy",
+    "pytest",
+    "ruff",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 88
+# Set target-version to the same interpreter floor declared in requires-python.
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM", "C4", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+# Generated migrations are not hand-formatted.
+"alembic/versions/*" = ["E501"]
+
+[tool.mypy]
+strict = true
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = ["alembic.*", "uvicorn.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
