@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-03
+
+- python: Add Docker + GitHub Actions production CI pipeline reference with lint, type-check, test, and Docker build gates plus SHA-tagged image/package publish (python-020)
+
 ## 2026-10-02
 
 - gha: Rework (gha-023) — repository_dispatch action rebuilt with zero runtime dependencies (built-in `fetch` instead of an unbundled `require`), hyphen-preserving `INPUT_*` lookup for hyphenated inputs, and 204 handled as success with no dispatch id; outputs are now `status`, `http-status`, and `attempts`
