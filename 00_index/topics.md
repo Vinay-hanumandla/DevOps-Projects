@@ -35,13 +35,13 @@
 - **templates** (36): [Microservices multistage scaffold](../docker/templates/microservices-multistage-scaffold/README.md) — api + worker + web where every built service uses a two-stage Dockerfile, with health-gated startup and file-based secrets · [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack with health-gated startup, file-based secrets, and a tools profile · [Local dev cluster scaffold](../docker/templates/local-dev-cluster/README.md) — kind config, Compose file, and k8s manifests for a throwaway dev loop · _…and 33 more under `docker/templates/`._
 - **src** (2): [Sample Python HTTP server](../docker/src/2026-07-16-server.py), [Sample Go HTTP server](../docker/src/main.go)
 
-## GitHub Actions  ·  27 files
+## GitHub Actions  ·  29 files
 
 - **primer:** [GitHub Actions — quick primer](../gha/notes/0000-primer-gha.md)
 - **notes** (3): most recent → [GitHub Actions quickstart trip-ups](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [Install GitHub CLI](../gha/notes/2026-08-05-install-gh-cli.md)
-- **docs** (4): most recent → [OIDC token exchange with GitHub Actions](../gha/docs/oidc-token-exchange.md) — short-lived tokens against AWS, GCP, Azure, and Vault instead of stored keys, [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md), [Quickstart gotchas](../gha/docs/2026-08-27-quickstart-gotchas.md)
+- **docs** (5): most recent → [Workflow security hardening](../gha/docs/workflow-security-hardening.md) — least-privilege token scopes, keyless cloud auth, secret handling, and SHA-pinned third-party actions · [OIDC token exchange with GitHub Actions](../gha/docs/oidc-token-exchange.md) — short-lived tokens against AWS, GCP, Azure, and Vault instead of stored keys · [Tag-triggered release workflows](../gha/docs/tag-triggered-release-workflows.md) · _…and 2 more under `gha/docs/`._
 - **configs** (11): most recent → [Input-validated deploy gate](../gha/configs/input-validated-deploy-gate/action.yml) — validates environment, mode, and replica count up front, then runs plan/apply conditionally and reports what ran · [Its caller workflow](../gha/configs/input-validated-deploy-gate-caller.yaml), [Hello-world workflow](../gha/configs/2026-09-26-hello-world-workflow.yaml) — checkout, runner and commit context, plus a manual trigger · _…and 8 more under `gha/configs/`._
-- **manifests** (1): [GitOps app-of-apps](../gha/manifests/gitops-app-of-apps.yaml) — an AppProject, a root app rendering an `apps/` directory, Helm- and Kustomize-sourced children, and a workflow that validates them and asks Argo CD to re-read after a merge
+- **manifests** (2): [Reusable workflow ecosystem](../gha/manifests/reusable-workflow-ecosystem.yaml) — reusable workflow, composite action, and caller composed into one delivery path, with inputs, outputs, and secrets threaded between the layers · [GitOps app-of-apps](../gha/manifests/gitops-app-of-apps.yaml) — an AppProject, a root app rendering an `apps/` directory, Helm- and Kustomize-sourced children, and a workflow that validates them and asks Argo CD to re-read after a merge
 - **scripts** (6): most recent → [Repository dispatch with retry](../gha/scripts/repository-dispatch-retry/action.yml) — fires a `repository_dispatch` event and retries only transient failures, with jittered backoff over `Retry-After` · [Its Node entrypoint](../gha/scripts/repository-dispatch-retry/index.js) — no runtime dependencies, hyphen-preserving `INPUT_*` lookup, 204 treated as success · [Labeled-issue custom action](../gha/scripts/custom-js-action/action.yml) — four inputs in, three outputs out, Node runtime · _…and 3 more under `gha/scripts/`._
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 - **snippets** (1): [Reusable workflow caller](../gha/snippets/reusable-workflow-caller.yaml) — minimal caller of a centrally maintained reusable workflow, passing inputs and secrets and reading outputs downstream
@@ -112,11 +112,11 @@
 - **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
 - **manifests** (1): [Local monitoring stack](../prom/manifests/local-monitoring-stack.yaml) — one-shot Prometheus + Alertmanager + Node Exporter stack for local evaluation
 
-## Python  ·  28 files
+## Python  ·  29 files
 
 - **primer:** [Python — quick primer](../python/notes/0000-primer-python.md)
 - **notes** (3): most recent → [Python quickstart gotchas](../python/notes/2026-08-22-python-quickstart-gotchas.md), [Python functions and modules](../python/notes/2026-08-04-python-functions-modules.md)
-- **docs** (3): most recent → [Comparing Python configuration approaches for DevOps workflows](../python/docs/comparing-python-configuration-approaches.md), [Python modules, packages, and imports](../python/docs/2026-08-04-python-modules-packages-imports.md)
+- **docs** (4): most recent → [Python + Docker + GHA production CI pipeline](../python/docs/python-docker-ci-pipeline.md) — lint, type-check, and test gates, then image and package publish from one workflow · [Comparing Python configuration approaches for DevOps workflows](../python/docs/comparing-python-configuration-approaches.md), [Python modules, packages, and imports](../python/docs/2026-08-04-python-modules-packages-imports.md) · _…and 1 more under `python/docs/`._
 - **scripts** (4): most recent → [Config loader with Pydantic settings](../python/scripts/config-loader-pydantic-settings.py), [Config validator](../python/scripts/config-validator.py), [Minimal file processing](../python/scripts/2026-08-04-minimal-file-processing.py), [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py)
 - **snippets** (4): most recent → [Dockerfile validator](../python/snippets/validate-dockerfile.py), [Docker Compose validator](../python/snippets/docker-compose-validator.py), [Config file reader](../python/snippets/2026-08-22-config-file-reader.py), [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
 - **configs** (4): most recent → [App config for the Pydantic loader](../python/configs/2026-09-16-app-config.yaml), [pyproject.toml README guide](../python/configs/2026-09-14-pyproject-toml-readme.md), [App config](../python/configs/2026-09-15-app-config.yaml), [pyproject.toml config](../python/configs/2026-08-24-pyproject-toml-config.toml)
@@ -136,10 +136,10 @@
 - **notebooks** (1): [State management strategies](../tf/notebooks/state-management-strategies.ipynb)
 - **templates** (8): [Terragrunt multi-environment scaffold](../tf/templates/terragrunt-multi-env/README.md) — one reusable module shared across dev, staging, and prod with per-environment inputs · _…and 7 more under `tf/templates/terragrunt-multi-env/`._
 
-## Repo-doc  ·  11 files
+## Repo-doc  ·  12 files
 
 - **primer:** [Repo-doc — quick primer](../repo-doc/notes/0000-primer-repo-doc.md)
-- **notes** (4): most recent → [Following the repo-task tutorial](../repo-doc/notes/2026-09-23-following-repo-task-tutorial-workflows.md), [Repo-doc CLI install and first scaffold](../repo-doc/notes/2026-09-21-repo-doc-cli-install-and-scaffold.md), [Repo-task quickstart trip-ups](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md)
+- **notes** (5): most recent → [Poking around the repo-task folder](../repo-doc/notes/2026-10-03-exploring-task-folder-structure.md), [Following the repo-task tutorial](../repo-doc/notes/2026-09-23-following-repo-task-tutorial-workflows.md), [Repo-doc CLI install and first scaffold](../repo-doc/notes/2026-09-21-repo-doc-cli-install-and-scaffold.md), [Repo-task quickstart trip-ups](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md)
 - **docs** (3): most recent → [Following the tutorial again — the pre-PR validation loop](../repo-doc/docs/2026-09-26-tutorial-validation-loop-trip-ups.md), [Repo-doc tooling overview](../repo-doc/docs/2026-09-08-repo-doc-tooling-overview.md), [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md)
 - **configs** (1): [Tool folder conventions](../repo-doc/configs/2026-09-26-tool-folder-conventions.md) — required subdirs, file-naming patterns, and primer rules for where files live in this kit
 - **scripts** (3): most recent → [Check folders and report gaps](../repo-doc/scripts/2026-09-25-check-folders-and-report-gaps.sh), [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh), [Minimal task automation](../repo-doc/scripts/2026-09-10-minimal-task-automation.sh)

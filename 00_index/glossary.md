@@ -521,3 +521,8 @@
 ## Bash (namerefs)
 
 - **Nameref (`declare -n`)** — a variable that acts as an alias for another variable named at runtime, letting a helper read or extend a caller's variable or array by name without `eval` and without globals; rejected as a circular reference if it names itself.
+
+## GitHub Actions (security and composition)
+
+- **Action pinning (SHA pin)** — referencing a third-party action by its immutable commit SHA instead of a mutable tag, so the workflow runs exactly the code that was reviewed; a tag can be moved after the fact, a SHA cannot.
+- **Caller workflow** — the top-level workflow that invokes reusable workflows and composite actions and gates downstream jobs on their outputs; it declares only the inputs each callee expects and reads back only the outputs each one promises.
