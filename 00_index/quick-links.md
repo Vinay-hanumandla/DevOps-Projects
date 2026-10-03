@@ -122,6 +122,9 @@
 - [Production distroless image with vulnerability gate](../docker/dockerfiles/production-distroless-vuln-gated.Dockerfile) — Go build in named build/test stages with a non-root distroless runtime, SBOM attestation, and a scan gate before the digest is promoted
 - [Multi-stage build patterns for Python services](../docker/docs/multi-stage-build-patterns-python-services.md) — slim vs distroless vs Alpine runtime profiles and the trade-offs that pick between them
 
+### Build and gate an image in one command
+- [Docker build wrapper](../docker/scripts/docker-build-wrapper.sh) — buildx build with registry cache reuse, multi-platform output, SBOM and provenance attestations, then a Trivy scan that fails the run on high-severity findings; the argument surface is `IMAGE`, `TAG`, a platform list, cache settings, and a scan severity threshold
+
 ### Scan and policy-check images
 - [Image vuln scan and policy enforcement](../docker/scripts/image-vuln-scan-policy.sh) — scans a built image for known vulnerabilities and blocks deployment on policy breaches
 
@@ -481,6 +484,14 @@
 ### Write a minimal custom JavaScript action
 - [Minimal custom JavaScript action](../gha/scripts/action.yml) — the smallest viable custom action: two inputs in, one greeting output out, on the node20 runtime
 - [Custom action entrypoint](../gha/scripts/minimal-custom-js-action.js) — reads the inputs, composes the message, and exposes it via `$GITHUB_OUTPUT`
+
+### Fire a repository_dispatch event from a workflow
+- [Repository dispatch with retry](../gha/scripts/repository-dispatch-retry/action.yml) — creates a `repository_dispatch` event through the REST API, retrying only 408/429/5xx and rate-limited 403s with jittered backoff over `Retry-After`
+- [Its Node entrypoint](../gha/scripts/repository-dispatch-retry/index.js) — zero runtime dependencies, hyphen-preserving `INPUT_*` lookup, 204 treated as success with no dispatch id, and `status`/`http-status`/`attempts` outputs
+
+### Gate a promotion on validated inputs
+- [Input-validated deploy gate](../gha/configs/input-validated-deploy-gate/action.yml) — validates environment, mode, and replica count up front, then runs plan always, apply only in apply mode, and a prod confirmation gate before the real thing
+- [Input-validated deploy gate caller](../gha/configs/input-validated-deploy-gate-caller.yaml) — example caller that maps the action's outputs into a later job's gate
 
 ### Share a shell lint-and-test gate across workflows
 - [Shared shell lint-and-test gate](../gha/configs/shared-shell-ci/action.yml) — reusable composite action that runs ShellCheck and shell tests with independently toggleable stages and outputs callers can gate on

@@ -369,7 +369,25 @@
 ## GitHub Actions (triggers)
 
 - **`workflow_dispatch`** — the trigger that makes a workflow startable by hand from the Actions tab; pairs with a `push` trigger so a workflow is both automatic on merge and testable before you trust it.
+- **`repository_dispatch`** — a trigger that fires when a caller creates a `repository_dispatch` event through the REST API, carrying a caller-chosen `event_type` and a JSON `client_payload`; the shape that lets one workflow hand a named job to another rather than duplicating its steps.
 - **Runner context** — the `runner.os`, `github.ref_name`, `github.sha`, and `github.actor` values exposed to a running job; printing them in a first workflow is the quickest way to learn what the runner actually knows about the run.
+
+## GitHub Actions (dispatch action)
+
+- **Transient vs permanent failure** — the split a retry loop needs: 408, 429, and 5xx are worth retrying, while a 422 means the request was malformed and retrying it unchanged will fail identically.
+- **`Retry-After`** — the response header a rate-limited API returns to say how long to wait; honouring it beats a fixed sleep, which is how an action avoids adding load to a service that is already shedding it.
+- **Hyphenated action inputs** — an input named `event-type` reaches a JavaScript action as `INPUT_EVENT-TYPE`, not `INPUT_EVENT_TYPE`; a naive `process.env[name.replace(/-/g, '_')]` silently returns undefined, so the lookup has to preserve the original spelling.
+- **Zero-dependency action** — a custom action whose entrypoint uses only what the runner already provides (`fetch`, `fs`, no `require` of a bundled package), so there is no build step and no `node_modules` to keep in sync with the action's declared runtime.
+- **204 as success** — `POST /dispatches` answers with `204 No Content` on success, which carries no dispatch id; treating a body-less 204 as success is what keeps a caller from retrying a dispatch that already landed.
+- **Input-validating composite action** — a reusable action that checks its own inputs (environment name, mode, replica range) and fails before doing any work, so an illegal promotion is caught at the gate rather than half-applied; the complement to a shared action that only branches on toggle flags.
+
+## Docker (build wrapper)
+
+- **Wrapper script** — one entry point (`docker-build-wrapper.sh`) that owns the buildx flags, cache settings, attestations, and the post-build scan, so the same build-and-gate flow runs in CI and locally instead of being retyped per invocation.
+- **Provenance attestation** — a buildx `--provenance` record binding the pushed image to the source commit and the builder that produced it, stored in the registry next to the digest.
+- **Registry cache reuse** — pointing `--cache-from` at a previous build's exported cache so unchanged layers skip rebuild; the single biggest lever on iterative build time once a service has more than a few layers.
+- **Scan gate** — running Trivy against the pushed tag and failing the run above a severity threshold, which is what turns "we scan images" from a report into something a build can actually fail on.
+- **Digest verification** — confirming with `imagetools inspect` that the tag resolves to the digest the build intended, catching the case where a mutable tag already points somewhere else.
 
 ## Repo-doc
 
