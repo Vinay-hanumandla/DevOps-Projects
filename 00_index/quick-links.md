@@ -379,6 +379,9 @@
 - [Comparing environment-aware config](../python/notebooks/comparing-env-aware-config.ipynb) — typed settings classes vs layered loaders vs minimal env readers for config that changes per environment
 - [Async patterns comparison](../python/notebooks/async-patterns-comparison.ipynb) — asyncio vs trio vs anyio for I/O-bound DevOps tooling like endpoint probing and artifact copies
 
+### Ship a Python service through CI to image and package
+- [Python + Docker + GHA production CI pipeline](../python/docs/python-docker-ci-pipeline.md) — one workflow with lint, type-check, and test gates followed by a publish stage for the container image and the package
+
 ### Get started with Terraform
 - [Terraform primer](../tf/notes/0000-primer-terraform.md) — what Terraform is, providers, state, and a minimal workflow
 - [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md) — following the official quickstart and where I got stuck
@@ -481,6 +484,9 @@
 ### Authenticate a workflow without storing cloud keys
 - [OIDC token exchange with GitHub Actions](../gha/docs/oidc-token-exchange.md) — the `id-token: write` permission, the audience and subject claims to trust, and the trust-relationship setup on the AWS, GCP, Azure, and HashiCorp Vault side
 
+### Harden a workflow that can reach production
+- [Workflow security hardening](../gha/docs/workflow-security-hardening.md) — explicit least-privilege token scopes, keyless cloud auth, secret-handling gates, and SHA-pinned third-party actions
+
 ### Write a minimal custom JavaScript action
 - [Minimal custom JavaScript action](../gha/scripts/action.yml) — the smallest viable custom action: two inputs in, one greeting output out, on the node20 runtime
 - [Custom action entrypoint](../gha/scripts/minimal-custom-js-action.js) — reads the inputs, composes the message, and exposes it via `$GITHUB_OUTPUT`
@@ -497,6 +503,9 @@
 - [Shared shell lint-and-test gate](../gha/configs/shared-shell-ci/action.yml) — reusable composite action that runs ShellCheck and shell tests with independently toggleable stages and outputs callers can gate on
 - [Shared shell CI caller](../gha/configs/shared-shell-ci-caller.yaml) — example caller showing zero-argument defaults, per-call overrides, and downstream jobs gated on the shared action's outputs
 
+### Compose reusable workflows and composite actions into one delivery path
+- [Reusable workflow ecosystem](../gha/manifests/reusable-workflow-ecosystem.yaml) — a reusable workflow, a composite action, and a caller composed into one delivery path, with inputs, outputs, and secrets threaded between the layers
+
 ### Keep the repo's own docs in sync
 - [Repo-doc primer](../repo-doc/notes/0000-primer-repo-doc.md) — notes on keeping the repository's own docs and coverage tables in sync
 - [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md) — how I kept the README coverage table and Git index honest against what's actually on disk
@@ -508,6 +517,7 @@
 - [Tool folder conventions](../repo-doc/configs/2026-09-26-tool-folder-conventions.md) — required subdirs, file-naming patterns, and primer rules for where files live in this kit
 - [Following the tutorial again — the pre-PR validation loop](../repo-doc/docs/2026-09-26-tutorial-validation-loop-trip-ups.md) — front-matter, CHANGELOG entry, folder-check script, and reading the gap report before opening a PR
 - [Check folders and report gaps](../repo-doc/scripts/2026-09-25-check-folders-and-report-gaps.sh) — one script that regenerates coverage tables, validates tool-folder structure, and reports gaps
+- [Poking around the repo-task folder](../repo-doc/notes/2026-10-03-exploring-task-folder-structure.md) — a first look at what the repo-doc notes, docs, scripts, and configs each hold, and where the next file belongs
 
 ### Ansible reference docs
 - [Retry strategies for unreliable targets](../ansible/docs/retry-strategies-unreliable-targets.md) — strategies for handling transient failures when targets drop connectivity during a playbook run
