@@ -6,6 +6,8 @@
 - gha: Add reusable workflow ecosystem manifest with caller workflow, composite action, and reusable workflow composition plus input/output threading (gha-025)
 - repo-doc: Add first-look notes exploring the repo-task folder structure and file conventions (repo-doc-010)
 - python/templates/python-service-scaffold/ — FastAPI service scaffold with SQLAlchemy models, Alembic migrations wired to the app metadata, in-memory pytest fixtures, and Ruff/mypy/pytest gates (python-021)
+- python/notebooks/asyncio-threading-multiprocessing-decision-guide.ipynb — Concurrency-model decision guide with measured IO-bound (sequential vs threads vs asyncio) and CPU-bound (sequential vs processes) benchmarks plus a choose_model rule with self-checks (python-022)
+- python/snippets/migration-match-except-star-taskgroup.py — Recent-Python migration patterns: match dispatch, TaskGroup fan-out, and except* per-kind failure handling, all self-checked (python-023)
 
 ## 2026-10-02
 
