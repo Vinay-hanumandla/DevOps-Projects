@@ -19,11 +19,11 @@ The `templates/` subfolders are copy-in starting points: a chart, a role, a coll
 
 ## Quick links
 
-- [Signed image promotion for GitOps](docker/manifests/gitops-image-promotion.yaml) — moves one built digest through dev → staging → prod without rebuilding, verifying its signature before each step and recording the reference the deployment repo pins.
-- [Production distroless image with vulnerability gate](docker/dockerfiles/production-distroless-vuln-gated.Dockerfile) — Go build in named build/test stages with a non-root distroless runtime, SBOM attestation, and a scan gate before the digest is promoted.
+- [Repository dispatch with retry](gha/scripts/repository-dispatch-retry/action.yml) — a custom action that fires a `repository_dispatch` event and retries only transient failures, with jittered backoff that respects `Retry-After`.
+- [Input-validated deploy gate](gha/configs/input-validated-deploy-gate/action.yml) — a composite action that validates environment, mode, and replica count up front, then runs plan and apply conditionally and reports what ran.
+- [Docker build wrapper](docker/scripts/docker-build-wrapper.sh) — one entry point for a buildx build with registry cache reuse, SBOM and provenance attestations, and a Trivy scan gate that fails the run.
 - [Microservices multistage scaffold](docker/templates/microservices-multistage-scaffold/README.md) — a Compose stack where every built service uses a two-stage Dockerfile, with health-gated startup and file-based secrets.
-- [Retry with circuit breaker](bash/scripts/retry-with-circuit-breaker.sh) — wraps any command in jittered exponential-backoff retries and stops calling a dependency after enough consecutive failures.
-- [Coproc, FIFO, and nameref patterns](bash/snippets/coproc-fifo-and-named-variables.sh) — a long-lived coproc worker, a kernel-scheduled FIFO pool, and dispatch without eval or globals.
+- [Signed image promotion for GitOps](docker/manifests/gitops-image-promotion.yaml) — moves one built digest through dev, staging, and prod without rebuilding, verifying its signature before each step.
 
 ## Layout
 
@@ -46,35 +46,35 @@ The `templates/` subfolders are copy-in starting points: a chart, a role, a coll
 
 ## Coverage
 
-Counts include files nested inside template trees. `Src`, `Hooks`, and `Other` are support locations that only a few tools use.
-In the `docs/concepts/` row, the `Notes` column holds the eight foundational primers and `Docs` the cross-tool concept articles; `Other` covers their companion notes and follow-on docs.
+Counts include files nested inside template trees. `Src` and `Hooks` are support locations that only a few tools use.
+In the `docs/concepts/` row, `Notes` counts the eight foundational primers alongside their companion notes and `Docs` the cross-tool concept articles.
 
 <details>
 <summary>Coverage table</summary>
 
-| Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Other | Last verified |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| Ansible | 3 | 5 | 5 | 1 | 4 | 2 | 0 | 0 | 21 | 0 | 0 | 0 | 2026-09-30 |
-| Bash | 3 | 7 | 12 | 3 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 0 | 2026-09-30 |
-| Docker | 5 | 3 | 7 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 1 | 2026-10-01 |
-| GitHub Actions | 3 | 4 | 4 | 1 | 9 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-26 |
-| Git | 16 | 12 | 7 | 0 | 0 | 1 | 0 | 0 | 18 | 0 | 1 | 0 | 2026-09-30 |
-| Grafana | 4 | 1 | 1 | 3 | 6 | 2 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-21 |
-| Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 0 | 2026-09-26 |
-| Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 5 | 0 | 0 | 0 | 2026-09-23 |
-| Kubernetes | 5 | 4 | 3 | 2 | 1 | 4 | 1 | 1 | 10 | 0 | 0 | 0 | 2026-09-19 |
-| Prometheus | 4 | 3 | 2 | 1 | 7 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-28 |
-| Python | 3 | 3 | 4 | 4 | 4 | 0 | 2 | 1 | 7 | 0 | 0 | 0 | 2026-09-20 |
-| Repo-doc | 4 | 3 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-26 |
-| Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 8 | 0 | 0 | 0 | 2026-09-22 |
-| Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-16 |
-| Foundational concepts | 8 | 13 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 4 | 2026-09-16 |
+| Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Last verified |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| Ansible | 3 | 5 | 5 | 1 | 4 | 2 | 0 | 0 | 21 | 0 | 0 | 2026-09-30 |
+| Bash | 3 | 7 | 12 | 3 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 2026-09-30 |
+| Docker | 5 | 3 | 8 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 2026-10-02 |
+| GitHub Actions | 3 | 4 | 6 | 1 | 11 | 1 | 1 | 0 | 0 | 0 | 0 | 2026-10-02 |
+| Git | 16 | 12 | 7 | 0 | 0 | 1 | 0 | 0 | 18 | 0 | 1 | 2026-09-30 |
+| Grafana | 4 | 1 | 1 | 3 | 6 | 2 | 1 | 0 | 0 | 0 | 0 | 2026-09-21 |
+| Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 2026-09-26 |
+| Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 5 | 0 | 0 | 2026-09-23 |
+| Kubernetes | 5 | 4 | 3 | 2 | 1 | 4 | 1 | 1 | 10 | 0 | 0 | 2026-09-19 |
+| Prometheus | 4 | 3 | 2 | 1 | 7 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-28 |
+| Python | 3 | 3 | 4 | 4 | 4 | 0 | 2 | 1 | 7 | 0 | 0 | 2026-09-20 |
+| Repo-doc | 4 | 3 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-26 |
+| Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 8 | 0 | 0 | 2026-09-22 |
+| Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-16 |
+| Foundational concepts | 11 | 14 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 2026-09-16 |
 
 </details>
 
 ## Status
 
-Currently hardening the image-supply side of the story: Dockerfiles that ship a non-root distroless runtime with an SBOM attestation and a vulnerability-scan gate, and a signed promotion manifest that moves one digest through dev → staging → prod without rebuilding. Just landed: the promotion manifest and the vuln-gated distroless Dockerfile, on top of the microservices multistage scaffold and the Bash retry-with-breaker work.
+Currently hardening the two places automation most often fails quietly: reusable actions that must do the right thing with a caller's input, and image delivery where a green build is not the same as a shippable artifact. Just landed: a `repository_dispatch` action that retries only transient failures, a composite deploy gate that validates its inputs before it acts, and a Docker build wrapper that turns cache reuse, SBOM attestation, and a vulnerability scan into one command.
 
 ---
 _Last updated: 2026-10-02_
