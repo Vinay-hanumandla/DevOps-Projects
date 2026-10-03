@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-03
+
+- gha: Add reusable workflow ecosystem manifest with caller workflow, composite action, and reusable workflow composition plus input/output threading (gha-025)
+- repo-doc: Add first-look notes exploring the repo-task folder structure and file conventions (repo-doc-010)
+
 ## 2026-10-02
 
 - gha: Rework (gha-023) — repository_dispatch action rebuilt with zero runtime dependencies (built-in `fetch` instead of an unbundled `require`), hyphen-preserving `INPUT_*` lookup for hyphenated inputs, and 204 handled as success with no dispatch id; outputs are now `status`, `http-status`, and `attempts`

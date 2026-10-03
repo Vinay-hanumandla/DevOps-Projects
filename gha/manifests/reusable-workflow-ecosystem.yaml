@@ -1,0 +1,113 @@
+# last_verified: 2026-10-03 · gha n/a
+#
+# Reusable workflow ecosystem: caller workflows, composite actions, and
+# reusable workflows composed into one delivery path.
+#
+# Purpose: show the three composition layers GitHub Actions provides and how
+# they thread inputs, outputs, and secrets between each other.
+#   doc 1  reusable workflow — test-and-report job exposed via workflow_call,
+#           returns a result summary output to its caller.
+#   doc 2  composite action — setup-and-check step bundle used inside jobs;
+#           takes a mode input, exposes a checklist output.
+#   doc 3  caller workflow — composes docs 1 and 2: calls the reusable
+#           workflow for the shared test job, then runs the composite action
+#           in its own deploy job and gates on both results.
+#
+# When to use: a shared check (lint, unit tests, artifact build) is needed by
+# several repositories or several workflows in one repository.
+# Prerequisites: the three files live at the relative paths referenced in the
+# caller; secrets referenced by name exist in the calling repository.
+# Steps: copy each document below into its own file at the path the caller
+# references (doc 1 to .github/workflows/shared-test-reusable.yml, doc 2 to
+# .github/actions/setup-and-check/action.yml), point each caller at them by
+# repository path, pass only the inputs each declares, and read back only
+# the outputs each declares. This single file collects all three so the
+# input/output threading can be reviewed in one place before splitting.
+# Verify: parse every document with a YAML parser, then trace each caller-side
+# input/output name against the matching reusable declaration.
+# Common errors: passing an input the reusable target never declared (it is
+# silently ignored); expecting a step output without a job-level mapping.
+
+# ── Doc 1: reusable workflow ────────────────────────────────────────────────
+# Shared test job. Called by doc 3. Emits one summary output.
+name: shared-test-reusable
+"on":
+  workflow_call:
+    inputs:
+      test-command:
+        description: Command the test job runs
+        required: false
+        default: run-checks
+        type: string
+      upload-report:
+        description: Whether the test job stores its report
+        required: false
+        default: false
+        type: boolean
+    outputs:
+      summary:
+        description: One-line result summary from the test run
+        value: ${{ jobs.test.outputs.summary }}
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    outputs:
+      summary: ${{ steps.record.outputs.summary }}
+    steps:
+      - name: Run shared checks
+        run: echo "Running ${{ inputs.test-command }}"
+      - name: Record summary
+        id: record
+        run: echo "summary=checks done" >> "$GITHUB_OUTPUT"
+---
+# ── Doc 2: composite action ─────────────────────────────────────────────────
+# Step bundle used inside a job. Called by docs 1-style jobs and by doc 3.
+name: setup-and-check
+description: Shared setup plus mode-gated check steps for one job
+inputs:
+  mode:
+    description: Which check suite to run
+    required: false
+    default: quick
+outputs:
+  checklist:
+    description: Which checks actually ran
+    value: ${{ steps.check.outputs.checklist }}
+runs:
+  using: composite
+  steps:
+    - name: Shared setup
+      run: echo "Setting up for mode ${{ inputs.mode }}"
+      shell: bash
+    - name: Mode-gated check
+      id: check
+      run: echo "checklist=${{ inputs.mode }}-checks" >> "$GITHUB_OUTPUT"
+      shell: bash
+---
+# ── Doc 3: caller workflow ──────────────────────────────────────────────────
+# Composes docs 1 and 2: reuses the shared test job, then runs the step
+# bundle in a second job that only proceeds when the tests report back.
+name: reusable-workflow-ecosystem-caller
+"on":
+  push:
+    branches:
+      - main
+jobs:
+  shared-tests:
+    name: Run shared reusable test job
+    uses: ./.github/workflows/shared-test-reusable.yml
+    with:
+      test-command: run-checks
+      upload-report: false
+  deploy:
+    name: Setup, check, then deploy
+    needs: shared-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run shared setup-and-check bundle
+        id: bundle
+        uses: ./.github/actions/setup-and-check
+        with:
+          mode: quick
+      - name: Report what ran
+        run: echo "Checks: ${{ steps.bundle.outputs.checklist }}"
