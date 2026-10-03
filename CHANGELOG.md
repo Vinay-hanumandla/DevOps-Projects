@@ -2,6 +2,7 @@
 
 ## 2026-10-03
 
+- python: Add Docker + GitHub Actions production CI pipeline reference with lint, type-check, test, and Docker build gates plus SHA-tagged image/package publish (python-020)
 - gha: Add reusable workflow ecosystem manifest with caller workflow, composite action, and reusable workflow composition plus input/output threading (gha-025)
 - repo-doc: Add first-look notes exploring the repo-task folder structure and file conventions (repo-doc-010)
 
