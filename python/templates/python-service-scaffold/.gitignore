@@ -1,0 +1,16 @@
+# last_verified: 2026-10-03 · python n/a
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+.venv/
+.env
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Local SQLite databases created by the default settings.
+*.db
+*.sqlite3
