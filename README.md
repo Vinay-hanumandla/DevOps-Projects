@@ -19,11 +19,11 @@ The `templates/` subfolders are copy-in starting points: a chart, a role, a coll
 
 ## Quick links
 
-- [Python + Docker + GHA production CI pipeline](python/docs/python-docker-ci-pipeline.md) — one workflow from pull request to published artifacts: lint, type-check, and test gates, then the container image and the package go out together.
-- [Reusable workflow ecosystem](gha/manifests/reusable-workflow-ecosystem.yaml) — a reusable workflow, a composite action, and a caller composed into one delivery path, with inputs, outputs, and secrets threaded between the layers.
-- [Poking around the repo-task folder](repo-doc/notes/2026-10-03-exploring-task-folder-structure.md) — a first look at what the repo-doc notes, docs, scripts, and configs each hold, and where the next file belongs.
-- [Workflow security hardening](gha/docs/workflow-security-hardening.md) — least-privilege token scopes, keyless cloud auth, secret-handling gates, and SHA-pinned third-party actions for workflows that reach production.
-- [Repository dispatch with retry](gha/scripts/repository-dispatch-retry/action.yml) — a custom action that fires a `repository_dispatch` event and retries only transient failures, with jittered backoff that respects `Retry-After`.
+- [AAP 27 migration guide](ansible/docs/aap-27-migration-guide.md) — notes on migrating from Ansible Automation Platform 2.x to 27.x, covering execution environment changes and collection updates.
+- [Python asyncio vs threading vs multiprocessing decision guide](python/notebooks/asyncio-threading-multiprocessing-decision-guide.ipynb) — notebook comparing the three concurrency models for I/O- and CPU-bound DevOps tooling.
+- [Python migration: match/except* and TaskGroup](python/snippets/migration-match-except-star-taskgroup.py) — demonstrates Python 3.11+ `except*` and `TaskGroup` for structured concurrency.
+- [Python service scaffold — .env.example](python/templates/python-service-scaffold/.env.example) — environment template for the Python service scaffold with database, Redis, and app settings.
+- [Python service scaffold — .gitignore](python/templates/python-service-scaffold/.gitignore) — standard Python ignores plus scaffold-specific entries for venv, cache, and generated files.
 
 ## Layout
 
@@ -54,27 +54,27 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 
 | Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Last verified |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| Ansible | 3 | 5 | 5 | 1 | 4 | 2 | 0 | 0 | 21 | 0 | 0 | 2026-09-30 |
-| Bash | 3 | 7 | 12 | 3 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 2026-09-30 |
-| Docker | 5 | 3 | 8 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 2026-10-02 |
-| GitHub Actions | 3 | 5 | 6 | 1 | 11 | 2 | 1 | 0 | 0 | 0 | 0 | 2026-10-03 |
-| Git | 16 | 12 | 7 | 0 | 0 | 1 | 0 | 0 | 18 | 0 | 1 | 2026-09-30 |
-| Grafana | 4 | 1 | 1 | 3 | 6 | 2 | 1 | 0 | 0 | 0 | 0 | 2026-09-21 |
+| Ansible | 3 | 6 | 5 | 1 | 4 | 2 | 0 | 0 | 21 | 0 | 0 | 2026-09-29 |
+| Bash | 3 | 7 | 12 | 3 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 2026-09-09 |
+| Docker | 5 | 3 | 8 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 2026-09-20 |
+| GitHub Actions | 3 | 5 | 6 | 1 | 11 | 2 | 1 | 0 | 0 | 0 | 0 | 2026-09-25 |
+| Git | 16 | 12 | 7 | 0 | 0 | 1 | 0 | 0 | 18 | 0 | 1 | 2026-09-21 |
+| Grafana | 4 | 1 | 1 | 3 | 6 | 2 | 1 | 0 | 0 | 0 | 0 | 2026-09-16 |
 | Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 2026-09-26 |
 | Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 5 | 0 | 0 | 2026-09-23 |
 | Kubernetes | 5 | 4 | 3 | 2 | 1 | 4 | 1 | 1 | 10 | 0 | 0 | 2026-09-19 |
 | Prometheus | 4 | 3 | 2 | 1 | 7 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-28 |
-| Python | 3 | 4 | 4 | 4 | 4 | 0 | 2 | 1 | 7 | 0 | 0 | 2026-10-03 |
-| Repo-doc | 5 | 3 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-03 |
-| Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 8 | 0 | 0 | 2026-09-22 |
-| Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-16 |
-| Foundational concepts | 11 | 14 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 2026-09-16 |
+| Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 23 | 0 | 0 | 2026-10-03 |
+| Repo-doc | 5 | 3 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-26 |
+| Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 8 | 0 | 0 | 2026-09-05 |
+| Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | — |
+| Foundational concepts | 2 | 68 | 22 | 13 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 2026-09-16 |
 
 </details>
 
 ## Status
 
-Currently tying the Python and Actions sides together: a production CI pipeline doc that takes a Python service from lint to published image and package, a workflow-security hardening reference, and an ecosystem manifest showing how reusable workflows and composite actions compose. Just landed: the Python CI pipeline and a first-look note on the repo-doc folder itself.
+Currently hardening the two places automation most often fails quietly: reusable actions that must do the right thing with a caller's input, and image delivery where a green build is not the same as a shippable artifact. Just landed: a `repository_dispatch` action that retries only transient failures, a composite deploy gate that validates its inputs before it acts, and a Docker build wrapper that turns cache reuse, SBOM attestation, and a vulnerability scan into one command.
 
 ---
-_Last updated: 2026-10-03_
+_Last updated: 2026-10-04_
