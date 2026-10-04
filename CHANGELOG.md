@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-04
+
+- docker: Add build cache backend chooser comparing inline, registry, and remote cache for CI pipelines with per-branch scoping and retention guidance (docker-026)
+- awx: Add first-day primer on Ansible Tower / AWX covering inventories, credentials, projects, job templates, and access basics (awx-001)
+
 ## 2026-10-03
 
 - ansible: Add Ansible Automation Platform 2.7 migration guide covering gateway-only architecture, containerized installer, execution environment changes, and ansible-core 2.21 support lifecycle (ansible-022)
