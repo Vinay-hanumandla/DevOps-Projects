@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-04
+
+- awx: Add first-look notes exploring the AWX UI sections and API-backed objects (awx-002)
+
 ## 2026-10-03
 
 - ansible: Add Ansible Automation Platform 2.7 migration guide covering gateway-only architecture, containerized installer, execution environment changes, and ansible-core 2.21 support lifecycle (ansible-022)
