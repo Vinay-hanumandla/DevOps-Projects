@@ -20,11 +20,11 @@ The `awx/` folder covers the Tower-side control plane — job templates, invento
 
 ## Quick links
 
+- [First kubectl commands — what's actually in this cluster](k8s/notes/2026-10-05-first-kubectl-commands-and-cluster-explore.md) — cluster-info, nodes, namespaces, and pods across all namespaces from a first live session, including the empty-looking default namespace trap.
+- [AAP platform resources as code](ansible/manifests/aap-platform-resources.yaml) — inventories, credentials, job templates, and schedules declared as YAML and reconciled through the gateway API, so the controller rebuilds identical.
+- [Comparing Ansible execution modes](ansible/notebooks/execution-modes-comparison.ipynb) — playbook runs, navigator, controller job templates, and event-driven rulebooks side by side, with the trigger and runtime behind each.
 - [Execution Environment build pipeline scaffold](ansible/templates/execution-environment-build-pipeline/README.md) — four fixed stages (build → SBOM → scan → push) over a digest-pinned base image, where the push does not happen until the vulnerability gate passes.
-- [EE build Containerfile](ansible/templates/execution-environment-build-pipeline/Containerfile) — resolves the Galaxy requirements in a build-only stage, then copies just the result into the stage that ships.
-- [EE build script](ansible/templates/execution-environment-build-pipeline/build-ee.sh) — runs those four stages in order, and refuses to start at all when the build tool or the scanner is missing.
-- [EE requirements.yml](ansible/templates/execution-environment-build-pipeline/requirements.yml) — the Galaxy collections an execution environment pins, so the set is a reviewable input rather than whatever the controller happened to have installed.
-- [EE environment template](ansible/templates/execution-environment-build-pipeline/.env.example) — placeholder for the approved base image digest; the build script rejects the placeholder, so an unpinned base cannot reach a released image by accident.
+- [Grafana unified alerting helper reference](grafana/docs/unified-alerting-helper-reference.md) — one folder with three files (rules, contact points, notification policies) and a naming scheme, so each new alert reuses the same shape.
 
 ## Layout
 
@@ -56,28 +56,28 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 
 | Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Last verified |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| Ansible | 3 | 6 | 5 | 1 | 4 | 2 | 0 | 0 | 28 | 0 | 0 | 2026-10-05 |
+| Ansible | 3 | 6 | 5 | 1 | 4 | 3 | 1 | 0 | 28 | 0 | 0 | 2026-10-05 |
 | AWX | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-04 |
-| Bash | 3 | 7 | 12 | 3 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 2026-09-30 |
+| Bash | 3 | 7 | 12 | 3 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 2026-09-29 |
 | Docker | 5 | 4 | 8 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 2026-10-04 |
 | GitHub Actions | 3 | 5 | 6 | 1 | 11 | 2 | 1 | 0 | 0 | 0 | 0 | 2026-10-03 |
 | Git | 16 | 12 | 7 | 0 | 0 | 1 | 0 | 0 | 18 | 0 | 1 | 2026-09-30 |
 | Grafana | 4 | 2 | 1 | 3 | 6 | 3 | 1 | 0 | 8 | 0 | 0 | 2026-10-05 |
 | Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 2026-09-26 |
 | Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 5 | 0 | 0 | 2026-09-23 |
-| Kubernetes | 5 | 4 | 3 | 2 | 1 | 4 | 1 | 1 | 10 | 0 | 0 | 2026-09-19 |
+| Kubernetes | 6 | 4 | 3 | 2 | 1 | 4 | 1 | 1 | 10 | 0 | 0 | 2026-10-05 |
 | Prometheus | 4 | 3 | 2 | 1 | 7 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-09-28 |
 | Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 23 | 0 | 0 | 2026-10-03 |
 | Repo-doc | 5 | 3 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-03 |
 | Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 8 | 0 | 0 | 2026-09-22 |
 | Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | — |
-| Foundational concepts | 11 | 14 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 2026-09-16 |
+| Foundational concepts | 11 | 14 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 2026-08-29 |
 
 </details>
 
 ## Status
 
-Currently hardening the places where automation quietly stops being reproducible on somebody else's runner: an execution environment whose collection set and base image are both reviewable inputs, and a Grafana install whose dashboards exist without a UI click. Just landed: an execution-environment build pipeline that resolves pinned Galaxy requirements in a build stage and will not push until the vulnerability scan passes, a unified-alerting reference that keeps rule, contact-point, and notification-policy files in matching folders so the UID linking them cannot rot, and a Grafana-on-Kubernetes manifest wiring a PVC, an Ingress, and a dashboard sidecar together in the order that keeps the pod out of CrashLoopBackOff.
+Currently pushing past playbooks into platform territory: controller inventories, credentials, templates, and schedules declared as versioned YAML, a notebook comparing the four ways to run the same automation, and first-contact kubectl notes from poking at a live cluster. Just landed: an AAP platform-resources manifest reconciled through the gateway API, an execution-modes comparison (CLI, navigator, controller jobs, event-driven rulebooks), and a first-kubectl-commands note covering the empty-default-namespace trap.
 
 ---
-_Last updated: 2026-10-05_
+_Last updated: 2026-10-06_

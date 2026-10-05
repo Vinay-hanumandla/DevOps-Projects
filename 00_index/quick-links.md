@@ -27,6 +27,9 @@
 - [EE environment template](../ansible/templates/execution-environment-build-pipeline/.env.example) — placeholder for the approved base image digest; the script rejects the placeholder so an unpinned base cannot reach a released image
 - [EE verification script](../ansible/templates/execution-environment-build-pipeline/verify-ee.sh) — asks the built image what it actually contains, so the artifact is checked against its own inventory rather than against the build log
 
+### Compare Ansible execution modes
+- [Comparing Ansible execution modes](../ansible/notebooks/execution-modes-comparison.ipynb) — playbook runs, navigator, controller job templates, and event-driven rulebooks side by side, with the trigger and runtime behind each
+
 ### Hand Terraform outputs to Ansible inventory
 - [Ansible + Terraform integration](../ansible/docs/ansible-terraform-integration.md) — where Terraform provisioning ends and Ansible configuration begins, with the outputs-to-inventory handoff and two-stage run ordering
 - [Terraform dynamic inventory](../ansible/manifests/terraform-dynamic-inventory.yaml) — builds the inventory from Terraform workspace outputs via the `tfc_inv` plugin, no CLI or backend credentials on the control node
@@ -47,6 +50,9 @@
 
 ### Converge nodes in pull mode
 - [Pull-mode localhost inventory](../ansible/manifests/pull-mode-local-execution.yaml) — each node clones the playbooks and converges itself with `ansible-pull` on a schedule, for fleets unreachable from a control node
+
+### Declare AAP platform resources as code
+- [AAP platform resources](../ansible/manifests/aap-platform-resources.yaml) — inventories, credentials, job templates, and schedules declared as YAML and reconciled through the gateway API, so the controller rebuilds identical after a re-deploy or upgrade
 
 ### Get started with AWX
 - [Ansible Tower / AWX primer](../awx/notes/0000-primer-awx.md) — what AWX adds on top of Ansible: shared inventories, a launch button, scheduling, access control, and job history
@@ -346,6 +352,7 @@
 - [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md) — kubectl CLI exploration notes with common commands and output explanations
 - [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md) — more kubectl gotchas on the second pass
 - [Quickstart kind contexts and port mismatch](../k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md) — kind setup quirks, context switching, and port-forwarding gotchas
+- [First kubectl commands on a live cluster](../k8s/notes/2026-10-05-first-kubectl-commands-and-cluster-explore.md) — cluster-info, nodes, namespaces, and pods across all namespaces from a first live session, including the empty-default-namespace trap
 
 ### Inspect Kubernetes resources
 - [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md) — kubectl commands for inspecting cluster resources and their events
