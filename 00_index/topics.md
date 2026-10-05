@@ -13,6 +13,11 @@
 - **snippets** (1): [Block/rescue/always deploy with handlers](../ansible/snippets/block-rescue-always-handlers.yaml) — config deploy with rollback, outcome report, and a change-gated service restart
 - **templates** (21): [Collection scaffold with Molecule and galaxy-importer](../ansible/templates/ansible-collection-scaffold/README.md) — copy-in collection with Molecule tests, `galaxy.yml`, CI workflow, and a galaxy-importer lint pass · [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, `galaxy.yml`, dynamic cloud inventory, and a Terraform-outputs handoff script · _…and 13 more under `ansible/templates/`._
 
+## AWX  ·  2 files
+
+- **primer:** [Ansible Tower / AWX — quick primer](../awx/notes/0000-primer-awx.md)
+- **notes** (2): most recent → [Poking around the AWX UI and API](../awx/notes/2026-10-04-explore-awx-ui-and-api.md) — inventories, credentials, templates, and jobs in the UI, then the API calls behind each page
+
 ## Bash  ·  61 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
@@ -24,12 +29,12 @@
 - **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
 - **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
 
-## Docker  ·  63 files
+## Docker  ·  64 files
 
 - **primer:** [Docker — quick primer](../docker/notes/0000-primer-docker.md)
 - **notes** (5): most recent → [Docker trip-ups after the initial run-through](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md), [Install Docker](../docker/notes/2026-07-19-install-docker.md)
 - **dockerfiles** (5): most recent → [Production distroless image with vulnerability gate](../docker/dockerfiles/production-distroless-vuln-gated.Dockerfile) — Go build in named build/test stages with a non-root distroless runtime, SBOM attestation, and a scan gate before promotion · [Production-hardened Python web service](../docker/dockerfiles/production-hardened-python-web-service.Dockerfile), [Production distroless image with SBOM](../docker/dockerfiles/production-distroless-sbom.Dockerfile)
-- **docs** (3): most recent → [Multi-stage build patterns for Python services](../docker/docs/multi-stage-build-patterns-python-services.md), [Storage drivers and volume types for stateful workloads](../docker/docs/storage-drivers-volume-types-comparison.md), [Docker Compose healthcheck service ordering](../docker/docs/docker-compose-healthcheck-service-ordering.md)
+- **docs** (4): most recent → [Choosing a build-cache backend](../docker/docs/build-cache-backends.md) — inline vs registry vs remote cache, with the CI pipeline shape that picks each one · [Multi-stage build patterns for Python services](../docker/docs/multi-stage-build-patterns-python-services.md), [Storage drivers and volume types for stateful workloads](../docker/docs/storage-drivers-volume-types-comparison.md) · _…and 1 more under `docker/docs/`._
 - **scripts** (8): most recent → [Docker build wrapper](../docker/scripts/docker-build-wrapper.sh) — one entry point for a buildx build with registry cache reuse, SBOM and provenance attestations, and a Trivy scan gate that fails the run · [Image vuln scan and policy enforcement](../docker/scripts/image-vuln-scan-policy.sh), [Multi-arch buildx automation](../docker/scripts/image-build-automation.sh) · _…and 5 more under `docker/scripts/`._
 - **manifests** (3): most recent → [Signed image promotion for GitOps](../docker/manifests/gitops-image-promotion.yaml) — moves one built digest through dev → staging → prod without rebuilding, verifying its signature before each step · [GitOps image build, sign, and push](../docker/manifests/gitops-image-build-and-push.yaml), [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml)
 - **templates** (36): [Microservices multistage scaffold](../docker/templates/microservices-multistage-scaffold/README.md) — api + worker + web where every built service uses a two-stage Dockerfile, with health-gated startup and file-based secrets · [Multi-service Compose app scaffold](../docker/templates/multi-service-compose-app/README.md) — copy-in stack with health-gated startup, file-based secrets, and a tools profile · [Local dev cluster scaffold](../docker/templates/local-dev-cluster/README.md) — kind config, Compose file, and k8s manifests for a throwaway dev loop · _…and 33 more under `docker/templates/`._
@@ -56,7 +61,7 @@
 - **manifests** (1): [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps git events (push, tag, merge request) to build → test → deploy jobs
 - **templates** (18): [Repo scaffold with hooks and branch protection](../git/templates/repo-scaffold/README.md) — hooks, CODEOWNERS, a PR template, a contributing guide, and workflows that apply branch protection and regenerate the changelog · [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) · _…and 16 more under `git/templates/`._
 
-## Grafana  ·  18 files
+## Grafana  ·  26 files
 
 - **primer:** [Grafana — quick primer](../grafana/notes/0000-primer-grafana.md)
 - **notes** (4): most recent → [First Grafana web UI](../grafana/notes/2026-08-27-first-grafana-web-ui.md), [Grafana quickstart gotchas](../grafana/notes/2026-08-27-grafana-quickstart-gotchas.md), [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
@@ -66,6 +71,7 @@
 - **scripts** (1): [Grafana dashboard API wrapper](../grafana/scripts/grafana-http-api-dashboard-wrapper.sh) — list, idempotent create/update, and safe delete via the HTTP API
 - **snippets** (3): most recent → [List dashboards and datasources](../grafana/snippets/2026-09-09-list-dashboards-datasources.py), [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh), [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
 - **notebooks** (1): [Comparing Grafana unified alerting vs Alertmanager](../grafana/notebooks/comparing-grafana-unified-alerting-vs-alertmanager.ipynb)
+- **templates** (8): [Grafana + Prometheus + Loki stack scaffold](../grafana/templates/grafana-prometheus-loki-stack/README.md) — Compose stack with metrics and logs side by side, both datasources and a starter dashboard provisioned at first boot · _…and 7 more under `grafana/templates/grafana-prometheus-loki-stack/`._
 
 ## Helm  ·  41 files
 
@@ -118,10 +124,10 @@
 - **notes** (3): most recent → [Python quickstart gotchas](../python/notes/2026-08-22-python-quickstart-gotchas.md), [Python functions and modules](../python/notes/2026-08-04-python-functions-modules.md)
 - **docs** (4): most recent → [Comparing Python configuration approaches for DevOps workflows](../python/docs/comparing-python-configuration-approaches.md), [Python modules, packages, and imports](../python/docs/2026-08-04-python-modules-packages-imports.md) · _…and 2 more under `python/docs/`._
 - **scripts** (4): most recent → [Config loader with Pydantic settings](../python/scripts/config-loader-pydantic-settings.py), [Config validator](../python/scripts/config-validator.py), [Minimal file processing](../python/scripts/2026-08-04-minimal-file-processing.py), [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py)
-- **snippets** (5): most recent → [Dockerfile validator](../python/snippets/validate-dockerfile.py), [Docker Compose validator](../python/snippets/docker-compose-validator.py), [Config file reader](../python/snippets/2026-08-22-config-file-reader.py), [First script — variables and types](../python/snippets/2026-07-22-first-script-variables-types.py)
+- **snippets** (5): most recent → [Migrating to match, except*, and TaskGroup](../python/snippets/migration-match-except-star-taskgroup.py) — mechanical replacements for if/elif dispatch, grouped fan-out failures, and hand-rolled task bookkeeping · [Dockerfile validator](../python/snippets/validate-dockerfile.py), [Docker Compose validator](../python/snippets/docker-compose-validator.py) · _…and 2 more under `python/snippets/`._
 - **configs** (4): most recent → [App config for the Pydantic loader](../python/configs/2026-09-16-app-config.yaml), [pyproject.toml README guide](../python/configs/2026-09-14-pyproject-toml-readme.md), [App config](../python/configs/2026-09-15-app-config.yaml), [pyproject.toml config](../python/configs/2026-08-24-pyproject-toml-config.toml)
 - **dockerfiles** (1): [Python app Dockerfile](../python/dockerfiles/python-app.Dockerfile)
-- **notebooks** (3): most recent → [Async patterns comparison](../python/notebooks/async-patterns-comparison.ipynb) — asyncio vs trio vs anyio for I/O-bound DevOps tooling, [Comparing environment-aware config](../python/notebooks/comparing-env-aware-config.ipynb) — typed settings vs layered loaders vs minimal env readers
+- **notebooks** (3): most recent → [Threading, multiprocessing, and asyncio decision guide](../python/notebooks/asyncio-threading-multiprocessing-decision-guide.ipynb) — which concurrency model fits I/O-bound DevOps tooling · [Async patterns comparison](../python/notebooks/async-patterns-comparison.ipynb) — asyncio vs trio vs anyio for I/O-bound DevOps tooling, [Comparing environment-aware config](../python/notebooks/comparing-env-aware-config.ipynb) — typed settings vs layered loaders vs minimal env readers
 - **templates** (23): [Python CLI + Docker + GHA scaffold](../python/templates/python-cli-docker-gha/README.md) — one copy-in layout with a typed CLI, a container image, and a workflow that tests it · [Python service scaffold](../python/templates/python-service-scaffold/README.md) — FastAPI service with Alembic migrations, Pydantic settings, pytest, and a docker-compose dev stack · _…and 21 more under `python/templates/`._
 
 ## Terraform  ·  28 files

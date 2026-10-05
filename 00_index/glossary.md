@@ -526,3 +526,14 @@
 
 - **Action pinning (SHA pin)** — referencing a third-party action by its immutable commit SHA instead of a mutable tag, so the workflow runs exactly the code that was reviewed; a tag can be moved after the fact, a SHA cannot.
 - **Caller workflow** — the top-level workflow that invokes reusable workflows and composite actions and gates downstream jobs on their outputs; it declares only the inputs each callee expects and reads back only the outputs each one promises.
+
+## AWX
+
+- **AWX** — the upstream, open-source control plane for Ansible: a web UI and API for storing inventories and credentials, launching playbooks through saved templates, and keeping a history of every run. Ansible Tower (and the Automation Controller inside Ansible Automation Platform) is the supported product built from the same codebase.
+- **Project** — the playbook source an AWX job draws from, usually a repo and branch AWX syncs on a timer; templates point at a project instead of a local checkout so every launch runs the same committed code.
+- **Job template** — a saved launch recipe tying together a project, a playbook, an inventory, and a credential; the unit teams share so launching "deploy web" needs no terminal access.
+- **Job** — a single run of a template, with its own streamed log, timing, and per-host status; the record that answers what ran, when, and whether it worked.
+- **Schedule** — a timer attached to a template so routine runs (nightly patching, Sunday morning checks) happen without anyone clicking launch.
+- **Workflow job template** — several templates chained with success/failure branches (provision, then configure, then verify, stopping if any step fails); the AWX-native way to order multi-stage automation.
+- **Role-based access (RBAC)** — who may see, launch, or edit which inventories, templates, and credentials; lets the on-call crew launch a restart template without being able to change what it runs.
+- **Execution environment** — the container image a job runs inside, carrying the interpreter, collections, and dependencies the playbook needs; rebuilding it is part of adopting a new ansible-core line such as the one AAP 2.7 ships on.

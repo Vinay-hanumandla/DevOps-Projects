@@ -40,6 +40,13 @@
 ### Converge nodes in pull mode
 - [Pull-mode localhost inventory](../ansible/manifests/pull-mode-local-execution.yaml) — each node clones the playbooks and converges itself with `ansible-pull` on a schedule, for fleets unreachable from a control node
 
+### Get started with AWX
+- [Ansible Tower / AWX primer](../awx/notes/0000-primer-awx.md) — what AWX adds on top of Ansible: shared inventories, a launch button, scheduling, access control, and job history
+- [Poking around the AWX UI and API](../awx/notes/2026-10-04-explore-awx-ui-and-api.md) — a second-day click-through of inventories, credentials, templates, and jobs, plus the API calls behind each page
+
+### Plan an AAP upgrade
+- [AAP 2.7 migration guide](../ansible/docs/aap-27-migration-guide.md) — gateway-only architecture, containerized installer, execution-environment rebuilds, and the ansible-core 2.21 support lifecycle behind the release
+
 ### Get started with Bash
 - [Bash primer](../bash/notes/0000-primer-bash.md) — what Bash is, key terminology, and a tiny example
 - [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md) — install check, first .sh file, and permission gotcha
@@ -136,6 +143,10 @@
 ### Run a container
 - [Run container with port map](../docker/scripts/2026-07-16-run-container-port-map.sh) — run a tagged image, map a port, verify, and tear down
 - [Run nginx with port map](../docker/scripts/2026-07-18-first-port-mapped-container.sh) — run nginx, map a port, verify, and tear down
+- [Build a containerized app with custom networks and volumes](../docker/scripts/build-containerized-app-custom-networks-volumes.sh) — build an image from scratch, then run it on its own network with a named volume and clean up after itself
+
+### Pick a build-cache backend for CI
+- [Choosing a build-cache backend](../docker/docs/build-cache-backends.md) — inline vs registry vs remote cache, with the CI pipeline shape that picks each one and per-branch cache scoping with a main-branch fallback
 
 ### Compose multi-service stacks
 - [Multi-service Docker Compose config](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml) — web app, cache, and worker on the default network with `depends_on`
@@ -242,6 +253,9 @@
 - [List dashboards and datasources](../grafana/snippets/2026-09-09-list-dashboards-datasources.py) — Python script to list dashboards and datasources via the Grafana API
 - [Prometheus + Alertmanager on-call pipeline](../grafana/docs/prometheus-alertmanager-oncall-pipeline.md) — wiring Grafana dashboards into a Prometheus and Alertmanager on-call flow
 - [Comparing Grafana unified alerting vs Alertmanager](../grafana/notebooks/comparing-grafana-unified-alerting-vs-alertmanager.ipynb) — notebook comparing built-in Grafana alerting with an external Alertmanager
+
+### Run metrics and logs side by side locally
+- [Grafana + Prometheus + Loki stack scaffold](../grafana/templates/grafana-prometheus-loki-stack/README.md) — one Compose file for Prometheus, Loki, Promtail, and Grafana with both datasources and a starter dashboard provisioned at first boot
 
 ### Get started with Helm
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
@@ -379,8 +393,13 @@
 - [Comparing environment-aware config](../python/notebooks/comparing-env-aware-config.ipynb) — typed settings classes vs layered loaders vs minimal env readers for config that changes per environment
 - [Async patterns comparison](../python/notebooks/async-patterns-comparison.ipynb) — asyncio vs trio vs anyio for I/O-bound DevOps tooling like endpoint probing and artifact copies
 
+### Choose a concurrency model for I/O-bound tooling
+- [Threading, multiprocessing, and asyncio decision guide](../python/notebooks/asyncio-threading-multiprocessing-decision-guide.ipynb) — which model fits the workload, worked through side by side
+- [Migrating to match, except*, and TaskGroup](../python/snippets/migration-match-except-star-taskgroup.py) — mechanical replacements for if/elif dispatch chains, grouped fan-out failures, and hand-rolled task bookkeeping
+
 ### Ship a Python service through CI to image and package
 - [Python + Docker + GHA production CI pipeline](../python/docs/python-docker-ci-pipeline.md) — one workflow with lint, type-check, and test gates followed by a publish stage for the container image and the package
+- [Python service scaffold](../python/templates/python-service-scaffold/README.md) — copy-in FastAPI service with Alembic migrations, Pydantic settings, pytest, and a Compose dev stack
 
 ### Get started with Terraform
 - [Terraform primer](../tf/notes/0000-primer-terraform.md) — what Terraform is, providers, state, and a minimal workflow
