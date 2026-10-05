@@ -1,0 +1,49 @@
+# last_verified: 2026-10-05 · ansible 2.21.4
+# ansible-023 — Execution Environment build pipeline scaffold.
+# Level: L5 | Output: template
+#
+# Two stages, both FROM the same execution-environment base image:
+#   galaxy — resolves requirements.yml into a build-only directory. Resolving in
+#           a separate stage keeps the dependency layer cacheable on its own and
+#           keeps the resolution tooling out of the stage that ships.
+#   final  — copies the resolved collections and roles out of the galaxy stage.
+#           Nothing is installed here, so nothing that exists only to satisfy the
+#           build can leak into the execution environment.
+#
+# EE_BASE_IMAGE is declared with no default on purpose. An ARG with no value
+# fails the build instead of falling back to a base image supplied implicitly by
+# the build tool, which is the only way an unpinned base reaches a released EE.
+# build-ee.sh passes --build-arg EE_BASE_IMAGE=<value from .env>.
+
+ARG EE_BASE_IMAGE
+
+FROM ${EE_BASE_IMAGE} AS galaxy
+
+USER root
+
+# Both destination directories are created up front so the final stage's COPY
+# always has a source to copy, whether or not the requirements file asks for
+# roles.
+RUN mkdir -p /build/collections /build/roles
+
+COPY requirements.yml /build/requirements.yml
+
+RUN ansible-galaxy collection install \
+        --requirements-file /build/requirements.yml \
+        --collections-path /build/collections
+
+# requirements.yml carries a `roles:` key only when the automation needs roles
+# from Galaxy. Guard the install so an unversioned, collections-only file is not
+# treated as a role requirement list and fails the build.
+RUN if grep -Eq '^roles:' /build/requirements.yml; then \
+        ansible-galaxy role install \
+            --requirements-file /build/requirements.yml \
+            --roles-path /build/roles; \
+    fi
+
+FROM ${EE_BASE_IMAGE} AS final
+
+USER root
+
+COPY --from=galaxy /build/collections /usr/share/ansible/collections
+COPY --from=galaxy /build/roles /usr/share/ansible/roles
