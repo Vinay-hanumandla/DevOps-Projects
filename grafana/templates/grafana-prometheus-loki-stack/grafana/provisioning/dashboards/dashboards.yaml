@@ -1,0 +1,16 @@
+# last_verified: 2026-10-05 · grafana n/a
+# Dashboard provider: loads every JSON dashboard from the mounted folder.
+# The folder path is the in-container path from the Compose volume mount.
+
+apiVersion: 1
+
+providers:
+  - name: local-dashboards
+    orgId: 1
+    folder: Stack
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/dashboards

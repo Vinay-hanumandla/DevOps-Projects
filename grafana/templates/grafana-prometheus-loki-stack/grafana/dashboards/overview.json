@@ -1,0 +1,39 @@
+{
+  "title": "Stack overview",
+  "uid": "stack-overview",
+  "tags": ["stack", "scaffold"],
+  "timezone": "browser",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Prometheus up",
+      "type": "stat",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus-local"
+      },
+      "targets": [
+        {
+          "expr": "up{job=\"prometheus\"}",
+          "legendFormat": "prometheus"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+    },
+    {
+      "id": 2,
+      "title": "Recent logs",
+      "type": "logs",
+      "datasource": {
+        "type": "loki",
+        "uid": "loki-local"
+      },
+      "targets": [
+        {
+          "expr": "{job=\"varlogs\"}"
+        }
+      ],
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+    }
+  ]
+}
