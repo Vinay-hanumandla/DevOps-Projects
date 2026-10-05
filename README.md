@@ -20,17 +20,17 @@ The `awx/` folder covers the Tower-side control plane — job templates, invento
 
 ## Quick links
 
-- [Grafana + Prometheus + Loki observability stack](grafana/templates/grafana-prometheus-loki-stack/README.md) — a Compose scaffold that runs metrics and logs side by side on one machine, with both datasources and a starter dashboard provisioned at first boot.
-- [Poking around the AWX UI and API](awx/notes/2026-10-04-explore-awx-ui-and-api.md) — a second-day click-through of inventories, credentials, templates, and jobs, plus the API calls behind each page.
-- [Ansible Tower / AWX primer](awx/notes/0000-primer-awx.md) — what AWX adds on top of Ansible: shared inventories, a launch button, scheduling, access control, and job history.
-- [Choosing a Docker build-cache backend](docker/docs/build-cache-backends.md) — inline vs registry vs remote cache for CI pipelines, with the pipeline shape that picks each one.
-- [Threading, multiprocessing, and asyncio decision guide](python/notebooks/asyncio-threading-multiprocessing-decision-guide.ipynb) — which concurrency model fits I/O-bound DevOps tooling, worked through side by side.
+- [Execution Environment build pipeline scaffold](ansible/templates/execution-environment-build-pipeline/README.md) — four fixed stages (build → SBOM → scan → push) over a digest-pinned base image, where the push does not happen until the vulnerability gate passes.
+- [EE build Containerfile](ansible/templates/execution-environment-build-pipeline/Containerfile) — resolves the Galaxy requirements in a build-only stage, then copies just the result into the stage that ships.
+- [EE build script](ansible/templates/execution-environment-build-pipeline/build-ee.sh) — runs those four stages in order, and refuses to start at all when the build tool or the scanner is missing.
+- [EE requirements.yml](ansible/templates/execution-environment-build-pipeline/requirements.yml) — the Galaxy collections an execution environment pins, so the set is a reviewable input rather than whatever the controller happened to have installed.
+- [EE environment template](ansible/templates/execution-environment-build-pipeline/.env.example) — placeholder for the approved base image digest; the build script rejects the placeholder, so an unpinned base cannot reach a released image by accident.
 
 ## Layout
 
 - `00_index/` — the map, quick links, glossary, and learning path for the kit.
 - `docs/concepts/` — foundational concept primers and cross-tool integration patterns.
-- `ansible/` — idempotent automation, collections, inventories, and Kubernetes handoffs.
+- `ansible/` — idempotent automation, collections, inventories, execution environments, and Kubernetes handoffs.
 - `awx/` — job templates, inventories, credentials, and the API behind the Tower control plane.
 - `bash/` — shell fundamentals, robust script patterns, debugging, and reusable scaffolds.
 - `docker/` — images, Compose, Buildx, registries, and container delivery patterns.
@@ -56,13 +56,13 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 
 | Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Last verified |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| Ansible | 3 | 6 | 5 | 1 | 4 | 2 | 0 | 0 | 21 | 0 | 0 | 2026-10-03 |
+| Ansible | 3 | 6 | 5 | 1 | 4 | 2 | 0 | 0 | 28 | 0 | 0 | 2026-10-05 |
 | AWX | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-04 |
 | Bash | 3 | 7 | 12 | 3 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 2026-09-30 |
 | Docker | 5 | 4 | 8 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 2026-10-04 |
 | GitHub Actions | 3 | 5 | 6 | 1 | 11 | 2 | 1 | 0 | 0 | 0 | 0 | 2026-10-03 |
 | Git | 16 | 12 | 7 | 0 | 0 | 1 | 0 | 0 | 18 | 0 | 1 | 2026-09-30 |
-| Grafana | 4 | 1 | 1 | 3 | 6 | 2 | 1 | 0 | 8 | 0 | 0 | 2026-10-05 |
+| Grafana | 4 | 2 | 1 | 3 | 6 | 3 | 1 | 0 | 8 | 0 | 0 | 2026-10-05 |
 | Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 2026-09-26 |
 | Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 5 | 0 | 0 | 2026-09-23 |
 | Kubernetes | 5 | 4 | 3 | 2 | 1 | 4 | 1 | 1 | 10 | 0 | 0 | 2026-09-19 |
@@ -71,13 +71,13 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 | Repo-doc | 5 | 3 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-03 |
 | Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 8 | 0 | 0 | 2026-09-22 |
 | Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | — |
-| Foundational concepts | 2 | 68 | 22 | 13 | 0 | 0 | 8 | 0 | 0 | 0 | 0 | 2026-09-16 |
+| Foundational concepts | 11 | 14 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 2026-09-16 |
 
 </details>
 
 ## Status
 
-Currently opening up the Tower side of automation: first-contact AWX notes (primer plus a UI-and-API click-through), an AAP 2.7 migration reference for the platform upgrade, and a Grafana + Prometheus + Loki stack scaffold for keeping metrics and logs side by side locally. Just landed alongside: a Docker build-cache backend guide and a Python concurrency-model decision notebook.
+Currently hardening the places where automation quietly stops being reproducible on somebody else's runner: an execution environment whose collection set and base image are both reviewable inputs, and a Grafana install whose dashboards exist without a UI click. Just landed: an execution-environment build pipeline that resolves pinned Galaxy requirements in a build stage and will not push until the vulnerability scan passes, a unified-alerting reference that keeps rule, contact-point, and notification-policy files in matching folders so the UID linking them cannot rot, and a Grafana-on-Kubernetes manifest wiring a PVC, an Ingress, and a dashboard sidecar together in the order that keeps the pod out of CrashLoopBackOff.
 
 ---
 _Last updated: 2026-10-05_
