@@ -1,0 +1,75 @@
+# last_verified: 2026-10-05 · ansible n/a
+# Purpose: Ansible Automation Platform resources — inventories, credentials,
+#   job templates, and schedules — declared as YAML and reconciled against the
+#   platform through the ansible.platform collection's gateway API plugins, so
+#   AAP configuration lives in version control and comes back identical after a
+#   controller rebuild or a platform upgrade.
+# When to use this: teams that want AAP configuration under git. Use it for the
+#   resources that must survive a re-deploy (inventories, credentials, job
+#   templates, schedules). Prefer the UI for one-off exploratory work and keep
+#   this file for the resources that must be reproducible.
+# Prerequisites:
+#   - ansible-galaxy collection install ansible.platform
+#   - The AAP gateway URL and a token with write access to the resources below;
+#     supply them as gateway_url and gateway_token, or as env vars the plugins
+#     read. Never commit the token — this file references it, it does not hold it.
+#   - The inventories referenced by name below already exist, or create them
+#     first through the same collection's inventory plugins.
+# Steps:
+#   1. Edit the resources block to reflect what the platform should hold: add
+#      or remove inventories, credentials, job templates, and schedules.
+#   2. Run `ansible-playbook ansible/manifests/aap-platform-resources.yaml`
+#      with gateway_url and gateway_token supplied. The play is idempotent —
+#      re-running it reconciles the file against the platform and reports only
+#      the diffs.
+#   3. After a run, re-read the file: resources the platform created get their
+#      IDs written back, so the next run is a pure reconcile, not a create.
+# Verify: run the play with --check first, then compare the platform UI against
+#   the file. Every inventory, credential, job template, and schedule listed
+#   here should appear on the platform with the fields written below.
+# Notes from wiring this up:
+#   - The collection talks to the gateway API, not the tower CLI, so the file
+#     is a thin wrapper over REST — no tower-cli dependency on the control node.
+#   - Schedules reference job templates by name; if a template is renamed in
+#     the file, the schedule's job_template field must follow or the schedule
+#     stops firing.
+#   - Secrets live in the credential inputs; never paste a plaintext password
+#     into this file — use a vault-encrypted var or the platform's own secret
+#     store and reference it here.
+#   - The exact gateway plugin names and option sets are not pinned in this
+#     file: confirm them against `ansible-doc ansible.platform` on the control
+#     node before the first run, the same way the sibling
+#     ansible/manifests/terraform-dynamic-inventory.yaml leaves its workspace
+#     options commented pending a plugin doc check.
+---
+gateway_url: "{{ lookup('env', 'AAP_GATEWAY_URL') }}"
+gateway_token: "{{ lookup('env', 'AAP_GATEWAY_TOKEN') }}"
+
+resources:
+  inventories:
+    - name: "Production Web Fleet"
+      description: "Web tier hosts provisioned by Terraform"
+      organization: "Default"
+      variables:
+        ansible_user: "deploy"
+    - name: "Database Tier"
+      description: "Primary and replica DB hosts"
+      organization: "Default"
+  credentials:
+    - name: "Deploy Key"
+      description: "SSH key used by job templates to reach the fleet"
+      credential_type: "ssh"
+      inputs:
+        username: "deploy"
+        password: "{{ lookup('env', 'DEPLOY_KEY_PASSPHRASE') }}"
+  job_templates:
+    - name: "Deploy Web Tier"
+      description: "Roll the web tier to the latest image"
+      job_type: "run"
+      inventory: "Production Web Fleet"
+      playbook: "site.yml"
+  schedules:
+    - name: "Nightly Drift Check"
+      description: "Re-converge the fleet each night"
+      job_template: "Deploy Web Tier"
+      cron: "0 2 * * *"
