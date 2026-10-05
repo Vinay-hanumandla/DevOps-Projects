@@ -19,6 +19,14 @@
 ### Scaffold an Ansible collection for Galaxy
 - [Collection scaffold with Molecule and galaxy-importer](../ansible/templates/ansible-collection-scaffold/README.md) — copy-in collection with Molecule tests, `galaxy.yml`, a CI workflow, and a galaxy-importer lint pass before publication
 
+### Run the same automation on a host you do not control
+- [Execution Environment build pipeline scaffold](../ansible/templates/execution-environment-build-pipeline/README.md) — four fixed stages (build → SBOM → scan → push) where the push does not happen until the vulnerability gate passes
+- [EE build Containerfile](../ansible/templates/execution-environment-build-pipeline/Containerfile) — resolves the Galaxy requirements in a build-only stage, then copies just the result into the stage that ships
+- [EE build script](../ansible/templates/execution-environment-build-pipeline/build-ee.sh) — runs those four stages in order and refuses to start at all when the build tool or the scanner is missing
+- [EE requirements.yml](../ansible/templates/execution-environment-build-pipeline/requirements.yml) — the Galaxy collections the image pins, so the set is a reviewable input rather than controller drift
+- [EE environment template](../ansible/templates/execution-environment-build-pipeline/.env.example) — placeholder for the approved base image digest; the script rejects the placeholder so an unpinned base cannot reach a released image
+- [EE verification script](../ansible/templates/execution-environment-build-pipeline/verify-ee.sh) — asks the built image what it actually contains, so the artifact is checked against its own inventory rather than against the build log
+
 ### Hand Terraform outputs to Ansible inventory
 - [Ansible + Terraform integration](../ansible/docs/ansible-terraform-integration.md) — where Terraform provisioning ends and Ansible configuration begins, with the outputs-to-inventory handoff and two-stage run ordering
 - [Terraform dynamic inventory](../ansible/manifests/terraform-dynamic-inventory.yaml) — builds the inventory from Terraform workspace outputs via the `tfc_inv` plugin, no CLI or backend credentials on the control node
@@ -195,7 +203,7 @@
 ### Choose between submodules, subtrees, and monorepo
 - [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md) — when to use each approach for managing external dependencies and multi-repo structures
 
-### Tag and push a Docker image from Git History
+### Tag and push a Docker image from Git history
 - [Git — tagging Docker images from git describe](../git/docs/git-describe-image-tags-registry.md) — deriving traceable image tags from git history and pushing to a registry
 
 ### Wire tag-driven releases and conventional-commit gates
@@ -254,8 +262,14 @@
 - [Prometheus + Alertmanager on-call pipeline](../grafana/docs/prometheus-alertmanager-oncall-pipeline.md) — wiring Grafana dashboards into a Prometheus and Alertmanager on-call flow
 - [Comparing Grafana unified alerting vs Alertmanager](../grafana/notebooks/comparing-grafana-unified-alerting-vs-alertmanager.ipynb) — notebook comparing built-in Grafana alerting with an external Alertmanager
 
+### Keep alerts reviewable as files
+- [Unified alerting helper reference](../grafana/docs/unified-alerting-helper-reference.md) — one folder with three files (rules, contact points, notification policies), one `<team>-<service>-<symptom>` naming scheme, and a review checklist, so each new alert reuses the same shape instead of being invented in the UI
+
 ### Run metrics and logs side by side locally
 - [Grafana + Prometheus + Loki stack scaffold](../grafana/templates/grafana-prometheus-loki-stack/README.md) — one Compose file for Prometheus, Loki, Promtail, and Grafana with both datasources and a starter dashboard provisioned at first boot
+
+### Run Grafana on Kubernetes
+- [Grafana deployment with Ingress and a dashboard sidecar](../grafana/manifests/kubernetes-persistent-ingress-sidecar.yaml) — PVC, Service, Ingress, and a sidecar that turns labelled ConfigMaps into provisioned dashboards, applied ConfigMap → PVC → Deployment so the pod does not start with its volumes missing
 
 ### Get started with Helm
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
@@ -463,11 +477,11 @@
 - [Network interface and routing inspection](../docs/concepts/networking-fundamentals/scripts/2026-08-05-network-interface-and-routing-inspection.sh) — inspect network interfaces and routing tables
 - [Path MTU discovery](../docs/concepts/networking-fundamentals/scripts/2026-08-24-path-mtu-discovery.sh) — binary-search for the largest packet a network path carries using ping's DF bit
 - [Socket connection tester](../docs/concepts/networking-fundamentals/snippets/2026-07-26-socket-connection-tester.py) — Python snippet that tests TCP socket connectivity and reports the result
-- [Applying networking in DevOps](../docs/concepts/networking-fundamentals/snippets/2026-08-23-applying-networking-in-devops.py) — Python snippet connecting networking concepts to real DevOps tasks
+- [Applying networking in DevOps](../docs/concepts/networking-fundamentals/snippets/2026-08-23-applying-networking-in-devops.py) — a Python snippet connecting networking concepts to real DevOps tasks
 - [Observability exercises](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-06-observability-exercises.sh) — hands-on exercises for observability concepts
 - [Observability exercises — round two](../docs/concepts/observability-monitoring-concepts/scripts/2026-08-20-observability-exercises.sh) — reading a raw access log for error ratio, sampling wall-clock latency with curl, and correlating two metric streams
 - [CI/CD pipeline metric collection probes](../docs/concepts/observability-monitoring-concepts/scripts/observability-cicd-pipeline-metric-collection-probes.sh) — collects CI/CD pipeline metrics and exports them to a Prometheus pushgateway endpoint
-- [Applying observability in DevOps](../docs/concepts/observability-monitoring-concepts/snippets/2026-08-07-applying-observability-in-devops.py) — Python snippet that extracts RED-method golden signals from request logs
+- [Applying observability in DevOps](../docs/concepts/observability-monitoring-concepts/snippets/2026-08-07-applying-observability-in-devops.py) — a Python snippet that extracts RED-method golden signals from request logs
 
 ### Practice DevOps scripting and automation
 - [Scripting automation exercises](../docs/concepts/scripting-automation-philosophy/scripts/2026-08-07-scripting-automation-exercises.sh) — hands-on practice for DRY helpers, idempotency, and exit codes from the scripting philosophy primer

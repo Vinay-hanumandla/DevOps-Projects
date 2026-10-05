@@ -17,6 +17,11 @@
 - **ansible-lint** — a linter that checks Ansible playbooks for bad practices; its strict profile flags unqualified module names and unsafe variable interpolation.
 - **Vault-encrypted password file** — a file containing the Ansible Vault password, stored with `chmod 600` permissions; a 0644 vault password file leaks the master key.
 - **ansible-vault** — the Ansible CLI subcommand for encrypting and decrypting YAML files containing sensitive data; `ansible-vault encrypt` creates an encrypted file, `ansible-vault decrypt` reveals it in plaintext, `ansible-vault edit` opens it in an editor, and `ansible-vault rotate` changes the encryption key for all Vault-encrypted files in scope.
+- **Execution Environment (EE)** — a container image carrying the Python interpreter, the collections, and the controller-side libraries one automation job needs, so the job behaves the same on whichever host runs it instead of inheriting whatever the controller happens to have installed.
+- **`requirements.yml`** — the Galaxy dependency file that lists the collections an execution environment installs; pinning versions here is what makes the built image reproducible rather than a moving target.
+- **ansible-builder** — the tool that assembles an execution environment from a definition plus a `requirements.yml`, emitting the `Containerfile` and build arguments the container engine then runs.
+- **Base image digest** — the `sha256:…` reference an execution environment is built from; a tag can be moved to different content underneath you, a digest cannot, which is why a build pipeline rejects a placeholder and refuses to publish an unpinned base.
+- **SBOM** — a Software Bill of Materials: the machine-readable inventory of what an image actually contains, attached to the artifact so a later vulnerability scan can be checked against the exact set of packages that shipped.
 
 ## Docker
 
@@ -167,6 +172,10 @@
 - **Provisioning** — configuring dashboards, data sources, and alert rules via declarative JSON/YAML files instead of the UI, so Grafana's configuration lives in version control and can be deployed with IaC tools.
 - **Templating variable** — a dashboard-level variable (here `service`, populated from `label_values(http_requests_total, service)`) that rewrites each panel's queries when switched; one dashboard serves every service instead of one dashboard per service.
 - **Dashboard UID** — the stable identifier Grafana assigns a dashboard; API create/update calls carry the same UID with an overwrite flag so reruns update in place, and delete-by-UID is a no-op when the dashboard is already gone.
+- **Unified alerting** — Grafana's built-in alerting, which splits every alert into three separate objects: a rule deciding *when* something is wrong, a contact point deciding *where* the message goes, and a notification policy deciding *which* messages reach *which* contact point.
+- **Contact point** — one delivery destination for alert notifications (email, webhook, chat channel); the reference names each one after its owning team so a responder can tell where a page came from without looking it up.
+- **Notification policy** — the routing tree that matches a firing alert's labels and silence duration against a tree of branches, ending at the contact point that gets messaged; the branch that does not match keeps the alert silent.
+- **Alert name convention (`<team>-<service>-<symptom>`)** — the naming scheme that makes an alert self-describing on arrival; the same prefix is reused on the policy matcher and the contact point so the three objects stay traceable to each other.
 
 ## Prometheus
 
