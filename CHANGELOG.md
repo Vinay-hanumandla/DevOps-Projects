@@ -2,6 +2,7 @@
 
 ## 2026-10-04
 
+- awx: Add first-look notes exploring the AWX UI sections and API-backed objects (awx-002)
 - docker: Add build cache backend chooser comparing inline, registry, and remote cache for CI pipelines with per-branch scoping and retention guidance (docker-026)
 - awx: Add first-day primer on Ansible Tower / AWX covering inventories, credentials, projects, job templates, and access basics (awx-001)
 
