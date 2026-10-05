@@ -1,0 +1,354 @@
+# last_verified: 2026-10-05 · grafana n/a
+#
+# Purpose: run Grafana on Kubernetes with three things wired end-to-end that a
+# bare Deployment leaves out — durable storage behind a PVC, a Service plus
+# Ingress in front of it, and a dashboard sidecar that turns labelled
+# ConfigMaps in the namespace into provisioned dashboards with no manual import.
+# Everything else in this file exists to serve those three.
+#
+# When to use: any Grafana instance that outlives a single pod. The PVC is
+# ReadWriteOnce with one replica, which is the shape that actually works on
+# most clusters — a second replica would block on the volume. If horizontal
+# scale-out is a requirement, this file is the wrong starting point and the
+# storage backend needs rethinking first.
+#
+# Prerequisites:
+#   - A namespace to apply this into (this file deliberately does not create one).
+#   - An Ingress controller that serves the `ingressClassName` named below.
+#   - A secret named grafana-credentials holding admin-user and
+#     admin-password keys, created out of band. Nothing is committed here.
+#
+# Apply order matters: the ConfigMap and PVC come before the Deployment, which
+# otherwise starts with its volumes missing and CrashLoopBackOffs until they
+# exist.
+#
+# Steps:
+#   1. Create the credentials secret, then apply this file top to bottom.
+#   2. Label a ConfigMap in the same namespace with grafana_dashboard: "1" and
+#      put dashboard JSON in it under a key ending in .json.
+#   3. Watch the sidecar copy the dashboard in and reload it in the UI.
+#
+# Verify:
+#   - kubectl get ingress -o wide            -> address assigned, host as set below
+#   - kubectl logs deploy/grafana -c grafana | tail
+#                                           -> datasource provisioning logs, no errors
+#   - kubectl exec deploy/grafana -c grafana -- ls /var/lib/grafana/dashboards
+#                                           -> the ConfigMap keys, written by the sidecar
+#   - The dashboard appears in the folder named by the FOLDER variable below.
+#
+# Image references are intentionally untagged. Pin each one to a digest for the
+# environment before this reaches a shared cluster; the tag choice is a policy
+# decision, not something this file should decide for you.
+---
+# Durable storage. Grafana keeps its SQLite database, uploaded plugins, and
+# provisioning state under /var/lib/grafana, so without this volume every
+# restart loses users, API keys, and alert rule state even when dashboards are
+# provisioned from ConfigMaps.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grafana-data
+  labels:
+    app: grafana
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+# File-based provisioning, mounted read-only at /etc/grafana/provisioning by
+# the Deployment below. Grafana walks this directory at startup, so it reads the
+# datasources here without any API call. Dashboard definitions deliberately do
+# NOT live here — they arrive through the sidecar, because dashboards change
+# far more often than datasources and this file should not be the thing that
+# has to be reapplied when a panel changes.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-provisioning
+  labels:
+    app: grafana
+data:
+  datasources.yaml: |
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        uid: prometheus-datasource
+        type: prometheus
+        access: proxy
+        # In-cluster DNS name, so Grafana reaches the Service rather than
+        # depending on an external hostname that may move.
+        url: http://prometheus.monitoring.svc.cluster.local:9090
+        isDefault: true
+        editable: false
+  dashboards.yaml: |
+    apiVersion: 1
+    providers:
+      - name: sidecar-dashboards
+        orgId: 1
+        folder: Provisioned
+        type: file
+        # A dashboard deleted from the ConfigMap stays in the UI until someone
+        # removes it deliberately. That is the safer default: a bad commit that
+        # empties a ConfigMap should not wipe the dashboards people are reading.
+        disableDeletion: true
+        updateIntervalSeconds: 30
+        allowUiUpdates: false
+        options:
+          path: /var/lib/grafana/dashboards
+---
+# The sidecar reads ConfigMaps through the API rather than through the
+# filesystem, so it needs its own identity instead of borrowing Grafana's.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: grafana-dashboard-syncer
+  labels:
+    app: grafana
+---
+# Namespaced, read-only, ConfigMaps only. list and watch are required for the
+# sidecar to notice changes, get to read them. The Role cannot be narrowed to
+# the labelled ConfigMaps specifically — Kubernetes RBAC matches resource
+# names, not labels — so it grants read over every ConfigMap in this namespace.
+# Put Grafana in its own namespace if that boundary matters.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: grafana-dashboard-syncer
+  labels:
+    app: grafana
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list", "watch"]
+---
+# The subject namespace is left unset on purpose: an omitted namespace on a
+# RoleBinding subject means the binding's own namespace. Setting it explicitly
+# to some other namespace is the easy way to bind a Role to an identity that
+# does not exist.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: grafana-dashboard-syncer
+  labels:
+    app: grafana
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: grafana-dashboard-syncer
+subjects:
+  - kind: ServiceAccount
+    name: grafana-dashboard-syncer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+spec:
+  # One replica, because the PVC above is ReadWriteOnce. The Recreate strategy
+  # avoids a second pod blocking on the volume during a rollout.
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      serviceAccountName: grafana-dashboard-syncer
+      # runAsNonRoot only, with no numeric uid/gid here on purpose: the right
+      # value depends on the image you pin, and a guess that disagrees with the
+      # image turns into a permission error at startup. Set fsGroup to the
+      # image's group id so the mounted volume is writable.
+      securityContext:
+        runAsNonRoot: true
+      containers:
+        - name: grafana
+          image: grafana/grafana
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            # Config keys map to GF_<SECTION>_<KEY>; the double underscore stands
+            # for a literal underscore in the key name. The paths here match the
+            # volume and emptyDir mounts below — changing one means changing the
+            # other.
+            - name: GF_PATHS_PROVISIONING
+              value: /etc/grafana/provisioning
+            - name: GF_PATHS_DATA
+              value: /var/lib/grafana
+            # Read from the out-of-band secret rather than a plaintext value, so
+            # the admin password never appears in a Deployment spec, in
+            # `kubectl describe`, or in this git history.
+            - name: GF_SECURITY_ADMIN_USER__FILE
+              value: /etc/grafana/secrets/admin-user
+            - name: GF_SECURITY_ADMIN_PASSWORD__FILE
+              value: /etc/grafana/secrets/admin-password
+            - name: GF_SECURITY_DISABLE_GRAVATAR
+              value: "true"
+            - name: GF_USERS_ALLOW_SIGN_UP
+              value: "false"
+            # Absolute root URL, so generated links and redirects behind the
+            # Ingress match the host users actually type. Keep this in step with
+            # the Ingress host below — when they diverge, sign-in redirects and
+            # provisioned dashboard links point at a host that is not serving.
+            - name: GF_SERVER_ROOT_URL
+              value: https://grafana.example.local
+            # Reject requests whose Host header is not the root URL above.
+            # Without it, a request arriving with an unexpected host is served
+            # normally, which is how a DNS-rebinding attempt against an
+            # otherwise internal Grafana gets through.
+            - name: GF_SERVER_ENFORCE_DOMAINS
+              value: "true"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              memory: 1Gi
+          # Readiness keeps the pod out of the Service endpoints until it
+          # answers, so a re-created pod is not handed traffic mid-startup. The
+          # two probes differ only in their initial delay: a liveness probe that
+          # fires during a slow first start kills and restarts the pod in a
+          # loop and it never gets past startup.
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/grafana
+            # Nested inside the data volume. Provisioned dashboards are derived
+            # state, rebuildable from the ConfigMaps at any time, so they stay
+            # off the PVC — the writable volume then holds only things that
+            # genuinely cannot be regenerated.
+            - name: dashboards
+              mountPath: /var/lib/grafana/dashboards
+            - name: provisioning
+              mountPath: /etc/grafana/provisioning
+              readOnly: true
+            - name: secrets
+              mountPath: /etc/grafana/secrets
+              readOnly: true
+        - name: dashboard-syncer
+          image: kiwigrid/k8s-sidecar
+          env:
+            # This is the sidecar's own documented environment interface, not a
+            # Grafana one. Check these against the README of the sidecar version
+            # you pin, since the variable set has changed across releases.
+            - name: FOLDER
+              value: /var/lib/grafana/dashboards
+            - name: RESOURCE
+              value: configmaps
+            - name: METHOD
+              value: LIST
+            # The contract with whoever authors dashboards: any ConfigMap in
+            # this namespace carrying this label has its keys written into
+            # FOLDER. Keys not ending in .json are skipped.
+            - name: LABEL
+              value: grafana_dashboard
+            - name: WATCH_INTERVAL
+              value: "60"
+            # ConfigMaps are mounted read-only by kubelet; the sidecar has to be
+            # told to write anyway rather than skipping on permissions.
+            - name: IGNORE_PERMISSIONS
+              value: "true"
+          resources:
+            requests:
+              cpu: 20m
+              memory: 64Mi
+            limits:
+              memory: 128Mi
+          volumeMounts:
+            - name: dashboards
+              mountPath: /var/lib/grafana/dashboards
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: grafana-data
+        - name: dashboards
+          emptyDir: {}
+        - name: provisioning
+          configMap:
+            name: grafana-provisioning
+            items:
+              # Grafana expects one file per provisioning type, in a directory
+              # named after that type — hence the explicit path mapping rather
+              # than letting both keys land flat in the mount root.
+              - key: datasources.yaml
+                path: datasources/datasources.yaml
+              - key: dashboards.yaml
+                path: dashboards/dashboards.yaml
+        - name: secrets
+          secret:
+            secretName: grafana-credentials
+            defaultMode: 0400
+---
+# Cluster-internal front door. The Ingress talks to this Service, and the
+# Service talks to the pod on the named port — which is why the port is named
+# rather than numeric in the probes and in the Service.
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+spec:
+  type: ClusterIP
+  selector:
+    app: grafana
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+  annotations:
+    # Dashboard and provisioning payloads are among the largest bodies Grafana
+    # accepts; the controller's default is smaller than some dashboards.
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    # Long-lived dashboard and session requests outlive the controller's
+    # default read timeout, which shows up as 504s on an otherwise healthy
+    # panel refresh.
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: grafana.example.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: grafana
+                port:
+                  name: http
+  # TLS terminates at the controller. The secret is created out of band, same
+  # as the credentials secret; issuing and renewing certificates is a cluster
+  # concern, not this file's job. Uncomment with the host above to enable.
+  # tls:
+  #   - hosts:
+  #       - grafana.example.local
+  #     secretName: grafana-tls
