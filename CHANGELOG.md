@@ -3,6 +3,8 @@
 ## 2026-10-04
 
 - awx: Add first-look notes exploring the AWX UI sections and API-backed objects (awx-002)
+- docker: Add build cache backend chooser comparing inline, registry, and remote cache for CI pipelines with per-branch scoping and retention guidance (docker-026)
+- awx: Add first-day primer on Ansible Tower / AWX covering inventories, credentials, projects, job templates, and access basics (awx-001)
 
 ## 2026-10-03
 
@@ -675,3 +677,4 @@ Passed ([x]) jenkins-018 — Jenkins: config — Jenkins Configuration as Code f
 - bash/scripts/retry-with-circuit-breaker.sh — Production Bash wrapper: jittered exponential backoff retries, a three-state circuit breaker with optional file-backed state, and structured key=value logging (bash-035)
 - bash/snippets/coproc-fifo-and-named-variables.sh — Advanced Bash patterns: coproc producer/consumer round trip, a FIFO worker pool, and nameref/indirect-expansion dispatch (bash-036)
 - gha/docs/workflow-security-hardening.md — Workflow security hardening reference: least-privilege `permissions` blocks, OIDC in place of stored cloud keys, secret-scanning gates, SHA-pinned third-party actions, untrusted-event-data handling, and privileged trigger rules (gha-024)
+- grafana/templates/grafana-prometheus-loki-stack/ — Local observability stack scaffold: Compose wiring for Grafana, Prometheus, Loki, and Promtail plus provisioned datasources, dashboard provider, and starter overview dashboard (grafana-016)

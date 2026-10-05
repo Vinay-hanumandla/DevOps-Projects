@@ -1,0 +1,21 @@
+# last_verified: 2026-10-05 · grafana n/a
+# Grafana provisioned datasources for the local stack.
+# Hostnames match the Compose service names on the default network.
+
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    uid: prometheus-local
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: true
+
+  - name: Loki
+    uid: loki-local
+    type: loki
+    access: proxy
+    url: http://loki:3100
+    editable: true
