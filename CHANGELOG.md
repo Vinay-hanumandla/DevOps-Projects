@@ -2,6 +2,7 @@
 
 ## 2026-10-05
 
+- ansible/templates/execution-environment-build-pipeline/ — EE build pipeline scaffold: two-stage Containerfile that resolves Galaxy requirements in a build-only stage, CycloneDX SBOM plus Trivy scan gate before push, and a verify step that asks the built image for its collection set (ansible-023)
 - grafana: Add unified alerting helper reference with reusable rules/contact-points/policies file convention, naming scheme, and review checklist (grafana-018)
 
 ## 2026-10-04

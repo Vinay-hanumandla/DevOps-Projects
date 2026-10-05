@@ -1,0 +1,5 @@
+# last_verified: 2026-10-05 · ansible 2.21.4
+# Generated build inputs stay out of version control: `.env` carries the pins
+# chosen for one deployment, and `artifacts/` carries generated SBOM documents.
+.env
+artifacts/

@@ -1,0 +1,26 @@
+# last_verified: 2026-10-05 · ansible 2.21.4
+# ansible-023 — Galaxy requirements installed into the execution environment.
+#
+# Read by the galaxy stage of ../Containerfile via
+# `ansible-galaxy collection install --requirements-file`.
+#
+# Collection entries are deliberately unversioned here. No collection version
+# was verified when this scaffold was written, and a plausible-looking pin that
+# nobody checked is worse than no pin: replace each entry with the
+# namespace.collection release your automation is actually tested against before
+# the first EE is promoted, so a rebuild of the same tag resolves the same
+# collection set.
+collections:
+  - name: ansible.posix
+  - name: ansible.utils
+  - name: community.general
+
+# Add a `roles:` key when the automation also pulls roles from Galaxy. The
+# galaxy stage guards its role install on this key, so leaving it out keeps the
+# build to collections only:
+#
+# roles:
+#   - src: acme.example.infrastructure
+#     name: app_config
+#     scm: git
+#     version: PIN_BEFORE_FIRST_BUILD
