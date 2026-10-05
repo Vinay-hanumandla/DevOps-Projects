@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-05
+
+- grafana: Add unified alerting helper reference with reusable rules/contact-points/policies file convention, naming scheme, and review checklist (grafana-018)
+
 ## 2026-10-04
 
 - awx: Add first-look notes exploring the AWX UI sections and API-backed objects (awx-002)
