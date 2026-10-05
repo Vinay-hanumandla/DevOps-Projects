@@ -1,0 +1,23 @@
+# last_verified: 2026-10-05 · grafana n/a
+# Promtail ships host log files to the Loki service in this stack.
+# The positions file must be writable, so it lives outside the
+# read-only config mount.
+
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: system
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varlogs
+          __path__: /var/log/*log
