@@ -1,0 +1,32 @@
+# last_verified: 2026-10-06 · Prometheus n/a
+
+# Alert rules: routed to Alertmanager via the alerting section of prometheus.yml.
+groups:
+  - name: stack-health
+    rules:
+      - alert: PrometheusTargetMissing
+        expr: up == 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Target {{ $labels.job }} on {{ $labels.instance }} is down"
+          description: "Prometheus has not been able to scrape {{ $labels.instance }} for 5 minutes."
+
+      - alert: PrometheusRuleEvaluationFailures
+        expr: rate(prometheus_rule_evaluation_failures_total[5m]) > 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Prometheus rule evaluation failures detected"
+          description: "At least one recording or alert rule failed to evaluate in the last 5 minutes."
+
+      - alert: AlertmanagerNotificationsFailing
+        expr: rate(alertmanager_notifications_failed_total[5m]) > 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Alertmanager notification deliveries are failing"
+          description: "Alertmanager failed to deliver at least one notification in the last 5 minutes."

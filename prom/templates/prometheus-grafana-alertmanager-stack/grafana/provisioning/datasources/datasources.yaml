@@ -1,0 +1,12 @@
+# last_verified: 2026-10-06 · Grafana n/a
+
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    uid: prometheus-stack
+    isDefault: true
+    editable: false

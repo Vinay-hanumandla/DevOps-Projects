@@ -1,0 +1,44 @@
+# last_verified: 2026-10-06 · Prometheus n/a
+
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: stack-prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=15d"
+      - "--web.enable-lifecycle"
+    ports:
+      - "9090:9090"
+    volumes:
+      - "./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro"
+      - "./prometheus/rules:/etc/prometheus/rules:ro"
+    restart: unless-stopped
+
+  alertmanager:
+    image: prom/alertmanager
+    container_name: stack-alertmanager
+    command:
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
+    ports:
+      - "9093:9093"
+    volumes:
+      - "./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro"
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana
+    container_name: stack-grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./grafana/provisioning:/etc/grafana/provisioning:ro"
+      - "./grafana/dashboards:/var/lib/grafana/dashboards:ro"
+      - "grafana-storage:/var/lib/grafana"
+    restart: unless-stopped
+
+volumes:
+  grafana-storage:

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-06
+
+- prom/templates/prometheus-grafana-alertmanager-stack/ — Local Prometheus + Grafana + Alertmanager monitoring stack scaffold: compose services, scrape/rule/alerting config, recording rules, alerts wired to an Alertmanager webhook route, provisioned Grafana datasource and dashboard provider, and a stack-overview dashboard on the recorded series (prom-018)
+
 ## 2026-10-05
 
 - k8s: Add first-day scratch notes running initial kubectl commands and exploring what's in the cluster (k8s-022)
