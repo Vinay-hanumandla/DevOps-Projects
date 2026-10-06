@@ -1,0 +1,15 @@
+# last_verified: 2026-10-06 · Grafana n/a
+
+apiVersion: 1
+
+providers:
+  - name: stack-dashboards
+    orgId: 1
+    folder: Stack
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: false

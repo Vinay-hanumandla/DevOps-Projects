@@ -1,0 +1,19 @@
+# last_verified: 2026-10-06 · Prometheus n/a
+
+# Recording rules: pre-computed series the dashboard queries directly, so
+# panels do not re-rate raw counters on every load.
+groups:
+  - name: prometheus-self-recording
+    interval: 1m
+    rules:
+      - record: job:prometheus_http_requests_total:rate5m
+        expr: |
+          sum by (job) (rate(prometheus_http_requests_total[5m]))
+
+      - record: job:alertmanager_notifications_total:rate5m
+        expr: |
+          sum by (job) (rate(alertmanager_notifications_total[5m]))
+
+      - record: job:up:sum
+        expr: |
+          sum by (job) (up)
