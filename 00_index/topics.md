@@ -62,7 +62,7 @@
 - **manifests** (1): [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps git events (push, tag, merge request) to build → test → deploy jobs
 - **templates** (18): [Repo scaffold with hooks and branch protection](../git/templates/repo-scaffold/README.md) — hooks, CODEOWNERS, a PR template, a contributing guide, and workflows that apply branch protection and regenerate the changelog · [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) · _…and 16 more under `git/templates/`._
 
-## Grafana  ·  28 files
+## Grafana  ·  29 files
 
 - **primer:** [Grafana — quick primer](../grafana/notes/0000-primer-grafana.md)
 - **notes** (4): most recent → [First Grafana web UI](../grafana/notes/2026-08-27-first-grafana-web-ui.md), [Grafana quickstart gotchas](../grafana/notes/2026-08-27-grafana-quickstart-gotchas.md), [Install Grafana](../grafana/notes/2026-08-06-install-grafana.md)
@@ -72,6 +72,7 @@
 - **scripts** (1): [Grafana dashboard API wrapper](../grafana/scripts/grafana-http-api-dashboard-wrapper.sh) — list, idempotent create/update, and safe delete via the HTTP API
 - **snippets** (3): most recent → [List dashboards and datasources](../grafana/snippets/2026-09-09-list-dashboards-datasources.py), [Create dashboard](../grafana/snippets/2026-08-22-create-dashboard.sh), [List dashboards](../grafana/snippets/2026-08-19-list-dashboards.sh)
 - **notebooks** (1): [Comparing Grafana unified alerting vs Alertmanager](../grafana/notebooks/comparing-grafana-unified-alerting-vs-alertmanager.ipynb)
+- **dockerfiles** (1): [Custom Grafana image with baked plugins and datasource](../grafana/dockerfiles/grafana-with-plugins-and-provisioned-datasource.Dockerfile) — plugins pre-installed at build time and a Prometheus datasource provisioned into the image, so every environment boots from one baked build
 - **templates** (8): [Grafana + Prometheus + Loki stack scaffold](../grafana/templates/grafana-prometheus-loki-stack/README.md) — Compose stack with metrics and logs side by side, both datasources and a starter dashboard provisioned at first boot · _…and 7 more under `grafana/templates/grafana-prometheus-loki-stack/`._
 
 ## Helm  ·  41 files
@@ -96,11 +97,11 @@
 - **snippets** (3): most recent → [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy), [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 - **templates** (5): [Jenkins shared library scaffold](../jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline library with `vars/*.groovy`, tests, and CI gating · _…and 4 more under `jenkins/templates/jenkins-shared-library/`._
 
-## Kubernetes  ·  32 files
+## Kubernetes  ·  33 files
 
 - **primer:** [Kubernetes — quick primer](../k8s/notes/0000-primer-kubernetes.md)
 - **notes** (6): most recent → [First kubectl commands on a live cluster](../k8s/notes/2026-10-05-first-kubectl-commands-and-cluster-explore.md), [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Quickstart kind contexts and port mismatch](../k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md)
-- **docs** (4): [Kubernetes with Helm, ArgoCD, and GitOps](../k8s/docs/kubernetes-helm-argocd-gitops-workflow.md) — end-to-end GitOps workflow using Helm chart packaging, ArgoCD sync, and sealed-secrets for continuous delivery, [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md), [kubectl imperative vs declarative](../k8s/docs/kubectl-imperative-vs-declarative.md), [Integrating Kubernetes with Terraform](../k8s/docs/integrating-kubernetes-with-terraform.md)
+- **docs** (5): [Choosing a secret management approach](../k8s/docs/choosing-secret-management-approach.md) — encrypted-in-git secrets, a vault-sync operator, and a volume-mount driver compared with a decision table and rotation guidance · [Kubernetes with Helm, ArgoCD, and GitOps](../k8s/docs/kubernetes-helm-argocd-gitops-workflow.md) — end-to-end GitOps workflow using Helm chart packaging, ArgoCD sync, and sealed-secrets for continuous delivery, [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md), [kubectl imperative vs declarative](../k8s/docs/kubectl-imperative-vs-declarative.md), [Integrating Kubernetes with Terraform](../k8s/docs/integrating-kubernetes-with-terraform.md)
 - **scripts** (3): most recent → [Multi-pod deployment](../k8s/scripts/multi-pod-deployment.sh), [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh)
 - **configs** (1): [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml)
 - **manifests** (4): most recent → [Production-ready deployment](../k8s/manifests/production-deployment.yaml), [Zero-downtime rolling deployment](../k8s/manifests/zero-downtime-rolling-deployment.yaml), [Multi-service application](../k8s/manifests/multi-service-application.yaml), [Minimal deployment and service](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml)
@@ -109,7 +110,7 @@
 - **dockerfiles** (1): [Operator development image](../k8s/dockerfiles/operator-dev.Dockerfile)
 - **templates** (10): [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — two-tier frontend/backend chart with ingress routing and Prometheus alert rules · _…and 9 more under `k8s/templates/multi-service-app/`._
 
-## Prometheus  ·  18 files
+## Prometheus  ·  28 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
 - **notes** (4): most recent → [Prometheus quickstart trip-ups](../prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md), [Install Prometheus and explore web UI](../prom/notes/2026-08-29-install-prometheus-explore-web-ui.md), [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
@@ -118,6 +119,7 @@
 - **scripts** (2): [Rules evaluator](../prom/scripts/rules-evaluator.go) — evaluates Prometheus recording and alerting rules against fetched metrics · [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh)
 - **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
 - **manifests** (1): [Local monitoring stack](../prom/manifests/local-monitoring-stack.yaml) — one-shot Prometheus + Alertmanager + Node Exporter stack for local evaluation
+- **templates** (10): [Prometheus + Grafana + Alertmanager stack scaffold](../prom/templates/prometheus-grafana-alertmanager-stack/README.md) — one Compose file for scraping, recording and alert rules, Alertmanager routing, and provisioned Grafana dashboards · _…and 9 more under `prom/templates/prometheus-grafana-alertmanager-stack/`._
 
 ## Python  ·  47 files
 

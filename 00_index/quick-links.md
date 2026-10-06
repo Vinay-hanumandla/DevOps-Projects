@@ -277,6 +277,9 @@
 ### Run Grafana on Kubernetes
 - [Grafana deployment with Ingress and a dashboard sidecar](../grafana/manifests/kubernetes-persistent-ingress-sidecar.yaml) — PVC, Service, Ingress, and a sidecar that turns labelled ConfigMaps into provisioned dashboards, applied ConfigMap → PVC → Deployment so the pod does not start with its volumes missing
 
+### Bake Grafana plugins and the datasource into the image
+- [Custom Grafana image with baked plugins and datasource](../grafana/dockerfiles/grafana-with-plugins-and-provisioned-datasource.Dockerfile) — plugins pre-installed at build time and a Prometheus datasource provisioned into the image, so every environment boots from one baked build instead of downloading plugins or registering the datasource by hand
+
 ### Get started with Helm
 - [Helm primer](../helm/notes/0000-primer-helm.md) — what Helm is, charts and templating, and a minimal workflow
 - [Values merge vs file](../helm/notes/2026-09-21-values-merge-set-vs-file.md) — when `--values` merges against `--set` and why order matters
@@ -370,6 +373,9 @@
 - [Integrating Kubernetes with Terraform](../k8s/docs/integrating-kubernetes-with-terraform.md) — where cluster provisioning ends and workload management begins, and how to keep the two from owning the same resource
 - [Kubernetes with Helm, ArgoCD, and GitOps](../k8s/docs/kubernetes-helm-argocd-gitops-workflow.md) — end-to-end GitOps workflow using Helm chart packaging, ArgoCD sync, and sealed-secrets for continuous delivery
 
+### Choose how cluster secrets reach workloads
+- [Choosing a secret management approach](../k8s/docs/choosing-secret-management-approach.md) — encrypted-in-git secrets, a vault-sync operator, and a volume-mount driver compared with a decision table, per-environment defaults, and rotation guidance
+
 ### Scaffold a two-tier app with ingress and monitoring
 - [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — frontend/backend chart with ingress routing and Prometheus alert rules in one copy-in layout
 - [Scaffold values](../k8s/templates/multi-service-app/values.yaml) — placeholder images, ingress host, and scrape annotations to point at real services
@@ -391,6 +397,12 @@
 - [Remote-write vs federation](../prom/configs/remote-write-vs-federation.yaml) — the two long-term-storage paths side by side: push series to a remote endpoint or let a peer scrape this one
 - [Remote-write long-term storage](../prom/configs/remote-write-long-term-storage.yaml) — fan the same series out to Thanos, VictoriaMetrics, or Mimir with queue tuning, one receiver at a time
 - [Rules evaluator](../prom/scripts/rules-evaluator.go) — runs recording and alerting rules offline against sample data with Go-template annotation expansion
+
+### Bring up Prometheus, Grafana, and Alertmanager locally
+- [Prometheus + Grafana + Alertmanager stack scaffold](../prom/templates/prometheus-grafana-alertmanager-stack/README.md) — one Compose file for scraping, recording and alert rules, Alertmanager routing, and provisioned Grafana dashboards, reproducible from a clean checkout
+- [Stack compose file](../prom/templates/prometheus-grafana-alertmanager-stack/docker-compose.yaml) — the services, mounts, and rule files the scaffold wires together
+- [Stack alert rules](../prom/templates/prometheus-grafana-alertmanager-stack/prometheus/rules/alert-rules.yml) — the alerting rules the stack loads, routed to an Alertmanager webhook receiver
+- [Stack recording rules](../prom/templates/prometheus-grafana-alertmanager-stack/prometheus/rules/recording-rules.yml) — pre-aggregated series the stack-overview dashboard reads instead of raw metrics
 
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip
