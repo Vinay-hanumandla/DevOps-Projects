@@ -2,15 +2,16 @@
 
 > A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](learning-path.md).
 
-## Ansible  ·  49 files
+## Ansible  ·  51 files
 
 - **primer:** [Ansible — quick primer](../ansible/notes/0000-primer-ansible.md)
 - **notes** (3): most recent → [Ansible quickstart gotchas](../ansible/notes/2026-08-31-ansible-quickstart-gotchas.md), [Installing Ansible and running my first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md)
 - **docs** (6): most recent → [AAP 27 migration guide](../ansible/docs/aap-27-migration-guide.md), [Ansible + Terraform integration](../ansible/docs/ansible-terraform-integration.md), [Retry strategies for unreliable targets](../ansible/docs/retry-strategies-unreliable-targets.md), [command/shell vs purpose-built idempotent modules](../ansible/docs/command-shell-vs-idempotent-modules.md), [Managing Kubernetes with Ansible](../ansible/docs/managing-kubernetes-with-ansible.md)
 - **configs** (4): most recent → [VPS hardening playbook](../ansible/configs/vps-hardening-playbook.yaml), [Idempotent nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml), [Install nginx playbook](../ansible/configs/2026-08-22-install-nginx-playbook.yaml)
 - **scripts** (5): most recent → [ansible-lint + yamllint pre-commit wrapper](../ansible/scripts/ansible-lint-yamllint-pre-commit-wrapper.sh), [Ansible Vault patterns](../ansible/scripts/ansible-vault-patterns.sh), [Gated playbook run](../ansible/scripts/ansible-playbook-gated-run.sh) · _…and 2 more under `ansible/scripts/`._
-- **manifests** (2): most recent → [Pull-mode localhost inventory](../ansible/manifests/pull-mode-local-execution.yaml) — each node clones the playbooks and converges itself with `ansible-pull` on a schedule, for fleets unreachable from a control node · [Terraform dynamic inventory](../ansible/manifests/terraform-dynamic-inventory.yaml) — builds the inventory from Terraform workspace outputs via the `tfc_inv` plugin
+- **manifests** (3): most recent → [AAP platform resources as code](../ansible/manifests/aap-platform-resources.yaml) — inventories, credentials, job templates, and schedules reconciled through the gateway API, so the controller rebuilds identical · [Pull-mode localhost inventory](../ansible/manifests/pull-mode-local-execution.yaml) — each node clones the playbooks and converges itself with `ansible-pull` on a schedule, for fleets unreachable from a control node · [Terraform dynamic inventory](../ansible/manifests/terraform-dynamic-inventory.yaml) — builds the inventory from Terraform workspace outputs via the `tfc_inv` plugin
 - **snippets** (1): [Block/rescue/always deploy with handlers](../ansible/snippets/block-rescue-always-handlers.yaml) — config deploy with rollback, outcome report, and a change-gated service restart
+- **notebooks** (1): [Comparing Ansible execution modes](../ansible/notebooks/execution-modes-comparison.ipynb) — playbook runs, navigator, controller job templates, and event-driven rulebooks side by side, with the trigger and runtime behind each
 - **templates** (28): [Execution Environment build pipeline scaffold](../ansible/templates/execution-environment-build-pipeline/README.md) — four fixed stages (build → SBOM → scan → push) over a digest-pinned base image, refusing to push until the scan gate passes · [Collection scaffold with Molecule and galaxy-importer](../ansible/templates/ansible-collection-scaffold/README.md) — copy-in collection with Molecule tests, `galaxy.yml`, CI workflow, and a galaxy-importer lint pass · [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, `galaxy.yml`, dynamic cloud inventory, and a Terraform-outputs handoff script · _…and 20 more under `ansible/templates/`._
 
 ## AWX  ·  2 files
@@ -95,10 +96,10 @@
 - **snippets** (3): most recent → [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy), [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 - **templates** (5): [Jenkins shared library scaffold](../jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline library with `vars/*.groovy`, tests, and CI gating · _…and 4 more under `jenkins/templates/jenkins-shared-library/`._
 
-## Kubernetes  ·  31 files
+## Kubernetes  ·  32 files
 
 - **primer:** [Kubernetes — quick primer](../k8s/notes/0000-primer-kubernetes.md)
-- **notes** (5): most recent → [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Quickstart kind contexts and port mismatch](../k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md), [Explore kubectl CLI](../k8s/notes/2026-08-03-explore-kubectl-cli.md)
+- **notes** (6): most recent → [First kubectl commands on a live cluster](../k8s/notes/2026-10-05-first-kubectl-commands-and-cluster-explore.md), [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Quickstart kind contexts and port mismatch](../k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md)
 - **docs** (4): [Kubernetes with Helm, ArgoCD, and GitOps](../k8s/docs/kubernetes-helm-argocd-gitops-workflow.md) — end-to-end GitOps workflow using Helm chart packaging, ArgoCD sync, and sealed-secrets for continuous delivery, [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md), [kubectl imperative vs declarative](../k8s/docs/kubectl-imperative-vs-declarative.md), [Integrating Kubernetes with Terraform](../k8s/docs/integrating-kubernetes-with-terraform.md)
 - **scripts** (3): most recent → [Multi-pod deployment](../k8s/scripts/multi-pod-deployment.sh), [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh)
 - **configs** (1): [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml)

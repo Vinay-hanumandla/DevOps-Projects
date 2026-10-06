@@ -546,3 +546,9 @@
 - **Workflow job template** — several templates chained with success/failure branches (provision, then configure, then verify, stopping if any step fails); the AWX-native way to order multi-stage automation.
 - **Role-based access (RBAC)** — who may see, launch, or edit which inventories, templates, and credentials; lets the on-call crew launch a restart template without being able to change what it runs.
 - **Execution environment** — the container image a job runs inside, carrying the interpreter, collections, and dependencies the playbook needs; rebuilding it is part of adopting a new ansible-core line such as the one AAP 2.7 ships on.
+
+## Ansible (execution modes)
+
+- **ansible-navigator** — the containerised runner for developing and debugging automation locally: it executes the play inside the same execution environment the controller would use, so a playbook that works under `ansible-navigator run` behaves the same as a scheduled job instead of depending on the workstation's libraries.
+- **ansible-rulebook** — the event-driven runner that watches sources (webhooks, message queues, alerts) and launches a playbook when a condition matches; the mode for "when this happens, run that" rather than a schedule or a human clicking launch.
+- **AAP gateway API (`ansible.platform`)** — the single API surface the Automation Platform exposes for its services; the `ansible.platform` collection ships plugins that declare inventories, credentials, job templates, and schedules against it, so controller configuration becomes a versioned manifest reconciled by a play instead of clicks in the UI.
