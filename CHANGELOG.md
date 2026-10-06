@@ -2,6 +2,7 @@
 
 ## 2026-10-06
 
+- k8s/docs/choosing-secret-management-approach.md — Choosing between encrypted-in-git secrets, vault-sync operator, and volume-mount driver for Kubernetes secret management with decision table and rotation guidance (k8s-023)
 - prom/templates/prometheus-grafana-alertmanager-stack/ — Local Prometheus + Grafana + Alertmanager monitoring stack scaffold: compose services, scrape/rule/alerting config, recording rules, alerts wired to an Alertmanager webhook route, provisioned Grafana datasource and dashboard provider, and a stack-overview dashboard on the recorded series (prom-018)
 - grafana/dockerfiles/grafana-with-plugins-and-provisioned-datasource.Dockerfile — Custom Grafana image with plugins pre-installed at build time and a Prometheus datasource provisioned into the image, so every env boots from one baked build instead of downloading plugins or registering the datasource via the UI (grafana-019)
 
