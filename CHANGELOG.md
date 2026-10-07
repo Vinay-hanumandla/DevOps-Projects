@@ -3,6 +3,7 @@
 ## 2026-10-07
 
 - k8s/templates/production-service/ — Production service template: Kustomize-wired Deployment, Service, ServiceAccount, HPA, PDB, default-deny NetworkPolicy, and namespace budgets (ResourceQuota plus LimitRange) with a dry-run verify script (k8s-024)
+- k8s/manifests/production-cluster-hardening.yaml — Production cluster hardening in one namespace: Pod Security enforce/audit/warn labels, least-privilege ServiceAccount plus Role and RoleBinding, restricted security contexts, and a default-deny plus allow-list NetworkPolicy pair (k8s-025)
 
 ## 2026-10-06
 
