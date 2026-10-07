@@ -1,0 +1,71 @@
+# last_verified: 2026-10-07 · kubernetes n/a
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: checkout-api
+  labels:
+    app: checkout-api
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: checkout-api
+  template:
+    metadata:
+      labels:
+        app: checkout-api
+    spec:
+      serviceAccountName: checkout-api
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: checkout-api
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: api
+          # Pin to the release tag or digest built by CI before applying.
+          # The kustomization images: stanza rewrites this tag per environment.
+          image: your-registry/checkout-api:release-tag
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 20
+            failureThreshold: 3
