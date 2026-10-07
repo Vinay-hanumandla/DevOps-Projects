@@ -57,6 +57,8 @@
 ### Get started with AWX
 - [Ansible Tower / AWX primer](../awx/notes/0000-primer-awx.md) — what AWX adds on top of Ansible: shared inventories, a launch button, scheduling, access control, and job history
 - [Poking around the AWX UI and API](../awx/notes/2026-10-04-explore-awx-ui-and-api.md) — a second-day click-through of inventories, credentials, templates, and jobs, plus the API calls behind each page
+- [Explore AWX UI and run first job template](../awx/notes/2026-10-07-explore-awx-ui-first-job-template.md) — third-day notes from applying the minimal AWX CR to Minikube and launching the first job template end-to-end
+- [Minimal AWX custom resource for Minikube](../awx/configs/2026-10-07-minimal-awx-custom-resource-minikube.yaml) — the smallest AWX CR that runs on Minikube: nodeport service, no ingress, and the secrets it references
 
 ### Plan an AAP upgrade
 - [AAP 2.7 migration guide](../ansible/docs/aap-27-migration-guide.md) — gateway-only architecture, containerized installer, execution-environment rebuilds, and the ansible-core 2.21 support lifecycle behind the release
@@ -380,6 +382,16 @@
 - [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — frontend/backend chart with ingress routing and Prometheus alert rules in one copy-in layout
 - [Scaffold values](../k8s/templates/multi-service-app/values.yaml) — placeholder images, ingress host, and scrape annotations to point at real services
 - [Scaffold alert rules](../k8s/templates/multi-service-app/monitoring/prometheus-rules.yaml) — baseline alerts that ship with the workloads instead of being bolted on later
+
+### Harden a workload namespace
+- [Production cluster hardening manifest](../k8s/manifests/production-cluster-hardening.yaml) — PodSecurity admission, least-privilege RBAC, and default-deny NetworkPolicy for a namespace about to serve real traffic
+
+### Scaffold a production Kubernetes service
+- [Production service template](../k8s/templates/production-service/README.md) — copy-in layout for a stateless HTTP service: Deployment, Service, ServiceAccount, HPA, PDB, default-deny NetworkPolicy, and namespace budgets behind one Kustomization
+- [Production Deployment](../k8s/templates/production-service/deployment.yaml) — hardened Deployment with security context, resource requests/limits, and a read-only root filesystem
+- [HorizontalPodAutoscaler](../k8s/templates/production-service/hpa.yaml) — CPU and memory targets wired to the production service Deployment
+- [NetworkPolicy](../k8s/templates/production-service/networkpolicy.yaml) — default-deny policy that allows only in-cluster traffic on the service port
+- [Verify the scaffold end to end](../k8s/templates/production-service/verify.sh) — proof that the template applies cleanly and the service answers
 
 ### Get started with Prometheus
 - [Prometheus primer](../prom/notes/0000-primer-prometheus.md) — what Prometheus is, metrics types, and a minimal workflow
