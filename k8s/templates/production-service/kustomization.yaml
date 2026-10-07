@@ -1,0 +1,21 @@
+# last_verified: 2026-10-07 · kubernetes n/a
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - serviceaccount.yaml
+  - deployment.yaml
+  - service.yaml
+  - hpa.yaml
+  - pdb.yaml
+  - networkpolicy.yaml
+  - namespace-budgets.yaml
+
+commonLabels:
+  app.kubernetes.io/part-of: checkout-api
+  app.kubernetes.io/managed-by: kustomize
+
+images:
+  - name: your-registry/checkout-api
+    newName: your-registry/checkout-api
+    newTag: release-tag

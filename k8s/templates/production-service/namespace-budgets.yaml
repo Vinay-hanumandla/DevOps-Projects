@@ -1,0 +1,34 @@
+# last_verified: 2026-10-07 · kubernetes n/a
+#
+# Namespace-scoped resource budgets. Apply these in the target namespace
+# alongside the workload. Quota caps total consumption; LimitRange supplies
+# defaults so a pod without explicit requests cannot escape accounting.
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: checkout-api-budget
+  labels:
+    app: checkout-api
+spec:
+  hard:
+    requests.cpu: "6"
+    requests.memory: 12Gi
+    limits.cpu: "12"
+    limits.memory: 24Gi
+    pods: "30"
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: checkout-api-defaults
+  labels:
+    app: checkout-api
+spec:
+  limits:
+    - type: Container
+      default:
+        cpu: 500m
+        memory: 256Mi
+      defaultRequest:
+        cpu: 100m
+        memory: 128Mi

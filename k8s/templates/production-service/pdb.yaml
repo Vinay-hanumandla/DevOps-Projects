@@ -1,0 +1,12 @@
+# last_verified: 2026-10-07 · kubernetes n/a
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: checkout-api
+  labels:
+    app: checkout-api
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: checkout-api

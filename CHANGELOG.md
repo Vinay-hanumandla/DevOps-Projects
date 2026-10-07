@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-07
+
+- k8s/templates/production-service/ — Production service template: Kustomize-wired Deployment, Service, ServiceAccount, HPA, PDB, default-deny NetworkPolicy, and namespace budgets (ResourceQuota plus LimitRange) with a dry-run verify script (k8s-024)
+
 ## 2026-10-06
 
 - k8s/docs/choosing-secret-management-approach.md — Choosing between encrypted-in-git secrets, vault-sync operator, and volume-mount driver for Kubernetes secret management with decision table and rotation guidance (k8s-023)
