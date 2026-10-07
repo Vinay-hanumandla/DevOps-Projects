@@ -1,0 +1,39 @@
+# last_verified: 2026-10-07 · awx 24.6.1 · awx-operator 2.19.1
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: awx-demo
+  namespace: awx
+spec:
+  service_type: nodeport
+  ingress_type: none
+  admin_user: admin
+  admin_email: admin@example.com
+  admin_password_secret: awx-demo-admin-password
+  secret_key_secret: awx-demo-secret-key
+  postgres_configuration_secret: awx-demo-postgres-configuration
+  redis_configuration_secret: awx-demo-redis-configuration
+  projects_persistence: true
+  projects_existing_claim: awx-demo-projects-pvc
+  web_replicas: 1
+  task_replicas: 1
+  web_resource_requirements:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1000m"
+      memory: "2Gi"
+  task_resource_requirements:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1000m"
+      memory: "2Gi"
+  postgres_storage_requirements:
+    requests:
+      storage: "5Gi"
+  redis_storage_requirements:
+    requests:
+      storage: "1Gi"
