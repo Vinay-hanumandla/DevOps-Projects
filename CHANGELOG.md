@@ -2,6 +2,8 @@
 
 ## 2026-10-07
 
+- awx/configs/2026-10-07-minimal-awx-custom-resource-minikube.yaml — Minimal AWX custom resource for local Minikube install with NodePort, PVC, and resource limits (awx-003)
+- awx/notes/2026-10-07-explore-awx-ui-first-job-template.md — Explore AWX UI and run first job template: inventory, credential, project, template, job loop (awx-004)
 - k8s/templates/production-service/ — Production service template: Kustomize-wired Deployment, Service, ServiceAccount, HPA, PDB, default-deny NetworkPolicy, and namespace budgets (ResourceQuota plus LimitRange) with a dry-run verify script (k8s-024)
 - k8s/manifests/production-cluster-hardening.yaml — Production cluster hardening in one namespace: Pod Security enforce/audit/warn labels, least-privilege ServiceAccount plus Role and RoleBinding, restricted security contexts, and a default-deny plus allow-list NetworkPolicy pair (k8s-025)
 
