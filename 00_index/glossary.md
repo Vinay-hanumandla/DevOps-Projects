@@ -300,6 +300,9 @@
 - **HPA (HorizontalPodAutoscaler)** — a Kubernetes object that scales a Deployment's replica count up or down against observed metrics (CPU, memory, or custom); the production deployment pairs it with resource requests so the target has something to measure against.
 - **NetworkPolicy** — a Kubernetes object that declares which pods may talk to which peers and ports; without one, every pod in the cluster can reach every other pod by default.
 - **ResourceQuota** — a namespace-scoped Kubernetes object that caps total resource consumption (CPU, memory, pod count) inside one namespace, so a single workload cannot starve its neighbours.
+- **Encrypted-in-git secrets** — encrypted blobs committed beside the manifests and decrypted by an in-cluster controller; the repo stays the source of truth and review happens through pull requests, at the cost of re-encrypting and committing on every rotation.
+- **Vault-sync operator** — a controller that mirrors keys from an outside vault service into native Secret objects on a refresh interval; rotation happens at the vault, and workloads keep reading plain Secrets.
+- **Volume-mount driver** — a kubelet-side driver that mounts outside secrets as files under the container path with no standing Secret copy; values refresh while the pod runs, so the app must re-read the file instead of caching the first read.
 
 ## Terraform (additional)
 
