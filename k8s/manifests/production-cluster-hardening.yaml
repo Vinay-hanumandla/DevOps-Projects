@@ -1,0 +1,243 @@
+# last_verified: 2026-10-07 · kubernetes n/a
+
+# Production cluster hardening end-to-end: Pod Security Standards,
+# least-privilege RBAC, and default-deny network policy in one namespace.
+#
+# Purpose: lock a single workload namespace so that (1) only restricted-compliant
+#   pods can run there, (2) the workload identity can read its own config and
+#   nothing else, and (3) no pod traffic flows except explicitly allowed paths.
+# When to use: hardening a namespace that hosts a stateless internal web workload
+#   before it serves real traffic.
+# Prerequisites: a cluster with the Pod Security admission plugin enabled and a
+#   kubectl context pointing at it; metrics and DNS addons as installed by default.
+# Apply: kubectl apply -f production-cluster-hardening.yaml
+# Verify: kubectl describe namespace hardened-workload shows the enforce labels;
+#   kubectl auth can-i --list --as=system:serviceaccount:hardened-workload:workload-runner -n hardened-workload
+#   lists only configmaps get/list and pods get/list; a test pod without the
+#   restricted security context is rejected on admission; traffic between two test
+#   pods is dropped until it matches the allow-list policy below.
+# Common errors: pods stuck Pending with a security-context admission message
+#   means the Deployment template drifted from the restricted profile — compare it
+#   against the template here rather than relaxing the namespace labels; 403s from
+#   the app mean the Role needs one more verb on one more resource, not a rebind
+#   to a broader role; curl timeouts between pods mean the allow-list policy
+#   selector or port does not match the Service and Deployment ports.
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hardened-workload
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: workload-runner
+  namespace: hardened-workload
+  labels:
+    app: web-app
+automountServiceAccountToken: true
+---
+# Least-privilege role: the workload can read its own ConfigMap and inspect its
+# own pods. No secret access, no write verbs, no cluster scope. Anything wider
+# (especially the built-in admin or cluster-admin bindings) defeats this file.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: workload-reader
+  namespace: hardened-workload
+  labels:
+    app: web-app
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: workload-runner-binding
+  namespace: hardened-workload
+  labels:
+    app: web-app
+subjects:
+  - kind: ServiceAccount
+    name: workload-runner
+    namespace: hardened-workload
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: workload-reader
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-config
+  namespace: hardened-workload
+  labels:
+    app: web-app
+data:
+  greeting: "served from the hardened namespace"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+  namespace: hardened-workload
+  labels:
+    app: web-app
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      serviceAccountName: workload-runner
+      # Restricted profile: non-root, no privilege escalation, default seccomp,
+      # all capabilities dropped, read-only root filesystem.
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: web-app
+                topologyKey: kubernetes.io/hostname
+      containers:
+        - name: web
+          # Substitute your own registry image built from audited sources.
+          image: example-web-app
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          env:
+            - name: GREETING
+              valueFrom:
+                configMapKeyRef:
+                  name: web-config
+                  key: greeting
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
+            capabilities:
+              drop: ["ALL"]
+            seccompProfile:
+              type: RuntimeDefault
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app
+  namespace: hardened-workload
+  labels:
+    app: web-app
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: web-app
+---
+# Default deny: every pod in this namespace is isolated on ingress and egress
+# until an allow-list policy below opens the exact path it needs.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: hardened-workload
+  labels:
+    app: web-app
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+---
+# Allow-list for the web workload: same-namespace clients may reach TCP 8080,
+# and pods may resolve DNS plus talk to each other on the app port. Everything
+# else stays denied by the policy above.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: web-app-allow
+  namespace: hardened-workload
+  labels:
+    app: web-app
+spec:
+  podSelector:
+    matchLabels:
+      app: web-app
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - podSelector: {}
+      ports:
+        - protocol: TCP
+          port: 8080
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+    - to:
+        - podSelector: {}
+      ports:
+        - protocol: TCP
+          port: 8080
