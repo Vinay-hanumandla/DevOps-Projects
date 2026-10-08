@@ -1,0 +1,72 @@
+# last_verified: 2026-10-08 · repo-doc n/a
+# Project configuration schema reference for the kit layout.
+# Companion to repo-doc/scripts/project-validator.py, which enforces
+# the required-fields and naming rules documented here.
+project:
+  # Human-readable kit name. Required, non-empty string.
+  name: ""
+  # Checkout root the validator walks. Required, must exist on disk.
+  kit_root: "."
+  # When false, primer problems are reported as notices instead of errors.
+  # Optional, defaults to true.
+  strict_primer: true
+
+# Every tool folder lives directly under the kit root. Required list,
+# at least one entry. Each entry names a top-level directory.
+tool_folders: []
+
+# Category subdirectories allowed directly under a tool folder.
+# Required list. The validator flags any other subdir and any file
+# sitting at the tool root.
+categories:
+  - notes
+  - docs
+  - scripts
+  - snippets
+  - configs
+  - templates
+  - manifests
+  - dockerfiles
+  - notebooks
+
+naming:
+  # Learner-stage files use a date prefix so the journal order is visible.
+  # Reference-stage files drop the date and use a stable kebab-case name.
+  # The validator treats the fixed primer name as the only exception.
+  learner_pattern: "date-prefixed journal name"
+  reference_pattern: "stable kebab-case name"
+  primer_name: "0000-primer-<tool>.md"
+
+primer:
+  # Exactly one primer per tool, ever. Required.
+  location: "notes/"
+  # Future learning goes in dated notes entries, never a second primer.
+  # The validator reports zero or multiple primers as an error.
+  max_per_tool: 1
+  # Primer content outside notes/ is reported as drift.
+  allow_outside_notes: false
+
+validation_rules:
+  # File at tool root (not inside a category subdir) is an error.
+  no_root_files: true
+  # Subdir not listed under categories is an error.
+  known_subdirs_only: true
+  # Empty category dir is a notice, not an error: a missing subdir
+  # simply means that tool has no files of that kind yet.
+  empty_dir_is_notice: true
+  # Primer outside notes/ is reported as drift.
+  primer_placement: true
+
+extension_patterns:
+  # Extension the validator expects per category. A tool may use
+  # a subset, but files with other extensions are worth a second look.
+  # These are conventions, not enforced errors.
+  notes: ".md"
+  docs: ".md"
+  scripts: ".py or .sh"
+  snippets: ".py or .sh"
+  configs: ".yaml"
+  manifests: ".yaml"
+  dockerfiles: ".Dockerfile"
+  notebooks: ".ipynb"
+  templates: "directory holding multiple files"
