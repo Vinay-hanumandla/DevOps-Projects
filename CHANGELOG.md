@@ -2,6 +2,8 @@
 
 ## 2026-10-08
 
+- repo-doc/scripts/project-validator.py — Kit project validator: checks tool folder structure, primer existence, and naming drift with stdlib-only checks (repo-doc-011)
+- repo-doc/configs/project-configuration-schema.yaml — Project configuration schema reference: required fields, validation rules, and extension patterns (repo-doc-013)
 - kprom/notes/0000-primer-kube-prometheus.md — Kube-Prometheus quick primer: what the chart installs, why it exists, and the core terms a first-timer hits (kprom-001)
 - kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md — Installed the kube-prometheus stack on a local cluster and explored the provisioned Grafana dashboards (kprom-002)
 - kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml — Minimal values override flipping Prometheus, Alertmanager, and Grafana services to NodePort for a local install (kprom-003)
