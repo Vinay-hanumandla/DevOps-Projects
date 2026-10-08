@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-08
+
+- kprom/notes/0000-primer-kube-prometheus.md — Kube-Prometheus quick primer: what the chart installs, why it exists, and the core terms a first-timer hits (kprom-001)
+- kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md — Installed the kube-prometheus stack on a local cluster and explored the provisioned Grafana dashboards (kprom-002)
+- kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml — Minimal values override flipping Prometheus, Alertmanager, and Grafana services to NodePort for a local install (kprom-003)
+
 ## 2026-10-07
 
 - awx/configs/2026-10-07-minimal-awx-custom-resource-minikube.yaml — Minimal AWX custom resource for local Minikube install with NodePort, PVC, and resource limits (awx-003)
