@@ -20,11 +20,11 @@ The `awx/` folder covers the Tower-side control plane — job templates, invento
 
 ## Quick links
 
-- [Choosing a Kubernetes secret management approach](k8s/docs/choosing-secret-management-approach.md) — encrypted-in-git secrets vs a vault-sync operator vs a volume-mount driver, with a decision table and rotation guidance per environment.
-- [Custom Grafana image with baked plugins and datasource](grafana/dockerfiles/grafana-with-plugins-and-provisioned-datasource.Dockerfile) — plugins pre-installed at build time and a Prometheus datasource provisioned into the image, so every environment boots from one baked build.
-- [Prometheus + Grafana + Alertmanager stack scaffold](prom/templates/prometheus-grafana-alertmanager-stack/README.md) — one Compose file for metrics, rules, alert routing, and provisioned dashboards, reproducible from a clean checkout.
-- [Stack compose file](prom/templates/prometheus-grafana-alertmanager-stack/docker-compose.yaml) — the services, mounts, and rule files the scaffold wires together for a single-command local stack.
-- [Stack alert rules](prom/templates/prometheus-grafana-alertmanager-stack/prometheus/rules/alert-rules.yml) — the alerting rules the scaffold loads, wired to an Alertmanager webhook route.
+- [Minimal AWX custom resource for local Minikube](awx/configs/2026-10-07-minimal-awx-custom-resource-minikube.yaml) — the smallest AWX CR that runs on Minikube: nodeport service, no ingress, and the secrets it references.
+- [Explore AWX UI and run first job template](awx/notes/2026-10-07-explore-awx-ui-first-job-template.md) — third-day notes from applying the AWX CR to Minikube and launching the first job template end-to-end.
+- [Production cluster hardening manifest](k8s/manifests/production-cluster-hardening.yaml) — PodSecurity admission, least-privilege RBAC, and default-deny NetworkPolicy for a workload namespace before it serves real traffic.
+- [Production service template](k8s/templates/production-service/README.md) — Deployment, Service, ServiceAccount, HPA, PDB, default-deny NetworkPolicy, and namespace budgets wired through one Kustomization.
+- [Production-ready Deployment](k8s/templates/production-service/deployment.yaml) — hardened Deployment with security context, resource requests/limits, and a read-only root filesystem.
 
 ## Layout
 
@@ -57,15 +57,15 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 | Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Last verified |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | Ansible | 3 | 6 | 5 | 1 | 4 | 3 | 1 | 0 | 28 | 0 | 0 | 2026-10-05 |
-| AWX | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-04 |
-| Bash | 3 | 7 | 12 | 3 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 2026-09-29 |
+| AWX | 3 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-07 |
+| Bash | 3 | 7 | 12 | 3 | 0 | 0 | 5 | 1 | 30 | 0 | 0 | 2026-09-30 |
 | Docker | 5 | 4 | 8 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 2026-10-04 |
 | GitHub Actions | 3 | 5 | 6 | 1 | 11 | 2 | 1 | 0 | 0 | 0 | 0 | 2026-10-03 |
 | Git | 16 | 12 | 7 | 0 | 0 | 1 | 0 | 0 | 18 | 0 | 1 | 2026-09-30 |
-| Grafana | 4 | 2 | 1 | 3 | 6 | 3 | 1 | 1 | 8 | 0 | 0 | 2026-10-06 |
+| Grafana | 4 | 2 | 1 | 3 | 6 | 3 | 1 | 1 | 8 | 0 | 0 | 2026-10-05 |
 | Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 2026-09-26 |
 | Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 5 | 0 | 0 | 2026-09-23 |
-| Kubernetes | 6 | 5 | 3 | 2 | 1 | 4 | 1 | 1 | 10 | 0 | 0 | 2026-10-06 |
+| Kubernetes | 6 | 5 | 3 | 2 | 1 | 5 | 1 | 1 | 20 | 0 | 0 | 2026-10-07 |
 | Prometheus | 4 | 3 | 2 | 1 | 7 | 1 | 0 | 0 | 10 | 0 | 0 | 2026-10-06 |
 | Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 23 | 0 | 0 | 2026-10-03 |
 | Repo-doc | 5 | 3 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-03 |
@@ -77,7 +77,7 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 
 ## Status
 
-Currently working through platform and observability pieces: a Kubernetes secret-management chooser (encrypted-in-git vs vault-sync operator vs volume-mount driver), a one-command Prometheus + Grafana + Alertmanager stack with recording rules and provisioned dashboards, and a baked Grafana image carrying its plugins and datasource. Just landed alongside earlier controller-as-code manifests and first-contact kubectl notes.
+Currently working through platform and observability pieces: a Kubernetes secret-management chooser (encrypted-in-git vs vault-sync operator vs volume-mount driver), a one-command Prometheus + Grafana + Alertmanager stack with recording rules and provisioned dashboards, and a baked Grafana image carrying its plugins and datasource. Just landed: a minimal AWX custom resource for local Minikube, the first job template run on AWX, a production-service scaffold packing HPA, PDB, NetworkPolicy, and namespace budgets behind one Kustomization, and a production cluster hardening manifest with PodSecurity admission and default-deny networking.
 
 ---
 _Last updated: 2026-10-07_

@@ -303,6 +303,8 @@
 - **Encrypted-in-git secrets** — encrypted blobs committed beside the manifests and decrypted by an in-cluster controller; the repo stays the source of truth and review happens through pull requests, at the cost of re-encrypting and committing on every rotation.
 - **Vault-sync operator** — a controller that mirrors keys from an outside vault service into native Secret objects on a refresh interval; rotation happens at the vault, and workloads keep reading plain Secrets.
 - **Volume-mount driver** — a kubelet-side driver that mounts outside secrets as files under the container path with no standing Secret copy; values refresh while the pod runs, so the app must re-read the file instead of caching the first read.
+- **ServiceAccount** — a Kubernetes object holding credentials a pod uses to authenticate to the API server; workloads should run under a dedicated ServiceAccount with the minimum RBAC they need rather than the default token.
+- **Kustomization** — the `kustomization.yaml` file that declares base resources, per-environment patches, and name-suffixes processed by `kubectl apply -k`; one file lets an environment override image tags and replica counts without duplicating manifests.
 
 ## Terraform (additional)
 
@@ -549,6 +551,8 @@
 - **Workflow job template** — several templates chained with success/failure branches (provision, then configure, then verify, stopping if any step fails); the AWX-native way to order multi-stage automation.
 - **Role-based access (RBAC)** — who may see, launch, or edit which inventories, templates, and credentials; lets the on-call crew launch a restart template without being able to change what it runs.
 - **Execution environment** — the container image a job runs inside, carrying the interpreter, collections, and dependencies the playbook needs; rebuilding it is part of adopting a new ansible-core line such as the one AAP 2.7 ships on.
+- **awx-operator** — the Kubernetes operator that reconciles an AWX custom resource into its backing pods and secrets; it provisions the web, task, redis, and postgres components so the whole control plane comes up from one manifest.
+- **AWX custom resource (CR)** — the `kind: AWX` manifest that the awx-operator reconciles; fields like `service_type`, `admin_user`, and `*_secret` map directly to runtime configuration, and `admin_password_secret` references a pre-existing Kubernetes Secret rather than embedding the password.
 
 ## Ansible (execution modes)
 

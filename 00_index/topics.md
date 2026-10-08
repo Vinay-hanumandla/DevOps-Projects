@@ -14,10 +14,11 @@
 - **notebooks** (1): [Comparing Ansible execution modes](../ansible/notebooks/execution-modes-comparison.ipynb) — playbook runs, navigator, controller job templates, and event-driven rulebooks side by side, with the trigger and runtime behind each
 - **templates** (28): [Execution Environment build pipeline scaffold](../ansible/templates/execution-environment-build-pipeline/README.md) — four fixed stages (build → SBOM → scan → push) over a digest-pinned base image, refusing to push until the scan gate passes · [Collection scaffold with Molecule and galaxy-importer](../ansible/templates/ansible-collection-scaffold/README.md) — copy-in collection with Molecule tests, `galaxy.yml`, CI workflow, and a galaxy-importer lint pass · [Role scaffold with Molecule and collection layout](../ansible/templates/ansible-role-molecule-collection/README.md) — copy-in role with Molecule tests, `galaxy.yml`, dynamic cloud inventory, and a Terraform-outputs handoff script · _…and 20 more under `ansible/templates/`._
 
-## AWX  ·  2 files
+## AWX  ·  4 files
 
 - **primer:** [Ansible Tower / AWX — quick primer](../awx/notes/0000-primer-awx.md)
-- **notes** (2): most recent → [Poking around the AWX UI and API](../awx/notes/2026-10-04-explore-awx-ui-and-api.md) — inventories, credentials, templates, and jobs in the UI, then the API calls behind each page
+- **notes** (3): most recent → [Explore AWX UI and run first job template](../awx/notes/2026-10-07-explore-awx-ui-first-job-template.md) — applied the minimal AWX CR to Minikube, waited for pods to report ready, then launched the first job template end-to-end · [Poking around the AWX UI and API](../awx/notes/2026-10-04-explore-awx-ui-and-api.md) — inventories, credentials, templates, and jobs in the UI, then the API calls behind each page
+- **configs** (1): [Minimal AWX custom resource for Minikube](../awx/configs/2026-10-07-minimal-awx-custom-resource-minikube.yaml) — the smallest AWX CR that runs on Minikube: nodeport service, no ingress, and the secrets it references
 
 ## Bash  ·  61 files
 
@@ -97,18 +98,18 @@
 - **snippets** (3): most recent → [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy), [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 - **templates** (5): [Jenkins shared library scaffold](../jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline library with `vars/*.groovy`, tests, and CI gating · _…and 4 more under `jenkins/templates/jenkins-shared-library/`._
 
-## Kubernetes  ·  33 files
+## Kubernetes  ·  44 files
 
 - **primer:** [Kubernetes — quick primer](../k8s/notes/0000-primer-kubernetes.md)
 - **notes** (6): most recent → [First kubectl commands on a live cluster](../k8s/notes/2026-10-05-first-kubectl-commands-and-cluster-explore.md), [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Quickstart kind contexts and port mismatch](../k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md)
 - **docs** (5): [Choosing a secret management approach](../k8s/docs/choosing-secret-management-approach.md) — encrypted-in-git secrets, a vault-sync operator, and a volume-mount driver compared with a decision table and rotation guidance · [Kubernetes with Helm, ArgoCD, and GitOps](../k8s/docs/kubernetes-helm-argocd-gitops-workflow.md) — end-to-end GitOps workflow using Helm chart packaging, ArgoCD sync, and sealed-secrets for continuous delivery, [Inspecting pods, services, and events](../k8s/docs/2026-08-04-inspecting-pods-services-events.md), [kubectl imperative vs declarative](../k8s/docs/kubectl-imperative-vs-declarative.md), [Integrating Kubernetes with Terraform](../k8s/docs/integrating-kubernetes-with-terraform.md)
 - **scripts** (3): most recent → [Multi-pod deployment](../k8s/scripts/multi-pod-deployment.sh), [Install Minikube and run kubectl version](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh)
 - **configs** (1): [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml)
-- **manifests** (4): most recent → [Production-ready deployment](../k8s/manifests/production-deployment.yaml), [Zero-downtime rolling deployment](../k8s/manifests/zero-downtime-rolling-deployment.yaml), [Multi-service application](../k8s/manifests/multi-service-application.yaml), [Minimal deployment and service](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml)
+- **manifests** (5): most recent → [Production cluster hardening](../k8s/manifests/production-cluster-hardening.yaml) — PodSecurity admission, least-privilege RBAC, and default-deny NetworkPolicy for a workload namespace · [Production-ready deployment](../k8s/manifests/production-deployment.yaml) · _…and 3 more under `k8s/manifests/`._
 - **snippets** (2): [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh), [Pod metrics via the API](../k8s/snippets/kubectl-pod-metrics.py)
 - **notebooks** (1): [Comparing Kubernetes rollout strategies](../k8s/notebooks/comparing-kubernetes-rollout-strategies.ipynb)
 - **dockerfiles** (1): [Operator development image](../k8s/dockerfiles/operator-dev.Dockerfile)
-- **templates** (10): [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — two-tier frontend/backend chart with ingress routing and Prometheus alert rules · _…and 9 more under `k8s/templates/multi-service-app/`._
+- **templates** (20): [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — two-tier frontend/backend chart with ingress routing and Prometheus alert rules · [Production service template](../k8s/templates/production-service/README.md) — Deployment, Service, ServiceAccount, HPA, PDB, default-deny NetworkPolicy, and namespace budgets wired through one Kustomization · _…and 8 more under `k8s/templates/multi-service-app/` and 9 more under `k8s/templates/production-service/`._
 
 ## Prometheus  ·  28 files
 
