@@ -1,0 +1,19 @@
+# last_verified: 2026-10-08 · kube-prometheus-stack n/a
+
+# Minimal values override for a local kube-prometheus-stack install.
+#   helm install monitoring <chart-ref> -f this-file.yaml
+prometheus:
+  service:
+    type: NodePort
+    port: 9090
+  defaultRules:
+    create: true
+alertmanager:
+  service:
+    type: NodePort
+    port: 9093
+grafana:
+  service:
+    type: NodePort
+    port: 3000
+  defaultDashboardsEnabled: true
