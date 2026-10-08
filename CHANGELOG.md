@@ -2,6 +2,7 @@
 
 ## 2026-10-08
 
+- bash/notebooks/bash-53-behavior-change-probes.ipynb — Deep-dive notebook isolating four Bash 5.3 behavior changes: GLOBSORT pathname-expansion sort order, inherit_errexit propagation into subshells, forkless `${| command; }` command substitution, and `test`/`[` parenthesized-subexpression parsing for >4 args — each with runnable probes, version guards, and ShellCheck notes (bash-034)
 - repo-doc/scripts/project-validator.py — Kit project validator: checks tool folder structure, primer existence, and naming drift with stdlib-only checks (repo-doc-011)
 - repo-doc/configs/project-configuration-schema.yaml — Project configuration schema reference: required fields, validation rules, and extension patterns (repo-doc-013)
 - kprom/notes/0000-primer-kube-prometheus.md — Kube-Prometheus quick primer: what the chart installs, why it exists, and the core terms a first-timer hits (kprom-001)
