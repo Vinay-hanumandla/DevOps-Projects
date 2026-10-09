@@ -93,6 +93,7 @@
 - [Integrating Bash with Git](../bash/docs/integrating-bash-with-git.md) — fail-fast, re-runnable patterns for release scripts that touch git
 - [Bash 5.3 migration guide](../bash/docs/bash-5.3-migration-guide.md) — documenting behavioral and syntactic changes in Bash 5.3 for script audits and upgrades
 - [Bash 5.3 deep dive](../bash/docs/bash-5.3-deep-dive.md) — detailed exploration of Bash 5.3 features and behavior changes
+- [Production runbook: strict-mode guardrails, PIPESTATUS telemetry, and ShellCheck CI gate](../bash/docs/production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md) — a production runbook for hardening Bash scripts against silent data corruption, undetected pipeline failures, and CI false positives, tying together strict-mode guardrails, PIPESTATUS array telemetry, and a ShellCheck CI gate
 
 ### Retry flaky commands without hammering a down dependency
 - [Retry with circuit breaker](../bash/scripts/retry-with-circuit-breaker.sh) — wraps any command in jittered exponential-backoff retries and stops calling after enough consecutive failures, with structured key=value logging
@@ -127,6 +128,7 @@
 - [Bats-core production test suite](../bash/notebooks/bats-core-production-test-suite.ipynb) — health-check, log-rotation, and secret-rotation suites with per-test isolation and setup/teardown hooks, runnable in CI via `bats tests/`
 
 ### Verify a Bash 5.2 → 5.3 upgrade
+- [Bash 5.3 features deep-dive notebook](../bash/notebooks/bash-5.3-features-deep-dive.ipynb) — GLOBSORT, inherit_errexit, ${| } pipefail, and test builtin changes in Bash 5.3, verified by running every cell on 5.2 then diffing on 5.3
 - [Bash 5.2 → 5.3 migration checklist](../bash/notebooks/bash-53-migration-checklist.ipynb) — run every cell on 5.2, save the output, re-run on 5.3 and diff, with a `BASH_VERSINFO` guard so mixed-version CI skips instead of failing
 
 ### Get started with Docker
@@ -586,7 +588,10 @@
 - [Tool folder conventions](../repo-doc/configs/2026-09-26-tool-folder-conventions.md) — required subdirs, file-naming patterns, and primer rules for where files live in this kit
 - [Following the tutorial again — the pre-PR validation loop](../repo-doc/docs/2026-09-26-tutorial-validation-loop-trip-ups.md) — front-matter, CHANGELOG entry, folder-check script, and reading the gap report before opening a PR
 - [Check folders and report gaps](../repo-doc/scripts/2026-09-25-check-folders-and-report-gaps.sh) — one script that regenerates coverage tables, validates tool-folder structure, and reports gaps
+- [Project validator](../repo-doc/scripts/project-validator.py) — a standard-library Python check that walks each tool folder and confirms it follows the kit's layout conventions
+- [Project configuration schema](../repo-doc/configs/project-configuration-schema.yaml) — YAML schema reference declaring the category subdirs, naming conventions, and primer rules every tool folder must follow
 - [Poking around the repo-task folder](../repo-doc/notes/2026-10-03-exploring-task-folder-structure.md) — a first look at what the repo-doc notes, docs, scripts, and configs each hold, and where the next file belongs
 
 ### Ansible reference docs
 - [Retry strategies for unreliable targets](../ansible/docs/retry-strategies-unreliable-targets.md) — strategies for handling transient failures when targets drop connectivity during a playbook run
+- [Wired handlers and idempotency in fleet configuration](../ansible/docs/wired-handlers-idempotency-fleet.md) — how handler ordering and idempotency checks were wired into fleet-wide configuration to keep dependent services in sync and flag non-convergent hosts

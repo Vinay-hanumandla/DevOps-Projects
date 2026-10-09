@@ -20,14 +20,14 @@
 - **notes** (3): most recent → [Explore AWX UI and run first job template](../awx/notes/2026-10-07-explore-awx-ui-first-job-template.md) — applied the minimal AWX CR to Minikube, waited for pods to report ready, then launched the first job template end-to-end · [Poking around the AWX UI and API](../awx/notes/2026-10-04-explore-awx-ui-and-api.md) — inventories, credentials, templates, and jobs in the UI, then the API calls behind each page
 - **configs** (1): [Minimal AWX custom resource for Minikube](../awx/configs/2026-10-07-minimal-awx-custom-resource-minikube.yaml) — the smallest AWX CR that runs on Minikube: nodeport service, no ingress, and the secrets it references
 
-## Bash  ·  61 files
+## Bash  ·  63 files
 
 - **primer:** [Bash — quick primer](../bash/notes/0000-primer-bash.md)
 - **notes** (3): most recent → [Bash guide — trip-ups](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md)
-- **docs** (7): most recent → [Production reference patterns](../bash/docs/production-reference-patterns.md) — shell-option flags for fail-fast, signal traps for guaranteed cleanup, process substitution, and coprocesses, each with the failure mode it prevents · [Bash 5.3 deep dive](../bash/docs/bash-5.3-deep-dive.md), [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md) · _…and 4 more under `bash/docs/`._
+- **docs** (8): most recent → [Production runbook: strict-mode guardrails, PIPESTATUS telemetry, and ShellCheck CI gate](../bash/docs/production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md) — a production runbook for hardening Bash scripts against silent data corruption, undetected pipeline failures, and CI false positives · [Production reference patterns](../bash/docs/production-reference-patterns.md) — shell-option flags for fail-fast, signal traps for guaranteed cleanup, process substitution, and coprocesses, each with the failure mode it prevents · [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md) · _…and 5 more under `bash/docs/`._
 - **scripts** (12): most recent → [Retry with circuit breaker](../bash/scripts/retry-with-circuit-breaker.sh) — jittered exponential-backoff retries plus a consecutive-failure breaker with structured key=value logging · [First script with argument handling](../bash/scripts/2026-09-26-first-script-with-args.sh) — takes a positional argument, defaults it with `${1:-…}`, and tests whether the path exists · [Parallel execution patterns](../bash/scripts/parallel-execution-patterns.sh) · _…and 9 more under `bash/scripts/`._
 - **snippets** (3): [Coproc, FIFO, and nameref patterns](../bash/snippets/coproc-fifo-and-named-variables.sh) — one long-lived coproc worker, a kernel-scheduled FIFO pool, and nameref dispatch without eval; [Advanced parameter expansion](../bash/snippets/parameter-expansion-advanced.sh) — global substitution, prefix/suffix stripping, and nested expansions without subshells; [Comparing [ ] vs [[ ]] gotchas](../bash/snippets/comparing-brackets-gotchas.sh)
-- **notebooks** (5): most recent → [Bash 5.2 → 5.3 migration checklist](../bash/notebooks/bash-53-migration-checklist.ipynb), [Bats-core production test suite](../bash/notebooks/bats-core-production-test-suite.ipynb), [Comparing shellcheck profiles](../bash/notebooks/comparing-shellcheck-profiles.ipynb) · _…and 2 more under `bash/notebooks/`._
+- **notebooks** (6): most recent → [Bash 5.3 features deep dive](../bash/notebooks/bash-5.3-features-deep-dive.ipynb) — GLOBSORT, inherit_errexit, ${| } pipefail, and test builtin changes in Bash 5.3 · [Bash 5.2 → 5.3 migration checklist](../bash/notebooks/bash-53-migration-checklist.ipynb), [Bats-core production test suite](../bash/notebooks/bats-core-production-test-suite.ipynb) · _…and 3 more under `bash/notebooks/`._
 - **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
 - **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
 
@@ -111,12 +111,6 @@
 - **dockerfiles** (1): [Operator development image](../k8s/dockerfiles/operator-dev.Dockerfile)
 - **templates** (20): [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — two-tier frontend/backend chart with ingress routing and Prometheus alert rules · [Production service template](../k8s/templates/production-service/README.md) — Deployment, Service, ServiceAccount, HPA, PDB, default-deny NetworkPolicy, and namespace budgets wired through one Kustomization · _…and 8 more under `k8s/templates/multi-service-app/` and 9 more under `k8s/templates/production-service/`._
 
-## Kube-Prometheus  ·  3 files
-
-- **primer:** [Kube-Prometheus — quick primer](../kprom/notes/0000-primer-kube-prometheus.md)
-- **notes** (2): most recent → [Installing the kube-prometheus stack and exploring Grafana](../kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md) — installed the chart with a small values override, watched it provision a folder of dashboards, and hit the `admin`/`admin` default-credential trap · [Kube-Prometheus — quick primer](../kprom/notes/0000-primer-kube-prometheus.md)
-- **configs** (1): [Minimal kube-prometheus-stack local values](../kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml) — `NodePort` overrides for Prometheus, Alertmanager, and Grafana so the UIs are reachable from a laptop
-
 ## Prometheus  ·  28 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
@@ -127,6 +121,12 @@
 - **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
 - **manifests** (1): [Local monitoring stack](../prom/manifests/local-monitoring-stack.yaml) — one-shot Prometheus + Alertmanager + Node Exporter stack for local evaluation
 - **templates** (10): [Prometheus + Grafana + Alertmanager stack scaffold](../prom/templates/prometheus-grafana-alertmanager-stack/README.md) — one Compose file for scraping, recording and alert rules, Alertmanager routing, and provisioned Grafana dashboards · _…and 9 more under `prom/templates/prometheus-grafana-alertmanager-stack/`._
+
+## Kube-Prometheus  ·  3 files
+
+- **primer:** [Kube-Prometheus — quick primer](../kprom/notes/0000-primer-kube-prometheus.md) — the kube-prometheus-stack Helm chart bundles Prometheus Operator, Prometheus, Alertmanager, node-exporter, kube-state-metrics, and Grafana as one operator-managed release
+- **notes** (2): most recent → [Installing the kube-prometheus stack and exploring Grafana](../kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md) — installed the chart with a small values file that flips the three services to NodePort so I could reach the UIs from outside the cluster
+- **configs** (1): [Minimal kube-prometheus local values](../kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml) — the smallest values file that brings up kube-prometheus-stack on Minikube with NodePorts
 
 ## Python  ·  47 files
 
