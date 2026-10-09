@@ -111,6 +111,12 @@
 - **dockerfiles** (1): [Operator development image](../k8s/dockerfiles/operator-dev.Dockerfile)
 - **templates** (20): [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — two-tier frontend/backend chart with ingress routing and Prometheus alert rules · [Production service template](../k8s/templates/production-service/README.md) — Deployment, Service, ServiceAccount, HPA, PDB, default-deny NetworkPolicy, and namespace budgets wired through one Kustomization · _…and 8 more under `k8s/templates/multi-service-app/` and 9 more under `k8s/templates/production-service/`._
 
+## Kube-Prometheus  ·  3 files
+
+- **primer:** [Kube-Prometheus — quick primer](../kprom/notes/0000-primer-kube-prometheus.md)
+- **notes** (2): most recent → [Installing the kube-prometheus stack and exploring Grafana](../kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md) — installed the chart with a small values override, watched it provision a folder of dashboards, and hit the `admin`/`admin` default-credential trap · [Kube-Prometheus — quick primer](../kprom/notes/0000-primer-kube-prometheus.md)
+- **configs** (1): [Minimal kube-prometheus-stack local values](../kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml) — `NodePort` overrides for Prometheus, Alertmanager, and Grafana so the UIs are reachable from a laptop
+
 ## Prometheus  ·  28 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
@@ -146,13 +152,13 @@
 - **notebooks** (1): [State management strategies](../tf/notebooks/state-management-strategies.ipynb)
 - **templates** (8): [Terragrunt multi-environment scaffold](../tf/templates/terragrunt-multi-env/README.md) — one reusable module shared across dev, staging, and prod with per-environment inputs · _…and 7 more under `tf/templates/terragrunt-multi-env/`._
 
-## Repo-doc  ·  12 files
+## Repo-doc  ·  14 files
 
 - **primer:** [Repo-doc — quick primer](../repo-doc/notes/0000-primer-repo-doc.md)
 - **notes** (5): most recent → [Following the repo-task tutorial](../repo-doc/notes/2026-09-23-following-repo-task-tutorial-workflows.md), [Repo-doc CLI install and first scaffold](../repo-doc/notes/2026-09-21-repo-doc-cli-install-and-scaffold.md), [Repo-task quickstart trip-ups](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md) · _…and 2 more under `repo-doc/notes/`._
 - **docs** (3): most recent → [Following the tutorial again — the pre-PR validation loop](../repo-doc/docs/2026-09-26-tutorial-validation-loop-trip-ups.md), [Repo-doc tooling overview](../repo-doc/docs/2026-09-08-repo-doc-tooling-overview.md), [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md)
-- **configs** (1): [Tool folder conventions](../repo-doc/configs/2026-09-26-tool-folder-conventions.md) — required subdirs, file-naming patterns, and primer rules for where files live in this kit
-- **scripts** (3): most recent → [Check folders and report gaps](../repo-doc/scripts/2026-09-25-check-folders-and-report-gaps.sh), [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh), [Minimal task automation](../repo-doc/scripts/2026-09-10-minimal-task-automation.sh)
+- **configs** (2): [Project configuration schema](../repo-doc/configs/project-configuration-schema.yaml) — the YAML reference declaring the category subdirs, naming conventions, and primer rules every tool folder must follow · [Tool folder conventions](../repo-doc/configs/2026-09-26-tool-folder-conventions.md) — required subdirs, file-naming patterns, and primer rules for where files live in this kit
+- **scripts** (4): most recent → [Project folder validator](../repo-doc/scripts/project-validator.py) — a standard-library Python check that walks each tool folder and confirms it follows the kit's layout conventions · [Check folders and report gaps](../repo-doc/scripts/2026-09-25-check-folders-and-report-gaps.sh), [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh) · _…and 1 more under `repo-doc/scripts/`._
 
 ## Concepts (docs/concepts/)  ·  64 files
 

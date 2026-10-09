@@ -7,7 +7,7 @@
 
 ## Who this is for
 
-A working DevOps engineer's quick-reference: first-contact notes, runnable snippets, and configs for Git, Bash, Docker, Kubernetes, Helm, Terraform, Ansible, AWX, GitHub Actions, Jenkins, Prometheus, Grafana, and Python.
+A working DevOps engineer's quick-reference: first-contact notes, runnable snippets, and configs for Git, Bash, Docker, Kubernetes, Helm, Terraform, Ansible, AWX, Kube-Prometheus, GitHub Actions, Jenkins, Prometheus, Grafana, and Python.
 Use it as a shelf you grab from while designing, debugging, or reviewing a system — not as a tutorial site, and not as a substitute for any tool's official documentation.
 It deliberately leaves out credentials, environment secrets, and a walkthrough for every product it touches.
 
@@ -20,11 +20,11 @@ The `awx/` folder covers the Tower-side control plane — job templates, invento
 
 ## Quick links
 
-- [Minimal AWX custom resource for local Minikube](awx/configs/2026-10-07-minimal-awx-custom-resource-minikube.yaml) — the smallest AWX CR that runs on Minikube: nodeport service, no ingress, and the secrets it references.
-- [Explore AWX UI and run first job template](awx/notes/2026-10-07-explore-awx-ui-first-job-template.md) — third-day notes from applying the AWX CR to Minikube and launching the first job template end-to-end.
-- [Production cluster hardening manifest](k8s/manifests/production-cluster-hardening.yaml) — PodSecurity admission, least-privilege RBAC, and default-deny NetworkPolicy for a workload namespace before it serves real traffic.
-- [Production service template](k8s/templates/production-service/README.md) — Deployment, Service, ServiceAccount, HPA, PDB, default-deny NetworkPolicy, and namespace budgets wired through one Kustomization.
-- [Production-ready Deployment](k8s/templates/production-service/deployment.yaml) — hardened Deployment with security context, resource requests/limits, and a read-only root filesystem.
+- [Kube-Prometheus primer](kprom/notes/0000-primer-kube-prometheus.md) — what the kube-prometheus-stack chart installs and why you pass it a values file instead of hand-writing scrape configs.
+- [Minimal kube-prometheus-stack local values](kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml) — flips Prometheus, Alertmanager, and Grafana to NodePort so the stack is reachable from a laptop on a local cluster.
+- [Installing the kube-prometheus stack and exploring Grafana](kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md) — first cluster install, the dashboard folder the chart provisions at first boot, and the `admin`/`admin` creds gotcha.
+- [Project configuration schema](repo-doc/configs/project-configuration-schema.yaml) — the YAML reference declaring the category subdirs, naming conventions, and primer rules every tool folder must follow.
+- [Project folder validator](repo-doc/scripts/project-validator.py) — a standard-library Python check that walks each tool folder and confirms it follows the kit's layout conventions.
 
 ## Layout
 
@@ -40,6 +40,7 @@ The `awx/` folder covers the Tower-side control plane — job templates, invento
 - `helm/` — chart structure, values, templates, testing, and registry workflows.
 - `jenkins/` — controllers, jobs, declarative pipelines, credentials, and SCM-backed Jenkinsfiles.
 - `k8s/` — Kubernetes objects, kubectl, Helm/Argo CD flows, and local clusters.
+- `kprom/` — Kube-Prometheus stack: the kube-prometheus-stack Helm chart that brings Prometheus, Alertmanager, and Grafana onto a cluster from one release.
 - `prom/` — Prometheus setup, PromQL, service discovery, and alerting.
 - `python/` — Python fundamentals, configuration, async tooling, and DevOps integrations.
 - `repo-doc/` — repository coverage and documentation-maintenance utilities.
@@ -66,9 +67,10 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 | Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 2026-09-26 |
 | Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 5 | 0 | 0 | 2026-09-23 |
 | Kubernetes | 6 | 5 | 3 | 2 | 1 | 5 | 1 | 1 | 20 | 0 | 0 | 2026-10-07 |
+| Kube-Prometheus | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-08 |
 | Prometheus | 4 | 3 | 2 | 1 | 7 | 1 | 0 | 0 | 10 | 0 | 0 | 2026-10-06 |
 | Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 23 | 0 | 0 | 2026-10-03 |
-| Repo-doc | 5 | 3 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-03 |
+| Repo-doc | 5 | 3 | 4 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-03 |
 | Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 8 | 0 | 0 | 2026-09-22 |
 | Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | Foundational concepts | 11 | 14 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 2026-08-29 |
@@ -77,7 +79,7 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 
 ## Status
 
-Currently working through platform and observability pieces: a Kubernetes secret-management chooser (encrypted-in-git vs vault-sync operator vs volume-mount driver), a one-command Prometheus + Grafana + Alertmanager stack with recording rules and provisioned dashboards, and a baked Grafana image carrying its plugins and datasource. Just landed: a minimal AWX custom resource for local Minikube, the first job template run on AWX, a production-service scaffold packing HPA, PDB, NetworkPolicy, and namespace budgets behind one Kustomization, and a production cluster hardening manifest with PodSecurity admission and default-deny networking.
+Currently working through platform and observability: a Kubernetes secret-management chooser (encrypted-in-git vs vault-sync operator vs volume-mount driver), a one-command kube-prometheus-stack release that brings Prometheus, Alertmanager, and Grafana onto a cluster behind NodePort services, and a baked Grafana image carrying its plugins and datasource. Just landed: the Kube-Prometheus primer and a minimal local values override, a project-configuration schema and folder validator that keep the kit's own conventions checked before a PR goes up, a minimal AWX custom resource for local Minikube, the first job template run on AWX, a production-service scaffold packing HPA, PDB, NetworkPolicy, and namespace budgets behind one Kustomization, and a production cluster hardening manifest with PodSecurity admission and default-deny networking.
 
 ---
-_Last updated: 2026-10-07_
+_Last updated: 2026-10-09_
