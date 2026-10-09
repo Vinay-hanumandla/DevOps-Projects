@@ -416,6 +416,11 @@
 - [Stack alert rules](../prom/templates/prometheus-grafana-alertmanager-stack/prometheus/rules/alert-rules.yml) — the alerting rules the stack loads, routed to an Alertmanager webhook receiver
 - [Stack recording rules](../prom/templates/prometheus-grafana-alertmanager-stack/prometheus/rules/recording-rules.yml) — pre-aggregated series the stack-overview dashboard reads instead of raw metrics
 
+### Install the kube-prometheus-stack on Kubernetes
+- [Kube-Prometheus primer](../kprom/notes/0000-primer-kube-prometheus.md) — the kube-prometheus-stack chart brings Prometheus, Alertmanager, node-exporter, kube-state-metrics, and Grafana onto a cluster as one Helm release, reconciled from a values file instead of hand-written scrape configs
+- [Minimal kube-prometheus-stack local values](../kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml) — flips the three UIs to NodePort so the monitoring stack is reachable from a laptop on a local cluster
+- [Installing the kube-prometheus stack and exploring Grafana](../kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md) — first cluster install, the dashboard folder the chart provisions at boot, and the `admin`/`admin` default-credential gotcha
+
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip
 - [Python quickstart gotchas](../python/notes/2026-08-22-python-quickstart-gotchas.md) — first-contact pitfalls when getting started with Python

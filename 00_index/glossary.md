@@ -328,6 +328,13 @@
 - **Remote-write vs federation** — the two paths for getting series into long-term storage: remote-write pushes samples from each Prometheus to a central endpoint as they arrive, while federation has a central Prometheus scrape `/federate` on its peers for selected series; the config keeps both so the trade-off is explicit.
 - **Remote-write receiver** — the long-term store a `remote_write` block fans samples out to (here Thanos, VictoriaMetrics, or Mimir); local Prometheus keeps short-term series while the receiver owns retention, downsampling, and global queries — uncomment exactly one receiver block per Prometheus.
 
+## Kube-Prometheus
+
+- **kube-prometheus-stack** — the Helm chart that installs a complete monitoring stack onto a Kubernetes cluster in one release: Prometheus, Alertmanager, the Prometheus Operator, node-exporter, kube-state-metrics, and Grafana, with default dashboards and alerting rules provisioned automatically.
+- **Prometheus Operator** — the controller that watches `Prometheus` and `ServiceMonitor` custom resources and reconciles the Deployments, Services, and ConfigMaps that actually run; it is a component inside the kube-prometheus project, not the whole stack.
+- **ServiceMonitor** — the custom resource the Prometheus Operator watches to decide which pods to scrape; instead of editing `prometheus.yml`, you declare one per set of services and the operator generates the scrape config from it.
+- **kube-state-metrics** — a sidecar that reads the Kubernetes API and re-expresses object state (deployments, pods, nodes) as metrics for Prometheus to scrape, filling the gap that raw pod metrics cannot show.
+
 ## Jenkins (additional)
 
 - **Pipeline script (inline)** — a Jenkinsfile pasted directly into a job's "Pipeline script" field instead of checked into a repo; the fastest path to a first build, and what the official quickstart uses before pointing at a real repository.
