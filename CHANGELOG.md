@@ -708,3 +708,7 @@ Passed ([x]) jenkins-018 — Jenkins: config — Jenkins Configuration as Code f
 - gha/docs/workflow-security-hardening.md — Workflow security hardening reference: least-privilege `permissions` blocks, OIDC in place of stored cloud keys, secret-scanning gates, SHA-pinned third-party actions, untrusted-event-data handling, and privileged trigger rules (gha-024)
 - grafana/templates/grafana-prometheus-loki-stack/ — Local observability stack scaffold: Compose wiring for Grafana, Prometheus, Loki, and Promtail plus provisioned datasources, dashboard provider, and starter overview dashboard (grafana-016)
 - grafana/manifests/kubernetes-persistent-ingress-sidecar.yaml — End-to-end Kubernetes deployment for Grafana: PVC-backed data directory, file-provisioned datasources, dashboard sidecar with least-privilege ConfigMap RBAC, Service, and Ingress (grafana-017)
+
+## 2026-10-09
+
+- bash/docs/production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md — Production runbook for Bash 5.3+ strict-mode guardrails, PIPESTATUS telemetry, and ShellCheck CI gate with structured logging and rollback procedures (bash-041)
