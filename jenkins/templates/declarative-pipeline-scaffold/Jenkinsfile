@@ -1,0 +1,164 @@
+// last_verified: 2026-10-10 · Jenkins declarative pipeline scaffold
+// Main pipeline demonstrating shared library, credential binding, and multi-branch patterns.
+// Reference the shared library with: @Library('pipeline-lib') _
+
+@Library('pipeline-lib') _
+
+pipeline {
+    agent {
+        label 'docker && kubernetes'
+    }
+
+    options {
+        timestamps()
+        timeout(time: 60, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '20', artifactNumToKeepStr: '5'))
+        disableConcurrentBuilds()
+    }
+
+    environment {
+        REGISTRY = 'registry.example.com'
+        IMAGE_NAME = 'myapp'
+        STAGING_NS = 'staging'
+        PROD_NS = 'production'
+        SLACK_WEBHOOK_ID = 'slack-webhook-id'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    env.GIT_COMMIT = gitCheckout(
+                        repoUrl: 'https://github.com/example/myapp.git',
+                        branch: env.BRANCH_NAME,
+                        credentialsId: 'git-credentials-id'
+                    )
+                }
+            }
+        }
+
+        stage('Lint & Test') {
+            parallel {
+                stage('Lint') {
+                    steps {
+                        sh 'npm ci && npm run lint'
+                    }
+                }
+                stage('Unit Tests') {
+                    steps {
+                        sh 'npm test -- --coverage'
+                    }
+                    post {
+                        always {
+                            publishCoverage adapters: [coberturaAdapter('coverage/cobertura-coverage.xml')]
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Build Image') {
+            steps {
+                script {
+                    env.IMAGE_REF = dockerBuildPush(
+                        image: env.IMAGE_NAME,
+                        tag: env.BUILD_NUMBER,
+                        registry: env.REGISTRY,
+                        credentialsId: 'registry-credentials-id',
+                        dockerfile: 'Dockerfile',
+                        buildArgs: ['VERSION': env.BUILD_NUMBER]
+                    )
+                }
+            }
+        }
+
+        stage('Scan Image') {
+            when {
+                expression { params.SCAN_IMAGE == true }
+            }
+            steps {
+                sh '''
+                    trivy image --exit-code 1 --severity HIGH,CRITICAL ${IMAGE_REF} || true
+                '''
+            }
+        }
+
+        stage('Deploy Staging') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'release/*'
+                }
+            }
+            steps {
+                script {
+                    k8sDeploy(
+                        imageRef: env.IMAGE_REF,
+                        namespace: env.STAGING_NS,
+                        deployment: env.IMAGE_NAME,
+                        kubeconfigId: 'kubeconfig-credentials-id',
+                        timeout: '300s'
+                    )
+                }
+            }
+        }
+
+        stage('Integration Tests') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'release/*'
+                }
+            }
+            steps {
+                sh '''
+                    kubectl wait --for=condition=available deployment/${IMAGE_NAME} -n ${STAGING_NS} --timeout=120s
+                    curl -f https://staging.example.com/health || exit 1
+                '''
+            }
+        }
+
+        stage('Deploy Production') {
+            when {
+                branch 'main'
+            }
+            input {
+                message 'Deploy to production?'
+                ok 'Deploy'
+                submitterParameter 'APPROVER'
+            }
+            steps {
+                script {
+                    k8sDeploy(
+                        imageRef: env.IMAGE_REF,
+                        namespace: env.PROD_NS,
+                        deployment: env.IMAGE_NAME,
+                        kubeconfigId: 'kubeconfig-credentials-id',
+                        timeout: '600s'
+                    )
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                slackNotify(
+                    webhookId: env.SLACK_WEBHOOK_ID,
+                    status: currentBuild.result ?: 'SUCCESS',
+                    message: "Build ${env.BUILD_NUMBER} ${currentBuild.result ?: 'SUCCESS'} (commit: ${env.GIT_COMMIT?.take(7)})"
+                )
+            }
+        }
+        success {
+            echo 'Pipeline completed successfully'
+        }
+        failure {
+            echo 'Pipeline failed'
+        }
+        unstable {
+            echo 'Pipeline unstable'
+        }
+    }
+}

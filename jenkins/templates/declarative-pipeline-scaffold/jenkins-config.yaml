@@ -1,0 +1,96 @@
+# last_verified: 2026-10-10 · Jenkins Configuration as Code
+# Multi-branch pipeline configuration for the declarative pipeline scaffold.
+# Apply with: jenkins-cli casc-reload --config jenkins-config.yaml
+
+jenkins:
+  systemMessage: "Jenkins configured via Configuration as Code"
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              id: "git-credentials-id"
+              scope: GLOBAL
+              username: "${GIT_USER}"
+              password: "${GIT_TOKEN}"
+              description: "GitHub access token for repository checkout"
+          - usernamePassword:
+              id: "registry-credentials-id"
+              scope: GLOBAL
+              username: "${REGISTRY_USER}"
+              password: "${REGISTRY_PASS}"
+              description: "Container registry credentials"
+          - file:
+              id: "kubeconfig-credentials-id"
+              scope: GLOBAL
+              fileName: "kubeconfig"
+              description: "Kubernetes kubeconfig for cluster access"
+          - string:
+              id: "slack-webhook-id"
+              scope: GLOBAL
+              secret: "${SLACK_WEBHOOK_URL}"
+              description: "Slack incoming webhook URL"
+          - usernamePassword:
+              id: "github-scan-credentials"
+              scope: GLOBAL
+              username: "${GITHUB_SCAN_USER}"
+              password: "${GITHUB_SCAN_TOKEN}"
+              description: "GitHub token for multi-branch scanning (repo + admin:repo_hook scopes)"
+
+jobs:
+  - script: |
+      multibranchPipelineJob('myapp-pipeline') {
+          displayName('MyApp Pipeline')
+          description('Declarative pipeline with shared library, credential binding, and multi-branch discovery')
+          
+          branchSources {
+              github {
+                  repoOwner('myorg')
+                  repository('myapp')
+                  credentialsId('github-scan-credentials')
+                  includes('*/main', '*/release/*', '*/hotfix/*', '*/feature/*')
+                  excludes('*/dependabot/*', '*/renovate/*')
+                  traits {
+                      gitHubBranchDiscovery {
+                          strategyId(1) // Only branches with PRs
+                      }
+                      gitHubTagDiscovery {}
+                  }
+              }
+          }
+          
+          orphanedItemStrategy {
+              discardOldItems {
+                  numToKeep(10)
+                  daysToKeep(30)
+              }
+          }
+          
+          triggers {
+              periodic(15) // Scan every 15 minutes
+          }
+          
+          factory {
+              workflowBranchProjectFactory {
+                  scriptPath('Jenkinsfile')
+              }
+          }
+      }
+
+globalPipelineLibraries:
+  libraries:
+    - name: "pipeline-lib"
+      defaultVersion: "main"
+      implicit: false
+      allowVersionOverride: true
+      retriever:
+        modernSCM:
+          scm:
+            github:
+              repoOwner: "myorg"
+              repository: "pipeline-lib"
+              credentialsId: "github-scan-credentials"
+              traits:
+                - gitHubBranchDiscovery:
+                    strategyId: 3 # All branches
