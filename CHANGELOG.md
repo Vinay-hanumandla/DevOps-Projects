@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-10
+
+- bash/docs/production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md — Reworked production runbook: trimmed strict-mode/trap overlap into sibling pointers, deepened PIPESTATUS telemetry with verified capture-then-pass helpers and scope rules, and detailed the ShellCheck severity/dialect/exclusion CI gate with no unbacked version or URL claims (bash-041)
+
 ## 2026-10-08
 
 - repo-doc/scripts/project-validator.py — Kit project validator: checks tool folder structure, primer existence, and naming drift with stdlib-only checks (repo-doc-011)
