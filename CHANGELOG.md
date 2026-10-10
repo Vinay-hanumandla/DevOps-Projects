@@ -2,6 +2,7 @@
 
 ## 2026-10-10
 
+- k8s/manifests/stateless-workload-spread-hpa-pdb.yaml — Single-file Deployment + Service + HPA + PDB baseline centered on topology spread scheduling, HPA scale-up/scale-down behavior windows, startup probe with preStop drain, and a maxUnavailable-form PDB (k8s-030)
 - bash/docs/production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md — Reworked production runbook: trimmed strict-mode/trap overlap into sibling pointers, deepened PIPESTATUS telemetry with verified capture-then-pass helpers and scope rules, and detailed the ShellCheck severity/dialect/exclusion CI gate with no unbacked version or URL claims (bash-041)
 
 ## 2026-10-08
