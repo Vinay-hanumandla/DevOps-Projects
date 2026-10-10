@@ -1,0 +1,182 @@
+# last_verified: 2026-10-10 · kubernetes n/a
+
+# Purpose: single-file production baseline for a stateless workload —
+# Deployment plus Service plus HorizontalPodAutoscaler plus
+# PodDisruptionBudget. The mechanisms this file centers on are spread
+# scheduling (topologySpreadConstraints across hostname and zone), HPA
+# scale-up/scale-down behavior windows, and graceful termination
+# (startup probe plus preStop drain), with a maxUnavailable-form PDB.
+# When to use: a stateless HTTP workload that must stay spread across
+# nodes/zones, scale on CPU, and survive voluntary disruptions without
+# dropping below quorum. Not for stateful workloads — those need
+# StatefulSets with stable identity and storage, which this file does
+# not cover.
+# Prerequisites: a namespace to install into; cluster support for
+# autoscaling/v2 HPA behavior and topologySpreadConstraints; metrics
+# collection wired up so CPU utilization readings exist (without it the
+# HPA holds the current replica count and never scales).
+# Apply: kubectl apply -f stateless-workload-spread-hpa-pdb.yaml -n <namespace>
+# Verify: kubectl get deploy,svc,hpa,pdb -l app=web-spread -n <namespace>;
+#   kubectl describe hpa web-spread-hpa -n <namespace> shows current
+#   CPU utilization and the behavior windows below.
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-spread
+  labels:
+    app: web-spread
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: web-spread
+  template:
+    metadata:
+      labels:
+        app: web-spread
+    spec:
+      # Spread pods across nodes first, then zones. ScheduleAnyway keeps
+      # small clusters (fewer nodes than replicas) working while still
+      # spreading whenever placement allows.
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: web-spread
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: web-spread
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: web
+          # Pin to a digest or tag per local policy before production use.
+          image: nginx
+          ports:
+            - containerPort: 80
+          resources:
+            # requests.cpu is required: the HPA CPU target below is a
+            # percentage of this request value.
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+            failureThreshold: 12
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            failureThreshold: 3
+          lifecycle:
+            # Give the Service endpoints controller time to remove this
+            # pod before the process exits, so in-flight requests drain.
+            preStop:
+              exec:
+                command: ["sleep", "5"]
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-spread
+  labels:
+    app: web-spread
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: web-spread
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: web-spread-hpa
+  labels:
+    app: web-spread
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: web-spread
+  # Matches the Deployment replicas above so the HPA never scales below
+  # the spread baseline on first reconcile.
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60
+  behavior:
+    scaleUp:
+      # React immediately to traffic spikes; doubling per minute caps
+      # the blast radius of a single noisy metrics window.
+      stabilizationWindowSeconds: 0
+      policies:
+        - type: Percent
+          value: 100
+          periodSeconds: 60
+    scaleDown:
+      # Hold scale-down for five minutes so a brief traffic dip does
+      # not flappingly remove pods that just warmed up.
+      stabilizationWindowSeconds: 300
+      policies:
+        - type: Percent
+          value: 50
+          periodSeconds: 60
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: web-spread-pdb
+  labels:
+    app: web-spread
+spec:
+  # maxUnavailable form (rather than minAvailable): exactly one pod may
+  # be voluntarily disrupted at a time, which reads directly off the
+  # rolling-update maxUnavailable above.
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: web-spread
