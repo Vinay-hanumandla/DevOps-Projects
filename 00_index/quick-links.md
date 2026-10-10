@@ -210,6 +210,9 @@
 - [Rebase-based vs merge-based release workflows](../git/docs/rebase-based-vs-merge-based-release-workflows.md) — comparing rebase and merge strategies for release branches
 - [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md) — how the two strategies behave once a repo crosses hundreds of contributors and long-lived release branches
 
+### Choose a PR integration strategy
+- [Comparing merge, rebase, and squash-merge strategies](../git/docs/comparing-merge-rebase-squash-strategies.md) — the three integration strategies weighed across history topology, conflict rates, and CI throughput, with a decision framework for picking a repo's default
+
 ### Choose between submodules, subtrees, and monorepo
 - [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md) — when to use each approach for managing external dependencies and multi-repo structures
 
@@ -341,6 +344,15 @@
 - [Jenkins CASC reproducible controller setup](../jenkins/configs/jenkins-casc-reproducible-controller-setup.yaml) — a CASC bundle that produces a deterministic controller from a single config
 - [Jenkins HA CASC config](../jenkins/configs/jenkins-casc-ha.yaml) — Jenkins Configuration as Code for a reproducible, high-availability controller setup
 
+### Scaffold a declarative pipeline with a shared library
+- [Declarative pipeline scaffold](../jenkins/templates/declarative-pipeline-scaffold/README.md) — copy-in declarative pipeline with shared-library steps, `withCredentials` credential binding, and multi-branch discovery config
+- [Scaffold Jenkinsfile](../jenkins/templates/declarative-pipeline-scaffold/Jenkinsfile) — the pipeline itself: checkout → lint/test → build → scan → deploy staging → integration test → deploy production → notify
+- [Scaffold multi-branch config](../jenkins/templates/declarative-pipeline-scaffold/jenkins-config.yaml) — Job DSL / CASC bundle that wires the directory up as a multi-branch pipeline
+- [gitCheckout step](../jenkins/templates/declarative-pipeline-scaffold/vars/gitCheckout.groovy) — shared-library step that clones with a bound Git credential and returns the commit SHA
+- [dockerBuildPush step](../jenkins/templates/declarative-pipeline-scaffold/vars/dockerBuildPush.groovy) — shared-library step that builds and pushes an image with a bound registry credential
+- [k8sDeploy step](../jenkins/templates/declarative-pipeline-scaffold/vars/k8sDeploy.groovy) — shared-library step that deploys to a namespace with a bound kubeconfig credential
+- [slackNotify step](../jenkins/templates/declarative-pipeline-scaffold/vars/slackNotify.groovy) — shared-library step that posts a build outcome to Slack via a bound webhook credential
+
 ### Write Jenkins shared library code
 - [Jenkins shared library scaffold](../jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline library with `vars/*.groovy`, tests, and CI gating
 - [Shared library Jenkinsfile](../jenkins/templates/jenkins-shared-library/Jenkinsfile) — entrypoint for the shared library demonstrating `@Library` usage and pipeline structure
@@ -422,6 +434,7 @@
 - [Kube-Prometheus primer](../kprom/notes/0000-primer-kube-prometheus.md) — the kube-prometheus-stack chart brings Prometheus, Alertmanager, node-exporter, kube-state-metrics, and Grafana onto a cluster as one Helm release, reconciled from a values file instead of hand-written scrape configs
 - [Minimal kube-prometheus-stack local values](../kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml) — flips the three UIs to NodePort so the monitoring stack is reachable from a laptop on a local cluster
 - [Installing the kube-prometheus stack and exploring Grafana](../kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md) — first cluster install, the dashboard folder the chart provisions at boot, and the `admin`/`admin` default-credential gotcha
+- [Quickstart walkthrough: deploying kube-prometheus-stack](../kprom/notes/2026-10-10-quickstart-walkthrough-kube-prometheus-stack.md) — the chart's scrape-config mental model (ServiceMonitor, PodMonitor, the `release` label) and the traps that cost the most time: ClusterIP defaults, the Grafana admin-password secret, and ServiceMonitor namespace matching
 
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip

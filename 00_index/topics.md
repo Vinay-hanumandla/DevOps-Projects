@@ -53,11 +53,11 @@
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 - **snippets** (1): [Reusable workflow caller](../gha/snippets/reusable-workflow-caller.yaml) — minimal caller of a centrally maintained reusable workflow, passing inputs and secrets and reading outputs downstream
 
-## Git  ·  55 files
+## Git  ·  56 files
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
 - **notes** (16): most recent → [Companion forgotten undo notes](../git/notes/2026-08-25-forgotten.md), [Git companion file quickstart](../git/notes/2026-09-10-git-companion-file-quickstart.txt), [Git companion readme primer](../git/notes/2026-09-10-git-companion-readme-primer.txt), [Git companion readme quickstart](../git/notes/2026-09-10-git-companion-readme-quickstart.md)
-- **docs** (12): most recent → [Worktree workflows for hotfix isolation](../git/docs/worktree-hotfix-isolation.md), [Worktree workflows for parallel feature development](../git/docs/worktree-parallel-feature-development.md), [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md), [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md)
+- **docs** (13): most recent → [Comparing merge, rebase, and squash-merge strategies](../git/docs/comparing-merge-rebase-squash-strategies.md) — the three integration strategies weighed across history topology, conflict rates, and CI throughput, with a decision framework for picking a default · [Worktree workflows for hotfix isolation](../git/docs/worktree-hotfix-isolation.md), [Worktree workflows for parallel feature development](../git/docs/worktree-parallel-feature-development.md), [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md), [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md)
 - **scripts** (7): most recent → [Repo health check](../git/scripts/git-repo-health-check.sh) — read-only gate combining fsck integrity, a deprecated-config audit for the Git 3.0 migration, and a partial-clone adoption report · [Changelog from conventional commits](../git/scripts/changelog-from-conventional-commits.sh), [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Git PR helper](../git/scripts/git-pr-helper.sh) · _…and 3 more under `git/scripts/`._
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
 - **manifests** (1): [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps git events (push, tag, merge request) to build → test → deploy jobs
@@ -88,7 +88,7 @@
 - **notebooks** (1): [Comparing Helm values merging](../helm/notebooks/comparing-helm-values-merging.ipynb)
 - **templates** (19): [Library chart scaffold](../helm/templates/library-chart-scaffold/README.md) — a `lib-common` chart of named templates, an app chart consuming them, a `values.schema.json`, and a `helm test` hook · [my-service chart scaffold](../helm/templates/my-service/README.md) — the plain chart the values-inheritance guide's `-f values-staging.yaml` runs against, with one override file per environment · _…and 15 more under `helm/templates/`._
 
-## Jenkins  ·  21 files
+## Jenkins  ·  28 files
 
 - **primer:** [Jenkins — quick primer](../jenkins/notes/0000-primer-jenkins.md)
 - **notes** (5): most recent → [First controller plugins, agents, credentials](../jenkins/notes/2026-09-22-first-controller-plugins-agents-credentials.md), [Following the official Jenkins tutorial](../jenkins/notes/2026-09-06-followed-jenkins-tutorial.md), [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md)
@@ -96,7 +96,7 @@
 - **docs** (3): most recent → [Jenkins + GitHub Actions + Argo CD progressive delivery](../jenkins/docs/integrating-jenkins-github-actions-argocd-progressive-delivery.md), [Moving a Jenkinsfile from inline script to SCM](../jenkins/docs/moving-jenkinsfile-to-scm-gotchas.md), [What tripped me up following the Jenkins declarative pipeline tutorial](../jenkins/docs/2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas
 - **scripts** (2): [Jenkinsfile for NodeJS pipeline](../jenkins/scripts/2026-09-22-nodejs-jenkinsfile.groovy) — declarative pipeline for building and testing a Node.js app, [Common CI/CD shared library groovy](../jenkins/scripts/common-cicd-shared-library.groovy) — shared library logic with buildAndPushDocker, checkoutAndLint, and deployToK8s steps
 - **snippets** (3): most recent → [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy), [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
-- **templates** (5): [Jenkins shared library scaffold](../jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline library with `vars/*.groovy`, tests, and CI gating · _…and 4 more under `jenkins/templates/jenkins-shared-library/`._
+- **templates** (12): [Declarative pipeline scaffold](../jenkins/templates/declarative-pipeline-scaffold/README.md) — copy-in declarative pipeline with shared-library steps (`gitCheckout`, `dockerBuildPush`, `k8sDeploy`, `slackNotify`), `withCredentials` credential binding, and multi-branch discovery config · [Jenkins shared library scaffold](../jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline library with `vars/*.groovy`, tests, and CI gating · _…and 10 more under `jenkins/templates/`._
 
 ## Kubernetes  ·  44 files
 
@@ -122,10 +122,10 @@
 - **manifests** (1): [Local monitoring stack](../prom/manifests/local-monitoring-stack.yaml) — one-shot Prometheus + Alertmanager + Node Exporter stack for local evaluation
 - **templates** (10): [Prometheus + Grafana + Alertmanager stack scaffold](../prom/templates/prometheus-grafana-alertmanager-stack/README.md) — one Compose file for scraping, recording and alert rules, Alertmanager routing, and provisioned Grafana dashboards · _…and 9 more under `prom/templates/prometheus-grafana-alertmanager-stack/`._
 
-## Kube-Prometheus  ·  3 files
+## Kube-Prometheus  ·  4 files
 
 - **primer:** [Kube-Prometheus — quick primer](../kprom/notes/0000-primer-kube-prometheus.md) — the kube-prometheus-stack Helm chart bundles Prometheus Operator, Prometheus, Alertmanager, node-exporter, kube-state-metrics, and Grafana as one operator-managed release
-- **notes** (2): most recent → [Installing the kube-prometheus stack and exploring Grafana](../kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md) — installed the chart with a small values file that flips the three services to NodePort so I could reach the UIs from outside the cluster
+- **notes** (3): most recent → [Quickstart walkthrough: deploying kube-prometheus-stack](../kprom/notes/2026-10-10-quickstart-walkthrough-kube-prometheus-stack.md) — the chart's scrape-config mental model (ServiceMonitor, PodMonitor, the `release` label) and the five traps that cost the most time · [Installing the kube-prometheus stack and exploring Grafana](../kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md) — installed the chart with a small values file that flips the three services to NodePort so I could reach the UIs from outside the cluster
 - **configs** (1): [Minimal kube-prometheus local values](../kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml) — the smallest values file that brings up kube-prometheus-stack on Minikube with NodePorts
 
 ## Python  ·  47 files
