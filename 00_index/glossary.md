@@ -566,3 +566,9 @@
 - **ansible-navigator** — the containerised runner for developing and debugging automation locally: it executes the play inside the same execution environment the controller would use, so a playbook that works under `ansible-navigator run` behaves the same as a scheduled job instead of depending on the workstation's libraries.
 - **ansible-rulebook** — the event-driven runner that watches sources (webhooks, message queues, alerts) and launches a playbook when a condition matches; the mode for "when this happens, run that" rather than a schedule or a human clicking launch.
 - **AAP gateway API (`ansible.platform`)** — the single API surface the Automation Platform exposes for its services; the `ansible.platform` collection ships plugins that declare inventories, credentials, job templates, and schedules against it, so controller configuration becomes a versioned manifest reconciled by a play instead of clicks in the UI.
+
+## Kube-Prometheus
+
+- **Kube-Prometheus** — the kube-prometheus-stack Helm chart that bundles the Prometheus Operator, Prometheus, Alertmanager, node-exporter, kube-state-metrics, and Grafana into one operator-managed release; the one-command install that replaces assembling all six components by hand.
+- **Prometheus Operator** — a Kubernetes controller that watches `Prometheus` and `Alertmanager` custom resources and reconciles the underlying StatefulSet/Deployment, Service, and ServiceMonitor objects; the operator pattern that keeps scrape config and alert routing in sync with the cluster instead of hand-editing YAML.
+- **ServiceMonitor** — a Prometheus Operator custom resource that declares which Kubernetes Services (and therefore which pods) should be scraped, what port and path to target, and which label selectors to match; the bridge between Services and Prometheus scrape configs.
