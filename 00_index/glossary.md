@@ -160,6 +160,10 @@
 - **Jenkinsfile** — the pipeline-as-code file living in the repo so job definitions are versioned. Example: `Jenkinsfile` at the root of a project.
 - **Initial admin password** — a one-time secret Jenkins writes to a file on disk during install; it's on the filesystem, not in the install output, and is needed for the first web-UI login.
 - **Configuration as Code (CASC)** — Jenkins Configuration as Code plugin (`jenkins.yaml` or `.yml` files) that defines controller configuration — security, tools, plugins, credentials, and system settings — as declarative YAML so the controller can be rebuilt from a single file.
+- **Shared library** — a versioned Groovy library whose `vars/*.groovy` files each define a `call(...)` method, so a pipeline invokes them as steps (`gitCheckout(...)`, `dockerBuildPush(...)`); pipeline logic is written once and reused across Jenkinsfiles instead of copy-pasted.
+- **Credential binding** — mapping a Jenkins-stored credential to an environment variable or file inside a `withCredentials` block, so secrets reach the steps that need them without appearing in the pipeline definition or console output.
+- **Multi-branch pipeline** — a Jenkins pipeline job type that automatically discovers branches and pull requests in a repository and runs the Jenkinsfile each one contains, so every branch gets the same pipeline without manual job setup.
+- **Job DSL** — a Groovy API for defining Jenkins jobs programmatically; in the declarative pipeline scaffold it wires a directory up as a multi-branch pipeline alongside (or instead of) CASC configuration.
 
 ## Grafana
 
@@ -333,6 +337,9 @@
 - **kube-prometheus-stack** — the Helm chart that installs a complete monitoring stack onto a Kubernetes cluster in one release: Prometheus, Alertmanager, the Prometheus Operator, node-exporter, kube-state-metrics, and Grafana, with default dashboards and alerting rules provisioned automatically.
 - **Prometheus Operator** — the controller that watches `Prometheus` and `ServiceMonitor` custom resources and reconciles the Deployments, Services, and ConfigMaps that actually run; it is a component inside the kube-prometheus project, not the whole stack.
 - **ServiceMonitor** — the custom resource the Prometheus Operator watches to decide which pods to scrape; instead of editing `prometheus.yml`, you declare one per set of services and the operator generates the scrape config from it.
+- **PodMonitor** — a custom resource like ServiceMonitor that scrapes pods directly instead of through a Service, for workloads that don't have a Service of their own.
+- **`release` label** — the convention the kube-prometheus-stack chart uses to mark its own resources (`release: <helm-release-name>`); the Prometheus CR's `serviceMonitorSelector` and `podMonitorSelector` pick ServiceMonitors and PodMonitors by that label, so a second stack installed under a different release name needs the selector widened to match both.
+- **`serviceMonitorNamespaceSelector`** — a field on the Prometheus CR that widens ServiceMonitor discovery beyond the chart's own namespace; by default the chart only selects ServiceMonitors in the namespace it was installed into, so apps in other namespaces need either this selector set to `{}` or a ServiceMonitor in the chart's namespace targeting their Services.
 - **kube-state-metrics** — a sidecar that reads the Kubernetes API and re-expresses object state (deployments, pods, nodes) as metrics for Prometheus to scrape, filling the gap that raw pod metrics cannot show.
 
 ## Jenkins (additional)
