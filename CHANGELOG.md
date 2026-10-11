@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-11
+
+- tf/templates/reusable-module-scaffold/ — Reusable Terraform module scaffold: variable validation with regex/enum checks, output contracts for downstream consumers, Terratest suite with happy/disabled/validation-failure cases, and GitHub Actions CI matrix over Go 1.22/1.23 (tf-028)
+
 ## 2026-10-10
 
 - repo-doc/scripts/kit-conformance-checker.py — Kit conformance checker: validates task entry schema, manifest queue sync, and id-prefix folder progression with stdlib-only checks (repo-doc-013)
