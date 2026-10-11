@@ -21,11 +21,11 @@ The `kprom/` folder wraps the kube-prometheus-stack Helm chart for cluster-nativ
 
 ## Quick links
 
-- [Bash production runbook: strict-mode guardrails, PIPESTATUS telemetry, and ShellCheck CI gate](bash/docs/production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md) — a production runbook for hardening Bash scripts against silent data corruption, undetected pipeline failures, and CI false positives across three complementary layers.
+- [Declarative pipeline scaffold](jenkins/templates/declarative-pipeline-scaffold/README.md) — copy-in Jenkins declarative pipeline with shared-library steps, `withCredentials` credential binding, and multi-branch discovery config.
+- [Kube-Prometheus quickstart walkthrough](kprom/notes/2026-10-10-quickstart-walkthrough-kube-prometheus-stack.md) — what the chart installs, the ServiceMonitor/PodMonitor mental model that replaces editing `prometheus.yml`, and the traps that cost the most time.
+- [Comparing merge, rebase, and squash-merge strategies](git/docs/comparing-merge-rebase-squash-strategies.md) — a decision framework for picking a default PR integration method across history topology, conflict rates, and CI throughput.
+- [Bash production runbook](bash/docs/production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md) — a production runbook for hardening Bash scripts against silent data corruption, undetected pipeline failures, and CI false positives across three complementary layers.
 - [Bash 5.3 feature deep-dive notebook](bash/notebooks/bash-5.3-features-deep-dive.ipynb) — GLOBSORT, inherit_errexit, ${| } pipefail, and test builtin changes in Bash 5.3, verified by running every cell on 5.2 then diffing on 5.3.
-- [Project configuration schema](repo-doc/configs/project-configuration-schema.yaml) — YAML schema reference for the kit layout, companion to the project validator.
-- [Project validator](repo-doc/scripts/project-validator.py) — one runnable check that answers whether a tool folder follows the conventions: required subdirs, primer existence, and level progression.
-- [Minimal kube-prometheus local values](kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml) — the smallest values file that brings up kube-prometheus-stack on Minikube with NodePorts.
 
 ## Layout
 
@@ -60,15 +60,15 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | Ansible | 3 | 6 | 5 | 1 | 4 | 3 | 1 | 0 | 28 | 0 | 0 | 2026-10-05 |
 | AWX | 3 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-07 |
-| Bash | 3 | 8 | 12 | 3 | 0 | 0 | 6 | 1 | 30 | 0 | 0 | 2026-10-09 |
+| Bash | 3 | 8 | 12 | 3 | 0 | 0 | 6 | 1 | 30 | 0 | 0 | 2026-10-10 |
 | Docker | 5 | 4 | 8 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 2026-10-04 |
 | GitHub Actions | 3 | 5 | 6 | 1 | 11 | 2 | 1 | 0 | 0 | 0 | 0 | 2026-10-03 |
-| Git | 16 | 12 | 7 | 0 | 0 | 1 | 0 | 0 | 18 | 0 | 1 | 2026-09-30 |
+| Git | 16 | 13 | 7 | 0 | 0 | 1 | 0 | 0 | 18 | 0 | 1 | 2026-10-09 |
 | Grafana | 4 | 2 | 1 | 3 | 6 | 3 | 1 | 1 | 8 | 0 | 0 | 2026-10-06 |
 | Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 2026-09-26 |
-| Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 5 | 0 | 0 | 2026-09-23 |
+| Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 12 | 0 | 0 | 2026-10-10 |
 | Kubernetes | 6 | 5 | 3 | 2 | 1 | 5 | 1 | 1 | 20 | 0 | 0 | 2026-10-07 |
-| Kube-Prometheus | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-08 |
+| Kube-Prometheus | 3 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-10 |
 | Prometheus | 4 | 3 | 2 | 1 | 7 | 1 | 0 | 0 | 10 | 0 | 0 | 2026-10-06 |
 | Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 23 | 0 | 0 | 2026-10-03 |
 | Repo-doc | 5 | 3 | 4 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-08 |
@@ -80,7 +80,7 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 
 ## Status
 
-Currently hardens the Bash tooling surface and adds cluster-native monitoring: a production runbook for strict-mode guardrails, PIPESTATUS telemetry, and ShellCheck CI; a Bash 5.3 deep-dive notebook; and Kube-Prometheus on Minikube with minimal local values. Just landed: an AWX control plane with a first job template run, a production-service scaffold packing HPA, PDB, NetworkPolicy, and namespace budgets behind one Kustomization, and a cluster hardening manifest with PodSecurity admission and default-deny networking.
+Currently working through CI delivery and observability: a copy-in Jenkins declarative pipeline scaffold with shared-library steps, credential binding, and multi-branch discovery; and a Kube-Prometheus quickstart walkthrough that turns the Operator's scrape-config model — ServiceMonitor, PodMonitor, the `release` label — into first-principles notes. Just landed: a merge/rebase/squash-merge decision framework for Git integration strategy, a Bash production runbook for the exit-zero failures strict mode hides, and a Bash 5.3 feature deep-dive notebook.
 
 ---
-_Last updated: 2026-10-09_
+_Last updated: 2026-10-10_
