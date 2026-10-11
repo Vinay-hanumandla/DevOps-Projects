@@ -1,3 +1,4 @@
+// last_verified: 2026-10-11 · terratest v0.45.0
 module github.com/example/terraform-module-test
 
 go 1.22
