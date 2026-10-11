@@ -2,6 +2,10 @@
 
 ## 2026-10-11
 
+- k8s/docs/choosing-service-mesh-istio-linkerd-consul.md — Choosing between Istio, Linkerd, and Consul for Kubernetes service mesh: comparison table, decision path, install and verify steps, and common errors (k8s-031)
+- awx/notes/2026-10-11-awx-24-6-quickstart-admin-bootstrap-ee-wiring-allow-jinja-trap.md — AWX 24.6 quickstart: admin bootstrap, execution environment wiring, and the ALLOW_JINJA_IN_EXTRA_VARS trap (awx-008)
+- docker/docs/comparing-docker-storage-drivers-and-volume-types-for-stateful-workloads.md — Comparing Docker storage drivers and volume types for stateful workloads: overlay2/btrfs/zfs/vfs drivers, named/bind/tmpfs volumes, and a decision path (docker-013)
+- Passed ([x]) tf-028 — Terraform: template — Reusable module scaffold: variable validation, output contracts, and CI test harness with Terratest · Level: L4 · 2026-10-11
 - tf/templates/reusable-module-scaffold/ — Reusable Terraform module scaffold: variable validation with regex/enum checks, output contracts for downstream consumers, Terratest suite with happy/disabled/validation-failure cases, and GitHub Actions CI matrix over Go 1.22/1.23 (tf-028)
 
 ## 2026-10-10
