@@ -2,6 +2,7 @@
 
 ## 2026-10-11
 
+- repo-doc/docs/kit-conformance-in-ci.md — Wiring `repo-doc/scripts/kit-conformance-checker.py` into GitHub Actions as a PR gate: pull_request trigger, Python 3.9+ stdlib-only run, and the gotchas around committed-path invocation, missing-input silent skip, and out-of-scope prefix notices (repo-doc-012)
 - k8s/docs/choosing-service-mesh-istio-linkerd-consul.md — Choosing between Istio, Linkerd, and Consul for Kubernetes service mesh: comparison table, decision path, install and verify steps, and common errors (k8s-031)
 - awx/notes/2026-10-11-awx-24-6-quickstart-admin-bootstrap-ee-wiring-allow-jinja-trap.md — AWX 24.6 quickstart: admin bootstrap, execution environment wiring, and the ALLOW_JINJA_IN_EXTRA_VARS trap (awx-008)
 - docker/docs/comparing-docker-storage-drivers-and-volume-types-for-stateful-workloads.md — Comparing Docker storage drivers and volume types for stateful workloads: overlay2/btrfs/zfs/vfs drivers, named/bind/tmpfs volumes, and a decision path (docker-013)
