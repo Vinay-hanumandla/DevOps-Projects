@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-12
+
+- kprom/manifests/2026-10-12-servicemonitor-prometheusrule-red-metrics.yaml — Minimal ServiceMonitor and PrometheusRule for a sample Go app: named-port scrape of /metrics plus error-rate and p99-latency alerts over RED metrics (kprom-008)
+- awx/configs/2026-10-12-execution-environment-mounts-pull-policy.yaml — Custom execution environment wiring: image pull policy, podman-style extra volume mounts, and an Organization-scoped container registry credential attached to the EE (awx-009)
+
 ## 2026-10-11
 
 - repo-doc/docs/kit-conformance-in-ci.md — Wiring `repo-doc/scripts/kit-conformance-checker.py` into GitHub Actions as a PR gate: pull_request trigger, Python 3.9+ stdlib-only run, and the gotchas around committed-path invocation, missing-input silent skip, and out-of-scope prefix notices (repo-doc-012)

@@ -1,0 +1,74 @@
+# last_verified: 2026-10-12 · kube-prometheus-stack n/a
+# I wanted the smallest scrape + alert pair that shows RED metrics
+# (rate, errors, duration) for a sample Go app. Two documents only:
+# a ServiceMonitor to scrape /metrics, and a PrometheusRule with one
+# error-rate alert and one latency alert. I applied it with
+# kubectl apply -f this file on a cluster already running the
+# kube-prometheus stack, then checked Targets and Alerts in the UI.
+#
+# Gotcha I hit: the label under metadata.labels has to match what my
+# stack's Prometheus actually selects for. On my install the selector
+# key was `release`, so I used the value below -- if your Targets page
+# stays empty, print your Prometheus object and copy its match label.
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: sample-go-app
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: sample-go-app
+  namespaceSelector:
+    matchNames:
+      - demo
+  endpoints:
+    # I used a named port because the monitor matches ports by name,
+    # not number -- `port: 8080` here would silently match nothing.
+    - port: http-metrics
+      path: /metrics
+      interval: 30s
+      scrapeTimeout: 10s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: sample-go-app-red
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: sample-go-app-red
+      interval: 30s
+      rules:
+        # Errors: share of 5xx responses over all responses, 5m window.
+        # I picked 0.05 for 5 minutes because lower thresholds paged me
+        # on deploys; still tuning this, 0.05 feels like a starting point.
+        - alert: SampleGoAppHighErrorRate
+          expr: |
+            sum by (job) (rate(http_requests_total{job="sample-go-app", status=~"5.."}[5m]))
+              /
+            sum by (job) (rate(http_requests_total{job="sample-go-app"}[5m])) > 0.05
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "High 5xx rate on sample-go-app"
+        # Duration: p99 request latency over 0.5s for 10 minutes.
+        # My app exposes a histogram called http_request_duration_seconds,
+        # so quantile over the _bucket series works; if yours is a summary
+        # instead, query the quantile directly and drop the histogram call.
+        - alert: SampleGoAppHighLatency
+          expr: |
+            histogram_quantile(0.99,
+              sum by (le, job) (rate(http_request_duration_seconds_bucket{job="sample-go-app"}[5m]))
+            ) > 0.5
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: "p99 latency above 0.5s on sample-go-app"
