@@ -1,0 +1,38 @@
+# last_verified: 2026-10-12 · awx 24.6.1 · awx-operator 2.19.1
+# Wiring a custom execution environment that needs host files inside the
+# job pods, a predictable image pull rule, and a private registry login.
+# I applied these as extra spec fields on my existing AWX custom resource
+# (same file shape as 2026-10-07-minimal-awx-custom-resource-minikube.yaml)
+# and did the registry login in the UI, because registry credentials live
+# in AWX itself, not in the CR. Where I got stuck is in the comments.
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: awx-demo
+  namespace: awx
+spec:
+  # I set this to Always while iterating on the EE image so every job
+  # pulls the newest tag. The default kept running yesterday's image and
+  # I blamed my playbook for half an hour before checking the job pod.
+  image_pull_policy: Always
+  # My custom EE alongside the default one. The name is what shows up in
+  # the Execution Environments list; the image has to be reachable from
+  # the cluster, otherwise jobs sit in ImagePullBackOff with no hint in AWX.
+  ee_images:
+    - name: "team-custom-ee"
+      image: "registry.example.com/team/custom-ee:latest"
+  # Podman-style extra mounts for the EE job pods. I needed a shared
+  # collections dir from the host. Format is src/dest plus options, much
+  # like a -v flag.
+  ee_extra_volume_mounts: |
+    - src: /opt/awx/collections
+      dest: /usr/share/ansible/collections
+      options: "z"
+  # Registry login: NOT in this file. In the AWX UI I went to Credentials,
+  # added one of type Container Registry with the registry user and token,
+  # and scoped it to my Organization (not Galaxy) -- scoping it wrong was
+  # my second stuck point, the EE just reported unauthorized until the
+  # credential and the EE sat in the same Organization. Then under
+  # Execution Environments I opened team-custom-ee and attached that
+  # credential, and picked the EE on the job template. Next thing I want
+  # to try is a read-only mount (options "ro,z") for a certs bundle.
