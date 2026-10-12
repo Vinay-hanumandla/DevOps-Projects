@@ -21,11 +21,11 @@ The `kprom/` folder wraps the kube-prometheus-stack Helm chart for cluster-nativ
 
 ## Quick links
 
+- [Reusable Terraform module scaffold](tf/templates/reusable-module-scaffold/README.md) — copy-in module scaffold with variable validation, output contracts, a Terratest suite (happy path, disabled, validation-rejection), and a Go-version CI matrix.
+- [Kit conformance checker](repo-doc/scripts/kit-conformance-checker.py) — one runnable check that the task list, the manifest snapshot, and the kit tree agree on entry shape, queue sync, and id-prefix folder progression.
 - [Declarative pipeline scaffold](jenkins/templates/declarative-pipeline-scaffold/README.md) — copy-in Jenkins declarative pipeline with shared-library steps, `withCredentials` credential binding, and multi-branch discovery config.
 - [Kube-Prometheus quickstart walkthrough](kprom/notes/2026-10-10-quickstart-walkthrough-kube-prometheus-stack.md) — what the chart installs, the ServiceMonitor/PodMonitor mental model that replaces editing `prometheus.yml`, and the traps that cost the most time.
-- [Comparing merge, rebase, and squash-merge strategies](git/docs/comparing-merge-rebase-squash-strategies.md) — a decision framework for picking a default PR integration method across history topology, conflict rates, and CI throughput.
 - [Bash production runbook](bash/docs/production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md) — a production runbook for hardening Bash scripts against silent data corruption, undetected pipeline failures, and CI false positives across three complementary layers.
-- [Bash 5.3 feature deep-dive notebook](bash/notebooks/bash-5.3-features-deep-dive.ipynb) — GLOBSORT, inherit_errexit, ${| } pipefail, and test builtin changes in Bash 5.3, verified by running every cell on 5.2 then diffing on 5.3.
 
 ## Layout
 
@@ -46,11 +46,11 @@ The `kprom/` folder wraps the kube-prometheus-stack Helm chart for cluster-nativ
 - `python/` — Python fundamentals, configuration, async tooling, and DevOps integrations.
 - `repo-doc/` — repository coverage and documentation-maintenance utilities.
 - `scripting-automation-philosophy/` — the companion config for the scripting deploy-checklist snippet.
-- `tf/` — Terraform projects, state, validation, manifests, and Terragrunt layouts.
+- `tf/` — Terraform projects, state, validation, manifests, reusable module scaffolding, and Terragrunt layouts.
 
 ## Coverage
 
-Counts include files nested inside template trees. `Src` and `Hooks` are support locations that only a few tools use.
+Counts include files nested inside template trees. `Src` and `Hooks` are support locations that only a few tools use. A folder's total (see `00_index/topics.md`) also counts root-level support dotfiles such as `docker/.dockerignore`, which has no category column here.
 In the `docs/concepts/` row, `Notes` counts the eight foundational primers alongside their companion notes and `Docs` the cross-tool concept articles.
 
 <details>
@@ -67,12 +67,12 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 | Grafana | 4 | 2 | 1 | 3 | 6 | 3 | 1 | 1 | 8 | 0 | 0 | 2026-10-06 |
 | Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 2026-09-26 |
 | Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 12 | 0 | 0 | 2026-10-10 |
-| Kubernetes | 6 | 5 | 3 | 2 | 1 | 5 | 1 | 1 | 20 | 0 | 0 | 2026-10-07 |
+| Kubernetes | 6 | 5 | 3 | 2 | 1 | 6 | 1 | 1 | 20 | 0 | 0 | 2026-10-07 |
 | Kube-Prometheus | 3 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-10 |
 | Prometheus | 4 | 3 | 2 | 1 | 7 | 1 | 0 | 0 | 10 | 0 | 0 | 2026-10-06 |
 | Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 23 | 0 | 0 | 2026-10-03 |
-| Repo-doc | 5 | 3 | 4 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-08 |
-| Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 8 | 0 | 0 | 2026-09-22 |
+| Repo-doc | 5 | 3 | 5 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-10 |
+| Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 17 | 0 | 0 | 2026-10-11 |
 | Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | Foundational concepts | 11 | 14 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 2026-09-16 |
 
@@ -80,7 +80,7 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 
 ## Status
 
-Currently working through CI delivery and observability: a copy-in Jenkins declarative pipeline scaffold with shared-library steps, credential binding, and multi-branch discovery; and a Kube-Prometheus quickstart walkthrough that turns the Operator's scrape-config model — ServiceMonitor, PodMonitor, the `release` label — into first-principles notes. Just landed: a merge/rebase/squash-merge decision framework for Git integration strategy, a Bash production runbook for the exit-zero failures strict mode hides, and a Bash 5.3 feature deep-dive notebook.
+Currently focused on module quality and kit hygiene: a reusable Terraform module scaffold with validated inputs, output contracts, and a Terratest suite that runs on a Go-version CI matrix; and a kit conformance checker that verifies the task list, manifest, and folder tree agree before a change goes through CI. Just landed: a Kube-Prometheus quickstart walkthrough, a declarative Jenkins pipeline scaffold, and a merge/rebase/squash-merge decision framework for Git integration strategy.
 
 ---
-_Last updated: 2026-10-10_
+_Last updated: 2026-10-11_

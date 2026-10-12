@@ -445,6 +445,8 @@
 - **`run-all`** — a Terragrunt command that runs the same subcommand (e.g. `plan`) across every environment folder at once, so dev, staging, and prod are previewed from one invocation instead of three separate runs.
 - **Fan-out composition** — a root Terraform module that wires focused submodules (here VPC, EKS, RDS) together by passing one module's outputs as another module's inputs, keeping each submodule small while the root owns the glue.
 - **Composition module** — the alternative to fan-out: one dedicated module owns the wiring between other modules, so each environment folder stays a thin caller. Worth the extra indirection when the number of environments or teams makes the root's argument lists unwieldy.
+- **Terratest** — a Go test framework for infrastructure code; `go test` against a module exercises plan/apply behaviour in real cases (here happy path, disabled module, and validation-rejection), so a module change is gated on a run rather than a `terraform validate`.
+- **Output contract** — the set of a module's declared outputs with descriptions and stable names; downstream configurations import the contract, not implementation details, so a module can be republished without breaking its callers.
 
 ## Ansible (additional)
 

@@ -485,6 +485,7 @@
 - [Terraform coverage check](../tf/docs/2026-08-11-terraform-coverage.md) — reconciling the Terraform folder against the manifest and fixing the counts
 
 ### Share one Terraform module across environments
+- [Reusable Terraform module scaffold](../tf/templates/reusable-module-scaffold/README.md) — copy-in module with validated inputs, output contracts, a Terratest suite (happy path, disabled, validation-rejection), and a Go-version CI matrix
 - [Terragrunt multi-environment scaffold](../tf/templates/terragrunt-multi-env/README.md) — one reusable module deployed to dev, staging, and prod with per-environment inputs and a shared remote-state backend
 - [Root module fan-out composition](../tf/manifests/root-module-fan-out-composition.hcl) — VPC, EKS, and RDS submodules wired together by passing outputs between module blocks
 - [State management strategies](../tf/notebooks/state-management-strategies.ipynb) — notebook comparing approaches to Terraform state handling
@@ -602,6 +603,7 @@
 - [Following the tutorial again — the pre-PR validation loop](../repo-doc/docs/2026-09-26-tutorial-validation-loop-trip-ups.md) — front-matter, CHANGELOG entry, folder-check script, and reading the gap report before opening a PR
 - [Check folders and report gaps](../repo-doc/scripts/2026-09-25-check-folders-and-report-gaps.sh) — one script that regenerates coverage tables, validates tool-folder structure, and reports gaps
 - [Project validator](../repo-doc/scripts/project-validator.py) — a standard-library Python check that walks each tool folder and confirms it follows the kit's layout conventions
+- [Kit conformance checker](../repo-doc/scripts/kit-conformance-checker.py) — validates task entry schema, manifest queue sync, and id-prefix folder progression with stdlib-only checks
 - [Project configuration schema](../repo-doc/configs/project-configuration-schema.yaml) — YAML schema reference declaring the category subdirs, naming conventions, and primer rules every tool folder must follow
 - [Poking around the repo-task folder](../repo-doc/notes/2026-10-03-exploring-task-folder-structure.md) — a first look at what the repo-doc notes, docs, scripts, and configs each hold, and where the next file belongs
 
