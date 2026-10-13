@@ -59,6 +59,10 @@
 - [Poking around the AWX UI and API](../awx/notes/2026-10-04-explore-awx-ui-and-api.md) — a second-day click-through of inventories, credentials, templates, and jobs, plus the API calls behind each page
 - [Explore AWX UI and run first job template](../awx/notes/2026-10-07-explore-awx-ui-first-job-template.md) — third-day notes from applying the minimal AWX CR to Minikube and launching the first job template end-to-end
 - [Minimal AWX custom resource for Minikube](../awx/configs/2026-10-07-minimal-awx-custom-resource-minikube.yaml) — the smallest AWX CR that runs on Minikube: nodeport service, no ingress, and the secrets it references
+- [AWX 24.6 quickstart — admin bootstrap, EE wiring, and the ALLOW_JINJA_IN_EXTRA_VARS trap](../awx/notes/2026-10-11-awx-24-6-quickstart-admin-bootstrap-ee-wiring-allow-jinja-trap.md) — first-day path from applying the CR to launching a job, including the silent extra-vars templating trap
+
+### Run jobs in a custom execution environment
+- [EE mounts, pull policy, and registry credential](../awx/configs/2026-10-12-execution-environment-mounts-pull-policy.yaml) — extra volume mounts for EE job pods, an Always pull rule while iterating on the EE image, and a private registry login on the AWX custom resource
 
 ### Plan an AAP upgrade
 - [AAP 2.7 migration guide](../ansible/docs/aap-27-migration-guide.md) — gateway-only architecture, containerized installer, execution-environment rebuilds, and the ansible-core 2.21 support lifecycle behind the release
@@ -182,6 +186,7 @@
 
 ### Choose storage for stateful workloads
 - [Storage drivers and volume types comparison](../docker/docs/storage-drivers-volume-types-comparison.md) — overlay2 vs alternatives, volumes vs bind mounts vs tmpfs, with a decision matrix and verification steps
+- [Comparing Docker storage drivers and volume types for stateful workloads](../docker/docs/comparing-docker-storage-drivers-and-volume-types-for-stateful-workloads.md) — driver and volume options walked through on a test host, ending in the decision path that picks storage per workload
 
 ### Get started with Git
 - [Git primer](../git/notes/0000-primer-git.md) — what Git is, key concepts, and a minimal workflow
@@ -392,6 +397,9 @@
 ### Choose how cluster secrets reach workloads
 - [Choosing a secret management approach](../k8s/docs/choosing-secret-management-approach.md) — encrypted-in-git secrets, a vault-sync operator, and a volume-mount driver compared with a decision table, per-environment defaults, and rotation guidance
 
+### Choose a service mesh for the cluster
+- [Choosing a service mesh — Istio, Linkerd, and Consul](../k8s/docs/choosing-service-mesh-istio-linkerd-consul.md) — traffic management, mTLS, and observability per mesh with the signals that pick one per environment instead of mixing them ad hoc
+
 ### Scaffold a two-tier app with ingress and monitoring
 - [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — frontend/backend chart with ingress routing and Prometheus alert rules in one copy-in layout
 - [Scaffold values](../k8s/templates/multi-service-app/values.yaml) — placeholder images, ingress host, and scrape annotations to point at real services
@@ -399,6 +407,9 @@
 
 ### Harden a workload namespace
 - [Production cluster hardening manifest](../k8s/manifests/production-cluster-hardening.yaml) — PodSecurity admission, least-privilege RBAC, and default-deny NetworkPolicy for a namespace about to serve real traffic
+
+### Keep a stateless workload spread and responsive
+- [Stateless workload spread with HPA and PDB](../k8s/manifests/stateless-workload-spread-hpa-pdb.yaml) — topology-spread scheduling across nodes and zones, HPA scale-up/scale-down windows, startup probe with preStop drain, and a maxUnavailable-form PDB in one file
 
 ### Scaffold a production Kubernetes service
 - [Production service template](../k8s/templates/production-service/README.md) — copy-in layout for a stateless HTTP service: Deployment, Service, ServiceAccount, HPA, PDB, default-deny NetworkPolicy, and namespace budgets behind one Kustomization
@@ -435,6 +446,9 @@
 - [Minimal kube-prometheus-stack local values](../kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml) — flips the three UIs to NodePort so the monitoring stack is reachable from a laptop on a local cluster
 - [Installing the kube-prometheus stack and exploring Grafana](../kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md) — first cluster install, the dashboard folder the chart provisions at boot, and the `admin`/`admin` default-credential gotcha
 - [Quickstart walkthrough: deploying kube-prometheus-stack](../kprom/notes/2026-10-10-quickstart-walkthrough-kube-prometheus-stack.md) — the chart's scrape-config mental model (ServiceMonitor, PodMonitor, the `release` label) and the traps that cost the most time: ClusterIP defaults, the Grafana admin-password secret, and ServiceMonitor namespace matching
+
+### Scrape and alert on RED metrics with the Operator
+- [ServiceMonitor + PrometheusRule RED metrics](../kprom/manifests/2026-10-12-servicemonitor-prometheusrule-red-metrics.yaml) — one scrape target and two alerts (error rate, latency) for a sample app; the manifest label has to match the Prometheus selector or the Targets page stays empty
 
 ### Get started with Python
 - [Python primer](../python/notes/0000-primer-python.md) — variables, types, functions, lists, dicts, venv, and pip
@@ -606,6 +620,7 @@
 - [Kit conformance checker](../repo-doc/scripts/kit-conformance-checker.py) — validates task entry schema, manifest queue sync, and id-prefix folder progression with stdlib-only checks
 - [Project configuration schema](../repo-doc/configs/project-configuration-schema.yaml) — YAML schema reference declaring the category subdirs, naming conventions, and primer rules every tool folder must follow
 - [Poking around the repo-task folder](../repo-doc/notes/2026-10-03-exploring-task-folder-structure.md) — a first look at what the repo-doc notes, docs, scripts, and configs each hold, and where the next file belongs
+- [Running the kit conformance checker in CI](../repo-doc/docs/kit-conformance-in-ci.md) — turning the local conformance script into a CI gate that fails a PR when the task list, manifest snapshot, and kit tree disagree
 
 ### Ansible reference docs
 - [Retry strategies for unreliable targets](../ansible/docs/retry-strategies-unreliable-targets.md) — strategies for handling transient failures when targets drop connectivity during a playbook run

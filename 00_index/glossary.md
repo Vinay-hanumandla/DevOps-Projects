@@ -423,6 +423,7 @@
 - **Tool index** — a per-tool Markdown file (e.g. `git/docs/2026-08-10-git-index.md`) that lists every doc in that tool's folder with a one-line description; walks the subdirectory tree and records what's there.
 - **Folder conventions** — the agreed layout for where files live: each tool holds only the category subdirs it uses (`notes/`, `docs/`, `scripts/`, `snippets/`, `configs/`, `manifests/`, `dockerfiles/`, `notebooks/`, `templates/`), learner-stage files carry a `YYYY-MM-DD-` prefix, and each tool gets exactly one `notes/0000-primer-<tool>.md`.
 - **Pre-PR validation loop** — the checks run after a file is written and before a PR goes up: confirm the category subdir, add the front-matter block, add the CHANGELOG one-liner, then run the folder-check script and read the gap report for complaints about your file.
+- **Conformance checker** — a stdlib-only script (`repo-doc/scripts/kit-conformance-checker.py`) that checks three inputs agree: task entries carry their required fields, the manifest queue snapshot matches the task list, and every open task's id prefix has a matching folder under the kit root; the CI doc wires it as a gate that fails a PR on any mismatch.
 
 ## Docker (additional)
 
@@ -569,6 +570,9 @@
 - **Execution environment** — the container image a job runs inside, carrying the interpreter, collections, and dependencies the playbook needs; rebuilding it is part of adopting a new ansible-core line such as the one AAP 2.7 ships on.
 - **awx-operator** — the Kubernetes operator that reconciles an AWX custom resource into its backing pods and secrets; it provisions the web, task, redis, and postgres components so the whole control plane comes up from one manifest.
 - **AWX custom resource (CR)** — the `kind: AWX` manifest that the awx-operator reconciles; fields like `service_type`, `admin_user`, and `*_secret` map directly to runtime configuration, and `admin_password_secret` references a pre-existing Kubernetes Secret rather than embedding the password.
+- **`image_pull_policy`** — the AWX CR field that sets the image pull rule for execution-environment job pods; `Always` pulls the newest tag on every launch while iterating, the default reuses the cached image and can silently run yesterday's build.
+- **`ee_extra_volume_mounts`** — the AWX CR field that mounts host paths into execution-environment job pods (`src`/`dest` plus options, like a `-v` flag); how a custom EE reaches a shared collections directory on the host.
+- **`ALLOW_JINJA_IN_EXTRA_VARS`** — the per-organization AWX setting that decides whether extra vars are interpolated as Jinja2 templates; when enabled, a value containing literal `{{ }}` is processed and may come back mangled with no warning, so values that are not meant to be templates need it disabled.
 
 ## Ansible (execution modes)
 
@@ -581,3 +585,16 @@
 - **Kube-Prometheus** — the kube-prometheus-stack Helm chart that bundles the Prometheus Operator, Prometheus, Alertmanager, node-exporter, kube-state-metrics, and Grafana into one operator-managed release; the one-command install that replaces assembling all six components by hand.
 - **Prometheus Operator** — a Kubernetes controller that watches `Prometheus` and `Alertmanager` custom resources and reconciles the underlying StatefulSet/Deployment, Service, and ServiceMonitor objects; the operator pattern that keeps scrape config and alert routing in sync with the cluster instead of hand-editing YAML.
 - **ServiceMonitor** — a Prometheus Operator custom resource that declares which Kubernetes Services (and therefore which pods) should be scraped, what port and path to target, and which label selectors to match; the bridge between Services and Prometheus scrape configs.
+- **PrometheusRule** — a Prometheus Operator custom resource that carries alerting and recording rules to the cluster as YAML instead of flags on a command line; one manifest holds the PromQL expression, the `for` duration, and the labels and annotations each firing alert carries.
+
+## Kubernetes (availability)
+
+- **topologySpreadConstraints** — scheduling rules on a workload that spread its pods across failure domains (hostname, zone); the spread baseline pairs them with an HPA for scale and a PDB for disruption budget so the workload stays spread while it scales.
+- **HPA behavior windows** — the `behavior.scaleUp`/`scaleDown` stanzas on a HorizontalPodAutoscaler that bound how fast replicas change (stabilization window, per-window policies); without them a spiky metric flaps the replica count up and down.
+- **preStop drain** — a `preStop` lifecycle hook (here a sleep) that holds a terminating container long enough for endpoints to be removed and in-flight requests to finish; paired with a startup probe so a slow-starting container is not killed before it is ready.
+
+## Kubernetes (service mesh)
+
+- **Istio** — the full-featured mesh for large fleets: traffic splitting, mTLS, and rich policy control through sidecar proxies, at the cost of the highest operational overhead of the three compared here.
+- **Linkerd** — the lightweight mesh for teams that want observability, retries, and mTLS with minimal overhead; fewer knobs than Istio, which is the point.
+- **Consul** — the mesh with a service catalog that reaches beyond Kubernetes (VMs, on-prem, cloud); pick it when workloads live on more than one platform rather than in one cluster.
