@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-13
+
+- prom/manifests/k8s-service-discovery-recording-rules-alertmanager.yaml — Kubernetes service discovery (node role plus kube-state-metrics endpoints), static blackbox probes, recording rules for request rates and node CPU, alerts built on those recordings, and a two-receiver Alertmanager routing tree with inhibit rule (prom-019)
+
 ## 2026-10-12
 
 - k8s/notebooks/service-mesh-ingress-dns-networking.ipynb — Kubernetes networking deep-dive: mesh weighted-split/mirroring/resilience policy, ingress host/path longest-prefix routing, and cluster DNS expansion patterns, each with a runnable stdlib model plus verify checklist (k8s-026)
