@@ -2,6 +2,7 @@
 
 ## 2026-10-12
 
+- k8s/notebooks/service-mesh-ingress-dns-networking.ipynb — Kubernetes networking deep-dive: mesh weighted-split/mirroring/resilience policy, ingress host/path longest-prefix routing, and cluster DNS expansion patterns, each with a runnable stdlib model plus verify checklist (k8s-026)
 - tf/templates/multi-environment-terraform-scaffold/ — Multi-environment Terraform scaffold: shared example-module plus one env folder (dev/staging/prod) each with its own S3 backend, root module, and per-environment tfvars, so the same stack deploys into three environments without copy-pasted root modules drifting apart (tf-023)
 - kprom/manifests/2026-10-12-servicemonitor-prometheusrule-red-metrics.yaml — Minimal ServiceMonitor and PrometheusRule for a sample Go app: named-port scrape of /metrics plus error-rate and p99-latency alerts over RED metrics (kprom-008)
 - awx/configs/2026-10-12-execution-environment-mounts-pull-policy.yaml — Custom execution environment wiring: image pull policy, podman-style extra volume mounts, and an Organization-scoped container registry credential attached to the EE (awx-009)
