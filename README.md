@@ -21,11 +21,11 @@ The `kprom/` folder wraps the kube-prometheus-stack Helm chart for cluster-nativ
 
 ## Quick links
 
-- [Custom execution environment mounts and pull policy](awx/configs/2026-10-12-execution-environment-mounts-pull-policy.yaml) — extra volume mounts for EE job pods, a predictable image pull rule while iterating, and a private registry login on the AWX custom resource.
+- [Kubernetes service discovery with recording rules and Alertmanager routing](prom/manifests/k8s-service-discovery-recording-rules-alertmanager.yaml) — node discovery, kube-state-metrics and blackbox scrape jobs, recording rules feeding alerts, and a two-receiver routing tree with `promtool`/`amtool` checks.
+- [Service mesh, ingress, and DNS networking](k8s/notebooks/service-mesh-ingress-dns-networking.ipynb) — the three layers that decide where cluster traffic goes, each paired with a runnable model so the routing rule shows in behaviour.
+- [Multi-environment Terraform scaffold](tf/templates/multi-environment-terraform-scaffold/README.md) — one shared module called from per-environment roots with per-env S3 backends and tfvars, so dev, staging, and prod stop drifting apart.
 - [ServiceMonitor + PrometheusRule RED metrics](kprom/manifests/2026-10-12-servicemonitor-prometheusrule-red-metrics.yaml) — the smallest scrape-and-alert pair showing rate, errors, and duration for a sample app on a kube-prometheus-stack cluster.
-- [AWX 24.6 quickstart](awx/notes/2026-10-11-awx-24-6-quickstart-admin-bootstrap-ee-wiring-allow-jinja-trap.md) — admin bootstrap on Minikube, execution-environment wiring, and the silent `ALLOW_JINJA_IN_EXTRA_VARS` trap that mangles extra vars.
-- [Docker storage drivers and volume types](docker/docs/comparing-docker-storage-drivers-and-volume-types-for-stateful-workloads.md) — overlay2 versus alternatives, volumes versus bind mounts versus tmpfs, with the decision path that picks storage for stateful workloads.
-- [Kit conformance checker in CI](repo-doc/docs/kit-conformance-in-ci.md) — turning the local conformance script into a CI gate that fails a PR when the task list, manifest snapshot, and kit tree disagree.
+- [Custom execution environment mounts and pull policy](awx/configs/2026-10-12-execution-environment-mounts-pull-policy.yaml) — extra volume mounts for EE job pods, a predictable image pull rule while iterating, and a private registry login on the AWX custom resource.
 
 ## Layout
 
@@ -67,12 +67,12 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 | Grafana | 4 | 2 | 1 | 3 | 6 | 3 | 1 | 1 | 8 | 0 | 0 | 2026-10-05 |
 | Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 2026-09-26 |
 | Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 12 | 0 | 0 | 2026-10-10 |
-| Kubernetes | 6 | 6 | 3 | 2 | 1 | 6 | 1 | 1 | 20 | 0 | 0 | 2026-10-11 |
+| Kubernetes | 6 | 6 | 3 | 2 | 1 | 6 | 2 | 1 | 20 | 0 | 0 | 2026-10-12 |
 | Kube-Prometheus | 3 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-10-10 |
-| Prometheus | 4 | 3 | 2 | 1 | 7 | 1 | 0 | 0 | 10 | 0 | 0 | 2026-10-06 |
+| Prometheus | 4 | 3 | 2 | 1 | 7 | 2 | 0 | 0 | 10 | 0 | 0 | 2026-10-13 |
 | Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 23 | 0 | 0 | 2026-10-03 |
 | Repo-doc | 5 | 4 | 5 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-11 |
-| Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 17 | 0 | 0 | 2026-10-11 |
+| Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 34 | 0 | 0 | 2026-10-12 |
 | Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | Foundational concepts | 11 | 14 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 2026-09-16 |
 
@@ -80,7 +80,7 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 
 ## Status
 
-Currently working through the Tower-side control plane and cluster monitoring: a custom AWX execution environment with host mounts, pull policy, and registry login on the custom resource, plus an AWX 24.6 quickstart covering admin bootstrap and the `ALLOW_JINJA_IN_EXTRA_VARS` trap; and a minimal ServiceMonitor + PrometheusRule pair that puts RED metrics on a sample app. Just landed: a reusable Terraform module scaffold with a Terratest suite, a kit conformance checker wired into CI, a Kubernetes service-mesh comparison, and a Docker storage driver and volume-type decision guide.
+Currently working through the Tower-side control plane and cluster monitoring: a custom AWX execution environment with host mounts, pull policy, and registry login on the custom resource, plus an AWX 24.6 quickstart covering admin bootstrap and the `ALLOW_JINJA_IN_EXTRA_VARS` trap; a minimal ServiceMonitor + PrometheusRule pair that puts RED metrics on a sample app; and a Prometheus manifest wiring node discovery, kube-state-metrics and blackbox probes, recording rules, and Alertmanager routing end to end. Just landed: a multi-environment Terraform scaffold sharing one module across dev, staging, and prod, a service-mesh/ingress/DNS networking notebook, a reusable Terraform module scaffold with a Terratest suite, and a kit conformance checker wired into CI.
 
 ---
-_Last updated: 2026-10-12_
+_Last updated: 2026-10-13_

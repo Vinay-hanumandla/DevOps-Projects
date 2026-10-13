@@ -331,6 +331,8 @@
 - **`relabel_configs`** — an ordered list of keep/drop/replace rules applied to each discovered target's labels before scraping; the mechanism that turns raw `__meta_kubernetes_*` labels into the `namespace`, `pod`, and `__address__` values the scrape uses.
 - **Remote-write vs federation** — the two paths for getting series into long-term storage: remote-write pushes samples from each Prometheus to a central endpoint as they arrive, while federation has a central Prometheus scrape `/federate` on its peers for selected series; the config keeps both so the trade-off is explicit.
 - **Remote-write receiver** — the long-term store a `remote_write` block fans samples out to (here Thanos, VictoriaMetrics, or Mimir); local Prometheus keeps short-term series while the receiver owns retention, downsampling, and global queries — uncomment exactly one receiver block per Prometheus.
+- **Blackbox exporter** — a prober that Prometheus scrapes indirectly: Prometheus tells it which endpoint to check and how (HTTP, TCP, ICMP), and it returns success/failure plus probe-duration metrics; how uptime and latency of targets outside the cluster are measured without installing anything on them.
+- **`amtool check-config`** — the Alertmanager CLI check that validates a routing tree before it is loaded; catches a mis-indented receiver or a matcher that never matches without restarting Alertmanager.
 
 ## Kube-Prometheus
 
