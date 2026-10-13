@@ -2,6 +2,7 @@
 
 ## 2026-10-13
 
+- tf/manifests/versioned-vpc-module.hcl — Reusable versioned VPC module: validated variables, multi-AZ public/private subnets with per-AZ or single NAT composition, and the vpc/subnet/route output contract downstream modules consume (tf-024)
 - prom/manifests/k8s-service-discovery-recording-rules-alertmanager.yaml — Kubernetes service discovery (node role plus kube-state-metrics endpoints), static blackbox probes, recording rules for request rates and node CPU, alerts built on those recordings, and a two-receiver Alertmanager routing tree with inhibit rule (prom-019)
 
 ## 2026-10-12
