@@ -1,0 +1,35 @@
+# last_verified: 2026-10-14 · Jenkins shared library scaffold
+# Docker Compose for running the test harness locally
+
+version: '3.8'
+
+services:
+  test-harness:
+    build:
+      context: ..
+      dockerfile: docker-test-harness/Dockerfile
+    volumes:
+      - ../vars:/workspace/vars:ro
+      - ../src:/workspace/src:ro
+      - ../tests:/workspace/tests:ro
+    environment:
+      - GROOVY_CLASSPATH=/opt/jenkins-pipeline-unit/lib/*:/workspace/src
+    command: groovy -cp /opt/jenkins-pipeline-unit/lib/*:/workspace/src /workspace/tests/runAllTests.groovy
+    # Alternative: run interactively for debugging
+    # command: tail -f /dev/null
+
+  # Optional: Run tests with Jenkins Pipeline Unit directly
+  pipeline-unit:
+    image: jenkins/inbound-agent:latest-jdk17
+    volumes:
+      - ../vars:/workspace/vars:ro
+      - ../src:/workspace/src:ro
+      - ../tests:/workspace/tests:ro
+    working_dir: /workspace
+    command: >
+      sh -c "
+        apt-get update && apt-get install -y groovy git curl unzip &&
+        curl -L -o /tmp/JenkinsPipelineUnit.zip https://github.com/jenkinsci/JenkinsPipelineUnit/releases/download/2.8/JenkinsPipelineUnit-2.8.zip &&
+        unzip /tmp/JenkinsPipelineUnit.zip -d /opt/jenkins-pipeline-unit &&
+        groovy -cp /opt/jenkins-pipeline-unit/lib/*:/workspace/src /workspace/tests/runAllTests.groovy
+      "
