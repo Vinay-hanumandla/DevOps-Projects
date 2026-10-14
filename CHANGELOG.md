@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-14
+
+Passed ([x]) tf-025 — Terraform: script — Reusable validation wrapper: init, validate, tflint, and tfsec gate with structured reporting · Level: L4 · 2026-10-14
+
 ## 2026-10-13
 
 - tf/scripts/tf-validation-gate.sh — Reusable validation wrapper: runs terraform init, validate, tflint, and tfsec; writes a structured key=value report per stage with exit codes and durations; supports --continue-on-error and --report; skips non-zero with clear failure reporting and help usage (tf-025)
@@ -740,3 +744,4 @@ Passed ([x]) jenkins-018 — Jenkins: config — Jenkins Configuration as Code f
 ## 2026-10-09
 
 - bash/docs/production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md — Production runbook for Bash 5.3+ strict-mode guardrails, PIPESTATUS telemetry, and ShellCheck CI gate with structured logging and rollback procedures (bash-041)
+- tf/docs/terraform-github-actions-plan-apply-pipeline-remote-backend-environment-approvals.md — Terraform GitHub Actions plan/apply pipeline with remote backend and environment approvals (tf-026)
