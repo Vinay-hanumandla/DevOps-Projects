@@ -2,6 +2,9 @@
 
 ## 2026-10-14
 
+- compose/notes/0000-primer-compose.md — Docker Compose quick primer: services, images, networks, volumes, port mappings (compose-001)
+- compose/notes/2026-10-14-first-compose-up.md — First-person scratch notes on my first compose up: port order, service-name hostnames, down cleanup (compose-002)
+- compose/configs/2026-10-14-web-plus-db.yaml — Minimal Compose file with web plus db services from scratch (compose-003)
 - tfc/notes/0000-primer-tfc.md — Terraform Cloud quick primer: orgs, workspaces, runs, state (tfc-001)
 - tfc/notes/2026-10-14-explore-workspaces.md — First-person scratch notes on workspace tabs, variables, and queued plans (tfc-002)
 - tfc/configs/2026-10-14-minimal-cloud-backend.hcl — Minimal cloud backend block for remote state (tfc-003)
