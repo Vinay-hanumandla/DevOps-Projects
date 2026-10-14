@@ -38,6 +38,7 @@ The `kprom/` folder wraps the kube-prometheus-stack Helm chart for cluster-nativ
 - `gha/` — GitHub Actions workflows, reusable actions, triggers, and local debugging.
 - `git/` — repositories, branches, hooks, worktrees, releases, and CI integration.
 - `grafana/` — dashboards, provisioning, alerts, and Jsonnet-oriented dashboard code.
+- `hchart/` — Helm Charts packaging: chart anatomy, releases, values, templates, hooks, and repositories.
 - `helm/` — chart structure, values, templates, testing, and registry workflows.
 - `jenkins/` — controllers, jobs, declarative pipelines, credentials, and SCM-backed Jenkinsfiles.
 - `k8s/` — Kubernetes objects, kubectl, Helm/Argo CD flows, and local clusters.
@@ -63,13 +64,14 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 | Bash | 3 | 8 | 12 | 3 | 0 | 0 | 6 | 1 | 30 | 0 | 0 | 2026-10-10 |
 | Docker | 5 | 5 | 8 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 2026-10-11 |
 | GitHub Actions | 3 | 5 | 6 | 1 | 11 | 2 | 1 | 0 | 0 | 0 | 0 | 2026-10-03 |
-| Git | 16 | 13 | 7 | 0 | 0 | 1 | 0 | 0 | 18 | 0 | 1 | 2026-10-09 |
+| Git | 16 | 13 | 7 | 0 | 0 | 1 | 1 | 0 | 18 | 0 | 1 | 2026-10-14 |
 | Grafana | 4 | 2 | 1 | 3 | 6 | 3 | 1 | 1 | 8 | 0 | 0 | 2026-10-05 |
 | Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 2026-09-26 |
-| Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 12 | 0 | 0 | 2026-10-10 |
+| Helm Charts | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-14 |
+| Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 37 | 0 | 0 | 2026-10-14 |
 | Kubernetes | 6 | 6 | 3 | 2 | 1 | 6 | 2 | 1 | 20 | 0 | 0 | 2026-10-12 |
 | Kube-Prometheus | 3 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-10-10 |
-| Prometheus | 4 | 3 | 2 | 1 | 7 | 2 | 0 | 0 | 10 | 0 | 0 | 2026-10-13 |
+| Prometheus | 4 | 4 | 2 | 1 | 8 | 2 | 0 | 0 | 10 | 0 | 0 | 2026-10-14 |
 | Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 23 | 0 | 0 | 2026-10-03 |
 | Repo-doc | 5 | 4 | 5 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-11 |
 | Terraform | 4 | 5 | 3 | 1 | 7 | 2 | 1 | 0 | 34 | 0 | 0 | 2026-10-14 |

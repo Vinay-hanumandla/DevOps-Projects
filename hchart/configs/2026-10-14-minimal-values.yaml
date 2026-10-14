@@ -1,0 +1,8 @@
+# last_verified: 2026-10-14 · hchart n/a
+# Default values for my-web-service.
+replicaCount: 1
+image:
+  repository: nginx
+  tag: "1.25"
+service:
+  port: 80
