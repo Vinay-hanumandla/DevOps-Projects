@@ -98,7 +98,7 @@
 - **snippets** (3): most recent → [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy), [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
 - **templates** (12): [Declarative pipeline scaffold](../jenkins/templates/declarative-pipeline-scaffold/README.md) — copy-in declarative pipeline with shared-library steps (`gitCheckout`, `dockerBuildPush`, `k8sDeploy`, `slackNotify`), `withCredentials` credential binding, and multi-branch discovery config · [Jenkins shared library scaffold](../jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline library with `vars/*.groovy`, tests, and CI gating · _…and 10 more under `jenkins/templates/`._
 
-## Kubernetes  ·  46 files
+## Kubernetes  ·  47 files
 
 - **primer:** [Kubernetes — quick primer](../k8s/notes/0000-primer-kubernetes.md)
 - **notes** (6): most recent → [First kubectl commands on a live cluster](../k8s/notes/2026-10-05-first-kubectl-commands-and-cluster-explore.md), [Kubernetes quickstart tripped up](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [Quickstart kind contexts and port mismatch](../k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md)
@@ -107,11 +107,11 @@
 - **configs** (1): [First deployment config](../k8s/configs/2026-08-22-first-deployment.yaml)
 - **manifests** (6): most recent → [Production cluster hardening](../k8s/manifests/production-cluster-hardening.yaml) — PodSecurity admission, least-privilege RBAC, and default-deny NetworkPolicy for a workload namespace · [Stateless workload spread with HPA and PDB](../k8s/manifests/stateless-workload-spread-hpa-pdb.yaml) — topology-spread scheduling with HPA scale windows, a startup probe with preStop drain, and a maxUnavailable-form PDB · [Production-ready deployment](../k8s/manifests/production-deployment.yaml) · _…and 3 more under `k8s/manifests/`._
 - **snippets** (2): [List cluster resources](../k8s/snippets/2026-08-19-list-cluster-resources.sh), [Pod metrics via the API](../k8s/snippets/kubectl-pod-metrics.py)
-- **notebooks** (1): [Comparing Kubernetes rollout strategies](../k8s/notebooks/comparing-kubernetes-rollout-strategies.ipynb)
+- **notebooks** (2): [Service mesh, ingress, and DNS networking](../k8s/notebooks/service-mesh-ingress-dns-networking.ipynb) — mesh traffic shaping, ingress routing, and DNS resolution paired with runnable models · [Comparing Kubernetes rollout strategies](../k8s/notebooks/comparing-kubernetes-rollout-strategies.ipynb)
 - **dockerfiles** (1): [Operator development image](../k8s/dockerfiles/operator-dev.Dockerfile)
 - **templates** (20): [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — two-tier frontend/backend chart with ingress routing and Prometheus alert rules · [Production service template](../k8s/templates/production-service/README.md) — Deployment, Service, ServiceAccount, HPA, PDB, default-deny NetworkPolicy, and namespace budgets wired through one Kustomization · _…and 8 more under `k8s/templates/multi-service-app/` and 9 more under `k8s/templates/production-service/`._
 
-## Prometheus  ·  28 files
+## Prometheus  ·  29 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
 - **notes** (4): most recent → [Prometheus quickstart trip-ups](../prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md), [Install Prometheus and explore web UI](../prom/notes/2026-08-29-install-prometheus-explore-web-ui.md), [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
@@ -119,7 +119,7 @@
 - **configs** (7): most recent → [Remote-write long-term storage](../prom/configs/remote-write-long-term-storage.yaml), [Kubernetes pod service discovery](../prom/configs/2026-09-18-kubernetes-service-discovery.yaml), [Remote-write vs federation](../prom/configs/remote-write-vs-federation.yaml), [Prometheus alerting rules](../prom/configs/2026-08-30-prometheus-alerting-rules.yaml) · _…and 3 more under `prom/configs/`._
 - **scripts** (2): [Rules evaluator](../prom/scripts/rules-evaluator.go) — evaluates Prometheus recording and alerting rules against fetched metrics · [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh)
 - **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
-- **manifests** (1): [Local monitoring stack](../prom/manifests/local-monitoring-stack.yaml) — one-shot Prometheus + Alertmanager + Node Exporter stack for local evaluation
+- **manifests** (2): [Kubernetes service discovery with recording rules and Alertmanager routing](../prom/manifests/k8s-service-discovery-recording-rules-alertmanager.yaml) — node discovery, kube-state-metrics and blackbox scrape jobs, recording rules feeding alerts, and a two-receiver routing tree · [Local monitoring stack](../prom/manifests/local-monitoring-stack.yaml) — one-shot Prometheus + Alertmanager + Node Exporter stack for local evaluation
 - **templates** (10): [Prometheus + Grafana + Alertmanager stack scaffold](../prom/templates/prometheus-grafana-alertmanager-stack/README.md) — one Compose file for scraping, recording and alert rules, Alertmanager routing, and provisioned Grafana dashboards · _…and 9 more under `prom/templates/prometheus-grafana-alertmanager-stack/`._
 
 ## Kube-Prometheus  ·  5 files
@@ -141,7 +141,7 @@
 - **notebooks** (3): most recent → [Threading, multiprocessing, and asyncio decision guide](../python/notebooks/asyncio-threading-multiprocessing-decision-guide.ipynb) — which concurrency model fits I/O-bound DevOps tooling · [Async patterns comparison](../python/notebooks/async-patterns-comparison.ipynb) — asyncio vs trio vs anyio for I/O-bound DevOps tooling, [Comparing environment-aware config](../python/notebooks/comparing-env-aware-config.ipynb) — typed settings vs layered loaders vs minimal env readers
 - **templates** (23): [Python CLI + Docker + GHA scaffold](../python/templates/python-cli-docker-gha/README.md) — one copy-in layout with a typed CLI, a container image, and a workflow that tests it · [Python service scaffold](../python/templates/python-service-scaffold/README.md) — FastAPI service with Alembic migrations, Pydantic settings, pytest, and a docker-compose dev stack · _…and 21 more under `python/templates/`._
 
-## Terraform  ·  37 files
+## Terraform  ·  54 files
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
 - **notes** (4): most recent → [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md), [Quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
@@ -151,7 +151,7 @@
 - **snippets** (1): [Terraform variables and outputs](../tf/snippets/2026-08-30-terraform-variables-outputs.hcl)
 - **manifests** (1): [Root module fan-out composition](../tf/manifests/root-module-fan-out-composition.hcl) — VPC, EKS, and RDS submodules wired via outputs from one root module
 - **notebooks** (1): [State management strategies](../tf/notebooks/state-management-strategies.ipynb)
-- **templates** (17): [Reusable module scaffold](../tf/templates/reusable-module-scaffold/README.md) — validated inputs, output contracts, a Terratest suite (happy path, disabled, validation-rejection), and a Go-version CI matrix · [Terragrunt multi-environment scaffold](../tf/templates/terragrunt-multi-env/README.md) — one reusable module shared across dev, staging, and prod with per-environment inputs · _…and 15 more under `tf/templates/`._
+- **templates** (34): [Reusable module scaffold](../tf/templates/reusable-module-scaffold/README.md) — validated inputs, output contracts, a Terratest suite (happy path, disabled, validation-rejection), and a Go-version CI matrix · [Multi-environment scaffold](../tf/templates/multi-environment-terraform-scaffold/README.md) — one shared module called from per-environment roots with per-env backends and tfvars, so dev, staging, and prod stop drifting apart · [Terragrunt multi-environment scaffold](../tf/templates/terragrunt-multi-env/README.md) — one reusable module shared across dev, staging, and prod with per-environment inputs · _…and 32 more under `tf/templates/`._
 
 ## Repo-doc  ·  16 files
 

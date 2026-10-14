@@ -400,6 +400,9 @@
 ### Choose a service mesh for the cluster
 - [Choosing a service mesh — Istio, Linkerd, and Consul](../k8s/docs/choosing-service-mesh-istio-linkerd-consul.md) — traffic management, mTLS, and observability per mesh with the signals that pick one per environment instead of mixing them ad hoc
 
+### Compare service mesh, ingress, and DNS networking on a live cluster
+- [Service mesh, ingress, and DNS networking](../k8s/notebooks/service-mesh-ingress-dns-networking.ipynb) — mesh traffic shaping, ingress routing, and DNS resolution paired with runnable models so each routing rule shows in behaviour, not just prose
+
 ### Scaffold a two-tier app with ingress and monitoring
 - [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — frontend/backend chart with ingress routing and Prometheus alert rules in one copy-in layout
 - [Scaffold values](../k8s/templates/multi-service-app/values.yaml) — placeholder images, ingress host, and scrape annotations to point at real services
@@ -434,6 +437,9 @@
 - [Remote-write vs federation](../prom/configs/remote-write-vs-federation.yaml) — the two long-term-storage paths side by side: push series to a remote endpoint or let a peer scrape this one
 - [Remote-write long-term storage](../prom/configs/remote-write-long-term-storage.yaml) — fan the same series out to Thanos, VictoriaMetrics, or Mimir with queue tuning, one receiver at a time
 - [Rules evaluator](../prom/scripts/rules-evaluator.go) — runs recording and alerting rules offline against sample data with Go-template annotation expansion
+
+### Wire Prometheus to Kubernetes end to end
+- [Kubernetes service discovery with recording rules and Alertmanager routing](../prom/manifests/k8s-service-discovery-recording-rules-alertmanager.yaml) — node discovery, kube-state-metrics and blackbox scrape jobs, recording rules feeding the alerts, and a two-receiver routing tree, with promtool and amtool checks
 
 ### Bring up Prometheus, Grafana, and Alertmanager locally
 - [Prometheus + Grafana + Alertmanager stack scaffold](../prom/templates/prometheus-grafana-alertmanager-stack/README.md) — one Compose file for scraping, recording and alert rules, Alertmanager routing, and provisioned Grafana dashboards, reproducible from a clean checkout
@@ -501,6 +507,7 @@
 ### Share one Terraform module across environments
 - [Reusable Terraform module scaffold](../tf/templates/reusable-module-scaffold/README.md) — copy-in module with validated inputs, output contracts, a Terratest suite (happy path, disabled, validation-rejection), and a Go-version CI matrix
 - [Terragrunt multi-environment scaffold](../tf/templates/terragrunt-multi-env/README.md) — one reusable module deployed to dev, staging, and prod with per-environment inputs and a shared remote-state backend
+- [Multi-environment Terraform scaffold](../tf/templates/multi-environment-terraform-scaffold/README.md) — one shared module called from per-environment roots with per-env S3 backends and tfvars, so dev, staging, and prod stop drifting apart
 - [Root module fan-out composition](../tf/manifests/root-module-fan-out-composition.hcl) — VPC, EKS, and RDS submodules wired together by passing outputs between module blocks
 - [State management strategies](../tf/notebooks/state-management-strategies.ipynb) — notebook comparing approaches to Terraform state handling
 
