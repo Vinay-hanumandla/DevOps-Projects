@@ -21,11 +21,11 @@ The `kprom/` folder wraps the kube-prometheus-stack Helm chart for cluster-nativ
 
 ## Quick links
 
+- [Terraform GitHub Actions plan/apply pipeline with remote backend and environment approvals](tf/docs/terraform-github-actions-plan-apply-pipeline-remote-backend-environment-approvals.md) — wiring a Terraform workflow to a remote backend with mandatory environment approvals for production, so plan and apply stay gated behind review.
+- [Terraform validation gate script](tf/scripts/tf-validation-gate.sh) — wraps `terraform validate` and `terraform fmt -check` so a CI job can reject a config before it reaches plan.
+- [Versioned VPC module manifest](tf/manifests/versioned-vpc-module.hcl) — a reusable VPC module pinned to a version source, with public and private subnets, NAT gateways, and route tables.
 - [Kubernetes service discovery with recording rules and Alertmanager routing](prom/manifests/k8s-service-discovery-recording-rules-alertmanager.yaml) — node discovery, kube-state-metrics and blackbox scrape jobs, recording rules feeding alerts, and a two-receiver routing tree with `promtool`/`amtool` checks.
 - [Service mesh, ingress, and DNS networking](k8s/notebooks/service-mesh-ingress-dns-networking.ipynb) — the three layers that decide where cluster traffic goes, each paired with a runnable model so the routing rule shows in behaviour.
-- [Multi-environment Terraform scaffold](tf/templates/multi-environment-terraform-scaffold/README.md) — one shared module called from per-environment roots with per-env S3 backends and tfvars, so dev, staging, and prod stop drifting apart.
-- [ServiceMonitor + PrometheusRule RED metrics](kprom/manifests/2026-10-12-servicemonitor-prometheusrule-red-metrics.yaml) — the smallest scrape-and-alert pair showing rate, errors, and duration for a sample app on a kube-prometheus-stack cluster.
-- [Custom execution environment mounts and pull policy](awx/configs/2026-10-12-execution-environment-mounts-pull-policy.yaml) — extra volume mounts for EE job pods, a predictable image pull rule while iterating, and a private registry login on the AWX custom resource.
 
 ## Layout
 
@@ -72,7 +72,7 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 | Prometheus | 4 | 3 | 2 | 1 | 7 | 2 | 0 | 0 | 10 | 0 | 0 | 2026-10-13 |
 | Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 23 | 0 | 0 | 2026-10-03 |
 | Repo-doc | 5 | 4 | 5 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-11 |
-| Terraform | 4 | 4 | 2 | 1 | 7 | 1 | 1 | 0 | 34 | 0 | 0 | 2026-10-12 |
+| Terraform | 4 | 5 | 3 | 1 | 7 | 2 | 1 | 0 | 34 | 0 | 0 | 2026-10-14 |
 | Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | Foundational concepts | 11 | 14 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 2026-09-16 |
 
@@ -80,7 +80,7 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 
 ## Status
 
-Currently working through the Tower-side control plane and cluster monitoring: a custom AWX execution environment with host mounts, pull policy, and registry login on the custom resource, plus an AWX 24.6 quickstart covering admin bootstrap and the `ALLOW_JINJA_IN_EXTRA_VARS` trap; a minimal ServiceMonitor + PrometheusRule pair that puts RED metrics on a sample app; and a Prometheus manifest wiring node discovery, kube-state-metrics and blackbox probes, recording rules, and Alertmanager routing end to end. Just landed: a multi-environment Terraform scaffold sharing one module across dev, staging, and prod, a service-mesh/ingress/DNS networking notebook, a reusable Terraform module scaffold with a Terratest suite, and a kit conformance checker wired into CI.
+Currently working through Terraform CI wiring and cluster monitoring: a Terraform GitHub Actions plan/apply pipeline with a remote backend and mandatory environment approvals for production, a validation gate script that rejects unformatted or invalid configs before they reach plan, and a versioned VPC module manifest pinning a reusable module to a version source. Also active: a Prometheus manifest wiring node discovery, kube-state-metrics and blackbox probes, recording rules, and Alertmanager routing end to end, plus an AWX custom execution environment with host mounts, pull policy, and registry login on the custom resource.
 
 ---
 _Last updated: 2026-10-13_

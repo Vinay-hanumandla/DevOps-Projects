@@ -67,6 +67,11 @@
 ### Plan an AAP upgrade
 - [AAP 2.7 migration guide](../ansible/docs/aap-27-migration-guide.md) — gateway-only architecture, containerized installer, execution-environment rebuilds, and the ansible-core 2.21 support lifecycle behind the release
 
+### Wire Terraform into GitHub Actions
+- [Terraform plan/apply pipeline with remote backend and environment approvals](../tf/docs/terraform-github-actions-plan-apply-pipeline-remote-backend-environment-approvals.md) — wiring a Terraform workflow to a remote backend with mandatory environment approvals for production, so plan and apply stay gated behind review
+- [Terraform validation gate](../tf/scripts/tf-validation-gate.sh) — wraps `terraform validate` and `terraform fmt -check` so a CI job can reject a config before it reaches plan
+- [Versioned VPC module manifest](../tf/manifests/versioned-vpc-module.hcl) — a reusable VPC module pinned to a version source, with public and private subnets, NAT gateways, and route tables
+
 ### Get started with Bash
 - [Bash primer](../bash/notes/0000-primer-bash.md) — what Bash is, key terminology, and a tiny example
 - [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md) — install check, first .sh file, and permission gotcha
