@@ -87,7 +87,7 @@ groups:
         annotations:
           summary: "High burn rate detected (1h window)"
           description: "Burn rate is {{ $value | printf \"%.2f\" }}x the error budget consumption rate. Error budget will be exhausted in {{ 1 / $value | printf \"%.1f\" }} hours at current rate."
-          runbook_url: "https://example.com/runbooks/slo-burn-rate"
+          runbook_url: "internal-runbook-slo-burn-rate"
 
       # Medium burn rate alert: 6h window burn rate >= 2
       - alert: SLOBurnRateMedium

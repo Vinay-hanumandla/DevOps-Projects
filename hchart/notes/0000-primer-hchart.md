@@ -27,7 +27,7 @@ Before Helm, you either copy-pasted YAML files between projects and manually edi
 - **Values** — the configurable parameters exposed by a chart, defined in `values.yaml` and overridden at install time with `-f my-values.yaml` or `--set key=value`. Example: `replicaCount: 3`.
 - **Template** — a Go template file in `templates/` that renders to a Kubernetes manifest when combined with values. Example: `templates/deployment.yaml` uses `.Values.image.repository`.
 - **Chart.yaml** — metadata file declaring the chart name, version, appVersion, description, and dependencies. Example: `name: my-app`, `version: 0.3.1`.
-- **Repository** — an HTTP server hosting chart packages and an `index.yaml` index. Example: `https://charts.bitnami.com/bitnami`.
+- **Repository** — an HTTP server hosting chart packages and an `index.yaml` index. Example: a chart museum instance or GitHub Pages site serving an `index.yaml`.
 - **Hook** — a special annotation on a manifest that runs at a specific point in the release lifecycle (pre-install, post-upgrade, etc.). Example: a Job that runs DB migrations before a new version starts.
 - **Library chart** — a chart with no templates, only reusable template helpers (e.g., common labels, naming conventions) shared via `chart.yaml` dependencies. Example: `common` chart used by all internal service charts.
 
