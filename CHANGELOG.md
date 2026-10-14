@@ -4,6 +4,8 @@
 
 - prom/docs/prometheus-operations-runbook.md — Prometheus production operations runbook: snapshot/file-copy backups, restore order, compaction head-room, WAL tuning, and disaster recovery sequence (prom-020)
 - Passed ([x]) tf-025 — Terraform: script — Reusable validation wrapper: init, validate, tflint, and tfsec gate with structured reporting · Level: L4 · 2026-10-14
+- prom/configs/recording-rules-slo-alerting.yaml — Prometheus recording rule groups for SLO-based alerting: SLI/SLO patterns, burn rate alerts, and multi-window rules (prom-021)
+- hchart/notes/0000-primer-hchart.md — Helm Charts quick primer: chart anatomy, releases, values, templates, hooks, and repositories (hchart-001)
 
 ## 2026-10-13
 
