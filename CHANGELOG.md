@@ -2,6 +2,9 @@
 
 ## 2026-10-14
 
+- tfc/notes/0000-primer-tfc.md — Terraform Cloud quick primer: orgs, workspaces, runs, state (tfc-001)
+- tfc/notes/2026-10-14-explore-workspaces.md — First-person scratch notes on workspace tabs, variables, and queued plans (tfc-002)
+- tfc/configs/2026-10-14-minimal-cloud-backend.hcl — Minimal cloud backend block for remote state (tfc-003)
 - jenkins/templates/jenkins-shared-library-scaffold/ — Jenkins shared library scaffold with Docker test harness and versioned pipeline templates (jenkins-020)
 - hchart/notes/2026-10-14-explore-public-chart-structure.md — First-person scratch notes unpacking a public chart: chart file layout, dependency charts/, _helpers.tpl, and test hooks (hchart-002)
 - hchart/configs/2026-10-14-minimal-chart.yaml + 2026-10-14-minimal-values.yaml — Minimal Chart.yaml and default values for a first web-service chart (hchart-003)
