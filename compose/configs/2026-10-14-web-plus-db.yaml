@@ -1,0 +1,10 @@
+# last_verified: 2026-10-14 · compose n/a
+services:
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: example
