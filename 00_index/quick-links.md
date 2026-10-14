@@ -193,6 +193,11 @@
 - [Storage drivers and volume types comparison](../docker/docs/storage-drivers-volume-types-comparison.md) — overlay2 vs alternatives, volumes vs bind mounts vs tmpfs, with a decision matrix and verification steps
 - [Comparing Docker storage drivers and volume types for stateful workloads](../docker/docs/comparing-docker-storage-drivers-and-volume-types-for-stateful-workloads.md) — driver and volume options walked through on a test host, ending in the decision path that picks storage per workload
 
+### Get started with Docker Compose
+- [Docker Compose primer](../compose/notes/0000-primer-compose.md) — services, images, networks, volumes, and the up/down loop for running several containers together
+- [My first compose up — what tripped me up](../compose/notes/2026-10-14-first-compose-up.md) — port order, service names as hostnames, and remembering `down` after closing the terminal
+- [Minimal web-plus-db Compose file](../compose/configs/2026-10-14-web-plus-db.yaml) — nginx on 8080 plus postgres as the smallest runnable starting point
+
 ### Get started with Git
 - [Git primer](../git/notes/0000-primer-git.md) — what Git is, key concepts, and a minimal workflow
 - [Git quickstart trip-ups](../git/notes/2026-07-13-git-quickstart-trip-ups.md) — first contact with Git and where it tripped me up
@@ -333,6 +338,12 @@
 - [my-service chart scaffold](../helm/templates/my-service/README.md) — the plain chart the values-inheritance guide's `-f values-staging.yaml` runs against
 - [my-service base values](../helm/templates/my-service/values.yaml) — the defaults every environment override starts from
 - [my-service staging override](../helm/templates/my-service/values-staging.yaml) — the environment-specific delta the inheritance guide walks through
+
+### Explore a Helm chart's structure
+- [Helm Charts primer](../hchart/notes/0000-primer-hchart.md) — charts, releases, values, templates, and repositories for packaging Kubernetes apps
+- [Exploring a public chart's structure](../hchart/notes/2026-10-14-explore-public-chart-structure.md) — Chart.yaml, values layout, helpers, and the empty `charts/` folder before dependency update
+- [Minimal chart metadata](../hchart/configs/2026-10-14-minimal-chart.yaml) — the smallest Chart.yaml for a demo chart
+- [Minimal chart values](../hchart/configs/2026-10-14-minimal-values.yaml) — the smallest values file a demo chart renders against
 
 ### Reconcile cluster state from Git with Argo CD
 - [GitOps app-of-apps](../gha/manifests/gitops-app-of-apps.yaml) — AppProject, root app rendering an `apps/` directory, Helm- and Kustomize-sourced children, and the workflow that validates them and asks Argo CD to re-read after a merge
@@ -515,6 +526,11 @@
 - [Multi-environment Terraform scaffold](../tf/templates/multi-environment-terraform-scaffold/README.md) — one shared module called from per-environment roots with per-env S3 backends and tfvars, so dev, staging, and prod stop drifting apart
 - [Root module fan-out composition](../tf/manifests/root-module-fan-out-composition.hcl) — VPC, EKS, and RDS submodules wired together by passing outputs between module blocks
 - [State management strategies](../tf/notebooks/state-management-strategies.ipynb) — notebook comparing approaches to Terraform state handling
+
+### Get started with Terraform Cloud
+- [Terraform Cloud primer](../tfc/notes/0000-primer-tfc.md) — organisations, workspaces, runs, shared variables, and VCS-triggered plans on the hosted service
+- [Poking around Terraform Cloud workspaces](../tfc/notes/2026-10-14-explore-workspaces.md) — Runs, States, Variables tabs and the env-vs-workspace variable category trap
+- [Minimal cloud backend block](../tfc/configs/2026-10-14-minimal-cloud-backend.hcl) — the smallest `cloud` block pointing a config at an organisation and workspace
 
 ### Understand a DevOps concept before touching a tool
 - [Linux & CLI Fundamentals](../docs/concepts/linux-cli-fundamentals/0000-primer-linux-cli-fundamentals.md) — the shell, processes, and filesystem basics everything leans on
