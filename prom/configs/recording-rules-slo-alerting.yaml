@@ -1,0 +1,174 @@
+# last_verified: 2026-10-14 · prom n/a
+groups:
+  - name: slo-recording-rules
+    interval: 30s
+    rules:
+      # SLI: Request availability (successful requests / total requests)
+      - record: slos:request_availability:ratio_rate5m
+        expr: |
+          sum(rate(http_requests_total{status=~"2.."}[5m]))
+          /
+          sum(rate(http_requests_total[5m]))
+
+      # SLI: Latency (proportion of requests under threshold)
+      - record: slos:request_latency:ratio_rate5m
+        expr: |
+          sum(rate(http_request_duration_seconds_bucket{le="0.5"}[5m]))
+          /
+          sum(rate(http_request_duration_seconds_bucket{le="+Inf"}[5m]))
+
+      # SLI: Error rate (5xx errors / total requests)
+      - record: slos:error_rate:ratio_rate5m
+        expr: |
+          sum(rate(http_requests_total{status=~"5.."}[5m]))
+          /
+          sum(rate(http_requests_total[5m]))
+
+      # SLO target: 99.9% availability over 30-day rolling window
+      - record: slos:availability:slo_target_30d
+        expr: 0.999
+
+      # SLO target: 95% of requests under 500ms over 30-day rolling window
+      - record: slos:latency:slo_target_30d
+        expr: 0.95
+
+      # SLO target: error rate below 0.1% over 30-day rolling window
+      - record: slos:error_rate:slo_target_30d
+        expr: 0.001
+
+      # Burn rate: how fast we're consuming the error budget (1h window)
+      - record: slos:burn_rate:1h
+        expr: |
+          (1 - slos:request_availability:ratio_rate5m)
+          / (1 - slos:availability:slo_target_30d)
+
+      # Burn rate: 6h window for slower detection
+      - record: slos:burn_rate:6h
+        expr: |
+          (1 - sum(rate(http_requests_total{status=~"2.."}[6h])) / sum(rate(http_requests_total[6h])))
+          / (1 - slos:availability:slo_target_30d)
+
+      # Burn rate: 24h window for long-term trend
+      - record: slos:burn_rate:24h
+        expr: |
+          (1 - sum(rate(http_requests_total{status=~"2.."}[24h])) / sum(rate(http_requests_total[24h])))
+          / (1 - slos:availability:slo_target_30d)
+
+      # Error budget remaining (percentage)
+      - record: slos:error_budget_remaining:ratio
+        expr: |
+          (slos:request_availability:ratio_rate5m - slos:availability:slo_target_30d)
+          / (1 - slos:availability:slo_target_30d)
+
+      # Multi-window burn rate: short window (5m) vs long window (1h)
+      - record: slos:burn_rate:multi_window:5m1h
+        expr: |
+          (1 - sum(rate(http_requests_total{status=~"2.."}[5m])) / sum(rate(http_requests_total[5m])))
+          /
+          (1 - sum(rate(http_requests_total{status=~"2.."}[1h])) / sum(rate(http_requests_total[1h])))
+
+      # Multi-window burn rate: medium window (1h) vs long window (6h)
+      - record: slos:burn_rate:multi_window:1h6h
+        expr: |
+          (1 - sum(rate(http_requests_total{status=~"2.."}[1h])) / sum(rate(http_requests_total[1h])))
+          /
+          (1 - sum(rate(http_requests_total{status=~"2.."}[6h])) / sum(rate(http_requests_total[6h])))
+
+  - name: slo-alerting-rules
+    interval: 60s
+    rules:
+      # High burn rate alert: 1h window burn rate >= 2 (fast burn)
+      - alert: SLOBurnRateHigh
+        expr: slos:burn_rate:1h >= 2
+        for: 5m
+        labels:
+          severity: critical
+          slo_tier: "availability"
+        annotations:
+          summary: "High burn rate detected (1h window)"
+          description: "Burn rate is {{ $value | printf \"%.2f\" }}x the error budget consumption rate. Error budget will be exhausted in {{ 1 / $value | printf \"%.1f\" }} hours at current rate."
+          runbook_url: "internal-runbook-slo-burn-rate"
+
+      # Medium burn rate alert: 6h window burn rate >= 2
+      - alert: SLOBurnRateMedium
+        expr: slos:burn_rate:6h >= 2
+        for: 30m
+        labels:
+          severity: warning
+          slo_tier: "availability"
+        annotations:
+          summary: "Elevated burn rate sustained (6h window)"
+          description: "Burn rate is {{ $value | printf \"%.2f\" }}x over 6h. Error budget consumption accelerating."
+
+      # Multi-window burn rate alert (Google SRE workbook pattern)
+      # Fast burn: 5m/1h ratio >= 14.4 (2% error budget in 5m)
+      - alert: SLOMultiWindowBurnRateFast
+        expr: slos:burn_rate:multi_window:5m1h >= 14.4
+        for: 2m
+        labels:
+          severity: critical
+          slo_tier: "availability"
+        annotations:
+          summary: "Fast multi-window burn rate triggered"
+          description: "Short-window (5m) burn rate is {{ $value | printf \"%.1f\" }}x long-window (1h). Immediate attention required."
+
+      # Slow burn: 1h/6h ratio >= 6 (5% error budget in 1h)
+      - alert: SLOMultiWindowBurnRateSlow
+        expr: slos:burn_rate:multi_window:1h6h >= 6
+        for: 15m
+        labels:
+          severity: warning
+          slo_tier: "availability"
+        annotations:
+          summary: "Slow multi-window burn rate triggered"
+          description: "Medium-window (1h) burn rate is {{ $value | printf \"%.1f\" }}x long-window (6h). Sustained elevated error rate."
+
+      # Latency SLO burn rate
+      - alert: SLOLatencyBurnRateHigh
+        expr: |
+          (1 - slos:request_latency:ratio_rate5m)
+          / (1 - slos:latency:slo_target_30d)
+          >= 2
+        for: 5m
+        labels:
+          severity: critical
+          slo_tier: "latency"
+        annotations:
+          summary: "Latency SLO burn rate high"
+          description: "Proportion of requests under 500ms dropping. Current ratio: {{ $value | printf \"%.3f\" }}"
+
+      # Error rate SLO burn rate
+      - alert: SLOErrorRateBurnRateHigh
+        expr: |
+          slos:error_rate:ratio_rate5m
+          / slos:error_rate:slo_target_30d
+          >= 2
+        for: 5m
+        labels:
+          severity: critical
+          slo_tier: "error_rate"
+        annotations:
+          summary: "Error rate SLO burn rate high"
+          description: "5xx error rate is {{ $value | printf \"%.1f\" }}x the SLO target of 0.1%"
+
+      # Error budget exhaustion warning (less than 10% remaining)
+      - alert: SLOErrorBudgetExhausting
+        expr: slos:error_budget_remaining:ratio < 0.1
+        for: 1h
+        labels:
+          severity: warning
+          slo_tier: "availability"
+        annotations:
+          summary: "Error budget below 10%"
+          description: "Only {{ $value | printf \"%.1f%%\" }} of error budget remaining for the 30-day window. Consider feature freeze."
+
+      # Error budget exhausted
+      - alert: SLOErrorBudgetExhausted
+        expr: slos:error_budget_remaining:ratio <= 0
+        for: 5m
+        labels:
+          severity: critical
+          slo_tier: "availability"
+        annotations:
+          summary: "Error budget exhausted"
+          description: "Error budget fully consumed for the 30-day SLO window. Deployment freeze recommended."
