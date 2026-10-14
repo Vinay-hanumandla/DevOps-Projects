@@ -1,0 +1,101 @@
+// last_verified: 2026-10-14 · Jenkins shared library scaffold
+// v1: Basic CI/CD pipeline template
+// This template demonstrates the fundamental CI/CD pattern using the shared library.
+// Suitable for simple applications with single-environment deployment.
+
+@Library('jenkins-shared-library-scaffold') _
+
+pipeline {
+    agent any
+
+    environment {
+        REGISTRY = 'registry.example.com'
+        IMAGE_NAME = 'myapp'
+        NAMESPACE = 'default'
+        DEPLOYMENT = 'myapp'
+    }
+
+    stages {
+        stage('Checkout & Lint') {
+            steps {
+                script {
+                    env.CHECKED_OUT_REVISION = checkoutAndLint([
+                        repoUrl: 'https://github.com/example/myapp.git',
+                        branch: 'main',
+                        credentialsId: 'github-credentials-id',
+                        lintCommand: 'npm ci && npm run lint'
+                    ])
+                }
+            }
+        }
+
+        stage('Build & Push Docker Image') {
+            steps {
+                script {
+                    env.IMAGE_REF = buildAndPushDocker([
+                        image: env.IMAGE_NAME,
+                        tag: env.BUILD_NUMBER,
+                        registry: env.REGISTRY,
+                        credentialsId: 'registry-credentials-id'
+                    ])
+                }
+            }
+        }
+
+        stage('Security Scan') {
+            steps {
+                script {
+                    scanImage([
+                        imageRef: env.IMAGE_REF,
+                        severity: 'HIGH,CRITICAL'
+                    ])
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    runTests([
+                        imageRef: env.IMAGE_REF,
+                        testCommand: 'npm test'
+                    ])
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    deployToK8s([
+                        imageRef: env.IMAGE_REF,
+                        namespace: env.NAMESPACE,
+                        deployment: env.DEPLOYMENT,
+                        kubeconfigId: 'kubeconfig-credentials-id'
+                    ])
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            script {
+                slackNotify([
+                    webhookId: 'slack-webhook-id',
+                    status: 'SUCCESS',
+                    message: "Build ${env.BUILD_NUMBER} deployed successfully!"
+                ])
+            }
+        }
+        failure {
+            script {
+                slackNotify([
+                    webhookId: 'slack-webhook-id',
+                    status: 'FAILURE',
+                    message: "Build ${env.BUILD_NUMBER} failed!"
+                ])
+            }
+        }
+    }
+}

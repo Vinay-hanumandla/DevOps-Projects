@@ -1,0 +1,255 @@
+// last_verified: 2026-10-14 · Jenkins shared library scaffold
+// v2: Advanced multi-environment pipeline template
+// This template demonstrates advanced patterns including:
+// - Multi-environment deployment (staging → production)
+// - Deployment strategies (rolling, blue-green, canary)
+// - Manual approval gates
+// - Environment-specific configuration
+// - Parallel stage execution
+
+@Library('jenkins-shared-library-scaffold') _
+
+pipeline {
+    agent any
+
+    // Global configuration - override per environment in config files
+    environment {
+        REGISTRY = 'registry.example.com'
+        IMAGE_NAME = 'myapp'
+        KUBECONFIG_ID = 'kubeconfig-credentials-id'
+        SLACK_WEBHOOK = 'slack-webhook-id'
+    }
+
+    // Load environment-specific config
+    // Expected files: config/staging.groovy, config/production.groovy
+    // Each returns a map with: namespace, deployment, strategy, etc.
+    def loadEnvConfig(String envName) {
+        def configFile = "config/${envName}.groovy"
+        if (fileExists(configFile)) {
+            return evaluate(new File(configFile).text)
+        }
+        return [:]
+    }
+
+    stages {
+        stage('Checkout & Lint') {
+            steps {
+                script {
+                    env.CHECKED_OUT_REVISION = checkoutAndLint([
+                        repoUrl: 'https://github.com/example/myapp.git',
+                        branch: env.BRANCH_NAME ?: 'main',
+                        credentialsId: 'github-credentials-id',
+                        lintCommand: 'npm ci && npm run lint'
+                    ])
+                }
+            }
+        }
+
+        stage('Build & Push Docker Image') {
+            steps {
+                script {
+                    // Build with build args from package.json version
+                    def version = sh(script: 'cat package.json | jq -r .version', returnStdout: true).trim()
+                    env.APP_VERSION = version ?: '0.0.0'
+                    
+                    env.IMAGE_REF = buildAndPushDocker([
+                        image: env.IMAGE_NAME,
+                        tag: "${env.APP_VERSION}-${env.BUILD_NUMBER}",
+                        registry: env.REGISTRY,
+                        credentialsId: 'registry-credentials-id',
+                        buildArgs: [VERSION: env.APP_VERSION, BUILD_NUMBER: env.BUILD_NUMBER],
+                        cacheFrom: "${env.REGISTRY}/${env.IMAGE_NAME}:latest",
+                        cacheTo: "type=inline"
+                    ])
+                }
+            }
+        }
+
+        stage('Security Scan') {
+            steps {
+                script {
+                    scanImage([
+                        imageRef: env.IMAGE_REF,
+                        severity: 'HIGH,CRITICAL',
+                        format: 'json',
+                        output: 'trivy-report.json',
+                        ignoreUnfixed: true
+                    ])
+                    // Archive scan report
+                    archiveArtifacts artifacts: 'trivy-report.json', fingerprint: true
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            parallel {
+                stage('Unit Tests') {
+                    steps {
+                        script {
+                            runTests([
+                                imageRef: env.IMAGE_REF,
+                                testCommand: 'npm run test:unit',
+                                coverageCommand: 'npm run test:coverage'
+                            ])
+                        }
+                    }
+                }
+                stage('Integration Tests') {
+                    steps {
+                        script {
+                            runTests([
+                                imageRef: env.IMAGE_REF,
+                                testCommand: 'npm run test:integration',
+                                envVars: [TEST_DB_URL: 'postgresql://test:test@localhost:5432/testdb']
+                            ])
+                        }
+                    }
+                }
+            }
+        }
+
+        // Staging deployment
+        stage('Deploy to Staging') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'develop'
+                    branch 'release/*'
+                }
+            }
+            steps {
+                script {
+                    def stagingConfig = loadEnvConfig('staging') + [
+                        namespace: 'staging',
+                        deployment: 'myapp-staging',
+                        strategy: 'rolling',
+                        timeout: '300s'
+                    ]
+                    stagingConfig.imageRef = env.IMAGE_REF
+                    stagingConfig.kubeconfigId = env.KUBECONFIG_ID
+                    
+                    deployToK8s(stagingConfig)
+                }
+            }
+        }
+
+        stage('Staging Smoke Tests') {
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'develop'
+                    branch 'release/*'
+                }
+            }
+            steps {
+                script {
+                    // Run smoke tests against staging
+                    sh """
+                        kubectl run smoke-test-\${BUILD_NUMBER} --rm -i --restart=Never \
+                            --image=curlimages/curl:latest \
+                            --namespace=staging \
+                            -- curl -f http://myapp-staging/health || exit 1
+                    """
+                }
+            }
+        }
+
+        // Production deployment with approval gate
+        stage('Deploy to Production') {
+            when {
+                branch 'main'
+            }
+            steps {
+                script {
+                    // Manual approval required for production
+                    timeout(time: 1, unit: 'HOURS') {
+                        input message: "Deploy ${env.IMAGE_REF} to production?", 
+                              ok: 'Deploy', 
+                              submitter: 'ops-team',
+                              parameters: [
+                                  string(name: 'DEPLOYMENT_STRATEGY', defaultValue: 'blue-green', 
+                                         description: 'Deployment strategy: rolling, blue-green, or canary'),
+                                  string(name: 'CANARY_WEIGHT', defaultValue: '10',
+                                         description: 'Canary traffic percentage (if canary strategy)')
+                              ]
+                    }
+                    
+                    def prodConfig = loadEnvConfig('production') + [
+                        namespace: 'production',
+                        deployment: 'myapp',
+                        strategy: env.DEPLOYMENT_STRATEGY ?: 'blue-green',
+                        timeout: '600s',
+                        kubeconfigId: env.KUBECONFIG_ID
+                    ]
+                    prodConfig.imageRef = env.IMAGE_REF
+                    
+                    if (prodConfig.strategy == 'canary') {
+                        prodConfig.canaryWeight = (env.CANARY_WEIGHT ?: '10') as int
+                    }
+                    
+                    deployToK8s(prodConfig)
+                }
+            }
+        }
+
+        stage('Production Health Check') {
+            when {
+                branch 'main'
+            }
+            steps {
+                script {
+                    // Wait for deployment and run health checks
+                    sh """
+                        kubectl wait --for=condition=available deployment/myapp \
+                            --namespace=production --timeout=300s
+                        kubectl run health-check-\${BUILD_NUMBER} --rm -i --restart=Never \
+                            --image=curlimages/curl:latest \
+                            --namespace=production \
+                            -- curl -f http://myapp/health && \
+                            curl -f http://myapp/ready
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up test pods
+            sh """
+                kubectl delete pods -l run=smoke-test-\${BUILD_NUMBER} --namespace=staging --ignore-not-found=true
+                kubectl delete pods -l run=health-check-\${BUILD_NUMBER} --namespace=production --ignore-not-found=true
+            """
+        }
+        success {
+            script {
+                slackNotify([
+                    webhookId: env.SLACK_WEBHOOK,
+                    status: 'SUCCESS',
+                    message: "Build ${env.BUILD_NUMBER} (${env.APP_VERSION}) deployed to production!",
+                    channel: '#deployments'
+                ])
+            }
+        }
+        failure {
+            script {
+                slackNotify([
+                    webhookId: env.SLACK_WEBHOOK,
+                    status: 'FAILURE',
+                    message: "Build ${env.BUILD_NUMBER} failed at stage: ${env.STAGE_NAME}",
+                    channel: '#alerts'
+                ])
+            }
+        }
+        unstable {
+            script {
+                slackNotify([
+                    webhookId: env.SLACK_WEBHOOK,
+                    status: 'UNSTABLE',
+                    message: "Build ${env.BUILD_NUMBER} unstable - tests may have failed",
+                    channel: '#alerts'
+                ])
+            }
+        }
+    }
+}
