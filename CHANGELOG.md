@@ -2,6 +2,7 @@
 
 ## 2026-10-15
 
+- git/templates/repo-scaffold/Makefile + scripts/run-tests.sh — test, lint, and check targets with documented prerequisites; self-tests cover script syntax, commit-msg hook samples, and changelog-generator idempotency (git-042)
 - git/docs/advanced-git-workflow-patterns.md — Advanced Git workflow patterns: monorepo strategies, commit signing, and bisect automation (git-041)
 - repo-doc/snippets/2026-10-15-stale-branch-cleanup.sh — Repository hygiene snippet: stale branch report, commit message lint, and dependency pin audit (repo-doc-014)
 
