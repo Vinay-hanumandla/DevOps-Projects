@@ -602,3 +602,30 @@
 - **Istio** — the full-featured mesh for large fleets: traffic splitting, mTLS, and rich policy control through sidecar proxies, at the cost of the highest operational overhead of the three compared here.
 - **Linkerd** — the lightweight mesh for teams that want observability, retries, and mTLS with minimal overhead; fewer knobs than Istio, which is the point.
 - **Consul** — the mesh with a service catalog that reaches beyond Kubernetes (VMs, on-prem, cloud); pick it when workloads live on more than one platform rather than in one cluster.
+
+## Docker Compose
+
+- **Service** — one container role in a Compose file, like the web page or the database; each service starts from an image and runs as its own container.
+- **Compose file** — the single YAML file listing services and how they connect; `docker compose up` reads it and brings the whole set up together.
+- **Up / down** — the two commands that start everything (`up`, streaming logs together) and then stop and remove it (`down`); closing the terminal does not stop backgrounded services.
+- **Port mapping** — the `host:container` pair on a service (e.g. `8080:80`); the first number is the laptop port opened in the browser, the second is the port the container listens on.
+- **Service name as hostname** — services on the same Compose network reach each other by service name (e.g. `db`); `localhost` from inside one container does not reach another service.
+
+## Helm Charts
+
+- **Chart** — the package itself: a directory with `Chart.yaml`, `values.yaml`, `templates/`, and optionally `charts/` for dependencies; installed with `helm install`.
+- **Release** — a specific installation of a chart in a cluster, with a name and revision history; installing the same chart twice with different names gives two releases.
+- **Values** — the configurable parameters a chart exposes, defined in `values.yaml` and overridden with `-f` or `--set`; e.g. `replicaCount: 3`.
+- **Template** — a Go template file in `templates/` that renders to a Kubernetes manifest when combined with values; e.g. `deployment.yaml` using `.Values.image.repository`.
+- **Chart.yaml** — metadata declaring chart name, version, appVersion, and dependencies; the versioned identity that lets a repo publish and upgrade the chart.
+- **.helmignore** — the exclusion file shipped with a chart (like `.gitignore`); keeps editor backups and packaged archives out of the published chart.
+- **`charts/` directory** — where a chart's downloaded dependencies land after `helm dependency update`; empty in the repo, populated at install time.
+
+## Terraform Cloud
+
+- **Organization** — the top-level account a team shares in Terraform Cloud; owns every workspace the team uses.
+- **Workspace** — a named slot tying one config directory to one state file; holds the state, variables, and run history for one stack.
+- **Run** — one plan or apply cycle inside a workspace; queued from a push or the UI, plans wait for confirmation before applying.
+- **State (hosted)** — the record of what Terraform last created, stored and locked by the service instead of a local file or self-managed backend.
+- **Workspace variable** — an input value set on the workspace (Terraform vs environment category) instead of the shell; the wrong category makes the plan complain the input is missing.
+- **VCS connection** — linking a repo so pushes queue speculative plans on their own; the path from merge to reviewed plan without manual triggers.

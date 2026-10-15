@@ -31,6 +31,12 @@
 - **dockerfiles** (1): [Strict-mode runner](../bash/dockerfiles/strict-mode-runner.Dockerfile)
 - **templates** (30): [Bash + Docker scaffold](../bash/templates/bash-docker-scaffold/README.md) · [Bash + Docker health-check scaffold](../bash/templates/bash-docker-healthcheck-scaffold/README.md) · [Bash production scaffold](../bash/templates/bash-production-scaffold/README.md)
 
+## Compose  ·  3 files
+
+- **primer:** [Docker Compose — quick primer](../compose/notes/0000-primer-compose.md) — services, images, networks, volumes, and the up/down loop for running several containers together
+- **notes** (2): most recent → [My first compose up — what tripped me up](../compose/notes/2026-10-14-first-compose-up.md) — port order, service names as hostnames, and remembering `down`
+- **configs** (1): [Minimal web-plus-db Compose file](../compose/configs/2026-10-14-web-plus-db.yaml) — nginx on 8080 plus postgres as the smallest runnable starting point
+
 ## Docker  ·  65 files
 
 - **primer:** [Docker — quick primer](../docker/notes/0000-primer-docker.md)
@@ -53,7 +59,7 @@
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 - **snippets** (1): [Reusable workflow caller](../gha/snippets/reusable-workflow-caller.yaml) — minimal caller of a centrally maintained reusable workflow, passing inputs and secrets and reading outputs downstream
 
-## Git  ·  56 files
+## Git  ·  57 files
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
 - **notes** (16): most recent → [Companion forgotten undo notes](../git/notes/2026-08-25-forgotten.md), [Git companion file quickstart](../git/notes/2026-09-10-git-companion-file-quickstart.txt), [Git companion readme primer](../git/notes/2026-09-10-git-companion-readme-primer.txt), [Git companion readme quickstart](../git/notes/2026-09-10-git-companion-readme-quickstart.md)
@@ -61,6 +67,7 @@
 - **scripts** (7): most recent → [Repo health check](../git/scripts/git-repo-health-check.sh) — read-only gate combining fsck integrity, a deprecated-config audit for the Git 3.0 migration, and a partial-clone adoption report · [Changelog from conventional commits](../git/scripts/changelog-from-conventional-commits.sh), [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Git PR helper](../git/scripts/git-pr-helper.sh) · _…and 3 more under `git/scripts/`._
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
 - **manifests** (1): [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps git events (push, tag, merge request) to build → test → deploy jobs
+- **notebooks** (1): [Choosing between merge, squash, and rebase](../git/notebooks/choosing-between-merge-squash-and-rebase-strategies.ipynb)
 - **templates** (18): [Repo scaffold with hooks and branch protection](../git/templates/repo-scaffold/README.md) — hooks, CODEOWNERS, a PR template, a contributing guide, and workflows that apply branch protection and regenerate the changelog · [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) · _…and 16 more under `git/templates/`._
 
 ## Grafana  ·  29 files
@@ -88,7 +95,13 @@
 - **notebooks** (1): [Comparing Helm values merging](../helm/notebooks/comparing-helm-values-merging.ipynb)
 - **templates** (19): [Library chart scaffold](../helm/templates/library-chart-scaffold/README.md) — a `lib-common` chart of named templates, an app chart consuming them, a `values.schema.json`, and a `helm test` hook · [my-service chart scaffold](../helm/templates/my-service/README.md) — the plain chart the values-inheritance guide's `-f values-staging.yaml` runs against, with one override file per environment · _…and 15 more under `helm/templates/`._
 
-## Jenkins  ·  28 files
+## Helm Charts  ·  4 files
+
+- **primer:** [Helm Charts — quick primer](../hchart/notes/0000-primer-hchart.md) — charts, releases, values, templates, and repositories for packaging Kubernetes apps
+- **notes** (2): most recent → [Exploring a public chart's structure](../hchart/notes/2026-10-14-explore-public-chart-structure.md) — Chart.yaml, values layout, helpers, and the empty `charts/` folder before dependency update
+- **configs** (2): most recent → [Minimal chart values](../hchart/configs/2026-10-14-minimal-values.yaml), [Minimal chart metadata](../hchart/configs/2026-10-14-minimal-chart.yaml)
+
+## Jenkins  ·  53 files
 
 - **primer:** [Jenkins — quick primer](../jenkins/notes/0000-primer-jenkins.md)
 - **notes** (5): most recent → [First controller plugins, agents, credentials](../jenkins/notes/2026-09-22-first-controller-plugins-agents-credentials.md), [Following the official Jenkins tutorial](../jenkins/notes/2026-09-06-followed-jenkins-tutorial.md), [Jenkins quickstart follow-up](../jenkins/notes/2026-09-03-quickstart-follow-up.md)
@@ -96,7 +109,7 @@
 - **docs** (3): most recent → [Jenkins + GitHub Actions + Argo CD progressive delivery](../jenkins/docs/integrating-jenkins-github-actions-argocd-progressive-delivery.md), [Moving a Jenkinsfile from inline script to SCM](../jenkins/docs/moving-jenkinsfile-to-scm-gotchas.md), [What tripped me up following the Jenkins declarative pipeline tutorial](../jenkins/docs/2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md) — Script Path, branch specifier, lightweight checkout, and credential-ID gotchas
 - **scripts** (2): [Jenkinsfile for NodeJS pipeline](../jenkins/scripts/2026-09-22-nodejs-jenkinsfile.groovy) — declarative pipeline for building and testing a Node.js app, [Common CI/CD shared library groovy](../jenkins/scripts/common-cicd-shared-library.groovy) — shared library logic with buildAndPushDocker, checkoutAndLint, and deployToK8s steps
 - **snippets** (3): most recent → [Shared-library + credentials pipeline](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy), [Environment-credentials pipeline](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [Hello world pipeline](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
-- **templates** (12): [Declarative pipeline scaffold](../jenkins/templates/declarative-pipeline-scaffold/README.md) — copy-in declarative pipeline with shared-library steps (`gitCheckout`, `dockerBuildPush`, `k8sDeploy`, `slackNotify`), `withCredentials` credential binding, and multi-branch discovery config · [Jenkins shared library scaffold](../jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline library with `vars/*.groovy`, tests, and CI gating · _…and 10 more under `jenkins/templates/`._
+- **templates** (37): [Declarative pipeline scaffold](../jenkins/templates/declarative-pipeline-scaffold/README.md) — copy-in declarative pipeline with shared-library steps (`gitCheckout`, `dockerBuildPush`, `k8sDeploy`, `slackNotify`), `withCredentials` credential binding, and multi-branch discovery config · [Jenkins shared library scaffold](../jenkins/templates/jenkins-shared-library/README.md) — copy-in versioned pipeline library with `vars/*.groovy`, tests, and CI gating · [Versioned shared-library scaffold with Docker test harness](../jenkins/templates/jenkins-shared-library-scaffold/README.md) — pipeline templates v1/v2, Docker test harness, and per-step unit tests · _…and 35 more under `jenkins/templates/`._
 
 ## Kubernetes  ·  47 files
 
@@ -111,12 +124,12 @@
 - **dockerfiles** (1): [Operator development image](../k8s/dockerfiles/operator-dev.Dockerfile)
 - **templates** (20): [Multi-service app Helm-chart scaffold](../k8s/templates/multi-service-app/README.md) — two-tier frontend/backend chart with ingress routing and Prometheus alert rules · [Production service template](../k8s/templates/production-service/README.md) — Deployment, Service, ServiceAccount, HPA, PDB, default-deny NetworkPolicy, and namespace budgets wired through one Kustomization · _…and 8 more under `k8s/templates/multi-service-app/` and 9 more under `k8s/templates/production-service/`._
 
-## Prometheus  ·  29 files
+## Prometheus  ·  31 files
 
 - **primer:** [Prometheus — quick primer](../prom/notes/0000-primer-prometheus.md)
 - **notes** (4): most recent → [Prometheus quickstart trip-ups](../prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md), [Install Prometheus and explore web UI](../prom/notes/2026-08-29-install-prometheus-explore-web-ui.md), [Install and explore web UI](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
-- **docs** (3): [PromQL advanced patterns](../prom/docs/promql-advanced-patterns.md) — subqueries, `predict_linear` headroom rules, and cross-cluster federation with a sample-pull config, [PromQL rate increase, histogram, and quantile](../prom/docs/2026-09-19-promql-rate-increase-histogram-quantile.md) — detecting sudden error-rate increases with `rate()`, bucket histograms, and `quantile_over_time()` for SLO burn-rate alerts, [Hybrid service discovery](../prom/docs/hybrid-service-discovery.md) — combining file-based, DNS, and Consul service discovery with priority fallbacks
-- **configs** (7): most recent → [Remote-write long-term storage](../prom/configs/remote-write-long-term-storage.yaml), [Kubernetes pod service discovery](../prom/configs/2026-09-18-kubernetes-service-discovery.yaml), [Remote-write vs federation](../prom/configs/remote-write-vs-federation.yaml), [Prometheus alerting rules](../prom/configs/2026-08-30-prometheus-alerting-rules.yaml) · _…and 3 more under `prom/configs/`._
+- **docs** (4): [PromQL advanced patterns](../prom/docs/promql-advanced-patterns.md) — subqueries, `predict_linear` headroom rules, and cross-cluster federation with a sample-pull config, [PromQL rate increase, histogram, and quantile](../prom/docs/2026-09-19-promql-rate-increase-histogram-quantile.md) — detecting sudden error-rate increases with `rate()`, bucket histograms, and `quantile_over_time()` for SLO burn-rate alerts, [Hybrid service discovery](../prom/docs/hybrid-service-discovery.md) — combining file-based, DNS, and Consul service discovery with priority fallbacks · [Prometheus operations runbook](../prom/docs/prometheus-operations-runbook.md)
+- **configs** (8): most recent → [Recording rules and SLO alerting](../prom/configs/recording-rules-slo-alerting.yaml), [Remote-write long-term storage](../prom/configs/remote-write-long-term-storage.yaml), [Kubernetes pod service discovery](../prom/configs/2026-09-18-kubernetes-service-discovery.yaml) · _…and 5 more under `prom/configs/`._
 - **scripts** (2): [Rules evaluator](../prom/scripts/rules-evaluator.go) — evaluates Prometheus recording and alerting rules against fetched metrics · [Prom query helper](../prom/scripts/2026-09-03-prom-query-helper.sh)
 - **snippets** (1): [First PromQL query](../prom/snippets/2026-08-19-first-promql-query.sh)
 - **manifests** (2): [Kubernetes service discovery with recording rules and Alertmanager routing](../prom/manifests/k8s-service-discovery-recording-rules-alertmanager.yaml) — node discovery, kube-state-metrics and blackbox scrape jobs, recording rules feeding alerts, and a two-receiver routing tree · [Local monitoring stack](../prom/manifests/local-monitoring-stack.yaml) — one-shot Prometheus + Alertmanager + Node Exporter stack for local evaluation
@@ -141,7 +154,7 @@
 - **notebooks** (3): most recent → [Threading, multiprocessing, and asyncio decision guide](../python/notebooks/asyncio-threading-multiprocessing-decision-guide.ipynb) — which concurrency model fits I/O-bound DevOps tooling · [Async patterns comparison](../python/notebooks/async-patterns-comparison.ipynb) — asyncio vs trio vs anyio for I/O-bound DevOps tooling, [Comparing environment-aware config](../python/notebooks/comparing-env-aware-config.ipynb) — typed settings vs layered loaders vs minimal env readers
 - **templates** (23): [Python CLI + Docker + GHA scaffold](../python/templates/python-cli-docker-gha/README.md) — one copy-in layout with a typed CLI, a container image, and a workflow that tests it · [Python service scaffold](../python/templates/python-service-scaffold/README.md) — FastAPI service with Alembic migrations, Pydantic settings, pytest, and a docker-compose dev stack · _…and 21 more under `python/templates/`._
 
-## Terraform  ·  55 files
+## Terraform  ·  57 files
 
 - **primer:** [Terraform — quick primer](../tf/notes/0000-primer-terraform.md)
 - **notes** (4): most recent → [Terraform quickstart trip-ups](../tf/notes/2026-08-27-terraform-quickstart.md), [Quickstart trip-ups](../tf/notes/2026-08-08-quickstart-trip-ups.md), [Install Terraform and run first version command](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
@@ -152,6 +165,12 @@
 - **manifests** (2): most recent → [Versioned VPC module](../tf/manifests/versioned-vpc-module.hcl) — a reusable VPC module pinned to a version source, with public and private subnets, NAT gateways, and route tables · [Root module fan-out composition](../tf/manifests/root-module-fan-out-composition.hcl) — VPC, EKS, and RDS submodules wired via outputs from one root module
 - **notebooks** (1): [State management strategies](../tf/notebooks/state-management-strategies.ipynb)
 - **templates** (34): [Reusable module scaffold](../tf/templates/reusable-module-scaffold/README.md) — validated inputs, output contracts, a Terratest suite (happy path, disabled, validation-rejection), and a Go-version CI matrix · [Multi-environment scaffold](../tf/templates/multi-environment-terraform-scaffold/README.md) — one shared module called from per-environment roots with per-env backends and tfvars, so dev, staging, and prod stop drifting apart · [Terragrunt multi-environment scaffold](../tf/templates/terragrunt-multi-env/README.md) — one reusable module shared across dev, staging, and prod with per-environment inputs · _…and 32 more under `tf/templates/`._
+
+## Terraform Cloud  ·  3 files
+
+- **primer:** [Terraform Cloud — quick primer](../tfc/notes/0000-primer-tfc.md) — organisations, workspaces, runs, shared variables, and VCS-triggered plans on the hosted service
+- **notes** (2): most recent → [Poking around Terraform Cloud workspaces](../tfc/notes/2026-10-14-explore-workspaces.md) — Runs, States, Variables tabs and the env-vs-workspace variable category trap
+- **configs** (1): [Minimal cloud backend block](../tfc/configs/2026-10-14-minimal-cloud-backend.hcl) — the smallest `cloud` block pointing a config at an organisation and workspace
 
 ## Repo-doc  ·  16 files
 
