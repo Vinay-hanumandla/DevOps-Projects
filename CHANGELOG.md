@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-15
+
+- git/docs/advanced-git-workflow-patterns.md — Advanced Git workflow patterns: monorepo strategies, commit signing, and bisect automation (git-041)
+- repo-doc/snippets/2026-10-15-stale-branch-cleanup.sh — Repository hygiene snippet: stale branch report, commit message lint, and dependency pin audit (repo-doc-014)
+
 ## 2026-10-14
 
 - compose/notes/0000-primer-compose.md — Docker Compose quick primer: services, images, networks, volumes, port mappings (compose-001)
