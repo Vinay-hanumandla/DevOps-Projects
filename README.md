@@ -22,11 +22,11 @@ The `compose/` folder holds first-contact Compose notes and a minimal web-plus-d
 
 ## Quick links
 
-- [Docker Compose primer](compose/notes/0000-primer-compose.md) — what Compose is, services, images, networks, volumes, and the up/down loop for running a web page plus a database together.
-- [My first compose up — what tripped me up](compose/notes/2026-10-14-first-compose-up.md) — port-order confusion, service names as hostnames, and remembering `down` after closing the terminal.
-- [Minimal web-plus-db Compose file](compose/configs/2026-10-14-web-plus-db.yaml) — two services, nginx on 8080 plus postgres, as the smallest starting point that actually runs.
-- [Terraform Cloud primer](tfc/notes/0000-primer-tfc.md) — what the hosted service adds over local Terraform: organisations, workspaces, runs, shared variables, and VCS-triggered plans.
-- [Minimal Terraform Cloud backend block](tfc/configs/2026-10-14-minimal-cloud-backend.hcl) — the smallest `cloud` block pointing a config at an organisation and workspace instead of local state.
+- [Branch protection policy workflow](git/templates/branch-protection-policy/README.md) — keeps the default branch's required reviews, status checks, and linear-history rules in a reviewed JSON file, applied by script or workflow, with a drift check and a rollback path.
+- [Apply-protection script](git/templates/branch-protection-policy/scripts/apply-protection.sh) — pushes the checked-in policy file to the repository's live branch-protection settings through the REST API.
+- [Branch protection policy file](git/templates/branch-protection-policy/policy/branch-protection.json) — the version-controlled policy itself: required reviews, required status checks, linear history, and stale-review dismissal.
+- [Advanced Git workflow patterns](git/docs/advanced-git-workflow-patterns.md) — monorepo organisation with path-scoped ownership, required commit signing, and scripted `git bisect` runs for locating regressions mechanically.
+- [Stale-branch cleanup report](repo-doc/snippets/2026-10-15-stale-branch-cleanup.sh) — one small read-only report: branches merged into main past a day cutoff, commit-message shape for the last ten commits, and leftover dependency pins worth a glance.
 
 ## Layout
 
@@ -68,7 +68,7 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 | Compose | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-14 |
 | Docker | 5 | 5 | 8 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 2026-10-11 |
 | GitHub Actions | 3 | 5 | 6 | 1 | 11 | 2 | 1 | 0 | 0 | 0 | 0 | 2026-10-03 |
-| Git | 16 | 13 | 7 | 0 | 0 | 1 | 1 | 0 | 18 | 0 | 1 | 2026-10-14 |
+| Git | 16 | 14 | 7 | 0 | 0 | 1 | 1 | 0 | 26 | 0 | 1 | 2026-10-15 |
 | Grafana | 4 | 2 | 1 | 3 | 6 | 3 | 1 | 1 | 8 | 0 | 0 | 2026-10-06 |
 | Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 2026-09-26 |
 | Helm Charts | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-14 |
@@ -77,7 +77,7 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 | Kube-Prometheus | 3 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-10-12 |
 | Prometheus | 4 | 4 | 2 | 1 | 8 | 2 | 0 | 0 | 10 | 0 | 0 | 2026-10-14 |
 | Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 23 | 0 | 0 | 2026-10-03 |
-| Repo-doc | 5 | 4 | 5 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-11 |
+| Repo-doc | 5 | 4 | 5 | 1 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-15 |
 | Terraform | 4 | 5 | 3 | 1 | 7 | 2 | 1 | 0 | 34 | 0 | 0 | 2026-10-14 |
 | Terraform Cloud | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-14 |
 | Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | — |
@@ -87,7 +87,7 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 
 ## Status
 
-Currently covering first contact with Docker Compose and Terraform Cloud: a two-service Compose file with port and hostname gotchas written down, and workspaces plus the minimal cloud backend block for hosted Terraform runs. Alongside that, Helm chart anatomy from a public chart teardown and a Jenkins shared-library scaffold with a Docker test harness and versioned pipeline templates.
+Currently keeping the default branch honest: a branch-protection-policy template that stores required reviews, status checks, and linear-history rules in a reviewed JSON file with apply, verify, and rollback scripts, plus an advanced-workflow reference covering monorepo organisation, required commit signing, and scripted `git bisect` runs. Alongside that, a read-only stale-branch cleanup report for the kit's own housekeeping.
 
 ---
 _Last updated: 2026-10-15_

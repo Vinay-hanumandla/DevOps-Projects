@@ -262,6 +262,17 @@
 - [Changelog template](../git/templates/repo-scaffold/CHANGELOG.md) — the append-only `[Unreleased]`-first layout the workflow expects
 - [Contributing guide](../git/templates/repo-scaffold/CONTRIBUTING.md) — branch, commit-message, and review conventions to hand a new contributor
 
+### Keep branch protection under version control
+- [Branch protection policy workflow](../git/templates/branch-protection-policy/README.md) — required reviews, status checks, and linear-history rules kept in a reviewed JSON file, applied by script or workflow, with drift verification and rollback
+- [Branch protection policy file](../git/templates/branch-protection-policy/policy/branch-protection.json) — the version-controlled policy itself: required reviews, required status checks, and linear-history rules
+- [Apply-protection script](../git/templates/branch-protection-policy/scripts/apply-protection.sh) — pushes the checked-in policy file to the live branch-protection settings through the REST API
+- [Verify-protection script](../git/templates/branch-protection-policy/scripts/verify-protection.sh) — detects drift between the checked-in policy file and the live settings
+- [Remove-protection script](../git/templates/branch-protection-policy/scripts/remove-protection.sh) — rolls the policy back when protection needs to come off
+- [Branch protection workflow](../git/templates/branch-protection-policy/.github/workflows/branch-protection.yml) — applies the checked-in policy on a schedule so settings converge without clicks
+
+### Handle monorepo, signing, and bisect at scale
+- [Advanced Git workflow patterns](../git/docs/advanced-git-workflow-patterns.md) — monorepo organisation with path-scoped ownership, required commit signing, and scripted `git bisect` runs for locating regressions mechanically
+
 ### Map out the Git folder
 - [Git — my first file index](../git/docs/2026-08-10-git-index.md) — cataloguing the Git folder into a per-category coverage table
 
@@ -649,6 +660,7 @@
 - [Project configuration schema](../repo-doc/configs/project-configuration-schema.yaml) — YAML schema reference declaring the category subdirs, naming conventions, and primer rules every tool folder must follow
 - [Poking around the repo-task folder](../repo-doc/notes/2026-10-03-exploring-task-folder-structure.md) — a first look at what the repo-doc notes, docs, scripts, and configs each hold, and where the next file belongs
 - [Running the kit conformance checker in CI](../repo-doc/docs/kit-conformance-in-ci.md) — turning the local conformance script into a CI gate that fails a PR when the task list, manifest snapshot, and kit tree disagree
+- [Stale-branch cleanup report](../repo-doc/snippets/2026-10-15-stale-branch-cleanup.sh) — read-only housekeeping: branches merged into main past a day cutoff, commit-message shape for the last ten commits, and leftover dependency pins
 
 ### Ansible reference docs
 - [Retry strategies for unreliable targets](../ansible/docs/retry-strategies-unreliable-targets.md) — strategies for handling transient failures when targets drop connectivity during a playbook run
