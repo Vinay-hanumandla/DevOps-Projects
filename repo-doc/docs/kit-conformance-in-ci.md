@@ -55,8 +55,8 @@ task id whose folder was renamed.
      run: |
        python3 repo-doc/scripts/kit-conformance-checker.py \
          --kit-root . \
-         --tasks-file DevOps_Automation/Agent/ACTIVE_BACKLOG_TASKS.md \
-         --manifest DevOps_Automation/Agent/MANIFEST.json
+         --tasks-file TASKS.md \
+         --manifest MANIFEST.json
    ```
 
 5. The workflow step inherits the shell, so a non-zero exit from the checker
