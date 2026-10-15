@@ -262,6 +262,7 @@
 - **Submodule** — a Git repo nested inside another repo, tracked by a commit pointer in the parent; requires `git submodule update --init --recursive` after cloning, and CI pipelines need extra steps to fetch the nested content.
 - **Subtree** — a strategy that merges a child repo's history into a subdirectory of the parent; the parent owns the code, contributors to the child don't need to know about the subtree, but the parent repo's history grows larger.
 - **Monorepo** — a single repository that contains multiple projects or services; avoids submodules and subtree commands but may require tooling like Bazel or careful directory ownership to keep builds fast.
+- **`git bisect`** — a binary-search over history that finds the commit which introduced a regression; mark a known-bad commit and a known-good one, then `git bisect run <check-script>` checks out each candidate and runs the script until a single culprit commit remains. The check script must exit zero on good and non-zero on bad, stay hermetic (seeded randomness, disposable data dir), and print the failing assertion so the bisect log stays readable.
 
 ## GitLab CI
 

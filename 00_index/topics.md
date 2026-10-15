@@ -59,16 +59,16 @@
 - **notebooks** (1): [Matrix vs single-job CI strategies](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
 - **snippets** (1): [Reusable workflow caller](../gha/snippets/reusable-workflow-caller.yaml) — minimal caller of a centrally maintained reusable workflow, passing inputs and secrets and reading outputs downstream
 
-## Git  ·  57 files
+## Git  ·  66 files
 
 - **primer:** [Git — quick primer](../git/notes/0000-primer-git.md)
 - **notes** (16): most recent → [Companion forgotten undo notes](../git/notes/2026-08-25-forgotten.md), [Git companion file quickstart](../git/notes/2026-09-10-git-companion-file-quickstart.txt), [Git companion readme primer](../git/notes/2026-09-10-git-companion-readme-primer.txt), [Git companion readme quickstart](../git/notes/2026-09-10-git-companion-readme-quickstart.md)
-- **docs** (13): most recent → [Comparing merge, rebase, and squash-merge strategies](../git/docs/comparing-merge-rebase-squash-strategies.md) — the three integration strategies weighed across history topology, conflict rates, and CI throughput, with a decision framework for picking a default · [Worktree workflows for hotfix isolation](../git/docs/worktree-hotfix-isolation.md), [Worktree workflows for parallel feature development](../git/docs/worktree-parallel-feature-development.md), [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md), [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md)
+- **docs** (14): most recent → [Advanced Git workflow patterns](../git/docs/advanced-git-workflow-patterns.md) — monorepo organisation with path-scoped ownership, required commit signing, and scripted `git bisect` runs, [Comparing merge, rebase, and squash-merge strategies](../git/docs/comparing-merge-rebase-squash-strategies.md) — the three integration strategies weighed across history topology, conflict rates, and CI throughput, with a decision framework for picking a default · [Worktree workflows for hotfix isolation](../git/docs/worktree-hotfix-isolation.md), [Worktree workflows for parallel feature development](../git/docs/worktree-parallel-feature-development.md), [Choosing between submodules, subtrees, and monorepo](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md), [Rebase vs merge at scale](../git/docs/rebase-vs-merge-at-scale.md)
 - **scripts** (7): most recent → [Repo health check](../git/scripts/git-repo-health-check.sh) — read-only gate combining fsck integrity, a deprecated-config audit for the Git 3.0 migration, and a partial-clone adoption report · [Changelog from conventional commits](../git/scripts/changelog-from-conventional-commits.sh), [Semantic release automation](../git/scripts/semantic-release-automation.sh), [Git PR helper](../git/scripts/git-pr-helper.sh) · _…and 3 more under `git/scripts/`._
 - **hooks** (1): [Install Git hooks](../git/hooks/install.sh)
 - **manifests** (1): [CI/CD pipeline trigger manifest](../git/manifests/ci-cd-pipeline-trigger.yaml) — maps git events (push, tag, merge request) to build → test → deploy jobs
 - **notebooks** (1): [Choosing between merge, squash, and rebase](../git/notebooks/choosing-between-merge-squash-and-rebase-strategies.ipynb)
-- **templates** (18): [Repo scaffold with hooks and branch protection](../git/templates/repo-scaffold/README.md) — hooks, CODEOWNERS, a PR template, a contributing guide, and workflows that apply branch protection and regenerate the changelog · [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) · _…and 16 more under `git/templates/`._
+- **templates** (26): [Branch protection policy workflow](../git/templates/branch-protection-policy/README.md) — required reviews, status checks, and linear-history rules kept in a reviewed JSON policy file, applied by script or workflow, with drift verification and rollback · [Repo scaffold with hooks and branch protection](../git/templates/repo-scaffold/README.md) — hooks, CODEOWNERS, a PR template, a contributing guide, and workflows that apply branch protection and regenerate the changelog · [Git-based release workflow scaffold](../git/templates/release-workflow/README.md) · _…and 24 more under `git/templates/`._
 
 ## Grafana  ·  29 files
 
@@ -172,13 +172,14 @@
 - **notes** (2): most recent → [Poking around Terraform Cloud workspaces](../tfc/notes/2026-10-14-explore-workspaces.md) — Runs, States, Variables tabs and the env-vs-workspace variable category trap
 - **configs** (1): [Minimal cloud backend block](../tfc/configs/2026-10-14-minimal-cloud-backend.hcl) — the smallest `cloud` block pointing a config at an organisation and workspace
 
-## Repo-doc  ·  16 files
+## Repo-doc  ·  17 files
 
 - **primer:** [Repo-doc — quick primer](../repo-doc/notes/0000-primer-repo-doc.md)
 - **notes** (5): most recent → [Following the repo-task tutorial](../repo-doc/notes/2026-09-23-following-repo-task-tutorial-workflows.md), [Repo-doc CLI install and first scaffold](../repo-doc/notes/2026-09-21-repo-doc-cli-install-and-scaffold.md), [Repo-task quickstart trip-ups](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md) · _…and 2 more under `repo-doc/notes/`._
 - **docs** (4): most recent → [Running the kit conformance checker in CI](../repo-doc/docs/kit-conformance-in-ci.md) — turning the local checker into a CI gate that fails a PR when the task list, manifest snapshot, and kit tree disagree · [Following the tutorial again — the pre-PR validation loop](../repo-doc/docs/2026-09-26-tutorial-validation-loop-trip-ups.md), [Repo-doc tooling overview](../repo-doc/docs/2026-09-08-repo-doc-tooling-overview.md), [Repo — reconcile coverage tables with on-disk counts](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md)
 - **configs** (2): [Project configuration schema](../repo-doc/configs/project-configuration-schema.yaml) — the YAML reference declaring the category subdirs, naming conventions, and primer rules every tool folder must follow · [Tool folder conventions](../repo-doc/configs/2026-09-26-tool-folder-conventions.md) — required subdirs, file-naming patterns, and primer rules for where files live in this kit
 - **scripts** (5): most recent → [Kit conformance checker](../repo-doc/scripts/kit-conformance-checker.py) — validates task entry schema, manifest queue sync, and id-prefix folder progression with stdlib-only checks · [Project folder validator](../repo-doc/scripts/project-validator.py) — a standard-library Python check that walks each tool folder and confirms it follows the kit's layout conventions · [Check folders and report gaps](../repo-doc/scripts/2026-09-25-check-folders-and-report-gaps.sh), [Regenerate coverage tables](../repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh) · _…and 1 more under `repo-doc/scripts/`._
+- **snippets** (1): [Stale-branch cleanup report](../repo-doc/snippets/2026-10-15-stale-branch-cleanup.sh) — read-only housekeeping report: branches merged into main past a day cutoff, commit-message shape for the last ten commits, and leftover dependency pins
 
 ## Concepts (docs/concepts/)  ·  64 files
 
