@@ -1,0 +1,66 @@
+# last_verified: 2026-10-15 · git n/a
+# Apply the version-controlled branch protection policy. Pull requests that
+# touch the policy only validate it; the policy is applied on manual dispatch
+# so a merge can never change protection as a side effect. Application needs
+# a credential with admin on the repository, supplied as the ADMIN_TOKEN
+# secret, because the default workflow token is not sufficient for it.
+name: Branch protection
+
+on:
+  pull_request:
+    paths:
+      - 'git/templates/branch-protection-policy/policy/**'
+      - 'git/templates/branch-protection-policy/scripts/**'
+  workflow_dispatch:
+    inputs:
+      branches:
+        description: 'Space-separated branches to protect (default: every branch in the policy file)'
+        type: string
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate the policy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the policy file shape
+        run: |
+          POLICY="git/templates/branch-protection-policy/policy/branch-protection.json"
+          jq -e '.branches | type == "object" and length > 0' "$POLICY" >/dev/null \
+            || { echo "policy must define at least one branch" >&2; exit 1; }
+          bad="$(jq -r '.branches | to_entries[] | select(.value.required_status_checks.contexts | type != "array") | .key')"
+          if [ -n "$bad" ]; then
+            echo "branches without a contexts array: $bad" >&2
+            exit 1
+          fi
+          empty="$(jq -r '.branches | to_entries[] | select(.value.required_status_checks.contexts | length == 0) | .key')"
+          if [ -n "$empty" ]; then
+            echo "NOTE: branches with no required checks (reviews/history rules still apply): $empty"
+          fi
+          bash -n git/templates/branch-protection-policy/scripts/apply-protection.sh
+          bash -n git/templates/branch-protection-policy/scripts/verify-protection.sh
+          bash -n git/templates/branch-protection-policy/scripts/remove-protection.sh
+          echo "policy shape valid"
+
+  apply:
+    name: Apply and verify
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.event_name == 'workflow_dispatch'
+    env:
+      GH_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply the policy
+        run: |
+          # shellcheck disable=SC2086
+          git/templates/branch-protection-policy/scripts/apply-protection.sh ${{ inputs.branches }}
+      - name: Verify convergence
+        run: |
+          # shellcheck disable=SC2086
+          git/templates/branch-protection-policy/scripts/verify-protection.sh ${{ inputs.branches }}

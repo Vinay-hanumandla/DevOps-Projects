@@ -1,0 +1,22 @@
+{
+  "_note": "Version-controlled branch protection policy. Each key under branches is an exact branch name; its value is the exact payload sent to the protection endpoint, so what is reviewed in a pull request is byte-for-byte what gets applied. Add further exact branch names (for example a stable release branch) as new keys. Keep required_status_checks.contexts aligned with the check names your CI workflow actually reports; an empty list applies the remaining rules but enforces no checks.",
+  "branches": {
+    "main": {
+      "required_status_checks": {
+        "strict": true,
+        "contexts": []
+      },
+      "enforce_admins": true,
+      "required_pull_request_reviews": {
+        "required_approving_review_count": 1,
+        "dismiss_stale_reviews": true
+      },
+      "required_signatures": {
+        "enabled": false
+      },
+      "required_linear_history": true,
+      "allow_force_pushes": false,
+      "allow_deletions": false
+    }
+  }
+}
