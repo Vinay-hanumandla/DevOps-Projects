@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-15
+
+- git/templates/repo-scaffold/Makefile + scripts/run-tests.sh — test, lint, and check targets with documented prerequisites; self-tests cover script syntax, commit-msg hook samples, and changelog-generator idempotency (git-042)
+
 ## 2026-10-14
 
 - compose/notes/0000-primer-compose.md — Docker Compose quick primer: services, images, networks, volumes, port mappings (compose-001)

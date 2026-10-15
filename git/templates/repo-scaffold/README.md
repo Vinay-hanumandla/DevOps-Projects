@@ -1,5 +1,5 @@
 ---
-last_verified: 2026-09-30
+last_verified: 2026-10-15
 tool_version: n/a
 sources: []
 ---
@@ -19,6 +19,7 @@ repo-scaffold/
 ├── README.md
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
+├── Makefile
 ├── .gitignore
 ├── .github/
 │   ├── CODEOWNERS
@@ -31,8 +32,17 @@ repo-scaffold/
 │   ├── commit-msg
 │   └── README.md
 └── scripts/
-    └── update-changelog.sh
+    ├── update-changelog.sh
+    └── run-tests.sh
 ```
+
+`Makefile` holds the `test`, `lint`, and `check` targets the pre-commit hook
+and CONTRIBUTING.md refer to: `test` runs `scripts/run-tests.sh`
+(syntax checks, commit-msg hook samples, changelog-generator idempotency),
+`lint` runs shellcheck over `scripts/` and `hooks/`, and `check` runs both.
+Prerequisites are listed at the top of the `Makefile` and in
+CONTRIBUTING.md — `git`, `bash`, `awk`, and `mktemp` for `test`,
+`shellcheck` additionally for `lint`.
 
 ## Install
 

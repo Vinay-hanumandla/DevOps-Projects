@@ -1,5 +1,5 @@
 ---
-last_verified: 2026-09-07
+last_verified: 2026-10-15
 tool_version: n/a
 sources: []
 ---
@@ -58,12 +58,20 @@ self-evident, a quick "LGTM" is enough. If a change touches shared infrastructur
 This repository ships a `Makefile` with the common targets:
 
 ```bash
-make test      # run the test suite
-make lint      # run shellcheck on every script
+make test      # run the self-tests in scripts/run-tests.sh
+make lint      # run shellcheck on every script and hook
 make check     # run both
 ```
 
 Run `make` with no arguments to see the full list.
+
+Prerequisites: `git`, `bash`, `awk`, and `mktemp` for `make test`
+(standard on any machine with git installed); `shellcheck` for `make lint`
+only. The test target syntax-checks every script and hook, exercises the
+commit-msg hook against sample messages, and replays the changelog generator
+twice over a scratch copy to prove the Unreleased block rebuild is
+idempotent. The lint target fails with an install hint when shellcheck is
+not on PATH.
 
 ## Questions
 
