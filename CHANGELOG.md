@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-10-18
+
+- python/templates/python-cli-docker-gha/.github/workflows/ci.yml — GitHub Actions CI workflow with lint (ruff, mypy), test (pytest), and Docker build + smoke-test jobs (python-025)
+- repo-doc/docs/2026-10-18-reconcile-primer-with-current-layout.md — Reconciliation of repo-doc primer with actual tool category layout and helper scripts (repo-doc-015)
+
 ## 2026-10-15
 
 - git/templates/branch-protection-policy/ — Version-controlled branch protection policy: policy JSON plus apply/verify/remove scripts and a validate-on-PR, apply-on-dispatch workflow (git-043)
