@@ -14,7 +14,7 @@ HANDOFF_KEYS = ("vpc_id", "db_endpoint", "redis_endpoint", "s3_bucket", "lb_dns"
 def main(src: str, dest: str) -> None:
     with open(src, encoding="utf-8") as fh:
         outputs = json.load(fh)
-    lines = ["---", "# Auto-generated from `terraform output -json`. Do not edit by hand."]
+    lines = ["---", "# Generated from `terraform output -json`."]
     for key in HANDOFF_KEYS:
         entry = outputs.get(key, {})
         value = entry.get("value", "") if isinstance(entry, dict) else entry
