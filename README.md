@@ -19,11 +19,11 @@ The `templates/` subfolders are copy-in starting points: a chart, a role, a coll
 
 ## Quick links
 
-- [Moving Jenkinsfile from inline to SCM](jenkins/docs/moving-jenkinsfile-from-inline-to-scm-script-path-branch-lightweight-checkout-credential-gotchas.md) — script paths, branches, lightweight checkout, and credential gotchas when moving from inline pipeline to a Jenkinsfile in SCM.
-- [Shared library reusable steps scaffold — Jenkinsfile](jenkins/templates/shared-library-reusable-steps-dsl-scaffold/Jenkinsfile) — entry point for the shared-library scaffold demonstrating reusable steps and DSL patterns.
-- [Shared library reusable steps scaffold — README](jenkins/templates/shared-library-reusable-steps-dsl-scaffold/README.md) — structure and usage of the shared-library scaffold template.
-- [Shared library pipeline template — simple Jenkinsfile](jenkins/templates/shared-library-reusable-steps-dsl-scaffold/pipeline-templates/simple/Jenkinsfile) — simple pipeline template that consumes shared-library reusable steps.
-- [Shared library utility](jenkins/templates/shared-library-reusable-steps-dsl-scaffold/src/com/example/jenkinslib/Utils.groovy) — example Groovy utility class in the shared-library scaffold.
+- [GitHub Actions production CI template — cache dependencies action](gha/templates/production-ci-template/.github/actions/cache-dependencies/action.yml) — Reusable GitHub Action for caching dependencies across workflow runs.
+- [GitHub Actions production CI template — configure environment action](gha/templates/production-ci-template/.github/actions/configure-environment/action.yml) — Reusable GitHub Action for environment setup and configuration.
+- [GitHub Actions production CI template — README](gha/templates/production-ci-template/README.md) — Documentation for the production CI template with usage examples.
+- [GitHub Actions production CI template — CI workflow](gha/templates/production-ci-template/ci.yml) — Main CI pipeline workflow with lint, test, and build stages.
+- [GitHub Actions production CI template — Deploy workflow](gha/templates/production-ci-template/deploy.yml) — Deployment workflow with environment promotion and approval gates.
 
 ## Layout
 
@@ -59,24 +59,30 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 
 | Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Last verified |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| Ansible | 3 | 6 | 5 | 1 | 4 | 3 | 1 | 0 | 28 | 0 | 0 | 2026-10-05 |
-| AWX | 4 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-12 |
-| Bash | 3 | 8 | 12 | 3 | 0 | 0 | 6 | 1 | 30 | 0 | 0 | 2026-10-10 |
+| Ansible | 3 | 6 | 5 | 1 | 4 | 3 | 1 | 0 | 28 | 0 | 0 | 2026-08-10 |
+| AWX | 4 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-04 |
+| Bash | 3 | 8 | 12 | 3 | 0 | 0 | 6 | 1 | 30 | 0 | 0 | 2026-07-18 |
 | Compose | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-14 |
-| Docker | 5 | 5 | 8 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 2026-10-11 |
-| GitHub Actions | 3 | 5 | 6 | 1 | 11 | 2 | 1 | 0 | 0 | 0 | 0 | 2026-10-03 |
-| Git | 16 | 13 | 7 | 0 | 0 | 1 | 1 | 0 | 18 | 0 | 1 | 2026-10-14 |
-| Grafana | 4 | 2 | 1 | 3 | 6 | 3 | 1 | 1 | 8 | 0 | 0 | 2026-10-06 |
-| Helm | 6 | 3 | 1 | 1 | 7 | 3 | 1 | 0 | 19 | 0 | 0 | 2026-09-26 |
+| Docker | 5 | 5 | 8 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 2026-07-19 |
+| GitHub Actions | 3 | 6 | 6 | 1 | 11 | 2 | 1 | 0 | 6 | 0 | 0 | 2026-08-05 |
+| Git | 16 | 14 | 7 | 0 | 0 | 1 | 1 | 0 | 26 | 0 | 1 | 2026-07-20 |
+| Grafana | 4 | 2 | 1 | 3 | 6 | 3 | 1 | 1 | 8 | 0 | 0 | 2026-08-06 |
+| Helm | 6 | 5 | 3 | 1 | 7 | 3 | 1 | 0 | 28 | 0 | 0 | 2026-07-31 |
 | Helm Charts | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-14 |
-| Jenkins | 5 | 3 | 2 | 3 | 3 | 0 | 0 | 0 | 37 | 0 | 0 | 2026-10-14 |
-| Kubernetes | 6 | 6 | 3 | 2 | 1 | 6 | 2 | 1 | 20 | 0 | 0 | 2026-10-12 |
-| Kube-Prometheus | 3 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-10-12 |
-| Prometheus | 4 | 4 | 2 | 1 | 8 | 2 | 0 | 0 | 10 | 0 | 0 | 2026-10-14 |
-| Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 23 | 0 | 0 | 2026-10-03 |
-| Repo-doc | 5 | 4 | 5 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-11 |
+| Jenkins | 5 | 4 | 2 | 3 | 3 | 0 | 0 | 0 | 45 | 0 | 0 | 2026-08-11 |
+| Kubernetes | 6 | 6 | 3 | 2 | 1 | 6 | 2 | 1 | 20 | 0 | 0 | 2026-08-02 |
+| Kube-Prometheus | 3 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-10-08 |
+| Prometheus | 4 | 4 | 2 | 1 | 8 | 2 | 0 | 0 | 10 | 0 | 0 | 2026-08-07 |
+| Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 24 | 0 | 0 | 2026-07-22 |
+| Repo-doc | 5 | 5 | 5 | 1 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-01 |
+| Terraform | 4 | 5 | 3 | 1 | 7 | 2 | 1 | 0 | 34 | 0 | 0 | 2026-08-01 |
+| Terraform Cloud | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-14 |
 
 </details>
+
+## Status
+
+Currently expanding the GitHub Actions production CI template with reusable actions for caching and environment configuration. New templates for `gha/templates/production-ci-template/` added this cycle.
 
 ---
 _Last updated: 2026-10-19_
