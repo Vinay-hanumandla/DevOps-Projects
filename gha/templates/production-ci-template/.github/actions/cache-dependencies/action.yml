@@ -1,0 +1,64 @@
+# last_verified: 2026-10-19 · gha n/a
+name: Cache Dependencies
+description: Restore and save dependency caches for multiple package managers
+inputs:
+  python-version:
+    description: 'Python version for cache key'
+    required: true
+    default: '3.12'
+  node-version:
+    description: 'Node.js version for cache key'
+    required: false
+    default: ''
+  cache-key-suffix:
+    description: 'Additional suffix for cache key'
+    required: false
+    default: ''
+outputs:
+  cache-hit:
+    description: 'Whether cache was restored'
+    value: ${{ steps.cache.outputs.cache-hit }}
+runs:
+  using: composite
+  steps:
+    - name: Cache Python dependencies (pip)
+      id: pip-cache
+      uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.2.1
+      with:
+        path: |
+          ~/.cache/pip
+          ~/.local/share/virtualenvs
+        key: pip-${{ runner.os }}-${{ inputs.python-version }}-${{ hashFiles('**/requirements*.txt', '**/pyproject.toml', '**/poetry.lock') }}-${{ inputs.cache-key-suffix }}
+        restore-keys: |
+          pip-${{ runner.os }}-${{ inputs.python-version }}-
+
+    - name: Cache Node.js dependencies (npm)
+      if: inputs.node-version != ''
+      id: npm-cache
+      uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.2.1
+      with:
+        path: |
+          ~/.npm
+          node_modules
+        key: npm-${{ runner.os }}-${{ inputs.node-version }}-${{ hashFiles('**/package-lock.json', '**/yarn.lock', '**/pnpm-lock.yaml') }}-${{ inputs.cache-key-suffix }}
+        restore-keys: |
+          npm-${{ runner.os }}-${{ inputs.node-version }}-
+
+    - name: Cache Docker layers
+      id: docker-cache
+      uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4.2.1
+      with:
+        path: /tmp/.buildx-cache
+        key: docker-${{ runner.os }}-${{ hashFiles('**/Dockerfile', '**/docker-compose*.yml') }}-${{ inputs.cache-key-suffix }}
+        restore-keys: |
+          docker-${{ runner.os }}-
+
+    - name: Set cache hit output
+      id: cache
+      run: |
+        hit="false"
+        if [ "${{ steps.pip-cache.outputs.cache-hit }}" = "true" ] || [ "${{ steps.npm-cache.outputs.cache-hit }}" = "true" ] || [ "${{ steps.docker-cache.outputs.cache-hit }}" = "true" ]; then
+          hit="true"
+        fi
+        echo "cache-hit=$hit" >> "$GITHUB_OUTPUT"
+      shell: bash
