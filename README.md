@@ -1,5 +1,5 @@
 # DevOps Projects
-> A working DevOps engineer's shelf for Git, Bash, Docker, Compose, Kubernetes, Helm, Terraform, Ansible, AWX, and the tools that connect them.
+> A working DevOps engineer's shelf for Git, Bash, Docker, Compose, Kubernetes, Helm, Terraform, Ansible, AWX, Jenkins, Prometheus, and the tools that connect them.
 
 [![Last commit](https://img.shields.io/github/last-commit/Vinay-hanumandla/DevOps-Projects)](https://github.com/Vinay-hanumandla/DevOps-Projects/commits/main) [![Top language](https://img.shields.io/github/languages/top/Vinay-hanumandla/DevOps-Projects)](https://github.com/Vinay-hanumandla/DevOps-Projects) [![Language count](https://img.shields.io/github/languages/count/Vinay-hanumandla/DevOps-Projects)](https://github.com/Vinay-hanumandla/DevOps-Projects) [![Repo size](https://img.shields.io/github/repo-size/Vinay-hanumandla/DevOps-Projects)](https://github.com/Vinay-hanumandla/DevOps-Projects)
 
@@ -16,17 +16,14 @@ It deliberately leaves out credentials, environment secrets, and a walkthrough f
 Notes, scripts, configs, manifests, and reusable templates for the tooling a DevOps engineer actually operates: version control and shell first, then containers and orchestration, then infrastructure as code and CI/CD, with observability and dashboarding on top.
 `docs/concepts/` holds the conceptual spine — eight foundational primers, each with runnable companions — and every tool folder holds the material you reach for when putting those ideas into practice.
 The `templates/` subfolders are copy-in starting points: a chart, a role, a collection, a repository, or a release workflow you can adopt wholesale rather than write from scratch.
-The `awx/` folder covers the Tower-side control plane — job templates, inventories, and credentials — for teams that have outgrown running playbooks by hand.
-The `kprom/` folder wraps the kube-prometheus-stack Helm chart for cluster-native monitoring with Prometheus, Grafana, and Alertmanager.
-The `compose/` folder holds first-contact Compose notes and a minimal web-plus-db starting file, `hchart/` unpacks Helm chart anatomy from public charts to minimal installs, and `tfc/` records first contact with Terraform Cloud workspaces and the cloud backend block.
 
 ## Quick links
 
-- [Docker Compose primer](compose/notes/0000-primer-compose.md) — what Compose is, services, images, networks, volumes, and the up/down loop for running a web page plus a database together.
-- [My first compose up — what tripped me up](compose/notes/2026-10-14-first-compose-up.md) — port-order confusion, service names as hostnames, and remembering `down` after closing the terminal.
-- [Minimal web-plus-db Compose file](compose/configs/2026-10-14-web-plus-db.yaml) — two services, nginx on 8080 plus postgres, as the smallest starting point that actually runs.
-- [Terraform Cloud primer](tfc/notes/0000-primer-tfc.md) — what the hosted service adds over local Terraform: organisations, workspaces, runs, shared variables, and VCS-triggered plans.
-- [Minimal Terraform Cloud backend block](tfc/configs/2026-10-14-minimal-cloud-backend.hcl) — the smallest `cloud` block pointing a config at an organisation and workspace instead of local state.
+- [Moving Jenkinsfile from inline to SCM](jenkins/docs/moving-jenkinsfile-from-inline-to-scm-script-path-branch-lightweight-checkout-credential-gotchas.md) — script paths, branches, lightweight checkout, and credential gotchas when moving from inline pipeline to a Jenkinsfile in SCM.
+- [Shared library reusable steps scaffold — Jenkinsfile](jenkins/templates/shared-library-reusable-steps-dsl-scaffold/Jenkinsfile) — entry point for the shared-library scaffold demonstrating reusable steps and DSL patterns.
+- [Shared library reusable steps scaffold — README](jenkins/templates/shared-library-reusable-steps-dsl-scaffold/README.md) — structure and usage of the shared-library scaffold template.
+- [Shared library pipeline template — simple Jenkinsfile](jenkins/templates/shared-library-reusable-steps-dsl-scaffold/pipeline-templates/simple/Jenkinsfile) — simple pipeline template that consumes shared-library reusable steps.
+- [Shared library utility](jenkins/templates/shared-library-reusable-steps-dsl-scaffold/src/com/example/jenkinslib/Utils.groovy) — example Groovy utility class in the shared-library scaffold.
 
 ## Layout
 
@@ -78,16 +75,8 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 | Prometheus | 4 | 4 | 2 | 1 | 8 | 2 | 0 | 0 | 10 | 0 | 0 | 2026-10-14 |
 | Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 23 | 0 | 0 | 2026-10-03 |
 | Repo-doc | 5 | 4 | 5 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-11 |
-| Terraform | 4 | 5 | 3 | 1 | 7 | 2 | 1 | 0 | 34 | 0 | 0 | 2026-10-14 |
-| Terraform Cloud | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-14 |
-| Scripting companion | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | — |
-| Foundational concepts | 11 | 14 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 2026-09-16 |
 
 </details>
 
-## Status
-
-Currently covering first contact with Docker Compose and Terraform Cloud: a two-service Compose file with port and hostname gotchas written down, and workspaces plus the minimal cloud backend block for hosted Terraform runs. Alongside that, Helm chart anatomy from a public chart teardown and a Jenkins shared-library scaffold with a Docker test harness and versioned pipeline templates.
-
 ---
-_Last updated: 2026-10-15_
+_Last updated: 2026-10-19_

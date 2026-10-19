@@ -629,3 +629,9 @@
 - **State (hosted)** — the record of what Terraform last created, stored and locked by the service instead of a local file or self-managed backend.
 - **Workspace variable** — an input value set on the workspace (Terraform vs environment category) instead of the shell; the wrong category makes the plan complain the input is missing.
 - **VCS connection** — linking a repo so pushes queue speculative plans on their own; the path from merge to reviewed plan without manual triggers.
+
+## Jenkins
+- **Declarative Pipeline** — Jenkins pipeline defined using a structured DSL in a Jenkinsfile with `pipeline {}` block.
+- **Shared Library** — Reusable Groovy code in Jenkins that can be loaded by pipelines to centralize logic.
+- **Lightweight checkout** — Faster SCM checkout in Jenkins that skips some data; can affect script paths and branches.
+- **Scripted Pipeline** — Jenkins pipeline written as Groovy code with more flexibility than declarative syntax.
