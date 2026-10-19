@@ -1,0 +1,196 @@
+# last_verified: 2026-10-19 · gha n/a
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        type: choice
+        required: true
+        options:
+          - staging
+          - production
+      image-tag:
+        description: 'Docker image tag to deploy'
+        type: string
+        required: false
+        default: 'latest'
+      skip-approval:
+        description: 'Skip manual approval (emergency only)'
+        type: boolean
+        required: false
+        default: false
+
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+  id-token: write
+  deployments: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  AWS_REGION: us-east-1
+  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+  AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+jobs:
+  deploy-staging:
+    name: Deploy to Staging
+    if: github.event.inputs.environment == 'staging' || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v'))
+    environment:
+      name: staging
+      url: https://staging.example.com
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.1.0
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-staging
+          role-session-name: GitHubActions-${{ github.run_id }}-staging
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Configure GCP credentials (OIDC)
+        uses: google-github-actions/auth@1d6f7c6e4b5c3f2e1a0d9c8b7a6f5e4d3c2b1a0f # v2.1.7
+        with:
+          workload_identity_provider: projects/${{ secrets.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-actions/providers/staging-provider
+          service_account: github-actions-staging@${{ secrets.GCP_PROJECT }}.iam.gserviceaccount.com
+          token_format: access_token
+
+      - name: Login to Azure (OIDC)
+        uses: azure/login@a65d5a5c8b4e3f2d1c0b9a8f7e6d5c4b3a2f1e0d # v2.2.0
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          allow-no-subscriptions: true
+
+      - name: Pull and verify image
+        run: |
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.image-tag || 'latest' }}
+          docker run --rm ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.image-tag || 'latest' }} --version
+
+      - name: Deploy to Kubernetes (staging)
+        run: |
+          kubectl config use-context staging
+          kubectl set image deployment/myapp myapp=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.image-tag || 'latest' }} -n staging
+          kubectl rollout status deployment/myapp -n staging --timeout=300s
+
+      - name: Run smoke tests
+        run: |
+          curl -f https://staging.example.com/health || exit 1
+
+      - name: Create deployment record
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              deployment_id: ${{ github.event.deployment.id }},
+              state: 'success',
+              environment: 'staging',
+              environment_url: 'https://staging.example.com'
+            })
+
+  deploy-production:
+    name: Deploy to Production
+    if: github.event.inputs.environment == 'production'
+    needs: deploy-staging
+    environment:
+      name: production
+      url: https://example.com
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Manual approval gate
+        if: github.event.inputs.skip-approval != true
+        uses: trstringer/manual-approval@c2d6c6e8b4f3a2e1d0c9b8a7f6e5d4c3b2a1f0e9d # v1.2.1
+        with:
+          secret: ${{ github.token }}
+          approvers: platform-team,tech-leads
+          minimum-approvals: 2
+          issue-title: "Production deployment approval required"
+          issue-body: |
+            **Deployment Details:**
+            - Image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.image-tag }}
+            - Triggered by: ${{ github.actor }}
+            - Run: ${{ github.run_id }}
+            - Run URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.1.0
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-production
+          role-session-name: GitHubActions-${{ github.run_id }}-production
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Configure GCP credentials (OIDC)
+        uses: google-github-actions/auth@1d6f7c6e4b5c3f2e1a0d9c8b7a6f5e4d3c2b1a0f # v2.1.7
+        with:
+          workload_identity_provider: projects/${{ secrets.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-actions/providers/production-provider
+          service_account: github-actions-production@${{ secrets.GCP_PROJECT }}.iam.gserviceaccount.com
+          token_format: access_token
+
+      - name: Login to Azure (OIDC)
+        uses: azure/login@a65d5a5c8b4e3f2d1c0b9a8f7e6d5c4b3a2f1e0d # v2.2.0
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          allow-no-subscriptions: true
+
+      - name: Pull and verify image
+        run: |
+          docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.image-tag || 'latest' }}
+          docker run --rm ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.image-tag || 'latest' }} --version
+
+      - name: Deploy to Kubernetes (production)
+        run: |
+          kubectl config use-context production
+          kubectl set image deployment/myapp myapp=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.image-tag || 'latest' }} -n production
+          kubectl rollout status deployment/myapp -n production --timeout=600s
+
+      - name: Run smoke tests
+        run: |
+          curl -f https://example.com/health || exit 1
+
+      - name: Create deployment record
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              deployment_id: ${{ github.event.deployment.id }},
+              state: 'success',
+              environment: 'production',
+              environment_url: 'https://example.com'
+            })
+
+      - name: Notify on success
+        if: success()
+        run: |
+          echo "Production deployment completed successfully"
+          # Add Slack/Discord/PagerDuty notification here
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "Production deployment failed"
+          # Add Slack/Discord/PagerDuty alert here

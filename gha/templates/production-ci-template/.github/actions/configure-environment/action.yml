@@ -1,0 +1,74 @@
+# last_verified: 2026-10-19 · gha n/a
+name: Configure Environment
+description: Set up cloud credentials and environment-specific configuration via OIDC
+inputs:
+  environment:
+    description: 'Target environment (staging|production)'
+    required: true
+    type: choice
+    options:
+      - staging
+      - production
+  aws-role-arn:
+    description: 'AWS IAM role ARN to assume'
+    required: true
+  gcp-workload-identity-provider:
+    description: 'GCP Workload Identity Provider resource name'
+    required: true
+  gcp-service-account:
+    description: 'GCP service account email'
+    required: true
+  azure-client-id:
+    description: 'Azure AD app client ID'
+    required: true
+  azure-tenant-id:
+    description: 'Azure AD tenant ID'
+    required: true
+  azure-subscription-id:
+    description: 'Azure subscription ID'
+    required: true
+  kubernetes-context:
+    description: 'Kubernetes context name'
+    required: true
+outputs:
+  kubeconfig:
+    description: 'Path to generated kubeconfig'
+    value: ${{ steps.kubeconfig.outputs.path }}
+runs:
+  using: composite
+  steps:
+    - name: Configure AWS credentials (OIDC)
+      uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.1.0
+      with:
+        role-to-assume: ${{ inputs.aws-role-arn }}
+        role-session-name: GitHubActions-${{ github.run_id }}-${{ inputs.environment }}
+        aws-region: us-east-1
+
+    - name: Configure GCP credentials (OIDC)
+      uses: google-github-actions/auth@1d6f7c6e4b5c3f2e1a0d9c8b7a6f5e4d3c2b1a0f # v2.1.7
+      with:
+        workload_identity_provider: ${{ inputs.gcp-workload-identity-provider }}
+        service_account: ${{ inputs.gcp-service-account }}
+        token_format: access_token
+
+    - name: Login to Azure (OIDC)
+      uses: azure/login@a65d5a5c8b4e3f2d1c0b9a8f7e6d5c4b3a2f1e0d # v2.2.0
+      with:
+        client-id: ${{ inputs.azure-client-id }}
+        tenant-id: ${{ inputs.azure-tenant-id }}
+        subscription-id: ${{ inputs.azure-subscription-id }}
+        allow-no-subscriptions: true
+
+    - name: Configure kubectl
+      id: kubeconfig
+      uses: azure/k8s-set-context@f5d2b8e1c0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d # v4.0.0
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBECONFIG_${{ upper(inputs.environment) }} }}
+        context: ${{ inputs.kubernetes-context }}
+
+    - name: Verify cluster access
+      run: |
+        kubectl auth can-i create deployments --namespace=${{ inputs.environment }}
+        kubectl get nodes --context=${{ inputs.kubernetes-context }}
+      shell: bash

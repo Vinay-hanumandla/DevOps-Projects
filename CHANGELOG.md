@@ -2,6 +2,8 @@
 
 ## 2026-10-19
 
+- gha/templates/production-ci-template/ — Production CI template with matrix builds (5 OS/python combos), dependency caching (pip/npm/Docker), reusable CI workflow, composite actions for caching and cloud OIDC setup, environment-gated deployments (staging auto, production 2-approval), keyless AWS/GCP/Azure auth via OIDC, SBOM/provenance generation, Trivy+CodeQL scanning (gha-027)
+
 - gha/docs/choosing-reusable-workflows-composite-actions-custom-js.md — Choosing between reusable workflows, composite actions, and custom JavaScript actions with decision checklist, side-by-side examples, and common errors (gha-026)
 - helm/scripts/2026-07-31-install-helm-run-version.sh — Install Helm via the official install script and verify with helm version (helm-028)
 - helm/scripts/2026-07-31-deploy-first-chart.sh — Install Helm, add stable repo, update, and deploy a test chart (helm-028)
