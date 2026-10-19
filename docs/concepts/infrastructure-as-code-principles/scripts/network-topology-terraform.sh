@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-# network-topology-terraform.sh
-# Generate a small Terraform network topology (VPC + public/private subnets +
+# last_verified: 2026-08-18 · terraform n/a
+#
+# network-topology-terraform.sh — render a small network topology as Terraform
+# HCL (one VPC, a configurable number of subnets, an internet gateway, and a
 # default route), driven entirely by parameters.
 #
 # This is the IaC + Networking pattern in miniature: the network is described
@@ -11,110 +13,59 @@ set -euo pipefail
 
 NET_NAME="${1:-demo}"
 VPC_CIDR="${2:-10.0.0.0/16}"
-OUT_DIR="${3:-./out}"
+SUBNET_COUNT="${3:-2}"
+OUT_DIR="${4:-generated-network}"
 
-cidr_to_prefix() {
-  local cidr="$1"
-  python3 -c "
-import ipaddress, sys
-try:
-  net = ipaddress.ip_network(sys.argv[1], strict=False)
-  print(net.prefixlen)
-except Exception:
-  pass
-" "$cidr"
-}
+if [[ ! "$SUBNET_COUNT" =~ ^[1-9][0-9]*$ ]]; then
+    echo "error: subnet count must be a positive integer (got '$SUBNET_COUNT')" >&2
+    exit 1
+fi
 
-next_subnet() {
-  local base="$1"
-  local newbits="$2"
-  python3 -c "
-import ipaddress, sys
-base = ipaddress.ip_network(sys.argv[1], strict=False)
-subnets = list(base.subnets(new_prefix=base.prefixlen + int(sys.argv[2])))
-print(str(subnets[0]))
-" "$base" "$newbits"
-}
-
-subnet_nth() {
-  local base="$1"
-  local newbits="$2"
-  local idx="$3"
-  python3 -c "
-import ipaddress, sys
-base = ipaddress.ip_network(sys.argv[1], strict=False)
-subnets = list(base.subnets(new_prefix=base.prefixlen + int(sys.argv[2])))
-print(str(subnets[int(sys.argv[3])]))
-" "$base" "$newbits" "$idx"
-}
+# Work out how many extra bits cidrsubnet() needs so we can carve SUBNET_COUNT
+# subnets out of the VPC CIDR. 2^newbits >= SUBNET_COUNT keeps every subnet
+# non-overlapping.
+newbits=0
+pow=1
+while (( pow < SUBNET_COUNT )); do
+    newbits=$((newbits + 1))
+    pow=$((pow * 2))
+done
 
 mkdir -p "$OUT_DIR"
 TF_FILE="${OUT_DIR}/network.tf"
 
 {
-  echo 'resource "aws_vpc" "main" {'
-  echo "  cidr_block = \"${VPC_CIDR}\""
-  echo "  tags = { Name = \"${NET_NAME}-vpc\" }"
-  echo '}'
-  echo ''
-
-  echo 'resource "aws_internet_gateway" "igw" {'
-  echo '  vpc_id = aws_vpc.main.id'
-  echo "  tags = { Name = \"${NET_NAME}-igw\" }"
-  echo '}'
-  echo ''
-
-  local_base=$(next_subnet "$VPC_CIDR" 2)
-  pub0=$(subnet_nth "$local_base" 1 0)
-  pub1=$(subnet_nth "$local_base" 1 1)
-  priv0=$(subnet_nth "$local_base" 2 2)
-  priv1=$(subnet_nth "$local_base" 2 3)
-
-  echo 'resource "aws_subnet" "public_0" {'
-  echo '  vpc_id                  = aws_vpc.main.id'
-  echo "  cidr_block              = \"${pub0}\""
-  echo '  map_public_ip_on_launch = true'
-  echo "  tags = { Name = \"${NET_NAME}-public-0\" }"
-  echo '}'
-  echo ''
-  echo 'resource "aws_subnet" "public_1" {'
-  echo '  vpc_id                  = aws_vpc.main.id'
-  echo "  cidr_block              = \"${pub1}\""
-  echo '  map_public_ip_on_launch = true'
-  echo "  tags = { Name = \"${NET_NAME}-public-1\" }"
-  echo '}'
-  echo ''
-  echo 'resource "aws_subnet" "private_0" {'
-  echo '  vpc_id     = aws_vpc.main.id'
-  echo "  cidr_block = \"${priv0}\""
-  echo "  tags = { Name = \"${NET_NAME}-private-0\" }"
-  echo '}'
-  echo ''
-  echo 'resource "aws_subnet" "private_1" {'
-  echo '  vpc_id     = aws_vpc.main.id'
-  echo "  cidr_block = \"${priv1}\""
-  echo "  tags = { Name = \"${NET_NAME}-private-1\" }"
-  echo '}'
-  echo ''
-
-  echo 'resource "aws_route_table" "public" {'
-  echo '  vpc_id = aws_vpc.main.id'
-  echo '  route {'
-  echo '    cidr_block = "0.0.0.0/0"'
-  echo '    gateway_id = aws_internet_gateway.igw.id'
-  echo '  }'
-  echo "  tags = { Name = \"${NET_NAME}-public-rt\" }"
-  echo '}'
-  echo ''
-
-  echo 'resource "aws_route_table_association" "public_0" {'
-  echo '  subnet_id      = aws_subnet.public_0.id'
-  echo '  route_table_id = aws_route_table.public.id'
-  echo '}'
-  echo 'resource "aws_route_table_association" "public_1" {'
-  echo '  subnet_id      = aws_subnet.public_1.id'
-  echo '  route_table_id = aws_route_table.public.id'
-  echo '}'
+    echo "# Rendered by network-topology-terraform.sh"
+    echo ""
+    echo 'resource "aws_vpc" "main" {'
+    echo "  cidr_block = \"${VPC_CIDR}\""
+    echo '  tags = { Name = "'"${NET_NAME}"'" }'
+    echo '}'
+    echo ""
+    echo 'resource "aws_internet_gateway" "gw" {'
+    echo '  vpc_id = aws_vpc.main.id'
+    echo '  tags   = { Name = "'"${NET_NAME}"'-gw" }'
+    echo '}'
+    echo ""
+    for ((i = 0; i < SUBNET_COUNT; i++)); do
+        echo "resource \"aws_subnet\" \"subnet_${i}\" {"
+        echo "  vpc_id     = aws_vpc.main.id"
+        echo "  cidr_block = cidrsubnet(\"${VPC_CIDR}\", ${newbits}, ${i})"
+        echo '  tags       = { Name = "'"${NET_NAME}"'-subnet-'"${i}"'" }'
+        echo '}'
+        echo ""
+    done
+    echo 'resource "aws_route_table" "main" {'
+    echo '  vpc_id = aws_vpc.main.id'
+    echo '  tags   = { Name = "'"${NET_NAME}"'-rt" }'
+    echo '}'
+    echo ""
+    echo 'resource "aws_route" "default_route" {'
+    echo '  route_table_id         = aws_route_table.main.id'
+    echo '  destination_cidr_block = "0.0.0.0/0"'
+    echo '  gateway_id             = aws_internet_gateway.gw.id'
+    echo '}'
 } > "$TF_FILE"
 
-echo "wrote $TF_FILE"
+echo "wrote ${TF_FILE} with ${SUBNET_COUNT} subnet(s) carved from ${VPC_CIDR}"
+echo "apply it in a real network by running terraform plan/apply inside ${OUT_DIR}"
