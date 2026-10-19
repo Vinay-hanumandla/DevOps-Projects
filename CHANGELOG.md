@@ -4,6 +4,7 @@
 
 - helm/docs/helm-migration-guide.md — Helm migration guide covering values merging, OCI registry chart storage, and library charts (helm-024)
 - helm/templates/polished-chart/ — Polished Helm chart template with Chart.yaml metadata, values.yaml validated by JSON Schema (values.schema.json), rendered Deployment/Service templates plus _helpers.tpl, .helmignore, and a kubeconform strict-mode integration config (helm-025)
+- helm/docs/helm-chart-repository-and-locking.md — Helm L5 reference covering chart repository management (helm repo add/update/list/remove) and dependency locking with Chart.yaml, Chart.lock, and helm dependency build/list (helm-030)
 
 ## 2026-10-18
 
