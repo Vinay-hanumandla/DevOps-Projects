@@ -3,6 +3,7 @@
 ## 2026-10-19
 
 - helm/docs/helm-migration-guide.md — Helm migration guide covering values merging, OCI registry chart storage, and library charts (helm-024)
+- helm/templates/polished-chart/ — Polished Helm chart template with Chart.yaml metadata, values.yaml validated by JSON Schema (values.schema.json), rendered Deployment/Service templates plus _helpers.tpl, .helmignore, and a kubeconform strict-mode integration config (helm-025)
 
 ## 2026-10-18
 

@@ -1,0 +1,7 @@
+# last_verified: 2026-10-19 · Helm n/a
+apiVersion: v2
+name: polished-chart
+description: A polished Helm chart template with JSON Schema values validation and rendered-manifest checks
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
