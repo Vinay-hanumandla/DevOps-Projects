@@ -1,0 +1,9 @@
+# last_verified: 2026-10-19 · Helm n/a
+# Kubeconform integration reference for rendered Helm manifests.
+# Use this with the rendered output of `helm template` to validate that every
+# manifest the chart produces conforms to the target Kubernetes API schema.
+mode: strict
+# kubernetes_versions: set to the target cluster's Kubernetes version.
+skip:
+  - CustomResourceDefinition
+output: json

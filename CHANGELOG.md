@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-19
+
+- helm/templates/polished-chart/ — Polished Helm chart template with Chart.yaml metadata, values.yaml validated by JSON Schema (values.schema.json), rendered Deployment/Service templates plus _helpers.tpl, .helmignore, and a kubeconform strict-mode integration config (helm-025)
+
 ## 2026-10-18
 
 - python/templates/python-cli-docker-gha/.github/workflows/ci.yml — GitHub Actions CI workflow with lint (ruff, mypy), test (pytest), and Docker build + smoke-test jobs (python-025)

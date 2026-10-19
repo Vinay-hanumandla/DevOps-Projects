@@ -1,0 +1,6 @@
+# last_verified: 2026-10-19 · Helm n/a
+.DS_Store
+.git/
+.gitignore
+kubeconform.yaml
+README.md
