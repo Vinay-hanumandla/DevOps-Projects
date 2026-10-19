@@ -1,0 +1,23 @@
+// last_verified: 2026-10-19
+@Library('my-shared-lib') _
+
+pipeline {
+    agent any
+    stages {
+        stage('Lint') {
+            steps {
+                runLint target: '.'
+            }
+        }
+        stage('Build') {
+            steps {
+                buildImage image: 'myapp:latest'
+            }
+        }
+        stage('Notify') {
+            steps {
+                sendSlackNotification channel: '#ci', message: 'Build complete'
+            }
+        }
+    }
+}
