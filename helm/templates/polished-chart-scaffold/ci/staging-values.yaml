@@ -1,0 +1,11 @@
+# last_verified: 2026-10-19 · Helm 3.13
+# Staging override: only the keys that differ from values.yaml.
+replicaCount: 2
+image:
+  tag: "1.0.0-rc1"
+service:
+  type: LoadBalancer
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
