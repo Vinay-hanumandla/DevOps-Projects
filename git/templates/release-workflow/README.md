@@ -31,7 +31,7 @@ steps so the same commands run identically from a terminal and from a pipeline.
 
 The scaffold ships a `CHANGELOG.md` template plus a CI job that regenerates
 the changelog from the commit history. Copy both into a repository that wants
-auto-maintained release notes:
+release notes maintained from commit history:
 
 - `templates/repo-scaffold/CHANGELOG.md` — append-only changelog with an
   `[Unreleased]` block at the top and versioned blocks below it. Never
