@@ -786,3 +786,4 @@ feat: add git notebook on merge, squash, and rebase strategies
 ## 2026-10-19
 
 - repo-doc/scripts/repo-doc-new-tool.sh — Wrapper script to create a new tool folder with standard 9-category layout, seed a primer stub, and register the tool in the coverage script (repo-doc-020)
+- 2026-10-20 repo-doc: add new tool integration starter kit template (repo-doc-032)
