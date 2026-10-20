@@ -795,3 +795,4 @@ Passed ([x]) repo-doc-032 — Project scaffold: repo-doc + new tool integration 
 - repo-doc/docs/closing-dead-index-and-coverage-references.md — Closing the dead per-tool `index.md` / `coverage.md` references by rewording the primer and the quickstart note (repo-doc-021)
 - repo-doc/notes/0000-primer-repo-doc.md — Primer reworded so it no longer promises a per-tool index or coverage page for every tool folder (repo-doc-021)
 - repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md — Trip-up 5 now records the outcome of the per-tool index step that was never found (repo-doc-021)
+2026-10-20: Add repo-doc CLI configuration schema (repo-doc-035)

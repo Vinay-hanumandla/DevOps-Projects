@@ -1,0 +1,270 @@
+# last_verified: 2026-10-20 · repo-doc n/a
+# Configuration schema for the repo-doc CLI.
+# Defines the tool registry, output path mappings, and validation rules
+# that the CLI uses when creating or validating tool folders.
+
+tool_registry:
+  # Known tools in the kit. Each entry maps a tool name to its
+  # category layout and primer expectations.
+  # The CLI reads this list to know which tools exist and where
+  # to create new files.
+  tools:
+    - name: ansible
+      categories:
+        - notes
+        - docs
+        - scripts
+        - snippets
+        - configs
+        - templates
+        - manifests
+        - notebooks
+      has_primer: true
+      primer_location: "notes/0000-primer-ansible.md"
+    - name: awx
+      categories:
+        - notes
+        - configs
+      has_primer: true
+      primer_location: "notes/0000-primer-awx.md"
+    - name: bash
+      categories:
+        - notes
+        - docs
+        - scripts
+        - snippets
+        - dockerfiles
+        - notebooks
+      has_primer: true
+      primer_location: "notes/0000-primer-bash.md"
+    - name: compose
+      categories:
+        - notes
+        - configs
+      has_primer: true
+      primer_location: "notes/0000-primer-compose.md"
+    - name: docker
+      categories:
+        - notes
+        - docs
+        - scripts
+        - manifests
+        - dockerfiles
+      has_primer: true
+      primer_location: "notes/0000-primer-docker.md"
+    - name: gha
+      categories:
+        - notes
+        - docs
+        - scripts
+        - snippets
+        - configs
+        - manifests
+        - notebooks
+      has_primer: true
+      primer_location: "notes/0000-primer-gha.md"
+    - name: git
+      categories:
+        - notes
+        - docs
+        - scripts
+        - manifests
+        - notebooks
+      has_primer: true
+      primer_location: "notes/0000-primer-git.md"
+    - name: grafana
+      categories:
+        - notes
+        - docs
+        - scripts
+        - snippets
+        - configs
+        - manifests
+        - dockerfiles
+        - notebooks
+      has_primer: true
+      primer_location: "notes/0000-primer-grafana.md"
+    - name: hchart
+      categories:
+        - notes
+        - configs
+      has_primer: true
+      primer_location: "notes/0000-primer-hchart.md"
+    - name: helm
+      categories:
+        - notes
+        - docs
+        - scripts
+        - snippets
+        - configs
+        - manifests
+        - notebooks
+      has_primer: true
+      primer_location: "notes/0000-primer-helm.md"
+    - name: jenkins
+      categories:
+        - notes
+        - docs
+        - scripts
+        - snippets
+        - configs
+      has_primer: true
+      primer_location: "notes/0000-primer-jenkins.md"
+    - name: k8s
+      categories:
+        - notes
+        - docs
+        - scripts
+        - snippets
+        - configs
+        - manifests
+        - dockerfiles
+        - notebooks
+      has_primer: true
+      primer_location: "notes/0000-primer-kubernetes.md"
+    - name: kprom
+      categories:
+        - notes
+        - configs
+        - manifests
+      has_primer: true
+      primer_location: "notes/0000-primer-kube-prometheus.md"
+    - name: prom
+      categories:
+        - notes
+        - docs
+        - scripts
+        - snippets
+        - configs
+        - manifests
+      has_primer: true
+      primer_location: "notes/0000-primer-prometheus.md"
+    - name: python
+      categories:
+        - notes
+        - docs
+        - scripts
+        - snippets
+        - configs
+        - dockerfiles
+        - notebooks
+      has_primer: true
+      primer_location: "notes/0000-primer-python.md"
+    - name: repo-doc
+      categories:
+        - notes
+        - docs
+        - scripts
+        - snippets
+        - configs
+        - templates
+      has_primer: true
+      primer_location: "notes/0000-primer-repo-doc.md"
+    - name: tf
+      categories:
+        - notes
+        - docs
+        - scripts
+        - snippets
+        - configs
+        - manifests
+        - notebooks
+      has_primer: true
+      primer_location: "notes/0000-primer-terraform.md"
+    - name: tfc
+      categories:
+        - notes
+        - configs
+      has_primer: true
+      primer_location: "notes/0000-primer-tfc.md"
+
+output_paths:
+  # Base directory for the kit (relative to CLI working directory).
+  kit_root: "."
+  # Category subdirectories under each tool folder.
+  # The CLI uses these to determine where to write new artifacts
+  # based on the task's Output type.
+  categories:
+    notes: "notes"
+    docs: "docs"
+    scripts: "scripts"
+    snippets: "snippets"
+    configs: "configs"
+    templates: "templates"
+    manifests: "manifests"
+    dockerfiles: "dockerfiles"
+    notebooks: "notebooks"
+  # File extension mapping per Output type.
+  # Used by the CLI to pick the correct extension when scaffolding.
+  extensions:
+    notes: ".md"
+    "notes(primer)": ".md"
+    docs: ".md"
+    "snippet(python)": ".py"
+    "snippet(bash)": ".sh"
+    "snippet(hcl)": ".hcl"
+    "script(python)": ".py"
+    "script(bash)": ".sh"
+    "config(yaml)": ".yaml"
+    "manifest(yaml)": ".yaml"
+    "dockerfile": ".Dockerfile"
+    notebook: ".ipynb"
+    template: ""  # templates are directories
+
+validation_rules:
+  # Structural validation rules enforced by the CLI and project-validator.py
+  structure:
+    # Every tool folder must contain only known category subdirectories.
+    no_root_files: true
+    known_subdirs_only: true
+    # Primer must live under notes/ and use the fixed name pattern.
+    primer_placement: true
+    primer_pattern: "0000-primer-<tool>.md"
+    max_primers_per_tool: 1
+    # Empty category directories are notices, not errors.
+    empty_dir_is_notice: true
+
+  # Naming conventions per level (L1-L2 learner, L3+ reference).
+  naming:
+    learner_stage_levels: ["L1", "L2"]
+    reference_stage_levels: ["L3", "L4", "L5", "L6", "L7", "L8", "L9"]
+    learner_pattern: "date-prefixed journal name (YYYY-MM-DD-<topic>.<ext>)"
+    reference_pattern: "stable kebab-case name (<topic>.<ext>)"
+    primer_name: "0000-primer-<tool>.md"
+
+  # File extension expectations per category (advisory, not enforced).
+  extension_patterns:
+    notes: ".md"
+    docs: ".md"
+    scripts: [".py", ".sh"]
+    snippets: [".py", ".sh"]
+    configs: ".yaml"
+    manifests: ".yaml"
+    dockerfiles: ".Dockerfile"
+    notebooks: ".ipynb"
+    templates: "directory"
+
+  # Cross-reference validation.
+  cross_references:
+    # Every task's declared Output path must exist on disk after the cycle.
+    artifact_must_exist: true
+    # Relative links in markdown must point to existing files.
+    links_must_resolve: true
+    # Companion files referenced in docs must be created in the same cycle.
+    companions_must_exist: true
+
+cli:
+  # CLI behavior settings.
+  default_kit_root: "."
+  config_file: "repo-doc/configs/repo-doc-cli-config.yaml"
+  # Commands the CLI supports.
+  commands:
+    - name: "new-tool"
+      description: "Create a new tool folder with standard layout"
+      script: "repo-doc/scripts/repo-doc-new-tool.sh"
+    - name: "validate"
+      description: "Validate kit structure against this config"
+      script: "repo-doc/scripts/project-validator.py"
+    - name: "coverage"
+      description: "Generate file count table per tool per category"
+      script: "repo-doc/scripts/2026-09-01-regenerate-coverage-tables.sh"
