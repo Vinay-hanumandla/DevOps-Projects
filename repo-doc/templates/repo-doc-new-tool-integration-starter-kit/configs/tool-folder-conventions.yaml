@@ -1,0 +1,18 @@
+# last_verified: 2026-10-20
+---
+last_verified: 2026-10-20
+tool_version: n/a
+sources: []
+---
+categories:
+  - notes
+  - docs
+  - scripts
+  - snippets
+  - configs
+  - templates
+  - manifests
+  - dockerfiles
+  - notebooks
+primer_pattern: "notes/0000-primer-<tool>.md"
+coverage_note: "Coverage tables are regenerated from disk; do not hand-edit."
