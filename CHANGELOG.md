@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-20
+
+- ansible/docs/ansible-2-20-to-2-21-migration-guide.md — Ansible migration guide covering the ansible-core 2.20 to 2.21 upgrade: inventory baseline, porting-guide review, isolated core upgrade, collection reinstall, syntax-check, staging validation, EE image update, and rollback (ansible-032)
+
 ## 2026-10-19
 
 - gha/templates/production-ci-template/ — Production CI template with matrix builds (5 OS/python combos), dependency caching (pip/npm/Docker), reusable CI workflow, composite actions for caching and cloud OIDC setup, environment-gated deployments (staging auto, production 2-approval), keyless AWS/GCP/Azure auth via OIDC, SBOM/provenance generation, Trivy+CodeQL scanning (gha-027)
