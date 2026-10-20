@@ -41,6 +41,11 @@
 - [First chart deployment snippet](../helm/snippets/2026-07-31-deploy-first-chart.sh) — One-liner to install a chart.
 - [Dev/staging/prod values overrides](../helm/configs/2026-08-20-dev-values.yaml) — Environment-specific configuration.
 
+### Explore public Helm Charts
+- [Helm Charts primer](../hchart/notes/0000-primer-hchart.md) — Working with community charts.
+- [Public chart structure teardown](../hchart/notes/2026-10-14-explore-public-chart-structure.md) — Reading a real chart layout.
+- [Minimal Chart.yaml/values.yaml](../hchart/configs/2026-10-14-minimal-chart.yaml) — Smallest chart scaffolding.
+
 ### Provision infrastructure with Terraform
 - [Terraform primer](../tf/notes/0000-primer-terraform.md) — IaC fundamentals, state, providers, and workflows.
 - [Install Terraform and first version](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md) — Setup and first command.
@@ -48,12 +53,22 @@
 - [Terraform init/validate/plan/apply with lock handling](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh) — CI-ready workflow wrapper.
 - [Reusable VPC module](../tf/configs/reusable-vpc-module.hcl) — Copy-in module for VPC with public/private subnets, NAT, route tables.
 
+### Use Terraform Cloud
+- [Terraform Cloud primer](../tfc/notes/0000-primer-tfc.md) — Workspaces, runs, and remote state.
+- [Explore workspaces](../tfc/notes/2026-10-14-explore-workspaces.md) — Navigating runs, states, and variables.
+- [Minimal cloud backend](../tfc/configs/2026-10-14-minimal-cloud-backend.hcl) — Pointing to a TFC workspace.
+
 ### Automate with Ansible
 - [Ansible primer](../ansible/notes/0000-primer-ansible.md) — Core concepts, architecture, and workflow essentials.
 - [Install Ansible and first command](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md) — Installation via pipx and first ad-hoc command.
 - [First ping playbook](../ansible/configs/2026-08-10-first-ping-playbook.yaml) — Minimal playbook to validate connectivity.
 - [Idempotent Nginx playbook](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml) — Real-world playbook with handlers and idempotent modules.
 - [Ansible ad-hoc toolkit](../ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh) — Reusable ad-hoc commands for common tasks.
+
+### Manage with AWX
+- [AWX primer](../awx/notes/0000-primer-awx.md) — Jobs, templates, inventories, and credentials.
+- [Explore AWX UI and API](../awx/notes/2026-10-04-explore-awx-ui-and-api.md) — Walking the API behind the UI.
+- [First job template run](../awx/notes/2026-10-07-explore-awx-ui-first-job-template.md) — From CR to launched job.
 
 ### Run CI/CD with GitHub Actions
 - [GitHub Actions primer](../gha/notes/0000-primer-gha.md) — Workflows, jobs, steps, and triggers.
@@ -78,31 +93,8 @@
 - [First dashboard config](../grafana/configs/2026-08-06-first-dashboard.yaml) — Provisioned dashboard as code.
 
 ### Use Kube-Prometheus stack on Kubernetes
-- [Kube-Prometheus primer](../kprom/notes/0000-primer-kube-prometheus.md) — Operator, ServiceMonitor, PodMonitor, and the release label.
-- [Minimal local values](../kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml) — Flip UIs to NodePort for laptop access.
-- [Install and explore Grafana](../kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md) — First cluster install walkthrough.
-- [ServiceMonitor + PrometheusRule RED manifest](../kprom/manifests/2026-10-12-servicemonitor-prometheusrule-red-metrics.yaml) — First scrape target and alerts to apply.
-
-### Write Python for DevOps tasks
-- [Python primer](../python/notes/0000-primer-python.md) — Fundamentals, tooling, and DevOps integrations.
-- [Create venv and run](../python/scripts/2026-07-22-create-venv-and-run.py) — Isolated environment setup.
-- [First script with variables and types](../python/snippets/2026-07-22-first-script-variables-types.py) — Basic syntax and type hints.
-- [Config file reader snippet](../python/snippets/2026-08-22-config-file-reader.py) — Reading YAML/TOML config files.
-- [Docker Compose validator](../python/snippets/docker-compose-validator.py) — Validate Compose files programmatically.
-
-### Manage AWX / Ansible Tower
-- [AWX primer](../awx/notes/0000-primer-awx.md) — Inventories, credentials, projects, templates, and jobs.
-- [Explore AWX UI and API](../awx/notes/2026-10-04-explore-awx-ui-and-api.md) — Click-through with API calls.
-- [Minimal AWX custom resource for Minikube](../awx/configs/2026-10-07-minimal-awx-custom-resource-minikube.yaml) — Smallest CR for local testing.
-- [First job template run](../awx/notes/2026-10-07-explore-awx-ui-first-job-template.md) — End-to-end from CR to job launch.
-
-### Package Helm Charts
-- [Helm Charts primer](../hchart/notes/0000-primer-hchart.md) — Chart anatomy, releases, values, templates, hooks, repositories.
-- [Explore public chart structure](../hchart/notes/2026-10-14-explore-public-chart-structure.md) — Teardown of a real chart's organisation.
-- [Minimal chart](../hchart/configs/2026-10-14-minimal-chart.yaml) — Smallest installable chart structure.
-- [Minimal values](../hchart/configs/2026-10-14-minimal-values.yaml) — Corresponding values file.
-
-### Use Terraform Cloud
-- [Terraform Cloud primer](../tfc/notes/0000-primer-tfc.md) — Organisations, workspaces, runs, and variables.
-- [Explore workspaces](../tfc/notes/2026-10-14-explore-workspaces.md) — Runs, States, and the variable-category trap.
-- [Minimal cloud backend block](../tfc/configs/2026-10-14-minimal-cloud-backend.hcl) — Point a config at a TFC workspace.
+- [Kube-Prometheus primer](../kprom/notes/0000-primer-kube-prometheus.md) — kube-prometheus-stack overview.
+- [Install and explore Grafana](../kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md) — First cluster install.
+- [Quickstart walkthrough](../kprom/notes/2026-10-10-quickstart-walkthrough-kube-prometheus-stack.md) — ServiceMonitor/PodMonitor and gotchas.
+- [Minimal local values](../kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml) — NodePort exposure for laptop use.
+- [ServiceMonitor + PrometheusRule](../kprom/manifests/2026-10-12-servicemonitor-prometheusrule-red-metrics.yaml) — First scrape and alerts.

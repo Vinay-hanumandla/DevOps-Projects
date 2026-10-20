@@ -85,4 +85,4 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 Currently expanding the GitHub Actions production CI template with reusable actions for caching and environment configuration. New templates for `gha/templates/production-ci-template/` added this cycle.
 
 ---
-_Last updated: 2026-10-19_
+_Last updated: 2026-10-20_
