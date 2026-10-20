@@ -280,6 +280,10 @@
 - **Matrix build** — a strategy that runs the same job across multiple configurations (e.g. different OS versions or language versions) to verify compatibility.
 - **Artifact** — a file or collection of files produced by a workflow run, such as a build output or test report; artifacts can be downloaded after the run completes.
 - **Composite action** — a reusable action that bundles multiple steps into a single reference, letting you share common setup (checkout, install, cache) across workflows without copy-pasting YAML.
+- **Reusable workflow** — a workflow defined in `.github/workflows/` that can be called from another workflow with `uses: ./.github/workflows/reusable.yml`, enabling workflow composition and DRY pipeline definitions.
+- **Environment protection rules** — settings on a GitHub Environment (e.g. `production`) that require required reviewers, wait timers, or branch restrictions before a deployment job can proceed.
+- **Action inputs/outputs** — declared parameters (`inputs:`) and return values (`outputs:`) for a composite action or JavaScript action, making the action's contract explicit and enabling chaining in workflows.
+- **OIDC token exchange** — using OpenID Connect to obtain short-lived cloud credentials (AWS, GCP, Azure) in a workflow without storing long-lived secrets; the workflow requests a JWT from GitHub's OIDC provider and exchanges it with the cloud provider.
 
 ## Networking
 
