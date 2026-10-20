@@ -787,3 +787,11 @@ feat: add git notebook on merge, squash, and rebase strategies
 
 - repo-doc/scripts/repo-doc-new-tool.sh — Wrapper script to create a new tool folder with standard 9-category layout, seed a primer stub, and register the tool in the coverage script (repo-doc-020)
 - 2026-10-20 repo-doc: add new tool integration starter kit template (repo-doc-032)
+
+## 2026-10-20
+
+Passed ([x]) repo-doc-032 — Project scaffold: repo-doc + new tool integration starter kit · Level: L4 · 2026-10-20
+- repo-doc/scripts/cross-tool-reference-validator.sh — Cross-tool reference validator: task ID prefixes, coverage manifest sync, primer coverage, and relative link plus changelog path resolution across the kit (repo-doc-033)
+- repo-doc/docs/closing-dead-index-and-coverage-references.md — Closing the dead per-tool `index.md` / `coverage.md` references by rewording the primer and the quickstart note (repo-doc-021)
+- repo-doc/notes/0000-primer-repo-doc.md — Primer reworded so it no longer promises a per-tool index or coverage page for every tool folder (repo-doc-021)
+- repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md — Trip-up 5 now records the outcome of the per-tool index step that was never found (repo-doc-021)

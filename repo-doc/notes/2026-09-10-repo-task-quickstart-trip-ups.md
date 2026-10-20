@@ -1,5 +1,5 @@
 ---
-last_verified: 2026-09-10
+last_verified: 2026-10-20
 tool_version: n/a
 sources: []
 ---
@@ -32,7 +32,7 @@ It printed the expected Markdown grid showing file counts per tool per category.
 
 **4. Category subdirectory names are fixed.** The primer lists them (`notes/`, `docs/`, `scripts/`, `snippets/`, `configs/`, `templates/`, `manifests/`, `dockerfiles/`, `notebooks/`), but there is no validation that a new file goes in the correct subdirectory. If I put a `.py` file in `docs/` instead of `scripts/`, the coverage count would still register it as a "docs" file. The tooling counts by directory, not by file extension.
 
-**5. The index regeneration is separate.** The primer mentions per-tool `index.md` or `coverage.md` pages, but the script I ran only produces the top-level coverage table. Regenerating the per-tool index pages is apparently a different step that I have not found yet. This is the third table the primer mentions needing to stay in sync.
+**5. The index regeneration is separate — and there is no second step.** The primer mentions per-tool `index.md` or `coverage.md` pages, but the script I ran only produces the top-level coverage table. I went looking for the missing step later and there is not one: only two per-tool pages exist (`git/docs/2026-08-10-git-index.md` and `helm/docs/2026-08-10-helm-coverage.md`) and both are hand-written. I have since reworded the primer so it no longer promises a page in every tool folder.
 
 ## What I would do differently
 
