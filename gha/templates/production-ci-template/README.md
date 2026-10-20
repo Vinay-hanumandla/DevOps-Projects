@@ -76,7 +76,7 @@ production-ci-template/
 
 2. Create GitHub environments `staging` and `production` with required reviewers.
 
-3. Configure OIDC trust in each cloud provider (see [OIDC token exchange](../docs/oidc-token-exchange.md)).
+3. Configure OIDC trust in each cloud provider (see [OIDC token exchange](../../docs/oidc-token-exchange.md)).
 
 4. Add required repository secrets (see Prerequisites).
 
@@ -213,7 +213,7 @@ Outputs: `kubeconfig` (path).
 
 - **Matrix dimensions**: Edit `strategy.matrix` in `ci.yml` to add/remove OS/python versions.
 - **Linter/test commands**: Replace `ruff`, `mypy`, `pytest` invocations in `reusable-ci.yml`.
-- **Cloud providers**: Remove unused OIDC steps from `configure-environment/action.yml`.
+- **Cloud providers**: Remove unused OIDC steps from `.github/actions/configure-environment/action.yml`.
 - **Kubernetes deployment**: Replace `kubectl set image` with Helm/ArgoCD/Kustomize as needed.
 - **Notifications**: Add Slack/Discord/PagerDuty webhooks in `deploy-production` success/failure steps.
 
@@ -221,7 +221,7 @@ Outputs: `kubeconfig` (path).
 
 - [Reusing workflows](https://docs.github.com/en/actions/using-workflows/reusing-workflows)
 - [Creating a composite action](https://docs.github.com/en/actions/creating-actions/creating-a-composite-action)
-- [GitHub Actions security hardening](../docs/workflow-security-hardening.md)
-- [OIDC token exchange with GitHub Actions](../docs/oidc-token-exchange.md)
+- [GitHub Actions security hardening](../../docs/workflow-security-hardening.md)
+- [OIDC token exchange with GitHub Actions](../../docs/oidc-token-exchange.md)
 - [Docker GitHub Actions guide](https://docs.docker.com/guides/gha/)
 - [GitHub Environments](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment)

@@ -21,9 +21,11 @@ Use this template when adding a new tool to an existing kit, or when bootstrappi
 ```
 repo-doc-new-tool-integration-starter-kit/
 ├── README.md
+├── Makefile
+├── .gitignore
 ├── scripts/
 │   ├── repo-doc-new-tool.sh
-│   └── regenerate-coverage-tables.sh
+│   └── 2026-09-01-regenerate-coverage-tables.sh
 └── configs/
     └── tool-folder-conventions.yaml
 ```
@@ -31,7 +33,7 @@ repo-doc-new-tool-integration-starter-kit/
 ## Getting started
 
 1. Copy `scripts/repo-doc-new-tool.sh` into your repo (e.g. `repo-doc/scripts/`) and make it executable.
-2. Copy or adapt `scripts/regenerate-coverage-tables.sh` to build your coverage tables.
+2. Copy or adapt `scripts/2026-09-01-regenerate-coverage-tables.sh` to build your coverage tables.
 3. Add your tools to the known tools list in the coverage script.
 4. Run `repo-doc-new-tool.sh <tool-name>` to create a new tool folder with all standard categories and a primer stub.
 

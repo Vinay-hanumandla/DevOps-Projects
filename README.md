@@ -52,7 +52,7 @@ The `templates/` subfolders are copy-in starting points: a chart, a role, a coll
 ## Coverage
 
 Counts include files nested inside template trees. `Src` and `Hooks` are support locations that only a few tools use. A folder's total (see `00_index/topics.md`) also counts root-level support dotfiles such as `docker/.dockerignore`, which has no category column here.
-In the `docs/concepts/` row, `Notes` counts the eight foundational primers alongside their companion notes and `Docs` the cross-tool concept articles.
+In the `docs/concepts/` row, `Notes` counts the eight foundational primers alongside their companion notes and `Docs` the cross-tool concept articles. The `scripting-automation-philosophy/` row counts only the companion config that sits beside the deploy-checklist snippet; that concept's primer, scripts, and snippets live under `docs/concepts/`.
 
 <details>
 <summary>Coverage table</summary>
@@ -74,15 +74,17 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 | Kube-Prometheus | 3 | 0 | 0 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 2026-10-08 |
 | Prometheus | 4 | 4 | 2 | 1 | 8 | 2 | 0 | 0 | 10 | 0 | 0 | 2026-08-07 |
 | Python | 3 | 4 | 4 | 5 | 4 | 0 | 3 | 1 | 24 | 0 | 0 | 2026-07-22 |
-| Repo-doc | 5 | 5 | 5 | 1 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-09-01 |
+| Repo-doc | 5 | 6 | 7 | 1 | 2 | 0 | 0 | 0 | 6 | 0 | 0 | 2026-10-20 |
 | Terraform | 4 | 5 | 3 | 1 | 7 | 2 | 1 | 0 | 34 | 0 | 0 | 2026-08-01 |
 | Terraform Cloud | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-14 |
+| `docs/concepts/` | 11 | 14 | 22 | 12 | 0 | 0 | 5 | 0 | 0 | 0 | 0 | 2026-10-20 |
+| `scripting-automation-philosophy/` | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-20 |
 
 </details>
 
 ## Status
 
-Currently expanding the GitHub Actions production CI template with reusable actions for caching and environment configuration. New templates for `gha/templates/production-ci-template/` added this cycle.
+Currently expanding the GitHub Actions production CI template with reusable actions for caching and environment configuration. New templates for `gha/templates/production-ci-template/` added this cycle. Coverage rows for `docs/concepts/` and `scripting-automation-philosophy/` added, and the Repo-doc counts re-checked against the tree.
 
 ---
-_Last updated: 2026-10-19_
+_Last updated: 2026-10-20_
