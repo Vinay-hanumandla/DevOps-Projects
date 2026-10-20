@@ -782,3 +782,7 @@ Passed ([x]) jenkins-018 — Jenkins: config — Jenkins Configuration as Code f
 - bash/docs/production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md — Production runbook for Bash 5.3+ strict-mode guardrails, PIPESTATUS telemetry, and ShellCheck CI gate with structured logging and rollback procedures (bash-041)
 - tf/docs/terraform-github-actions-plan-apply-pipeline-remote-backend-environment-approvals.md — Terraform GitHub Actions plan/apply pipeline with remote backend and environment approvals (tf-026)
 feat: add git notebook on merge, squash, and rebase strategies
+
+## 2026-10-19
+
+- repo-doc/scripts/repo-doc-new-tool.sh — Wrapper script to create a new tool folder with standard 9-category layout, seed a primer stub, and register the tool in the coverage script (repo-doc-020)
