@@ -1,0 +1,33 @@
+# last_verified: 2026-09-16 · ansible n/a
+- name: Ensure application group exists
+  ansible.builtin.group:
+    name: "{{ app_user }}"
+    state: present
+
+- name: Ensure application user exists
+  ansible.builtin.user:
+    name: "{{ app_user }}"
+    group: "{{ app_user }}"
+    create_home: false
+    system: true
+    state: present
+
+- name: Ensure application directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: "0755"
+  loop:
+    - "{{ app_dir }}"
+    - "{{ app_config_path | dirname }}"
+
+- name: Render application configuration
+  ansible.builtin.template:
+    src: app.conf.j2
+    dest: "{{ app_config_path }}"
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: "0640"
+  notify: Restart app_example

@@ -1,0 +1,19 @@
+name: Molecule
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install ansible ansible-lint molecule molecule-docker galaxy-importer
+      - name: Molecule test
+        run: molecule test
+      - name: Build collection
+        run: ansible-galaxy collection build -o .
+      - name: Lint collection artifact
+        run: python -m galaxy_importer.main example_org-app_collection-1.0.0.tar.gz

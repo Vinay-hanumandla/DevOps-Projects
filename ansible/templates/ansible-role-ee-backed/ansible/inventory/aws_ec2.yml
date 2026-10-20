@@ -1,0 +1,17 @@
+# last_verified: 2026-09-16 · ansible n/a
+# Cloud inventory: discover hosts Terraform tagged at provision time instead of
+# keeping a static host list. Requires the cloud collection providing this plugin.
+plugin: amazon.aws.aws_ec2
+regions:
+  - us-east-1
+filters:
+  tag:ManagedBy: terraform
+  tag:Environment: staging
+  instance-state-name: running
+keyed_groups:
+  - key: tags.Role
+    prefix: role
+hostnames:
+  - private-ip-address
+compose:
+  ansible_host: private_ip_address

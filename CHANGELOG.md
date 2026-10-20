@@ -801,3 +801,4 @@ Passed ([x]) repo-doc-032 — Project scaffold: repo-doc + new tool integration 
 - repo-doc/notes/0000-primer-repo-doc.md — Primer reworded so it no longer promises a per-tool index or coverage page for every tool folder (repo-doc-021)
 - repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md — Trip-up 5 now records the outcome of the per-tool index step that was never found (repo-doc-021)
 2026-10-20: Add repo-doc CLI configuration schema (repo-doc-035)
+- ansible-033: ansible/templates/ansible-role-ee-backed/ (fixed template)
