@@ -1,0 +1,14 @@
+# last_verified: 2026-10-20 · ansible n/a
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Confirm the application directory exists
+      ansible.builtin.stat:
+        path: "{{ app_dir }}"
+      register: app_dir_stat
+    - name: Assert the directory was created
+      ansible.builtin.assert:
+        that:
+          - app_dir_stat.stat.exists
+        fail_msg: "app_dir was not created by the role"
+        success_msg: "app_dir exists as expected"

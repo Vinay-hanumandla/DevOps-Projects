@@ -3,6 +3,7 @@
 ## 2026-10-20
 
 - ansible/docs/ansible-2-20-to-2-21-migration-guide.md — Ansible migration guide covering the ansible-core 2.20 to 2.21 upgrade: inventory baseline, porting-guide review, isolated core upgrade, collection reinstall, syntax-check, staging validation, EE image update, and rollback (ansible-032)
+- ansible/templates/reusable-ansible-role/ — Reusable Ansible role template with Molecule testing, Galaxy metadata (galaxy.yml), and a CI workflow that builds the collection and runs molecule test plus galaxy-importer lint on every push (ansible-033)
 
 ## 2026-10-19
 

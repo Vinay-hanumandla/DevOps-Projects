@@ -1,0 +1,5 @@
+# last_verified: 2026-10-20 · ansible n/a
+- name: Apply app_role
+  hosts: all
+  roles:
+    - role: app_role

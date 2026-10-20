@@ -1,0 +1,8 @@
+# last_verified: 2026-10-20 · ansible n/a
+galaxy_info:
+  role_name: app_role
+  description: Reusable role scaffold tested with Molecule and gated by CI.
+  license: MIT
+  min_ansible_version: null
+  platforms: []
+dependencies: []

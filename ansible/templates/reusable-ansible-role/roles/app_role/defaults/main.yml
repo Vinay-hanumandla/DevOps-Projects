@@ -1,0 +1,6 @@
+# last_verified: 2026-10-20 · ansible n/a
+app_user: app_user
+app_group: "{{ app_user }}"
+app_dir: /opt/app_role
+app_config_path: /etc/app_role/app.conf
+app_service: app_role

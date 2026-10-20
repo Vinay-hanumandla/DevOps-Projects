@@ -1,0 +1,16 @@
+# last_verified: 2026-10-20 · ansible n/a
+# Default Molecule scenario. Image intentionally untagged so the scaffold
+# never cites a version it did not verify; pin the image digest in real use.
+driver:
+  name: docker
+platforms:
+  - name: app-instance
+    image: ubuntu
+provisioner:
+  name: ansible
+  playbooks:
+    converge: converge.yml
+verifier:
+  name: ansible
+  playbooks:
+    verify: verify.yml

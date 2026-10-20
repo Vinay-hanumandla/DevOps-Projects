@@ -1,0 +1,13 @@
+# last_verified: 2026-10-20 · ansible n/a
+# Scaffold Galaxy metadata. Rename namespace/name for real use.
+namespace: example_org
+name: app_role
+version: 1.0.0
+readme: README.md
+description: Reusable role scaffold tested with Molecule and gated by CI.
+license:
+  - MIT
+tags:
+  - application
+  - configuration
+dependencies: []
