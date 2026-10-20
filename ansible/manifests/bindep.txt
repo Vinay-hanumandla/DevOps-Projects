@@ -1,0 +1,40 @@
+# last_verified: 2026-10-20 · ansible 2.21.5
+# ansible-034 — System packages for the curated execution environment.
+# Read by ansible-builder via the `dependencies.system` key in the EE manifest.
+# Installed via microdnf (creator-ee base) during the EE build.
+# Format: <package> [platform:<platform>] [profile:<profile>]
+# Only the 'default' profile is used here.
+
+# SSH and network tools (for network collections)
+openssh-clients
+sshpass
+iproute
+iputils
+bind-utils
+net-tools
+telnet
+traceroute
+nmap-ncat
+
+# Cloud CLI tools (optional, for debug/inspect inside EE)
+# awscli2            [platform:rpm]  # large, install on demand
+# azure-cli          [platform:rpm]  # requires Microsoft repo
+# gcloud-cli         [platform:rpm]  # requires Google repo
+
+# Development / build tools (not in final EE, only in build stage if needed)
+# gcc                [profile:build]
+# python3-devel      [profile:build]
+# libffi-devel       [profile:build]
+# openssl-devel      [profile:build]
+
+# Timezone and locale (runtime)
+tzdata
+glibc-langpack-en
+
+# Certificate management
+ca-certificates
+openssl
+
+# Text processing (for filters/lookbacks)
+jq
+yq

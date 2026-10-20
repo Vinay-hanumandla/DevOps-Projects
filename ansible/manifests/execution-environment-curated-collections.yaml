@@ -1,0 +1,73 @@
+# last_verified: 2026-10-20 · ansible 2.21.5
+# Purpose: Ansible Execution Environment definition with a curated set of
+#   collections for network automation, cloud provisioning, and platform
+#   operations. This manifest is consumed by ansible-builder to produce a
+#   container image that runs consistently across self-managed AAP, the AWX
+#   Operator on Kubernetes, and the AAP managed service.
+# When to use this: teams that need a reproducible EE image for production
+#   automation. Use it when the control plane (AAP controller or AWX) must run
+#   jobs with a fixed, audited collection set — no implicit installs, no drift
+#   between environments. Keep this file in version control alongside the
+#   playbooks that depend on it.
+# Prerequisites:
+#   - ansible-builder >= 3.0.0 installed on the build host (python3 -m pip install ansible-builder)
+#   - Container runtime: podman (preferred) or docker with buildx
+#   - Registry credentials for the target image registry (quay.io, ghcr.io, or private)
+#   - Base image available: quay.io/ansible/creator-ee:latest (ansible-core 2.21.5, microdnf)
+# Steps:
+#   1. Review the collections, python, and system sections below. Replace each
+#      unversioned entry with the exact release your automation is tested
+#      against before the first promoted build.
+#   2. Run `ansible-builder build -t <registry>/ee-curated:<tag> -f
+#      ansible/manifests/execution-environment-curated-collections.yaml
+#      --container-runtime podman` from the repository root.
+#   3. Push the image: `podman push <registry>/ee-curated:<tag>`.
+#   4. Register the EE in AAP or AWX: Settings → Execution Environments → Add,
+#      reference the pushed image digest. Jobs and job templates then select
+#      this EE by name.
+# Verify: run `ansible-builder introspect -f
+#   ansible/manifests/execution-environment-curated-collections.yaml` and
+#   confirm the resolved dependency graph matches expectations. After the build,
+#   run a test job against the EE that exercises one task from each listed
+#   collection (e.g., `cisco.ios.ios_command`, `amazon.aws.ec2_instance`,
+#   `ansible.platform.gateway`).
+# Common errors:
+#   - Build fails with "microdnf: command not found" — the base image must be
+#     quay.io/ansible/creator-ee (microdnf), not awx-ee (dnf). See
+#     https://uclab.dev/kubernetes/awx/.
+#   - Apple Silicon build produces "exec format error" on amd64 clusters — add
+#     `--platform linux/amd64` to the build command or build on an amd64 runner.
+#   - Collection version conflict during galaxy install — pin every collection
+#     in the manifest; ansible-builder resolves the full graph and fails on
+#     incompatibility rather than picking an arbitrary version.
+#   - EE image not selectable in AWX — the AWX CR must have
+#     `ee_images` listing the image digest, or the EE must be created via the
+#     AAP UI/API first.
+# References:
+#   - ansible-builder documentation: https://ansible.readthedocs.io/projects/builder/
+#   - AAP 2.7 execution environments: https://developers.redhat.com/articles/2026/06/10/whats-new-red-hat-ansible-automation-platform-2-7
+#   - AWX Operator EE mounting: https://uclab.dev/kubernetes/awx/
+#   - Ansible creator-ee base image: https://quay.io/repository/ansible/creator-ee
+---
+version: 3
+images:
+  base_image:
+    name: "quay.io/ansible/creator-ee:latest"
+    signature_original: ""
+    signature_validated: ""
+dependencies:
+  galaxy: requirements.yml
+  python: requirements.txt
+  system: bindep.txt
+additional_build_steps:
+  prepend: |
+    # Use microdnf (creator-ee base) not dnf
+    RUN microdnf update -y && microdnf clean all
+  append: |
+    # Drop to non-root UID 1000 (creator-ee default)
+    USER 1000
+options:
+  package_manager_path: "/usr/bin/microdnf"
+  relax_passwd_permissions: false
+  workdir: "/runner"
+  user: "1000"
