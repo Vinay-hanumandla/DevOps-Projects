@@ -22,6 +22,11 @@
 - **ansible-builder** — the tool that assembles an execution environment from a definition plus a `requirements.yml`, emitting the `Containerfile` and build arguments the container engine then runs.
 - **Base image digest** — the `sha256:…` reference an execution environment is built from; a tag can be moved to different content underneath you, a digest cannot, which is why a build pipeline rejects a placeholder and refuses to publish an unpinned base.
 - **SBOM** — a Software Bill of Materials: the machine-readable inventory of what an image actually contains, attached to the artifact so a later vulnerability scan can be checked against the exact set of packages that shipped.
+- **bindep.txt** — a system dependency file listing OS packages (via `microdnf`/`dnf`/`apt`) that an execution environment needs; consumed by `ansible-builder` and installed into the EE image before Python and Galaxy dependencies.
+- **creator-ee** — the upstream base image (`quay.io/ansible/creator-ee`) used for building execution environments; includes `ansible-core`, `microdnf`, and the runner user (UID 1000), replacing the older `awx-ee` image.
+- **microdnf** — a minimal DNF-compatible package manager used in the `creator-ee` base image; smaller and faster than full DNF, suitable for container builds.
+- **AWX Operator** — a Kubernetes operator that manages the AWX application lifecycle (deployment, upgrades, backups) via the `AWX` custom resource; installed via Helm from the `awx-operator` repository.
+- **AWX Custom Resource (CR)** — a Kubernetes custom resource of kind `AWX` (API group `awx.ansible.com`) that declares the desired state of an AWX instance: service type, admin credentials, resource limits, persistence, and execution environment images.
 
 ## Docker
 

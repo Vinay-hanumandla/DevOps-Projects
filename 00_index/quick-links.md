@@ -69,6 +69,7 @@
 - [AWX primer](../awx/notes/0000-primer-awx.md) — Jobs, templates, inventories, and credentials.
 - [Explore AWX UI and API](../awx/notes/2026-10-04-explore-awx-ui-and-api.md) — Walking the API behind the UI.
 - [First job template run](../awx/notes/2026-10-07-explore-awx-ui-first-job-template.md) — From CR to launched job.
+- [AWX quickstart script](../awx/scripts/2026-10-20-awx-quickstart.sh) — End-to-end AWX bootstrap from CR to running job.
 
 ### Run CI/CD with GitHub Actions
 - [GitHub Actions primer](../gha/notes/0000-primer-gha.md) — Workflows, jobs, steps, and triggers.
