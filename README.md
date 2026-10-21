@@ -19,11 +19,11 @@ The `templates/` subfolders are copy-in starting points: a chart, a role, a coll
 
 ## Quick links
 
-- [GitHub Actions production CI template — cache dependencies action](gha/templates/production-ci-template/.github/actions/cache-dependencies/action.yml) — Reusable GitHub Action for caching dependencies across workflow runs.
-- [GitHub Actions production CI template — configure environment action](gha/templates/production-ci-template/.github/actions/configure-environment/action.yml) — Reusable GitHub Action for environment setup and configuration.
-- [GitHub Actions production CI template — README](gha/templates/production-ci-template/README.md) — Documentation for the production CI template with usage examples.
-- [GitHub Actions production CI template — CI workflow](gha/templates/production-ci-template/ci.yml) — Main CI pipeline workflow with lint, test, and build stages.
-- [GitHub Actions production CI template — Deploy workflow](gha/templates/production-ci-template/deploy.yml) — Deployment workflow with environment promotion and approval gates.
+- [AWX quickstart script](awx/scripts/2026-10-20-awx-quickstart.sh) — End-to-end AWX bootstrap from CR to running job.
+- [Ansible execution environment curated collections](ansible/manifests/execution-environment-curated-collections.yaml) — Pinned collections for reproducible EE builds.
+- [Ansible requirements](ansible/manifests/requirements.yml) — Galaxy collection dependencies for the curated EE.
+- [Ansible requirements.txt](ansible/manifests/requirements.txt) — Python-level dependencies for execution environments.
+- [Ansible bindep](ansible/manifests/bindep.txt) — System packages required by the curated execution environment.
 
 ## Layout
 
@@ -59,8 +59,8 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 
 | Area | Notes | Docs | Scripts | Snippets | Configs | Manifests | Notebooks | Dockerfiles | Templates | Src | Hooks | Last verified |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| Ansible | 3 | 6 | 5 | 1 | 4 | 3 | 1 | 0 | 28 | 0 | 0 | 2026-08-10 |
-| AWX | 4 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-04 |
+| Ansible | 3 | 6 | 5 | 1 | 4 | 6 | 1 | 0 | 28 | 0 | 0 | 2026-08-10 |
+| AWX | 4 | 0 | 1 | 0 | 2 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-20 |
 | Bash | 3 | 8 | 12 | 3 | 0 | 0 | 6 | 1 | 30 | 0 | 0 | 2026-07-18 |
 | Compose | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 2026-10-14 |
 | Docker | 5 | 5 | 8 | 0 | 0 | 3 | 0 | 5 | 36 | 2 | 0 | 2026-07-19 |
@@ -82,7 +82,7 @@ In the `docs/concepts/` row, `Notes` counts the eight foundational primers along
 
 ## Status
 
-Currently expanding the GitHub Actions production CI template with reusable actions for caching and environment configuration. New templates for `gha/templates/production-ci-template/` added this cycle.
+Currently expanding AWX coverage with a quickstart script and execution environment manifests. Ansible execution environment content added this cycle.
 
 ---
-_Last updated: 2026-10-20_
+_Last updated: 2026-10-21_
