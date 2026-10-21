@@ -4,168 +4,269 @@ tool_version: n/a
 sources: []
 ---
 
-# Bash Production Runbook
+# Bash production runbook: strict mode, cleanup-once traps, and correlation-ID logging
 
 ## Purpose
 
-This document provides authoritative reference patterns for writing production-grade Bash scripts. It covers the essential safety flags (`set -euo pipefail`), robust signal handling, and structured logging approaches that distinguish fragile one-off scripts from maintainable automation.
+This runbook is the copy-pasteable starting point for a Bash script that has to
+survive unattended execution: strict mode that fails loudly, signal handling
+that cleans up exactly once, and structured logs that can be traced across a
+multi-script run by a single correlation id.
+
+It also pins down three behaviours that the sibling docs in this directory
+leave open:
+
+1. What `set -e` actually aborts on — in particular that a plain assignment
+   from a command substitution aborts the script, and that `local` hides it.
+2. Why a `trap … EXIT` handler combined with a signal trap runs the cleanup
+   twice, and the guard that makes it run once.
+3. The application log contract — one JSON key set, one level filter, one
+   correlation id — and how a child process inherits it. (The sibling
+   strict-mode runbook covers a different record shape: one telemetry record
+   per pipeline, carrying the `PIPESTATUS` array.)
+
+The strict-mode header guard, trap-based cleanup, `PIPESTATUS` telemetry and
+the ShellCheck CI gate are covered by the sibling docs listed under References.
+They are not repeated here on purpose; this document owns the consolidated
+template and the three behaviours above.
 
 ## When to Use
 
-Apply these patterns to any Bash script that:
-- Runs unattended in CI/CD pipelines, cron jobs, or systemd services
-- Manages infrastructure, deployments, or data processing where silent failures are costly
-- Must operate reliably across different environments and Bash versions (4.0+)
-- Needs observable, debuggable execution without manual intervention
+Apply this runbook when authoring or reviewing a Bash script that:
+
+- Runs unattended (CI job, cron entry, service unit, container entrypoint)
+  where a silent failure is expensive.
+- Performs a multi-step operation (deploy, migration, backup, sync) that must
+  release locks, remove temporary state, or close connections on the way out.
+- Acts as a parent of other scripts and needs one trace identifier across the
+  whole run.
+- Is being audited: the Verify section is a checklist that runs unchanged
+  against a candidate script.
+
+A one-off command that is typed and read in the same terminal does not need
+this machinery. `set -euo pipefail` on its own is enough for it.
 
 ## Prerequisites
 
-- Bash 4.0 or later (for associative arrays, `mapfile`, and modern parameter expansion)
-- Understanding of exit codes, file descriptors, and process signals
-- Access to standard Unix utilities (`date`, `printf`, `tee`, `logger`)
+- A Bash with associative arrays (`help declare`). The template uses them for
+  the level table and nothing more exotic.
+- `jq` for JSON encoding of log messages and for the log-shape gate in the
+  Verify section. The template falls back to a pure-Bash escaper when `jq` is
+  not installed.
+- `shellcheck` for the static gate in the Verify section.
+- `uuidgen` for correlation ids. The template falls back to
+  `/proc/sys/kernel/random/uuid` and then to a random hex string, so the id
+  is never empty.
 
-## Core Safety Flags
+## Steps
 
-### `set -euo pipefail`
+### 1. Strict mode: what aborts the script, and what does not
+
+`set -euo pipefail` is the header of the template:
 
 ```bash
-#!/usr/bin/env bash
 set -euo pipefail
 ```
 
-| Flag | Effect | Why It Matters |
+| Flag | Effect | Why it matters |
 |------|--------|----------------|
-| `-e` (errexit) | Exit immediately when a command exits non-zero | Prevents cascading failures from silently ignored errors |
-| `-u` (nounset) | Treat unset variables as an error when expanding | Catches typos in variable names before they cause damage |
-| `-o pipefail` | Pipeline returns the exit code of the rightmost non-zero command | Ensures `cmd1 | cmd2` fails if `cmd1` fails, not just `cmd2` |
+| `-e` (errexit) | Abort on a command that returns non-zero | Stops a failed step from being papered over by the next one |
+| `-u` (nounset) | Treat an unset variable as an error | Catches typos in variable names before they cause damage |
+| `-o pipefail` | A pipeline returns the status of the rightmost failing stage | `cmd1 \| cmd2` fails when `cmd1` fails, not only when `cmd2` fails |
 
-**Placement**: Place at the top of the script, after the shebang, before any other code.
+`errexit` does not fire in every position, and the exceptions are the part
+that is usually misremembered. The table below was verified by running each
+case, not by reading the manual.
 
-### Scope Limitations
+| Construct | Aborts the script? | Reason |
+|-----------|--------------------|--------|
+| `cmd` | Yes | The status is not consumed by anything else |
+| `result=$(cmd)` | Yes | A plain assignment takes the exit status of the substitution |
+| `local value=$(cmd)` | No | `local` returns 0 and masks the substitution's status |
+| `local value; value=$(cmd)` | Yes | Splitting declaration from assignment restores the abort |
+| `if cmd; then … fi` | No | The status is tested, not fatal |
+| `cmd \|\| fallback` | No | The fallback handles the failure |
+| `cmd1 \| cmd2` under `pipefail` | Yes, if any stage fails | The pipeline status is the rightmost failing stage |
+| Body of a trap handler | Yes | `errexit` is still in force inside the handler |
 
-The `errexit` flag does not trigger in these contexts (by design):
+Two consequences follow directly. A command substitution that is expected to
+fail has to be moved into a tested context rather than assigned blindly:
 
 ```bash
-# Command in a conditional — exit code is tested, not fatal
-if ! grep -q "pattern" file.txt; then
-    echo "Pattern not found"
-fi
-
-# Command in a subshell — parent script continues
-result=$(false)  # Subshell fails, but assignment succeeds
-
-# Command followed by || or && — explicit handling
-risky_command || handle_failure
+set -euo pipefail
+result=$(false)          # aborts here: the script exits 1
+echo "not reached"       # never printed
 ```
 
-**Best practice**: Avoid relying on these exceptions. Use explicit error handling instead.
-
-## Signal Handling
-
-### Signal Overview
-
-| Signal | Number | Default Action | Typical Use |
-|--------|--------|----------------|-------------|
-| `SIGHUP` | 1 | Terminate | Terminal closed, reload config |
-| `SIGINT` | 2 | Terminate | Ctrl+C, graceful shutdown |
-| `SIGTERM` | 15 | Terminate | Polite shutdown request (systemd, Kubernetes) |
-| `SIGUSR1` | 10 | Terminate | User-defined (e.g., rotate logs) |
-| `SIGUSR2` | 12 | Terminate | User-defined (e.g., dump state) |
-
-### Trap Patterns
-
-#### Minimal Graceful Shutdown
+And a function that assigns from a command substitution must not hide the
+status behind `local`:
 
 ```bash
-#!/usr/bin/env bash
 set -euo pipefail
-
-cleanup() {
-    local exit_code=$?
-    log_info "Shutting down (exit code: $exit_code)"
-    # Release locks, close connections, remove temp files
-    rm -f "${LOCK_FILE:-}"
-    exit "$exit_code"
+collect() {
+    local value=$(false)   # `local` masks the failure: the script continues
+    echo "still running, value='$value'"
 }
-
-trap cleanup EXIT
-trap 'cleanup; exit 130' INT   # 128 + SIGINT(2) = 130
-trap 'cleanup; exit 143' TERM  # 128 + SIGTERM(15) = 143
+collect                    # prints "still running", exits 0
 ```
 
-#### Idempotent Cleanup with State Tracking
+Declare first, assign on the next line, and the failure is fatal again:
 
 ```bash
-#!/usr/bin/env bash
-set -euo pipefail
+collect() {
+    local value
+    value=$(false)         # aborts: the substitution's status is the assignment's status
+    echo "not reached"
+}
+```
 
-declare -A CLEANUP_ACTIONS=()
+The template relies on this behaviour deliberately: `CORRELATION_ID="$(generate_correlation_id)"`
+aborts the run if the id generator fails, because an untraceable run is worse
+than a stopped one.
+
+### 2. Cleanup that runs exactly once
+
+A cleanup handler registered on `EXIT` also fires when the script exits from a
+signal handler, because the handler's own `exit` triggers the `EXIT` trap
+again. Registering the same handler for both `EXIT` and `TERM` therefore runs
+the registered cleanup actions twice on a `SIGTERM`.
+
+The fix is a guard flag, plus `set +e` inside the handler so that a failing
+cleanup step cannot replace the exit code the caller asked for:
+
+```bash
+CLEANUP_DONE=0
+declare -a CLEANUP_ACTIONS=()
 
 register_cleanup() {
-    local name="$1"
-    local action="$2"
-    CLEANUP_ACTIONS["$name"]="$action"
+    CLEANUP_ACTIONS+=("$1")
 }
 
-run_cleanup() {
-    local exit_code=$1
-    for name in "${!CLEANUP_ACTIONS[@]}"; do
-        log_debug "Running cleanup: $name"
-        eval "${CLEANUP_ACTIONS[$name]}" || log_warn "Cleanup '$name' failed"
+cleanup() {
+    local exit_code="$1"
+    if (( CLEANUP_DONE )); then
+        return 0
+    fi
+    CLEANUP_DONE=1
+
+    # errexit stays on inside a trap handler, so disable it here: a failing
+    # cleanup step is reported and the original status is still returned.
+    set +e
+
+    local action
+    for action in "${CLEANUP_ACTIONS[@]}"; do
+        if ! eval "$action"; then
+            printf 'warning: cleanup action failed: %s\n' "$action" >&2
+        fi
     done
+
     exit "$exit_code"
 }
 
-trap 'run_cleanup $?' EXIT
-trap 'run_cleanup 130' INT
-trap 'run_cleanup 143' TERM
-
-# Usage example
-register_cleanup "lock" "rm -f /var/lock/my-script.lock"
-register_cleanup "tempdir" "rm -rf /tmp/my-script-$$"
+trap 'cleanup $?' EXIT
+trap 'cleanup 130' INT
+trap 'cleanup 143' TERM
 ```
 
-#### Reload Configuration on SIGHUP
+The exit statuses the handler is asked to preserve:
 
-```bash
-reload_config() {
-    log_info "Received SIGHUP, reloading configuration"
-    # Re-read config file, re-establish connections
-    source /etc/my-script/config.conf
-    reconnect_services
-}
+| Situation | Trap | Status returned |
+|-----------|------|-----------------|
+| Normal completion | `cleanup $?` | 0 |
+| A step failed | `cleanup $?` | the failing step's status |
+| `SIGINT` (Ctrl+C) | `cleanup 130` | 130 |
+| `SIGTERM` (polite stop) | `cleanup 143` | 143 |
+| `SIGKILL` | none — the handler never runs | the process is removed, cleanup does not happen |
 
-trap reload_config HUP
-```
+The signal handlers are installed before the work starts, and every function
+the handlers call is defined above the `trap` lines: a handler that calls an
+undefined function fails with `command not found` at the worst possible
+moment.
 
-### Signal Safety Rules
+### 3. Structured logging with a correlation id
 
-1. **Keep trap handlers minimal** — they run asynchronously; avoid complex logic, I/O, or locks
-2. **Use async-signal-safe functions only** — `printf`, `exit`, variable assignment are safe; most library calls are not
-3. **Re-arm traps if needed** — some signals reset handlers on delivery (not typical in Bash)
-4. **Preserve original exit code** — capture `$?` immediately in `EXIT` trap
+The template emits one JSON object per line, and every line uses the same key
+set. A single schema is the point: a log parser, a gate and a dashboard all
+have to agree on the field names, and a second key set silently breaks every
+consumer that was written against the first.
 
-## Structured Logging
+| Key | Meaning |
+|-----|---------|
+| `timestamp` | UTC time with millisecond precision |
+| `level` | `DEBUG`, `INFO`, `WARN`, `ERROR` or `CRITICAL` |
+| `script` | Name of the script that emitted the line |
+| `pid` | Process id of the emitter |
+| `correlation_id` | Trace identifier shared by every line of one run |
+| `message` | The human-readable text, JSON-escaped |
 
-### Log Levels
+Levels are compared numerically, so filtering is an integer test:
 
-| Level | Numeric | Use Case |
-|-------|---------|----------|
-| `DEBUG` | 10 | Verbose diagnostic detail |
+| Level | Value | Typical use |
+|-------|-------|-------------|
+| `DEBUG` | 10 | Diagnostic detail, off by default |
 | `INFO` | 20 | Normal operational events |
 | `WARN` | 30 | Unexpected but handled situations |
-| `ERROR` | 40 | Failures requiring attention |
-| `CRITICAL` | 50 | Immediate intervention needed |
+| `ERROR` | 40 | Failures needing attention |
+| `CRITICAL` | 50 | Immediate intervention required |
 
-### JSON Structured Logger
+A line is emitted when its level is greater than or equal to the configured
+threshold. `LOG_LEVEL=WARN` therefore keeps `WARN`, `ERROR` and `CRITICAL` and
+drops `DEBUG` and `INFO`.
+
+The correlation id is created once by the parent and exported, so every child
+process inherits it without extra wiring:
+
+```bash
+if [[ -z "${CORRELATION_ID:-}" ]]; then
+    CORRELATION_ID="$(generate_correlation_id)"
+fi
+export CORRELATION_ID LOG_LEVEL
+export LOG_THRESHOLD="${LOG_LEVEL_NUM[$LOG_LEVEL]}"
+```
+
+`LOG_LEVEL` and `LOG_THRESHOLD` are exported for the same reason: a child
+step that logged `INFO` lines while the parent was running at `WARN` would
+break the verbosity the operator asked for. With the threshold in the
+environment, a child applies the same filter and the whole run stays
+consistent.
+
+An operator-set `CORRELATION_ID` wins over the generated one, which is what
+makes a trace reproducible:
+
+```bash
+CORRELATION_ID=run-4711 ./runbook.sh | jq -r '.correlation_id' | sort -u
+# run-4711
+```
+
+### 4. Consolidated runbook template
+
+Save this as `runbook.sh` and replace the work phase with the real workload.
+Everything around it — the header, the logging contract, the cleanup guard and
+the argument parsing — is ready to use as is.
 
 ```bash
 #!/usr/bin/env bash
+# last_verified: 2026-10-20 · bash n/a
+#
+# Consolidated runbook template: strict mode, cleanup-once traps, and
+# correlation-ID structured logging.
+
 set -euo pipefail
 
-readonly LOG_LEVEL="${LOG_LEVEL:-INFO}"
-readonly LOG_FORMAT="${LOG_FORMAT:-json}"  # json or text
+# ===========================================================================
+# CONFIGURATION
+# ===========================================================================
+SCRIPT_NAME="${0##*/}"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+LOG_LEVEL="${LOG_LEVEL:-INFO}"
+CONFIG_FILE="${CONFIG_FILE:-$SCRIPT_DIR/$SCRIPT_NAME.conf}"
+CORRELATION_ID="${CORRELATION_ID:-}"
 
+readonly SCRIPT_NAME SCRIPT_DIR
+
+# ===========================================================================
+# LOGGING
+# ===========================================================================
 declare -A LOG_LEVEL_NUM=(
     [DEBUG]=10
     [INFO]=20
@@ -174,193 +275,186 @@ declare -A LOG_LEVEL_NUM=(
     [CRITICAL]=50
 )
 
+json_escape() {
+    local text="$1"
+    text=${text//\\/\\\\}
+    text=${text//\"/\\\"}
+    text=${text//$'\n'/\\n}
+    text=${text//$'\r'/\\r}
+    text=${text//$'\t'/\\t}
+    printf '%s' "$text"
+}
+
 log() {
     local level="$1"
     shift
     local message="$*"
     local timestamp
     timestamp=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")
-    local script_name="${0##*/}"
-    local pid=$$
 
-    if (( LOG_LEVEL_NUM["$level"] < LOG_LEVEL_NUM["$LOG_LEVEL"] )); then
+    if (( ${LOG_LEVEL_NUM[$level]:-0} < ${LOG_LEVEL_NUM[$LOG_LEVEL]:-20} )); then
         return 0
     fi
 
-    if [[ "$LOG_FORMAT" == "json" ]]; then
-        printf '{"timestamp":"%s","level":"%s","script":"%s","pid":%d,"message":%s}\n' \
-            "$timestamp" "$level" "$script_name" "$pid" "$(jq -n --arg msg "$message" '$msg')"
+    local encoded
+    if command -v jq >/dev/null 2>&1; then
+        encoded=$(jq -n --arg msg "$message" '$msg')
     else
-        printf '[%s] %-8s [%s:%d] %s\n' "$timestamp" "$level" "$script_name" "$pid" "$message"
+        encoded="\"$(json_escape "$message")\""
     fi
+
+    printf '{"timestamp":"%s","level":"%s","script":"%s","pid":%d,"correlation_id":"%s","message":%s}\n' \
+        "$timestamp" "$level" "$SCRIPT_NAME" "$$" "$CORRELATION_ID" "$encoded"
 }
 
 log_debug() { log DEBUG "$@"; }
-log_info()  { log INFO  "$@"; }
-log_warn()  { log WARN  "$@"; }
-log_error() { log ERROR "$@"; }
-log_critical() { log CRITICAL "$@"; }
-```
-
-**Dependencies**: Requires `jq` for JSON escaping. For zero-dependency environments, use a pure-Bash escape function:
-
-```bash
-json_escape() {
-    local str="$1"
-    str=${str//\\/\\\\}
-    str=${str//\"/\\\"}
-    str=${str//$'\n'/\\n}
-    str=${str//$'\r'/\\r}
-    str=${str//$'\t'/\\t}
-    printf '%s' "$str"
-}
-
-# In log(): replace jq line with:
-# "$(json_escape "$message")"
-```
-
-### Contextual Logging with Correlation IDs
-
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-
-CORRELATION_ID="${CORRELATION_ID:-$(uuidgen 2>/dev/null || printf '%x' $RANDOM$RANDOM$RANDOM)}"
-export CORRELATION_ID
-
-log() {
-    local level="$1"
-    shift
-    local message="$*"
-    local timestamp
-    timestamp=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")
-    printf '{"timestamp":"%s","level":"%s","correlation_id":"%s","message":%s}\n' \
-        "$timestamp" "$level" "$CORRELATION_ID" "$(jq -n --arg msg "$message" '$msg')"
-}
-```
-
-### Structured Log Output Example
-
-```json
-{"timestamp":"2026-10-20T14:32:15.123Z","level":"INFO","correlation_id":"a1b2c3d4","message":"Starting deployment to production"}
-{"timestamp":"2026-10-20T14:32:15.456Z","level":"DEBUG","correlation_id":"a1b2c3d4","message":"Validating manifest: /manifests/prod.yaml"}
-{"timestamp":"2026-10-20T14:32:16.789Z","level":"WARN","correlation_id":"a1b2c3d4","message":"Resource limit not set for container 'app', using defaults"}
-{"timestamp":"2026-10-20T14:32:18.012Z","level":"INFO","correlation_id":"a1b2c3d4","message":"Deployment completed successfully"}
-```
-
-## Integrated Runbook Template
-
-```bash
-#!/usr/bin/env bash
-# Production-grade Bash script template
-# last_verified: 2026-10-20 · bash 5.2
-
-set -euo pipefail
-
-# ============================================================================
-# CONFIGURATION
-# ============================================================================
-readonly SCRIPT_NAME="${0##*/}"
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-readonly LOG_LEVEL="${LOG_LEVEL:-INFO}"
-readonly LOG_FORMAT="${LOG_FORMAT:-json}"
-readonly CORRELATION_ID="${CORRELATION_ID:-$(uuidgen 2>/dev/null || printf '%x' $RANDOM$RANDOM$RANDOM)}"
-export CORRELATION_ID
-
-# ============================================================================
-# LOGGING
-# ============================================================================
-declare -A LOG_LEVEL_NUM=(
-    [DEBUG]=10 [INFO]=20 [WARN]=30 [ERROR]=40 [CRITICAL]=50
-)
-
-log() {
-    local level="$1"; shift
-    local msg="$*"
-    local ts; ts=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")
-    (( LOG_LEVEL_NUM["$level"] < LOG_LEVEL_NUM["$LOG_LEVEL"] )) && return 0
-    if [[ "$LOG_FORMAT" == "json" ]]; then
-        printf '{"ts":"%s","lvl":"%s","cid":"%s","msg":%s}\n' \
-            "$ts" "$level" "$CORRELATION_ID" "$(jq -n --arg m "$msg" '$m')"
-    else
-        printf '[%s] %-8s [%s] %s\n' "$ts" "$level" "$CORRELATION_ID" "$msg"
-    fi
-}
-log_debug() { log DEBUG "$@"; }
-log_info()  { log INFO  "$@"; }
-log_warn()  { log WARN  "$@"; }
+log_info() { log INFO "$@"; }
+log_warn() { log WARN "$@"; }
 log_error() { log ERROR "$@"; }
 log_critical() { log CRITICAL "$@"; }
 
-# ============================================================================
-# STATE & CLEANUP
-# ============================================================================
-declare -A CLEANUP_ACTIONS=()
-register_cleanup() { CLEANUP_ACTIONS["$1"]="$2"; }
+# ===========================================================================
+# CLEANUP
+# ===========================================================================
+CLEANUP_DONE=0
+RUN_STATE="starting"
+declare -a CLEANUP_ACTIONS=()
+
+register_cleanup() {
+    CLEANUP_ACTIONS+=("$1")
+}
 
 cleanup() {
-    local ec=$1
-    for action in "${CLEANUP_ACTIONS[@]}"; do
-        eval "$action" 2>/dev/null || log_warn "Cleanup action failed: $action"
-    done
-    exit "$ec"
-}
+    local exit_code="$1"
+    if (( CLEANUP_DONE )); then
+        return 0
+    fi
+    CLEANUP_DONE=1
 
+    # The handler must not change the exit code the caller asked for, so
+    # errexit is disabled inside it: a failing cleanup step is reported and
+    # the original status is still returned.
+    set +e
+
+    local action
+    for action in "${CLEANUP_ACTIONS[@]}"; do
+        if ! eval "$action"; then
+            printf 'warning: cleanup action failed: %s\n' "$action" >&2
+        fi
+    done
+
+    if [[ "$RUN_STATE" == "running" ]]; then
+        log_info "Cleanup finished (exit code: $exit_code)"
+    fi
+    exit "$exit_code"
+}
 trap 'cleanup $?' EXIT
 trap 'cleanup 130' INT
 trap 'cleanup 143' TERM
 
-# ============================================================================
+# ===========================================================================
 # HELPERS
-# ============================================================================
+# ===========================================================================
 usage() {
     cat <<EOF
 Usage: $SCRIPT_NAME [OPTIONS]
 Options:
-  -h, --help       Show this help
-  -v, --verbose    Enable debug logging
-  -c, --config     Config file path (default: /etc/$SCRIPT_NAME.conf)
+  -h, --help       Show this help and exit
+  -v, --verbose    Enable DEBUG logging
+  -c, --config     Configuration file (default: $CONFIG_FILE)
 EOF
 }
 
 parse_args() {
-    while [[ $# -gt 0 ]]; do
-        case $1 in
-            -h|--help) usage; exit 0 ;;
-            -v|--verbose) LOG_LEVEL=DEBUG ;;
-            -c|--config) CONFIG_FILE="$2"; shift ;;
-            *) log_error "Unknown option: $1"; usage; exit 1 ;;
+    while (($# > 0)); do
+        case "$1" in
+            -h|--help)
+                usage
+                exit 0
+                ;;
+            -v|--verbose)
+                LOG_LEVEL=DEBUG
+                ;;
+            -c|--config)
+                if (($# < 2)); then
+                    printf 'error: --config requires a path\n' >&2
+                    exit 2
+                fi
+                CONFIG_FILE="$2"
+                shift
+                ;;
+            *)
+                printf 'error: unknown option: %s\n' "$1" >&2
+                usage >&2
+                exit 2
+                ;;
         esac
         shift
     done
 }
 
-# ============================================================================
+generate_correlation_id() {
+    if command -v uuidgen >/dev/null 2>&1; then
+        uuidgen
+    elif [[ -r /proc/sys/kernel/random/uuid ]]; then
+        cat /proc/sys/kernel/random/uuid
+    else
+        printf '%04x%04x%04x' "$RANDOM" "$RANDOM" "$RANDOM"
+    fi
+}
+
+# ===========================================================================
 # MAIN
-# ============================================================================
+# ===========================================================================
 main() {
     parse_args "$@"
-    log_info "Starting $SCRIPT_NAME"
+    RUN_STATE="running"
 
-    # Load configuration
-    if [[ -f "${CONFIG_FILE:-/etc/$SCRIPT_NAME.conf}" ]]; then
+    if [[ -z "${CORRELATION_ID:-}" ]]; then
+        CORRELATION_ID="$(generate_correlation_id)"
+    fi
+
+    if [[ -z "${LOG_LEVEL_NUM[$LOG_LEVEL]+set}" ]]; then
+        printf 'error: unknown LOG_LEVEL: %s\n' "$LOG_LEVEL" >&2
+        exit 2
+    fi
+
+    # Exported so that child steps inherit the same trace identifier and the
+    # same verbosity as the parent.
+    export CORRELATION_ID LOG_LEVEL
+    export LOG_THRESHOLD="${LOG_LEVEL_NUM[$LOG_LEVEL]}"
+
+    log_info "Starting $SCRIPT_NAME (correlation id: $CORRELATION_ID)"
+
+    if [[ -f "$CONFIG_FILE" ]]; then
         # shellcheck source=/dev/null
-        source "${CONFIG_FILE:-/etc/$SCRIPT_NAME.conf}"
-        log_info "Loaded config from ${CONFIG_FILE:-/etc/$SCRIPT_NAME.conf}"
+        source "$CONFIG_FILE"
+        log_info "Loaded configuration from $CONFIG_FILE"
+    else
+        log_warn "No configuration file at $CONFIG_FILE, continuing with defaults"
     fi
 
-    # Acquire lock
-    LOCK_FILE="/var/lock/$SCRIPT_NAME.lock"
-    if ! mkdir "$LOCK_FILE" 2>/dev/null; then
-        log_error "Another instance is running (lock: $LOCK_FILE)"
-        exit 1
-    fi
-    register_cleanup "lock" "rmdir '$LOCK_FILE'"
+    local work_dir
+    work_dir="$(mktemp -d)"
+    register_cleanup "rm -rf '$work_dir'"
+    log_debug "Work directory: $work_dir"
 
-    # Do work
     log_info "Work phase started"
-    # ... your logic here ...
+    # Optional delay, used by the signal-handling check in the Verify section.
+    sleep "${WORK_DELAY:-0}"
     log_info "Work phase completed"
+
+    # A child step inherits the exported correlation id and log threshold, so
+    # every line of a multi-script run carries the same trace identifier and
+    # the same verbosity. The child reuses the same key set as the parent.
+    bash -c '
+        set -euo pipefail
+        if (( 20 < ${LOG_THRESHOLD:-20} )); then
+            exit 0
+        fi
+        printf "{\"timestamp\":\"%s\",\"level\":\"INFO\",\"script\":\"child-step.sh\",\"pid\":%d,\"correlation_id\":\"%s\",\"message\":\"child step finished\"}\n" \
+            "$(date -u "+%Y-%m-%dT%H:%M:%S.%3NZ")" "$$" "$CORRELATION_ID"
+    '
 
     log_info "Script completed successfully"
 }
@@ -370,74 +464,114 @@ main "$@"
 
 ## Verify
 
-### Static Analysis
+Run these against the script under review. Every expected value below was
+produced by executing the template.
+
+### Static gate
 
 ```bash
-# Syntax check
-bash -n script.sh
-
-# ShellCheck (recommended)
-shellcheck -x script.sh
-
-# Check for common anti-patterns
-grep -n 'set +e' script.sh       # Should not disable errexit
-grep -n '|| true' script.sh      # Should not silently ignore failures
-grep -n '2>/dev/null' script.sh  # Should not suppress stderr indiscriminately
+bash -n runbook.sh          # syntax check
+shellcheck -x runbook.sh    # static analysis; must exit 0
 ```
 
-### Runtime Verification
+### Strict-mode semantics
 
 ```bash
-# Test signal handling
-timeout 2s bash -c 'trap "echo SIGTERM received" TERM; sleep 10' &
+# A plain assignment from a failing substitution aborts the script.
+bash -c 'set -euo pipefail; result=$(false); echo "not reached"'
+echo "exit=$?"    # exit=1, and "not reached" was not printed
+
+# `local` masks the same failure.
+bash -c 'set -euo pipefail; f() { local v=$(false); echo "still running"; }; f'
+echo "exit=$?"    # prints "still running", exit=0
+```
+
+### Cleanup runs exactly once
+
+```bash
+# Normal completion: one cleanup line.
+./runbook.sh | grep -c 'Cleanup finished'
+# 1
+
+# SIGTERM: the script exits 143 and the cleanup still runs only once.
+WORK_DELAY=5 ./runbook.sh > /tmp/run.log 2>&1 &
+pid=$!
 sleep 1
-kill -TERM $!
-wait $!  # Should show "SIGTERM received"
-
-# Test errexit behavior
-bash -c 'set -e; false; echo "should not print"'
-# Exit code should be 1, no output
-
-# Test pipefail
-bash -c 'set -o pipefail; false | true; echo $?'
-# Should print 1
+kill -TERM "$pid"
+wait "$pid"
+echo "exit=$?"                          # exit=143
+grep -c 'Cleanup finished' /tmp/run.log
+# 1
 ```
 
-### Log Output Validation
+### Log contract
 
 ```bash
-# Verify JSON structure
-./script.sh | jq -e 'has("ts") and has("lvl") and has("cid") and has("msg")'
+# Every line is a JSON object with the agreed key set.
+./runbook.sh | jq -e 'has("timestamp") and has("level") and has("correlation_id") and has("message")' >/dev/null \
+  && echo "shape ok"
+# shape ok
 
-# Verify log levels filter correctly
-LOG_LEVEL=WARN ./script.sh  # Should not show DEBUG/INFO
-LOG_LEVEL=DEBUG ./script.sh # Should show all levels
+# One correlation id for the whole run, including the child step.
+./runbook.sh | jq -r '.correlation_id' | sort -u | wc -l
+# 1
+
+# The threshold filters the levels.
+LOG_LEVEL=WARN ./runbook.sh | jq -r '.level' | sort -u
+# WARN
+
+# Verbose mode raises the threshold to DEBUG.
+./runbook.sh --verbose | jq -r '.level' | sort -u | tr '\n' ' '
+# DEBUG INFO WARN
+```
+
+### Argument handling
+
+```bash
+./runbook.sh --help          # usage text, exit 0
+./runbook.sh --nope          # "error: unknown option: --nope", exit 2
+./runbook.sh --config        # "error: --config requires a path", exit 2
+LOG_LEVEL=TRACE ./runbook.sh # "error: unknown LOG_LEVEL: TRACE", exit 2
 ```
 
 ## Rollback
 
-If a script using these patterns causes issues in production:
-
-1. **Immediate**: Send `SIGTERM` to the process — the `cleanup` trap will execute registered actions
-2. **State recovery**: Check the correlation ID in logs to trace the execution path
-3. **Configuration rollback**: If config was modified, restore from version control or backup
-4. **Lock cleanup**: If script crashed before `EXIT` trap, manually remove `/var/lock/script.lock`
+1. **Stop the run**: send `SIGTERM`. The cleanup handler removes the temporary
+   work directory and the script exits 143.
+2. **Recover state after a hard kill**: `SIGKILL` never runs the handler
+   (`SIGSTOP` only suspends the process), so the work directory can survive a
+   hard kill. Its path is in the `DEBUG` line `Work directory: …`; remove it
+   manually.
+3. **Fall back to plain strict mode**: delete the `trap` lines, the
+   `CLEANUP_DONE`/`RUN_STATE` state and the `cleanup` function. The remaining
+   script still runs with `set -euo pipefail`; it just stops cleaning up.
+4. **Reduce the noise**: `LOG_LEVEL=INFO` (the default) or `LOG_LEVEL=WARN`
+   drops the `DEBUG` lines without touching the code.
 
 ## Common Errors
 
-| Error | Cause | Resolution |
-|-------|-------|------------|
-| `unbound variable` | Referencing unset variable with `set -u` | Initialize all variables; use `${VAR:-default}` for optional ones |
-| `command not found` in trap | Function defined after `trap` | Define all trap handlers before setting traps |
-| `cleanup` runs twice | `trap EXIT` + explicit `cleanup` call | Only use `trap` for cleanup; don't call manually |
-| `SIGTERM` ignored in Docker | PID 1 doesn't receive signals by default | Use `exec` in Dockerfile or `tini`/`dumb-init` as entrypoint |
-| JSON logs malformed | Unescaped newlines/quotes in messages | Use `jq -n --arg` or pure-Bash escape function |
-| `pipefail` masks expected failures | `grep` returns 1 when no match | Use `grep -q || true` or handle explicitly |
+| Symptom | Cause | Resolution |
+|---------|-------|------------|
+| Script exits 1 on a line that looks harmless | `errexit` aborts on any unhandled non-zero status, including a plain assignment from a command substitution | Put the command in a tested context (`if`, `\|\|`) or handle the status explicitly |
+| A failure disappears inside a function | `local value=$(cmd)` — `local` returns 0 and masks the substitution's status | Declare first, assign on the next line |
+| Cleanup actions run twice | The `EXIT` trap and the signal trap call the same handler, and the handler's `exit` fires the `EXIT` trap again | Guard the handler with a "done" flag, as in the template |
+| The exit code is not the one the step failed with | `errexit` is still in force inside the trap handler, so a failing cleanup step aborts it | `set +e` at the top of the handler and report failures on stderr |
+| Log lines are not valid JSON | The message was interpolated without escaping | Build the value with `jq -n --arg`, or use the `json_escape` fallback |
+| The log gate rejects the script's own output | The script emits a different key set than the gate expects | Keep one key set and change the producer and the gate together |
+| Child steps log under a different trace id | The correlation id was generated but not exported | `export CORRELATION_ID` in the parent; children inherit it |
+| `LOG_LEVEL=WARN` still shows `INFO` lines from a child | The child applies its own threshold | Export `LOG_LEVEL` and `LOG_THRESHOLD` so the child inherits the parent's verbosity |
+| The timestamp contains a literal `%3N` | The millisecond format needs GNU `date` | Use `date -u +%FT%TZ` where GNU `date` is unavailable |
+| The script ignores `SIGTERM` | The signal went to a wrapper process that does not forward it | `exec` the script in the entrypoint so the script itself receives the signal |
 
 ## References
 
-- Bash Manual: [The Set Builtin](https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html)
-- Bash Manual: [Signals](https://www.gnu.org/software/bash/manual/html_node/Signals.html)
-- ShellCheck: [Automated Shell Script Analysis](https://www.shellcheck.net/)
-- Google Shell Style Guide: [Error Handling](https://google.github.io/styleguide/shellguide.html#s4.2-error-handling)
-- 12-Factor App: [Logs](https://12factor.net/logs) — structured logging rationale
+- [production-reference-patterns](production-reference-patterns.md) — shell
+  options, variable validation, dependency checks, signal traps, process
+  substitution, coprocesses and an idempotency guard.
+- [strict-mode-trap-patterns](strict-mode-trap-patterns.md) — strict mode and
+  trap-based cleanup wired into a real script, including the subshell and
+  arithmetic-comparison gotchas.
+- [production-runbook-strict-mode-pipestatus-shellcheck-ci-gate](production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md)
+  — `PIPESTATUS` capture patterns and the ShellCheck CI gate.
+- [2026-07-23-robust-bash-scripts](2026-07-23-robust-bash-scripts.md) — a
+  personal checklist of everyday Bash mistakes.

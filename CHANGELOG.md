@@ -2,6 +2,8 @@
 
 ## 2026-10-20
 
+- bash/docs/bash-production-runbook.md — Bash production runbook covering set -euo pipefail patterns, signal handling (SIGTERM/SIGINT/SIGHUP), structured JSON logging with correlation IDs, and an integrated runbook template (bash-037)
+- bash/docs/bash-production-runbook.md — Rework (bash-037): corrected strict-mode semantics (a plain assignment from a failing command substitution aborts the script; `local` masks it), cleanup that runs exactly once under `trap EXIT` plus a signal trap, one JSON key set for the log contract, a working `--verbose` flag, a shellcheck-clean consolidated template, and cross-references to the sibling Bash docs
 - ansible/manifests/execution-environment-curated-collections.yaml — Ansible Execution Environment manifest with curated collections for network automation (cisco.ios, cisco.nxos, cisco.iosxr, arista.eos), cloud provisioning (amazon.aws, azure.azcollection, google.cloud), and platform operations (ansible.platform), plus companion requirements.yml, requirements.txt, and bindep.txt (ansible-034)
 - ansible/docs/ansible-2-20-to-2-21-migration-guide.md — Ansible migration guide covering the ansible-core 2.20 to 2.21 upgrade: inventory baseline, porting-guide review, isolated core upgrade, collection reinstall, syntax-check, staging validation, EE image update, and rollback (ansible-032)
 
