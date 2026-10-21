@@ -3,160 +3,239 @@
 > A map of what's here. For a beginner-to-advanced reading order, see [learning-path.md](learning-path.md).
 
 ## Ansible  ·  56 files
+
 - **primer:** [0000-primer-ansible.md](../ansible/notes/0000-primer-ansible.md)
-- **notes** (2): [2026-08-31-ansible-quickstart-gotchas.md](../ansible/notes/2026-08-31-ansible-quickstart-gotchas.md), [2026-08-10-install-ansible-and-run-first-command.md](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md)
-- **configs** (4): [vps-hardening-playbook.yaml](../ansible/configs/vps-hardening-playbook.yaml), [2026-08-31-idempotent-nginx-playbook.yaml](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml), [2026-08-22-install-nginx-playbook.yaml](../ansible/configs/2026-08-22-install-nginx-playbook.yaml), [2026-08-10-first-ping-playbook.yaml](../ansible/configs/2026-08-10-first-ping-playbook.yaml)
-- **docs** (6): [command-shell-vs-idempotent-modules.md](../ansible/docs/command-shell-vs-idempotent-modules.md), [ansible-terraform-integration.md](../ansible/docs/ansible-terraform-integration.md), [retry-strategies-unreliable-targets.md](../ansible/docs/retry-strategies-unreliable-targets.md), [wired-handlers-idempotency-fleet.md](../ansible/docs/wired-handlers-idempotency-fleet.md), [managing-kubernetes-with-ansible.md](../ansible/docs/managing-kubernetes-with-ansible.md), [ansible-2-20-to-2-21-migration-guide.md](../ansible/docs/ansible-2-20-to-2-21-migration-guide.md)
-- **scripts** (5): [ansible-adhoc-toolkit.sh](../ansible/scripts/2026-08-31-ansible-adhoc-toolkit.sh), [ansible-vault-patterns.sh](../ansible/scripts/ansible-vault-patterns.sh), [ansible-playbook-wrapper.sh](../ansible/scripts/ansible-playbook-wrapper.sh), [ansible-playbook-gated-run.sh](../ansible/scripts/ansible-playbook-gated-run.sh), [ansible-lint-yamllint-pre-commit-wrapper.sh](../ansible/scripts/ansible-lint-yamllint-pre-commit-wrapper.sh)
-- **manifests** (6): [terraform-dynamic-inventory.yaml](../ansible/manifests/terraform-dynamic-inventory.yaml), [pull-mode-local-execution.yaml](../ansible/manifests/pull-mode-local-execution.yaml), [aap-platform-resources.yaml](../ansible/manifests/aap-platform-resources.yaml), [execution-environment-curated-collections.yaml](../ansible/manifests/execution-environment-curated-collections.yaml), [requirements.yml](../ansible/manifests/requirements.yml), [requirements.txt](../ansible/manifests/requirements.txt)
-- **notebooks** (1): [execution-modes-comparison.ipynb](../ansible/notebooks/execution-modes-comparison.ipynb)
-- **snippets** (1): [block-rescue-always-handlers.yaml](../ansible/snippets/block-rescue-always-handlers.yaml)
-- **templates** (28): …and 28 more under `ansible/templates/` — browse the folder.
+- **Notes** (3): [2026-08-31-ansible-quickstart-gotchas.md](../ansible/notes/2026-08-31-ansible-quickstart-gotchas.md), [2026-08-10-install-ansible-and-run-first-command.md](../ansible/notes/2026-08-10-install-ansible-and-run-first-command.md), [0000-primer-ansible.md](../ansible/notes/0000-primer-ansible.md)
+- **Docs** (7): [wired-handlers-idempotency-fleet.md](../ansible/docs/wired-handlers-idempotency-fleet.md), [retry-strategies-unreliable-targets.md](../ansible/docs/retry-strategies-unreliable-targets.md), [managing-kubernetes-with-ansible.md](../ansible/docs/managing-kubernetes-with-ansible.md)
+- _…and 4 more under `ansible/` — browse the folder._
+- **Scripts** (5): [ansible-vault-patterns.sh](../ansible/scripts/ansible-vault-patterns.sh), [ansible-playbook-wrapper.sh](../ansible/scripts/ansible-playbook-wrapper.sh), [ansible-playbook-gated-run.sh](../ansible/scripts/ansible-playbook-gated-run.sh)
+- _…and 2 more under `ansible/` — browse the folder._
+- **Snippets** (1): [block-rescue-always-handlers.yaml](../ansible/snippets/block-rescue-always-handlers.yaml)
+- **Configs** (4): [vps-hardening-playbook.yaml](../ansible/configs/vps-hardening-playbook.yaml), [2026-08-31-idempotent-nginx-playbook.yaml](../ansible/configs/2026-08-31-idempotent-nginx-playbook.yaml), [2026-08-22-install-nginx-playbook.yaml](../ansible/configs/2026-08-22-install-nginx-playbook.yaml)
+- _…and 1 more under `ansible/` — browse the folder._
+- **Manifests** (7): [terraform-dynamic-inventory.yaml](../ansible/manifests/terraform-dynamic-inventory.yaml), [requirements.yml](../ansible/manifests/requirements.yml), [requirements.txt](../ansible/manifests/requirements.txt)
+- _…and 4 more under `ansible/` — browse the folder._
+- **Notebooks** (1): [execution-modes-comparison.ipynb](../ansible/notebooks/execution-modes-comparison.ipynb)
+- **Templates** (28): [verify-ee.sh](../ansible/templates/execution-environment-build-pipeline/verify-ee.sh), [requirements.yml](../ansible/templates/execution-environment-build-pipeline/requirements.yml), [build-ee.sh](../ansible/templates/execution-environment-build-pipeline/build-ee.sh)
+- _…and 25 more under `ansible/` — browse the folder._
 
 ## AWX  ·  7 files
+
 - **primer:** [0000-primer-awx.md](../awx/notes/0000-primer-awx.md)
-- **notes** (3): [2026-10-11-awx-24-6-quickstart-admin-bootstrap-ee-wiring-allow-jinja-trap.md](../awx/notes/2026-10-11-awx-24-6-quickstart-admin-bootstrap-ee-wiring-allow-jinja-trap.md), [2026-10-07-explore-awx-ui-first-job-template.md](../awx/notes/2026-10-07-explore-awx-ui-first-job-template.md), [2026-10-04-explore-awx-ui-and-api.md](../awx/notes/2026-10-04-explore-awx-ui-and-api.md)
-- **configs** (2): [2026-10-12-execution-environment-mounts-pull-policy.yaml](../awx/configs/2026-10-12-execution-environment-mounts-pull-policy.yaml), [2026-10-07-minimal-awx-custom-resource-minikube.yaml](../awx/configs/2026-10-07-minimal-awx-custom-resource-minikube.yaml)
-- **scripts** (1): [2026-10-20-awx-quickstart.sh](../awx/scripts/2026-10-20-awx-quickstart.sh)
+- **Notes** (4): [2026-10-11-awx-24-6-quickstart-admin-bootstrap-ee-wiring-allow-jinja-trap.md](../awx/notes/2026-10-11-awx-24-6-quickstart-admin-bootstrap-ee-wiring-allow-jinja-trap.md), [2026-10-07-explore-awx-ui-first-job-template.md](../awx/notes/2026-10-07-explore-awx-ui-first-job-template.md), [2026-10-04-explore-awx-ui-and-api.md](../awx/notes/2026-10-04-explore-awx-ui-and-api.md)
+- _…and 1 more under `awx/` — browse the folder._
+- **Scripts** (1): [2026-10-20-awx-quickstart.sh](../awx/scripts/2026-10-20-awx-quickstart.sh)
+- **Configs** (2): [2026-10-12-execution-environment-mounts-pull-policy.yaml](../awx/configs/2026-10-12-execution-environment-mounts-pull-policy.yaml), [2026-10-07-minimal-awx-custom-resource-minikube.yaml](../awx/configs/2026-10-07-minimal-awx-custom-resource-minikube.yaml)
 
-## Bash  ·  63 files
+## Bash  ·  64 files
+
 - **primer:** [0000-primer-bash.md](../bash/notes/0000-primer-bash.md)
-- **docs** (8): [production-reference-patterns.md](../bash/docs/production-reference-patterns.md), [strict-mode-trap-patterns.md](../bash/docs/strict-mode-trap-patterns.md), [debug-and-profile-with-set-x-and-trace-traps.md](../bash/docs/debug-and-profile-with-set-x-and-trace-traps.md), [integrating-bash-with-git.md](../bash/docs/integrating-bash-with-git.md), [robust-bash-scripts.md](../bash/docs/2026-07-23-robust-bash-scripts.md), [bash-5.3-deep-dive.md](../bash/docs/bash-5.3-deep-dive.md), [bash-5.3-migration-guide.md](../bash/docs/bash-5.3-migration-guide.md), [production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md](../bash/docs/production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md)
-- **scripts** (12): [system-report-tool.sh](../bash/scripts/system-report-tool.sh), [retry-with-circuit-breaker.sh](../bash/scripts/retry-with-circuit-breaker.sh), [parallel-execution-patterns.sh](../bash/scripts/parallel-execution-patterns.sh), [log-rotation-retention.sh](../bash/scripts/log-rotation-retention.sh), [build-and-check.sh](../bash/scripts/build-and-check.sh), [2026-09-26-first-script-with-args.sh](../bash/scripts/2026-09-26-first-script-with-args.sh), [2026-09-05-companion-test.sh](../bash/scripts/2026-09-05-companion-test.sh), [2026-07-27-companion-test.sh](../bash/scripts/2026-07-27-companion-test.sh), [2026-07-27-companion-hello.sh](../bash/scripts/2026-07-27-companion-hello.sh), [2026-07-23-safe-bash-template.sh](../bash/scripts/2026-07-23-safe-bash-template.sh), [2026-07-18-first-hello-world.sh](../bash/scripts/2026-07-18-first-hello-world.sh), [trap-library-template.sh](../bash/scripts/trap-library-template.sh)
-- **snippets** (3): [parameter-expansion-advanced.sh](../bash/snippets/parameter-expansion-advanced.sh), [coproc-fifo-and-named-variables.sh](../bash/snippets/coproc-fifo-and-named-variables.sh), [comparing-brackets-gotchas.sh](../bash/snippets/comparing-brackets-gotchas.sh)
-- **notebooks** (6): [bash-5.3-features-deep-dive.ipynb](../bash/notebooks/bash-5.3-features-deep-dive.ipynb), [bash-53-migration-checklist.ipynb](../bash/notebooks/bash-53-migration-checklist.ipynb), [bats-core-production-test-suite.ipynb](../bash/notebooks/bats-core-production-test-suite.ipynb), [comparing-log-rotation-approaches.ipynb](../bash/notebooks/comparing-log-rotation-approaches.ipynb), [comparing-pipeline-exit-code-handling.ipynb](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb), [comparing-shellcheck-profiles.ipynb](../bash/notebooks/comparing-shellcheck-profiles.ipynb)
-- **templates** (30): …and 30 more under `bash/templates/` — browse the folder.
+- **Notes** (3): [2026-07-23-bash-guide-trip-ups.md](../bash/notes/2026-07-23-bash-guide-trip-ups.md), [2026-07-18-install-bash-and-first-script.md](../bash/notes/2026-07-18-install-bash-and-first-script.md), [0000-primer-bash.md](../bash/notes/0000-primer-bash.md)
+- **Docs** (9): [strict-mode-trap-patterns.md](../bash/docs/strict-mode-trap-patterns.md), [production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md](../bash/docs/production-runbook-strict-mode-pipestatus-shellcheck-ci-gate.md), [production-reference-patterns.md](../bash/docs/production-reference-patterns.md)
+- _…and 6 more under `bash/` — browse the folder._
+- **Scripts** (12): [trap-library-template.sh](../bash/scripts/trap-library-template.sh), [system-report-tool.sh](../bash/scripts/system-report-tool.sh), [retry-with-circuit-breaker.sh](../bash/scripts/retry-with-circuit-breaker.sh)
+- _…and 9 more under `bash/` — browse the folder._
+- **Snippets** (3): [parameter-expansion-advanced.sh](../bash/snippets/parameter-expansion-advanced.sh), [coproc-fifo-and-named-variables.sh](../bash/snippets/coproc-fifo-and-named-variables.sh), [comparing-brackets-gotchas.sh](../bash/snippets/comparing-brackets-gotchas.sh)
+- **Notebooks** (6): [comparing-shellcheck-profiles.ipynb](../bash/notebooks/comparing-shellcheck-profiles.ipynb), [comparing-pipeline-exit-code-handling.ipynb](../bash/notebooks/comparing-pipeline-exit-code-handling.ipynb), [comparing-log-rotation-approaches.ipynb](../bash/notebooks/comparing-log-rotation-approaches.ipynb)
+- _…and 3 more under `bash/` — browse the folder._
+- **Dockerfiles** (1): [strict-mode-runner.Dockerfile](../bash/dockerfiles/strict-mode-runner.Dockerfile)
+- **Templates** (30): [app.bats](../bash/templates/bash-production-scaffold/tests/app.bats), [retry.sh](../bash/templates/bash-production-scaffold/lib/retry.sh), [logging.sh](../bash/templates/bash-production-scaffold/lib/logging.sh)
+- _…and 27 more under `bash/` — browse the folder._
 
-## Compose  ·  3 files
+## Compose  ·  6 files
+
 - **primer:** [0000-primer-compose.md](../compose/notes/0000-primer-compose.md)
-- **notes** (1): [2026-10-14-first-compose-up.md](../compose/notes/2026-10-14-first-compose-up.md)
-- **configs** (1): [2026-10-14-web-plus-db.yaml](../compose/configs/2026-10-14-web-plus-db.yaml)
+- **Notes** (3): [2026-10-21-depends-on-healthchecks.md](../compose/notes/2026-10-21-depends-on-healthchecks.md), [2026-10-14-first-compose-up.md](../compose/notes/2026-10-14-first-compose-up.md), [0000-primer-compose.md](../compose/notes/0000-primer-compose.md)
+- **Scripts** (1): [2026-10-21-compose-lifecycle.sh](../compose/scripts/2026-10-21-compose-lifecycle.sh)
+- **Configs** (2): [2026-10-21-minimal-multi-service-stack.yaml](../compose/configs/2026-10-21-minimal-multi-service-stack.yaml), [2026-10-14-web-plus-db.yaml](../compose/configs/2026-10-14-web-plus-db.yaml)
 
 ## Docker  ·  65 files
+
 - **primer:** [0000-primer-docker.md](../docker/notes/0000-primer-docker.md)
-- **notes** (4): [2026-08-06-docker-quickstart-trip-ups.md](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md), [2026-07-19-install-docker.md](../docker/notes/2026-07-19-install-docker.md), [2026-07-15-docker-quickstart-trip-ups.md](../docker/notes/2026-07-15-docker-quickstart-trip-ups.md), [2026-07-13-docker-quickstart-trip-ups.md](../docker/notes/2026-07-13-docker-quickstart-trip-ups.md)
-- **docs** (5): [multi-stage-build-patterns-python-services.md](../docker/docs/multi-stage-build-patterns-python-services.md), [storage-drivers-volume-types-comparison.md](../docker/docs/storage-drivers-volume-types-comparison.md), [build-cache-backends.md](../docker/docs/build-cache-backends.md), [docker-compose-healthcheck-service-ordering.md](../docker/docs/docker-compose-healthcheck-service-ordering.md), [comparing-docker-storage-drivers-and-volume-types-for-stateful-workloads.md](../docker/docs/comparing-docker-storage-drivers-and-volume-types-for-stateful-workloads.md)
-- **scripts** (8): [image-build-automation.sh](../docker/scripts/image-build-automation.sh), [docker-build-wrapper.sh](../docker/scripts/docker-build-wrapper.sh), [multi-arch-buildx.sh](../docker/scripts/multi-arch-buildx.sh), [image-vuln-scan-policy.sh](../docker/scripts/image-vuln-scan-policy.sh), [build-containerized-app-custom-networks-volumes.sh](../docker/scripts/build-containerized-app-custom-networks-volumes.sh), [2026-07-18-first-port-mapped-container.sh](../docker/scripts/2026-07-18-first-port-mapped-container.sh), [2026-07-16-run-container-port-map.sh](../docker/scripts/2026-07-16-run-container-port-map.sh), [2026-07-19-first-hello-world.sh](../docker/scripts/2026-07-19-first-hello-world.sh)
-- **dockerfiles** (5): [production-hardened-python-web-service.Dockerfile](../docker/dockerfiles/production-hardened-python-web-service.Dockerfile), [production-distroless-vuln-gated.Dockerfile](../docker/dockerfiles/production-distroless-vuln-gated.Dockerfile), [production-distroless-sbom.Dockerfile](../docker/dockerfiles/production-distroless-sbom.Dockerfile), [multi-stage-nonroot.Dockerfile](../docker/dockerfiles/multi-stage-nonroot.Dockerfile), [2026-07-17-minimal-image-tagged-nonroot.Dockerfile](../docker/dockerfiles/2026-07-17-minimal-image-tagged-nonroot.Dockerfile)
-- **manifests** (3): [gitops-image-promotion.yaml](../docker/manifests/gitops-image-promotion.yaml), [gitops-image-build-and-push.yaml](../docker/manifests/gitops-image-build-and-push.yaml), [2026-08-17-multi-service-docker-compose.yaml](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml)
-- **templates** (36): …and 36 more under `docker/templates/` — browse the folder.
+- **Notes** (5): [2026-08-06-docker-quickstart-trip-ups.md](../docker/notes/2026-08-06-docker-quickstart-trip-ups.md), [2026-07-19-install-docker.md](../docker/notes/2026-07-19-install-docker.md), [2026-07-15-docker-quickstart-trip-ups.md](../docker/notes/2026-07-15-docker-quickstart-trip-ups.md)
+- _…and 2 more under `docker/` — browse the folder._
+- **Docs** (5): [storage-drivers-volume-types-comparison.md](../docker/docs/storage-drivers-volume-types-comparison.md), [multi-stage-build-patterns-python-services.md](../docker/docs/multi-stage-build-patterns-python-services.md), [docker-compose-healthcheck-service-ordering.md](../docker/docs/docker-compose-healthcheck-service-ordering.md)
+- _…and 2 more under `docker/` — browse the folder._
+- **Scripts** (8): [multi-arch-buildx.sh](../docker/scripts/multi-arch-buildx.sh), [image-vuln-scan-policy.sh](../docker/scripts/image-vuln-scan-policy.sh), [image-build-automation.sh](../docker/scripts/image-build-automation.sh)
+- _…and 5 more under `docker/` — browse the folder._
+- **Manifests** (3): [gitops-image-promotion.yaml](../docker/manifests/gitops-image-promotion.yaml), [gitops-image-build-and-push.yaml](../docker/manifests/gitops-image-build-and-push.yaml), [2026-08-17-multi-service-docker-compose.yaml](../docker/manifests/2026-08-17-multi-service-docker-compose.yaml)
+- **Dockerfiles** (5): [production-hardened-python-web-service.Dockerfile](../docker/dockerfiles/production-hardened-python-web-service.Dockerfile), [production-distroless-vuln-gated.Dockerfile](../docker/dockerfiles/production-distroless-vuln-gated.Dockerfile), [production-distroless-sbom.Dockerfile](../docker/dockerfiles/production-distroless-sbom.Dockerfile)
+- _…and 2 more under `docker/` — browse the folder._
+- **Templates** (36): [index.html](../docker/templates/multi-service-compose-app/web/index.html), [db_password.txt.example](../docker/templates/multi-service-compose-app/secrets/db_password.txt.example), [api_key.txt.example](../docker/templates/multi-service-compose-app/secrets/api_key.txt.example)
+- _…and 33 more under `docker/` — browse the folder._
+- **Src** (2): [main.go](../docker/src/main.go), [2026-07-16-server.py](../docker/src/2026-07-16-server.py)
 
 ## GitHub Actions  ·  36 files
+
 - **primer:** [0000-primer-gha.md](../gha/notes/0000-primer-gha.md)
-- **notes** (2): [2026-08-06-github-actions-quickstart-trip-ups.md](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [2026-08-05-install-gh-cli.md](../gha/notes/2026-08-05-install-gh-cli.md)
-- **docs** (6): [workflow-security-hardening.md](../gha/docs/workflow-security-hardening.md), [tag-triggered-release-workflows.md](../gha/docs/tag-triggered-release-workflows.md), [oidc-token-exchange.md](../gha/docs/oidc-token-exchange.md), [choosing-reusable-workflows-composite-actions-custom-js.md](../gha/docs/choosing-reusable-workflows-composite-actions-custom-js.md), [2026-08-27-quickstart-gotchas.md](../gha/docs/2026-08-27-quickstart-gotchas.md), [2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md](../gha/docs/2026-08-06-how-i-learned-to-read-workflow-logs-and-debug-failures.md)
-- **configs** (11): [matrix-cache-artifact-ci.yaml](../gha/configs/matrix-cache-artifact-ci.yaml), [reusable-composite-action-caller.yaml](../gha/configs/reusable-composite-action-caller.yaml), [reusable-composite-action/action.yml](../gha/configs/reusable-composite-action/action.yml), [shared-shell-ci-caller.yaml](../gha/configs/shared-shell-ci-caller.yaml), [shared-shell-ci/action.yml](../gha/configs/shared-shell-ci/action.yml), [input-validated-deploy-gate-caller.yaml](../gha/configs/input-validated-deploy-gate-caller.yaml), [input-validated-deploy-gate/action.yml](../gha/configs/input-validated-deploy-gate/action.yml), [2026-09-26-hello-world-workflow.yaml](../gha/configs/2026-09-26-hello-world-workflow.yaml), [2026-09-04-minimal-ci-workflow.yaml](../gha/configs/2026-09-04-minimal-ci-workflow.yaml), [2026-08-06-minimal-ci-workflow.yaml](../gha/configs/2026-08-06-minimal-ci-workflow.yaml), [2026-08-05-first-workflow.yaml](../gha/configs/2026-08-05-first-workflow.yaml)
-- **scripts** (6): [repository-dispatch-retry/index.js](../gha/scripts/repository-dispatch-retry/index.js), [repository-dispatch-retry/action.yml](../gha/scripts/repository-dispatch-retry/action.yml), [custom-js-action/index.js](../gha/scripts/custom-js-action/index.js), [custom-js-action/action.yml](../gha/scripts/custom-js-action/action.yml), [minimal-custom-js-action.js](../gha/scripts/minimal-custom-js-action.js), [action.yml](../gha/scripts/action.yml)
-- **manifests** (2): [reusable-workflow-ecosystem.yaml](../gha/manifests/reusable-workflow-ecosystem.yaml), [gitops-app-of-apps.yaml](../gha/manifests/gitops-app-of-apps.yaml)
-- **notebooks** (1): [comparing-matrix-vs-single-job-ci-strategies.ipynb](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
-- **templates** (6): [production-ci-template/ci.yml](../gha/templates/production-ci-template/ci.yml), [production-ci-template/deploy.yml](../gha/templates/production-ci-template/deploy.yml), [production-ci-template/reusable-ci.yml](../gha/templates/production-ci-template/reusable-ci.yml), [production-ci-template/README.md](../gha/templates/production-ci-template/README.md), [production-ci-template/.github/actions/configure-environment/action.yml](../gha/templates/production-ci-template/.github/actions/configure-environment/action.yml), [production-ci-template/.github/actions/cache-dependencies/action.yml](../gha/templates/production-ci-template/.github/actions/cache-dependencies/action.yml)
+- **Notes** (3): [2026-08-06-github-actions-quickstart-trip-ups.md](../gha/notes/2026-08-06-github-actions-quickstart-trip-ups.md), [2026-08-05-install-gh-cli.md](../gha/notes/2026-08-05-install-gh-cli.md), [0000-primer-gha.md](../gha/notes/0000-primer-gha.md)
+- **Docs** (6): [workflow-security-hardening.md](../gha/docs/workflow-security-hardening.md), [tag-triggered-release-workflows.md](../gha/docs/tag-triggered-release-workflows.md), [oidc-token-exchange.md](../gha/docs/oidc-token-exchange.md)
+- _…and 3 more under `gha/` — browse the folder._
+- **Scripts** (6): [index.js](../gha/scripts/repository-dispatch-retry/index.js), [action.yml](../gha/scripts/repository-dispatch-retry/action.yml), [minimal-custom-js-action.js](../gha/scripts/minimal-custom-js-action.js)
+- _…and 3 more under `gha/` — browse the folder._
+- **Snippets** (1): [reusable-workflow-caller.yaml](../gha/snippets/reusable-workflow-caller.yaml)
+- **Configs** (11): [action.yml](../gha/configs/shared-shell-ci/action.yml), [shared-shell-ci-caller.yaml](../gha/configs/shared-shell-ci-caller.yaml), [action.yml](../gha/configs/reusable-composite-action/action.yml)
+- _…and 8 more under `gha/` — browse the folder._
+- **Manifests** (2): [reusable-workflow-ecosystem.yaml](../gha/manifests/reusable-workflow-ecosystem.yaml), [gitops-app-of-apps.yaml](../gha/manifests/gitops-app-of-apps.yaml)
+- **Notebooks** (1): [comparing-matrix-vs-single-job-ci-strategies.ipynb](../gha/notebooks/comparing-matrix-vs-single-job-ci-strategies.ipynb)
+- **Templates** (6): [reusable-ci.yml](../gha/templates/production-ci-template/reusable-ci.yml), [deploy.yml](../gha/templates/production-ci-template/deploy.yml), [ci.yml](../gha/templates/production-ci-template/ci.yml)
+- _…and 3 more under `gha/` — browse the folder._
 
 ## Git  ·  66 files
+
 - **primer:** [0000-primer-git.md](../git/notes/0000-primer-git.md)
-- **notes** (16): [2026-09-10-git-companion-readme-quickstart.md](../git/notes/2026-09-10-git-companion-readme-quickstart.md), [2026-09-10-git-companion-file-quickstart.txt](../git/notes/2026-09-10-git-companion-file-quickstart.txt), [2026-09-10-git-companion-readme-primer.txt](../git/notes/2026-09-10-git-companion-readme-primer.txt), [2026-08-25-forgotten.md](../git/notes/2026-08-25-forgotten.md), [2026-07-28-git-companion-forgotten-undo-notes-15.md](../git/notes/2026-07-28-git-companion-forgotten-undo-notes-15.md), [2026-07-28-git-companion-forgotten-undo-notes.md](../git/notes/2026-07-28-git-companion-forgotten-undo-notes.md), [2026-07-28-git-companion-readme-quickstart-trip-ups.md](../git/notes/2026-07-28-git-companion-readme-quickstart-trip-ups.md), [2026-07-27-git-companion-readme-quickstart.md](../git/notes/2026-07-27-git-companion-readme-quickstart.md), [2026-07-27-git-companion-readme.md](../git/notes/2026-07-27-git-companion-readme.md), [2026-07-27-git-companion-file-quickstart.md](../git/notes/2026-07-27-git-companion-file-quickstart.md), [2026-07-20-install-git.md](../git/notes/2026-07-20-install-git.md), [2026-07-15-git-quickstart-trip-ups.md](../git/notes/2026-07-15-git-quickstart-trip-ups.md), [2026-07-15-undo-stage-commit-push.md](../git/notes/2026-07-15-undo-stage-commit-push.md), [2026-07-13-git-quickstart-trip-ups.md](../git/notes/2026-07-13-git-quickstart-trip-ups.md), [2026-07-13-undo-stage-commit-push.md](../git/notes/2026-07-13-undo-stage-commit-push.md), [2026-09-10-git-companion-readme-quickstart.md](../git/notes/2026-09-10-git-companion-readme-quickstart.md)
-- **docs** (14): [rebase-vs-merge-at-scale.md](../git/docs/rebase-vs-merge-at-scale.md), [worktree-parallel-feature-development.md](../git/docs/worktree-parallel-feature-development.md), [worktree-hotfix-isolation.md](../git/docs/worktree-hotfix-isolation.md), [signed-commits-and-ci-provenance.md](../git/docs/signed-commits-and-ci-provenance.md), [rebase-based-vs-merge-based-release-workflows.md](../git/docs/rebase-based-vs-merge-based-release-workflows.md), [git-describe-image-tags-registry.md](../git/docs/git-describe-image-tags-registry.md), [git-cicd-tag-driven-releases-conventional-commits.md](../git/docs/git-cicd-tag-driven-releases-conventional-commits.md), [git-cicd-integration-patterns.md](../git/docs/git-cicd-integration-patterns.md), [comparing-merge-rebase-squash-strategies.md](../git/docs/comparing-merge-rebase-squash-strategies.md), [advanced-git-workflow-patterns.md](../git/docs/advanced-git-workflow-patterns.md), [2026-09-08-choosing-submodules-subtrees-monorepo.md](../git/docs/2026-09-08-choosing-submodules-subtrees-monorepo.md), [2026-08-10-git-index.md](../git/docs/2026-08-10-git-index.md), [interactive-rebase-vs-merge-commit.md](../git/docs/interactive-rebase-vs-merge-commit.md), [how-i-wired-git-hooks-into-my-local-dev-workflow.md](../git/docs/how-i-wired-git-hooks-into-my-local-dev-workflow.md)
-- **scripts** (7): [git-repo-health-check.sh](../git/scripts/git-repo-health-check.sh), [semantic-release-automation.sh](../git/scripts/semantic-release-automation.sh), [git-pr-helper.sh](../git/scripts/git-pr-helper.sh), [feature-branch-rebase-workflow.sh](../git/scripts/feature-branch-rebase-workflow.sh), [changelog-from-conventional-commits.sh](../git/scripts/changelog-from-conventional-commits.sh), [2026-07-20-branch-merge-revert.sh](../git/scripts/2026-07-20-branch-merge-revert.sh), [2026-07-20-first-repo.sh](../git/scripts/2026-07-20-first-repo.sh)
-- **hooks** (1): [install.sh](../git/hooks/install.sh)
-- **manifests** (1): [ci-cd-pipeline-trigger.yaml](../git/manifests/ci-cd-pipeline-trigger.yaml)
-- **notebooks** (1): [choosing-between-merge-squash-and-rebase-strategies.ipynb](../git/notebooks/choosing-between-merge-squash-and-rebase-strategies.ipynb)
-- **templates** (26): …and 26 more under `git/templates/` — browse the folder.
+- **Notes** (16): [2026-09-10-git-companion-readme-quickstart.md](../git/notes/2026-09-10-git-companion-readme-quickstart.md), [2026-09-10-git-companion-readme-primer.txt](../git/notes/2026-09-10-git-companion-readme-primer.txt), [2026-09-10-git-companion-file-quickstart.txt](../git/notes/2026-09-10-git-companion-file-quickstart.txt)
+- _…and 13 more under `git/` — browse the folder._
+- **Docs** (14): [worktree-parallel-feature-development.md](../git/docs/worktree-parallel-feature-development.md), [worktree-hotfix-isolation.md](../git/docs/worktree-hotfix-isolation.md), [signed-commits-and-ci-provenance.md](../git/docs/signed-commits-and-ci-provenance.md)
+- _…and 11 more under `git/` — browse the folder._
+- **Scripts** (7): [semantic-release-automation.sh](../git/scripts/semantic-release-automation.sh), [git-repo-health-check.sh](../git/scripts/git-repo-health-check.sh), [git-pr-helper.sh](../git/scripts/git-pr-helper.sh)
+- _…and 4 more under `git/` — browse the folder._
+- **Manifests** (1): [ci-cd-pipeline-trigger.yaml](../git/manifests/ci-cd-pipeline-trigger.yaml)
+- **Notebooks** (1): [choosing-between-merge-squash-and-rebase-strategies.ipynb](../git/notebooks/choosing-between-merge-squash-and-rebase-strategies.ipynb)
+- **Templates** (26): [update-changelog.sh](../git/templates/repo-scaffold/scripts/update-changelog.sh), [run-tests.sh](../git/templates/repo-scaffold/scripts/run-tests.sh), [pre-commit](../git/templates/repo-scaffold/hooks/pre-commit)
+- _…and 23 more under `git/` — browse the folder._
+- **Hooks** (1): [install.sh](../git/hooks/install.sh)
 
 ## Grafana  ·  29 files
-- **primer:** [0000-primer-grafana.md](../grafana/notes/0000-primer-grafana.md)
-- **notes** (3): [2026-08-27-grafana-quickstart-gotchas.md](../grafana/notes/2026-08-27-grafana-quickstart-gotchas.md), [2026-08-27-first-grafana-web-ui.md](../grafana/notes/2026-08-27-first-grafana-web-ui.md), [2026-08-06-install-grafana.md](../grafana/notes/2026-08-06-install-grafana.md)
-- **docs** (2): [unified-alerting-helper-reference.md](../grafana/docs/unified-alerting-helper-reference.md), [prometheus-alertmanager-oncall-pipeline.md](../grafana/docs/prometheus-alertmanager-oncall-pipeline.md)
-- **configs** (6): [2026-08-30-loki-datasource-provisioning.yaml](../grafana/configs/2026-08-30-loki-datasource-provisioning.yaml), [2026-08-29-grafana-datasource-provisioning.yaml](../grafana/configs/2026-08-29-grafana-datasource-provisioning.yaml), [provisioned-dashboard-panels-variables.yaml](../grafana/configs/provisioned-dashboard-panels-variables.yaml), [2026-08-27-provisioning-datasource-dashboard.yaml](../grafana/configs/2026-08-27-provisioning-datasource-dashboard.yaml), [2026-08-22-datasource-provisioning.yaml](../grafana/configs/2026-08-22-datasource-provisioning.yaml), [2026-08-06-first-dashboard.yaml](../grafana/configs/2026-08-06-first-dashboard.yaml)
-- **scripts** (1): [grafana-http-api-dashboard-wrapper.sh](../grafana/scripts/grafana-http-api-dashboard-wrapper.sh)
-- **snippets** (3): [2026-09-09-list-dashboards-datasources.py](../grafana/snippets/2026-09-09-list-dashboards-datasources.py), [2026-08-22-create-dashboard.sh](../grafana/snippets/2026-08-22-create-dashboard.sh), [2026-08-19-list-dashboards.sh](../grafana/snippets/2026-08-19-list-dashboards.sh)
-- **dockerfiles** (1): [grafana-with-plugins-and-provisioned-datasource.Dockerfile](../grafana/dockerfiles/grafana-with-plugins-and-provisioned-datasource.Dockerfile)
-- **manifests** (3): [production-provisioning-datasources-dashboards-alerts.yaml](../grafana/manifests/production-provisioning-datasources-dashboards-alerts.yaml), [kubernetes-persistent-ingress-sidecar.yaml](../grafana/manifests/kubernetes-persistent-ingress-sidecar.yaml), [dashboard-provisioning-grafonnet-jsonnet.yaml](../grafana/manifests/dashboard-provisioning-grafonnet-jsonnet.yaml)
-- **templates** (8): …and 8 more under `grafana/templates/` — browse the folder.
 
-## Helm  ·  54 files
-- **primer:** [0000-primer-helm.md](../helm/notes/0000-primer-helm.md)
-- **notes** (5): [2026-09-21-values-merge-set-vs-file.md](../helm/notes/2026-09-21-values-merge-set-vs-file.md), [2026-08-19-following-helm-quickstart.md](../helm/notes/2026-08-19-following-helm-quickstart.md), [2026-08-18-install-helm-with-package-manager.md](../helm/notes/2026-08-18-install-helm-with-package-manager.md), [2026-08-08-explore-helm-chart-repo.md](../helm/notes/2026-08-08-explore-helm-chart-repo.md), [2026-07-31-install-helm-run-version.md](../helm/notes/2026-07-31-install-helm-run-version.md)
-- **docs** (5): [helm-production-best-practices.md](../helm/docs/helm-production-best-practices.md), [helm-values-inheritance.md](../helm/docs/helm-values-inheritance.md), [helm-migration-guide.md](../helm/docs/helm-migration-guide.md), [helm-chart-repository-and-locking.md](../helm/docs/helm-chart-repository-and-locking.md), [2026-08-10-helm-coverage.md](../helm/docs/2026-08-10-helm-coverage.md)
-- **configs** (7): [multi-environment-helm-values.yaml](../helm/configs/multi-environment-helm-values.yaml), [chart-scaffold.yaml](../helm/configs/chart-scaffold.yaml), [2026-09-21-minimal-static-web-app-values.yaml](../helm/configs/2026-09-21-minimal-static-web-app-values.yaml), [2026-08-20-prod-values.yaml](../helm/configs/2026-08-20-prod-values.yaml), [2026-08-20-dev-values.yaml](../helm/configs/2026-08-20-dev-values.yaml), [2026-08-20-staging-values.yaml](../helm/configs/2026-08-20-staging-values.yaml), [reusable-vpc-module.hcl](../tf/configs/reusable-vpc-module.hcl)
-- **scripts** (3): [helm-release-workflow.sh](../helm/scripts/helm-release-workflow.sh), [2026-07-31-deploy-first-chart.sh](../helm/scripts/2026-07-31-deploy-first-chart.sh), [2026-07-31-install-helm-run-version.sh](../helm/scripts/2026-07-31-install-helm-run-version.sh)
-- **manifests** (3): [production-multi-tier-deployment.yaml](../helm/manifests/production-multi-tier-deployment.yaml), [hooks-lifecycle.yaml](../helm/manifests/hooks-lifecycle.yaml), [2026-08-14-first-chart-template.yaml](../helm/manifests/2026-08-14-first-chart-template.yaml)
-- **notebooks** (1): [comparing-helm-values-merging.ipynb](../helm/notebooks/comparing-helm-values-merging.ipynb)
-- **snippets** (1): [2026-07-31-deploy-first-chart.sh](../helm/snippets/2026-07-31-deploy-first-chart.sh)
-- **templates** (28): …and 28 more under `helm/templates/` — browse the folder.
+- **primer:** [0000-primer-grafana.md](../grafana/notes/0000-primer-grafana.md)
+- **Notes** (4): [2026-08-27-grafana-quickstart-gotchas.md](../grafana/notes/2026-08-27-grafana-quickstart-gotchas.md), [2026-08-27-first-grafana-web-ui.md](../grafana/notes/2026-08-27-first-grafana-web-ui.md), [2026-08-06-install-grafana.md](../grafana/notes/2026-08-06-install-grafana.md)
+- _…and 1 more under `grafana/` — browse the folder._
+- **Docs** (2): [unified-alerting-helper-reference.md](../grafana/docs/unified-alerting-helper-reference.md), [prometheus-alertmanager-oncall-pipeline.md](../grafana/docs/prometheus-alertmanager-oncall-pipeline.md)
+- **Scripts** (1): [grafana-http-api-dashboard-wrapper.sh](../grafana/scripts/grafana-http-api-dashboard-wrapper.sh)
+- **Snippets** (3): [2026-09-09-list-dashboards-datasources.py](../grafana/snippets/2026-09-09-list-dashboards-datasources.py), [2026-08-22-create-dashboard.sh](../grafana/snippets/2026-08-22-create-dashboard.sh), [2026-08-19-list-dashboards.sh](../grafana/snippets/2026-08-19-list-dashboards.sh)
+- **Configs** (6): [provisioned-dashboard-panels-variables.yaml](../grafana/configs/provisioned-dashboard-panels-variables.yaml), [2026-08-30-loki-datasource-provisioning.yaml](../grafana/configs/2026-08-30-loki-datasource-provisioning.yaml), [2026-08-29-grafana-datasource-provisioning.yaml](../grafana/configs/2026-08-29-grafana-datasource-provisioning.yaml)
+- _…and 3 more under `grafana/` — browse the folder._
+- **Manifests** (3): [production-provisioning-datasources-dashboards-alerts.yaml](../grafana/manifests/production-provisioning-datasources-dashboards-alerts.yaml), [kubernetes-persistent-ingress-sidecar.yaml](../grafana/manifests/kubernetes-persistent-ingress-sidecar.yaml), [dashboard-provisioning-grafonnet-jsonnet.yaml](../grafana/manifests/dashboard-provisioning-grafonnet-jsonnet.yaml)
+- **Notebooks** (1): [comparing-grafana-unified-alerting-vs-alertmanager.ipynb](../grafana/notebooks/comparing-grafana-unified-alerting-vs-alertmanager.ipynb)
+- **Dockerfiles** (1): [grafana-with-plugins-and-provisioned-datasource.Dockerfile](../grafana/dockerfiles/grafana-with-plugins-and-provisioned-datasource.Dockerfile)
+- **Templates** (8): [promtail-config.yaml](../grafana/templates/grafana-prometheus-loki-stack/promtail/promtail-config.yaml), [prometheus.yaml](../grafana/templates/grafana-prometheus-loki-stack/prometheus/prometheus.yaml), [loki-config.yaml](../grafana/templates/grafana-prometheus-loki-stack/loki/loki-config.yaml)
+- _…and 5 more under `grafana/` — browse the folder._
 
 ## Helm Charts  ·  4 files
+
 - **primer:** [0000-primer-hchart.md](../hchart/notes/0000-primer-hchart.md)
-- **notes** (1): [2026-10-14-explore-public-chart-structure.md](../hchart/notes/2026-10-14-explore-public-chart-structure.md)
-- **configs** (2): [2026-10-14-minimal-values.yaml](../hchart/configs/2026-10-14-minimal-values.yaml), [2026-10-14-minimal-chart.yaml](../hchart/configs/2026-10-14-minimal-chart.yaml)
+- **Notes** (2): [2026-10-14-explore-public-chart-structure.md](../hchart/notes/2026-10-14-explore-public-chart-structure.md), [0000-primer-hchart.md](../hchart/notes/0000-primer-hchart.md)
+- **Configs** (2): [2026-10-14-minimal-values.yaml](../hchart/configs/2026-10-14-minimal-values.yaml), [2026-10-14-minimal-chart.yaml](../hchart/configs/2026-10-14-minimal-chart.yaml)
+
+## Helm  ·  54 files
+
+- **primer:** [0000-primer-helm.md](../helm/notes/0000-primer-helm.md)
+- **Notes** (6): [2026-09-21-values-merge-set-vs-file.md](../helm/notes/2026-09-21-values-merge-set-vs-file.md), [2026-08-19-following-helm-quickstart.md](../helm/notes/2026-08-19-following-helm-quickstart.md), [2026-08-18-install-helm-with-package-manager.md](../helm/notes/2026-08-18-install-helm-with-package-manager.md)
+- _…and 3 more under `helm/` — browse the folder._
+- **Docs** (5): [helm-values-inheritance.md](../helm/docs/helm-values-inheritance.md), [helm-production-best-practices.md](../helm/docs/helm-production-best-practices.md), [helm-migration-guide.md](../helm/docs/helm-migration-guide.md)
+- _…and 2 more under `helm/` — browse the folder._
+- **Scripts** (3): [helm-release-workflow.sh](../helm/scripts/helm-release-workflow.sh), [2026-07-31-install-helm-run-version.sh](../helm/scripts/2026-07-31-install-helm-run-version.sh), [2026-07-31-deploy-first-chart.sh](../helm/scripts/2026-07-31-deploy-first-chart.sh)
+- **Snippets** (1): [2026-07-31-deploy-first-chart.sh](../helm/snippets/2026-07-31-deploy-first-chart.sh)
+- **Configs** (7): [multi-environment-helm-values.yaml](../helm/configs/multi-environment-helm-values.yaml), [chart-scaffold.yaml](../helm/configs/chart-scaffold.yaml), [2026-09-21-minimal-static-web-app-values.yaml](../helm/configs/2026-09-21-minimal-static-web-app-values.yaml)
+- _…and 4 more under `helm/` — browse the folder._
+- **Manifests** (3): [production-multi-tier-deployment.yaml](../helm/manifests/production-multi-tier-deployment.yaml), [hooks-lifecycle.yaml](../helm/manifests/hooks-lifecycle.yaml), [2026-08-14-first-chart-template.yaml](../helm/manifests/2026-08-14-first-chart-template.yaml)
+- **Notebooks** (1): [comparing-helm-values-merging.ipynb](../helm/notebooks/comparing-helm-values-merging.ipynb)
+- **Templates** (28): [values.yaml](../helm/templates/polished-chart/values.yaml), [values.schema.json](../helm/templates/polished-chart/values.schema.json), [service.yaml](../helm/templates/polished-chart/templates/service.yaml)
+- _…and 25 more under `helm/` — browse the folder._
 
 ## Jenkins  ·  62 files
+
 - **primer:** [0000-primer-jenkins.md](../jenkins/notes/0000-primer-jenkins.md)
-- **notes** (4): [2026-09-22-first-controller-plugins-agents-credentials.md](../jenkins/notes/2026-09-22-first-controller-plugins-agents-credentials.md), [2026-09-06-followed-jenkins-tutorial.md](../jenkins/notes/2026-09-06-followed-jenkins-tutorial.md), [2026-09-03-quickstart-follow-up.md](../jenkins/notes/2026-09-03-quickstart-follow-up.md), [2026-08-11-install-jenkins-and-open-web-ui.md](../jenkins/notes/2026-08-11-install-jenkins-and-open-web-ui.md)
-- **docs** (4): [integrating-jenkins-github-actions-argocd-progressive-delivery.md](../jenkins/docs/integrating-jenkins-github-actions-argocd-progressive-delivery.md), [moving-jenkinsfile-from-inline-to-scm-script-path-branch-lightweight-checkout-credential-gotchas.md](../jenkins/docs/moving-jenkinsfile-from-inline-to-scm-script-path-branch-lightweight-checkout-credential-gotchas.md), [moving-jenkinsfile-to-scm-gotchas.md](../jenkins/docs/moving-jenkinsfile-to-scm-gotchas.md), [2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md](../jenkins/docs/2026-09-19-what-tripped-me-following-jenkins-declarative-pipeline-tutorial.md)
-- **configs** (3): [jenkins-casc-ha.yaml](../jenkins/configs/jenkins-casc-ha.yaml), [jenkins-casc-reproducible-controller-setup.yaml](../jenkins/configs/jenkins-casc-reproducible-controller-setup.yaml), [2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile)
-- **scripts** (2): [common-cicd-shared-library.groovy](../jenkins/scripts/common-cicd-shared-library.groovy), [2026-09-22-nodejs-jenkinsfile.groovy](../jenkins/scripts/2026-09-22-nodejs-jenkinsfile.groovy)
-- **snippets** (3): [2026-09-19-shared-library-credentials.groovy](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy), [2026-09-05-environment-credentials-pipeline.groovy](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [2026-08-11-hello-world-pipeline.groovy](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
-- **templates** (45): …and 45 more under `jenkins/templates/` — browse the folder.
+- **Notes** (5): [2026-09-22-first-controller-plugins-agents-credentials.md](../jenkins/notes/2026-09-22-first-controller-plugins-agents-credentials.md), [2026-09-06-followed-jenkins-tutorial.md](../jenkins/notes/2026-09-06-followed-jenkins-tutorial.md), [2026-09-03-quickstart-follow-up.md](../jenkins/notes/2026-09-03-quickstart-follow-up.md)
+- _…and 2 more under `jenkins/` — browse the folder._
+- **Docs** (4): [moving-jenkinsfile-to-scm-gotchas.md](../jenkins/docs/moving-jenkinsfile-to-scm-gotchas.md), [moving-jenkinsfile-from-inline-to-scm-script-path-branch-lightweight-checkout-credential-gotchas.md](../jenkins/docs/moving-jenkinsfile-from-inline-to-scm-script-path-branch-lightweight-checkout-credential-gotchas.md), [integrating-jenkins-github-actions-argocd-progressive-delivery.md](../jenkins/docs/integrating-jenkins-github-actions-argocd-progressive-delivery.md)
+- _…and 1 more under `jenkins/` — browse the folder._
+- **Scripts** (2): [common-cicd-shared-library.groovy](../jenkins/scripts/common-cicd-shared-library.groovy), [2026-09-22-nodejs-jenkinsfile.groovy](../jenkins/scripts/2026-09-22-nodejs-jenkinsfile.groovy)
+- **Snippets** (3): [2026-09-19-shared-library-credentials.groovy](../jenkins/snippets/2026-09-19-shared-library-credentials.groovy), [2026-09-05-environment-credentials-pipeline.groovy](../jenkins/snippets/2026-09-05-environment-credentials-pipeline.groovy), [2026-08-11-hello-world-pipeline.groovy](../jenkins/snippets/2026-08-11-hello-world-pipeline.groovy)
+- **Configs** (3): [jenkins-casc-reproducible-controller-setup.yaml](../jenkins/configs/jenkins-casc-reproducible-controller-setup.yaml), [jenkins-casc-ha.yaml](../jenkins/configs/jenkins-casc-ha.yaml), [2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile](../jenkins/configs/2026-09-05-minimal-declarative-jenkinsfile.jenkinsfile)
+- **Templates** (45): [sendSlackNotification.groovy](../jenkins/templates/shared-library-reusable-steps-dsl-scaffold/vars/sendSlackNotification.groovy), [runLint.groovy](../jenkins/templates/shared-library-reusable-steps-dsl-scaffold/vars/runLint.groovy), [buildImage.groovy](../jenkins/templates/shared-library-reusable-steps-dsl-scaffold/vars/buildImage.groovy)
+- _…and 42 more under `jenkins/` — browse the folder._
 
 ## Kubernetes  ·  47 files
+
 - **primer:** [0000-primer-kubernetes.md](../k8s/notes/0000-primer-kubernetes.md)
-- **notes** (5): [2026-10-05-first-kubectl-commands-and-cluster-explore.md](../k8s/notes/2026-10-05-first-kubectl-commands-and-cluster-explore.md), [2026-09-16-quickstart-kind-contexts-and-port-mismatch.md](../k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md), [2026-08-04-kubernetes-quickstart-tripped-up.md](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md), [2026-08-03-explore-kubectl-cli.md](../k8s/notes/2026-08-03-explore-kubectl-cli.md), [2026-08-02-explore-kubectl-cli.md](../k8s/notes/2026-08-02-explore-kubectl-cli.md)
-- **docs** (6): [kubernetes-helm-argocd-gitops-workflow.md](../k8s/docs/kubernetes-helm-argocd-gitops-workflow.md), [integrating-kubernetes-with-terraform.md](../k8s/docs/integrating-kubernetes-with-terraform.md), [kubectl-imperative-vs-declarative.md](../k8s/docs/kubectl-imperative-vs-declarative.md), [choosing-secret-management-approach.md](../k8s/docs/choosing-secret-management-approach.md), [choosing-service-mesh-istio-linkerd-consul.md](../k8s/docs/choosing-service-mesh-istio-linkerd-consul.md), [2026-08-04-inspecting-pods-services-events.md](../k8s/docs/2026-08-04-inspecting-pods-services-events.md)
-- **scripts** (3): [multi-pod-deployment.sh](../k8s/scripts/multi-pod-deployment.sh), [2026-08-03-install-minikube-and-run-kubectl-version.sh](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh), [2026-08-02-install-minikube-and-run-kubectl-version.sh](../k8s/scripts/2026-08-02-install-minikube-and-run-kubectl-version.sh)
-- **snippets** (2): [kubectl-pod-metrics.py](../k8s/snippets/kubectl-pod-metrics.py), [2026-08-19-list-cluster-resources.sh](../k8s/snippets/2026-08-19-list-cluster-resources.sh)
-- **configs** (1): [2026-08-22-first-deployment.yaml](../k8s/configs/2026-08-22-first-deployment.yaml)
-- **dockerfiles** (1): [operator-dev.Dockerfile](../k8s/dockerfiles/operator-dev.Dockerfile)
-- **manifests** (6): [zero-downtime-rolling-deployment.yaml](../k8s/manifests/zero-downtime-rolling-deployment.yaml), [stateless-workload-spread-hpa-pdb.yaml](../k8s/manifests/stateless-workload-spread-hpa-pdb.yaml), [production-deployment.yaml](../k8s/manifests/production-deployment.yaml), [production-cluster-hardening.yaml](../k8s/manifests/production-cluster-hardening.yaml), [multi-service-application.yaml](../k8s/manifests/multi-service-application.yaml), [2026-08-04-minimal-deployment-and-service.yaml](../k8s/manifests/2026-08-04-minimal-deployment-and-service.yaml)
-- **notebooks** (2): [service-mesh-ingress-dns-networking.ipynb](../k8s/notebooks/service-mesh-ingress-dns-networking.ipynb), [comparing-kubernetes-rollout-strategies.ipynb](../k8s/notebooks/comparing-kubernetes-rollout-strategies.ipynb)
-- **templates** (20): …and 20 more under `k8s/templates/` — browse the folder.
+- **Notes** (6): [2026-10-05-first-kubectl-commands-and-cluster-explore.md](../k8s/notes/2026-10-05-first-kubectl-commands-and-cluster-explore.md), [2026-09-16-quickstart-kind-contexts-and-port-mismatch.md](../k8s/notes/2026-09-16-quickstart-kind-contexts-and-port-mismatch.md), [2026-08-04-kubernetes-quickstart-tripped-up.md](../k8s/notes/2026-08-04-kubernetes-quickstart-tripped-up.md)
+- _…and 3 more under `k8s/` — browse the folder._
+- **Docs** (6): [kubernetes-helm-argocd-gitops-workflow.md](../k8s/docs/kubernetes-helm-argocd-gitops-workflow.md), [kubectl-imperative-vs-declarative.md](../k8s/docs/kubectl-imperative-vs-declarative.md), [integrating-kubernetes-with-terraform.md](../k8s/docs/integrating-kubernetes-with-terraform.md)
+- _…and 3 more under `k8s/` — browse the folder._
+- **Scripts** (3): [multi-pod-deployment.sh](../k8s/scripts/multi-pod-deployment.sh), [2026-08-03-install-minikube-and-run-kubectl-version.sh](../k8s/scripts/2026-08-03-install-minikube-and-run-kubectl-version.sh), [2026-08-02-install-minikube-and-run-kubectl-version.sh](../k8s/scripts/2026-08-02-install-minikube-and-run-kubectl-version.sh)
+- **Snippets** (2): [kubectl-pod-metrics.py](../k8s/snippets/kubectl-pod-metrics.py), [2026-08-19-list-cluster-resources.sh](../k8s/snippets/2026-08-19-list-cluster-resources.sh)
+- **Configs** (1): [2026-08-22-first-deployment.yaml](../k8s/configs/2026-08-22-first-deployment.yaml)
+- **Manifests** (6): [zero-downtime-rolling-deployment.yaml](../k8s/manifests/zero-downtime-rolling-deployment.yaml), [stateless-workload-spread-hpa-pdb.yaml](../k8s/manifests/stateless-workload-spread-hpa-pdb.yaml), [production-deployment.yaml](../k8s/manifests/production-deployment.yaml)
+- _…and 3 more under `k8s/` — browse the folder._
+- **Notebooks** (2): [service-mesh-ingress-dns-networking.ipynb](../k8s/notebooks/service-mesh-ingress-dns-networking.ipynb), [comparing-kubernetes-rollout-strategies.ipynb](../k8s/notebooks/comparing-kubernetes-rollout-strategies.ipynb)
+- **Dockerfiles** (1): [operator-dev.Dockerfile](../k8s/dockerfiles/operator-dev.Dockerfile)
+- **Templates** (20): [verify.sh](../k8s/templates/production-service/verify.sh), [serviceaccount.yaml](../k8s/templates/production-service/serviceaccount.yaml), [service.yaml](../k8s/templates/production-service/service.yaml)
+- _…and 17 more under `k8s/` — browse the folder._
 
 ## Kube-Prometheus  ·  5 files
+
 - **primer:** [0000-primer-kube-prometheus.md](../kprom/notes/0000-primer-kube-prometheus.md)
-- **notes** (2): [2026-10-10-quickstart-walkthrough-kube-prometheus-stack.md](../kprom/notes/2026-10-10-quickstart-walkthrough-kube-prometheus-stack.md), [2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md](../kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md)
-- **configs** (1): [2026-10-08-minimal-kube-prometheus-local-values.yaml](../kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml)
-- **manifests** (1): [2026-10-12-servicemonitor-prometheusrule-red-metrics.yaml](../kprom/manifests/2026-10-12-servicemonitor-prometheusrule-red-metrics.yaml)
+- **Notes** (3): [2026-10-10-quickstart-walkthrough-kube-prometheus-stack.md](../kprom/notes/2026-10-10-quickstart-walkthrough-kube-prometheus-stack.md), [2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md](../kprom/notes/2026-10-08-install-kube-prometheus-stack-and-explore-grafana.md), [0000-primer-kube-prometheus.md](../kprom/notes/0000-primer-kube-prometheus.md)
+- **Configs** (1): [2026-10-08-minimal-kube-prometheus-local-values.yaml](../kprom/configs/2026-10-08-minimal-kube-prometheus-local-values.yaml)
+- **Manifests** (1): [2026-10-12-servicemonitor-prometheusrule-red-metrics.yaml](../kprom/manifests/2026-10-12-servicemonitor-prometheusrule-red-metrics.yaml)
 
 ## Prometheus  ·  31 files
+
 - **primer:** [0000-primer-prometheus.md](../prom/notes/0000-primer-prometheus.md)
-- **notes** (3): [2026-08-30-prometheus-quickstart-trip-ups.md](../prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md), [2026-08-29-install-prometheus-explore-web-ui.md](../prom/notes/2026-08-29-install-prometheus-explore-web-ui.md), [2026-08-07-install-and-explore-web-ui.md](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
-- **docs** (4): [promql-advanced-patterns.md](../prom/docs/promql-advanced-patterns.md), [prometheus-operations-runbook.md](../prom/docs/prometheus-operations-runbook.md), [hybrid-service-discovery.md](../prom/docs/hybrid-service-discovery.md), [2026-09-19-promql-rate-increase-histogram-quantile.md](../prom/docs/2026-09-19-promql-rate-increase-histogram-quantile.md)
-- **configs** (8): [remote-write-long-term-storage.yaml](../prom/configs/remote-write-long-term-storage.yaml), [remote-write-vs-federation.yaml](../prom/configs/remote-write-vs-federation.yaml), [2026-09-18-kubernetes-service-discovery.yaml](../prom/configs/2026-09-18-kubernetes-service-discovery.yaml), [recording-rules-slo-alerting.yaml](../prom/configs/recording-rules-slo-alerting.yaml), [2026-08-30-prometheus-alerting-rules.yaml](../prom/configs/2026-08-30-prometheus-alerting-rules.yaml), [2026-08-29-prometheus-scrape-config.yaml](../prom/configs/2026-08-29-prometheus-scrape-config.yaml), [2026-08-22-prometheus-scrape-config.yaml](../prom/configs/2026-08-22-prometheus-scrape-config.yaml), [2026-08-07-first-scrape-target.yaml](../prom/configs/2026-08-07-first-scrape-target.yaml)
-- **scripts** (2): [rules-evaluator.go](../prom/scripts/rules-evaluator.go), [2026-09-03-prom-query-helper.sh](../prom/scripts/2026-09-03-prom-query-helper.sh)
-- **snippets** (1): [2026-08-19-first-promql-query.sh](../prom/snippets/2026-08-19-first-promql-query.sh)
-- **manifests** (2): [local-monitoring-stack.yaml](../prom/manifests/local-monitoring-stack.yaml), [k8s-service-discovery-recording-rules-alertmanager.yaml](../prom/manifests/k8s-service-discovery-recording-rules-alertmanager.yaml)
-- **templates** (10): …and 10 more under `prom/templates/` — browse the folder.
+- **Notes** (4): [2026-08-30-prometheus-quickstart-trip-ups.md](../prom/notes/2026-08-30-prometheus-quickstart-trip-ups.md), [2026-08-29-install-prometheus-explore-web-ui.md](../prom/notes/2026-08-29-install-prometheus-explore-web-ui.md), [2026-08-07-install-and-explore-web-ui.md](../prom/notes/2026-08-07-install-and-explore-web-ui.md)
+- _…and 1 more under `prom/` — browse the folder._
+- **Docs** (4): [promql-advanced-patterns.md](../prom/docs/promql-advanced-patterns.md), [prometheus-operations-runbook.md](../prom/docs/prometheus-operations-runbook.md), [hybrid-service-discovery.md](../prom/docs/hybrid-service-discovery.md)
+- _…and 1 more under `prom/` — browse the folder._
+- **Scripts** (2): [rules-evaluator.go](../prom/scripts/rules-evaluator.go), [2026-09-03-prom-query-helper.sh](../prom/scripts/2026-09-03-prom-query-helper.sh)
+- **Snippets** (1): [2026-08-19-first-promql-query.sh](../prom/snippets/2026-08-19-first-promql-query.sh)
+- **Configs** (8): [remote-write-vs-federation.yaml](../prom/configs/remote-write-vs-federation.yaml), [remote-write-long-term-storage.yaml](../prom/configs/remote-write-long-term-storage.yaml), [recording-rules-slo-alerting.yaml](../prom/configs/recording-rules-slo-alerting.yaml)
+- _…and 5 more under `prom/` — browse the folder._
+- **Manifests** (2): [local-monitoring-stack.yaml](../prom/manifests/local-monitoring-stack.yaml), [k8s-service-discovery-recording-rules-alertmanager.yaml](../prom/manifests/k8s-service-discovery-recording-rules-alertmanager.yaml)
+- **Templates** (10): [recording-rules.yml](../prom/templates/prometheus-grafana-alertmanager-stack/prometheus/rules/recording-rules.yml), [alert-rules.yml](../prom/templates/prometheus-grafana-alertmanager-stack/prometheus/rules/alert-rules.yml), [prometheus.yml](../prom/templates/prometheus-grafana-alertmanager-stack/prometheus/prometheus.yml)
+- _…and 7 more under `prom/` — browse the folder._
 
 ## Python  ·  48 files
+
 - **primer:** [0000-primer-python.md](../python/notes/0000-primer-python.md)
-- **notes** (2): [2026-08-22-python-quickstart-gotchas.md](../python/notes/2026-08-22-python-quickstart-gotchas.md), [2026-08-04-python-functions-modules.md](../python/notes/2026-08-04-python-functions-modules.md)
-- **docs** (4): [python-github-actions-integration.md](../python/docs/python-github-actions-integration.md), [python-docker-ci-pipeline.md](../python/docs/python-docker-ci-pipeline.md), [comparing-python-configuration-approaches.md](../python/docs/comparing-python-configuration-approaches.md), [2026-08-04-python-modules-packages-imports.md](../python/docs/2026-08-04-python-modules-packages-imports.md)
-- **scripts** (4): [config-validator.py](../python/scripts/config-validator.py), [config-loader-pydantic-settings.py](../python/scripts/config-loader-pydantic-settings.py), [2026-08-04-minimal-file-processing.py](../python/scripts/2026-08-04-minimal-file-processing.py), [2026-07-22-create-venv-and-run.py](../python/scripts/2026-07-22-create-venv-and-run.py)
-- **snippets** (5): [validate-dockerfile.py](../python/snippets/validate-dockerfile.py), [docker-compose-validator.py](../python/snippets/docker-compose-validator.py), [migration-match-except-star-taskgroup.py](../python/snippets/migration-match-except-star-taskgroup.py), [2026-08-22-config-file-reader.py](../python/snippets/2026-08-22-config-file-reader.py), [2026-07-22-first-script-variables-types.py](../python/snippets/2026-07-22-first-script-variables-types.py)
-- **configs** (4): [2026-09-16-app-config.yaml](../python/configs/2026-09-16-app-config.yaml), [2026-09-15-app-config.yaml](../python/configs/2026-09-15-app-config.yaml), [2026-09-14-pyproject-toml-readme.md](../python/configs/2026-09-14-pyproject-toml-readme.md), [2026-08-24-pyproject-toml-config.toml](../python/configs/2026-08-24-pyproject-toml-config.toml)
-- **dockerfiles** (1): [python-app.Dockerfile](../python/dockerfiles/python-app.Dockerfile)
-- **notebooks** (3): [asyncio-threading-multiprocessing-decision-guide.ipynb](../python/notebooks/asyncio-threading-multiprocessing-decision-guide.ipynb), [async-patterns-comparison.ipynb](../python/notebooks/async-patterns-comparison.ipynb), [comparing-env-aware-config.ipynb](../python/notebooks/comparing-env-aware-config.ipynb)
-- **templates** (24): …and 24 more under `python/templates/` — browse the folder.
+- **Notes** (3): [2026-08-22-python-quickstart-gotchas.md](../python/notes/2026-08-22-python-quickstart-gotchas.md), [2026-08-04-python-functions-modules.md](../python/notes/2026-08-04-python-functions-modules.md), [0000-primer-python.md](../python/notes/0000-primer-python.md)
+- **Docs** (4): [python-github-actions-integration.md](../python/docs/python-github-actions-integration.md), [python-docker-ci-pipeline.md](../python/docs/python-docker-ci-pipeline.md), [comparing-python-configuration-approaches.md](../python/docs/comparing-python-configuration-approaches.md)
+- _…and 1 more under `python/` — browse the folder._
+- **Scripts** (4): [config-validator.py](../python/scripts/config-validator.py), [config-loader-pydantic-settings.py](../python/scripts/config-loader-pydantic-settings.py), [2026-08-04-minimal-file-processing.py](../python/scripts/2026-08-04-minimal-file-processing.py)
+- _…and 1 more under `python/` — browse the folder._
+- **Snippets** (5): [validate-dockerfile.py](../python/snippets/validate-dockerfile.py), [migration-match-except-star-taskgroup.py](../python/snippets/migration-match-except-star-taskgroup.py), [docker-compose-validator.py](../python/snippets/docker-compose-validator.py)
+- _…and 2 more under `python/` — browse the folder._
+- **Configs** (4): [2026-09-16-app-config.yaml](../python/configs/2026-09-16-app-config.yaml), [2026-09-15-app-config.yaml](../python/configs/2026-09-15-app-config.yaml), [2026-09-14-pyproject-toml-readme.md](../python/configs/2026-09-14-pyproject-toml-readme.md)
+- _…and 1 more under `python/` — browse the folder._
+- **Notebooks** (3): [comparing-env-aware-config.ipynb](../python/notebooks/comparing-env-aware-config.ipynb), [asyncio-threading-multiprocessing-decision-guide.ipynb](../python/notebooks/asyncio-threading-multiprocessing-decision-guide.ipynb), [async-patterns-comparison.ipynb](../python/notebooks/async-patterns-comparison.ipynb)
+- **Dockerfiles** (1): [python-app.Dockerfile](../python/dockerfiles/python-app.Dockerfile)
+- **Templates** (24): [test_items.py](../python/templates/python-service-scaffold/tests/test_items.py), [test_health.py](../python/templates/python-service-scaffold/tests/test_health.py), [conftest.py](../python/templates/python-service-scaffold/tests/conftest.py)
+- _…and 21 more under `python/` — browse the folder._
 
 ## Repo-doc  ·  28 files
+
 - **primer:** [0000-primer-repo-doc.md](../repo-doc/notes/0000-primer-repo-doc.md)
-- **notes** (4): [2026-10-03-exploring-task-folder-structure.md](../repo-doc/notes/2026-10-03-exploring-task-folder-structure.md), [2026-09-23-following-repo-task-tutorial-workflows.md](../repo-doc/notes/2026-09-23-following-repo-task-tutorial-workflows.md), [2026-09-21-repo-doc-cli-install-and-scaffold.md](../repo-doc/notes/2026-09-21-repo-doc-cli-install-and-scaffold.md), [2026-09-10-repo-task-quickstart-trip-ups.md](../repo-doc/notes/2026-09-10-repo-task-quickstart-trip-ups.md)
-- **docs** (5): [kit-conformance-in-ci.md](../repo-doc/docs/kit-conformance-in-ci.md), [2026-10-18-reconcile-primer-with-current-layout.md](../repo-doc/docs/2026-10-18-reconcile-primer-with-current-layout.md), [2026-09-26-tutorial-validation-loop-trip-ups.md](../repo-doc/docs/2026-09-26-tutorial-validation-loop-trip-ups.md), [2026-09-08-repo-doc-tooling-overview.md](../repo-doc/docs/2026-09-08-repo-doc-tooling-overview.md), [2026-08-08-reconcile-coverage-tables.md](../repo-doc/docs/2026-08-08-reconcile-coverage-tables.md)
-- **scripts** (5): [kit-conformance-checker.py](../repo-doc/scripts/kit-conformance-checker.py), [project-validator.py](../repo-doc/scripts/project-validator.py), [2026-09-25-check-folders-and-report-gaps.sh](../repo-doc/scripts/2026-09-25-check-folders-and-report-gaps.sh), [2026-09-10-minimal-task-automation.sh](../repo-doc/scripts/2026-09-10-minimal-task-automation.sh), [repo-doc-new-tool.sh](../repo-doc/scripts/repo-doc-new-tool.sh)
-- **configs** (2): [project-configuration-schema.yaml](../repo-doc/configs/project-configuration-schema.yaml), [2026-09-26-tool-folder-conventions.md](../repo-doc/configs/2026-09-26-tool-folder-conventions.md)
-- **snippets** (1): [2026-10-15-stale-branch-cleanup.sh](../repo-doc/snippets/2026-10-15-stale-branch-cleanup.sh)
-- **templates** (1): …and 1 more under `repo-doc/templates/` — browse the folder.
+- **Notes** (5): [2026-10-03-exploring-task-folder-structure.md](../repo-doc/notes/2026-10-03-exploring-task-folder-structure.md), [2026-09-23-following-repo-task-tutorial-workflows.md](../repo-doc/notes/2026-09-23-following-repo-task-tutorial-workflows.md), [2026-09-21-repo-doc-cli-install-and-scaffold.md](../repo-doc/notes/2026-09-21-repo-doc-cli-install-and-scaffold.md)
+- _…and 2 more under `repo-doc/` — browse the folder._
+- **Docs** (6): [kit-conformance-in-ci.md](../repo-doc/docs/kit-conformance-in-ci.md), [closing-dead-index-and-coverage-references.md](../repo-doc/docs/closing-dead-index-and-coverage-references.md), [2026-10-18-reconcile-primer-with-current-layout.md](../repo-doc/docs/2026-10-18-reconcile-primer-with-current-layout.md)
+- _…and 3 more under `repo-doc/` — browse the folder._
+- **Scripts** (7): [repo-doc-new-tool.sh](../repo-doc/scripts/repo-doc-new-tool.sh), [project-validator.py](../repo-doc/scripts/project-validator.py), [kit-conformance-checker.py](../repo-doc/scripts/kit-conformance-checker.py)
+- _…and 4 more under `repo-doc/` — browse the folder._
+- **Snippets** (1): [2026-10-15-stale-branch-cleanup.sh](../repo-doc/snippets/2026-10-15-stale-branch-cleanup.sh)
+- **Configs** (3): [repo-doc-cli-config.yaml](../repo-doc/configs/repo-doc-cli-config.yaml), [project-configuration-schema.yaml](../repo-doc/configs/project-configuration-schema.yaml), [2026-09-26-tool-folder-conventions.md](../repo-doc/configs/2026-09-26-tool-folder-conventions.md)
+- **Templates** (6): [repo-doc-new-tool.sh](../repo-doc/templates/repo-doc-new-tool-integration-starter-kit/scripts/repo-doc-new-tool.sh), [2026-09-01-regenerate-coverage-tables.sh](../repo-doc/templates/repo-doc-new-tool-integration-starter-kit/scripts/2026-09-01-regenerate-coverage-tables.sh), [tool-folder-conventions.yaml](../repo-doc/templates/repo-doc-new-tool-integration-starter-kit/configs/tool-folder-conventions.yaml)
+- _…and 3 more under `repo-doc/` — browse the folder._
 
 ## Terraform  ·  57 files
+
 - **primer:** [0000-primer-terraform.md](../tf/notes/0000-primer-terraform.md)
-- **notes** (3): [2026-08-27-terraform-quickstart.md](../tf/notes/2026-08-27-terraform-quickstart.md), [2026-08-08-quickstart-trip-ups.md](../tf/notes/2026-08-08-quickstart-trip-ups.md), [2026-07-26-install-terraform-and-run-first-version-command.md](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
-- **docs** (5): [terraform-github-actions-plan-apply-pipeline-remote-backend-environment-approvals.md](../tf/docs/terraform-github-actions-plan-apply-pipeline-remote-backend-environment-approvals.md), [module-composition-patterns.md](../tf/docs/module-composition-patterns.md), [local-vs-remote-terraform-state.md](../tf/docs/local-vs-remote-terraform-state.md), [2026-08-11-terraform-coverage.md](../tf/docs/2026-08-11-terraform-coverage.md), [2026-08-06-terraform-project-structure.md](../tf/docs/2026-08-06-terraform-project-structure.md)
-- **configs** (7): [multi-resource-terraform-config.hcl](../tf/configs/multi-resource-terraform-config.hcl), [reusable-vpc-module.hcl](../tf/configs/reusable-vpc-module.hcl), [aws-vpc-nat-module.hcl](../tf/configs/aws-vpc-nat-module.hcl), [2026-09-02-first-terraform-null-resource.hcl](../tf/configs/2026-09-02-first-terraform-null-resource.hcl), [2026-08-08-minimal-provider-resource.hcl](../tf/configs/2026-08-08-minimal-provider-resource.hcl), [2026-08-06-first-terraform-provider-resource.hcl](../tf/configs/2026-08-06-first-terraform-provider-resource.hcl), [2026-07-26-first-terraform-local-file-resource.hcl](../tf/configs/2026-07-26-first-terraform-local-file-resource.hcl)
-- **scripts** (3): [tf-validation-gate.sh](../tf/scripts/tf-validation-gate.sh), [2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh), [2026-08-08-tf-init-plan-apply.sh](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
-- **manifests** (2): [root-module-fan-out-composition.hcl](../tf/manifests/root-module-fan-out-composition.hcl), [versioned-vpc-module.hcl](../tf/manifests/versioned-vpc-module.hcl)
-- **notebooks** (1): [state-management-strategies.ipynb](../tf/notebooks/state-management-strategies.ipynb)
-- **snippets** (1): [2026-08-30-terraform-variables-outputs.hcl](../tf/snippets/2026-08-30-terraform-variables-outputs.hcl)
-- **templates** (34): …and 34 more under `tf/templates/` — browse the folder.
+- **Notes** (4): [2026-08-27-terraform-quickstart.md](../tf/notes/2026-08-27-terraform-quickstart.md), [2026-08-08-quickstart-trip-ups.md](../tf/notes/2026-08-08-quickstart-trip-ups.md), [2026-07-26-install-terraform-and-run-first-version-command.md](../tf/notes/2026-07-26-install-terraform-and-run-first-version-command.md)
+- _…and 1 more under `tf/` — browse the folder._
+- **Docs** (5): [terraform-github-actions-plan-apply-pipeline-remote-backend-environment-approvals.md](../tf/docs/terraform-github-actions-plan-apply-pipeline-remote-backend-environment-approvals.md), [module-composition-patterns.md](../tf/docs/module-composition-patterns.md), [local-vs-remote-terraform-state.md](../tf/docs/local-vs-remote-terraform-state.md)
+- _…and 2 more under `tf/` — browse the folder._
+- **Scripts** (3): [tf-validation-gate.sh](../tf/scripts/tf-validation-gate.sh), [2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh](../tf/scripts/2026-09-04-tf-init-validate-plan-apply-with-lock-handling.sh), [2026-08-08-tf-init-plan-apply.sh](../tf/scripts/2026-08-08-tf-init-plan-apply.sh)
+- **Snippets** (1): [2026-08-30-terraform-variables-outputs.hcl](../tf/snippets/2026-08-30-terraform-variables-outputs.hcl)
+- **Configs** (7): [reusable-vpc-module.hcl](../tf/configs/reusable-vpc-module.hcl), [multi-resource-terraform-config.hcl](../tf/configs/multi-resource-terraform-config.hcl), [aws-vpc-nat-module.hcl](../tf/configs/aws-vpc-nat-module.hcl)
+- _…and 4 more under `tf/` — browse the folder._
+- **Manifests** (2): [versioned-vpc-module.hcl](../tf/manifests/versioned-vpc-module.hcl), [root-module-fan-out-composition.hcl](../tf/manifests/root-module-fan-out-composition.hcl)
+- **Notebooks** (1): [state-management-strategies.ipynb](../tf/notebooks/state-management-strategies.ipynb)
+- **Templates** (34): [terragrunt.hcl](../tf/templates/terragrunt-multi-env/terragrunt.hcl), [variables.tf](../tf/templates/terragrunt-multi-env/modules/app-config/variables.tf), [outputs.tf](../tf/templates/terragrunt-multi-env/modules/app-config/outputs.tf)
+- _…and 31 more under `tf/` — browse the folder._
 
 ## Terraform Cloud  ·  3 files
+
 - **primer:** [0000-primer-tfc.md](../tfc/notes/0000-primer-tfc.md)
-- **notes** (1): [2026-10-14-explore-workspaces.md](../tfc/notes/2026-10-14-explore-workspaces.md)
-- **configs** (1): [2026-10-14-minimal-cloud-backend.hcl](../tfc/configs/2026-10-14-minimal-cloud-backend.hcl)
+- **Notes** (2): [2026-10-14-explore-workspaces.md](../tfc/notes/2026-10-14-explore-workspaces.md), [0000-primer-tfc.md](../tfc/notes/0000-primer-tfc.md)
+- **Configs** (1): [2026-10-14-minimal-cloud-backend.hcl](../tfc/configs/2026-10-14-minimal-cloud-backend.hcl)
+
