@@ -566,6 +566,10 @@
 
 - **Nameref (`declare -n`)** — a variable that acts as an alias for another variable named at runtime, letting a helper read or extend a caller's variable or array by name without `eval` and without globals; rejected as a circular reference if it names itself.
 
+## Bash (runbook)
+
+- **Correlation id** — a unique identifier stamped on every log record in a multi-script run so one operation can be traced across scripts, retries, and restarts; the runbook passes it through child processes so an unattended job's output stays readable.
+
 ## GitHub Actions (security and composition)
 
 - **Action pinning (SHA pin)** — referencing a third-party action by its immutable commit SHA instead of a mutable tag, so the workflow runs exactly the code that was reviewed; a tag can be moved after the fact, a SHA cannot.

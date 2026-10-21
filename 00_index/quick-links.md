@@ -14,6 +14,7 @@
 - [Install Bash and first script](../bash/notes/2026-07-18-install-bash-and-first-script.md) — First script with shebang, variables, and execution.
 - [Safe Bash template](../bash/scripts/2026-07-23-safe-bash-template.sh) — Boilerplate with strict mode, traps, and logging.
 - [Strict mode and trap patterns](../bash/docs/strict-mode-trap-patterns.md) — Deep dive on `set -Eeuo pipefail` and signal handling.
+- [Bash production runbook](../bash/docs/bash-production-runbook.md) — Strict mode, once-only trap cleanup, and correlation-ID logging.
 - [System report tool](../bash/scripts/system-report-tool.sh) — Example of a production-grade info-gathering script.
 
 ### Build and run Docker containers
@@ -26,7 +27,9 @@
 ### Orchestrate with Docker Compose
 - [Compose primer](../compose/notes/0000-primer-compose.md) — Services, networks, volumes, and the up/down loop.
 - [First compose up notes](../compose/notes/2026-10-14-first-compose-up.md) — Port-order and hostname gotchas.
-- [Minimal web-plus-db Compose file](../compose/configs/2026-10-14-web-plus-db.yaml) — Smallest runnable multi-service starting point.
+- [Compose `depends_on` + healthchecks](../compose/notes/2026-10-21-depends-on-healthchecks.md) — Why `depends_on` alone does not wait for a database to be ready.
+- [Minimal multi-service Compose stack](../compose/configs/2026-10-21-minimal-multi-service-stack.yaml) — Web, db, and cache with `condition: service_healthy` startup ordering.
+- [Compose lifecycle script](../compose/scripts/2026-10-21-compose-lifecycle.sh) — Up, wait-for-healthy, logs, and tear-down.
 
 ### Work with Kubernetes
 - [Kubernetes primer](../k8s/notes/0000-primer-kubernetes.md) — Core objects, namespaces, pods, and kubectl usage.
@@ -69,7 +72,7 @@
 - [AWX primer](../awx/notes/0000-primer-awx.md) — Jobs, templates, inventories, and credentials.
 - [Explore AWX UI and API](../awx/notes/2026-10-04-explore-awx-ui-and-api.md) — Walking the API behind the UI.
 - [First job template run](../awx/notes/2026-10-07-explore-awx-ui-first-job-template.md) — From CR to launched job.
-- [AWX quickstart script](../awx/scripts/2026-10-20-awx-quickstart.sh) — End-to-end AWX bootstrap from CR to running job.
+- [AWX quickstart script](../awx/scripts/2026-10-20-awx-quickstart.sh) — Deploy the AWX operator and run a first job template.
 
 ### Run CI/CD with GitHub Actions
 - [GitHub Actions primer](../gha/notes/0000-primer-gha.md) — Workflows, jobs, steps, and triggers.
